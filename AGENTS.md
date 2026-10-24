@@ -1,0 +1,26 @@
+# SpecSentry agent context
+
+SpecSentry is a secure specification and review workspace for Contributors, Reviewers, and Release Maintainers. Build a new codebase; prior MPs supply neither source nor documentation.
+
+## Product context
+
+Use [PRODUCT-SPEC](workflow/specs/PRODUCT-SPEC.md) for requirements, scope, architecture direction, ownership, and open decisions. Read the relevant sections for the task. Resolve conflicts using applicable higher-priority instructions and surface unresolved product conflicts.
+
+## Shared invariants
+
+- Product AI is advisory: typed, bounded suggestions through a server-side SoC LLM gateway. Business mutations require deterministic server-side authorization and validation.
+- Preserve ownership/assignment boundaries, immutable submitted revisions, audit evidence, and manual operation when AI fails.
+- Keep credentials and raw sensitive prompts out of handoffs and logs. Record verified outcomes and available measurements; label missing telemetry unavailable.
+- Work within assigned file ownership. Preserve other contributors' changes and request coordination before changing shared contracts.
+
+## Shared recording requirements
+
+- Record model use, tokens, and time for main-agent stages and subagent invocations using [resource recording](workflow/RESOURCES.md). Mark unavailable telemetry explicitly.
+- Log every prompt explicitly requesting a code or specification change, including subsequent steering, in `logs/<name>/<log_name.md>`. Use the prompter's name, not the agent's or implementation owner's. Record general context, requested changes, changes made, affected files, and validation. Related prompts may share one conversation log; distinguish requests from outcomes. Use the [prompt log template](workflow/templates/PROMPT-LOG.md).
+- Establish the prompter's name from session context; ask when unknown rather than attributing the prompt to a guessed person.
+
+## Task-specific context
+
+When working on Reviewer functionality, read the [Reviewer workflow entry point](workflow/reviewer/README.md).
+
+Discover current source, commands, and CI from the repository before checks. Product-spec paths may describe planned artifacts; distinguish those from working controls. Link authoritative artifacts instead of copying broad histories.
