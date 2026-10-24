@@ -16,8 +16,8 @@ Use [PRODUCT-SPEC](workflow/specs/PRODUCT-SPEC.md) for requirements, scope, arch
 ## Shared recording requirements
 
 - Record model use, tokens, and time for main-agent stages and subagent invocations using [resource recording](workflow/RESOURCES.md). Mark unavailable telemetry explicitly.
-- Log every prompt explicitly requesting a code or specification change, including subsequent steering, in `logs/<name>/<log_name.md>`. Use the prompter's name, not the agent's or implementation owner's. Record general context, requested changes, changes made, affected files, and validation. Related prompts may share one conversation log; distinguish requests from outcomes. Use the [prompt log template](workflow/templates/PROMPT-LOG.md).
-- Establish the prompter's name from session context; ask when unknown rather than attributing the prompt to a guessed person.
+- Log every prompt explicitly requesting a code or specification change, including subsequent steering, in `logs/<name>/<log_name.md>`. Record general context, requested changes, changes made, affected files, and validation. Related prompts may share one conversation log; distinguish requests from outcomes. Use the [prompt log template](workflow/templates/PROMPT-LOG.md).
+- Resolve the prompter's name using the [logging skill](.agents/skills/log-change-session/SKILL.md): explicit session identity takes precedence; otherwise infer from Git identity or the relevant role owner and record the source.
 
 ## Task-specific context
 
