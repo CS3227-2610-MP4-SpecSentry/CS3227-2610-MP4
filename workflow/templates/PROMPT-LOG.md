@@ -1,6 +1,6 @@
 # Prompt and change log
 
-Use `logs/<name>/<log_name.md>` for every prompt explicitly requesting code or specification changes. Name identifies the person prompting, established from session context or clarification. Prefer a date and short task in the filename. Related prompts may share one conversation log, with each change request and outcome accounted for. This recording rule applies to every member and does not prescribe their execution workflow.
+Use `logs/<name>/<log_name.md>` for every prompt explicitly requesting code or specification changes. Resolve the name using the [logging skill](../../.agents/skills/log-change-session/SKILL.md) and record whether it was explicit or inferred and from which source. Prefer a date and short task in the filename. Related prompts may share one conversation log, with each change request and outcome accounted for. This recording rule applies to every member and does not prescribe their execution workflow.
 
 ## Context and requests
 
