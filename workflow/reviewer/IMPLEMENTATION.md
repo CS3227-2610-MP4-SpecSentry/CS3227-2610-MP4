@@ -18,6 +18,8 @@ Use [run sections](templates/RUN.md) as needed in `logs/<name>/<log_name.md>` (u
 
 Read [main-agent guidance](agents/MAIN.md). Extract existing requirement IDs, acceptance criteria, edge/failure cases, exclusions, and relevant decisions. Inspect the current architecture and identify components to add or modify. Describe contracts, dependencies, data flow, trust boundaries, and tentative ownership.
 
+Use [prepare-change-brief](skills/prepare-change-brief.md) for the repeatable brief procedure. It does not itself start implementation.
+
 Resolve questions using requirements, decisions, and code. Code provides implementation evidence, not authority to contradict requirements. For a material unresolved ambiguity, ask the prompter with a recommendation, implications, and alternatives. Aim to resolve these before implementation; pause only dependent work if a question emerges later.
 
 **Exit:** the implementation brief accounts for all requested behavior, identifies its sources, and has no unresolved ambiguity blocking the proposed work.
@@ -42,6 +44,8 @@ The main agent chooses the split; the security reviewer challenges unsafe bounda
 Announce workers, scope, permitted files, shared-file owner, dependencies, model/effort with rationale, and expected checks. Proceed without a routine approval pause; keep the announcement visible for human intervention. Respect actual concurrency limits and dispatch ready work only.
 
 Give each worker [implementer guidance](agents/IMPLEMENTER.md) and a focused assignment. Assign disjoint write sets, including tests, migrations, configuration, and generated files. Worktrees can isolate edits but do not resolve overlapping semantic ownership. Define cross-module contracts with names/signatures or schemas, errors, authorization, transaction/version semantics, and an owner where relevant.
+
+At assignment, completion, review, and fix boundaries, use [reviewer-role-agent-handoff](skills/reviewer-role-agent-handoff.md) to create focused handoff documents with one writer per file. Link them from the run record; read-only subagents return content for the coordinator to persist.
 
 Workers request contract changes through the main agent. Update affected assignments and obtain security re-review when warranted. Report urgent blockers immediately; batch routine completion evidence.
 

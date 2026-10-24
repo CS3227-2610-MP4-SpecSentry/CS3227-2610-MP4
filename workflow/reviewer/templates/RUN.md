@@ -39,12 +39,8 @@ Copy relevant sections to `logs/<name>/<log_name.md>` (use the prompting person'
 
 ## Completion and handoff
 
-- Agent, task/finding IDs, input source/version:
-- Implemented behavior and changed files:
-- Decisions, assumptions, contract changes/disposition:
-- Commands/tools, exact outcomes, evidence links:
-- Unresolved risks, limitations, next authorized action:
-- Resource row/reference:
+- Handoff ID/path, sender/recipient, readiness/blocking status:
+- Use the [handoff procedure](../skills/reviewer-role-agent-handoff.md) and [canonical format](HANDOFF.md) for the full document. Link it here rather than duplicating its contents.
 
 ## Integration
 

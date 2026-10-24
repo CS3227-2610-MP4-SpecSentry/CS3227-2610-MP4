@@ -16,7 +16,17 @@ Shared invariants, resource measurements, and prompt logging in the root [contex
 | Review architecture/security or a changed trust boundary | [Security reviewer](agents/SECURITY-REVIEWER.md) |
 | Implement a bounded assignment or fix | [Implementer](agents/IMPLEMENTER.md) |
 | Independently review or revalidate fixes | [Reviewer](agents/REVIEWER.md) |
-| Record briefs, assignments, findings, or handoffs | Relevant section of [run template](templates/RUN.md) |
+| Record briefs, assignments, or findings | Relevant section of [run template](templates/RUN.md) |
+| Create assignment, completion, review, or fix handoff documents | [Handoff procedure](skills/reviewer-role-agent-handoff.md) and its linked template |
 | Choose subagent models/effort or evaluate the harness | [Resource and harness guidance](RESOURCES.md) |
 
 Load only the guidance needed for the current assignment and its linked requirement sections. Prompter-named logs are historical evidence, not an alternative source of workflow instructions.
+
+## Skills
+
+| Skill | Scope and invocation |
+| --- | --- |
+| [prepare-change-brief](../../.agents/skills/prepare-change-brief/SKILL.md) | Reviewer workflow only; automatic or explicit; [procedure](skills/prepare-change-brief.md) |
+| [reviewer-role-agent-handoff](../../.agents/skills/reviewer-role-agent-handoff/SKILL.md) | Reviewer workflow only; automatic or explicit; [procedure](skills/reviewer-role-agent-handoff.md) |
+
+The discovery entries in `.agents/skills/` are pointers; substantive instructions and the handoff format remain in this directory. Repository-wide skills are routed from root AGENTS.md. Use specification/security review capabilities inside this workflow while retaining its ownership, independence, and finding-disposition rules.
