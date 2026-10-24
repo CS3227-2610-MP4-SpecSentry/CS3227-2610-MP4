@@ -12,7 +12,7 @@ Use for assignment, completion, security-review, implementation-review, or fix-r
 
 ## Storage and ownership
 
-Default: `logs/<prompter-name>/handoffs/<run-id>/<sequence>-<from>-to-<to>.md`. Each file has one assigned writer and a unique sequence; it supplements the shared prompt/change log and never replaces it. Respect the recipient's context budget. Keep tables and summaries concise; link larger outputs instead of embedding transcripts.
+Default: `logs/<prompter-name>/reviewer/<run-id>/handoffs/<sequence>-<from>-to-<to>.md`. Use the [handoff generator/validator](../scripts/README.md#4-generate-and-validate-handoffs) with structured seven-section input when a run exists. Each file has one assigned writer and a unique sequence; it supplements the shared prompt/change log and never replaces it. Respect the recipient's context budget. Keep tables and summaries concise; link larger outputs instead of embedding transcripts.
 
 The sender writes the document when authorized for that path. A read-only subagent returns its filled content to the coordinator, which persists it and records its source. A handoff skill cannot grant a read-only reviewer write permission. Keep previous handoffs as evidence; record corrections or superseding handoffs explicitly rather than silently rewriting a recipient's input.
 

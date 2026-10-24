@@ -19,6 +19,7 @@ Shared invariants, resource measurements, and prompt logging in the root [contex
 | Record briefs, assignments, or findings | Relevant section of [run template](templates/RUN.md) |
 | Create assignment, completion, review, or fix handoff documents | [Handoff procedure](skills/reviewer-role-agent-handoff.md) and its linked template |
 | Choose subagent models/effort or evaluate the harness | [Resource and harness guidance](RESOURCES.md) |
+| Record stages, collect evidence, generate handoffs, or check run consistency | [Reviewer automation CLI](scripts/README.md) |
 
 Load only the guidance needed for the current assignment and its linked requirement sections. Prompter-named logs are historical evidence, not an alternative source of workflow instructions.
 

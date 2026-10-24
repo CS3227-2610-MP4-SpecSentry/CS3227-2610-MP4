@@ -14,6 +14,8 @@ The main agent owns the brief, design, contracts, split, model/effort selection,
 
 Use [run sections](templates/RUN.md) as needed in `logs/<name>/<log_name.md>` (use the prompting person's name); a run ID is a date plus short task name. Link source requirements with a commit or recorded document state. Keep one coordinator-owned run record; workers return summaries for incorporation rather than concurrently editing it.
 
+Use the [Reviewer automation CLI](scripts/README.md) to register expected work and record one boundary pair per agent, invocation, stage, and attempt. Include reused agents, fix/revalidation cycles, failures, and interruptions. Start/finish recording at execution boundaries; import directly attributable telemetry when exposed and record reasons otherwise. These commands require agent invocation; they are not automatic runtime instrumentation.
+
 ## 1. Compile requirements and design
 
 Read [main-agent guidance](agents/MAIN.md). Extract existing requirement IDs, acceptance criteria, edge/failure cases, exclusions, and relevant decisions. Inspect the current architecture and identify components to add or modify. Describe contracts, dependencies, data flow, trust boundaries, and tentative ownership.
@@ -55,6 +57,8 @@ Workers request contract changes through the main agent. Update affected assignm
 
 The main agent owns integration. In a shared directory, inspect the assembled work; with worktrees, bring the changes together first. Check interfaces, configuration, migrations, security assumptions, and the combined diff. Run the available build and relevant integration checks.
 
+Snapshot the relevant settled files and use the command-evidence helper for explicit authorized checks. After fixes, retain prior failures and explicitly supersede stale evidence with fresh checks/handoffs.
+
 Fix small wiring issues directly and record them. Return substantive defects to the responsible worker. Wait for writers to finish before creating a stable review state. Record a commit, or base commit plus diff/content hashes and relevant untracked-file hashes, so evidence identifies the actual reviewed content. Do not commit solely to satisfy this step without task authorization.
 
 **Exit:** integration checks pass, or an explicit environment limitation and alternative evidence are recorded. An unavailable critical check remains a blocker to claiming verified completion.
@@ -78,5 +82,7 @@ After two unsuccessful fix/review cycles, reassess the root cause and approach b
 ## 7. Close
 
 Finalize the run summary and [resource record](RESOURCES.md), including main-agent stages. Reconcile changed requirements, guides, and traceability as applicable. Report delivered behavior, validation, limitations, and remaining decisions. Product deployment and release checks are invoked only when the task reaches that boundary, using the product-spec requirements and existing authorization.
+
+Run the CLI's completeness check and address missing declared records, unresolved blockers, stale current evidence, and independent-review gaps. Coverage warnings identify unavailable telemetry; structural success does not establish semantic correctness or replace human approvals. Keep the prompter-named Markdown session log alongside the structured run artifacts.
 
 **Exit:** the final report and evidence refer to the same implementation state, and any incomplete work is explicit.

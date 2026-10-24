@@ -17,9 +17,11 @@ Select capability and effort separately. Escalate based on observed inadequacy, 
 
 Follow the shared [resource recording rules](../RESOURCES.md) and include the measurements in the scoped run record.
 
+The [Reviewer scripts](scripts/README.md) now provide expected-stage registration, start/finish timing, exact per-record usage imports, coverage summaries, and completeness reports. Record each agent/invocation/stage/attempt separately. The CLI measures boundaries when called; it cannot discover undeclared activity or access hidden model/token counters. Unavailable measurements remain explicit.
+
 ## Initial harness and future enforcement
 
-The initial harness consists of routing guidance, stage gates, ownership contracts, and structured records. These are procedural controls. Application build/test tooling and automated evidence validators must be established by relevant future tasks; they are not currently enforced merely because this document exists.
+The harness combines procedural routing and stage gates with scripts for ownership, evidence, findings, and recording consistency. Application build/test tooling still depends on the product implementation. Checks execute only when invoked; these local evidence files remain editable and do not prove review quality or enforce operating-system permissions.
 
 As executable checks become available, run them at integration/review: build, requirement tests, authorization/AI contracts, static analysis, and relevant regressions. Later evidence validation can check required fields, links, finding dispositions, and reviewed-state identifiers. Such structural checks cannot establish behavioral correctness.
 
