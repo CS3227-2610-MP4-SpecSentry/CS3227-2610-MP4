@@ -14,6 +14,19 @@ Baseline review: 25 October 2026. Every existing requirement ID has one definiti
 Command outcomes, corrections, independent review and resource limitations are in
 [the base-source session log](../logs/ngkhengyang/2026-10-25-base-source-initialization.md).
 
+## Architecture and submission initialization — 25 October 2026
+
+`src/server/src/app.module.ts` registers seven empty business modules and imports
+the configured `DatabaseModule`. Health/readiness remain the only public APIs.
+Health contracts moved to `src/shared/src/contracts/health.ts` with unchanged public
+exports. Client role folders are reservations only. See
+[Architecture](../docs/Architecture.md) for target responsibilities.
+
+Required guide/reflection/site artifacts and a presence-check command are initialized;
+see [Submission readiness](SUBMISSION.md). Presence does not satisfy role, AI,
+deployment or experiment acceptance. Validation and limitations for this change are
+recorded in [the session log](../logs/ngkhengyang/2026-10-25-architecture-initialization.md).
+
 ## Product acceptance plan
 
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |

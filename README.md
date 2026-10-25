@@ -45,6 +45,24 @@ the workspace that uses them; for example `npm install <package> -w @specsentry/
 Keep credentials, database clients, prompts and authorization code in `src/server`.
 Never put secrets in `VITE_*` variables or export server code through `src/shared`.
 
+## Architecture and submission artifacts
+
+The [architecture guide](docs/Architecture.md) describes module responsibilities and
+transaction seams. Backend domain folders are empty NestJS registrations; frontend
+`features/` folders reserve the three role areas. Shared wire schemas live under
+`src/shared/src/contracts/`. No product workflow is implemented by these folders.
+
+- [User Guide](docs/UserGuide.md): current behavior and testing limitations.
+- [Developer Guide](docs/DeveloperGuide.md): setup, design, workflow and acknowledgements.
+- [Reflections](docs/Reflections.md): observations and pending experiments.
+- [Workflow index](workflow/README.md): process files, templates and tools.
+- [Submission readiness](workflow/SUBMISSION.md): assignment deliverables and remaining gaps.
+- [Product website source](src/website/README.md): static site and GitHub Pages setup.
+
+`npm run check:submission` checks local required-artifact presence only. It does not
+certify product completion or live access. The Pages workflow publishes the product
+site from `master` after repository Pages configuration; deployment is unverified.
+
 ## Local startup
 
 Install Node.js 24 LTS (24.15 or newer), npm 11/12, and Docker with Compose.
