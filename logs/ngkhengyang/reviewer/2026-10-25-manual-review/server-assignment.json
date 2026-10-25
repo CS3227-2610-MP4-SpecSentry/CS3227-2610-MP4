@@ -1,0 +1,13 @@
+{
+  "role": "implementer",
+  "dependencies": [],
+  "id": "server",
+  "paths": [
+    "src/shared/src/contracts/reviewer.ts",
+    "src/server/prisma",
+    "src/server/src/reviews",
+    "src/server/src/proposals/proposals.service.ts",
+    "src/server/src/activity/activity.service.ts"
+  ],
+  "agent": "server"
+}

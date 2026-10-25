@@ -1,0 +1,14 @@
+{
+  "requirements": "REQ-REV-002/004/005/009/010 supporting 001/006/007/011/015. Full user verification obligations in brief acceptance matrix.",
+  "verification": "Contract/HTTP/Jest and real PostgreSQL coverage: stale references/versions, takeover/provenance, gates, disabled/former access, round finality, same/changed/concurrent keys, rollback, severity filter, history pagination.",
+  "identity": "main to tests; manual-review; independent specification-derived test implementation; ngkhengyang",
+  "references": [
+    "logs/ngkhengyang/2026-10-25-manual-review.md",
+    "workflow/specs/ROLE-REVIEWER.md",
+    "workflow/specs/INTEGRATION-SPEC.md"
+  ],
+  "risks": "Never truncate unidentified database. Main provisions dedicated disposable reviewer DB. Existing TRUNCATE lists must include new FK tables. Independent implementation review remains separate.",
+  "state": "design: baseline 8397100; server foundation in progress; derive cases now and await exact contracts. Existing tests show PostgreSQL fixture patterns.",
+  "resources": "gpt-6.1-sol/high selected because specification-derived race and transactional tests are subtle. Coordinator interval tests-1 implement; token telemetry unavailable.",
+  "permissions": "Own src/server/test and workflow/tests/browser/reviewer-manual.spec.ts only. No production changes. Not alone; coordinate server contracts."
+}

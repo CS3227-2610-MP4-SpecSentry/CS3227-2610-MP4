@@ -1,0 +1,14 @@
+{
+  "requirements": "REQ-REV-001/002/004/005/007/009/010/015 plus stale-form protections. Read-only history and clear loading/empty/error/conflict feedback.",
+  "state": "design: server settling schemas; GET review/effective coverage/blockers plus paginated findings/decisions/coverage-history/finding history. Approved PUT coverage and POST finding/transitions/amendments/decision.",
+  "verification": "Component tests for usable assessment/confirm, provenance and transitions, decision gates/request note, frozen/historical state, severity filter and stale form reconciliation. Existing intake regressions retained.",
+  "identity": "main to UI; manual-review; implementation assignment; ngkhengyang",
+  "resources": "gpt-6.1-sol/medium selected for bounded React UI against server-owned contracts. Coordinator interval ui-1 implement; token telemetry unavailable.",
+  "risks": "Bind forms to revision, proposal version and assignment generation. Do not silently reload/retarget old forms. Retain original idempotency key/body on uncertain decision outcome. Escaped plain text.",
+  "references": [
+    "logs/ngkhengyang/2026-10-25-manual-review.md",
+    "workflow/specs/ROLE-REVIEWER.md",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx"
+  ],
+  "permissions": "Own src/client/src/features/reviewer only, including components/styles/tests. No contracts or server edits. Other workers active; preserve their changes."
+}

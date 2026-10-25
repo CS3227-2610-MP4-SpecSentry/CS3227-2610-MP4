@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { assignedReviewsResponseSchema, proposalActivityResponseSchema, proposalDetailResponseSchema, reviewCommandResponseSchema, reviewPoolResponseSchema, submittedRevisionsResponseSchema, type AssignedReviewItem, type PoolItem, type ProposalDetailResponse, type ProposalActivityResponse, type SubmittedRevisionsResponse, type SessionResponse } from '@specsentry/shared';
 import type { AuthorizationGeneration } from '../../shared/authorization';
+import { ManualReview } from './ManualReview';
 
 type Queue = { items: (PoolItem | AssignedReviewItem)[]; nextCursor: string | null };
 type Parser<T> = { parse: (value: unknown) => T };
@@ -21,6 +22,7 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
   const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
+  const [stale, setStale] = useState(false);
   const generation = useRef(0);
   const mutationPending = useRef(false);
   const initialLoadNeeded = useRef(true);
@@ -29,10 +31,10 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
   useEffect(() => () => { generation.current++; }, []);
   useEffect(() => { if (detail) title.current?.focus(); }, [detail]);
 
-  async function request<T>(url: string, schema: Parser<T>, local: number, body?: unknown): Promise<T> {
+  async function request<T>(url: string, schema: Parser<T>, local: number, body?: unknown, method = 'POST', key?: string): Promise<T> {
     const auth = authorization.current();
     const current = () => auth === authorization.current() && local === generation.current;
-    const response = await fetch(url, { credentials: 'same-origin', cache: 'no-store', ...(body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrfToken }, body: JSON.stringify(body) }) });
+    const response = await fetch(url, { credentials: 'same-origin', cache: 'no-store', ...(body === undefined ? {} : { method, headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrfToken, ...(key ? { 'Idempotency-Key': key } : {}) }, body: JSON.stringify(body) }) });
     if (!current()) throw new StaleResponse();
     if ([401, 403, 404].includes(response.status)) {
       authorization.invalidate(); clearProtected(); setQueue(null);
@@ -79,7 +81,10 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
       // A focus read may replace pagination, but must not supersede a command
       // whose committed outcome is still being established.
       if (mutationPending.current) return;
-      if (selected) void open(selected, detail?.revision.id); else void loadQueue();
+      if (selected && detail) {
+        generation.current++; const local = generation.current; setPending(false); setStale(true);
+        void request(`/api/proposals/${encodeURIComponent(selected)}?revisionId=${encodeURIComponent(detail.revision.id)}`, proposalDetailResponseSchema, local).catch(cause => { if (!(cause instanceof StaleResponse)) { setDetail(null); failed(cause); } });
+      } else void loadQueue();
     };
     window.addEventListener('focus', revalidate);
     return () => window.removeEventListener('focus', revalidate);
@@ -88,7 +93,7 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
     initialLoadNeeded.current = false;
     generation.current++; const local = generation.current;
     if (!mutationPending.current) setPending(false);
-    setSelected(id); setDetail(null); setHistory(null); setActivity(null); setError(''); setLoading(true);
+    setStale(false); setSelected(id); setDetail(null); setHistory(null); setActivity(null); setError(''); setLoading(true);
     try {
       const value = await request(`/api/proposals/${encodeURIComponent(id)}${revisionId ? `?revisionId=${encodeURIComponent(revisionId)}` : ''}`, proposalDetailResponseSchema, local);
       setDetail(value);
@@ -138,7 +143,7 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
         <label htmlFor="authorId">Author ID</label><input id="authorId" name="authorId" maxLength={128} />
         <label htmlFor="minAgeDays">Minimum original age (days)</label><input id="minAgeDays" name="minAgeDays" type="number" min="0" max="365000" step="1" />
         <label htmlFor="maxAgeDays">Maximum original age (days)</label><input id="maxAgeDays" name="maxAgeDays" type="number" min="0" max="365000" step="1" />
-        {tab === 'assigned' && <><label htmlFor="state">State</label><select id="state" name="state"><option value="">All states</option>{['IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED'].map(state => <option key={state}>{state}</option>)}</select></>}
+        {tab === 'assigned' && <><label htmlFor="severity">Unresolved severity</label><select id="severity" name="severity"><option value="">All severities</option>{['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'].map(value => <option key={value}>{value}</option>)}</select><label htmlFor="state">State</label><select id="state" name="state"><option value="">All states</option>{['IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED'].map(state => <option key={state}>{state}</option>)}</select></>}
         <button disabled={pending || loading}>Apply filters</button>
       </form>
       {queue?.items.length === 0 && <p>No proposals match these filters.</p>}
@@ -151,9 +156,11 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
       <p>This submitted revision is immutable. {revision.id === detail.assignment.revisionId ? 'Current assigned revision.' : 'Historical submitted revision (read only).'}</p><h4>Summary</h4><p className="plain-text">{revision.summary}</p><h4>Problem</h4><p className="plain-text">{revision.problem}</p><h4>Constraints</h4><p className="plain-text">{revision.constraints || 'None provided.'}</p><h4>Expected behavior</h4><p className="plain-text">{revision.expectedBehavior}</p>
       <h4>Acceptance criteria</h4><ul>{revision.criteria.map(criterion => <li key={criterion.id}><p>{criterion.stableKey}: {criterion.statement} ({criterion.required ? 'Required' : 'Optional'})</p><p>Linked evidence: {revision.criterionEvidenceLinks.filter(link => link.criterionId === criterion.id).map(link => link.evidenceId).join(', ') || 'None'}</p></li>)}</ul>
       <h4>Submitted diff</h4><pre>{revision.diffText || 'No diff provided.'}</pre><h4>Test evidence</h4>{revision.evidence.length === 0 ? <p>No evidence provided.</p> : revision.evidence.map(evidence => <section key={evidence.id}><h5>{evidence.id}</h5><pre>{evidence.text}</pre><p>Evidence hash: {evidence.evidenceHash}</p></section>)}
-      <button disabled={pending || !['IN_REVIEW', 'CHANGES_REQUESTED'].includes(detail.state)} onClick={() => void command(detail, 'drop')}>Drop assignment</button>
+      <ManualReview key={`${detail.id}:${revision.id}:${detail.version}:${detail.assignment.id}:${detail.assignment.version}`} detail={detail} stale={stale} busy={pending} request={(url, schema, body, method, key) => request(url, schema, generation.current, body, method, key)} onRefresh={() => void open(detail.id)} onChanged={message => { setNotice(message); void open(detail.id); }} onBusy={value => { mutationPending.current = value; setPending(value); }} />
+      <button disabled={stale || pending || !['IN_REVIEW', 'CHANGES_REQUESTED'].includes(detail.state)} onClick={() => void command(detail, 'drop')}>Drop assignment</button>
       <h4>Submitted revision history</h4>{history?.items.length === 0 && <p>No submitted revisions.</p>}<ul>{history?.items.map(item => <li key={item.id}><button disabled={pending || item.id === revision.id} onClick={() => void open(detail.id, item.id)}>View revision {item.number}</button> {item.summary} · {date(item.submittedAt)}</li>)}</ul>{history?.nextCursor && <button disabled={pending} onClick={() => void more('history')}>Next history page</button>}
       <h4>Proposal activity</h4>{activity?.items.length === 0 && <p>No activity recorded.</p>}<ol>{activity?.items.map(item => <li key={item.id}>{date(item.timestamp)} · {item.actor?.username ?? 'System'} · {item.action} · {item.summary}<p>Proposal: {item.proposalId}</p><p>Affected revision: {item.revisionId}</p><p>Assignment: {item.assignmentId ?? 'None'}</p><p>Outcome: {item.outcome === 'SUCCESS' ? 'Success' : item.outcome}</p>{item.reason && <p>{item.reason}</p>}</li>)}</ol>{activity?.nextCursor && <button disabled={pending} onClick={() => void more('activity')}>Next activity page</button>}
     </article>}
   </section>;
 }
+

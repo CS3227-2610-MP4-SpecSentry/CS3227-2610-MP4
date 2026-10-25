@@ -1,0 +1,1657 @@
+{
+  "schema_version": 1,
+  "scope": "reviewer",
+  "run_id": "2026-10-25-manual-review",
+  "prompter": "ngkhengyang",
+  "requirements": [
+    "REQ-REV-002",
+    "REQ-REV-004",
+    "REQ-REV-005"
+  ],
+  "created_at": "2026-10-25T15:21:35.588474+00:00",
+  "required_stages": [
+    "compile",
+    "security",
+    "dispatch",
+    "implement",
+    "integrate",
+    "review",
+    "close"
+  ],
+  "expected": {
+    "main|main-1|compile|1": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "compile",
+      "attempt": 1,
+      "record_id": "rec-8d5e27647ab34436"
+    },
+    "security|security-1|security|1": {
+      "agent": "security",
+      "invocation": "security-1",
+      "stage": "security",
+      "attempt": 1,
+      "record_id": "rec-79b8edacf6044667"
+    },
+    "main|main-1|dispatch|1": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "dispatch",
+      "attempt": 1,
+      "record_id": "rec-45b8f8e569d74f13"
+    },
+    "server|server-1|implement|1": {
+      "agent": "server",
+      "invocation": "server-1",
+      "stage": "implement",
+      "attempt": 1,
+      "record_id": "rec-37ad306ba6754541"
+    },
+    "tests|tests-1|implement|1": {
+      "agent": "tests",
+      "invocation": "tests-1",
+      "stage": "implement",
+      "attempt": 1,
+      "record_id": "rec-b0a97c3f9c584ef2"
+    },
+    "ui|ui-1|implement|1": {
+      "agent": "ui",
+      "invocation": "ui-1",
+      "stage": "implement",
+      "attempt": 1,
+      "record_id": "rec-31b414ef72a240bb"
+    },
+    "main|main-1|integrate|1": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "integrate",
+      "attempt": 1,
+      "record_id": "rec-57276243598b459a"
+    },
+    "ui|ui-2|fix|1": {
+      "agent": "ui",
+      "invocation": "ui-2",
+      "stage": "fix",
+      "attempt": 1,
+      "record_id": "rec-7e25960ac4bb4a44"
+    },
+    "tests|tests-2|revalidate|1": {
+      "agent": "tests",
+      "invocation": "tests-2",
+      "stage": "revalidate",
+      "attempt": 1,
+      "record_id": "rec-649db56a435447c5"
+    },
+    "security|security-2|review|1": {
+      "agent": "security",
+      "invocation": "security-2",
+      "stage": "review",
+      "attempt": 1,
+      "record_id": "rec-d688058cffb7452b"
+    },
+    "server|server-2|fix|1": {
+      "agent": "server",
+      "invocation": "server-2",
+      "stage": "fix",
+      "attempt": 1,
+      "record_id": "rec-be9e3c27cf004322"
+    },
+    "ui|ui-3|fix|1": {
+      "agent": "ui",
+      "invocation": "ui-3",
+      "stage": "fix",
+      "attempt": 1,
+      "record_id": "rec-7148ede9a18b4b48"
+    },
+    "tests|tests-3|fix|1": {
+      "agent": "tests",
+      "invocation": "tests-3",
+      "stage": "fix",
+      "attempt": 1,
+      "record_id": "rec-706c7ebbdff54735"
+    },
+    "security|security-3|revalidate|1": {
+      "agent": "security",
+      "invocation": "security-3",
+      "stage": "revalidate",
+      "attempt": 1,
+      "record_id": "rec-dc70a8416305458f"
+    },
+    "main|main-1|close|1": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "close",
+      "attempt": 1,
+      "record_id": "rec-0969669d60cc4f5e"
+    },
+    "main|main-2|close|1": {
+      "agent": "main",
+      "invocation": "main-2",
+      "stage": "close",
+      "attempt": 1,
+      "record_id": "rec-d97601e9916143a9"
+    },
+    "tests|tests-1|implement|2": {
+      "agent": "tests",
+      "invocation": "tests-1",
+      "stage": "implement",
+      "attempt": 2,
+      "record_id": "rec-dd3f2165e51d446f"
+    },
+    "tests|tests-3|fix|2": {
+      "agent": "tests",
+      "invocation": "tests-3",
+      "stage": "fix",
+      "attempt": 2,
+      "record_id": "rec-8a5dd6a5364041f4"
+    },
+    "ui|ui-3|fix|2": {
+      "agent": "ui",
+      "invocation": "ui-3",
+      "stage": "fix",
+      "attempt": 2,
+      "record_id": "rec-72ddb55183b64a84"
+    }
+  },
+  "records": {
+    "rec-8d5e27647ab34436": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "compile",
+      "attempt": 1,
+      "id": "rec-8d5e27647ab34436",
+      "status": "succeeded",
+      "start": "2026-10-25T15:21:35.956989+00:00",
+      "end": "2026-10-25T15:25:44.266087+00:00",
+      "elapsed_seconds": 248.309098,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime token/cache telemetry not exposed",
+        "input_tokens": "Per-stage runtime token/cache telemetry not exposed",
+        "output_tokens": "Per-stage runtime token/cache telemetry not exposed",
+        "cache_read_tokens": "Per-stage runtime token/cache telemetry not exposed",
+        "tool_calls": "Per-stage runtime token/cache telemetry not exposed",
+        "retries": "Per-stage runtime token/cache telemetry not exposed",
+        "observed_model": "Per-stage runtime token/cache telemetry not exposed",
+        "observed_effort": "Per-stage runtime token/cache telemetry not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Brief compiled; baseline and runtimes inspected; independent design controls settled"
+    },
+    "rec-79b8edacf6044667": {
+      "agent": "security",
+      "invocation": "security-1",
+      "stage": "security",
+      "attempt": 1,
+      "id": "rec-79b8edacf6044667",
+      "status": "succeeded",
+      "start": "2026-10-25T15:22:27.873853+00:00",
+      "end": "2026-10-25T15:25:43.896512+00:00",
+      "elapsed_seconds": 196.022659,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime token/cache telemetry not exposed",
+        "input_tokens": "Per-stage runtime token/cache telemetry not exposed",
+        "output_tokens": "Per-stage runtime token/cache telemetry not exposed",
+        "cache_read_tokens": "Per-stage runtime token/cache telemetry not exposed",
+        "tool_calls": "Per-stage runtime token/cache telemetry not exposed",
+        "retries": "Per-stage runtime token/cache telemetry not exposed",
+        "observed_model": "Per-stage runtime token/cache telemetry not exposed",
+        "observed_effort": "Per-stage runtime token/cache telemetry not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Independent design review ready with SEC-D01 deterministic server-resolved coverage and SEC-D02 bounded pagination controls incorporated"
+    },
+    "rec-45b8f8e569d74f13": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "dispatch",
+      "attempt": 1,
+      "id": "rec-45b8f8e569d74f13",
+      "status": "succeeded",
+      "start": "2026-10-25T15:25:44.837307+00:00",
+      "end": "2026-10-25T15:27:18.032258+00:00",
+      "elapsed_seconds": 93.194951,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Server foundation, independent tests, and UI assigned disjoint ownership; security controls incorporated"
+    },
+    "rec-37ad306ba6754541": {
+      "agent": "server",
+      "invocation": "server-1",
+      "stage": "implement",
+      "attempt": 1,
+      "id": "rec-37ad306ba6754541",
+      "status": "succeeded",
+      "start": "2026-10-25T15:25:45.204300+00:00",
+      "end": "2026-10-25T15:37:58.602892+00:00",
+      "elapsed_seconds": 733.398592,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Manual server/contracts/migration implemented; Prisma generate, server typecheck, scoped lint passed; nested evidence integration defect fixed; independent validation follows"
+    },
+    "rec-b0a97c3f9c584ef2": {
+      "agent": "tests",
+      "invocation": "tests-1",
+      "stage": "implement",
+      "attempt": 1,
+      "id": "rec-b0a97c3f9c584ef2",
+      "status": "failed",
+      "start": "2026-10-25T15:26:31.685150+00:00",
+      "end": "2026-10-25T15:37:58.937176+00:00",
+      "elapsed_seconds": 687.252026,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable",
+        "input_tokens": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable",
+        "output_tokens": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable",
+        "cache_read_tokens": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable",
+        "tool_calls": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable",
+        "retries": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable",
+        "observed_model": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable",
+        "observed_effort": "Stage token/cache telemetry not exposed; nested validation commands have measured durations but per-attempt start timestamps unavailable"
+      },
+      "usage_import_id": null,
+      "outcome": "Tests implemented; initial17 PostgreSQL cases5passed12failed, diagnostic and stale-loaded retry16passed1failed. Real nested evidence bug fixed by server; status/test expectations corrected. Boundary observed after retry; exact attempt start timestamps unavailable."
+    },
+    "rec-31b414ef72a240bb": {
+      "agent": "ui",
+      "invocation": "ui-1",
+      "stage": "implement",
+      "attempt": 1,
+      "id": "rec-31b414ef72a240bb",
+      "status": "succeeded",
+      "start": "2026-10-25T15:27:16.849903+00:00",
+      "end": "2026-10-25T15:36:08.790879+00:00",
+      "elapsed_seconds": 531.940976,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "medium",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "UI implemented; shared build/client typecheck and 53 component tests passed; independent review pending"
+    },
+    "rec-57276243598b459a": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "integrate",
+      "attempt": 1,
+      "id": "rec-57276243598b459a",
+      "status": "succeeded",
+      "start": "2026-10-25T15:27:18.387444+00:00",
+      "end": "2026-10-25T16:14:51.751620+00:00",
+      "elapsed_seconds": 2853.364176,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed; interval includes unknown idle gap",
+        "input_tokens": "Per-stage runtime usage not exposed; interval includes unknown idle gap",
+        "output_tokens": "Per-stage runtime usage not exposed; interval includes unknown idle gap",
+        "cache_read_tokens": "Per-stage runtime usage not exposed; interval includes unknown idle gap",
+        "tool_calls": "Per-stage runtime usage not exposed; interval includes unknown idle gap",
+        "retries": "Per-stage runtime usage not exposed; interval includes unknown idle gap",
+        "observed_model": "Per-stage runtime usage not exposed; interval includes unknown idle gap",
+        "observed_effort": "Per-stage runtime usage not exposed; interval includes unknown idle gap"
+      },
+      "usage_import_id": null,
+      "outcome": "Integrated slice validated: lint, production build,48 PostgreSQL tests,6 Chromium tests passed; prior35 server58 client passed. Includes idle gap and waiting; not active compute."
+    },
+    "rec-7e25960ac4bb4a44": {
+      "agent": "ui",
+      "invocation": "ui-2",
+      "stage": "fix",
+      "attempt": 1,
+      "id": "rec-7e25960ac4bb4a44",
+      "status": "succeeded",
+      "start": "2026-10-25T15:36:09.182577+00:00",
+      "end": "2026-10-25T15:37:58.238849+00:00",
+      "elapsed_seconds": 109.056272,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "medium",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Preserve narrative whitespace and restart explicit finding history at page1; client typecheck and58 tests passed"
+    },
+    "rec-649db56a435447c5": {
+      "agent": "tests",
+      "invocation": "tests-2",
+      "stage": "revalidate",
+      "attempt": 1,
+      "id": "rec-649db56a435447c5",
+      "status": "succeeded",
+      "start": "2026-10-25T15:37:59.272923+00:00",
+      "end": "2026-10-25T15:40:44.798994+00:00",
+      "elapsed_seconds": 165.526071,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Full PostgreSQL integration6suites48tests passed after evidence fix; unit35 passed. Further independent review findings require targeted regression edits."
+    },
+    "rec-d688058cffb7452b": {
+      "agent": "security",
+      "invocation": "security-2",
+      "stage": "review",
+      "attempt": 1,
+      "id": "rec-d688058cffb7452b",
+      "status": "succeeded",
+      "start": "2026-10-25T15:38:27.024431+00:00",
+      "end": "2026-10-25T16:10:54.471288+00:00",
+      "elapsed_seconds": 1947.446857,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage counters unavailable",
+        "input_tokens": "Per-stage counters unavailable",
+        "output_tokens": "Per-stage counters unavailable",
+        "cache_read_tokens": "Per-stage counters unavailable",
+        "tool_calls": "Per-stage counters unavailable",
+        "retries": "Per-stage counters unavailable",
+        "observed_model": "Per-stage counters unavailable",
+        "observed_effort": "Per-stage counters unavailable"
+      },
+      "usage_import_id": null,
+      "outcome": "Independent source review complete; SEC-I01 statically fixed, no other confirmed defect; final regression evidence pending. Interval includes unknown idle gap before checkpoint."
+    },
+    "rec-be9e3c27cf004322": {
+      "agent": "server",
+      "invocation": "server-2",
+      "stage": "fix",
+      "attempt": 1,
+      "id": "rec-be9e3c27cf004322",
+      "status": "succeeded",
+      "start": "2026-10-25T15:39:57.530621+00:00",
+      "end": "2026-10-25T15:41:12.587489+00:00",
+      "elapsed_seconds": 75.056868,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "SEC-I01 activity includes bounded affected IDs and authorized reasons/decision notes atomically; server typecheck and scoped lint passed"
+    },
+    "rec-7148ede9a18b4b48": {
+      "agent": "ui",
+      "invocation": "ui-3",
+      "stage": "fix",
+      "attempt": 1,
+      "id": "rec-7148ede9a18b4b48",
+      "status": "interrupted",
+      "start": "2026-10-25T15:39:57.865774+00:00",
+      "end": "2026-10-25T15:40:45.587284+00:00",
+      "elapsed_seconds": 47.72151,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "medium",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "No worker invocation ran; coordinator measured dispatch interval only",
+        "input_tokens": "No worker invocation ran; coordinator measured dispatch interval only",
+        "output_tokens": "No worker invocation ran; coordinator measured dispatch interval only",
+        "cache_read_tokens": "No worker invocation ran; coordinator measured dispatch interval only",
+        "tool_calls": "No worker invocation ran; coordinator measured dispatch interval only",
+        "retries": "No worker invocation ran; coordinator measured dispatch interval only",
+        "observed_model": "No worker invocation ran; coordinator measured dispatch interval only",
+        "observed_effort": "No worker invocation ran; coordinator measured dispatch interval only"
+      },
+      "usage_import_id": null,
+      "outcome": "UI followup dispatch rejected by active-agent concurrency limit before execution; main takes tiny mock signature cleanup"
+    },
+    "rec-706c7ebbdff54735": {
+      "agent": "tests",
+      "invocation": "tests-3",
+      "stage": "fix",
+      "attempt": 1,
+      "id": "rec-706c7ebbdff54735",
+      "status": "interrupted",
+      "start": "2026-10-25T15:40:45.215350+00:00",
+      "end": "2026-10-25T16:10:54.110094+00:00",
+      "elapsed_seconds": 1808.894744,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Worker usage limit interrupted completion; per-stage counters unavailable",
+        "input_tokens": "Worker usage limit interrupted completion; per-stage counters unavailable",
+        "output_tokens": "Worker usage limit interrupted completion; per-stage counters unavailable",
+        "cache_read_tokens": "Worker usage limit interrupted completion; per-stage counters unavailable",
+        "tool_calls": "Worker usage limit interrupted completion; per-stage counters unavailable",
+        "retries": "Worker usage limit interrupted completion; per-stage counters unavailable",
+        "observed_model": "Worker usage limit interrupted completion; per-stage counters unavailable",
+        "observed_effort": "Worker usage limit interrupted completion; per-stage counters unavailable"
+      },
+      "usage_import_id": null,
+      "outcome": "Regression assertions implemented; worker hit usage limit before rerun. Main continues validation. Unknown idle gap until current observed checkpoint."
+    },
+    "rec-dc70a8416305458f": {
+      "agent": "security",
+      "invocation": "security-3",
+      "stage": "revalidate",
+      "attempt": 1,
+      "id": "rec-dc70a8416305458f",
+      "status": "succeeded",
+      "start": "2026-10-25T16:13:29.245987+00:00",
+      "end": "2026-10-25T16:15:32.554072+00:00",
+      "elapsed_seconds": 123.308085,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Independent final-source-3 verification closes SEC-I01/F-001 using source and48 passed PostgreSQL tests; no remaining blocker"
+    },
+    "rec-0969669d60cc4f5e": {
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "close",
+      "attempt": 1,
+      "id": "rec-0969669d60cc4f5e",
+      "status": "succeeded",
+      "start": "2026-10-25T16:14:52.102798+00:00",
+      "end": "2026-10-25T16:15:33.884101+00:00",
+      "elapsed_seconds": 41.781303,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage runtime usage not exposed",
+        "input_tokens": "Per-stage runtime usage not exposed",
+        "output_tokens": "Per-stage runtime usage not exposed",
+        "cache_read_tokens": "Per-stage runtime usage not exposed",
+        "tool_calls": "Per-stage runtime usage not exposed",
+        "retries": "Per-stage runtime usage not exposed",
+        "observed_model": "Per-stage runtime usage not exposed",
+        "observed_effort": "Per-stage runtime usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Final checks and independent finding closure recorded; documentation/traceability updated; resource reconciliation follows"
+    },
+    "rec-d97601e9916143a9": {
+      "agent": "main",
+      "invocation": "main-2",
+      "stage": "close",
+      "attempt": 1,
+      "id": "rec-d97601e9916143a9",
+      "status": "succeeded",
+      "start": "2026-10-25T16:35:19.134569+00:00",
+      "end": "2026-10-25T16:37:18.182729+00:00",
+      "elapsed_seconds": 119.04816,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage usage not exposed",
+        "input_tokens": "Per-stage usage not exposed",
+        "output_tokens": "Per-stage usage not exposed",
+        "cache_read_tokens": "Per-stage usage not exposed",
+        "tool_calls": "Per-stage usage not exposed",
+        "retries": "Per-stage usage not exposed",
+        "observed_model": "Per-stage usage not exposed",
+        "observed_effort": "Per-stage usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Workflow continuation completed real attempt2 recovery, fresh final-snapshot PostgreSQL checks and superseding handoff; completeness/report rendering follows"
+    },
+    "rec-dd3f2165e51d446f": {
+      "agent": "tests",
+      "invocation": "tests-1",
+      "stage": "implement",
+      "attempt": 2,
+      "id": "rec-dd3f2165e51d446f",
+      "status": "succeeded",
+      "start": "2026-10-25T16:35:19.485867+00:00",
+      "end": "2026-10-25T16:36:52.581661+00:00",
+      "elapsed_seconds": 93.095794,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage usage not exposed",
+        "input_tokens": "Per-stage usage not exposed",
+        "output_tokens": "Per-stage usage not exposed",
+        "cache_read_tokens": "Per-stage usage not exposed",
+        "tool_calls": "Per-stage usage not exposed",
+        "retries": "Per-stage usage not exposed",
+        "observed_model": "Per-stage usage not exposed",
+        "observed_effort": "Per-stage usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Original test owner recovered failed implementation attempt:35 server tests passed;5 owned test hashes match final-source-3; existing48 PostgreSQL passes verified"
+    },
+    "rec-8a5dd6a5364041f4": {
+      "agent": "tests",
+      "invocation": "tests-3",
+      "stage": "fix",
+      "attempt": 2,
+      "id": "rec-8a5dd6a5364041f4",
+      "status": "succeeded",
+      "start": "2026-10-25T16:35:19.824356+00:00",
+      "end": "2026-10-25T16:36:52.946857+00:00",
+      "elapsed_seconds": 93.122501,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution",
+        "input_tokens": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution",
+        "output_tokens": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution",
+        "cache_read_tokens": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution",
+        "tool_calls": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution",
+        "retries": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution",
+        "observed_model": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution",
+        "observed_effort": "Per-stage usage not exposed; same shared validation command also supports implementation recovery, not duplicate test execution"
+      },
+      "usage_import_id": null,
+      "outcome": "Original test owner recovered interrupted fix:SEC-I01 activity and same-reviewer replay regressions inspected against final-source-3 and successful integration evidence;35 unit tests passed"
+    },
+    "rec-72ddb55183b64a84": {
+      "agent": "ui",
+      "invocation": "ui-3",
+      "stage": "fix",
+      "attempt": 2,
+      "id": "rec-72ddb55183b64a84",
+      "status": "succeeded",
+      "start": "2026-10-25T16:35:20.197427+00:00",
+      "end": "2026-10-25T16:36:53.271730+00:00",
+      "elapsed_seconds": 93.074303,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "medium",
+      "observed_model": null,
+      "observed_effort": null,
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null
+      },
+      "tool_calls": null,
+      "retries": null,
+      "usage_source": null,
+      "unavailable_reasons": {
+        "usage_source": "Per-stage usage not exposed",
+        "input_tokens": "Per-stage usage not exposed",
+        "output_tokens": "Per-stage usage not exposed",
+        "cache_read_tokens": "Per-stage usage not exposed",
+        "tool_calls": "Per-stage usage not exposed",
+        "retries": "Per-stage usage not exposed",
+        "observed_model": "Per-stage usage not exposed",
+        "observed_effort": "Per-stage usage not exposed"
+      },
+      "usage_import_id": null,
+      "outcome": "Original UI owner completed cleanup validation:focused ESLint and58 client tests passed; no edits"
+    }
+  },
+  "assignments": {
+    "server": {
+      "id": "server",
+      "agent": "server",
+      "role": "implementer",
+      "paths": [
+        "src/shared/src/contracts/reviewer.ts",
+        "src/server/prisma",
+        "src/server/src/reviews",
+        "src/server/src/proposals/proposals.service.ts",
+        "src/server/src/activity/activity.service.ts"
+      ],
+      "dependencies": [],
+      "created_at": "2026-10-25T15:25:45.659962+00:00"
+    },
+    "tests": {
+      "id": "tests",
+      "agent": "tests",
+      "role": "implementer",
+      "paths": [
+        "src/server/test",
+        "workflow/tests/browser/reviewer-manual.spec.ts"
+      ],
+      "dependencies": [
+        "server"
+      ],
+      "created_at": "2026-10-25T15:26:32.149044+00:00"
+    },
+    "ui": {
+      "id": "ui",
+      "agent": "ui",
+      "role": "implementer",
+      "paths": [
+        "src/client/src/features/reviewer"
+      ],
+      "dependencies": [
+        "server"
+      ],
+      "created_at": "2026-10-25T15:27:17.301053+00:00"
+    },
+    "main-integration": {
+      "id": "main-integration",
+      "agent": "main",
+      "role": "main",
+      "paths": [
+        "docs/UserGuide.md",
+        "docs/DeveloperGuide.md",
+        "workflow/PLAN.md",
+        "workflow/TRACEABILITY.md",
+        "playwright.config.ts"
+      ],
+      "dependencies": [],
+      "created_at": "2026-10-25T15:32:51.073473+00:00"
+    }
+  },
+  "findings": {
+    "F-001": {
+      "requirement": "REQ-SHR-007 / INTEGRATION-SPEC event boundaries",
+      "owner": "server",
+      "reviewer": "security",
+      "description": "SEC-I01: transactional activity lacked affected finding/criterion IDs and human reasons or decision note. Owner fixed safe summaries/reason projection; independent closure pending.",
+      "id": "F-001",
+      "severity": "MEDIUM",
+      "blocks": true,
+      "status": "closed",
+      "evidence": [
+        "src/server/src/reviews/manual-review.ts",
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/independent-closure.md"
+      ],
+      "created_at": "2026-10-25T15:41:12.226367+00:00",
+      "history": [
+        {
+          "status": "open",
+          "reviewer": "security",
+          "at": "2026-10-25T15:41:12.226367+00:00",
+          "evidence": [
+            "src/server/src/reviews/manual-review.ts"
+          ]
+        },
+        {
+          "status": "closed",
+          "reviewer": "security",
+          "at": "2026-10-25T16:15:32.901794+00:00",
+          "evidence": [
+            "logs/ngkhengyang/reviewer/2026-10-25-manual-review/independent-closure.md"
+          ],
+          "record_id": "rec-dc70a8416305458f",
+          "snapshot_id": "final-source-3"
+        }
+      ]
+    }
+  },
+  "cycles": [],
+  "snapshots": {
+    "integrated-source-1": {
+      "created_at": "2026-10-25T15:38:00.135768+00:00",
+      "paths": [
+        "playwright.config.ts",
+        "src/client/src/features/reviewer",
+        "src/server/prisma/migrations/20261025170000_manual_review",
+        "src/server/prisma/schema.prisma",
+        "src/server/src/reviews",
+        "src/server/test",
+        "src/shared/src/contracts/reviewer.ts",
+        "workflow/tests/browser/reviewer-manual.spec.ts"
+      ],
+      "base": "HEAD",
+      "snapshot": {
+        "paths": [
+          "playwright.config.ts",
+          "src/client/src/features/reviewer",
+          "src/server/prisma/migrations/20261025170000_manual_review",
+          "src/server/prisma/schema.prisma",
+          "src/server/src/reviews",
+          "src/server/test",
+          "src/shared/src/contracts/reviewer.ts",
+          "workflow/tests/browser/reviewer-manual.spec.ts"
+        ],
+        "base": "HEAD",
+        "head": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+        "base_commit": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+        "diff_sha256": "1be6f8d1bf530959e9d23729932f9d5d08e9c79db4249a35718266fefa3644c1",
+        "files": {
+          "playwright.config.ts": {
+            "sha256": "946a2c7790257de4b7b9568ea195c3db82ddb6af8dcf17ebd8cfe9283f64ee96",
+            "bytes": 744
+          },
+          "src/client/src/features/reviewer/ManualReview.test.tsx": {
+            "sha256": "d0024ff955d512034adc32da1fa7b420f0d2886bee0e34004ff7cde7aec25d15",
+            "bytes": 14830
+          },
+          "src/client/src/features/reviewer/ManualReview.tsx": {
+            "sha256": "8e70c5311eeaaff27e7fc00b100f1bc9bd63fa829841f7e6419db921643f51fc",
+            "bytes": 18349
+          },
+          "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+            "sha256": "692688d7bebcd5e39b05fff784b7785428283d01b820e04f88ff6548c1762221",
+            "bytes": 17168
+          },
+          "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+            "sha256": "e9a01c4ddd73ca629a557b39d492b05c455ed85def59213a7c090b15476e53d2",
+            "bytes": 16112
+          },
+          "src/server/prisma/migrations/20261025170000_manual_review/migration.sql": {
+            "sha256": "921f428d1789f43af9d48c01b33a784d549dcf57219a992d59ad36f850f1d575",
+            "bytes": 12585
+          },
+          "src/server/prisma/schema.prisma": {
+            "sha256": "4463832690ee07088600b565ceb735c98b68b7655db334376f86ce2a31e2b62d",
+            "bytes": 12587
+          },
+          "src/server/src/reviews/manual-review.ts": {
+            "sha256": "e1a64a7c56c439bee62db04b9c293762ce6afa748c575bbabf28dc563dfb2a4f",
+            "bytes": 18852
+          },
+          "src/server/src/reviews/reviewer-context.ts": {
+            "sha256": "8677c442f8dd170a49d45f6896d25e9812274a86b2249aa060fa9c57bc82fb14",
+            "bytes": 2643
+          },
+          "src/server/src/reviews/reviews.controller.ts": {
+            "sha256": "ac8e73d48f5f590b6662be0358cfeeaa6895f7b7cf388279db6640ed79ccd023",
+            "bytes": 8967
+          },
+          "src/server/src/reviews/reviews.module.ts": {
+            "sha256": "9cd75784552f847d71eb8c0df38889b405a8338bd3cb5ffba180d178249e560e",
+            "bytes": 811
+          },
+          "src/server/src/reviews/reviews.service.ts": {
+            "sha256": "7441a1ad8820b20f37a146585aec836fb9b2504370e3ba4bc7a0f519b9ee44de",
+            "bytes": 13004
+          },
+          "src/server/src/reviews/seed-reviewer.ts": {
+            "sha256": "f1a00a39a7c48d147a7c35101d99eb8512e8fa975a6e12d4914e7430d5cbf060",
+            "bytes": 6710
+          },
+          "src/server/test/database.integration.ts": {
+            "sha256": "c8fa48f8c0e96018b592c664311c788e55084edcb9187bca8751d00713a35b35",
+            "bytes": 741
+          },
+          "src/server/test/demo-seed.integration.ts": {
+            "sha256": "dc9fcda4f5ef95d1a43870e07b15d871b52196e7316597edabaa39d1982b15ba",
+            "bytes": 3372
+          },
+          "src/server/test/http.spec.ts": {
+            "sha256": "2f5103ea1a990609b8c0e46c283e49812632d46dfaed3be3a06565ffa9a06a7a",
+            "bytes": 3480
+          },
+          "src/server/test/identity.integration.ts": {
+            "sha256": "e0594cf32d28b5f8ef1ca17720fb37b1b5f81074d11c7d775fbff43bba8ca972",
+            "bytes": 8037
+          },
+          "src/server/test/identity.spec.ts": {
+            "sha256": "96b9147f3a03ee572f272822975900a74177704f81ac4a3b308a0b9a57d5ea9b",
+            "bytes": 8378
+          },
+          "src/server/test/manual-review-contracts.spec.ts": {
+            "sha256": "899442f96787a69af5dd07dc74798ac69052b7c6fe449e03520a6948d3b90051",
+            "bytes": 4351
+          },
+          "src/server/test/manual-review.integration.ts": {
+            "sha256": "9b8aa40566afd1828348360e788f16671a5bf749e7c1b846b602a5ccca371e11",
+            "bytes": 38196
+          },
+          "src/server/test/reviewer-contracts.spec.ts": {
+            "sha256": "ae79040c968b1ff6f7efa9ffa09e5afa91b17561cd1db84bf121038c5e696ecc",
+            "bytes": 4583
+          },
+          "src/server/test/reviewer-seed.integration.ts": {
+            "sha256": "63b53abb45ee1beec6de97da9545794716b25669145e13a5518844e73d5c2694",
+            "bytes": 3926
+          },
+          "src/server/test/reviews.integration.ts": {
+            "sha256": "6c3765047ab64ec03d85ccedbec8821a9a8e0f527c9a10232194505beeb104ab",
+            "bytes": 30769
+          },
+          "src/server/test/reviews.spec.ts": {
+            "sha256": "12ebc85d41afd1278d4c76f5d1d8f3330405fb10d91e19d1d376a91924da68fd",
+            "bytes": 8455
+          },
+          "src/shared/src/contracts/reviewer.ts": {
+            "sha256": "9bf13c5035d1fb94de836f7258cc3b4f21c3bfa2012928dfc1efe27214af00ff",
+            "bytes": 19756
+          },
+          "workflow/tests/browser/reviewer-manual.spec.ts": {
+            "sha256": "1b07e3ef584049361ae5ee28c4338dbb42480d4cef72363266764cd0605275dc",
+            "bytes": 5015
+          }
+        }
+      },
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/snapshots/integrated-source-1.json",
+      "artifact_sha256": "900038adb8e441cb17fe654216e34a3ffe8d2de77423eb61ce1356fed46bf317"
+    },
+    "final-source-2": {
+      "created_at": "2026-10-25T16:10:55.282808+00:00",
+      "paths": [
+        "playwright.config.ts",
+        "src/client/src/features/reviewer",
+        "src/server/prisma/migrations/20261025170000_manual_review",
+        "src/server/prisma/schema.prisma",
+        "src/server/src/reviews",
+        "src/server/test",
+        "src/shared/src/contracts/reviewer.ts",
+        "workflow/tests/browser/reviewer-manual.spec.ts"
+      ],
+      "base": "HEAD",
+      "snapshot": {
+        "paths": [
+          "playwright.config.ts",
+          "src/client/src/features/reviewer",
+          "src/server/prisma/migrations/20261025170000_manual_review",
+          "src/server/prisma/schema.prisma",
+          "src/server/src/reviews",
+          "src/server/test",
+          "src/shared/src/contracts/reviewer.ts",
+          "workflow/tests/browser/reviewer-manual.spec.ts"
+        ],
+        "base": "HEAD",
+        "head": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+        "base_commit": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+        "diff_sha256": "1be6f8d1bf530959e9d23729932f9d5d08e9c79db4249a35718266fefa3644c1",
+        "files": {
+          "playwright.config.ts": {
+            "sha256": "946a2c7790257de4b7b9568ea195c3db82ddb6af8dcf17ebd8cfe9283f64ee96",
+            "bytes": 744
+          },
+          "src/client/src/features/reviewer/ManualReview.test.tsx": {
+            "sha256": "49eaa4023c280fe2c34cfd2e5de515752ae13c44571edb535ed8693745116201",
+            "bytes": 14936
+          },
+          "src/client/src/features/reviewer/ManualReview.tsx": {
+            "sha256": "8e70c5311eeaaff27e7fc00b100f1bc9bd63fa829841f7e6419db921643f51fc",
+            "bytes": 18349
+          },
+          "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+            "sha256": "692688d7bebcd5e39b05fff784b7785428283d01b820e04f88ff6548c1762221",
+            "bytes": 17168
+          },
+          "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+            "sha256": "e9a01c4ddd73ca629a557b39d492b05c455ed85def59213a7c090b15476e53d2",
+            "bytes": 16112
+          },
+          "src/server/prisma/migrations/20261025170000_manual_review/migration.sql": {
+            "sha256": "921f428d1789f43af9d48c01b33a784d549dcf57219a992d59ad36f850f1d575",
+            "bytes": 12585
+          },
+          "src/server/prisma/schema.prisma": {
+            "sha256": "4463832690ee07088600b565ceb735c98b68b7655db334376f86ce2a31e2b62d",
+            "bytes": 12587
+          },
+          "src/server/src/reviews/manual-review.ts": {
+            "sha256": "261bc41d1fe529c6d72193277240187b4756b2cec90f8a659d3f31130b68ec23",
+            "bytes": 19183
+          },
+          "src/server/src/reviews/reviewer-context.ts": {
+            "sha256": "8677c442f8dd170a49d45f6896d25e9812274a86b2249aa060fa9c57bc82fb14",
+            "bytes": 2643
+          },
+          "src/server/src/reviews/reviews.controller.ts": {
+            "sha256": "ac8e73d48f5f590b6662be0358cfeeaa6895f7b7cf388279db6640ed79ccd023",
+            "bytes": 8967
+          },
+          "src/server/src/reviews/reviews.module.ts": {
+            "sha256": "9cd75784552f847d71eb8c0df38889b405a8338bd3cb5ffba180d178249e560e",
+            "bytes": 811
+          },
+          "src/server/src/reviews/reviews.service.ts": {
+            "sha256": "7441a1ad8820b20f37a146585aec836fb9b2504370e3ba4bc7a0f519b9ee44de",
+            "bytes": 13004
+          },
+          "src/server/src/reviews/seed-reviewer.ts": {
+            "sha256": "f1a00a39a7c48d147a7c35101d99eb8512e8fa975a6e12d4914e7430d5cbf060",
+            "bytes": 6710
+          },
+          "src/server/test/database.integration.ts": {
+            "sha256": "c8fa48f8c0e96018b592c664311c788e55084edcb9187bca8751d00713a35b35",
+            "bytes": 741
+          },
+          "src/server/test/demo-seed.integration.ts": {
+            "sha256": "dc9fcda4f5ef95d1a43870e07b15d871b52196e7316597edabaa39d1982b15ba",
+            "bytes": 3372
+          },
+          "src/server/test/http.spec.ts": {
+            "sha256": "2f5103ea1a990609b8c0e46c283e49812632d46dfaed3be3a06565ffa9a06a7a",
+            "bytes": 3480
+          },
+          "src/server/test/identity.integration.ts": {
+            "sha256": "e0594cf32d28b5f8ef1ca17720fb37b1b5f81074d11c7d775fbff43bba8ca972",
+            "bytes": 8037
+          },
+          "src/server/test/identity.spec.ts": {
+            "sha256": "96b9147f3a03ee572f272822975900a74177704f81ac4a3b308a0b9a57d5ea9b",
+            "bytes": 8378
+          },
+          "src/server/test/manual-review-contracts.spec.ts": {
+            "sha256": "899442f96787a69af5dd07dc74798ac69052b7c6fe449e03520a6948d3b90051",
+            "bytes": 4351
+          },
+          "src/server/test/manual-review.integration.ts": {
+            "sha256": "a5fb10e502f5c73d41ab0db437c5fd4aff6589d03c1a1fdcbfccabef7eeca3c2",
+            "bytes": 40188
+          },
+          "src/server/test/reviewer-contracts.spec.ts": {
+            "sha256": "ae79040c968b1ff6f7efa9ffa09e5afa91b17561cd1db84bf121038c5e696ecc",
+            "bytes": 4583
+          },
+          "src/server/test/reviewer-seed.integration.ts": {
+            "sha256": "63b53abb45ee1beec6de97da9545794716b25669145e13a5518844e73d5c2694",
+            "bytes": 3926
+          },
+          "src/server/test/reviews.integration.ts": {
+            "sha256": "6c3765047ab64ec03d85ccedbec8821a9a8e0f527c9a10232194505beeb104ab",
+            "bytes": 30769
+          },
+          "src/server/test/reviews.spec.ts": {
+            "sha256": "12ebc85d41afd1278d4c76f5d1d8f3330405fb10d91e19d1d376a91924da68fd",
+            "bytes": 8455
+          },
+          "src/shared/src/contracts/reviewer.ts": {
+            "sha256": "9bf13c5035d1fb94de836f7258cc3b4f21c3bfa2012928dfc1efe27214af00ff",
+            "bytes": 19756
+          },
+          "workflow/tests/browser/reviewer-manual.spec.ts": {
+            "sha256": "1b07e3ef584049361ae5ee28c4338dbb42480d4cef72363266764cd0605275dc",
+            "bytes": 5015
+          }
+        }
+      },
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/snapshots/final-source-2.json",
+      "artifact_sha256": "2a60e5a4db52ffe0c94e7deea72e5e053874fb6a1da263480b63923b3761c211"
+    },
+    "final-source-3": {
+      "created_at": "2026-10-25T16:14:00.281106+00:00",
+      "paths": [
+        "playwright.config.ts",
+        "src/client/src/features/reviewer",
+        "src/server/prisma/migrations/20261025170000_manual_review",
+        "src/server/prisma/schema.prisma",
+        "src/server/src/reviews",
+        "src/server/test",
+        "src/shared/src/contracts/reviewer.ts",
+        "workflow/tests/browser/reviewer-manual.spec.ts"
+      ],
+      "base": "HEAD",
+      "snapshot": {
+        "paths": [
+          "playwright.config.ts",
+          "src/client/src/features/reviewer",
+          "src/server/prisma/migrations/20261025170000_manual_review",
+          "src/server/prisma/schema.prisma",
+          "src/server/src/reviews",
+          "src/server/test",
+          "src/shared/src/contracts/reviewer.ts",
+          "workflow/tests/browser/reviewer-manual.spec.ts"
+        ],
+        "base": "HEAD",
+        "head": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+        "base_commit": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+        "diff_sha256": "1be6f8d1bf530959e9d23729932f9d5d08e9c79db4249a35718266fefa3644c1",
+        "files": {
+          "playwright.config.ts": {
+            "sha256": "946a2c7790257de4b7b9568ea195c3db82ddb6af8dcf17ebd8cfe9283f64ee96",
+            "bytes": 744
+          },
+          "src/client/src/features/reviewer/ManualReview.test.tsx": {
+            "sha256": "49eaa4023c280fe2c34cfd2e5de515752ae13c44571edb535ed8693745116201",
+            "bytes": 14936
+          },
+          "src/client/src/features/reviewer/ManualReview.tsx": {
+            "sha256": "8e70c5311eeaaff27e7fc00b100f1bc9bd63fa829841f7e6419db921643f51fc",
+            "bytes": 18349
+          },
+          "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+            "sha256": "692688d7bebcd5e39b05fff784b7785428283d01b820e04f88ff6548c1762221",
+            "bytes": 17168
+          },
+          "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+            "sha256": "e9a01c4ddd73ca629a557b39d492b05c455ed85def59213a7c090b15476e53d2",
+            "bytes": 16112
+          },
+          "src/server/prisma/migrations/20261025170000_manual_review/migration.sql": {
+            "sha256": "921f428d1789f43af9d48c01b33a784d549dcf57219a992d59ad36f850f1d575",
+            "bytes": 12585
+          },
+          "src/server/prisma/schema.prisma": {
+            "sha256": "4463832690ee07088600b565ceb735c98b68b7655db334376f86ce2a31e2b62d",
+            "bytes": 12587
+          },
+          "src/server/src/reviews/manual-review.ts": {
+            "sha256": "261bc41d1fe529c6d72193277240187b4756b2cec90f8a659d3f31130b68ec23",
+            "bytes": 19183
+          },
+          "src/server/src/reviews/reviewer-context.ts": {
+            "sha256": "8677c442f8dd170a49d45f6896d25e9812274a86b2249aa060fa9c57bc82fb14",
+            "bytes": 2643
+          },
+          "src/server/src/reviews/reviews.controller.ts": {
+            "sha256": "ac8e73d48f5f590b6662be0358cfeeaa6895f7b7cf388279db6640ed79ccd023",
+            "bytes": 8967
+          },
+          "src/server/src/reviews/reviews.module.ts": {
+            "sha256": "9cd75784552f847d71eb8c0df38889b405a8338bd3cb5ffba180d178249e560e",
+            "bytes": 811
+          },
+          "src/server/src/reviews/reviews.service.ts": {
+            "sha256": "7441a1ad8820b20f37a146585aec836fb9b2504370e3ba4bc7a0f519b9ee44de",
+            "bytes": 13004
+          },
+          "src/server/src/reviews/seed-reviewer.ts": {
+            "sha256": "f1a00a39a7c48d147a7c35101d99eb8512e8fa975a6e12d4914e7430d5cbf060",
+            "bytes": 6710
+          },
+          "src/server/test/database.integration.ts": {
+            "sha256": "c8fa48f8c0e96018b592c664311c788e55084edcb9187bca8751d00713a35b35",
+            "bytes": 741
+          },
+          "src/server/test/demo-seed.integration.ts": {
+            "sha256": "dc9fcda4f5ef95d1a43870e07b15d871b52196e7316597edabaa39d1982b15ba",
+            "bytes": 3372
+          },
+          "src/server/test/http.spec.ts": {
+            "sha256": "2f5103ea1a990609b8c0e46c283e49812632d46dfaed3be3a06565ffa9a06a7a",
+            "bytes": 3480
+          },
+          "src/server/test/identity.integration.ts": {
+            "sha256": "e0594cf32d28b5f8ef1ca17720fb37b1b5f81074d11c7d775fbff43bba8ca972",
+            "bytes": 8037
+          },
+          "src/server/test/identity.spec.ts": {
+            "sha256": "96b9147f3a03ee572f272822975900a74177704f81ac4a3b308a0b9a57d5ea9b",
+            "bytes": 8378
+          },
+          "src/server/test/manual-review-contracts.spec.ts": {
+            "sha256": "899442f96787a69af5dd07dc74798ac69052b7c6fe449e03520a6948d3b90051",
+            "bytes": 4351
+          },
+          "src/server/test/manual-review.integration.ts": {
+            "sha256": "a5fb10e502f5c73d41ab0db437c5fd4aff6589d03c1a1fdcbfccabef7eeca3c2",
+            "bytes": 40188
+          },
+          "src/server/test/reviewer-contracts.spec.ts": {
+            "sha256": "ae79040c968b1ff6f7efa9ffa09e5afa91b17561cd1db84bf121038c5e696ecc",
+            "bytes": 4583
+          },
+          "src/server/test/reviewer-seed.integration.ts": {
+            "sha256": "63b53abb45ee1beec6de97da9545794716b25669145e13a5518844e73d5c2694",
+            "bytes": 3926
+          },
+          "src/server/test/reviews.integration.ts": {
+            "sha256": "6c3765047ab64ec03d85ccedbec8821a9a8e0f527c9a10232194505beeb104ab",
+            "bytes": 30769
+          },
+          "src/server/test/reviews.spec.ts": {
+            "sha256": "12ebc85d41afd1278d4c76f5d1d8f3330405fb10d91e19d1d376a91924da68fd",
+            "bytes": 8455
+          },
+          "src/shared/src/contracts/reviewer.ts": {
+            "sha256": "9bf13c5035d1fb94de836f7258cc3b4f21c3bfa2012928dfc1efe27214af00ff",
+            "bytes": 19756
+          },
+          "workflow/tests/browser/reviewer-manual.spec.ts": {
+            "sha256": "a81ed54d0b6d8028d3bacb0d335a57201250f6a45e9e7e0a9e73c376f171178a",
+            "bytes": 5037
+          }
+        }
+      },
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/snapshots/final-source-3.json",
+      "artifact_sha256": "bbcb2a3e1545c603148088c0c36ceab71a3770ce46839b29a3f0d1668db79ef6"
+    }
+  },
+  "commands": {
+    "integrated-lint-1": {
+      "exit_code": 1,
+      "launch_failed": false,
+      "timed_out": false,
+      "incomplete": false,
+      "truncated": false,
+      "streams": {
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "sha256": "60c866d835f33522a021d946f9db9c7b80d3c082b56ae01349af9241bb9727b0",
+          "bytes": 97
+        }
+      },
+      "snapshot_id": "integrated-source-1",
+      "started_at": "2026-10-25T15:38:53.387470+00:00",
+      "ended_at": "2026-10-25T15:38:53.435350+00:00",
+      "executable": "cmd",
+      "argv_sha256": "7f3eedad86761b41061d79908be3dfae02459de40928524cddeab144cb76fbb2",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {
+        "stdout": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/integrated-lint-1-stdout.json",
+        "stderr": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/integrated-lint-1-stderr.json"
+      },
+      "passed": false,
+      "superseded_by": "final-lint-3",
+      "superseded_reason": "Absolute node launch and final-source-3 full lint passed",
+      "superseded_at": "2026-10-25T16:15:30.492477+00:00"
+    },
+    "integrated-lint-2": {
+      "exit_code": null,
+      "launch_failed": true,
+      "timed_out": false,
+      "incomplete": true,
+      "truncated": false,
+      "streams": {},
+      "snapshot_id": "integrated-source-1",
+      "started_at": "2026-10-25T15:39:21.800130+00:00",
+      "ended_at": "2026-10-25T15:39:21.825108+00:00",
+      "executable": "node",
+      "argv_sha256": "093565c3910e8ca2f2344d6aa30db0083c713d6616a54ac78022284da8514c7c",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {},
+      "passed": false,
+      "superseded_by": "final-lint-3",
+      "superseded_reason": "Absolute node launch and final-source-3 full lint passed",
+      "superseded_at": "2026-10-25T16:15:31.263902+00:00"
+    },
+    "final-lint": {
+      "exit_code": 0,
+      "launch_failed": false,
+      "timed_out": false,
+      "incomplete": false,
+      "truncated": false,
+      "streams": {
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d",
+          "bytes": 107
+        }
+      },
+      "snapshot_id": "final-source-2",
+      "started_at": "2026-10-25T16:10:56.203874+00:00",
+      "ended_at": "2026-10-25T16:11:02.904060+00:00",
+      "executable": "node.exe",
+      "argv_sha256": "880f3118d1a3a878ef1d6f6f04add0ca8ee967bb0a49f82bb9a8889ebac85f01",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {
+        "stdout": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-stdout.json",
+        "stderr": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-stderr.json"
+      },
+      "passed": true,
+      "superseded_by": "final-lint-3",
+      "superseded_reason": "Browser test locator-only delta checked by final lint",
+      "superseded_at": "2026-10-25T16:15:32.117989+00:00"
+    },
+    "final-postgres": {
+      "exit_code": 0,
+      "launch_failed": false,
+      "timed_out": false,
+      "incomplete": false,
+      "truncated": false,
+      "streams": {
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "sha256": "4e9847ee88668cdcf148984094e1516336caa9794f68e84a16fc943266536ece",
+          "bytes": 776
+        }
+      },
+      "snapshot_id": "final-source-2",
+      "started_at": "2026-10-25T16:11:17.193610+00:00",
+      "ended_at": "2026-10-25T16:12:00.401312+00:00",
+      "executable": "node.exe",
+      "argv_sha256": "05a14be0e485f6a72e7514498a882c502d0cd8e70b0cdf3db616fe7ccb360fb9",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {
+        "stdout": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-postgres-stdout.json",
+        "stderr": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-postgres-stderr.json"
+      },
+      "passed": true,
+      "superseded_by": "closure-postgres",
+      "superseded_reason": "Fresh unchanged final-source-3 full PostgreSQL rerun replaces evidence bound to broader stale snapshot",
+      "superseded_at": "2026-10-25T16:36:54.041450+00:00"
+    },
+    "final-browser": {
+      "exit_code": 1,
+      "launch_failed": false,
+      "timed_out": false,
+      "incomplete": false,
+      "truncated": false,
+      "streams": {
+        "stdout": {
+          "sha256": "aea416034290b3b20a7782c76359c4b13e6319274c0c87e792c40fe46ec260ce",
+          "bytes": 3317
+        },
+        "stderr": {
+          "sha256": "9e354d537fb30340f56453bc7747b9b37da0dca2db8aca66f30eb2f14c6e1a32",
+          "bytes": 930
+        }
+      },
+      "snapshot_id": "final-source-2",
+      "started_at": "2026-10-25T16:12:21.126728+00:00",
+      "ended_at": "2026-10-25T16:13:10.430539+00:00",
+      "executable": "node.exe",
+      "argv_sha256": "3b6c398a0770acb87a678c10f268568d6e2adca0bb955fc25a90679f7ebbb144",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {
+        "stdout": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-stdout.json",
+        "stderr": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-stderr.json"
+      },
+      "passed": false,
+      "superseded_by": "final-browser-2",
+      "superseded_reason": "Corrected select locator to accessible combobox role; full6test rerun passed",
+      "superseded_at": "2026-10-25T16:14:49.874753+00:00"
+    },
+    "final-browser-2": {
+      "exit_code": 0,
+      "launch_failed": false,
+      "timed_out": false,
+      "incomplete": false,
+      "truncated": false,
+      "streams": {
+        "stdout": {
+          "sha256": "1f425228526eb2b8835f867ea15f74f33bf33665ef351152e31880c999d5d947",
+          "bytes": 1004
+        },
+        "stderr": {
+          "sha256": "bbe1a150110eb93768f75ee8c30d27899db6c1938405e99ca669a118f4b36fdd",
+          "bytes": 766
+        }
+      },
+      "snapshot_id": "final-source-3",
+      "started_at": "2026-10-25T16:14:05.218932+00:00",
+      "ended_at": "2026-10-25T16:14:24.416240+00:00",
+      "executable": "node.exe",
+      "argv_sha256": "3b6c398a0770acb87a678c10f268568d6e2adca0bb955fc25a90679f7ebbb144",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {
+        "stdout": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-2-stdout.json",
+        "stderr": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-2-stderr.json"
+      },
+      "passed": true
+    },
+    "final-lint-3": {
+      "exit_code": 0,
+      "launch_failed": false,
+      "timed_out": false,
+      "incomplete": false,
+      "truncated": false,
+      "streams": {
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d",
+          "bytes": 107
+        }
+      },
+      "snapshot_id": "final-source-3",
+      "started_at": "2026-10-25T16:15:06.546833+00:00",
+      "ended_at": "2026-10-25T16:15:12.271180+00:00",
+      "executable": "node.exe",
+      "argv_sha256": "880f3118d1a3a878ef1d6f6f04add0ca8ee967bb0a49f82bb9a8889ebac85f01",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {
+        "stdout": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-3-stdout.json",
+        "stderr": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-3-stderr.json"
+      },
+      "passed": true
+    },
+    "closure-postgres": {
+      "exit_code": 0,
+      "launch_failed": false,
+      "timed_out": false,
+      "incomplete": false,
+      "truncated": false,
+      "streams": {
+        "stdout": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "sha256": "0309d321160dee59f869c68d233421af4b49e6e33f76b26c893006b24fd1925e",
+          "bytes": 760
+        }
+      },
+      "snapshot_id": "final-source-3",
+      "started_at": "2026-10-25T16:35:47.160997+00:00",
+      "ended_at": "2026-10-25T16:36:31.789013+00:00",
+      "executable": "node.exe",
+      "argv_sha256": "05a14be0e485f6a72e7514498a882c502d0cd8e70b0cdf3db616fe7ccb360fb9",
+      "timeout_seconds": 180.0,
+      "stale": false,
+      "output_artifacts": {
+        "stdout": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/closure-postgres-stdout.json",
+        "stderr": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/closure-postgres-stderr.json"
+      },
+      "passed": true
+    }
+  },
+  "handoffs": {
+    "01-main-to-server": {
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/01-main-to-server.md",
+      "artifact_sha256": "b01a3b781ae0ac1f55d27294bde37c8c3a8a90ed5064b0e9681c8a28cfe55c11",
+      "input_sha256": "a6fcf9fcd67e58bb35cdfe2e1cbe9b694ff3daaaf3dec591caf871e84db6d0fc",
+      "snapshot_id": null,
+      "references": [
+        "logs/ngkhengyang/2026-10-25-manual-review.md",
+        "workflow/specs/ROLE-REVIEWER.md",
+        "workflow/specs/INTEGRATION-SPEC.md"
+      ],
+      "resource_record": null,
+      "created_at": "2026-10-25T15:25:46.059733+00:00"
+    },
+    "02-main-to-tests": {
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/02-main-to-tests.md",
+      "artifact_sha256": "6b90a4cd354022718c29540d05c64761a226e413be1b35bab04cc56bf0ccf349",
+      "input_sha256": "d023c9ed6aabf702679f85ba4f39bb58cc4bd371972fad081080d732619105e4",
+      "snapshot_id": null,
+      "references": [
+        "logs/ngkhengyang/2026-10-25-manual-review.md",
+        "workflow/specs/ROLE-REVIEWER.md",
+        "workflow/specs/INTEGRATION-SPEC.md"
+      ],
+      "resource_record": null,
+      "created_at": "2026-10-25T15:26:32.505260+00:00"
+    },
+    "03-main-to-ui": {
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/03-main-to-ui.md",
+      "artifact_sha256": "5a4048275b8d63a4fdb10b344a87cdeeae55219a012687d71935a669d67c7ef5",
+      "input_sha256": "ae8e9c83517351575177971f1715509c29f9ec53cb5fec09832c2f3d892579fb",
+      "snapshot_id": null,
+      "references": [
+        "logs/ngkhengyang/2026-10-25-manual-review.md",
+        "workflow/specs/ROLE-REVIEWER.md",
+        "src/client/src/features/reviewer/ReviewerWorkspace.tsx"
+      ],
+      "resource_record": null,
+      "created_at": "2026-10-25T15:27:17.653001+00:00"
+    },
+    "04-security-to-main": {
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/04-security-to-main.md",
+      "artifact_sha256": "29b2d15f8c2e951af887c3d6e439f443d0b56263cb777a3e18d0b27cc71301f1",
+      "input_sha256": "d0e7ea8aa3175b29bb2157dd7f93e295641721c24a1718c8dc6aa5f093825927",
+      "snapshot_id": null,
+      "references": [
+        "logs/ngkhengyang/2026-10-25-manual-review.md",
+        "src/server/src/reviews/reviews.service.ts",
+        "src/server/src/proposals/proposals.service.ts"
+      ],
+      "resource_record": null,
+      "created_at": "2026-10-25T15:29:07.387743+00:00"
+    },
+    "05-main-to-review": {
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/05-main-to-review.md",
+      "artifact_sha256": "2f79bcf5eed4d503fdc336207bab93d8da98c0ec941cb2d3268e44f069cfa2dc",
+      "input_sha256": "57d18844dfc727fa3042385d12d3ab6ceea3c97519a4945db4a83f6de0efc65d",
+      "snapshot_id": "integrated-source-1",
+      "references": [
+        "logs/ngkhengyang/2026-10-25-manual-review.md",
+        "workflow/specs/ROLE-REVIEWER.md",
+        "workflow/specs/INTEGRATION-SPEC.md",
+        "src/server/src/reviews/manual-review.ts",
+        "src/client/src/features/reviewer/ManualReview.tsx"
+      ],
+      "resource_record": null,
+      "created_at": "2026-10-25T15:38:28.330535+00:00",
+      "superseded_by": "06-final-closure",
+      "superseded_reason": "Final integrated source and independent revalidation replace preliminary snapshot handoff; source findings closed",
+      "superseded_at": "2026-10-25T16:37:17.854321+00:00"
+    },
+    "06-final-closure": {
+      "artifact": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/06-final-closure.md",
+      "artifact_sha256": "024fcf163964ca253b03cca9e472c36178d72c1fffe756267bf7e1a0547193fa",
+      "input_sha256": "b595c66f1fa7e3db5187631f3915915d6843b2bfd8babc2d2245f71e15c4ddbc",
+      "snapshot_id": "final-source-3",
+      "references": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/independent-closure.md",
+        "workflow/specs/ROLE-REVIEWER.md",
+        "workflow/specs/INTEGRATION-SPEC.md",
+        "docs/UserGuide.md",
+        "docs/DeveloperGuide.md",
+        "workflow/TRACEABILITY.md"
+      ],
+      "resource_record": null,
+      "created_at": "2026-10-25T16:37:17.039348+00:00"
+    }
+  }
+}

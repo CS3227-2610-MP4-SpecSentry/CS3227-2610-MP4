@@ -6,7 +6,7 @@ import { ProposalsModule } from '../proposals/proposals.module';
 import { ReviewsController } from './reviews.controller';
 import { ReviewsService } from './reviews.service';
 
-// Reviewer intake registration; assessment and decision writes remain future work.
+// Reviewer intake, human assessment, immutable findings and decisions.
 @Module({})
 export class ReviewsModule {
   static register(config: ServerConfig): DynamicModule {

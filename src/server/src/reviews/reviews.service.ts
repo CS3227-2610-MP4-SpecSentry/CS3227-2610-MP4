@@ -1,4 +1,6 @@
 import { ConflictException, ForbiddenException, HttpException, Injectable } from '@nestjs/common';
+import { ManualReviewService } from './manual-review';
+import type { CoverageHistoryQuery, CoverageWriteRequest, CreateFindingRequest, FindingAmendmentRequest, FindingTransitionRequest, HumanReviewPageQuery, ReviewDecisionRequest } from '@specsentry/shared';
 import { assignedReviewsResponseSchema, reviewCommandResponseSchema, reviewPoolResponseSchema,
   type AssignedReviewsQuery, type ClaimProposalRequest, type DropProposalRequest, type ReviewPoolQuery } from '@specsentry/shared';
 import { ActivityService } from '../activity/activity.service';
@@ -11,6 +13,8 @@ import { decodeCursor, encodeCursor, lockReviewer, nextVersion, type ReviewerAct
 export class ReviewsService {
   constructor(private readonly database: DatabaseService, private readonly proposals: ProposalsService,
     private readonly activity: ActivityService) {}
+
+  private get manual() { return new ManualReviewService(this.proposals, this.activity); }
 
   private async authorized<T>(actor: ReviewerActor, target: string, operation: string, work: (tx: ReviewTransaction) => Promise<T>): Promise<T> {
     try {
@@ -34,8 +38,9 @@ export class ReviewsService {
   queue(actor: ReviewerActor, query: ReviewPoolQuery | AssignedReviewsQuery, assigned = false) {
     return this.authorized(actor, assigned ? 'assigned-reviews' : 'review-pool', 'VIEW', async (tx) => {
       const state = 'state' in query ? query.state : undefined;
+      const severity = 'severity' in query ? query.severity : undefined;
       const scope = JSON.stringify([assigned ? 'assigned' : 'pool', assigned ? actor.accountId : null,
-        query.authorId ?? null, query.minAgeDays ?? null, query.maxAgeDays ?? null, state ?? null]);
+        query.authorId ?? null, query.minAgeDays ?? null, query.maxAgeDays ?? null, state ?? null, severity ?? null]);
       const cursor = decodeCursor(query.cursor, scope, 'timestamp');
       const now = Date.now();
       const firstSubmittedAt = { not: null,
@@ -49,6 +54,17 @@ export class ReviewsService {
         ...(cursor ? { OR: [{ firstSubmittedAt: { gt: new Date(cursor.timestamp!) } },
           { firstSubmittedAt: new Date(cursor.timestamp!), id: { gt: cursor.id } }] } : {}),
       };
+      if (severity) {
+        // Resolve each finding's latest immutable event, including inherited findings.
+        // Filter through the current assignment before retrieving any matching pointer.
+        const matches = await tx.$queryRaw<{ id: string }[]>`SELECT DISTINCT f."proposalId" AS id FROM "ReviewFinding" f
+          JOIN "ChangeProposal" p ON p."id"=f."proposalId"
+          JOIN "ReviewAssignment" a ON a."id"=p."currentAssignmentId"
+          LEFT JOIN LATERAL (SELECT "severity", "status" FROM "FindingEvent" WHERE "findingId"=f."id" ORDER BY "mutationVersion" DESC LIMIT 1) e ON true
+          WHERE a."reviewerId"=${actor.accountId} AND a."status"='ACTIVE'
+          AND COALESCE(e."status",'OPEN'::"FindingStatus")='OPEN' AND COALESCE(e."severity",f."severity")::text=${severity}`;
+        where.id = { in: matches.map((row) => row.id) };
+      }
       const rows = await tx.changeProposal.findMany({ where, orderBy: [{ firstSubmittedAt: 'asc' }, { id: 'asc' }], take: query.limit + 1,
         select: rootSelect });
       const page = rows.slice(0, query.limit);
@@ -114,6 +130,37 @@ export class ReviewsService {
       await this.proposals.assignedRoot(tx, id, actor.accountId);
       return this.activity.page(tx, id, cursor);
     });
+  }
+
+  review(actor: ReviewerActor, id: string, query: { revisionId?: string }) {
+    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.review(tx, actor, id, query));
+  }
+  findings(actor: ReviewerActor, id: string, query: HumanReviewPageQuery) {
+    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.findings(tx, actor, id, query));
+  }
+  decisions(actor: ReviewerActor, id: string, query: HumanReviewPageQuery) {
+    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.decisions(tx, actor, id, query));
+  }
+  coverageHistory(actor: ReviewerActor, id: string, query: CoverageHistoryQuery) {
+    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.coverageHistory(tx, actor, id, query));
+  }
+  findingHistory(actor: ReviewerActor, id: string, findingId: string, query: HumanReviewPageQuery) {
+    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.findingHistory(tx, actor, id, findingId, query));
+  }
+  coverage(actor: ReviewerActor, id: string, criterionId: string, body: CoverageWriteRequest) {
+    return this.authorized(actor, id, 'COVERAGE', (tx) => this.manual.coverage(tx, actor, id, criterionId, body));
+  }
+  createFinding(actor: ReviewerActor, id: string, body: CreateFindingRequest) {
+    return this.authorized(actor, id, 'FINDING', (tx) => this.manual.createFinding(tx, actor, id, body));
+  }
+  transitionFinding(actor: ReviewerActor, id: string, body: FindingTransitionRequest) {
+    return this.authorized(actor, id, 'FINDING_TRANSITION', (tx) => this.manual.changeFinding(tx, actor, id, body));
+  }
+  amendFinding(actor: ReviewerActor, id: string, body: FindingAmendmentRequest) {
+    return this.authorized(actor, id, 'FINDING_AMENDMENT', (tx) => this.manual.changeFinding(tx, actor, id, body));
+  }
+  decide(actor: ReviewerActor, id: string, body: ReviewDecisionRequest, key: string) {
+    return this.authorized(actor, id, 'DECISION', (tx) => this.manual.decide(tx, actor, id, body, key));
   }
 
   // Account administration already owns the disabled account lock. Never starts a nested transaction.

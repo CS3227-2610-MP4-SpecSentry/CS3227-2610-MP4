@@ -7,8 +7,10 @@ contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
 PostgreSQL sessions, CSRF, role guards and restricted security events. The first
 Reviewer increment adds pool/assigned queues, claim/drop, immutable submitted
 detail/history, business activity and transactional assignment release on account
-disablement. Contributor writes, findings, coverage, decisions, notifications,
-releases and AI integration remain pending. See [Authentication](Authentication.md).
+disablement. Manual review adds criterion assessments and individual takeover
+confirmation, append-only findings/transitions/amendments, human decisions,
+approval gates, decision idempotency and authorized history. Contributor writes,
+notifications, releases and AI integration remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
 See the root [directory map](../README.md#directory-map) for frontend/backend
@@ -96,6 +98,53 @@ The database migration adds partial uniqueness and deferred pointer-consistency
 triggers beyond Prisma's schema syntax. Do not replace it with `db push` or omit
 its SQL constraints. Account disablement, assignment release, lifecycle changes
 and required activity commit in the same transaction. No code/diff is executed.
+
+## Manual Reviewer contracts
+
+The shared reviewer schemas define all request and response fields. Review writes
+carry `expectedVersion`, `revisionId`, `assignmentId` and
+`expectedAssignmentVersion`. Each transaction locks and rechecks the enabled
+reviewer account, then the proposal root and current assignment. Proposal version
+advances with each write; stale forms receive 409. Validation uses 422, access
+denial 403 and missing/expired sessions 401 through the safe error envelope.
+
+| Route | Purpose |
+| --- | --- |
+| `GET /api/proposals/:id/review` | Selected-revision effective coverage and complete approval blockers |
+| `GET /api/proposals/:id/findings` | Paginated proposal findings and current severity/status |
+| `GET /api/proposals/:id/coverage-history` | Paginated assessment and confirmation records |
+| `GET /api/proposals/:id/decisions` | Paginated immutable human decisions |
+| `GET /api/proposals/:proposalId/findings/:id/history` | Paginated attributed finding events |
+| `PUT /api/proposals/:id/coverage/:criterionId` | Assess or explicitly confirm the effective preserved assessment |
+| `POST /api/proposals/:id/findings` | Create a human finding |
+| `POST /api/findings/:id/transitions` | Resolve, reopen or change severity with a reason |
+| `POST /api/findings/:id/amendments` | Append a correction and reason |
+| `POST /api/proposals/:id/decision` | Approve or request changes; requires `Idempotency-Key` |
+
+Narratives use normalized Unicode code-point limits of 2,000 characters. Mutation
+schemas reject unknown fields. Criterion/evidence references must belong to the
+current submitted revision. Findings retain origin revision/assignment/author and
+description; later events identify the acting assignment and revision. Coverage
+is append-only and ordered by proposal mutation version, not timestamp. Confirmation
+loads its effective source on the server. Approval blockers examine all findings
+and current coverage independently of pagination. History is visible only to the
+current assignee; it contains no private drafts or AI metadata.
+
+Decision keys are scoped to actor, operation and proposal and bound to a canonical
+validated request hash for 24 hours. The transaction persists the decision,
+lifecycle/version changes, activity and replay record together. Identical retries
+return the original outcome; changed payloads conflict. Account and current object
+access are reauthorized before replay. A key never grants access after drop or
+disablement. Ordinary edits remain frozen after approval and in release states.
+
+Future Contributor resubmission must lock the same proposal root, append a fresh
+immutable revision and revision-specific assignment while retaining the reviewer,
+and advance versions. Coverage is selected by revision and therefore starts empty;
+proposal findings retain history and unresolved status. The existing seed/history
+fixtures do not implement a Contributor submission API. Notifications,
+acknowledgments, approval revocation and release hooks remain separate integration
+work. Do not add another decision to a CHANGES_REQUESTED round to emulate
+resubmission.
 
 ## Browser verification
 

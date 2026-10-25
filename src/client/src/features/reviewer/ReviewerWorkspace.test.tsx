@@ -1,6 +1,8 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ReviewerWorkspace } from './ReviewerWorkspace';
+// Manual controls have their own contract and lifecycle tests.
+vi.mock('./ManualReview', () => ({ ManualReview: () => null }));
 const timestamp = '2026-10-01T00:00:00.000Z';
 const session = { account: { id: 'r', username: 'reviewer', role: 'REVIEWER' as const }, csrfToken: 'a'.repeat(64), expiresAt: Date.now() + 100000 };
 const item = { id: 'p', version: 1, title: 'Example', author: { id: 'a', username: 'author' }, summary: 'Summary', firstSubmittedAt: timestamp, latestSubmittedAt: timestamp, awaitingRevision: true };
@@ -109,7 +111,7 @@ it.each(['history', 'activity'])('reenables controls after delayed next %s page 
   await waitFor(() => expect(screen.getByRole('button', { name: 'Refresh queue' })).toBeEnabled());
   await act(async () => { held.resolve(kind === 'history' ? { items: [{ id: 'old', number: 1, submittedAt: timestamp, summary: 'STALE PAGE' }], nextCursor: null } : { items: [event], nextCursor: null }); });
   expect(screen.queryByText('STALE PAGE')).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Drop assignment' })).toBeEnabled();
+  expect(screen.getByRole('button', { name: 'Drop assignment' })).toBeDisabled();
   expect(screen.getByRole('button', { name: 'Review pool' })).toBeEnabled();
 });
 
@@ -165,4 +167,13 @@ it.each(['history', 'activity'].flatMap(kind => [403, 500].map(status => [kind, 
   fireEvent.click(screen.getByRole('button', { name: 'Review pool' }));
   expect(await screen.findByText('No proposals match these filters.')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Apply filters' })).toBeEnabled();
+});
+
+
+
+it('passes unresolved severity as an assigned queue filter', async () => {
+  const fetch = vi.fn().mockResolvedValue(reply(page)); setup(fetch);
+  fireEvent.click(screen.getByRole('button', { name: 'My assignments' })); await screen.findByText('No proposals match these filters.');
+  fireEvent.change(screen.getByLabelText('Unresolved severity'), { target: { value: 'CRITICAL' } }); fireEvent.click(screen.getByRole('button', { name: 'Apply filters' }));
+  await waitFor(() => expect(fetch.mock.calls.at(-1)![0]).toContain('severity=CRITICAL'));
 });

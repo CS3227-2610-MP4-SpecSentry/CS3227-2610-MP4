@@ -24,6 +24,11 @@ model UserAccount {
   proposals    ChangeProposal[]
   assignments  ReviewAssignment[]
   activities   ProposalActivity[]
+  coverage CoverageAssessment[]
+  findings ReviewFinding[]
+  findingEvents FindingEvent[]
+  decisions ReviewDecision[]
+  reviewIdempotency ReviewIdempotency[]
 }
 
 model AuthSession {
@@ -83,6 +88,13 @@ enum ProposalActivityAction {
   CLAIMED
   DROPPED
   ASSIGNMENT_RELEASED
+  COVERAGE_ASSESSED
+  COVERAGE_CONFIRMED
+  FINDING_CREATED
+  FINDING_TRANSITIONED
+  FINDING_AMENDED
+  REVIEW_APPROVED
+  CHANGES_REQUESTED
 }
 
 // Lifecycle root. Composite foreign keys prevent cross-proposal pointers.
@@ -102,6 +114,10 @@ model ChangeProposal {
   assignments         ReviewAssignment[] @relation("ProposalAssignments")
   currentAssignment   ReviewAssignment? @relation("CurrentAssignment", fields: [id, currentRevisionId, currentAssignmentId], references: [proposalId, revisionId, id], onDelete: Restrict, onUpdate: NoAction)
   activities          ProposalActivity[]
+  coverage CoverageAssessment[]
+  findings ReviewFinding[]
+  decisions ReviewDecision[]
+  reviewIdempotency ReviewIdempotency[]
 
   @@index([state, firstSubmittedAt, id])
   @@index([ownerId])
@@ -140,6 +156,8 @@ model AcceptanceCriterion {
   required      Boolean                 @default(true)
   revision      ProposalRevision        @relation(fields: [revisionId], references: [id], onDelete: Restrict)
   evidenceLinks CriterionEvidenceLink[]
+  coverage CoverageAssessment[]
+  findings ReviewFinding[]
 
   @@unique([revisionId, id])
   @@unique([revisionId, stableKey])
@@ -152,6 +170,7 @@ model TestEvidence {
   evidenceHash   String
   revision       ProposalRevision        @relation(fields: [revisionId], references: [id], onDelete: Restrict)
   criterionLinks CriterionEvidenceLink[]
+  coverageLinks CoverageEvidence[]
 
   @@unique([revisionId, id])
 }
@@ -182,6 +201,11 @@ model ReviewAssignment {
   reviewer     UserAccount            @relation(fields: [reviewerId], references: [id], onDelete: Restrict)
   currentFor   ChangeProposal?        @relation("CurrentAssignment")
   activities   ProposalActivity[]
+  coverage CoverageAssessment[]
+  findings ReviewFinding[]
+  findingEvents FindingEvent[]
+  decisions ReviewDecision[]
+
 
   @@unique([proposalId, revisionId, id])
   @@index([reviewerId, status, assignedAt, id])
@@ -207,3 +231,138 @@ model ProposalActivity {
 
   @@index([proposalId, timestamp, id])
 }
+
+enum CoverageStatus {
+  COVERED
+  PARTIALLY_COVERED
+  NOT_COVERED
+  NOT_APPLICABLE
+}
+enum FindingSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+enum FindingStatus {
+  OPEN
+  RESOLVED
+}
+enum FindingOperation {
+  RESOLVE
+  REOPEN
+  CHANGE_SEVERITY
+  AMEND
+}
+enum ReviewDecisionKind {
+  APPROVE
+  REQUEST_CHANGES
+}
+model CoverageAssessment {
+  id String @id @default(uuid())
+  proposalId String
+  revisionId String
+  assignmentId String
+  criterionId String
+  actorId String
+  status CoverageStatus
+  rationale String?
+  sourceCoverageId String?
+  mutationVersion Int
+  createdAt DateTime @default(now())
+  proposal ChangeProposal @relation(fields: [proposalId], references: [id], onDelete: Restrict)
+  assignment ReviewAssignment @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
+  criterion AcceptanceCriterion @relation(fields: [revisionId, criterionId], references: [revisionId, id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  source CoverageAssessment? @relation("CoverageConfirmation", fields: [proposalId, revisionId, criterionId, sourceCoverageId], references: [proposalId, revisionId, criterionId, id], onDelete: Restrict, onUpdate: NoAction)
+  confirmations CoverageAssessment[] @relation("CoverageConfirmation")
+  evidence CoverageEvidence[]
+  @@unique([proposalId, mutationVersion])
+  @@unique([proposalId, revisionId, criterionId, id])
+  @@unique([revisionId, id])
+  @@index([proposalId, revisionId, criterionId, mutationVersion])
+}
+model CoverageEvidence {
+  assessmentId String
+  revisionId String
+  evidenceId String
+  assessment CoverageAssessment @relation(fields: [revisionId, assessmentId], references: [revisionId, id], onDelete: Restrict)
+  evidence TestEvidence @relation(fields: [revisionId, evidenceId], references: [revisionId, id], onDelete: Restrict)
+  @@id([assessmentId, evidenceId])
+}
+model ReviewFinding {
+  id String @id @default(uuid())
+  proposalId String
+  revisionId String
+  assignmentId String
+  actorId String
+  criterionId String?
+  diffLocation Json?
+  severity FindingSeverity
+  description String
+  mutationVersion Int
+  createdAt DateTime @default(now())
+  proposal ChangeProposal @relation(fields: [proposalId], references: [id], onDelete: Restrict)
+  assignment ReviewAssignment @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
+  criterion AcceptanceCriterion? @relation(fields: [revisionId, criterionId], references: [revisionId, id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  events FindingEvent[]
+  @@unique([proposalId, id])
+  @@unique([proposalId, mutationVersion])
+  @@index([proposalId, mutationVersion, id])
+}
+model FindingEvent {
+  id String @id @default(uuid())
+  findingId String
+  proposalId String
+  revisionId String
+  assignmentId String
+  actorId String
+  operation FindingOperation
+  reason String
+  description String?
+  severity FindingSeverity
+  status FindingStatus
+  mutationVersion Int
+  createdAt DateTime @default(now())
+  finding ReviewFinding @relation(fields: [proposalId, findingId], references: [proposalId, id], onDelete: Restrict)
+  assignment ReviewAssignment @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  @@unique([proposalId, mutationVersion])
+  @@index([proposalId, findingId, mutationVersion, id])
+}
+model ReviewDecision {
+  id String @id @default(uuid())
+  proposalId String
+  revisionId String
+  assignmentId String
+  actorId String
+  decision ReviewDecisionKind
+  note String?
+  mutationVersion Int
+  createdAt DateTime @default(now())
+  proposal ChangeProposal @relation(fields: [proposalId], references: [id], onDelete: Restrict)
+  assignment ReviewAssignment @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  @@unique([proposalId, revisionId])
+  @@unique([proposalId, mutationVersion])
+  @@index([proposalId, mutationVersion, id])
+}
+model ReviewIdempotency {
+  id String @id @default(uuid())
+  proposalId String
+  actorId String
+  operation String
+  keyHash String
+  requestHash String
+  response Json
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  proposal ChangeProposal @relation(fields: [proposalId], references: [id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  @@unique([actorId, operation, proposalId, keyHash])
+  @@index([expiresAt])
+}
+
+
+

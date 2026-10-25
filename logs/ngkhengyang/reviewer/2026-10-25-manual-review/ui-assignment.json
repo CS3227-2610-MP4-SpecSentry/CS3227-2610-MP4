@@ -1,0 +1,11 @@
+{
+  "agent": "ui",
+  "dependencies": [
+    "server"
+  ],
+  "role": "implementer",
+  "paths": [
+    "src/client/src/features/reviewer"
+  ],
+  "id": "ui"
+}

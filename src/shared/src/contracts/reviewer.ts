@@ -26,7 +26,7 @@ export const reviewerCursorSchema = z.string().min(1).max(REVIEWER_LIMITS.cursor
 export const reviewerTimestampSchema = z.iso.datetime({ offset: true });
 export const proposalStateSchema = z.enum(['DRAFT', 'SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN']);
 export const assignedReviewStateSchema = z.enum(['IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED']);
-export const proposalActivityActionSchema = z.enum(['SUBMITTED', 'RESUBMITTED', 'CLAIMED', 'DROPPED', 'ASSIGNMENT_RELEASED']);
+export const proposalActivityActionSchema = z.enum(['SUBMITTED', 'RESUBMITTED', 'CLAIMED', 'DROPPED', 'ASSIGNMENT_RELEASED', 'COVERAGE_ASSESSED', 'COVERAGE_CONFIRMED', 'FINDING_CREATED', 'FINDING_TRANSITIONED', 'FINDING_AMENDED', 'REVIEW_APPROVED', 'CHANGES_REQUESTED']);
 
 export const normalizeReviewerText = (value: string): string => value.replace(/\r\n?/g, '\n');
 export const reviewerCodePointLength = (value: string): number => Array.from(normalizeReviewerText(value)).length;
@@ -60,7 +60,7 @@ const validAgeRange = (value: { minAgeDays?: number; maxAgeDays?: number }): boo
 
 export const reviewPoolQuerySchema = z.object({ ...ageQuery, ...pageQuery }).strict()
   .refine(validAgeRange, { message: 'Minimum age must not exceed maximum age', path: ['minAgeDays'] });
-export const assignedReviewsQuerySchema = z.object({ ...ageQuery, ...pageQuery, state: assignedReviewStateSchema.optional() }).strict()
+export const assignedReviewsQuerySchema = z.object({ ...ageQuery, ...pageQuery, state: assignedReviewStateSchema.optional(), severity: z.enum(['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']).optional() }).strict()
   .refine(validAgeRange, { message: 'Minimum age must not exceed maximum age', path: ['minAgeDays'] });
 export const proposalDetailQuerySchema = z.object({ revisionId: reviewerIdSchema.optional() }).strict();
 export const submittedRevisionsQuerySchema = z.object(pageQuery).strict();
@@ -199,3 +199,102 @@ export type SubmittedRevisionSummary = z.infer<typeof submittedRevisionSummarySc
 export type SubmittedRevisionsResponse = z.infer<typeof submittedRevisionsResponseSchema>;
 export type ProposalActivityItem = z.infer<typeof proposalActivityItemSchema>;
 export type ProposalActivityResponse = z.infer<typeof proposalActivityResponseSchema>;
+
+// Human manual review: bounded, strict requests with server-owned attribution.
+export const findingSeveritySchema = z.enum(['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']);
+export const findingStatusSchema = z.enum(['OPEN', 'RESOLVED']);
+export const coverageStatusSchema = z.enum(['COVERED', 'PARTIALLY_COVERED', 'NOT_COVERED', 'NOT_APPLICABLE']);
+export const reviewTextSchema = text(2_000, true);
+const reviewWriteScope = {
+  expectedVersion: reviewerVersionSchema, revisionId: reviewerIdSchema,
+  assignmentId: reviewerIdSchema, expectedAssignmentVersion: reviewerVersionSchema,
+};
+export const coverageWriteRequestSchema = z.discriminatedUnion('operation', [
+  z.object({ ...reviewWriteScope, operation: z.literal('ASSESS'), status: coverageStatusSchema,
+    rationale: reviewTextSchema.optional(), evidenceIds: z.array(reviewerIdSchema).max(REVIEWER_LIMITS.evidence).default([]),
+  }).strict().refine((value) => value.status === 'COVERED' || !!value.rationale, { message: 'Rationale required', path: ['rationale'] })
+    .refine((value) => new Set(value.evidenceIds).size === value.evidenceIds.length, { message: 'Duplicate evidence', path: ['evidenceIds'] }),
+  z.object({ ...reviewWriteScope, operation: z.literal('CONFIRM'), sourceCoverageId: reviewerIdSchema }).strict(),
+]);
+export const findingDiffLocationSchema = z.object({ path: reviewTextSchema, line: z.number().int().min(1).max(REVIEWER_LIMITS.version) }).strict();
+export const createFindingRequestSchema = z.object({ ...reviewWriteScope, severity: findingSeveritySchema,
+  description: reviewTextSchema, criterionId: reviewerIdSchema.optional(), diffLocation: findingDiffLocationSchema.optional(),
+}).strict();
+export const findingTransitionRequestSchema = z.discriminatedUnion('operation', [
+  z.object({ ...reviewWriteScope, operation: z.literal('RESOLVE'), reason: reviewTextSchema }).strict(),
+  z.object({ ...reviewWriteScope, operation: z.literal('REOPEN'), reason: reviewTextSchema }).strict(),
+  z.object({ ...reviewWriteScope, operation: z.literal('CHANGE_SEVERITY'), severity: findingSeveritySchema, reason: reviewTextSchema }).strict(),
+]);
+export const findingAmendmentRequestSchema = z.object({ ...reviewWriteScope, description: reviewTextSchema, reason: reviewTextSchema }).strict();
+export const reviewDecisionRequestSchema = z.object({ ...reviewWriteScope, decision: z.enum(['APPROVE', 'REQUEST_CHANGES']), note: reviewTextSchema.optional() }).strict();
+export const reviewIdempotencyKeySchema = z.string().min(1).max(128).regex(/^[\x21-\x7e]+$/);
+export const humanReviewQuerySchema = proposalDetailQuerySchema;
+export const humanReviewPageQuerySchema = z.object(pageQuery).strict();
+export const coverageHistoryQuerySchema = z.object({ ...pageQuery, revisionId: reviewerIdSchema.optional(), criterionId: reviewerIdSchema.optional() }).strict();
+export const coverageRecordSchema = z.object({
+  id: reviewerIdSchema, proposalId: reviewerIdSchema, revisionId: reviewerIdSchema, assignmentId: reviewerIdSchema,
+  criterionId: reviewerIdSchema, actor: reviewerAuthorSchema, status: coverageStatusSchema, rationale: reviewTextSchema.nullable(),
+  evidenceIds: z.array(reviewerIdSchema).max(REVIEWER_LIMITS.evidence), sourceCoverageId: reviewerIdSchema.nullable(),
+  mutationVersion: reviewerVersionSchema, createdAt: reviewerTimestampSchema,
+}).strict();
+export const findingRecordSchema = z.object({
+  id: reviewerIdSchema, proposalId: reviewerIdSchema, revisionId: reviewerIdSchema, assignmentId: reviewerIdSchema,
+  actor: reviewerAuthorSchema, severity: findingSeveritySchema, description: reviewTextSchema,
+  criterionId: reviewerIdSchema.nullable(), diffLocation: findingDiffLocationSchema.nullable(), createdAt: reviewerTimestampSchema,
+  mutationVersion: reviewerVersionSchema, currentSeverity: findingSeveritySchema, status: findingStatusSchema,
+}).strict();
+export const findingEventSchema = z.object({
+  id: reviewerIdSchema, findingId: reviewerIdSchema, proposalId: reviewerIdSchema, revisionId: reviewerIdSchema,
+  assignmentId: reviewerIdSchema, actor: reviewerAuthorSchema,
+  operation: z.enum(['RESOLVE', 'REOPEN', 'CHANGE_SEVERITY', 'AMEND']), reason: reviewTextSchema,
+  description: reviewTextSchema.nullable(), severity: findingSeveritySchema, status: findingStatusSchema,
+  mutationVersion: reviewerVersionSchema, createdAt: reviewerTimestampSchema,
+}).strict();
+export const decisionRecordSchema = z.object({
+  id: reviewerIdSchema, proposalId: reviewerIdSchema, revisionId: reviewerIdSchema, assignmentId: reviewerIdSchema,
+  actor: reviewerAuthorSchema, decision: z.enum(['APPROVE', 'REQUEST_CHANGES']), note: reviewTextSchema.nullable(),
+  mutationVersion: reviewerVersionSchema, createdAt: reviewerTimestampSchema,
+}).strict();
+export const approvalBlockerSchema = z.object({
+  code: z.enum(['STATE', 'MISSING_ASSESSMENT', 'UNCONFIRMED_ASSESSMENT', 'REQUIRED_NOT_COVERED', 'UNRESOLVED_HIGH_CRITICAL']),
+  criterionId: reviewerIdSchema.optional(), findingId: reviewerIdSchema.optional(),
+}).strict();
+export const humanReviewResponseSchema = z.object({
+  proposalId: reviewerIdSchema, revisionId: reviewerIdSchema, version: reviewerVersionSchema,
+  assignmentId: reviewerIdSchema, assignmentVersion: reviewerVersionSchema, editable: z.boolean(),
+  coverage: z.array(coverageRecordSchema.extend({ confirmed: z.boolean() }).strict()).max(REVIEWER_LIMITS.criteria),
+  // Blockers are complete; finding IDs are intentionally omitted to keep this response bounded.
+  approvalBlockers: z.array(approvalBlockerSchema).max(REVIEWER_LIMITS.criteria * 2 + 2),
+}).strict();
+const humanPage = <T extends z.ZodType>(item: T) => z.object({ items: z.array(item).max(REVIEWER_LIMITS.pageMax), nextCursor: reviewerCursorSchema.nullable() }).strict();
+export const findingsResponseSchema = humanPage(findingRecordSchema);
+export const findingHistoryResponseSchema = humanPage(findingEventSchema);
+export const coverageHistoryResponseSchema = humanPage(coverageRecordSchema);
+export const decisionsResponseSchema = humanPage(decisionRecordSchema);
+export const findingCommandResponseSchema = reviewCommandResponseSchema.extend({ finding: findingRecordSchema }).strict();
+export const findingEventCommandResponseSchema = reviewCommandResponseSchema.extend({ event: findingEventSchema }).strict();
+export const coverageCommandResponseSchema = reviewCommandResponseSchema.extend({ coverage: coverageRecordSchema }).strict();
+export const decisionCommandResponseSchema = reviewCommandResponseSchema.extend({ decision: decisionRecordSchema }).strict();
+export type CoverageWriteRequest = z.infer<typeof coverageWriteRequestSchema>;
+export type CreateFindingRequest = z.infer<typeof createFindingRequestSchema>;
+export type FindingTransitionRequest = z.infer<typeof findingTransitionRequestSchema>;
+export type FindingAmendmentRequest = z.infer<typeof findingAmendmentRequestSchema>;
+export type ReviewDecisionRequest = z.infer<typeof reviewDecisionRequestSchema>;
+export type HumanReviewQuery = z.infer<typeof humanReviewQuerySchema>;
+export type HumanReviewPageQuery = z.infer<typeof humanReviewPageQuerySchema>;
+export type CoverageHistoryQuery = z.infer<typeof coverageHistoryQuerySchema>;
+export type HumanReviewResponse = z.infer<typeof humanReviewResponseSchema>;
+export type CoverageRecord = z.infer<typeof coverageRecordSchema>;
+export type FindingRecord = z.infer<typeof findingRecordSchema>;
+export type FindingEvent = z.infer<typeof findingEventSchema>;
+export type DecisionRecord = z.infer<typeof decisionRecordSchema>;
+export type FindingsResponse = z.infer<typeof findingsResponseSchema>;
+export type FindingHistoryResponse = z.infer<typeof findingHistoryResponseSchema>;
+export type CoverageHistoryResponse = z.infer<typeof coverageHistoryResponseSchema>;
+export type DecisionsResponse = z.infer<typeof decisionsResponseSchema>;
+export type FindingCommandResponse = z.infer<typeof findingCommandResponseSchema>;
+export type FindingEventCommandResponse = z.infer<typeof findingEventCommandResponseSchema>;
+export type CoverageCommandResponse = z.infer<typeof coverageCommandResponseSchema>;
+export type DecisionCommandResponse = z.infer<typeof decisionCommandResponseSchema>;
+
+
