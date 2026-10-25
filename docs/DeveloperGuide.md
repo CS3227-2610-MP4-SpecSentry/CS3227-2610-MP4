@@ -82,6 +82,35 @@ Docker Compose and an HTTP smoke test. Local checks are not proof that remote CI
 has executed. CI publication/signing and live environment promotion are later
 release work, documented in [Deployment](Deployment.md).
 
+## GitHub PR review with Codex
+
+Use the native Codex GitHub integration for this repository. Review guidance lives
+in the root [Code Review Rules](../AGENTS.md#code-review-rules); no API key or
+additional GitHub Actions workflow is required for this setup.
+
+Activation is an account setting, not a setting committed in this repository:
+
+1. Open [Codex code review settings](https://chatgpt.com/settings/code-review)
+   and connect `CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4`. If missing,
+   check the GitHub connection's repository access and organization approval.
+2. Select the repository, enable **Automatic review** under **Review code**,
+   and choose **All PRs** for team coverage. Configuring this requires GitHub
+   push or admin permission. With personal preferences, each author enables
+   automatic review and selects a trigger.
+3. Push the guidance and open a representative PR. Verify that Codex responds;
+   comment `@codex review` to request a manual review.
+
+If no response appears, check repository access, review settings and the trigger.
+GitHub connection alone does not prove automatic reviews are enabled.
+For a missing repository, check the organization's [installed GitHub Apps](https://github.com/organizations/CS3227-2610-MP4-SpecSentry/settings/installations).
+Configure the Codex connector to include this repository. If absent, install it
+through Codex's GitHub connection flow and choose the SpecSentry organization.
+
+Keep CI and human approvals as merge gates. This developer tool is separate from
+the product's Reviewer role and SoC gateway.
+
+See the [official setup and troubleshooting guide](https://learn.chatgpt.com/docs/third-party/github).
+
 ## Security boundaries
 
 The frontend shell and login bootstrap are public; protected API content requires
