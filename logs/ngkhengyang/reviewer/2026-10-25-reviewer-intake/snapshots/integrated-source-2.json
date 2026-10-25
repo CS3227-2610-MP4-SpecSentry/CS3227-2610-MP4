@@ -1,0 +1,356 @@
+{
+  "base": "HEAD",
+  "base_commit": "99e1cc4f4c6c96010c50f0b99b9a24160eb951a1",
+  "diff_sha256": "b367d2d7e40d43d195fbae3a97a898193d78de945e609555d2a23e5b14eedbda",
+  "files": {
+    "eslint.config.mjs": {
+      "bytes": 1331,
+      "sha256": "e8a1d61855a82ab830723d004719c721eba4e7f06406e0aef25550a659d88d52"
+    },
+    "package.json": {
+      "bytes": 2233,
+      "sha256": "7a7c7af28c050bfd6d98c93ac1d698801492e87902ed49a00ea47a6976a0710b"
+    },
+    "playwright.config.ts": {
+      "bytes": 651,
+      "sha256": "31d2ac90b7f698cd74f9386541d963e910c5df5d77f55ccbe475dd0bb752a174"
+    },
+    "src/client/package.json": {
+      "bytes": 701,
+      "sha256": "c09b3ff23a6567e1cf8fe0a08369c9a9c7751a0d317c110b5a8e1c97ed05af62"
+    },
+    "src/client/src/App.test.tsx": {
+      "bytes": 9521,
+      "sha256": "7e61dea40ec89640d7bcaa196ad135044cee641e52beed0b9bf92e76cc7fce66"
+    },
+    "src/client/src/App.tsx": {
+      "bytes": 7267,
+      "sha256": "f473d108a0dbc57cb2644ab4bc0eb42762699c53eac2dd7f7a8093983f5e84d6"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+      "bytes": 9514,
+      "sha256": "31ec8e82dcce3034c4fa91bf5742af30c380da3542d7ed36877d6a9c274bdf6b"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+      "bytes": 14091,
+      "sha256": "1b7f8955ffb2227382ddea45b7d5e4d97e41c925a0a27ab5b49a0895ec8c8c0d"
+    },
+    "src/client/src/main.tsx": {
+      "bytes": 318,
+      "sha256": "bc6b8ea34939811e21e38fc64df298352c5f08096cbd96ea55c5195392d74481"
+    },
+    "src/client/src/shared/authorization.ts": {
+      "bytes": 96,
+      "sha256": "7ea4b0ad60025ff4ebe43c5ed75ab63706d8c3e757d567b0af534a458e786467"
+    },
+    "src/client/src/styles.css": {
+      "bytes": 1464,
+      "sha256": "58cf412e97817d51507a64c886adcea7b4c8630b8b578aefe7528cc598b7bf17"
+    },
+    "src/client/src/test/setup.ts": {
+      "bytes": 155,
+      "sha256": "e6fb71ea5185b022ef77fdf9b081851a9bf989a63cf6041b4d31ad2fe799bffa"
+    },
+    "src/client/vite.config.ts": {
+      "bytes": 351,
+      "sha256": "67f45113fb8ac0ab4cfe850d199d972ac29ecfcd7867908028e9b10c2a958210"
+    },
+    "src/server/package.json": {
+      "bytes": 1606,
+      "sha256": "5785316cc9910a09cb43813e0fec028b46d1627a0b419914f3b7828b3d45faa9"
+    },
+    "src/server/prisma/migrations/20261025060000_identity/migration.sql": {
+      "bytes": 1473,
+      "sha256": "ad4ce9e0ce0c3b489ce8f61e21f20d63f27a4677159a6005ffec7cdfbf0a7fe2"
+    },
+    "src/server/prisma/migrations/20261025070000_reviewer_intake/migration.sql": {
+      "bytes": 13630,
+      "sha256": "1cd93e9700d81ceb8bd365b88de331d305bf3dddfa442901dd14dc5e2ad2094f"
+    },
+    "src/server/prisma/migrations/migration_lock.toml": {
+      "bytes": 25,
+      "sha256": "e0f301404b533bea819cafbc56ca2a9d9bcc2cf97d6350473e3a008f0637cc12"
+    },
+    "src/server/prisma/schema.prisma": {
+      "bytes": 7136,
+      "sha256": "a957f825977682ea2e2479b161f5eefde8792384aca7b6d5b513230fe39cc447"
+    },
+    "src/server/src/activity/activity.module.ts": {
+      "bytes": 286,
+      "sha256": "65246a98dc21bf6d7619f5c8d233a685d89080449e8d18f322201324d0c13716"
+    },
+    "src/server/src/activity/activity.service.ts": {
+      "bytes": 1669,
+      "sha256": "0dc0a0b9a0e0611beb27f7e68f9a3961858de5bddb2caa82799102a9c424dd8d"
+    },
+    "src/server/src/ai/ai.module.ts": {
+      "bytes": 160,
+      "sha256": "f71a6759fb7f3d7401fc3575d7cb3e5e50eee2aedc492818eef1fd8266c6003d"
+    },
+    "src/server/src/app.module.ts": {
+      "bytes": 1139,
+      "sha256": "f6afe08c19800ac446687dabd6e13b7bbad8dd77e7ffbd5931801410c6dfa9c4"
+    },
+    "src/server/src/config.ts": {
+      "bytes": 1049,
+      "sha256": "be4d4b854e43ce3d30a0c7e4c84926cc04783d88d61353b399d76ee04be29283"
+    },
+    "src/server/src/database/database.module.ts": {
+      "bytes": 463,
+      "sha256": "42ad8022ffb9f6d7d1e4fff7e8ca8c743bf015a56d732bd5d49efd03ac1f0044"
+    },
+    "src/server/src/database/database.service.ts": {
+      "bytes": 876,
+      "sha256": "a4c6e397a9ce8c65969666a65a4615570cc377aa460b51e278fde460c0de02f5"
+    },
+    "src/server/src/generated/prisma/browser.ts": {
+      "bytes": 1717,
+      "sha256": "257f8272d6a6315410564bd377f91408a084d590501b3987d9b90e1d904e556b"
+    },
+    "src/server/src/generated/prisma/client.ts": {
+      "bytes": 2574,
+      "sha256": "77ecd420398c3adb537f07dc4761e3edae47dfb50f83e9debcc52b3b65a18085"
+    },
+    "src/server/src/generated/prisma/commonInputTypes.ts": {
+      "bytes": 29252,
+      "sha256": "e466104672b27f974e272edf922b5658784c4df5a0f4fb3ebbb15dcb9057e24c"
+    },
+    "src/server/src/generated/prisma/enums.ts": {
+      "bytes": 1589,
+      "sha256": "d2ca8c42ff4db44bc11cf27967925a0401d83e048d6fa869cf1ec3a2e82b1cd9"
+    },
+    "src/server/src/generated/prisma/internal/class.ts": {
+      "bytes": 76809,
+      "sha256": "b7be55ba54f0df4e3cd4c8eced34e2dd2631224dc7ae660e595b39c139166eda"
+    },
+    "src/server/src/generated/prisma/internal/prismaNamespace.ts": {
+      "bytes": 61590,
+      "sha256": "bf4c9d9de4b6610d5f5ded20507143e1dc18235d60728c4a9b31dbc0765bc1f1"
+    },
+    "src/server/src/generated/prisma/internal/prismaNamespaceBrowser.ts": {
+      "bytes": 7021,
+      "sha256": "f5a2383458c5d6aab7f9ddfeda925f84cf5f13b9faf1b26cc49228b4f1a04087"
+    },
+    "src/server/src/generated/prisma/models.ts": {
+      "bytes": 816,
+      "sha256": "f58eccb9e100a0784854806a5871993e429352f475a91773118e0f1ea866755c"
+    },
+    "src/server/src/generated/prisma/models/AcceptanceCriterion.ts": {
+      "bytes": 62999,
+      "sha256": "9a58789cd46fae7dbed9527708b429ebbf3bec9a8a4e5652a3f81a9c375433fb"
+    },
+    "src/server/src/generated/prisma/models/AuthSession.ts": {
+      "bytes": 38976,
+      "sha256": "bfe83d292b8c2923e2768f803a0dc451bb1c14146377efd36e23ac898b3bd76c"
+    },
+    "src/server/src/generated/prisma/models/ChangeProposal.ts": {
+      "bytes": 102615,
+      "sha256": "6ebe92d30c0656f6cbcc54f3cb5e2da0823f09dcbdbdd111052398cd156b4eb8"
+    },
+    "src/server/src/generated/prisma/models/CriterionEvidenceLink.ts": {
+      "bytes": 62478,
+      "sha256": "1aca3bfbbf0bf0cd8b984584e4b1dd45ec6464b8ca52f95564eea89f1aaeb75a"
+    },
+    "src/server/src/generated/prisma/models/LoginThrottle.ts": {
+      "bytes": 42127,
+      "sha256": "05871659f66c974934f62343b44edda161b5b40f2955abdcf762f9c41b8fad86"
+    },
+    "src/server/src/generated/prisma/models/ProposalActivity.ts": {
+      "bytes": 92031,
+      "sha256": "4fa1fbd5b79f4a838b86e28c1e4efe3fc798c8487ee555aafe8c7f3b52bbda00"
+    },
+    "src/server/src/generated/prisma/models/ProposalRevision.ts": {
+      "bytes": 102478,
+      "sha256": "9e14246fecf416e466b7f7129899dc063a770a7ff1c9ef21810884a9ca7e33b7"
+    },
+    "src/server/src/generated/prisma/models/ReviewAssignment.ts": {
+      "bytes": 98570,
+      "sha256": "240560bb5d8f148a7f1cf5fdcf2ba9762237aade195317a93dd3c1c179afa9ae"
+    },
+    "src/server/src/generated/prisma/models/SecurityEvent.ts": {
+      "bytes": 44235,
+      "sha256": "ac3475bc82a3828338988857eed06efc61ad7b440427fecc25159e287e45cece"
+    },
+    "src/server/src/generated/prisma/models/TestEvidence.ts": {
+      "bytes": 56963,
+      "sha256": "e69fb8b2df652579fcb079a2a9160987ec5e96805b01273262581e3d2d661041"
+    },
+    "src/server/src/generated/prisma/models/UserAccount.ts": {
+      "bytes": 63594,
+      "sha256": "7f3da819a285bccd75ff6bfdff55feca383820b566a67852963be286b3fb420e"
+    },
+    "src/server/src/health/health.controller.ts": {
+      "bytes": 736,
+      "sha256": "9ccdab47110f34ed9af857c9ee0d35fe405dac8180bf048c4bb646b96aea0102"
+    },
+    "src/server/src/http.ts": {
+      "bytes": 2160,
+      "sha256": "f8aa5a304fc09fb7e30b91593fdbab75fab5b3002b6b28fab86abe8f643bcc06"
+    },
+    "src/server/src/identity/access.ts": {
+      "bytes": 605,
+      "sha256": "fc2c3728e1f2ae6cab9b916939d718b2d77851f1368f2c94493723d0364c1588"
+    },
+    "src/server/src/identity/account-administration.service.ts": {
+      "bytes": 1236,
+      "sha256": "9077de1fba71b1803389ebae1fa0163acdaca932f215805be0e717f8d873ceac"
+    },
+    "src/server/src/identity/identity.controller.ts": {
+      "bytes": 3173,
+      "sha256": "6bfddf79deddd87045d987c4b51a92999600ba1e152bb768d8441ab579a2c3da"
+    },
+    "src/server/src/identity/identity.guard.ts": {
+      "bytes": 2642,
+      "sha256": "02a16aa844c95cc4b5536790d9819ddffcab4fbd29d6d8b3cfbfc2e1db9f22f2"
+    },
+    "src/server/src/identity/identity.module.ts": {
+      "bytes": 1549,
+      "sha256": "86114240bff54157c5aef5314e8e9bca9d84747bde7e86ca363dd357f5af7496"
+    },
+    "src/server/src/identity/identity.service.ts": {
+      "bytes": 3185,
+      "sha256": "c94aa8c35cc53bce3c1b62a8061a528578310c74ad54e0785088dbfd9bb8cc67"
+    },
+    "src/server/src/identity/manage-account.ts": {
+      "bytes": 2729,
+      "sha256": "f00d7af9cc732edbad7a54c1a7df50992e8c288ecb5510850ac71c37a2a880d6"
+    },
+    "src/server/src/identity/seed-demo.ts": {
+      "bytes": 2302,
+      "sha256": "b166967b13102bff2228f0c1af16311143f9628c2ade318a3e2d03529796e29c"
+    },
+    "src/server/src/identity/session.store.ts": {
+      "bytes": 2292,
+      "sha256": "12f74d1df14c343f0d6e4d085772328fcb7e448d630e3b68dcdb152049ee58a1"
+    },
+    "src/server/src/main.ts": {
+      "bytes": 1329,
+      "sha256": "eff03a862e14a3e72a2d693cad70b97ea7a2ef7c2e48f9210af7038ebaa7da31"
+    },
+    "src/server/src/notifications/notifications.module.ts": {
+      "bytes": 163,
+      "sha256": "d0da5f0ffb4797b8c277cde6666a87c3868dad9c7f99a77321577ca373e4d178"
+    },
+    "src/server/src/proposals/proposals.module.ts": {
+      "bytes": 282,
+      "sha256": "feb41de12dd78ab5addbbc5310c2da725876c66fc313f90335f3ccc96346cd3e"
+    },
+    "src/server/src/proposals/proposals.service.ts": {
+      "bytes": 4133,
+      "sha256": "9c96cc001e3fcae14d1e5c7adc21171d2c0156df30ff2205bcce5786b979f550"
+    },
+    "src/server/src/releases/releases.module.ts": {
+      "bytes": 167,
+      "sha256": "d715488049dad6cb9649458f0eccf43a7e5e66a1c92c38f29477e7a5c8f1a066"
+    },
+    "src/server/src/reviews/reviewer-context.ts": {
+      "bytes": 2596,
+      "sha256": "c6162403a4eb104f36b4a3dd4a4e0e74aed846eb4f844db3d7499e52c84b9044"
+    },
+    "src/server/src/reviews/reviews.controller.ts": {
+      "bytes": 2536,
+      "sha256": "ca19c428251c80e94975f5e7e82a28575b33b37d64dcc233cd234d8a9a8bf443"
+    },
+    "src/server/src/reviews/reviews.module.ts": {
+      "bytes": 820,
+      "sha256": "fd1931262d821bf2dcf3363979598bc9fed56c0a7fffd004b826d37612b72fab"
+    },
+    "src/server/src/reviews/reviews.service.ts": {
+      "bytes": 9547,
+      "sha256": "2dc26cdcf25a1bf15d7e47822bab2f752ffb380a7d5909a09b649c2498eafd92"
+    },
+    "src/server/src/reviews/seed-reviewer.ts": {
+      "bytes": 6618,
+      "sha256": "aaed9312ed87c38f07e7e68f53595deaf2ab6d1ed38767318e34024dc7ce74ee"
+    },
+    "src/server/test/database.integration.ts": {
+      "bytes": 741,
+      "sha256": "c8fa48f8c0e96018b592c664311c788e55084edcb9187bca8751d00713a35b35"
+    },
+    "src/server/test/demo-seed.integration.ts": {
+      "bytes": 3372,
+      "sha256": "dc9fcda4f5ef95d1a43870e07b15d871b52196e7316597edabaa39d1982b15ba"
+    },
+    "src/server/test/http.spec.ts": {
+      "bytes": 3480,
+      "sha256": "2f5103ea1a990609b8c0e46c283e49812632d46dfaed3be3a06565ffa9a06a7a"
+    },
+    "src/server/test/identity.integration.ts": {
+      "bytes": 8037,
+      "sha256": "e0594cf32d28b5f8ef1ca17720fb37b1b5f81074d11c7d775fbff43bba8ca972"
+    },
+    "src/server/test/identity.spec.ts": {
+      "bytes": 8378,
+      "sha256": "96b9147f3a03ee572f272822975900a74177704f81ac4a3b308a0b9a57d5ea9b"
+    },
+    "src/server/test/reviewer-contracts.spec.ts": {
+      "bytes": 4530,
+      "sha256": "65f74900e96c6995bf831e0bfc4d386b51ce1f622128969b4e304af69433d984"
+    },
+    "src/server/test/reviewer-seed.integration.ts": {
+      "bytes": 3650,
+      "sha256": "998fb9c2b04f5978b60a41a12e2d61923d5bddbf062f06aa7c75fb15530b2f39"
+    },
+    "src/server/test/reviews.integration.ts": {
+      "bytes": 25873,
+      "sha256": "59ebd19b96485a90a36bee9fe9e6ee9214d0945c6db431b229ce7728e588e773"
+    },
+    "src/server/test/reviews.spec.ts": {
+      "bytes": 5403,
+      "sha256": "12c029db460abea6bff441b58015d3eee65cc64ed42c344ff97a35fd639c1dc2"
+    },
+    "src/shared/package.json": {
+      "bytes": 561,
+      "sha256": "2fb9f30cb96a5b2f5e95b9e2f7be9c222860599790eb9f1477eedf913b6d8399"
+    },
+    "src/shared/src/contracts/health.ts": {
+      "bytes": 390,
+      "sha256": "dab9233f63d584be75a60a341995973cad4720a9f5b1e15973be601b46a07856"
+    },
+    "src/shared/src/contracts/identity.ts": {
+      "bytes": 913,
+      "sha256": "98531cd3f409c2ad49daddfcdcfa454c0aff1c283989c6cfbb67d0ff99259a6d"
+    },
+    "src/shared/src/contracts/reviewer.ts": {
+      "bytes": 11171,
+      "sha256": "c2eb58243a042cb9f086757f5e9c161e0299b18f89c27f4a93962694d4b3e207"
+    },
+    "src/shared/src/index.ts": {
+      "bytes": 308,
+      "sha256": "39f482c2bac395a56918c03cec55a261cd1b229581fd1f5678b0bf81de84b1ae"
+    },
+    "tsconfig.base.json": {
+      "bytes": 255,
+      "sha256": "d4c6f2301e4692a5ef03b8780283e207a899af34ccff826f08a9fc6f853985d6"
+    },
+    "workflow/tests/browser/fixtures/reviewer-intake.ts": {
+      "bytes": 3835,
+      "sha256": "b261336d83ce5c6580f1b908fed8d413d80a0424059254944ae9d33f63883c7c"
+    },
+    "workflow/tests/browser/reviewer-intake.spec.ts": {
+      "bytes": 3310,
+      "sha256": "057ad705b926be165d2df71d7fb2f3d165220db3e3e6b049b641e270a0811a43"
+    },
+    "workflow/tests/browser/scaffold.spec.ts": {
+      "bytes": 3165,
+      "sha256": "913efed1c58d9a3a82381bed522956d968aca75361843e4394efad443b59993b"
+    }
+  },
+  "head": "99e1cc4f4c6c96010c50f0b99b9a24160eb951a1",
+  "paths": [
+    "eslint.config.mjs",
+    "package.json",
+    "playwright.config.ts",
+    "src/client/package.json",
+    "src/client/src",
+    "src/client/vite.config.ts",
+    "src/server/package.json",
+    "src/server/prisma",
+    "src/server/src",
+    "src/server/test",
+    "src/shared/package.json",
+    "src/shared/src",
+    "tsconfig.base.json",
+    "workflow/tests/browser"
+  ]
+}

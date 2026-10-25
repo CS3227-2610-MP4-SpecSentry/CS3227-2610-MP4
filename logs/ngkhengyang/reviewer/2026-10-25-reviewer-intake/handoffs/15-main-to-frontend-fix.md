@@ -1,0 +1,37 @@
+# Agent handoff
+
+## 1. Identity and goal
+
+Run2026\-10\-25\-reviewer\-intake;15\-main\-to\-frontend\-fix;main/main\-2 to frontend/frontend\-fix\-1;integration failure fix assignment.
+
+## 2. Requirements and focused context
+
+INT\-10 shared authorization/navigation generation and tests; F\-003. Effective v1/v2 remain unchanged. Diagnose integrated rootnpmtest failures, not just worker\-only pass.
+
+Referenced repository files:
+
+- [logs/ngkhengyang/reviewer/2026\-10\-25\-reviewer\-intake/brief\-v2.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v2.md)
+- [src/client/src/App.test.tsx](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/client/src/App.test.tsx)
+- [src/client/src/features/reviewer/ReviewerWorkspace.tsx](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/client/src/features/reviewer/ReviewerWorkspace.tsx)
+- [logs/ngkhengyang/reviewer/2026\-10\-25\-reviewer\-intake/commands/unit\-client\-1\-stderr.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/commands/unit-client-1-stderr.json)
+
+## 3. Scope, permissions, and dependencies
+
+User implementation authorization persists. Same exclusive frontend ownership paths. You are not alone; preserve backend/main edits. No contracts/schema/server/config/log changes. Return fixes/checks/completion content; main records resources.
+
+## 4. Current state and changes
+
+Integrated\-1 source snapshot identifies failing state. unit\-client\-1: backend30/30 passed, client27/29; expiry/detail and expiry/activity could not find Open Protected proposal; DOM shows assigned tab but empty pool\-like list. Code has deferred initial loadQueue effect with active\-only check. Suspect obsolete initial load starts after navigation; independently diagnose. Snapshot integrated\-1 included ignored dist/Vitest caches and became stale through testing, without source edits. integrated\-source\-1 narrows to source/config/tests and pins the same failing source state.
+
+## 5. Verification and findings
+
+Inspect full saved command output base64 JSON as needed, source App.test.tsx expiry matrix and ReviewerWorkspace initial effect. Ensure queued initial load cannot override a later user tab/filter/navigation intent. Keep controlled deterministic expiry tests and strengthen regression if needed. Run whole root npmtest after fix, not only isolatedclient, plus scopedlint/typecheck. Report actual failure/root cause.
+
+## 6. Risks, questions, and next action
+
+Do not weaken postparse access\-loss checks or pending\-generation enforcement. Initial\-loop race hypothesis is not yet established product impact. Keep historical failing command; main will supersede only with successful fresh evidence.
+
+## 7. Resource record
+
+Selected gpt\-6.1\-sol/medium, reused original owner. Coordinator starts frontend\-fix\-1/fix before triggering; unknown token/cache/final\-runtime counters remain unavailable.
+

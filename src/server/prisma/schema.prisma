@@ -21,6 +21,9 @@ model UserAccount {
   role         AccountRole
   enabled      Boolean     @default(true)
   version      Int         @default(1)
+  proposals    ChangeProposal[]
+  assignments  ReviewAssignment[]
+  activities   ProposalActivity[]
 }
 
 model AuthSession {
@@ -49,4 +52,158 @@ model SecurityEvent {
   timestamp     DateTime @default(now())
 
   @@index([timestamp])
+}
+
+enum ProposalState {
+  DRAFT
+  SUBMITTED
+  IN_REVIEW
+  CHANGES_REQUESTED
+  APPROVED
+  IN_RELEASE
+  RELEASED
+  WITHDRAWN
+}
+
+enum ReviewAssignmentStatus {
+  ACTIVE
+  CLOSED
+}
+
+enum AssignmentEndReason {
+  DROPPED
+  ACCOUNT_DISABLED
+  REVISION_REPLACED
+  WITHDRAWN
+}
+
+enum ProposalActivityAction {
+  SUBMITTED
+  RESUBMITTED
+  CLAIMED
+  DROPPED
+  ASSIGNMENT_RELEASED
+}
+
+// Lifecycle root. Composite foreign keys prevent cross-proposal pointers.
+model ChangeProposal {
+  id                  String            @id @default(uuid())
+  ownerId             String
+  title               String
+  state               ProposalState     @default(DRAFT)
+  currentRevisionId   String?
+  currentAssignmentId String?           @unique
+  firstSubmittedAt    DateTime?
+  createdAt           DateTime          @default(now())
+  version             Int               @default(0)
+  owner               UserAccount       @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  revisions           ProposalRevision[] @relation("ProposalRevisions")
+  currentRevision     ProposalRevision? @relation("CurrentRevision", fields: [id, currentRevisionId], references: [proposalId, id], onDelete: Restrict, onUpdate: NoAction)
+  assignments         ReviewAssignment[] @relation("ProposalAssignments")
+  currentAssignment   ReviewAssignment? @relation("CurrentAssignment", fields: [id, currentRevisionId, currentAssignmentId], references: [proposalId, revisionId, id], onDelete: Restrict, onUpdate: NoAction)
+  activities          ProposalActivity[]
+
+  @@index([state, firstSubmittedAt, id])
+  @@index([ownerId])
+  @@unique([id, currentRevisionId, currentAssignmentId])
+}
+
+// Every row is a submitted snapshot; no draft/private fields live here.
+model ProposalRevision {
+  id               String                @id @default(uuid())
+  proposalId       String
+  number           Int
+  summary          String
+  problem          String
+  constraints      String
+  expectedBehavior String
+  diffText         String
+  submittedAt      DateTime              @default(now())
+  createdAt        DateTime              @default(now())
+  proposal         ChangeProposal        @relation("ProposalRevisions", fields: [proposalId], references: [id], onDelete: Restrict)
+  currentFor       ChangeProposal[]      @relation("CurrentRevision")
+  criteria         AcceptanceCriterion[]
+  evidence         TestEvidence[]
+  assignments      ReviewAssignment[]
+  activities       ProposalActivity[]
+
+  @@unique([proposalId, id])
+  @@unique([proposalId, number])
+  @@index([proposalId, number(sort: Desc), id])
+}
+
+model AcceptanceCriterion {
+  id            String                  @id @default(uuid())
+  revisionId    String
+  stableKey     String
+  statement     String
+  required      Boolean                 @default(true)
+  revision      ProposalRevision        @relation(fields: [revisionId], references: [id], onDelete: Restrict)
+  evidenceLinks CriterionEvidenceLink[]
+
+  @@unique([revisionId, id])
+  @@unique([revisionId, stableKey])
+}
+
+model TestEvidence {
+  id             String                  @id @default(uuid())
+  revisionId     String
+  text           String
+  evidenceHash   String
+  revision       ProposalRevision        @relation(fields: [revisionId], references: [id], onDelete: Restrict)
+  criterionLinks CriterionEvidenceLink[]
+
+  @@unique([revisionId, id])
+}
+
+model CriterionEvidenceLink {
+  revisionId  String
+  criterionId String
+  evidenceId  String
+  criterion   AcceptanceCriterion @relation(fields: [revisionId, criterionId], references: [revisionId, id], onDelete: Restrict)
+  evidence    TestEvidence        @relation(fields: [revisionId, evidenceId], references: [revisionId, id], onDelete: Restrict)
+
+  @@id([criterionId, evidenceId])
+}
+
+// Closing an assignment retains its identity and provenance permanently.
+model ReviewAssignment {
+  id           String                 @id @default(uuid())
+  proposalId   String
+  revisionId   String
+  reviewerId   String
+  status       ReviewAssignmentStatus @default(ACTIVE)
+  assignedAt   DateTime               @default(now())
+  endedAt      DateTime?
+  endReason    AssignmentEndReason?
+  version      Int                    @default(0)
+  proposal     ChangeProposal         @relation("ProposalAssignments", fields: [proposalId], references: [id], onDelete: Restrict)
+  revision     ProposalRevision       @relation(fields: [proposalId, revisionId], references: [proposalId, id], onDelete: Restrict)
+  reviewer     UserAccount            @relation(fields: [reviewerId], references: [id], onDelete: Restrict)
+  currentFor   ChangeProposal?        @relation("CurrentAssignment")
+  activities   ProposalActivity[]
+
+  @@unique([proposalId, revisionId, id])
+  @@index([reviewerId, status, assignedAt, id])
+  @@index([proposalId, assignedAt, id])
+}
+
+// Separate from operational security events and their retention/pruning policy.
+model ProposalActivity {
+  id           String                 @id @default(uuid())
+  proposalId   String
+  revisionId   String
+  assignmentId String?
+  actorId      String?
+  action       ProposalActivityAction
+  outcome      String                 @default("SUCCESS")
+  summary      String
+  reason       String?
+  timestamp    DateTime               @default(now())
+  proposal     ChangeProposal         @relation(fields: [proposalId], references: [id], onDelete: Restrict)
+  revision     ProposalRevision       @relation(fields: [proposalId, revisionId], references: [proposalId, id], onDelete: Restrict)
+  assignment   ReviewAssignment?      @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
+  actor        UserAccount?           @relation(fields: [actorId], references: [id], onDelete: Restrict)
+
+  @@index([proposalId, timestamp, id])
 }

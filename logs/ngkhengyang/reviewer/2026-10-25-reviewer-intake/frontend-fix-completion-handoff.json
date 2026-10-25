@@ -1,0 +1,17 @@
+{
+  "identity": "Run2026-10-25-reviewer-intake;16-frontend-fix-to-main;frontend/frontend-fix-1 to main/main-2;F-003 fix completion.",
+  "requirements": "INT-10 navigation/access generations; maintain effective v1/v2 and all prior security controls. F-003 requires independent implementation-reviewer verification, not owner-only closure.",
+  "permissions": "Original frontend owner changed three owned files only; other changes preserved. Main persists completion and owns integrated evidence.",
+  "state": "Integrated-source-2 pins source/config/tests after explicit initialization-intent fix; excludes build/Vitest caches. Base99e1cc4f4c6c96010c50f0b99b9a24160eb951a1; backend/shared contracts unchanged.",
+  "verification": "Deterministic regression failed before fix, passed after. Whole rootnpmtest backend30/client30 and sharedbuild passed; scopedlint/clienttypecheck pass. Initial generation-only approach still failed two tests before reassessment and explicit intent fix. See frontend-fix-completion.md.",
+  "risks": "Final recorded broadchecks/browser and independent F-003 closure pending. No known remaining owner blocker; no DB execution during fix.",
+  "resources": "Selected gpt-6.1-sol/medium;rec-1efe6d306f42492e finished; token/cache/final-runtime counters unavailable.",
+  "references": [
+    "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/frontend-fix-completion.md",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx",
+    "src/client/src/App.test.tsx"
+  ],
+  "snapshot_id": "integrated-source-2",
+  "resource_record": "rec-1efe6d306f42492e"
+}

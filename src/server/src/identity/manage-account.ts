@@ -4,6 +4,10 @@ import { accountRoleSchema, usernameSchema } from '@specsentry/shared';
 import { readConfig } from '../config';
 import { DatabaseService } from '../database/database.service';
 import { hashPassword } from './identity.service';
+import { AccountAdministrationService } from './account-administration.service';
+import { ReviewsService } from '../reviews/reviews.service';
+import { ProposalsService } from '../proposals/proposals.service';
+import { ActivityService } from '../activity/activity.service';
 
 async function main(): Promise<void> {
   loadEnvironment({ path: resolve(__dirname, '../../../../.env'), quiet: true });
@@ -22,10 +26,8 @@ async function main(): Promise<void> {
       });
     } else if (action === 'disable') {
       const username = usernameSchema.parse(process.env.ACCOUNT_USERNAME);
-      await database.client.$transaction(async (tx) => {
-        const account = await tx.userAccount.update({ where: { username }, data: { enabled: false, version: { increment: 1 } } });
-        await tx.securityEvent.create({ data: { action: 'ACCOUNT_DISABLED', target: account.id, outcome: 'success' } });
-      });
+      await new AccountAdministrationService(database,
+        new ReviewsService(database, new ProposalsService(), new ActivityService())).disable(username);
     } else if (action === 'prune') {
       const now = new Date();
       await database.client.$transaction([

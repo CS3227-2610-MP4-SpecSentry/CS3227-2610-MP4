@@ -1,0 +1,20 @@
+{
+  "identity": "Run2026-10-25-reviewer-intake;14-backend-to-main;backend/backend-1 to main/main-2;implementation completion;ready for integrated validation.",
+  "requirements": "Effective v1/v2 INT-01-11 backend scope with security controls. Reviewer intake only; no Contributor writes/AI/findings/coverage/decision/release features.",
+  "permissions": "Backend exclusive write set only, other edits preserved. Main integrated root module/scripts. Main owns final verification and records.",
+  "state": "Source base99e1cc4f4c6c96010c50f0b99b9a24160eb951a1 plus integrated-1 snapshot captures backend/foundation/frontend/main wiring and browser sources. Workers finished writing.",
+  "verification": "Backend server typecheck/lint/diffcheck,21 selected unit/HTTP/auth tests,30 fullPostgreSQL tests and3 final seed-lock revalidation pass. Isolated test DB released. Broad repository/browser and independentreview pending.",
+  "risks": "No contract deviation or backend blocker. Production provider/deployment/fullrole acceptance outside increment; preserve original security/account session invariants. PostgreSQL concurrent-query deprecation is nonfatal.",
+  "resources": "Selected gpt-6.1-sol/high; coordinator interval rec-4b169c82401d425f finished; attributable token/cache/final-runtime counters unavailable.",
+  "references": [
+    "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/backend-completion.md",
+    "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v1.md",
+    "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v2.md",
+    "src/server/src/reviews/reviews.service.ts",
+    "src/server/src/proposals/proposals.service.ts",
+    "src/server/src/identity/account-administration.service.ts",
+    "src/server/test/reviews.integration.ts"
+  ],
+  "snapshot_id": "integrated-1",
+  "resource_record": "rec-4b169c82401d425f"
+}

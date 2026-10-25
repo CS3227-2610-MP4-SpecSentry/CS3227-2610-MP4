@@ -1,14 +1,15 @@
 # Architecture
 
-Status: base authentication plus module registration scaffold, 25 October 2026. Domain behavior remains
-planned under the [technical specification](../workflow/specs/TECHNICAL-SPEC.md).
+Status: base authentication and the first Reviewer intake increment, 25 October 2026.
+The remaining domain behavior is planned under the
+[technical specification](../workflow/specs/TECHNICAL-SPEC.md).
 
 ## Deployment and responsibilities
 
 One React/Vite browser application calls one NestJS backend under `/api`. In
 production a single Docker image serves both from the same origin. PostgreSQL
-holds accounts, sessions, login throttles and restricted security events; business
-records are added with their owning features. Development and production
+holds accounts, sessions, login throttles, restricted security events, immutable
+submitted revisions, review assignments and separate business activity. Development and production
 use separate services, databases and secrets; see [Deployment](Deployment.md).
 
 ```mermaid
@@ -36,8 +37,9 @@ flowchart TB
     AI --> SoC[SoC LLM]
 ```
 
-The diagram is the target design. Currently health/readiness, base authentication, database
-connectivity and module registration are implemented. See [Authentication](Authentication.md).
+The diagram is the target design. Health/readiness, authentication, database
+connectivity and Reviewer intake are implemented; AI and release operations remain
+planned. See [Authentication](Authentication.md).
 
 | Module / directory under server source | Single responsibility |
 | --- | --- |
@@ -51,11 +53,26 @@ connectivity and module registration are implemented. See [Authentication](Authe
 | database | Supply Prisma connectivity and transaction infrastructure |
 | health | Report liveness and database readiness |
 
-`AppModule` composes the modules. Business modules other than Identity are intentionally empty NestJS
-registrations: no placeholder routes, provider calls, domain schema or permissions
-are implied. `DatabaseModule.register(config)` owns connectivity configuration and
+`AppModule` composes the modules. `ReviewsModule.register(config)` supplies Reviewer
+routes and imports transaction-aware Proposals and Activity services. Contributor
+writes, findings, coverage and decisions remain outside this increment. Releases,
+Notifications and AI remain empty registrations.
+`DatabaseModule.register(config)` owns connectivity configuration and
 exports `DatabaseService` for the existing health controller without global state. `IdentityModule.register(config)` imports the same configured
 database module and registers the default-protected authentication/CSRF/role guard.
+
+Reviewer services carry the authenticated account/version into a database
+transaction and lock the account before proposal roots. Full-content reads check
+current assignment before loading relations. Claim/drop and account-disable
+release update lifecycle, historical assignments and required activity atomically.
+Database constraints enforce one ACTIVE assignment, same-proposal/current-revision
+pointers and deferred active-pointer consistency. Submitted content and business
+events reject updates/deletes; closed assignment provenance is retained. Business
+activity is separate from operational security pruning. Fixture creation is a
+development/test CLI operation, not a public API.
+Reviewer controller validation failures also create restricted rejection events
+after session/role/CSRF enforcement. These events use fixed operation/target
+labels and exclude request bodies, query values and shared business activity.
 
 ## Implementation seams
 
@@ -75,6 +92,8 @@ Cross-module commands have one coordinator and one transaction:
 
 | Command | Coordinator | Atomic participants |
 | --- | --- | --- |
+| Claim/drop | Reviews | Root/version, assignment history/current pointer and business activity |
+| Disable reviewer | Account administration | Account/version, unfinished assignment releases, root transitions, security event and business activity |
 | Submit revision | Proposals | Revision/state, retained reviewer's new round, activity and notice |
 | Revoke approval | Reviews | Approval invalidation, candidate protection, activity and Maintainer notice |
 | Publish release | Releases | Fresh gates/approvals, member states, immutable snapshot and activity |
@@ -83,14 +102,17 @@ Participating module operations must accept the same transaction context, rather
 than independently committing. Publication and revocation serialize on shared
 candidate/approval records. Required activity and notices commit with the command;
 in-process events after commit are insufficient for those guarantees. These
-interfaces and domain models remain to be implemented against
+release and submission interfaces remain to be implemented against
 [integration contracts](../workflow/specs/INTEGRATION-SPEC.md).
 
 ## Client, contracts and AI
 
 As features are implemented, use `client/src/features/{contributor,reviewer,maintainer}`
 for role UI areas and `client/src/shared` for reusable presentation and HTTP handling.
-The base client has guarded role landing pages; role workflow features remain pending.
+The client has guarded role landing pages and Reviewer intake under
+`features/reviewer`. The shared authorization generation discards pending session
+and content responses after observed access loss, account change or navigation;
+the server remains authoritative for every request. Other role workflows remain pending.
 `shared/src/contracts` contains browser-safe Zod wire schemas, re-exported through
 `shared/src/index.ts`. Database types, authorization policies, prompts and secrets
 remain server-only.

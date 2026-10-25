@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { ReviewerWorkspace } from './features/reviewer/ReviewerWorkspace';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import { csrfResponseSchema, sessionResponseSchema, type AccountRole, type SessionResponse } from '@specsentry/shared';
 
@@ -55,20 +56,27 @@ export function App() {
   const [notice, setNotice] = useState('');
   const [loggingOut, setLoggingOut] = useState(false);
   const generation = useRef(0);
+  const identity = useRef('');
+  const [authorization] = useState(() => ({ current: () => generation.current, invalidate: () => { generation.current++; } }));
+  const invalidate = useCallback((message: string) => { generation.current++; identity.current = ''; setSession(null); setNotice(message); setLoading(false); }, []);
   const checkSession = useCallback(async (signal?: AbortSignal) => {
     const currentGeneration = generation.current;
     if (signal?.aborted) return;
     try {
       const response = await fetch('/api/auth/session', { signal, credentials: 'same-origin' });
       if (signal?.aborted || generation.current !== currentGeneration) return;
-      if (response.status === 401) { setSession(null); return; }
+      if (response.status === 401) { invalidate('Your session ended. Please sign in again.'); return; }
       if (!response.ok) throw new Error();
       const current = sessionResponseSchema.parse(await response.json());
-      if (!signal?.aborted && generation.current === currentGeneration) setSession(current);
+      if (!signal?.aborted && generation.current === currentGeneration) {
+        const nextIdentity = JSON.stringify(current.account);
+        if (identity.current && identity.current !== nextIdentity) generation.current++;
+        identity.current = nextIdentity; setSession(current);
+      }
     } catch {
-      if (!signal?.aborted && generation.current === currentGeneration) { setSession(null); setNotice('Unable to verify your session. Please sign in again.'); }
+      if (!signal?.aborted && generation.current === currentGeneration) { invalidate('Unable to verify your session. Please sign in again.'); }
     } finally { if (!signal?.aborted) setLoading(false); }
-  }, []);
+  }, [invalidate]);
   useEffect(() => {
     const controller = new AbortController();
     void Promise.resolve().then(() => checkSession(controller.signal));
@@ -76,18 +84,19 @@ export function App() {
   }, [checkSession]);
   useEffect(() => {
     if (!session) return;
-    const timer = window.setTimeout(() => { generation.current++; setSession(null); setNotice('Your session expired. Please sign in again.'); }, Math.max(0, session.expiresAt - Date.now()));
+    const timer = window.setTimeout(() => { invalidate('Your session expired. Please sign in again.'); }, Math.max(0, session.expiresAt - Date.now()));
     const onFocus = () => { void checkSession(); };
     window.addEventListener('focus', onFocus);
     return () => { window.clearTimeout(timer); window.removeEventListener('focus', onFocus); };
-  }, [session, checkSession]);
+  }, [session, checkSession, invalidate]);
 
   async function logout() {
     if (!session) return;
-    generation.current++;
+    const token = session.csrfToken;
+    invalidate('Signing out…');
     setLoggingOut(true);
     try {
-      const response = await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin', headers: { 'x-csrf-token': session.csrfToken } });
+      const response = await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin', headers: { 'x-csrf-token': token } });
       if (!response.ok && response.status !== 401) throw new Error();
       setSession(null);
       setNotice('You have signed out.');
@@ -101,13 +110,13 @@ export function App() {
     <h1>SpecSentry</h1>
     {notice && <p role="status">{notice}</p>}
     {loading ? <p role="status">Checking session…</p> : !session || !workspace ?
-      <Login onLogin={(current) => { generation.current++; setSession(current); setNotice(''); }} /> : <>
+      <Login onLogin={(current) => { generation.current++; identity.current = JSON.stringify(current.account); setSession(current); setNotice(''); }} /> : <>
         <nav aria-label="Account"><Link to={workspace.path}>{workspace.label} workspace</Link><button onClick={() => void logout()} disabled={loggingOut}>Sign out</button></nav>
         <p>Signed in as {session.account.username}</p>
         <Routes>
           <Route path="/" element={<Navigate to={workspace.path} replace />} />
           <Route path="/login" element={<Navigate to={workspace.path} replace />} />
-          {Object.entries(workspaces).map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? <>
+          {Object.entries(workspaces).map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? role === 'REVIEWER' ? <ReviewerWorkspace key={JSON.stringify(session.account)} session={session} authorization={authorization} onUnauthorized={() => invalidate('Your session ended. Please sign in again.')} /> : <>
             <h2>{item.label} workspace</h2><p className="notice">Your account is ready. Workflow features will appear here as they become available.</p>
           </> : <><h2>Access denied</h2><p>This workspace requires a different account role.</p></>} />)}
           <Route path="*" element={<><h2>Page not found</h2><Link to={workspace.path}>Return to your workspace</Link></>} />

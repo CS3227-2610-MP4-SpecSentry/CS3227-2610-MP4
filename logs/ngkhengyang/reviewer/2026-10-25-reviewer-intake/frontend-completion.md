@@ -1,0 +1,9 @@
+# Frontend completion — frontend/frontend-1
+
+Selected gpt-6.1-sol/medium. Changed only App.tsx, App.test.tsx, styles.css, shared/authorization.ts, features/reviewer/ReviewerWorkspace.tsx and its tests, workflow/tests/browser/reviewer-intake.spec.ts and fixtures/reviewer-intake.ts. No shared/server/config/package/log changes or contract deviations.
+
+Implemented pool and own assigned queues, author/original-age/state filtering, original/latest ages and cursor pages; claim, one immutable selected submitted revision, criterion/evidence links and escaped diff/evidence; paginated revision history/activity; current-assignment/revision/version drop; awaiting-revision status; loading/pending/empty/error/conflict/access-loss/focus feedback. Shared authorization generations check after parsing and clear stale content on terminal access/session changes. No browser persistence.
+
+Passed client typecheck, production build (120 modules), scoped ESLint and29/29 client tests. Covers old session200 after newer401/error, delayed parsing, detail/history/activity after navigation/expiry/account switch/logout and delayed history/activity after drop, claims/filters/paging/hostile text/strict projections/authoritative denial. Initial lint issues corrected; real500ms expiry-test flake replaced by controlled Vitest timers. Owned files trimmed to one final newline. Worker git discovery failed, so main runs canonical git diff--check.
+
+Browser source prepared but not executed by frontend to avoid backend DB interference. Uses disposable migrated TEST_DATABASE_URL, port3000/proxy config and pinned Chromium. A keyboard claim/history/drop, B denial/takeover, formerA denial, Contributor403, escaped hostile text and scoped axe checks. Final integration and independent review pending. Coordinator record rec-10b6814d93cf4786; token/cache/final-runtime counters unavailable, no estimates.

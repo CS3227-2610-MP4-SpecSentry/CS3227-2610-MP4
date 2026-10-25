@@ -6,3 +6,4 @@ export {
   type ReadinessResponse,
 } from './contracts/health';
 export * from './contracts/identity';
+export * from './contracts/reviewer';

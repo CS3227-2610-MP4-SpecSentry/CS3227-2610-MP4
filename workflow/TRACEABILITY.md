@@ -47,6 +47,36 @@ HTTP tests, eight client tests, eight PostgreSQL integration tests, four Chromiu
 tests, and production dependency audit (zero vulnerabilities) passed. The login
 page axe scan reported zero violations; full product accessibility is unverified.
 
+## Reviewer intake increment — 25 October 2026
+
+This increment supplies development/test submissions and implements Reviewer
+intake. It does not complete the full Reviewer role. Effective acceptance scope
+INT-01–INT-11 and exclusions are in the [session brief](../logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v1.md)
+and its [security refinements](../logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v2.md).
+
+| Requirement / delivered boundary | Source and verification evidence | Remaining scope |
+| --- | --- | --- |
+| REQ-REV-001 partial: pool/own queues, author/original-age/state filters, original/latest ages, bounded pages | `src/server/src/reviews`, `src/shared/src/contracts/reviewer.ts`, `src/client/src/features/reviewer`; `reviews.integration.ts` INT-02/03 and client tests | Unresolved-severity filter requires findings; full performance protocol pending |
+| REQ-REV-007 partial: concurrent claim, eligible-state drop, takeover, immediate server access loss and retained assignment provenance | `reviews.integration.ts` INT-04/06/07 includes actual claim/claim, drop/reclaim and stale-assignment races; migration enforces one ACTIVE row and immutable historical provenance; Chromium intake walkthrough | Finding/coverage preservation and takeover confirmation need future finding/coverage modules |
+| REQ-REV-011 partial: no expiry; atomic account disable/release into correct queues; frozen assignment noninterference | Account administration and `reviews.integration.ts` INT-08: claim/drop/disable races, session version/role recheck, assignment-write and activity rollback | Effective approval/decision preservation remains to be verified when approval records exist |
+| REQ-REV-015 partial: assigned-only immutable submitted detail/history and permitted human activity | Explicit server projections; INT-05/09 cross-proposal and revoked-page checks; paginated revisions; private drafts/AI data absent from contracts | Findings/responses/decisions and private AI audit integration remain pending |
+| REQ-SHR-001/002/003/004/007 partial: Reviewer authorization, optimistic versions, atomic business events and retention separation | Real HTTP/CSRF/role checks, locked account/session version and proposal roots; business activity separate from prunable SecurityEvent; INT-01/05/07/08/09/11 | Other role domain operations and remaining event families remain pending |
+| REQ-SHR-005 / NFR-A11Y-001 partial: keyboard activation/focus and automated intake scan | `workflow/tests/browser/reviewer-intake.spec.ts`; axe scan of the selected review detail; escaped hostile-text checks; client response-race tests | Full keyboard-only, zoom/reflow, all-role and deployed accessibility acceptance remains pending |
+
+Recorded local checks after independent-review fixes include schema validation,
+typecheck, lint, 32 backend unit/HTTP tests, 38 client tests and 31 PostgreSQL
+integration tests. Production build and five Chromium tests are also recorded in
+the session evidence. The initial integrated client run
+failed two expiry cases; the reproduced initial-load/navigation race was fixed with
+explicit intent invalidation and a deterministic regression. Failures and fresh
+source-bound command evidence are retained in the [session log](../logs/ngkhengyang/2026-10-25-reviewer-intake.md).
+Independent review additionally identified missing restricted audit for controller
+validation rejections, pagination controls stuck pending after focus refresh, and
+omitted revision/entity/outcome context in the activity UI. Original owners fixed
+each with regression coverage; the session records independent revalidation.
+Independent review status and any subsequent fixes are recorded there; these
+command results alone are not a release or full product acceptance claim.
+
 ## Product acceptance plan
 
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
@@ -68,21 +98,21 @@ page axe scan reported zero violations; full product accessibility is unverified
 | [REQ-REL-006](specs/ROLE-MAINTAINER.md#requirements) | Audit view | [AC-REL-006](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-007](specs/ROLE-MAINTAINER.md#requirements) | Candidate responsibility and revocation notice | [AC-REL-007](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-008](specs/ROLE-MAINTAINER.md#requirements) | Publication and revocation race | [AC-REL-008](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
-| [REQ-REV-001](specs/ROLE-REVIEWER.md#requirements) | Review pool and assigned queue | [AC-REV-001](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
+| [REQ-REV-001](specs/ROLE-REVIEWER.md#requirements) | Review pool and assigned queue | [AC-REV-001](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Partial: Reviewer intake evidence above; severity filter pending |
 | [REQ-REV-002](specs/ROLE-REVIEWER.md#requirements) | Criterion assessment | [AC-REV-002](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-003](specs/ROLE-REVIEWER.md#requirements) | AI risk review | [AC-REV-003](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-004](specs/ROLE-REVIEWER.md#requirements) | Finding management | [AC-REV-004](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-005](specs/ROLE-REVIEWER.md#requirements) | Review decision | [AC-REV-005](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-006](specs/ROLE-REVIEWER.md#requirements) | Stale review | [AC-REV-006](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
-| [REQ-REV-007](specs/ROLE-REVIEWER.md#requirements) | Claim and drop | [AC-REV-007](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
+| [REQ-REV-007](specs/ROLE-REVIEWER.md#requirements) | Claim and drop | [AC-REV-007](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Partial: claim/drop/race/access evidence above; finding/coverage takeover integration pending |
 | [REQ-REV-008](specs/ROLE-REVIEWER.md#requirements) | New revision notification | [AC-REV-008](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-009](specs/ROLE-REVIEWER.md#requirements) | Finding contents and provenance | [AC-REV-009](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-010](specs/ROLE-REVIEWER.md#requirements) | Resolved finding history | [AC-REV-010](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
-| [REQ-REV-011](specs/ROLE-REVIEWER.md#requirements) | Assignment availability | [AC-REV-011](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
+| [REQ-REV-011](specs/ROLE-REVIEWER.md#requirements) | Assignment availability | [AC-REV-011](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Partial: atomic disable/release/race evidence above; approval-record integration pending |
 | [REQ-REV-012](specs/ROLE-REVIEWER.md#requirements) | AI response race | [AC-REV-012](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-013](specs/ROLE-REVIEWER.md#requirements) | AI suggestion handling | [AC-REV-013](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-014](specs/ROLE-REVIEWER.md#requirements) | AI size limits | [AC-REV-014](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
-| [REQ-REV-015](specs/ROLE-REVIEWER.md#requirements) | Human history and AI privacy | [AC-REV-015](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
+| [REQ-REV-015](specs/ROLE-REVIEWER.md#requirements) | Human history and AI privacy | [AC-REV-015](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Partial: assigned submitted detail/history/activity evidence above; finding/decision/private AI integration pending |
 | [REQ-REV-016](specs/ROLE-REVIEWER.md#requirements) | Revoke approval | [AC-REV-016](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-SHR-001](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Authentication | [AC-SHR-001](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Base authentication evidence above; assignment integration pending |
 | [REQ-SHR-002](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Role enforcement | [AC-SHR-002](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Base role guard verified; domain authorization pending |

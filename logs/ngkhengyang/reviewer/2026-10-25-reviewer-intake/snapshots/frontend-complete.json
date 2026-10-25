@@ -1,0 +1,53 @@
+{
+  "base": "HEAD",
+  "base_commit": "99e1cc4f4c6c96010c50f0b99b9a24160eb951a1",
+  "diff_sha256": "15365f64224422fa72439a64d6a609dae688b50735300e0678de779a4f41edb4",
+  "files": {
+    "src/client/src/App.test.tsx": {
+      "bytes": 9475,
+      "sha256": "d2a82a040715b9866c440342c673dd6b4ad02cf6909f5c33a36a0b8eaeabcb99"
+    },
+    "src/client/src/App.tsx": {
+      "bytes": 7267,
+      "sha256": "f473d108a0dbc57cb2644ab4bc0eb42762699c53eac2dd7f7a8093983f5e84d6"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+      "bytes": 8798,
+      "sha256": "e38d5e1964876bf4d98d9d295d32cd6af197c19bc445bf8bd734e576bb606548"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+      "bytes": 13547,
+      "sha256": "f4ddbf2dc148e4b927c5f9fd48102a5e819b65c40ac898d5ca894b1412866604"
+    },
+    "src/client/src/main.tsx": {
+      "bytes": 318,
+      "sha256": "bc6b8ea34939811e21e38fc64df298352c5f08096cbd96ea55c5195392d74481"
+    },
+    "src/client/src/shared/authorization.ts": {
+      "bytes": 96,
+      "sha256": "7ea4b0ad60025ff4ebe43c5ed75ab63706d8c3e757d567b0af534a458e786467"
+    },
+    "src/client/src/styles.css": {
+      "bytes": 1464,
+      "sha256": "58cf412e97817d51507a64c886adcea7b4c8630b8b578aefe7528cc598b7bf17"
+    },
+    "src/client/src/test/setup.ts": {
+      "bytes": 155,
+      "sha256": "e6fb71ea5185b022ef77fdf9b081851a9bf989a63cf6041b4d31ad2fe799bffa"
+    },
+    "workflow/tests/browser/fixtures/reviewer-intake.ts": {
+      "bytes": 3835,
+      "sha256": "b261336d83ce5c6580f1b908fed8d413d80a0424059254944ae9d33f63883c7c"
+    },
+    "workflow/tests/browser/reviewer-intake.spec.ts": {
+      "bytes": 3310,
+      "sha256": "057ad705b926be165d2df71d7fb2f3d165220db3e3e6b049b641e270a0811a43"
+    }
+  },
+  "head": "99e1cc4f4c6c96010c50f0b99b9a24160eb951a1",
+  "paths": [
+    "src/client/src",
+    "workflow/tests/browser/fixtures/reviewer-intake.ts",
+    "workflow/tests/browser/reviewer-intake.spec.ts"
+  ]
+}

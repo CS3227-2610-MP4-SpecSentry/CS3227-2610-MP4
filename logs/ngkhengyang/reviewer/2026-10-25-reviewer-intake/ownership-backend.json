@@ -1,0 +1,20 @@
+{
+  "id": "backend",
+  "agent": "backend",
+  "role": "implementer",
+  "paths": [
+    "src/server/src/reviews",
+    "src/server/src/proposals",
+    "src/server/src/activity",
+    "src/server/src/identity/manage-account.ts",
+    "src/server/src/identity/account-administration.service.ts",
+    "src/server/test/reviewer-contracts.spec.ts",
+    "src/server/test/reviews.spec.ts",
+    "src/server/test/reviews.integration.ts",
+    "src/server/test/reviewer-seed.integration.ts",
+    "src/server/test/reviewer-disable.integration.ts"
+  ],
+  "dependencies": [
+    "foundation"
+  ]
+}

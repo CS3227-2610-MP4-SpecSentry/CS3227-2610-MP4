@@ -1,0 +1,53 @@
+{
+  "coverage": {
+    "expected_records": 6,
+    "resource_records": 6,
+    "unavailable_token_metrics": 18
+  },
+  "errors": [
+    "required stage implement: no successful resource record",
+    "required stage integrate: no successful resource record",
+    "required stage review: no successful resource record",
+    "handoffs: no current snapshot-bound implementation handoff recorded"
+  ],
+  "ok": false,
+  "scope": "Local consistency checks do not establish semantic correctness.",
+  "warnings": [
+    "record rec-550d0ab394a54262: usage_source unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-550d0ab394a54262: input_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-550d0ab394a54262: output_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-550d0ab394a54262: cache_read_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-550d0ab394a54262: tool_calls unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-550d0ab394a54262: retries unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-76f85bb28e5b4632: usage_source unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-76f85bb28e5b4632: input_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-76f85bb28e5b4632: output_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-76f85bb28e5b4632: cache_read_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-76f85bb28e5b4632: tool_calls unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-76f85bb28e5b4632: retries unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-1f49d87dc9734359: usage_source unavailable (No attributable final runtime token/cache/observed execution/tool/retry counters; self-reported inspection counts are separately documented)",
+    "record rec-1f49d87dc9734359: input_tokens unavailable (No attributable final runtime token/cache/observed execution/tool/retry counters; self-reported inspection counts are separately documented)",
+    "record rec-1f49d87dc9734359: output_tokens unavailable (No attributable final runtime token/cache/observed execution/tool/retry counters; self-reported inspection counts are separately documented)",
+    "record rec-1f49d87dc9734359: cache_read_tokens unavailable (No attributable final runtime token/cache/observed execution/tool/retry counters; self-reported inspection counts are separately documented)",
+    "record rec-1f49d87dc9734359: tool_calls unavailable (No attributable final runtime token/cache/observed execution/tool/retry counters; self-reported inspection counts are separately documented)",
+    "record rec-1f49d87dc9734359: retries unavailable (No attributable final runtime token/cache/observed execution/tool/retry counters; self-reported inspection counts are separately documented)",
+    "record rec-1438c2de2205461a: usage_source unavailable (No attributable final runtime token/cache/tool/retry or observed execution counters; separate self-inspection counts retained without double-counting)",
+    "record rec-1438c2de2205461a: input_tokens unavailable (No attributable final runtime token/cache/tool/retry or observed execution counters; separate self-inspection counts retained without double-counting)",
+    "record rec-1438c2de2205461a: output_tokens unavailable (No attributable final runtime token/cache/tool/retry or observed execution counters; separate self-inspection counts retained without double-counting)",
+    "record rec-1438c2de2205461a: cache_read_tokens unavailable (No attributable final runtime token/cache/tool/retry or observed execution counters; separate self-inspection counts retained without double-counting)",
+    "record rec-1438c2de2205461a: tool_calls unavailable (No attributable final runtime token/cache/tool/retry or observed execution counters; separate self-inspection counts retained without double-counting)",
+    "record rec-1438c2de2205461a: retries unavailable (No attributable final runtime token/cache/tool/retry or observed execution counters; separate self-inspection counts retained without double-counting)",
+    "record rec-c1cab9d43b1846c1: usage_source unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c1cab9d43b1846c1: input_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c1cab9d43b1846c1: output_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c1cab9d43b1846c1: cache_read_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c1cab9d43b1846c1: tool_calls unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c1cab9d43b1846c1: retries unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c5d27e24de5747e2: usage_source unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c5d27e24de5747e2: input_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c5d27e24de5747e2: output_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c5d27e24de5747e2: cache_read_tokens unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c5d27e24de5747e2: tool_calls unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)",
+    "record rec-c5d27e24de5747e2: retries unavailable (Runtime exposes no attributable per-stage token/cache/tool/retry counters or exact parent model/effort)"
+  ]
+}

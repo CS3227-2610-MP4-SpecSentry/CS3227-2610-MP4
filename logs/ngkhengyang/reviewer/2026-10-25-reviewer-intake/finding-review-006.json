@@ -1,0 +1,11 @@
+{
+  "requirement": "INT-09;REQ-SHR-007",
+  "severity": "MEDIUM",
+  "blocks": true,
+  "owner": "frontend",
+  "reviewer": "implementation-reviewer",
+  "description": "ActivityUI omitssupplied revisionId/assignmentId/outcome,showsonlyactor/time/action/summary. Identicaleventsacrossrevisionslackrequired affectedrevision/entityandoutcome. Renderauthorizedcontextandsuccessoutcome;testdistinctrevisionevents.",
+  "evidence": [
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx"
+  ]
+}

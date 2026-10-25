@@ -1,0 +1,240 @@
+{
+  "records": 30,
+  "finished": 30,
+  "expected": 30,
+  "measured_totals_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "measured_record_coverage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "summed_agent_elapsed_seconds": 9767.967106,
+  "observed_record_span_seconds": 20735.293909,
+  "note": "Span covers recorded boundaries only, not unrecorded full-run time. Missing usage is not zero. Cache reads are included in input; reasoning is not added again.",
+  "timing_breakdown": {
+    "pure_model_computation_seconds": null,
+    "pure_active_implementation_seconds": null,
+    "missing_reason": "No inference-active/CPU/GPU or edit-active/wait accounting was captured. Exact idle inside interrupted attempts is unavailable. Start/end intervals cannot truthfully separate these retrospective components.",
+    "stage_groups": {
+      "implementer_implementation_and_fixes": {
+        "record_ids": [
+          "rec-d2af400839994272",
+          "rec-4b169c82401d425f",
+          "rec-10b6814d93cf4786",
+          "rec-1efe6d306f42492e",
+          "rec-8b3eb14a3a2b4b0f",
+          "rec-a732c9256f1a4df7",
+          "rec-359f21f1f3394309"
+        ],
+        "count": 7,
+        "summed_elapsed_seconds": 2927.59656,
+        "parallel_merged_elapsed_seconds": 1968.384633,
+        "scope": "Coordinator-observed start/end intervals include tools, scheduling, waits and reporting. Pure active implementation or computation is not isolated."
+      },
+      "main_integration": {
+        "record_ids": [
+          "rec-c434559fd8fc44ea",
+          "rec-9915f414e21b4490",
+          "rec-baf39d5d93274005"
+        ],
+        "count": 3,
+        "summed_elapsed_seconds": 1427.324197,
+        "parallel_merged_elapsed_seconds": 1427.324197,
+        "scope": "Coordinator-observed start/end intervals include tools, scheduling, waits and reporting. Pure active implementation or computation is not isolated."
+      },
+      "independent_reviews": {
+        "record_ids": [
+          "rec-1f49d87dc9734359",
+          "rec-1438c2de2205461a",
+          "rec-695a63ba6ff34fe5",
+          "rec-0f4576c362ab4931",
+          "rec-560293657d094483",
+          "rec-b2fcc472ab894729",
+          "rec-35d0b9eed41d4631",
+          "rec-824f066dbd11405c"
+        ],
+        "count": 8,
+        "summed_elapsed_seconds": 2092.357391,
+        "parallel_merged_elapsed_seconds": 1382.094474,
+        "scope": "Coordinator-observed start/end intervals include tools, scheduling, waits and reporting. Pure active implementation or computation is not isolated."
+      },
+      "main_preparation_coordination_close": {
+        "record_ids": [
+          "rec-550d0ab394a54262",
+          "rec-76f85bb28e5b4632",
+          "rec-c1cab9d43b1846c1",
+          "rec-c5d27e24de5747e2",
+          "rec-96a2b47852dd43fb",
+          "rec-ca5d388213524103",
+          "rec-12ffd44a87aa440c",
+          "rec-659b8a39b18a4839",
+          "rec-884b4ca15a9446f8",
+          "rec-c9f5485a3452436c",
+          "rec-8ef2177a23b74e45",
+          "rec-735e8f1d762544cd"
+        ],
+        "count": 12,
+        "summed_elapsed_seconds": 3320.688958,
+        "parallel_merged_elapsed_seconds": 3320.257896,
+        "scope": "Coordinator-observed start/end intervals include tools, scheduling, waits and reporting. Pure active implementation or computation is not isolated."
+      }
+    },
+    "application_command_intervals": [
+      {
+        "id": "typecheck-1",
+        "start": "2026-10-25T07:39:22.849686+00:00",
+        "end": "2026-10-25T07:39:38.634887+00:00",
+        "elapsed_seconds": 15.785201,
+        "passed": true,
+        "superseded_by": "typecheck-2"
+      },
+      {
+        "id": "lint-1",
+        "start": "2026-10-25T07:39:46.321524+00:00",
+        "end": "2026-10-25T07:40:02.279739+00:00",
+        "elapsed_seconds": 15.958215,
+        "passed": true,
+        "superseded_by": "lint-2"
+      },
+      {
+        "id": "unit-client-1",
+        "start": "2026-10-25T07:40:10.815115+00:00",
+        "end": "2026-10-25T07:40:32.212019+00:00",
+        "elapsed_seconds": 21.396904,
+        "passed": false,
+        "superseded_by": "unit-client-2"
+      },
+      {
+        "id": "postgresql-1",
+        "start": "2026-10-25T07:44:16.364147+00:00",
+        "end": "2026-10-25T07:44:43.384123+00:00",
+        "elapsed_seconds": 27.019976,
+        "passed": true,
+        "superseded_by": "postgresql-final"
+      },
+      {
+        "id": "typecheck-2",
+        "start": "2026-10-25T07:48:09.938745+00:00",
+        "end": "2026-10-25T07:48:26.478251+00:00",
+        "elapsed_seconds": 16.539506,
+        "passed": true,
+        "superseded_by": "typecheck-final"
+      },
+      {
+        "id": "lint-2",
+        "start": "2026-10-25T07:48:27.938621+00:00",
+        "end": "2026-10-25T07:48:32.104752+00:00",
+        "elapsed_seconds": 4.166131,
+        "passed": true,
+        "superseded_by": "lint-final"
+      },
+      {
+        "id": "unit-client-2",
+        "start": "2026-10-25T07:48:33.796728+00:00",
+        "end": "2026-10-25T07:48:51.407939+00:00",
+        "elapsed_seconds": 17.611211,
+        "passed": true,
+        "superseded_by": "tests-final"
+      },
+      {
+        "id": "build-1",
+        "start": "2026-10-25T07:48:52.917985+00:00",
+        "end": "2026-10-25T07:49:08.012979+00:00",
+        "elapsed_seconds": 15.094994,
+        "passed": true,
+        "superseded_by": "build-final"
+      },
+      {
+        "id": "browser-1",
+        "start": "2026-10-25T07:49:09.553231+00:00",
+        "end": "2026-10-25T07:49:22.139290+00:00",
+        "elapsed_seconds": 12.586059,
+        "passed": true,
+        "superseded_by": "browser-final"
+      },
+      {
+        "id": "schema-final",
+        "start": "2026-10-25T08:08:50.254520+00:00",
+        "end": "2026-10-25T08:09:20.073976+00:00",
+        "elapsed_seconds": 29.819456,
+        "passed": true,
+        "superseded_by": null
+      },
+      {
+        "id": "typecheck-final",
+        "start": "2026-10-25T08:09:21.794006+00:00",
+        "end": "2026-10-25T08:09:37.962629+00:00",
+        "elapsed_seconds": 16.168623,
+        "passed": true,
+        "superseded_by": null
+      },
+      {
+        "id": "lint-final",
+        "start": "2026-10-25T08:09:39.505957+00:00",
+        "end": "2026-10-25T08:09:44.521239+00:00",
+        "elapsed_seconds": 5.015282,
+        "passed": true,
+        "superseded_by": null
+      },
+      {
+        "id": "tests-final",
+        "start": "2026-10-25T08:09:46.411961+00:00",
+        "end": "2026-10-25T08:10:03.516838+00:00",
+        "elapsed_seconds": 17.104877,
+        "passed": true,
+        "superseded_by": null
+      },
+      {
+        "id": "postgresql-final",
+        "start": "2026-10-25T08:10:05.047857+00:00",
+        "end": "2026-10-25T08:10:30.419925+00:00",
+        "elapsed_seconds": 25.372068,
+        "passed": true,
+        "superseded_by": null
+      },
+      {
+        "id": "build-final",
+        "start": "2026-10-25T08:10:32.415060+00:00",
+        "end": "2026-10-25T08:10:45.947284+00:00",
+        "elapsed_seconds": 13.532224,
+        "passed": true,
+        "superseded_by": null
+      },
+      {
+        "id": "browser-final",
+        "start": "2026-10-25T08:10:47.693607+00:00",
+        "end": "2026-10-25T08:10:59.844139+00:00",
+        "elapsed_seconds": 12.150532,
+        "passed": true,
+        "superseded_by": null
+      },
+      {
+        "id": "submission-final",
+        "start": "2026-10-25T08:11:01.808533+00:00",
+        "end": "2026-10-25T08:11:02.278339+00:00",
+        "elapsed_seconds": 0.469806,
+        "passed": true,
+        "superseded_by": null
+      }
+    ],
+    "application_command_elapsed_seconds_all_attempts": 265.791065,
+    "application_command_elapsed_seconds_final_checks": 119.632868,
+    "command_scope": "Direct process wall time, not CPU/model compute. Includes earlier failures and superseded runs; subset of stage intervals, not an additional time budget. Does not include every ad hoc worker command."
+  },
+  "main_settings_confirmation": {
+    "source": "Explicit human confirmation in this conversation: main agent is invoked in 6.1 sol on high effort",
+    "recorded_at": "2026-10-25T12:33:40.272125+00:00",
+    "selected_model": "gpt-6.1-sol",
+    "selected_effort": "high",
+    "observed_metadata": "unavailable; no independent runtime attestation",
+    "applies_to": "All main-agent records in this conversation/run"
+  }
+}

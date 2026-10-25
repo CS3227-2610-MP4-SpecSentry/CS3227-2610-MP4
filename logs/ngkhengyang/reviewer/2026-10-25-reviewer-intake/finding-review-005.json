@@ -1,0 +1,11 @@
+{
+  "requirement": "INT-10;REQ-SHR-005;sharedfailurecontract",
+  "severity": "MEDIUM",
+  "blocks": true,
+  "owner": "frontend",
+  "reviewer": "implementation-reviewer",
+  "description": "Independent React/jsdom reproduction: held next-history/activity page thenwindowfocus invokes open, incrementsgeneration butneverresetspending; oldfinally cannotclear. Allqueue/drop/refreshcontrolsstuckdisabled afterresponses. Introducependingownership/reset and deterministichistory/activityfocusregressions.",
+  "evidence": [
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx"
+  ]
+}

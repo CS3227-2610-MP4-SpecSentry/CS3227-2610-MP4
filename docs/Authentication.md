@@ -34,9 +34,11 @@ public registration, role picker, password-reset flow, or administrator web role
 
 With `ACCOUNT_USERNAME` set, `npm run account -- disable` disables the account
 and increments its version. Existing sessions lose access on their next protected
-request. Future assignment functionality must additionally release unfinished
-assignments transactionally when integrating account disablement; no assignment
-tables exist in this base implementation. Administrative role/password changes
+request. Reviewer disablement also releases unfinished assignments transactionally:
+`IN_REVIEW` returns to `SUBMITTED`, while `CHANGES_REQUESTED` remains awaiting
+revision. Assignment history is retained, and completed frozen states are left
+unchanged. Account/version changes, releases and their required events commit
+together; an activity failure rolls back the whole operation. Administrative role/password changes
 must increment the account version to invalidate old sessions.
 
 Run `npm run account -- prune` periodically from the administrative checkout to

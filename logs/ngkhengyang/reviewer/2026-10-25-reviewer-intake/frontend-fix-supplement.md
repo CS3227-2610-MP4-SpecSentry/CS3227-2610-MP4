@@ -1,0 +1,3 @@
+# F-006 supplement to active handoff21
+
+Original frontendowner also owns F-006 from independentreviewer source inspection: UI timeline currently omits server-provided revisionId/assignmentId/outcome. Render affected authorizedrevision/entity and successoutcome with understandablelabels, preserving actor/time/action/summary/reason. Testdistinctrevisionevents and optionalassignment. Samewrite set/model/resourceinterval frontend-fix-2; no extra invocation ornew ownership. EffectiveINT09/SHR007 requires visibility; no backendwirechange needed. This supplement was delivered with the active frontendfix assignment before trigger.

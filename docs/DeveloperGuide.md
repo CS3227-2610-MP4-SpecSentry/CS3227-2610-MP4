@@ -4,8 +4,11 @@
 
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
-PostgreSQL sessions, CSRF, role guards and restricted security events. Domain
-workflows and AI integration remain pending. See [Authentication](Authentication.md).
+PostgreSQL sessions, CSRF, role guards and restricted security events. The first
+Reviewer increment adds pool/assigned queues, claim/drop, immutable submitted
+detail/history, business activity and transactional assignment release on account
+disablement. Contributor writes, findings, coverage, decisions, notifications,
+releases and AI integration remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
 See the root [directory map](../README.md#directory-map) for frontend/backend
@@ -64,6 +67,37 @@ npm run test:integration
 
 Auth integration tests create and remove synthetic fixtures in the migrated test
 database. Never substitute production URLs.
+
+Reviewer integration tests require the intake migration as well as identity.
+Submitted snapshots, activity and historical assignments reject row updates or
+deletions. Test cleanup can truncate fixture tables only in an explicitly
+disposable test database; it must not weaken those production constraints.
+
+## Reviewer intake fixtures
+
+After configuring a development database and applying migrations, run
+`npm run db:seed` to provision the existing synthetic demo accounts, followed by
+`npm run db:seed:reviewer` to add synthetic submitted revisions for the Reviewer
+walkthrough. The latter requires the demo Contributor and Reviewer accounts to
+exist. Both commands refuse production configuration. Reruns preserve existing
+accounts and existing proposal snapshots; they do not reset edited credentials,
+disablement or review state. Never use these fixture commands against production.
+
+The intake API provides `GET /api/review-pool`, `GET /api/reviews/assignments`,
+`POST /api/proposals/:id/claim`, `POST /api/proposals/:id/drop`, and assigned-only
+detail, `/revisions` and `/activity` reads. Wire schemas live in
+`src/shared/src/contracts/reviewer.ts`. Every protected read reauthorizes its
+scope; cursor contents never grant access. Review commands carry root versions,
+and drop additionally carries revision/assignment identities and assignment version.
+Claim/drop use version checks rather than idempotency keys. Read current state
+before retrying after an uncertain response.
+
+The database migration adds partial uniqueness and deferred pointer-consistency
+triggers beyond Prisma's schema syntax. Do not replace it with `db push` or omit
+its SQL constraints. Account disablement, assignment release, lifecycle changes
+and required activity commit in the same transaction. No code/diff is executed.
+
+## Browser verification
 
 For the built-client browser/accessibility smoke test:
 
