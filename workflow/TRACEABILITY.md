@@ -27,6 +27,26 @@ see [Submission readiness](SUBMISSION.md). Presence does not satisfy role, AI,
 deployment or experiment acceptance. Validation and limitations for this change are
 recorded in [the session log](../logs/ngkhengyang/2026-10-25-architecture-initialization.md).
 
+## Base authentication evidence — 25 October 2026
+
+The earlier infrastructure tables describe historical scaffold evidence. Current
+base auth is implemented in `src/server/src/identity`, the account/session migration,
+shared identity contracts, and the React login/role landing pages. See
+[Authentication](../docs/Authentication.md) and the
+[auth session log](../logs/ngkhengyang/2026-10-25-authentication-rbac.md).
+
+| Requirement / boundary | Evidence | Remaining scope |
+| --- | --- | --- |
+| REQ-SHR-001 / AC-SHR-001: authentication | HTTP tests cover protection, session rotation, logout replay, disablement/version changes and absolute expiry; PostgreSQL tests cover hashing, persistence and idle expiry; administrative create/disable/prune smoke passed | Automatic release of disabled reviewers' unfinished assignments requires future assignment implementation |
+| REQ-SHR-002 / AC-SHR-002: base roles | Direct HTTP tests exercise all three roles against role-guarded handlers; strict login schema rejects client role fields; Chromium tests restore each role workspace | Ownership, assignment, lifecycle and expected-version checks belong in future domain services; full criterion remains partial |
+| NFR-SEC-001 / AC-NFR-SEC-001 | PostgreSQL rolling-window account/IP and concurrent-throttle tests; HTTP CSRF/429 tests; Chromium Secure/HttpOnly/SameSite cookie checks behind simulated TLS proxy | Actual deployed HTTPS/proxy topology unverified |
+| REQ-SHR-004: restricted security evidence | Auth paths write safe security events; account management uses transactional account/event changes; 90-day operational pruning command | Business audit/timeline and automated pruning scheduling remain pending |
+
+Local checks: schema validation, typecheck, lint, production build, 23 backend
+HTTP tests, eight client tests, eight PostgreSQL integration tests, four Chromium
+tests, and production dependency audit (zero vulnerabilities) passed. The login
+page axe scan reported zero violations; full product accessibility is unverified.
+
 ## Product acceptance plan
 
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
@@ -64,8 +84,8 @@ recorded in [the session log](../logs/ngkhengyang/2026-10-25-architecture-initia
 | [REQ-REV-014](specs/ROLE-REVIEWER.md#requirements) | AI size limits | [AC-REV-014](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-015](specs/ROLE-REVIEWER.md#requirements) | Human history and AI privacy | [AC-REV-015](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
 | [REQ-REV-016](specs/ROLE-REVIEWER.md#requirements) | Revoke approval | [AC-REV-016](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
-| [REQ-SHR-001](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Authentication | [AC-SHR-001](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
-| [REQ-SHR-002](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Role enforcement | [AC-SHR-002](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
+| [REQ-SHR-001](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Authentication | [AC-SHR-001](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Base authentication evidence above; assignment integration pending |
+| [REQ-SHR-002](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Role enforcement | [AC-SHR-002](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Base role guard verified; domain authorization pending |
 | [REQ-SHR-003](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Concurrency | [AC-SHR-003](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
 | [REQ-SHR-004](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Audit | [AC-SHR-004](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
 | [REQ-SHR-005](specs/SHARED-REQUIREMENTS.md#shared-behavior) | Accessibility | [AC-SHR-005](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |

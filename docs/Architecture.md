@@ -1,13 +1,14 @@
 # Architecture
 
-Status: module registration scaffold, 25 October 2026. Product behavior remains
+Status: base authentication plus module registration scaffold, 25 October 2026. Domain behavior remains
 planned under the [technical specification](../workflow/specs/TECHNICAL-SPEC.md).
 
 ## Deployment and responsibilities
 
 One React/Vite browser application calls one NestJS backend under `/api`. In
 production a single Docker image serves both from the same origin. PostgreSQL
-holds business records and, once implemented, sessions. Development and production
+holds accounts, sessions, login throttles and restricted security events; business
+records are added with their owning features. Development and production
 use separate services, databases and secrets; see [Deployment](Deployment.md).
 
 ```mermaid
@@ -35,8 +36,8 @@ flowchart TB
     AI --> SoC[SoC LLM]
 ```
 
-The diagram is the target design. Currently only health/readiness, database
-connectivity and module registration are implemented.
+The diagram is the target design. Currently health/readiness, base authentication, database
+connectivity and module registration are implemented. See [Authentication](Authentication.md).
 
 | Module / directory under server source | Single responsibility |
 | --- | --- |
@@ -50,10 +51,11 @@ connectivity and module registration are implemented.
 | database | Supply Prisma connectivity and transaction infrastructure |
 | health | Report liveness and database readiness |
 
-`AppModule` composes the modules. Business modules are intentionally empty NestJS
+`AppModule` composes the modules. Business modules other than Identity are intentionally empty NestJS
 registrations: no placeholder routes, provider calls, domain schema or permissions
 are implied. `DatabaseModule.register(config)` owns connectivity configuration and
-exports `DatabaseService` for the existing health controller without global state.
+exports `DatabaseService` for the existing health controller without global state. `IdentityModule.register(config)` imports the same configured
+database module and registers the default-protected authentication/CSRF/role guard.
 
 ## Implementation seams
 
@@ -88,7 +90,7 @@ interfaces and domain models remain to be implemented against
 
 As features are implemented, use `client/src/features/{contributor,reviewer,maintainer}`
 for role UI areas and `client/src/shared` for reusable presentation and HTTP handling.
-No protected role screens are registered until authentication/authorization exists.
+The base client has guarded role landing pages; role workflow features remain pending.
 `shared/src/contracts` contains browser-safe Zod wire schemas, re-exported through
 `shared/src/index.ts`. Database types, authorization policies, prompts and secrets
 remain server-only.

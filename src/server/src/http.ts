@@ -4,6 +4,7 @@ import { Catch, HttpException, type ArgumentsHost, type ExceptionFilter } from '
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import express, { type Request, type Response, type NextFunction } from 'express';
 import helmet from 'helmet';
+import { SERVER_CONFIG, type ServerConfig } from './config';
 
 @Catch()
 class SafeExceptionFilter implements ExceptionFilter {
@@ -20,6 +21,8 @@ class SafeExceptionFilter implements ExceptionFilter {
 }
 
 export function configureHttp(app: NestExpressApplication, clientDirectory?: string): void {
+  const config = app.get<ServerConfig>(SERVER_CONFIG);
+  app.set('trust proxy', config.TRUST_PROXY_HOPS);
   app.disable('x-powered-by');
   app.setGlobalPrefix('api');
   app.use(helmet());

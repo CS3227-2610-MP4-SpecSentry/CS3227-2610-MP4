@@ -18,7 +18,7 @@ describe('scaffold HTTP boundary', () => {
   beforeAll(async () => {
     writeFileSync(join(clientDirectory, 'index.html'), '<h1>Scaffold</h1>');
     const module = await Test.createTestingModule({
-      imports: [AppModule.register(readConfig({ NODE_ENV: 'test', DATABASE_URL: 'postgresql://test:test@localhost/test' }))],
+      imports: [AppModule.register(readConfig({ SESSION_SECRET: 'synthetic-test-session-secret-32-chars', NODE_ENV: 'test', DATABASE_URL: 'postgresql://test:test@localhost/test' }))],
     }).overrideProvider(DatabaseService).useValue({ checkConnection }).compile();
     app = module.createNestApplication<NestExpressApplication>({ logger: false });
     configureHttp(app, clientDirectory);
@@ -54,6 +54,6 @@ describe('scaffold HTTP boundary', () => {
     await request(app.getHttpServer()).post('/').expect(404);
   });
   it('rejects invalid configuration without echoing sensitive input', () => {
-    expect(() => readConfig({ DATABASE_URL: 'secret-value', PORT: '-1' })).toThrow('Invalid server configuration: PORT, DATABASE_URL');
+    expect(() => readConfig({ SESSION_SECRET: 'synthetic-test-session-secret-32-chars', DATABASE_URL: 'secret-value', PORT: '-1' })).toThrow('Invalid server configuration: PORT, DATABASE_URL');
   });
 });
