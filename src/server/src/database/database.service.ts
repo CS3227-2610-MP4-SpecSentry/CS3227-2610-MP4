@@ -5,7 +5,7 @@ import { SERVER_CONFIG, type ServerConfig } from '../config';
 
 @Injectable()
 export class DatabaseService implements OnModuleDestroy {
-  private readonly client: PrismaClient;
+  readonly client: PrismaClient;
 
   constructor(@Inject(SERVER_CONFIG) config: ServerConfig) {
     const adapter = new PrismaPg({

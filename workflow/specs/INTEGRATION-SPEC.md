@@ -31,6 +31,10 @@ Operations below define logical inputs and outcomes derived from existing requir
 
 | Operation / approved route | Required input and scope | Observable outcome / failure |
 | --- | --- | --- |
+| GET /api/auth/csrf | Public login bootstrap | Pre-login session cookie and `{csrfToken}`; no protected content |
+| POST /api/auth/login | Session-bound CSRF header; strict `{username,password}` | Rotated session/CSRF and `{account,csrfToken,expiresAt}`; generic 401, validation 422 or throttled 429 with Retry-After |
+| GET /api/auth/session | Valid session and enabled/version-matching account | `{account:{id,username,role},csrfToken,expiresAt}`; expiresAt is epoch milliseconds capped by idle/absolute expiry |
+| POST /api/auth/logout | Valid session and CSRF header | Destroy session, clear cookie, 204 |
 | GET /api/review-pool | Reviewer; scoped filters/page | Allowed metadata only; no submitted detail or private AI fields |
 | GET /api/proposals/:id | Owner/current assignee or scoped Maintainer; submitted revision selector | Authorized representation; working drafts owner-only; linked content reauthorizes independently |
 | POST /api/proposals | Contributor; draft fields | New owned DRAFT; validation/role failure creates none |
@@ -129,3 +133,13 @@ Candidate-content version is distinct from general metadata version. Membership/
 | DraftTombstone | proposalId, actorId, action, timestamp | No working content; never used to delete submitted history |
 
 Business audit history and operational/security audit retention are separated logically so operational pruning cannot erase required submission history. New physical schemas/migrations must implement these contracts without importing previous-project schema files.
+
+### Authentication input defaults
+
+Usernames contain 1–80 ASCII letters, digits, dots, underscores or hyphens;
+trim and normalize to lowercase before lookup/provisioning. Login passwords are
+1–256 characters without trimming or rewriting. Administrative provisioning
+requires 12–256 characters. Role is server-owned and cannot be supplied at login.
+These controls implement REQ-SHR-001/002 and NFR-SEC-001; the login CSRF bootstrap
+is part of the public login exception. See [Authentication](../../docs/Authentication.md)
+for implementation boundaries and administrative operation.

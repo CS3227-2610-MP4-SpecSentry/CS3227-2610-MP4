@@ -1,8 +1,8 @@
 # SpecSentry
 
 Secure specification and review workspace for CS3227 MP4. This repository currently
-contains a runnable infrastructure scaffold; authentication, role workflows, domain
-models and AI integration are subsequent work. No deployed application is claimed.
+contains a runnable scaffold with base authentication and single-role accounts.
+Domain workflows and AI integration are subsequent work. No deployed application is claimed.
 
 ## Directory map
 
@@ -15,13 +15,13 @@ src/
     src/http.ts           Security headers, safe errors and production frontend serving
     src/health/           Liveness and database-readiness endpoints
     src/database/         Prisma connection service
-    prisma/schema.prisma  Database schema source (connectivity only for now)
+    prisma/schema.prisma  Account/session schema and reviewed migrations
     prisma.config.ts      Prisma CLI / direct migration connection configuration
     test/                 Backend HTTP and PostgreSQL integration tests
   client/                 FRONTEND — React browser application
     index.html            HTML entry point
     src/main.tsx          React entry point and browser router
-    src/App.tsx           Initial page and API health display
+    src/App.tsx           Login, session handling and role landing pages
     src/styles.css        Shared frontend styles
     vite.config.ts        Frontend build, test and local /api proxy configuration
   shared/                 Browser-safe contracts shared by frontend and backend
@@ -48,7 +48,7 @@ Never put secrets in `VITE_*` variables or export server code through `src/share
 ## Architecture and submission artifacts
 
 The [architecture guide](docs/Architecture.md) describes module responsibilities and
-transaction seams. Backend domain folders are empty NestJS registrations; frontend
+transaction seams. Identity implements base auth; other backend domain folders are empty registrations. Frontend
 role folders will be added with their features. Shared wire schemas live under
 `src/shared/src/contracts/`. No product workflow is implemented by these folders.
 
@@ -73,10 +73,13 @@ npm ci --ignore-scripts
 npm run db:generate
 ```
 
-Copy `.env.example` to `.env` (`Copy-Item .env.example .env` in PowerShell), then:
+Copy `.env.example` to `.env` (`Copy-Item .env.example .env` in PowerShell), set a
+random `SESSION_SECRET` of at least 32 characters, then:
 
 ```sh
 docker compose up -d db
+npm run db:migrate:deploy
+# Provision accounts using docs/Authentication.md before signing in.
 npm run dev
 ```
 
@@ -88,9 +91,12 @@ update the Vite proxy. Alternatively, run the production-style application with:
 docker compose --profile app up --build -d --wait
 ```
 
-Then open http://localhost:3000. `/api/health` checks the process; `/api/ready`
-checks PostgreSQL. These are the only implemented public APIs. The setup page
-contains no product data, and no protected role screens are implemented yet.
+The production-style container requires HTTPS through a controlled TLS proxy for
+sign-in because production cookies are Secure. Use Vite development for local HTTP
+authentication. Health and the login shell remain available at http://localhost:3000. `/api/health` checks the process; `/api/ready`
+checks PostgreSQL connectivity. Login/CSRF bootstrap is public; session lookup and
+logout require authentication. See [Authentication](docs/Authentication.md) for
+account provisioning, API contracts, and role-guard integration.
 
 ## Checks
 

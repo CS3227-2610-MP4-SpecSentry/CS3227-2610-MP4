@@ -6,3 +6,11 @@ h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; }
 .notice { padding: 1rem; border-left: 4px solid #315f90; background: #e6edf5; }
 a { color: #164d86; }
 :focus-visible { outline: 3px solid #164d86; outline-offset: 4px; }
+
+form { display: grid; gap: .75rem; max-width: 24rem; }
+input, button { font: inherit; padding: .65rem .8rem; border: 1px solid #60738a; border-radius: .3rem; }
+input { min-width: 0; }
+button { cursor: pointer; background: #164d86; color: white; }
+button:disabled { cursor: wait; opacity: .7; }
+nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+[role="alert"] { color: #8f1d1d; }

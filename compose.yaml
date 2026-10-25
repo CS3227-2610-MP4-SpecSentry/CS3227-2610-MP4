@@ -20,6 +20,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET to a random value of at least 32 characters}
       DATABASE_URL: postgresql://specsentry:specsentry_local@db:5432/specsentry
     ports:
       - "127.0.0.1:3000:3000"

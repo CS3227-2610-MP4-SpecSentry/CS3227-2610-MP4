@@ -3,8 +3,9 @@
 ## Current state
 
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
-contracts and Prisma PostgreSQL connectivity. It has no domain models/migrations,
-accounts, sessions, CSRF tokens, role APIs, audit persistence or AI integration.
+contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
+PostgreSQL sessions, CSRF, role guards and restricted security events. Domain
+workflows and AI integration remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
 See the root [directory map](../README.md#directory-map) for frontend/backend
@@ -26,7 +27,9 @@ optional dependencies. NestJS 11.2.8 is pinned for the CommonJS/Jest scaffold;
 the root `multer` override selects patched 2.5.0 for Nest's transitive dependency.
 No upload API is exposed. Re-run generation after schema changes. Copy the root
 `.env.example` to `.env`, start `docker compose up -d db`, then `npm run dev`.
-The initial `SELECT 1` readiness query needs no database tables.
+Set a random `SESSION_SECRET` of at least 32 characters. Run
+`npm run db:migrate:deploy` and provision accounts as documented in
+[Authentication](Authentication.md) before signing in. Readiness checks connectivity only.
 
 Database schema source lives in `src/server/prisma/schema.prisma`; generated code
 under `src/server/src/generated/` is ignored. For a feature schema, create and
@@ -44,8 +47,8 @@ variables directly, runs as the nonroot `node` user and needs no `.env` file.
 ## Verification commands
 
 Root commands: `npm run db:validate`, `npm run typecheck`, `npm run lint`,
-`npm test`, and `npm run build`. Unit/HTTP tests use mocked database connectivity;
-client tests cover safe handling of malformed and failed health responses.
+`npm test`, and `npm run build`. Unit/HTTP tests use isolated mocks for session/role/CSRF behavior;
+client tests cover login, logout, role routing and session expiry.
 HTTP tests verify generic readiness failure, security headers and API/asset 404
 behavior in the presence of frontend fallback.
 
@@ -53,12 +56,14 @@ For real PostgreSQL integration, use a disposable test database and set
 `TEST_DATABASE_URL` explicitly. In PowerShell:
 
 ```powershell
-$env:TEST_DATABASE_URL = 'postgresql://specsentry:specsentry_local@localhost:5432/specsentry'
+$env:TEST_DATABASE_URL = 'postgresql://test_user:test_password@localhost:5433/specsentry_test'
+$env:DIRECT_DATABASE_URL = $env:TEST_DATABASE_URL
+npm run db:migrate:deploy
 npm run test:integration
 ```
 
-This scaffold test is read-only and creates no schema; later feature tests must
-use isolated databases and reviewed migrations. Never substitute production URLs.
+Auth integration tests create and remove synthetic fixtures in the migrated test
+database. Never substitute production URLs.
 
 For the built-client browser/accessibility smoke test:
 
@@ -69,7 +74,8 @@ npm run test:e2e
 ```
 
 Port 3000 must be free; Playwright starts its own production-mode server. This
-smoke checks the setup page only, not full product WCAG conformance or role flows.
+suite uses the disposable `TEST_DATABASE_URL` to test all three account roles and
+scans the login page. It does not establish full product WCAG conformance.
 
 CI runs the checks with PostgreSQL, Chromium, dependency audit, secret scanning,
 Docker Compose and an HTTP smoke test. Local checks are not proof that remote CI
@@ -78,11 +84,12 @@ release work, documented in [Deployment](Deployment.md).
 
 ## Security boundaries
 
-The setup page is public and contains no protected data. Only `/api/health` and
-`/api/ready` are implemented. No product route may be added without the specified
-session, CSRF and service-level authorization controls. Unknown API routes and
-missing assets stay JSON 404 responses rather than receiving frontend HTML.
-No CORS override or proxy trust is enabled before authentication design is implemented.
+The frontend shell and login bootstrap are public; protected API content requires
+an active session. Global authentication, CSRF and optional role guards run before
+protected handlers. Domain services must still enforce object scope and lifecycle
+constraints. Unknown API routes and missing assets stay JSON 404 responses.
+Proxy trust defaults to zero and must match the controlled deployment topology.
+See [Authentication](Authentication.md) for the session and administration contract.
 
 Health responses expose only status. Database query and connection timeouts are
 bounded; connection failures produce generic 503 errors with generated correlation

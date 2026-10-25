@@ -8,5 +8,45 @@ datasource db {
   provider = "postgresql"
 }
 
-// Connectivity-only scaffold. Domain models and reviewed migrations are added
-// with their owning features; the logical model lives in INTEGRATION-SPEC.md.
+enum AccountRole {
+  CONTRIBUTOR
+  REVIEWER
+  RELEASE_MAINTAINER
+}
+
+model UserAccount {
+  id           String      @id @default(uuid())
+  username     String      @unique
+  passwordHash String
+  role         AccountRole
+  enabled      Boolean     @default(true)
+  version      Int         @default(1)
+}
+
+model AuthSession {
+  id        String   @id
+  data      String
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
+
+model LoginThrottle {
+  key          String   @id
+  failuresAt   DateTime[]
+  updatedAt    DateTime @updatedAt
+  blockedUntil DateTime?
+}
+
+// Restricted operational evidence, never exposed as submission activity.
+model SecurityEvent {
+  id            String   @id @default(uuid())
+  actorId       String?
+  action        String
+  target        String
+  outcome       String
+  correlationId String?
+  timestamp     DateTime @default(now())
+
+  @@index([timestamp])
+}

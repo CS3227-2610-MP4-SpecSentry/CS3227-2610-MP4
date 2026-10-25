@@ -21,7 +21,7 @@ endpoint is `/api/ready`. Do not add a Render source-build command.
    Keep the provider's TLS parameters; never disable certificate verification.
 3. Store each non-pooler connection URL as `DIRECT_DATABASE_URL` in the corresponding
    protected GitHub Environment for migration jobs. It is not needed by the runtime.
-4. Once domain migrations exist, run `npm ci --ignore-scripts`,
+4. Apply the authentication migration before first sign-in. Run `npm ci --ignore-scripts`,
    `npm run db:generate` and `npm run db:migrate:deploy` in the release job using
    the matching environment's direct URL. Review SQL before committing it.
 5. Build/test/scan/sign/publish one image in CI, deploy its digest to development,
@@ -32,8 +32,11 @@ endpoint is `/api/ready`. Do not add a Render source-build command.
 Steps 4-6 describe the intended release pipeline; the initial CI workflow validates
 the scaffold and Docker image but does not publish, sign or deploy it. Real cloud
 IDs, credentials, environment approvals and release workflows remain unconfigured.
-Do not expose this scaffold as the completed product: authentication and role
-controls are still pending. No AI keys are needed or used at this stage.
+Set an independent random `SESSION_SECRET` of at least 32 characters per service
+and configure `TRUST_PROXY_HOPS` to the verified TLS proxy topology (the template
+assumes one trusted hop). Provision accounts from a trusted checkout using
+[Authentication](Authentication.md). Base authentication is implemented; domain
+workflows remain pending. No AI keys are needed or used at this stage.
 
 ## Free-tier considerations
 

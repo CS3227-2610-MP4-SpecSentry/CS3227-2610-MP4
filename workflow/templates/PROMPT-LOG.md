@@ -16,6 +16,10 @@ Use `logs/<name>/<log_name.md>` for every prompt explicitly requesting code or s
 
 ## Resource record
 
+- Structured report / record references (or Reviewer-run references; avoid double-counting):
+- Timing coverage: before-first-edit / delayed bootstrap / manual fallback, with explanation:
+- Record `start` before editing and `finish` after validation; run `report` before the final response. Missing tokens do not prevent measured time.
+
 | Stage / agent / invocation | Selected model / effort; observed if exposed | Start / end with timezone | Elapsed | Input / output tokens | Cache usage | Tool calls / retries | Outcome / telemetry source or unavailable reason |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | | | | | | | | |

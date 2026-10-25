@@ -6,7 +6,7 @@ config({ path: resolve(__dirname, '../../.env'), quiet: true });
 
 export default defineConfig({
   schema: 'prisma/schema.prisma',
-  migrations: { path: 'prisma/migrations' },
+  migrations: { path: 'prisma/migrations', seed: 'node -r ts-node/register src/identity/seed-demo.ts' },
   // Generate/validate remain usable without live credentials. Database commands
   // fail closed when no explicit direct URL is supplied.
   datasource: { url: process.env.DIRECT_DATABASE_URL ?? '' },

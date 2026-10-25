@@ -26,7 +26,9 @@
     "db:generate": "npm run db:generate -w @specsentry/server",
     "db:validate": "npm run db:validate -w @specsentry/server",
     "db:migrate:dev": "npm run db:migrate:dev -w @specsentry/server",
-    "db:migrate:deploy": "npm run db:migrate:deploy -w @specsentry/server"
+    "db:migrate:deploy": "npm run db:migrate:deploy -w @specsentry/server",
+    "account": "npm run account -w @specsentry/server --",
+    "db:seed": "npm run build -w @specsentry/shared && npm run db:seed -w @specsentry/server"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

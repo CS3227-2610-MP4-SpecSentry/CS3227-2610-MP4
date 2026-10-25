@@ -5,3 +5,4 @@ export {
   type HealthResponse,
   type ReadinessResponse,
 } from './contracts/health';
+export * from './contracts/identity';
