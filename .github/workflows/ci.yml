@@ -1,0 +1,50 @@
+name: CI
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb
+        env:
+          POSTGRES_USER: specsentry
+          POSTGRES_PASSWORD: ci_synthetic_password
+          POSTGRES_DB: specsentry_test
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U specsentry -d specsentry_test"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql://specsentry:ci_synthetic_password@127.0.0.1:5433/specsentry_test
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run db:validate && npm run db:generate
+      - run: npm run typecheck && npm run lint && npm test
+      - run: npm run test:integration
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm audit --omit=dev --audit-level=high
+      - run: docker compose config --quiet
+      - run: docker compose --profile app up --build -d --wait
+      - run: node workflow/tooling/smoke.mjs
+      - if: always()
+        run: docker compose --profile app down --volumes
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Scan Git history for secrets
+        run: docker run --rm -v "$PWD:/repo:ro" ghcr.io/gitleaks/gitleaks:v8.30.1 git /repo --redact --no-banner
