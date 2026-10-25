@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SpecSentry: a specification and review workspace for small software teams.">
+    <title>SpecSentry — Specification and review workspace</title>
+    <style>
+      :root { color-scheme: light; font-family: system-ui, sans-serif; color: #17283b; background: #f5f7fa; }
+      body { margin: 0; line-height: 1.65; }
+      main { max-width: 64rem; margin: auto; padding: 3rem 1.5rem; }
+      h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 1rem; }
+      h2 { margin-top: 2.5rem; }
+      a { color: #164d9a; text-underline-offset: .2em; }
+      a:focus-visible { outline: 3px solid #164d9a; outline-offset: 4px; }
+      .status { border-left: .3rem solid #895100; background: #fff3d9; padding: 1rem; }
+      .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+      article { background: white; padding: 1.25rem; border: 1px solid #d4dce5; border-radius: .5rem; }
+      article h3 { margin-top: 0; }
+      footer { margin-top: 3rem; border-top: 1px solid #d4dce5; padding-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p>CS3227 · Team SpecSentry</p>
+        <h1>SpecSentry</h1>
+        <p>Connect change specifications, human code review and release evidence in one workspace.</p>
+      </header>
+      <p class="status"><strong>Development status — 25 October 2026:</strong>
+        infrastructure and architecture scaffold. Role workflows and AI features are planned.
+        No live application URL has been verified.</p>
+      <section aria-labelledby="roles-heading">
+        <h2 id="roles-heading">Planned workflows</h2>
+        <div class="roles">
+          <article><h3>Contributor</h3><p>Prepare specifications, criteria and text patches.
+            A Spec Draft Assistant will suggest ways to clarify requirements.</p></article>
+          <article><h3>Reviewer</h3><p>Assess submitted revisions, record findings and decide coverage.
+            A Patch Risk Assistant will suggest gaps, risks and tests.</p></article>
+          <article><h3>Release Maintainer</h3><p>Assemble approved changes and verify release gates.
+            A Release Gate Assistant will summarize readiness considerations.</p></article>
+        </div>
+        <p>AI is advisory. Human decisions and deterministic server checks control changes,
+          approvals and publication. The planned application does not execute patches or deploy submitted code.</p>
+      </section>
+      <nav aria-label="Project documentation">
+        <h2>Documentation and source</h2>
+        <ul>
+          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4">Source repository and setup</a></li>
+          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/UserGuide.md">User Guide</a></li>
+          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/DeveloperGuide.md">Developer Guide</a></li>
+          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/Architecture.md">Architecture</a></li>
+          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/Reflections.md">Reflections and experiment status</a></li>
+        </ul>
+      </nav>
+      <section aria-labelledby="team-heading">
+        <h2 id="team-heading">Team responsibilities</h2>
+        <p>yooplo — Contributor and authentication; ngkhengyang — Reviewer and AI gateway;
+          yu-sutong — Release Maintainer, persistence and deployment.</p>
+      </section>
+      <footer><p>Release screenshots, peer-testing instructions and the application link will be added
+        after the corresponding features and deployments are verified.</p></footer>
+    </main>
+  </body>
+</html>
