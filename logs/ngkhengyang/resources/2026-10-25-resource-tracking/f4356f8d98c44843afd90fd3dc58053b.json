@@ -1,0 +1,35 @@
+{
+  "id": "f4356f8d98c44843afd90fd3dc58053b",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-25-resource-tracking",
+  "agent": "main",
+  "invocation": "tracking-fix",
+  "stage": "implement",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact runtime model and effort not exposed; recording starts after bootstrap edits",
+  "started_at": "2026-10-25T05:16:22.081202+00:00",
+  "ended_at": "2026-10-25T05:18:43.415218+00:00",
+  "elapsed_seconds": 141.334016,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Six tests and local links passed; recording instructions and helper implemented",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token/cache/tool counters and exact execution settings not exposed",
+    "output_tokens": "Per-record token/cache/tool counters and exact execution settings not exposed",
+    "cache_read_tokens": "Per-record token/cache/tool counters and exact execution settings not exposed",
+    "tool_calls": "Per-record token/cache/tool counters and exact execution settings not exposed",
+    "retries": "Per-record token/cache/tool counters and exact execution settings not exposed"
+  },
+  "unavailable_reason": "Per-record token/cache/tool counters and exact execution settings not exposed"
+}
