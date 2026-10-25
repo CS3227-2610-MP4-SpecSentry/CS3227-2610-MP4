@@ -26,3 +26,9 @@ Repository-wide skills are available for [specification conformance review](.age
 When working on Reviewer functionality, read the [Reviewer workflow entry point](workflow/reviewer/README.md).
 
 Discover current source, commands, and CI from the repository before checks. Product-spec paths may describe planned artifacts; distinguish those from working controls. Link authoritative artifacts instead of copying broad histories.
+
+## Code Review Rules
+
+- Flag protected data reads or business mutations that bypass deterministic server-side role, ownership/assignment, lifecycle, or session/CSRF checks. Check the applicable [product requirements](workflow/specs/PRODUCT-SPEC.md); the existing public health/readiness routes are intentional exceptions.
+- Flag changes that overwrite submitted revisions, accept stale revision decisions, or separate a business mutation from its required audit/notification transaction. Preserve immutable submission evidence and the current revision/assignment boundaries defined in the specifications.
+- Flag client-side credentials, sensitive prompt/body logging, or AI output that directly authorizes or performs a business mutation. Product AI must use the bounded server-side SoC gateway, validate typed output, and leave the manual workflow usable on failure. Developer PR review through Codex is separate from product AI.
