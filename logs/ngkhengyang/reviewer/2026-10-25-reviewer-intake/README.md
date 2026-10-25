@@ -4,7 +4,7 @@ Completed increment: safe pool, claim, assigned immutable proposal detail/eviden
 
 ## Evidence index
 
-- [Session log](../../2026-10-25-reviewer-intake.md): requests, changes, decisions, failures and final outcomes.
+- [Consolidated workflow log](../../2026-10-25-reviewer-intake.md): complete requests/execution, tasks, findings, resources, workflow problems, implemented specification improvements and pending tooling.
 - [Brief v1](brief-v1.md) and [v2 refinements](brief-v2.md): unchanged requirement/contract provenance used by workflow/TRACEABILITY.md. Historical proposal/status language describes their creation time.
 - [Compact state](state.json): ownership, six finding histories, 19 command outcomes, historical completeness PASS and retired snapshot hashes.
 - [Final file manifest](snapshots/final-review-state.json): the sole retained snapshot; 100 reviewed files, covering the identical83tested-source hashes.

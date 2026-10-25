@@ -101,4 +101,4 @@ For each future workflow specification revision, append a dated entry here linki
 
 | Date | Revision | Corresponding change log |
 | --- | --- | --- |
-| 2026-10-25 | Efficiency revision: conditional decomposition/preflight, concise context, snapshot/evidence reuse and retention, focused revalidation, task-proportionate effort with Astra by exception, honest timing and tooling capability boundaries. | [Changes and validation](../../logs/ngkhengyang/2026-10-25-reviewer-workflow-efficiency.md#changes) |
+| 2026-10-25 | Efficiency revision: conditional decomposition/preflight, concise context, snapshot/evidence reuse and retention, focused revalidation, task-proportionate effort with Astra by exception, honest timing and tooling capability boundaries. | [Changes and validation](../../logs/ngkhengyang/2026-10-25-reviewer-intake.md#workflow-improvements-made) |
