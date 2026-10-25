@@ -86,9 +86,9 @@ interfaces and domain models remain to be implemented against
 
 ## Client, contracts and AI
 
-`client/src/features/{contributor,reviewer,maintainer}` reserves role UI areas;
-`client/src/shared` reserves reusable presentation and HTTP handling. No protected
-role screens are registered until authentication/authorization exists.
+As features are implemented, use `client/src/features/{contributor,reviewer,maintainer}`
+for role UI areas and `client/src/shared` for reusable presentation and HTTP handling.
+No protected role screens are registered until authentication/authorization exists.
 `shared/src/contracts` contains browser-safe Zod wire schemas, re-exported through
 `shared/src/index.ts`. Database types, authorization policies, prompts and secrets
 remain server-only.

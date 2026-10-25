@@ -119,3 +119,25 @@ Verification: `git config --show-origin --show-scope --get-all user.name` identi
 `C:/Users/User/.gitconfig` as the global source. No product code changed.
 Resource telemetry for this correction: exact model/effort, tokens/cache, elapsed
 and start/end timestamps unavailable; tool evidence retained in the conversation.
+
+## Documentation cleanup
+
+Request: after noting documentation overhead, the user explicitly asked to remove
+redundant README files. Removed ten: server, Prisma, client, shared-contract and
+website READMEs; the three frontend role placeholders; the frontend shared
+placeholder; and the evaluations placeholder. Kept the root overview, workflow
+index, Reviewer workflow entry point and Reviewer CLI instructions.
+
+Preserved useful migration and Pages setup instructions in `docs/DeveloperGuide.md`.
+Updated root links and architecture/traceability text so planned folders are not
+described as delivered features. Historical initialization entries above describe
+the earlier state and are superseded by this cleanup. No application code changed.
+
+Validation: required-artifact check passed; five changed Markdown documents had
+zero broken relative links; `git diff --check` passed (Git emitted only LF/CRLF
+conversion notices). Four README files remain. Runtime tests were not rerun for
+this documentation-only change. Human review of the summary remains pending.
+
+| Stage / agent | Model / effort | Time (SGT) | Elapsed | Tokens / cache | Calls / retries | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| README cleanup / main agent | Exact model/effort unavailable | Validation timestamp 2026-10-25 12:56:02.994 +08:00; start/end not instrumented | Unavailable | Unavailable: not exposed | Aggregate unavailable; individual calls in transcript; no subagents | Local shell results and diff; documentation only |

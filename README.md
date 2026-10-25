@@ -49,7 +49,7 @@ Never put secrets in `VITE_*` variables or export server code through `src/share
 
 The [architecture guide](docs/Architecture.md) describes module responsibilities and
 transaction seams. Backend domain folders are empty NestJS registrations; frontend
-`features/` folders reserve the three role areas. Shared wire schemas live under
+role folders will be added with their features. Shared wire schemas live under
 `src/shared/src/contracts/`. No product workflow is implemented by these folders.
 
 - [User Guide](docs/UserGuide.md): current behavior and testing limitations.
@@ -57,7 +57,7 @@ transaction seams. Backend domain folders are empty NestJS registrations; fronte
 - [Reflections](docs/Reflections.md): observations and pending experiments.
 - [Workflow index](workflow/README.md): process files, templates and tools.
 - [Submission readiness](workflow/SUBMISSION.md): assignment deliverables and remaining gaps.
-- [Product website source](src/website/README.md): static site and GitHub Pages setup.
+- [Product website setup](docs/DeveloperGuide.md#product-website): static site and GitHub Pages publication.
 
 `npm run check:submission` checks local required-artifact presence only. It does not
 certify product completion or live access. The Pages workflow publishes the product

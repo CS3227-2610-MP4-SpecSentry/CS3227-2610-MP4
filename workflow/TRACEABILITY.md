@@ -19,7 +19,7 @@ Command outcomes, corrections, independent review and resource limitations are i
 `src/server/src/app.module.ts` registers seven empty business modules and imports
 the configured `DatabaseModule`. Health/readiness remain the only public APIs.
 Health contracts moved to `src/shared/src/contracts/health.ts` with unchanged public
-exports. Client role folders are reservations only. See
+exports. Client role folders are planned and will be added with their features. See
 [Architecture](../docs/Architecture.md) for target responsibilities.
 
 Required guide/reflection/site artifacts and a presence-check command are initialized;

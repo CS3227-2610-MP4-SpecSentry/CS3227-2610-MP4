@@ -16,7 +16,7 @@
 | reviewer/tests/ | Python tests of the workflow tooling, not product acceptance |
 | templates/PROMPT-LOG.md | Prompt/change/resource summary format |
 | templates/EXPERIMENT.md | Controlled comparison and result format |
-| evaluations/ | Versioned evaluation and experiment evidence; initialized, results pending |
+| evaluations/ (when results exist) | Versioned evaluation and experiment evidence; create with the first result |
 | tooling/smoke.mjs | Existing HTTP liveness/readiness smoke check |
 | tooling/submission-check.mjs | Local required-artifact presence check; does not certify grading readiness |
 | tests/browser/ | Playwright setup-page and accessibility smoke checks |
