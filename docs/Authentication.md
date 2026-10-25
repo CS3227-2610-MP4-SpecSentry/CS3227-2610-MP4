@@ -44,6 +44,25 @@ remove expired sessions, inactive throttle entries, and security events older
 than 90 days. This command does not prune business history. Scheduling is an
 operator responsibility; no background scheduler is introduced here.
 
+## Demo accounts
+
+After applying migrations, run `npm run db:seed` from the repository root to create
+two development/demo accounts per role:
+
+| Role | Usernames |
+| --- | --- |
+| Contributor | `contributor1`, `contributor2` |
+| Reviewer | `reviewer1`, `reviewer2` |
+| Release Maintainer | `release_maintainer1`, `release_maintainer2` |
+
+All newly created demo accounts use password `Password123!`, stored as Argon2id
+hashes. This fixed synthetic credential is an explicit demo-only exception to
+normal administrative provisioning. The seed refuses `NODE_ENV=production`.
+Reruns skip existing usernames without changing their passwords, roles, enabled
+status or versions. Account creation and its security events commit together.
+The seed uses `DATABASE_URL` from the root `.env`; migrations use
+`DIRECT_DATABASE_URL`. No schema migration is needed for the seed itself.
+
 ## API contract
 
 | Endpoint | Access and result |

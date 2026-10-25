@@ -1,0 +1,35 @@
+{
+  "id": "6b9aa13c8c3e48be8c9126129d9ed047",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-25-demo-accounts",
+  "agent": "main",
+  "invocation": "main-seed",
+  "stage": "implement-and-validate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-25T06:17:57.498634+00:00",
+  "ended_at": "2026-10-25T06:24:03.843822+00:00",
+  "elapsed_seconds": 366.345188,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Demo seed implemented and validated with 11 PostgreSQL checks; configured database credentials rejected population with 28P01",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable model, token, cache, tool and retry telemetry not exposed",
+    "output_tokens": "Attributable model, token, cache, tool and retry telemetry not exposed",
+    "cache_read_tokens": "Attributable model, token, cache, tool and retry telemetry not exposed",
+    "tool_calls": "Attributable model, token, cache, tool and retry telemetry not exposed",
+    "retries": "Attributable model, token, cache, tool and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable model, token, cache, tool and retry telemetry not exposed"
+}
