@@ -1,6 +1,6 @@
 # Reviewer resource summary
 
-Main agent: **gpt-6.1-sol / high**, explicitly confirmed by the user after run completion. This corrects the earlier unavailable selection. Independently observed runtime metadata remains unavailable; earlier reports/handoffs retain their historical statements.
+Main agent: **gpt-6.1-sol / high**, explicitly confirmed by the user after run completion. This corrects the earlier unavailable selection. Independently observed runtime metadata remains unavailable; the selected settings correction is retained in resources.json.
 
 ## Implementation and computation time
 
@@ -26,7 +26,7 @@ Recorded application verification commands took **265.791 seconds** across all r
 - Explicit user pause gaps outside recorded intervals are excluded from merged work windows. Unknown idle within usage-limit attempts cannot be subtracted reliably; those original measured boundaries are preserved.
 - Input/output/cache tokens, final provider tool/retry counters and independently observed model settings remain unavailable. Coverage0 means no attributable values were exposed; empty CLI arithmetic totals0 do not mean actual zero usage.
 
-[Detailed measurements and provenance](resource-summary-final-details.json) · [Structured run](state.json) · [Completeness](completeness-final.json)
+[Measured records and provenance](resources.json) Â· [Structured run](state.json) Â· [Historical completeness and final outcome](state.json)
 
 ## Per-agent records
 
@@ -78,3 +78,5 @@ These additional measured windows are merged with structured intervals for full-
 | explicit pause resumption read-only bootstrap | 2026-10-25T12:24:37+00:00 | 2026-10-25T12:25:04.465356+00:00 | 27.465356 |
 
 Final resource/report rendering is outside the measured close under the recording exception. Model-compute and edit-active instrumentation was absent, so future measurements cannot recover it for this run.
+
+Archive note: obsolete intermediate artifacts were consolidated at user request. This report describes the original implementation run; later report correction and cleanup have separate resource intervals.

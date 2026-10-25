@@ -1,0 +1,589 @@
+Historical command output. Original byte hashes/counts are in state.json; this UTF-8 text is a decoded presentation, not the original byte stream. No commands rerun during archival.
+
+================ unit-client-1 ================
+--- stdout (decoded from original bounded capture) ---
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+ESM dist\index.mjs 10.70 KB
+ESM ⚡️ Build success in 63ms
+CJS dist\index.js 14.89 KB
+CJS ⚡️ Build success in 64ms
+DTS Build start
+DTS ⚡️ Build success in 2488ms
+DTS dist\index.d.ts  17.86 KB
+DTS dist\index.d.mts 17.86 KB
+
+ RUN  v5.0.5 C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/client
+
+ ❯ src/App.test.tsx (20 tests | 2 failed) 4726ms
+   × discards protected expiry response: detail 1612ms
+   × discards protected expiry response: activity 1610ms
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 27 passed (29)
+   Start at  15:40:25
+   Duration  6.80s (tests 61%, environment 29%, setup 6%, import 3%, transform 1%)
+
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 test
+npm notice run npm run build -w @specsentry/shared && npm run test -w @specsentry/server && npm run test -w @specsentry/client
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/server@0.1.0 test
+npm notice run jest --runInBand --config jest.config.cjs
+
+Test Suites: 4 passed, 4 total
+Tests:       30 passed, 30 total
+Snapshots:   0 total
+Time:        7.542 s, estimated 29 s
+Ran all test suites.
+npm notice run @specsentry/client@0.1.0 test
+npm notice run vitest run
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/App.test.tsx > discards protected expiry response: detail
+ FAIL  src/App.test.tsx > discards protected expiry response: activity
+TestingLibraryElementError: Unable to find role="button" and name "Open Protected proposal"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mid[39m=[32m"main-content"[39m
+    [36m>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"eyebrow"[39m
+      [36m>[39m
+        [0mSpecification and review workspace[0m
+      [36m</p>[39m
+      [36m<h1>[39m
+        [0mSpecSentry[0m
+      [36m</h1>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Account"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/reviewer"[39m
+        [36m>[39m
+          [0mReviewer[0m
+          [0m workspace[0m
+        [36m</a>[39m
+        [36m<button>[39m
+          [0mSign out[0m
+        [36m</button>[39m
+      [36m</nav>[39m
+      [36m<p>[39m
+        [0mSigned in as [0m
+        [0malice[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-label[39m=[32m"Reviewer workspace"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mReviewer workspace[0m
+        [36m</h2>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Review queues"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+          [36m>[39m
+            [0mReview pool[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"true"[39m
+          [36m>[39m
+            [0mMy assignments[0m
+          [36m</button>[39m
+        [36m</nav>[39m
+        [36m<button>[39m
+          [0mRefresh queue[0m
+        [36m</button>[39m
+        [36m<h3>[39m
+          [0mMy assigned proposals[0m
+        [36m</h3>[39m
+        [36m<form[39m
+          [33maria-label[39m=[32m"Filter proposals"[39m
+        [36m>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"authorId"[39m
+          [36m>[39m
+            [0mAuthor ID[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mid[39m=[32m"authorId"[39m
+            [33mmaxlength[39m=[32m"128"[39m
+            [33mname[39m=[32m"authorId"[39m
+          [36m/>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"minAgeDays"[39m
+          [36m>[39m
+            [0mMinimum original age (days)[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mid[39m=[32m"minAgeDays"[39m
+            [33mmax[39m=[32m"365000"[39m
+            [33mmin[39m=[32m"0"[39m
+            [33mname[39m=[32m"minAgeDays"[39m
+            [33mstep[39m=[32m"1"[39m
+            [33mtype[39m=[32m"number"[39m
+          [36m/>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"maxAgeDays"[39m
+          [36m>[39m
+            [0mMaximum original age (days)[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mid[39m=[32m"maxAgeDays"[39m
+            [33mmax[39m=[32m"365000"[39m
+            [33mmin[39m=[32m"0"[39m
+            [33mname[39m=[32m"maxAgeDays"[39m
+            [33mstep[39m=[32m"1"[39m
+            [33mtype[39m=[32m"number"[39m
+          [36m/>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"state"[39m
+          [36m>[39m
+            [0mState[0m
+          [36m</label>[39m
+          [36m<select[39m
+            [33mid[39m=[32m"state"[39m
+            [33mname[39m=[32m"state"[39m
+          [36m>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll states[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mIN_REVIEW[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mCHANGES_REQUESTED[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAPPROVED[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mIN_RELEASE[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mRELEASED[0m
+            [36m</option>[39m
+          [36m</select>[39m
+          [36m<button>[39m
+            [0mApply filters[0m
+          [36m</button>[39m
+        [36m</form>[39m
+        [36m<p>[39m
+          [0mNo proposals match these filters.[0m
+        [36m</p>[39m
+        [36m<ul[39m
+          [33mclass[39m=[32m"proposal-list"[39m
+        [36m/>[39m
+      [36m</section>[39m
+    [36m</main>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mid[39m=[32m"main-content"[39m
+    [36m>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"eyebrow"[39m
+      [36m>[39m
+        [0mSpecification and review workspace[0m
+      [36m</p>[39m
+      [36m<h1>[39m
+        [0mSpecSentry[0m
+      [36m</h1>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Account"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/reviewer"[39m
+        [36m>[39m
+          [0mReviewer[0m
+          [0m workspace[0m
+        [36m</a>[39m
+        [36m<button>[39m
+          [0mSign out[0m
+        [36m</button>[39m
+      [36m</nav>[39m
+      [36m<p>[39m
+        [0mSigned in as [0m
+        [0malice[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-label[39m=[32m"Reviewer workspace"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mReviewer workspace[0m
+        [36m</h2>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Review queues"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+          [36m>[39m
+            [0mReview pool[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"true"[39m
+          [36m>[39m
+            [0mMy assignments[0m
+          [36m</button>[39m
+        [36m</nav>[39m
+        [36m<button>[39m
+          [0mRefresh queue[0m
+        [36m</button>[39m
+        [36m<h3>[39m
+          [0mMy assigned proposals[0m
+        [36m</h3>[39m
+        [36m<form[39m
+          [33maria-label[39m=[32m"Filter proposals"[39m
+        [36m>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"authorId"[39m
+          [36m>[39m
+            [0mAuthor ID[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mid[39m=[32m"authorId"[39m
+            [33mmaxlength[39m=[32m"128"[39m
+            [33mname[39m=[32m"authorId"[39m
+          [36m/>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"minAgeDays"[39m
+          [36m>[39m
+            [0mMinimum original age (days)[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mid[39m=[32m"minAgeDays"[39m
+            [33mmax[39m=[32m"365000"[39m
+            [33mmin[39m=[32m"0"[39m
+            [33mname[39m=[32m"minAgeDays"[39m
+            [33mstep[39m=[32m"1"[39m
+            [33mtype[39m=[32m"number"[39m
+          [36m/>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"maxAgeDays"[39m
+          [36m>[39m
+            [0mMaximum original age (days)[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mid[39m=[32m"maxAgeDays"[39m
+            [33mmax[39m=[32m"365000"[39m
+            [33mmin[39m=[32m"0"[39m
+            [33mname[39m=[32m"maxAgeDays"[39m
+            [33mstep[39m=[32m"1"[39m
+            [33mtype[39m=[32m"number"[39m
+          [36m/>[39m
+          [36m<label[39m
+            [33mfor[39m=[32m"state"[39m
+          [36m>[39m
+            [0mState[0m
+          [36m</label>[39m
+          [36m<select[39m
+            [33mid[39m=[32m"state"[39m
+            [33mname[39m=[32m"state"[39m
+          [36m>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll states[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mIN_REVIEW[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mCHANGES_REQUESTED[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAPPROVED[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mIN_RELEASE[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mRELEASED[0m
+            [36m</option>[39m
+          [36m</select>[39m
+          [36m<button>[39m
+            [0mApply filters[0m
+          [36m</button>[39m
+        [36m</form>[39m
+        [36m<p>[39m
+          [0mNo proposals match these filters.[0m
+        [36m</p>[39m
+        [36m<ul[39m
+          [33mclass[39m=[32m"proposal-list"[39m
+        [36m/>[39m
+      [36m</section>[39m
+    [36m</main>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/App.test.tsx:109:114
+    107|     });
+    108|     vi.stubGlobal('fetch', fetch); render(<MemoryRouter initialEntries…
+    109|     fireEvent.click(await screen.findByRole('button', { name: 'My assi…
+       |                                                                                                                  ^
+    110|     await new Promise(resolve => setTimeout(resolve, 0));
+    111|     if (transition === 'account switch') { fireEvent(window, new Event…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\client
+npm error workspace @specsentry/client@0.1.0
+npm error location C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\client
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c vitest run
+
+================ schema-final ================
+--- stdout (decoded from original bounded capture) ---
+The schema at prisma\schema.prisma is valid 🚀
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 db:validate
+npm notice run npm run db:validate -w @specsentry/server
+npm notice run @specsentry/server@0.1.0 db:validate
+npm notice run prisma validate
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma.
+
+================ typecheck-final ================
+--- stdout (decoded from original bounded capture) ---
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 14.89 KB
+CJS ⚡️ Build success in 215ms
+ESM dist\index.mjs 10.70 KB
+ESM ⚡️ Build success in 216ms
+DTS Build start
+DTS ⚡️ Build success in 3238ms
+DTS dist\index.d.ts  17.86 KB
+DTS dist\index.d.mts 17.86 KB
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 typecheck
+npm notice run npm run build -w @specsentry/shared && npm run typecheck --workspaces --if-present
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/shared@0.1.0 typecheck
+npm notice run tsc --noEmit
+npm notice run @specsentry/server@0.1.0 typecheck
+npm notice run @specsentry/client@0.1.0 typecheck
+
+================ lint-final ================
+--- stdout (decoded from original bounded capture) ---
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 lint
+npm notice run eslint src workflow/tooling/*.mjs playwright.config.ts
+
+================ tests-final ================
+--- stdout (decoded from original bounded capture) ---
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+ESM dist\index.mjs 10.70 KB
+ESM ⚡️ Build success in 76ms
+CJS dist\index.js 14.89 KB
+CJS ⚡️ Build success in 76ms
+DTS Build start
+DTS ⚡️ Build success in 3238ms
+DTS dist\index.d.ts  17.86 KB
+DTS dist\index.d.mts 17.86 KB
+
+ RUN  v5.0.5 C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/client
+
+
+ Test Files  2 passed (2)
+      Tests  38 passed (38)
+   Start at  16:09:59
+   Duration  3.49s (tests 47%, environment 40%, setup 8%, import 4%, transform 1%)
+
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 test
+npm notice run npm run build -w @specsentry/shared && npm run test -w @specsentry/server && npm run test -w @specsentry/client
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/server@0.1.0 test
+npm notice run jest --runInBand --config jest.config.cjs
+
+Test Suites: 4 passed, 4 total
+Tests:       32 passed, 32 total
+Snapshots:   0 total
+Time:        5.906 s, estimated 7 s
+Ran all test suites.
+npm notice run @specsentry/client@0.1.0 test
+npm notice run vitest run
+
+================ postgresql-final ================
+--- stdout (decoded from original bounded capture) ---
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 14.89 KB
+CJS ⚡️ Build success in 71ms
+ESM dist\index.mjs 10.70 KB
+ESM ⚡️ Build success in 71ms
+DTS Build start
+DTS ⚡️ Build success in 3219ms
+DTS dist\index.d.ts  17.86 KB
+DTS dist\index.d.mts 17.86 KB
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 test:integration
+npm notice run npm run build -w @specsentry/shared && npm run test:integration -w @specsentry/server
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/server@0.1.0 test:integration
+npm notice run jest --runInBand --config jest.integration.config.cjs
+(node:15704) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Test Suites: 5 passed, 5 total
+Tests:       31 passed, 31 total
+Snapshots:   0 total
+Time:        18.674 s, estimated 19 s
+Ran all test suites.
+
+================ build-final ================
+--- stdout (decoded from original bounded capture) ---
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 14.89 KB
+CJS ⚡️ Build success in 83ms
+ESM dist\index.mjs 10.70 KB
+ESM ⚡️ Build success in 83ms
+DTS Build start
+DTS ⚡️ Build success in 2395ms
+DTS dist\index.d.ts  17.86 KB
+DTS dist\index.d.mts 17.86 KB
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 120 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.49 kB │ gzip:   0.30 kB
+dist/assets/index-CqbdtgUU.css    1.22 kB │ gzip:   0.60 kB
+dist/assets/index-D0J-FcIe.js   363.87 kB │ gzip: 112.00 kB
+
+✓ built in 330ms
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 build
+npm notice run npm run build -w @specsentry/shared && npm run build -w @specsentry/server && npm run build -w @specsentry/client
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/server@0.1.0 build
+npm notice run tsc -p tsconfig.build.json
+npm notice run @specsentry/client@0.1.0 build
+npm notice run tsc --noEmit && vite build
+
+================ browser-final ================
+--- stdout (decoded from original bounded capture) ---
+
+Running 5 tests using 2 workers
+
+  ok 2 [chromium] › workflow\tests\browser\scaffold.spec.ts:27:5 › login page withholds workspace content and passes automated accessibility checks (2.3s)
+  ok 3 [chromium] › workflow\tests\browser\scaffold.spec.ts:37:7 › Contributor can sign in, restore the session, and sign out (987ms)
+  ok 4 [chromium] › workflow\tests\browser\scaffold.spec.ts:37:7 › Reviewer can sign in, restore the session, and sign out (1.1s)
+  ok 1 [chromium] › workflow\tests\browser\reviewer-intake.spec.ts:14:5 › two Reviewers claim, inspect immutable history, drop and take over with keyboard and access checks (4.5s)
+  ok 5 [chromium] › workflow\tests\browser\scaffold.spec.ts:37:7 › Release Maintainer can sign in, restore the session, and sign out (705ms)
+
+  5 passed (10.7s)
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 test:e2e
+npm notice run playwright test
+[WebServer] npm notice run specsentry@0.1.0 start
+[WebServer] npm notice run npm run start -w @specsentry/server
+[WebServer] npm notice run @specsentry/server@0.1.0 start
+[WebServer] npm notice run node dist/main.js
+(node:29424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:34668) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+
+================ submission-final ================
+--- stdout (decoded from original bounded capture) ---
+PRESENT src/server/src/app.module.ts
+PRESENT src/client/src/App.tsx
+PRESENT src/shared/src/index.ts
+PRESENT src/website/index.html
+PRESENT workflow/README.md
+PRESENT workflow/specs/PRODUCT-SPEC.md
+PRESENT workflow/specs/AI-SECURITY-SPEC.md
+PRESENT workflow/DEVELOPMENT.md
+PRESENT workflow/RESOURCES.md
+PRESENT workflow/TRACEABILITY.md
+PRESENT workflow/SUBMISSION.md
+PRESENT docs/UserGuide.md
+PRESENT docs/DeveloperGuide.md
+PRESENT docs/Reflections.md
+PRESENT .github/workflows/ci.yml
+PRESENT .github/workflows/pages.yml
+PRESENT logs/
+Repository inspected: C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\
+Presence only: content accuracy, feature completion, public GitHub access, live URLs,
+security/AI tests, experiment results, master freshness and human log review require separate verification.
+--- stderr (decoded from original bounded capture) ---
+npm notice run specsentry@0.1.0 check:submission
+npm notice run node workflow/tooling/submission-check.mjs
+
+================ final-record-check ================
+--- stdout (decoded from original bounded capture) ---
+{
+  "result": "PASS",
+  "changed_paths": 180,
+  "findings_closed": 6,
+  "checks": [
+    "tested/reviewed state current",
+    "all findings closed",
+    "resource registry matches invocations",
+    "current handoffs valid",
+    "changes within declared ownership",
+    "local log links resolve",
+    "diff whitespace clean"
+  ],
+  "limitation": "Structural evidence check; behavioral evidence comes from tests and independent review."
+}
+--- stderr (decoded from original bounded capture) ---
+warning: in the working copy of 'src/client/src/App.test.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/client/src/App.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/client/src/styles.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/client/src/App.test.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/client/src/App.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/client/src/styles.css', LF will be replaced by CRLF the next time Git touches it

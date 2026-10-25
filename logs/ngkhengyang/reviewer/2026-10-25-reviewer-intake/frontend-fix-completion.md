@@ -1,5 +1,0 @@
-# Frontend fix completion — F-003
-
-Frontend/frontend-fix-1, selected gpt-6.1-sol/medium, changed only ReviewerWorkspace.tsx, ReviewerWorkspace.test.tsx and App.test.tsx. Deterministically reproduced obsolete initial pool loading after assigned navigation and replacing the newer user action. Capturing generation only inside the mount effect was insufficient and a root rerun still failed two tests. Explicit initialLoadNeeded intent is now consumed by queue/proposal actions even before effect setup; the deferred task checks intent and authorization/local generation. New regression failed before fix and passed after. Expiry matrix awaits held JSON-parser barrier and resolves delayed bodies in act without removing assertions.
-
-Final whole rootnpmtest: sharedbuild/backend30/client30 passed; scopedESLint and clienttypecheck pass. Initial sandbox build failure required approved benign escalation, no config workaround. One final newline in changed files. No DB/browser/server/schema/contracts/log edits. Main independent closure remains pending. Coordinator record rec-1efe6d306f42492e; tokens/cache/final-runtime counters unavailable.
