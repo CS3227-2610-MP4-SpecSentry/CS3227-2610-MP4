@@ -23,6 +23,8 @@ Shared invariants, resource measurements, and prompt logging in the root [contex
 
 Load only the guidance needed for the current assignment and its linked requirement sections. Prompter-named logs are historical evidence, not an alternative source of workflow instructions.
 
+Workflow revisions are tracked in the implementation specification's final [changelog](IMPLEMENTATION.md#changelog), with links to the corresponding change logs. Current model/effort selection and the Astra exception are defined only in [resource guidance](RESOURCES.md#dispatch-policy).
+
 ## Skills
 
 | Skill | Scope and invocation |

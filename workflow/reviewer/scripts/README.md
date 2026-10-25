@@ -120,7 +120,7 @@ Closure requires the assigned independent reviewer, a successful registered revi
 
 ## 6. Supersede stale evidence and check completeness
 
-After fixes, create fresh snapshots/checks/handoffs. Preserve failed earlier evidence and explicitly link its replacement:
+After fixes, create fresh snapshots/checks/handoffs for affected state. Reuse still-valid evidence for unaffected selected scopes; preserve failed earlier evidence and explicitly link its replacement:
 
 ```powershell
 python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/coverage-validation supersede --kind commands --id tests-1 --by tests-2 --reason 'Fix integrated and checked against a new snapshot'
@@ -130,3 +130,35 @@ python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/
 The same command supports `--kind handoffs`. Completion examines current terminal evidence and validates supersession chains; failures disappear from neither history nor recorded totals. Record earlier failed attempts as failed and later successful stage attempts separately.
 
 The completeness report checks the declared invocation/stage registry, timing, usage reasons, required stages, independent review identity, findings, cycles, handoffs, and current snapshot/check evidence. Explicit unavailable telemetry produces coverage warnings rather than invented measurements. The coordinator must declare every actual agent/stage/attempt; undeclared activity cannot be discovered. Semantic acceptance-criterion coverage, security sufficiency, and any human approvals still require agent/human assessment.
+
+## 7. Evidence efficiency and retention
+
+### Current operations
+
+- Select actual source/configuration/tests and relevant documentation explicitly, including necessary untracked files. Exclude dependencies, build outputs, caches and credentials; include generated sources only when their content is required evidence. Inspect the selected file set before relying on a snapshot. The current CLI can traverse ignored files under a selected directory, so broad directory selection is not a safe exclusion mechanism.
+- Create snapshots for material verification boundaries: an initial baseline when needed, settled integration and changed fixes/final review. A foundation contract change can justify its own scoped snapshot. A progress update, handoff, command rerun or resumption with fresh unchanged evidence does not by itself justify a copy. Different source-only and documentation scopes are legitimate when they preserve valid test evidence; explain the distinction.
+- Use existing registration, command, handoff and supersession operations in dependency order. Independent reads/checks may run together where safe; state mutations and dependent evidence operations remain ordered. Keep one canonical record and reference it from summaries. Retain required current CLI inputs/artifacts and active state; it presently embeds snapshot data and requires separate handoff input/generated files.
+- Reuse valid check results by selected source scope and dependency impact. Reviewers run discriminating checks independently; this does not require repeating an unchanged complete suite. Store bounded, safe output when useful for verification or diagnosis, especially final checks and failures; ordinary successful intermediate commands can retain result/hash metadata without another output copy.
+
+### Closure and compaction
+
+The retained evidence must trace request → approved requirements/contracts → assigned changes → checks → independent finding closure → final reviewed state. Keep measured attempts, including failures/interruptions, with timing/settings provenance and explicit missing telemetry. One index and final resource summary should point to canonical structured records rather than repeat them. Preserve meaningful decisions and acceptance gaps.
+
+Run completeness against valid active state before compaction. Preserve the exact original result and its state association as historical evidence. Retain final file hashes and required test/review evidence; obsolete manifests, draft inputs, duplicate handoffs and repetitive outputs may be consolidated only after references/outcomes have been preserved and retention is authorized. Keep finding transitions and failed/interrupted outcomes even when their verbose artifacts are consolidated. Never delete evidence merely to make a gate pass.
+
+The current CLI has **no archive/compaction command** and cannot resume or validate a separately compacted archive as active state. Preserve active CLI format and its referenced artifacts by default. An explicitly authorized manual archive must declare its different format, validate retained links/hashes/measurement totals, preserve the historical completeness result and state that it is not resumable by this CLI. Later work starts a new run. Do not overwrite source hashes or relabel an old review as approval of later changes.
+
+### Automation contract — not implemented by this specification revision
+
+Future tooling changes should provide the following behavior, with executable tests before advertising it as available:
+
+| Capability | Required checks |
+| --- | --- |
+| Canonical completion/handoff recording with generated views | One source of truth; stable references, disjoint ownership and seven-section handoff validation; read-only reviewers gain no write permission |
+| Referenced, deduplicated snapshot manifests | Required untracked files included; dependencies/caches/secrets excluded; unchanged content reused; changed relevant files invalidate evidence |
+| Consistent generated-artifact hashing | Hash actual written bytes under a documented serialization/newline convention; verify Windows/LF behavior; keep source-file hash semantics explicit |
+| Observed lifecycle event capture | Close on actual completion/pause/failure when observable; record unknown gaps on recovery; distinguish elapsed/wait states without inventing inference/CPU time |
+| Validated closed-run archive | Preserve finding history, failed attempts, review independence and final check/hash provenance; check links and totals; keep schema/version compatibility and historical results explicit |
+| Compact reports | Deduplicate shared unavailable reasons while preserving per-record exceptions, provenance and measurement coverage |
+
+Until those capabilities exist, use the current operations and documented limitations above. This workflow revision changes procedures/templates only; it neither adds these CLI features nor automatically captures runtime usage.

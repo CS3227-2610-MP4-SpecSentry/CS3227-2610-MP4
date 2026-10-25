@@ -22,6 +22,10 @@ Read [main-agent guidance](agents/MAIN.md). Extract existing requirement IDs, ac
 
 Use [prepare-change-brief](skills/prepare-change-brief.md) for the repeatable brief procedure. It does not itself start implementation.
 
+Classify the task as localized, separable, or foundation-dependent. Record the smallest useful increment and a short decomposition rationale in the brief: expected parallel benefit, shared contracts and likely coordination cost. Reuse established foundations; a new foundation stage is needed only when dependent workers require changed contracts or infrastructure. Retain acceptance criteria and proportionate independent security/implementation review for every classification.
+
+Perform a read-only environment preflight before dependent dispatch: discover repository commands, available runtimes, test database isolation, migrations and browser prerequisites as applicable. Record ready/missing status once; provision only within authorization. Separate cold setup from repeat-run measurements. An environment blocker pauses dependent checks rather than triggering speculative code changes.
+
 Resolve questions using requirements, decisions, and code. Code provides implementation evidence, not authority to contradict requirements. For a material unresolved ambiguity, ask the prompter with a recommendation, implications, and alternatives. Aim to resolve these before implementation; pause only dependent work if a question emerges later.
 
 **Exit:** the implementation brief accounts for all requested behavior, identifies its sources, and has no unresolved ambiguity blocking the proposed work.
@@ -43,11 +47,11 @@ The main agent chooses the split; the security reviewer challenges unsafe bounda
 | Tightly coupled files or unsettled interfaces | One implementer or smaller parallel portion |
 | Shared foundation required by several workers | Foundation first, then parallel work |
 
-Announce workers, scope, permitted files, shared-file owner, dependencies, model/effort with rationale, and expected checks. Proceed without a routine approval pause; keep the announcement visible for human intervention. Respect actual concurrency limits and dispatch ready work only.
+Announce workers, scope, permitted files, shared-file owner, dependencies, model/effort with rationale under the [selection policy](RESOURCES.md#dispatch-policy), and expected checks. Proceed without a routine approval pause; keep the announcement visible for human intervention. Respect actual concurrency limits and dispatch ready work only.
 
 Give each worker [implementer guidance](agents/IMPLEMENTER.md) and a focused assignment. Assign disjoint write sets, including tests, migrations, configuration, and generated files. Worktrees can isolate edits but do not resolve overlapping semantic ownership. Define cross-module contracts with names/signatures or schemas, errors, authorization, transaction/version semantics, and an owner where relevant.
 
-At assignment, completion, review, and fix boundaries, use [reviewer-role-agent-handoff](skills/reviewer-role-agent-handoff.md) to create focused handoff documents with one writer per file. Link them from the run record; read-only subagents return content for the coordinator to persist.
+At assignment, completion, review, and fix boundaries, use [reviewer-role-agent-handoff](skills/reviewer-role-agent-handoff.md). Keep a concise task packet with authoritative references; subsequent packets emphasize changed contracts, findings and evidence. Use one authoritative handoff per actual boundary rather than extra copies for status updates. Read-only subagents return content for the coordinator to persist.
 
 Workers request contract changes through the main agent. Update affected assignments and obtain security re-review when warranted. Report urgent blockers immediately; batch routine completion evidence.
 
@@ -57,7 +61,7 @@ Workers request contract changes through the main agent. Update affected assignm
 
 The main agent owns integration. In a shared directory, inspect the assembled work; with worktrees, bring the changes together first. Check interfaces, configuration, migrations, security assumptions, and the combined diff. Run the available build and relevant integration checks.
 
-Snapshot the relevant settled files and use the command-evidence helper for explicit authorized checks. After fixes, retain prior failures and explicitly supersede stale evidence with fresh checks/handoffs.
+Snapshot settled files at verification boundaries, following [evidence efficiency and retention](scripts/README.md#7-evidence-efficiency-and-retention). Use explicit source scopes, relevant untracked files and command evidence. Reuse a fresh snapshot when selected content is unchanged; worker completion or user resumption alone does not require another snapshot. After fixes, retain prior failures and explicitly supersede stale evidence.
 
 Fix small wiring issues directly and record them. Return substantive defects to the responsible worker. Wait for writers to finish before creating a stable review state. Record a commit, or base commit plus diff/content hashes and relevant untracked-file hashes, so evidence identifies the actual reviewed content. Do not commit solely to satisfy this step without task authorization.
 
@@ -75,6 +79,8 @@ The main agent batches fixes by original owner and updates assignments when owne
 
 Integrate fixes before revalidation. The same independent reviewer checks finding closure, changed code, and affected regressions. Broaden checks for shared authorization, lifecycle, contracts, persistence, or other cross-cutting changes; report new defects even when they were absent from the initial batch. Revisit security review for changes to trust boundaries, access controls, AI context, external calls, persistence, or security contracts.
 
+Supply the fix diff, stable finding IDs, affected acceptance criteria and new check results. Preserve the initial acceptance matrix and reuse unaffected evidence only when its selected source hashes and relevant contracts remain valid. Run focused regressions first; rerun broader checks when affected dependencies or unresolved concerns justify them. Documentation-only changes still need conformance review but do not alone require application test reruns. Reviewers independently inspect fixes; owner summaries are navigation aids, not closure evidence.
+
 After two unsuccessful fix/review cycles, reassess the root cause and approach before another cycle. Ask the prompter with a recommendation if a material decision remains unresolved. Pause dependent work for permission expansion or insufficient verification resources; follow existing authorization rather than repeatedly requesting it.
 
 **Exit:** findings are closed with evidence or explicitly reported unresolved; relevant regression checks pass and documentation matches the reviewed state. Unresolved blockers prevent a completion claim.
@@ -85,4 +91,14 @@ Finalize the run summary and [resource record](RESOURCES.md), including main-age
 
 Run the CLI's completeness check and address missing declared records, unresolved blockers, stale current evidence, and independent-review gaps. Coverage warnings identify unavailable telemetry; structural success does not establish semantic correctness or replace human approvals. Keep the prompter-named Markdown session log alongside the structured run artifacts.
 
+Produce one final evidence index and resource summary referencing canonical records. Follow the retention policy before any compaction; preserve requests, findings, failed/interrupted attempts and final review/test provenance. Distinguish validated active runs from historical closed-run archives. Evaluate useful outcomes and resource limitations using [resource guidance](RESOURCES.md#evaluation), not artifact counts or token consumption as success measures.
+
 **Exit:** the final report and evidence refer to the same implementation state, and any incomplete work is explicit.
+
+## Changelog
+
+For each future workflow specification revision, append a dated entry here linking its prompter-named change log and relevant section. Record the concrete behavior changed and validation in that log; retain previous entries. Changes to linked policy, role, handoff or template documents belong to the same revision entry when part of one request.
+
+| Date | Revision | Corresponding change log |
+| --- | --- | --- |
+| 2026-10-25 | Efficiency revision: conditional decomposition/preflight, concise context, snapshot/evidence reuse and retention, focused revalidation, task-proportionate effort with Astra by exception, honest timing and tooling capability boundaries. | [Changes and validation](../../logs/ngkhengyang/2026-10-25-reviewer-workflow-efficiency.md#changes) |
