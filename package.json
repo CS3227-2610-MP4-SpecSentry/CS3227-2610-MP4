@@ -1,0 +1,45 @@
+{
+  "name": "specsentry",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SpecSentry specification and review workspace",
+  "workspaces": [
+    "src/shared",
+    "src/server",
+    "src/client"
+  ],
+  "engines": {
+    "node": ">=24.15 <25",
+    "npm": ">=11 <13"
+  },
+  "packageManager": "npm@12.2.1",
+  "scripts": {
+    "dev": "npm run build -w @specsentry/shared && concurrently -k -n shared,server,client \"npm run dev -w @specsentry/shared\" \"npm run dev -w @specsentry/server\" \"npm run dev -w @specsentry/client\"",
+    "build": "npm run build -w @specsentry/shared && npm run build -w @specsentry/server && npm run build -w @specsentry/client",
+    "start": "npm run start -w @specsentry/server",
+    "typecheck": "npm run build -w @specsentry/shared && npm run typecheck --workspaces --if-present",
+    "lint": "eslint src workflow/tooling/*.mjs playwright.config.ts",
+    "test": "npm run build -w @specsentry/shared && npm run test -w @specsentry/server && npm run test -w @specsentry/client",
+    "test:integration": "npm run build -w @specsentry/shared && npm run test:integration -w @specsentry/server",
+    "test:e2e": "playwright test",
+    "db:generate": "npm run db:generate -w @specsentry/server",
+    "db:validate": "npm run db:validate -w @specsentry/server",
+    "db:migrate:dev": "npm run db:migrate:dev -w @specsentry/server",
+    "db:migrate:deploy": "npm run db:migrate:deploy -w @specsentry/server"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.10.1",
+    "concurrently": "10.0.6",
+    "eslint": "10.13.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.0"
+  },
+  "overrides": {
+    "multer": "2.5.0"
+  }
+}

@@ -86,12 +86,12 @@ These focuses organize work and do not create exclusive ownership. The contribut
 
 ## Work packages and dependencies
 
-All packages below are planned; no application implementation or release verification is claimed. Owners are existing coordination contacts, not evidence of completed assignments.
+Statuses below distinguish implemented infrastructure from pending product behavior and release verification. Owners are existing coordination contacts, not evidence of completed feature assignments.
 
 | Task | Scope | Dependencies | Coordination | Status / exit evidence |
 | --- | --- | --- | --- | --- |
 | TASK-001 | Resolve validation, identity, API and AI blocking decisions | None | Relevant role owners | Policy baseline approved 25 October; actual live provider verification remains pending |
-| TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Planned; clean-start and denial tests |
+| TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Partial: base server/client/shared workspaces, connectivity, local Compose, Docker/CI templates and setup docs initialized 25 October; source/build/browser/PostgreSQL checks recorded in base-source log. Sessions, CSRF, domain migrations and audit remain pending; Docker/remote CI unexecuted locally |
 | TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Planned; REQ-CON evidence |
 | TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Planned; normal/denial/race tests |
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |

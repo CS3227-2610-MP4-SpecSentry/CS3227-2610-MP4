@@ -1,0 +1,27 @@
+# Provisioning template only. Replace image URLs with CI-published immutable digests.
+# No Git build on Render: CI builds the image; production promotes the tested digest.
+services:
+  - type: web
+    name: specsentry-dev
+    runtime: image
+    plan: free
+    image:
+      url: ghcr.io/cs3227-2610-mp4-specsentry/cs3227-2610-mp4:configure-tested-digest
+    healthCheckPath: /api/ready
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+  - type: web
+    name: specsentry-prod
+    runtime: image
+    plan: free
+    image:
+      url: ghcr.io/cs3227-2610-mp4-specsentry/cs3227-2610-mp4:configure-tested-digest
+    healthCheckPath: /api/ready
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false

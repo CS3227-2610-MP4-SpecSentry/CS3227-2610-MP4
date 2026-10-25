@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:17-alpine@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb
+    environment:
+      POSTGRES_USER: specsentry
+      POSTGRES_PASSWORD: specsentry_local
+      POSTGRES_DB: specsentry
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U specsentry -d specsentry"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  app:
+    profiles: ["app"]
+    build: .
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://specsentry:specsentry_local@db:5432/specsentry
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  postgres_data:

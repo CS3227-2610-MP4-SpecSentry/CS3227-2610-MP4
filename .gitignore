@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+.tools/
+src/server/src/generated/
+playwright-report/
+test-results/
+*.tsbuildinfo
+*.log
