@@ -47,6 +47,16 @@ HTTP tests, eight client tests, eight PostgreSQL integration tests, four Chromiu
 tests, and production dependency audit (zero vulnerabilities) passed. The login
 page axe scan reported zero violations; full product accessibility is unverified.
 
+## Assignment and development-process evidence
+
+[ASSIGNMENT-SPEC](specs/ASSIGNMENT-SPEC.md) defines MP4-001 through MP4-015. Its evidence-home column and [SUBMISSION](SUBMISSION.md) map the assignment to deliverables; documentation presence is not completion. The assignment capture/session checks are recorded in [the 26 October log](../logs/yooplo/2026-10-26-mp4-assignment.md). Role, live AI, deployment, experiment, contribution and human-verification evidence remain governed by their existing records.
+
+| Obligation | Planned verification | Current evidence / gap |
+| --- | --- | --- |
+| MP4-004: development-process security | [AC-DEVSEC-001 through AC-DEVSEC-004](specs/AI-SECURITY-SPEC.md#development-agent-security-and-evidence) | Planned; no new adversarial workflow run executed by the assignment-capture task |
+| MP4-006 / MP4-013: context/resource evidence and reflections | [Team experiment protocol](DEVELOPMENT.md#required-experiments-for-reflections), Reflections and linked evaluations | Capture preserves required analysis topics; experiments/results remain pending |
+| MP4-014 / MP4-015: interaction summaries and declaration | Prompter logs, human accuracy/completeness review, Developer Guide acknowledgements | Current task logged and AI assistance declared; complete historical coverage and human sign-off not inferred |
+
 ## Product acceptance plan
 
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |

@@ -1,0 +1,35 @@
+{
+  "id": "01124d0c539344d9a99626410980eef9",
+  "prompter": "yooplo",
+  "session": "2026-10-26-mp4-assignment",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "assignment-extraction",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family supplied by session; exact runtime identifier and effort not exposed",
+  "started_at": "2026-10-26T09:54:07.111562+00:00",
+  "ended_at": "2026-10-26T09:55:48.754758+00:00",
+  "elapsed_seconds": 101.643196,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read all five PDF pages and SHA256; compared existing guidance; extractor setup recovered from cache permissions, network and stdout encoding failures",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable runtime token/cache/tool counters and exact settings not exposed; extraction tool failures documented in session log",
+    "output_tokens": "Attributable runtime token/cache/tool counters and exact settings not exposed; extraction tool failures documented in session log",
+    "cache_read_tokens": "Attributable runtime token/cache/tool counters and exact settings not exposed; extraction tool failures documented in session log",
+    "tool_calls": "Attributable runtime token/cache/tool counters and exact settings not exposed; extraction tool failures documented in session log",
+    "retries": "Attributable runtime token/cache/tool counters and exact settings not exposed; extraction tool failures documented in session log"
+  },
+  "unavailable_reason": "Attributable runtime token/cache/tool counters and exact settings not exposed; extraction tool failures documented in session log"
+}

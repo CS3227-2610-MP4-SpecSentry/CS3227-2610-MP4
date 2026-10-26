@@ -1,0 +1,35 @@
+{
+  "id": "79937fc8b6064995adcecc07cb56aa7a",
+  "prompter": "yooplo",
+  "session": "2026-10-26-mp4-assignment",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "assignment-specification",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family supplied by session; exact runtime identifier and effort not exposed",
+  "started_at": "2026-10-26T09:55:49.424603+00:00",
+  "ended_at": "2026-10-26T10:02:09.464689+00:00",
+  "elapsed_seconds": 380.040086,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Page-referenced assignment specification and related guidance added; whitespace, artifact presence, 239 local links and ID checks passed; corrected patch context and checker encoding failures",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable token/cache/tool/retry counters and exact runtime settings not exposed",
+    "output_tokens": "Attributable token/cache/tool/retry counters and exact runtime settings not exposed",
+    "cache_read_tokens": "Attributable token/cache/tool/retry counters and exact runtime settings not exposed",
+    "tool_calls": "Attributable token/cache/tool/retry counters and exact runtime settings not exposed",
+    "retries": "Attributable token/cache/tool/retry counters and exact runtime settings not exposed"
+  },
+  "unavailable_reason": "Attributable token/cache/tool/retry counters and exact runtime settings not exposed"
+}

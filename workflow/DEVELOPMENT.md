@@ -6,9 +6,12 @@ Status: process baseline, not executed review evidence. Reviewer implementation 
 
 The repository specifications under workflow/specs are the source of truth. Stable identifiers connect product intent, acceptance criteria, architecture decisions, implementation tasks, tests, pull requests, guides, evaluation evidence, and reflections. A material behavior change is incomplete until the specification, tests, traceability record, and user-facing documentation agree.
 
+The [assignment specification](specs/ASSIGNMENT-SPEC.md) captures course constraints separately from team product choices. Each member owns a complete role feature set plus substantial shared work. If an SDD toolkit is used, record the team's own agent coordination and how it complements or compares with the toolkit; toolkit output alone is insufficient. Keep UI and shared components simple, with clear responsibilities and reused common behavior.
+
 | **Artifact** | **Purpose** |
 | --- | --- |
 | workflow/specs/PRODUCT-SPEC.md | Product index, actors, lifecycle, boundaries and glossary; requirement definitions in linked role/shared specifications |
+| workflow/specs/ASSIGNMENT-SPEC.md | Page-referenced MP4 constraints, deliverables, academic integrity, reflection prompts and assessment logistics |
 | workflow/specs/ROLE-CONTRIBUTOR.md | Contributor flows, permissions, AI feature, edge cases, and acceptance criteria |
 | workflow/specs/ROLE-REVIEWER.md | Reviewer flows, finding rules, AI feature, stale review behavior, and acceptance criteria |
 | workflow/specs/ROLE-MAINTAINER.md | Release gates, publication rules, AI feature, audit access, and acceptance criteria |
@@ -66,11 +69,13 @@ Each agent receives a task-specific context pack instead of the entire repositor
 
 ### Required Experiments for Reflections
 
+These controlled comparisons are team-selected verification commitments, not individually prescribed experiments in the assignment. The PDF's [sample reflection questions](specs/ASSIGNMENT-SPEC.md#reflection-discussion-guide) guide analysis. Cover both application AI and development-agent behavior, keep their accounting separate, and record actual per-member contributions. Include triggering/context/resource sharing, idle or blocked time, repeated analysis/retries, conflicts, and quality versus coordination cost. Report unavailable reasoning/cache telemetry without collecting hidden reasoning or fabricating savings.
+
 | **Experiment** | **Method** | **Evidence** |
 | --- | --- | --- |
 | Context size | Run the same bounded task with a focused context pack and a broad repository context | Compare tokens, latency, defects, retrievals, and reviewer corrections |
 | Single agent versus coordinated agents | Implement comparable low-risk and high-risk tasks with one agent and generator-verifier coordination | Compare wall time, tool calls, defects found, rework, and handoff overhead |
-| Prompt template version | Evaluate a baseline prompt and an improved typed, delimited prompt on the same cases | Compare schema validity, injection resistance, usefulness, and token use |
+| Prompt template / skill version | Evaluate baseline and revised prompts/skill instructions on the same cases; include relevant system instructions and context layout | Compare schema validity, instruction following, injection resistance, usefulness, and token use |
 | Cache and persisted summaries | Repeat a task with and without a stable context summary or reusable prefix | Compare cache reads, input tokens, repeated retrievals, and correctness |
 | Model choice | Use a lower-cost model for bounded extraction and a stronger model for one complex review set | Compare cost proxy, latency, agreement, and human corrections |
 

@@ -1,0 +1,19 @@
+{
+  "id": "693ea49dfc6d4dbaa5a26e04bdd78b5f",
+  "prompter": "yooplo",
+  "session": "2026-10-26-instructions-branch",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "split-validate-publish",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family supplied by session; exact runtime identifier and effort not exposed",
+  "started_at": "2026-10-26T10:06:08.015815+00:00",
+  "ended_at": null,
+  "elapsed_seconds": null,
+  "status": "running",
+  "usage": null
+}

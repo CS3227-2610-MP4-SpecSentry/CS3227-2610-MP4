@@ -4,6 +4,8 @@
 - Requirement/task and fixed source revision:
 - Hypothesis and comparison conditions:
 - Input/context artifacts and prompt/skill versions (safe references only):
+- Scope: application AI or development agents; applicable MP4/acceptance/security case IDs:
+- Triggering, shared resources, handoffs, conflicts, idle/blocked time and repeated-analysis overhead (for coordinated runs):
 - Model/effort, environment, controls, repetitions and execution order:
 - Expected quality/security outcomes and scoring method:
 - Actual commands, run/handoff links and verifier:
