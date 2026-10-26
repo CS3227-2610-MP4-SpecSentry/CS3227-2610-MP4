@@ -4,7 +4,7 @@
 
 This directory defines the agent roles and multi-agent implementation workflow for Reviewer functionality only, regardless of implementer. Use the [scope boundary](IMPLEMENTATION.md#scope) to decide which part of a task is covered. Standalone shared AI infrastructure work does not trigger this workflow by owner identity; supporting changes directly required by Reviewer behavior are included.
 
-The [product specification](../specs/PRODUCT-SPEC.md) remains authoritative for product requirements. For covered implementation work, the execution procedure here specializes its pre-existing generic agent workflow: requirements interpretation and architecture are combined in the main agent, integration belongs to that agent, and the same independent reviewer may revalidate fixes. Other functionalities retain their applicable process. For mixed-functionality tasks, apply this procedure to the Reviewer portion and coordinate shared interfaces.
+The [product specification](../specs/PRODUCT-SPEC.md) remains authoritative for product requirements. For covered implementation work, requirements interpretation and architecture are combined in the main agent, which remains accountable for integration and may delegate its execution to a focused integrator. The same independent reviewer may revalidate fixes. Other functionalities retain their applicable process. For mixed-functionality tasks, apply this procedure to the Reviewer portion and coordinate shared interfaces.
 
 Shared invariants, resource measurements, and prompt logging in the root [context file](../../AGENTS.md) remain repository-wide. Detailed agent responsibilities and execution rules introduced for Reviewer work are defined only in this directory.
 
@@ -15,6 +15,7 @@ Shared invariants, resource measurements, and prompt logging in the root [contex
 | Coordinate implementation of a task/feature | [Implementation workflow](IMPLEMENTATION.md), then [main agent](agents/MAIN.md) |
 | Review architecture/security or a changed trust boundary | [Security reviewer](agents/SECURITY-REVIEWER.md) |
 | Implement a bounded assignment or fix | [Implementer](agents/IMPLEMENTER.md) |
+| Execute delegated integration | [Integrator](agents/INTEGRATOR.md) |
 | Independently review or revalidate fixes | [Reviewer](agents/REVIEWER.md) |
 | Record briefs, assignments, or findings | Relevant section of [run template](templates/RUN.md) |
 | Create assignment, completion, review, or fix handoff documents | [Handoff procedure](skills/reviewer-role-agent-handoff.md) and its linked template |

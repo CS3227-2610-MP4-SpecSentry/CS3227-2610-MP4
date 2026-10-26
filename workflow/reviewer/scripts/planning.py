@@ -57,6 +57,15 @@ def matrix(args):
 
 def current_check(run, state, check_id):
     """Only terminal, passing evidence for the currently registered check counts."""
+    from validation import View
+    if isinstance(run, View) and state is run.data:
+        if check_id not in run.checks:
+            run.checks[check_id] = _current_check(run, state, check_id)
+        return run.checks[check_id]
+    return _current_check(run, state, check_id)
+
+
+def _current_check(run, state, check_id):
     executions = state.get("verification_runs", {})
     candidates = [(key, value) for key, value in executions.items() if value["check"] == check_id]
     if not candidates:
@@ -126,7 +135,9 @@ def completion_current(run, state, row):
 
 def readiness(args):
     run = core.open_run(args)
-    errors = readiness_errors(run, run.state(), args.assignment)
+    from validation import operation
+    with operation(run) as view:
+        errors = readiness_errors(view, view.state(), args.assignment)
     core.emit({"ok": not errors, "errors": errors,
                "scope": "Declared coverage and prerequisites; scenario quality still requires independent review."})
     return int(bool(errors))

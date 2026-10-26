@@ -160,8 +160,13 @@ def snapshot_matches(run, snapshot_id):
         if not record:
             return False
         artifact = core.repo_file(run.repo, record["artifact"])
-        return (_file_hash(artifact) == record["artifact_sha256"] and
-                _snapshot(run, record["paths"], record["base"]) == record["snapshot"])
+        from validation import View
+        digest = run.file_hash(artifact) if isinstance(run, View) else _file_hash(artifact)
+        if digest != record["artifact_sha256"]:
+            return False
+        current = (run.snapshot(record["paths"], record["base"]) if isinstance(run, View)
+                   else _snapshot(run, record["paths"], record["base"]))
+        return current == record["snapshot"]
     except (core.Error, OSError, KeyError, ValueError):
         return False
 
@@ -347,7 +352,9 @@ def validate_handoff(run, key):
     if not record:
         raise core.Error("Handoff ID does not exist")
     artifact = core.repo_file(run.repo, record["artifact"])
-    if _file_hash(artifact) != record["artifact_sha256"]:
+    from validation import View
+    digest = run.file_hash(artifact) if isinstance(run, View) else _file_hash(artifact)
+    if digest != record["artifact_sha256"]:
         raise core.Error("Handoff artifact changed")
     for reference in record["references"]:
         if not core.repo_file(run.repo, reference).is_file():

@@ -15,6 +15,8 @@ import core
 import evidence
 import verification
 import workflow
+import checks
+import planning
 
 
 class WorkflowV3Tests(unittest.TestCase):
@@ -74,6 +76,66 @@ class WorkflowV3Tests(unittest.TestCase):
         self.check()
         self.cli("matrix", "--input", self.payload("matrix", self.plan()))
         self.cli("verify", "--check", "tests")
+
+    def test_report_bundle_shares_one_validation_with_markdown(self):
+        self.ready()
+        record = self.start()["record_id"]
+        self.complete(record)
+        with patch.object(evidence, "_snapshot", wraps=evidence._snapshot) as rebuilt, \
+                patch.object(planning, "_current_check", wraps=planning._current_check) as checked:
+            bundle = self.cli("report", "--format", "bundle", code=1)
+        self.assertIn("# Reviewer run report", bundle["markdown"])
+        self.assertIn("consistent: False", bundle["markdown"])
+        self.assertFalse(bundle["consistency"]["ok"])
+        # environment(shared), tests(src+shared), completion(src), twice each
+        self.assertEqual(rebuilt.call_count, 6)
+        self.assertEqual(checked.call_count, 2)  # Six matrix cases share one test check.
+        self.assertEqual(bundle["consistency"], checks.check_run(self.run))
+
+    def test_completion_refresh_preserves_interval_and_rejects_changed_content(self):
+        self.ready()
+        record = self.start()["record_id"]
+        self.complete(record)
+        before = self.run.state()["records"]
+        # Force represents an external reset; refresh points at replacement checks.
+        result = self.cli("verify", "--check", "tests", "--force")
+        commands = [row["command"] for row in result["checks"]]
+        old_commands = self.run.state()["completions"]["finished"]["commands"]
+        state = self.run.state()
+        for old in old_commands:
+            check_id = state["verification_runs"][old]["check"]
+            new = next(cid for cid in commands if state["verification_runs"][cid]["check"] == check_id)
+            self.cli("supersede", "--kind", "commands", "--id", old, "--by", new, "--reason", "External reset")
+        argv = ["completion-refresh", "--id", "refreshed", "--from", "finished", "--snapshot", "finished",
+                "--reason", "Rechecked external state"]
+        for cid in commands:
+            argv += ["--command", cid]
+        self.cli(*argv)
+        state = self.run.state()
+        self.assertEqual(before, state["records"])
+        self.assertEqual(state["completions"]["refreshed"]["record_id"], record)
+        self.assertTrue(self.cli(*argv)["unchanged"])
+        self.assertEqual(state, self.run.state())
+        (self.repo / "src/code.txt").write_text("changed implementation", encoding="utf-8")
+        self.cli("snapshot", "--id", "changed", "--path", "src")
+        argv[2], argv[6] = "changed-refresh", "changed"
+        self.assertIn("identical current selected content", self.cli(*argv, code=2))
+        self.assertNotIn("changed-refresh", self.run.state()["completions"])
+
+    def test_completion_refresh_cannot_bypass_newer_attempt_or_missing_coverage(self):
+        self.ready()
+        record = self.start()["record_id"]
+        self.complete(record)
+        state = self.run.state()
+        env = next(cid for cid, row in state["verification_runs"].items() if row["check"] == "environment")
+        argv = ["completion-refresh", "--id", "refresh", "--from", "finished", "--snapshot", "finished",
+                "--reason", "Rechecked", "--command", env]
+        self.assertIn("cover every declared changed path", self.cli(*argv, code=2))
+        self.start(stage="fix")
+        test = next(cid for cid, row in state["verification_runs"].items() if row["check"] == "tests")
+        argv += ["--command", test]
+        self.assertIn("no newer implementation/fix attempt", self.cli(*argv, code=2))
+        self.assertNotIn("refresh", self.run.state()["completions"])
 
     def start(self, stage="implement", agent="worker", attempt=1, code=0):
         args = ["start", "--agent", agent, "--invocation", "one", "--stage", stage,

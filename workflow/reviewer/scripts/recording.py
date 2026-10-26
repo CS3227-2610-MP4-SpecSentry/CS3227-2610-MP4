@@ -43,6 +43,9 @@ def start(args):
     record_id = "rec-" + uuid.uuid4().hex[:16]
     with run.edit() as data:
         assignment_id = getattr(args, "assignment", None)
+        changes_code = getattr(args, "changes_code", False)
+        if changes_code and args.stage != "integrate":
+            raise Error("--changes-code is for integration; implementation/fix already implies code changes")
         if data.get("workflow_version", 2) >= 3 and args.stage in ("implement", "fix"):
             from planning import readiness_errors
             owner = data["assignments"].get(assignment_id)
@@ -64,6 +67,8 @@ def start(args):
             "unavailable_reasons": {}, "usage_import_id": None,
             "assignment": assignment_id,
         }
+        if changes_code:
+            data["records"][record_id]["changes_code"] = True
     emit({"record_id": record_id, "key": key})
     return 0
 
@@ -151,9 +156,9 @@ def usage(args):
     return 0
 
 
-def summarize(args):
-    run = open_run(args)
-    data = run.state()
+def summarize(args, data=None):
+    if data is None:
+        data = open_run(args).state()
     records = list(data["records"].values())
     ended = [r for r in records if r.get("end")]
     intervals = [(dt.datetime.fromisoformat(r["start"]), dt.datetime.fromisoformat(r["end"])) for r in ended]
@@ -199,6 +204,8 @@ def register(subparsers):
             parser.add_argument("--model", required=True)
             parser.add_argument("--effort", required=True)
             parser.add_argument("--assignment", help="required for version 3 implementation/fix dispatch")
+            parser.add_argument("--changes-code", action="store_true",
+                                help="mark integration wiring edits for independent review and closure timing")
         parser.set_defaults(func=handler)
     parser = subparsers.add_parser("finish")
     parser.add_argument("--id", required=True)

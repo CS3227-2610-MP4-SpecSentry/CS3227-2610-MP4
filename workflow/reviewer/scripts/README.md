@@ -120,6 +120,8 @@ python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/
 
 Closure requires the assigned independent reviewer, a successful registered review/revalidation record after the finding and relevant owner fixes, a fresh snapshot after those fixes, and actual evidence references. The same links are rechecked at completion. Both security and implementation review must have successful agents distinct from implementation/fix agents. Findings retain transition history; closed findings can reopen. Deferring a blocker does not satisfy completion. Before another cycle after two failed cycles, supply `--reassessment` with the cause/approach decision; the script does not decide the new approach.
 
+Use [`finding close-batch`](V3.md#6-refresh-evidence-and-close-findings) to preflight a reviewer's closures and commit all transitions atomically. Exact retries add no history. The individual transition command and all independence, timing and freshness checks remain available.
+
 ## 6. Supersede stale evidence and check completeness
 
 After fixes, create fresh snapshots/checks/handoffs for affected state. Reuse still-valid evidence for unaffected selected scopes; preserve failed earlier evidence and explicitly link its replacement:
@@ -132,6 +134,8 @@ python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/
 The same command supports `--kind handoffs`. Completion examines current terminal evidence and validates supersession chains; failures disappear from neither history nor recorded totals. Record earlier failed attempts as failed and later successful stage attempts separately.
 
 The completeness report checks the declared invocation/stage registry, timing, usage reasons, required stages, independent review identity, findings, cycles, handoffs, and current snapshot/check evidence. Explicit unavailable telemetry produces coverage warnings rather than invented measurements. The coordinator must declare every actual agent/stage/attempt; undeclared activity cannot be discovered. Semantic acceptance-criterion coverage, security sufficiency, and any human approvals still require agent/human assessment.
+
+`report --format bundle` returns JSON consistency and Markdown from one operation-local validated view; use it when both are required. Validation shares repeated scope/check reads, then rechecks content, artifacts and state before returning. Nothing is reused across operations. [`completion-refresh`](V3.md#6-refresh-evidence-and-close-findings) appends check evidence for identical current selected content without a new code-fix timestamp; it cannot refresh changed source or bypass a newer implementation attempt.
 
 ## 7. Evidence efficiency and retention
 

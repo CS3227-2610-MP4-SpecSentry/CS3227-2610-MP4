@@ -54,22 +54,88 @@ def complete(args):
             raise core.Error("Completion commands must cover every declared changed path")
         recording.finish_record(state, value["record_id"], "succeeded", value["summary"], value["unavailable_reason"])
         completions[key] = {**value, "changed_paths": paths, "created_at": core.now()}
-        sections = {
-            "identity": f"{owner['agent']} completed {value['assignment']}: {value['summary']}",
-            "requirements": ", ".join(state["requirements"]),
-            "permissions": f"Owned paths: {owner['paths']}; dependencies: {owner['dependencies']}",
-            "state": f"{value['summary']}; changed paths: {paths}; snapshot: {value['snapshot_id']}",
-            "verification": f"Current passing commands: {commands}; consult canonical findings in state.json",
-            "risks": f"{value['risks']}; next action: {value['next_action']}",
-            "resources": f"Canonical resource record: {value['record_id']}; unavailable telemetry: {value['unavailable_reason']}",
-        }
-        stored = evidence.store_handoff(run, state, key, sections, files, value["snapshot_id"], value["record_id"])
-        stored["completion_id"] = key
+        stored = store_completion_handoff(run, state, key, value, paths, files, owner)
     core.emit({"completion": key, "handoff": stored["artifact"], "record_id": value["record_id"]})
+
+
+def store_completion_handoff(run, state, key, value, paths, files, owner):
+    sections = {
+        "identity": f"{owner['agent']} completed {value['assignment']}: {value['summary']}",
+        "requirements": ", ".join(state["requirements"]),
+        "permissions": f"Owned paths: {owner['paths']}; dependencies: {owner['dependencies']}",
+        "state": f"{value['summary']}; changed paths: {paths}; snapshot: {value['snapshot_id']}",
+        "verification": f"Current passing commands: {value['commands']}; consult canonical findings in state.json",
+        "risks": f"{value['risks']}; next action: {value['next_action']}",
+        "resources": f"Canonical resource record: {value['record_id']}; unavailable telemetry: {value['unavailable_reason']}",
+    }
+    if value.get("refresh_of"):
+        sections["state"] += f"; evidence refresh of {value['refresh_of']}: {value['refresh_reason']}"
+    stored = evidence.store_handoff(run, state, key, sections, files, value["snapshot_id"], value["record_id"])
+    stored["completion_id"] = key
+    return stored
+
+
+def refresh(args):
+    """Refresh checks for identical selected content without inventing a code-fix interval."""
+    from validation import operation
+    run = core.open_run(args)
+    key, previous_id, sid = (core.identifier(v) for v in (args.id, args.previous, args.snapshot))
+    commands = [core.identifier(v) for v in args.check_command]
+    if len(set(commands)) != len(commands):
+        raise core.Error("Refresh commands must be distinct")
+    reason = core.text(args.reason)
+    with run.edit() as state:
+        old = state.get("completions", {}).get(previous_id)
+        if not old:
+            raise core.Error("Refresh requires an existing completion")
+        value = {**old, "snapshot_id": sid, "commands": commands,
+                 "refresh_of": previous_id, "refresh_reason": reason}
+        existing = state["completions"].get(key)
+        if existing and {k: v for k, v in existing.items() if k != "created_at"} != {
+                k: v for k, v in value.items() if k != "created_at"}:
+            raise core.Error("Completion ID already exists with different content")
+        with operation(run) as view:
+            if (not evidence.snapshot_matches(view, old["snapshot_id"])
+                    or not evidence.snapshot_matches(view, sid)
+                    or state["snapshots"][old["snapshot_id"]]["snapshot"] != state["snapshots"][sid]["snapshot"]):
+                raise core.Error("Refresh requires identical current selected content; changed content needs implementation/fix and review")
+            if not completion_current(view, state, value):
+                raise core.Error("Refresh requires current passing checks and no newer implementation/fix attempt")
+            covered = {path for cid in commands
+                       for path in state["snapshots"][state["commands"][cid]["snapshot_id"]]["snapshot"]["files"]}
+            if any(path not in covered for path in old["changed_paths"]):
+                raise core.Error("Refresh commands must cover every declared changed path")
+            errors = readiness_errors(view, state, old["assignment"]) if state.get("workflow_version", 2) >= 3 else []
+            if errors:
+                raise core.Error("Refresh prerequisites: " + "; ".join(errors))
+            if existing:
+                evidence.validate_handoff(view, key)
+        if not existing:
+            value["created_at"] = core.now()
+            files = [core.repo_file(run.repo, path) for path in old["references"]]
+            owner = state["assignments"][old["assignment"]]
+            stored = store_completion_handoff(run, state, key, value, old["changed_paths"], files, owner)
+            stored.update({"refresh_of": previous_id, "refresh_reason": reason})
+            state["completions"][key] = value
+        else:
+            stored = state["handoffs"][key]
+    core.emit({"completion": key, "refresh_of": previous_id, "unchanged": bool(existing), "handoff": stored["artifact"]})
 
 
 def report(args):
     run = core.open_run(args)
+    from validation import operation
+    with operation(run) as view:
+        consistency, markdown = render_report(view)
+    if getattr(args, "format", "markdown") == "bundle":
+        core.emit({"consistency": consistency, "markdown": markdown})
+    else:
+        print(markdown, end="")
+    return int(not consistency["ok"])
+
+
+def render_report(run):
+    """Both views derive from the same operation-local validation result."""
     state = run.state()
     consistency = check_run(run)
     rows = ["# Reviewer run report", "", "Canonical source: state.json; this report is a derived view.", "",
@@ -106,9 +172,8 @@ def report(args):
         refs = "; ".join(f"{rid}: {', '.join(fields)}" for rid, fields in affected.items())
         rows.append("- " + core.literal(reason) + "; " + core.literal(refs))
     with contextlib.redirect_stdout(io.StringIO()) as capture:
-        recording.summarize(type("Args", (), {"repo": run.repo, "run": run.path, "markdown": True})())
-    print("\n".join(rows) + capture.getvalue())
-    return int(not consistency["ok"])
+        recording.summarize(type("Args", (), {"markdown": True})(), data=state)
+    return consistency, "\n".join(rows) + capture.getvalue()
 
 
 def register(subparsers):
@@ -116,5 +181,14 @@ def register(subparsers):
     parser.add_argument("--id", required=True)
     parser.add_argument("--input", required=True)
     parser.set_defaults(func=complete)
+    parser = subparsers.add_parser("completion-refresh", help="refresh evidence for unchanged content without a new implementation record")
+    parser.add_argument("--id", required=True)
+    parser.add_argument("--from", dest="previous", required=True)
+    parser.add_argument("--snapshot", required=True)
+    parser.add_argument("--command", dest="check_command", action="append", required=True)
+    parser.add_argument("--reason", required=True)
+    parser.set_defaults(func=refresh)
     parser = subparsers.add_parser("report", help="derive one report from canonical records, findings and evidence")
+    parser.add_argument("--format", choices=("markdown", "bundle"), default="markdown",
+                        help="bundle emits JSON consistency and Markdown from one validation")
     parser.set_defaults(func=report)
