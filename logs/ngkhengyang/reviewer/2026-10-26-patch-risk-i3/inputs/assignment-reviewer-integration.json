@@ -1,0 +1,21 @@
+{
+  "id": "reviewer-integration",
+  "agent": "reviewer-integration",
+  "role": "implementer",
+  "dependencies": [
+    "foundation"
+  ],
+  "paths": [
+    "src/server/src/reviews/patch-risk.service.ts",
+    "src/server/src/reviews/patch-risk.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/server/src/reviews/manual-review.ts",
+    "src/server/src/reviews/reviews.service.ts",
+    "src/server/src/proposals/proposals.service.ts",
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "src/server/src/identity/business-context.ts",
+    "src/server/src/http.ts",
+    "src/server/test/patch-risk.integration.ts",
+    "src/server/test/patch-risk-http.spec.ts"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "requirement": "REQ-REV-014; clear oversized-context explanation and manual fallback",
+  "severity": "MEDIUM",
+  "blocks": true,
+  "owner": "ui",
+  "reviewer": "independent-review",
+  "description": "PatchRiskAssistant.tsx:77-80 discards the safe INPUT_LIMIT reason from a422 AI_UNAVAILABLE response and displays generic unavailability/try-again-later guidance. An independent in-memory TSX/JSDOM probe confirmed that exact feedback while manual/analyze controls remained enabled. Map allowlisted size-limit reasons to explicit guidance that the complete context exceeds AI limits and manual review remains available; preserve safe correlation references and test diff/total-context limit feedback. No component source was edited by the reviewer.",
+  "evidence": [
+    "src/client/src/features/reviewer/PatchRiskAssistant.tsx",
+    "src/server/src/http.ts",
+    "src/client/src/features/reviewer/PatchRiskAssistant.test.tsx"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "named-foundation",
+  "kind": "unit",
+  "argv": [
+    "C:\\Users\\User\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-patch-risk-i3-implementation\\inputs\\run-check.py",
+    "named-foundation"
+  ],
+  "paths": [
+    "package-lock.json",
+    "package.json",
+    "src/server/package.json",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/ai/contracts.ts",
+    "src/server/src/config.ts",
+    "src/server/test/ai-foundation.spec.ts",
+    "src/shared/package.json",
+    "src/shared/src/contracts/ai.ts",
+    "src/shared/src/contracts/reviewer.ts",
+    "src/shared/src/contracts/revision-cycle.ts",
+    "src/server/test/ai-fixtures.ts",
+    "src/server/src/app.module.ts",
+    "src/server/src/ai/ai.module.ts"
+  ],
+  "depends_on": [
+    "runtime"
+  ],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 120
+}

@@ -1,0 +1,1 @@
+error: Missing required environment variable: TEST_DATABASE_URL

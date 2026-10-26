@@ -1,0 +1,13 @@
+{
+  "id": "main-records",
+  "agent": "main",
+  "role": "coordinator",
+  "dependencies": [],
+  "paths": [
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3",
+    "logs/ngkhengyang/2026-10-26-reviewer-iteration3.md",
+    "docs/Reviewer-Guide.md",
+    "docs/AI-Integration.md",
+    "workflow/TRACEABILITY.md"
+  ]
+}

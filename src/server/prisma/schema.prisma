@@ -194,6 +194,8 @@ model CriterionEvidenceLink {
 // Closing an assignment retains its identity and provenance permanently.
 model ReviewAssignment {
   id           String                 @id @default(uuid())
+  // Immutable continuity identity, copied only for retained-reviewer revisions.
+  accessGenerationId String           @default(dbgenerated("gen_random_uuid()::text"))
   proposalId   String
   revisionId   String
   reviewerId   String
@@ -216,6 +218,7 @@ model ReviewAssignment {
   @@unique([proposalId, revisionId, id])
   @@index([reviewerId, status, assignedAt, id])
   @@index([proposalId, assignedAt, id])
+  @@index([proposalId, reviewerId, accessGenerationId])
 }
 
 // Separate from operational security events and their retention/pruning policy.
@@ -407,6 +410,93 @@ model ReviewIdempotency {
   actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
   @@unique([actorId, operation, proposalId, keyHash])
   @@index([expiresAt])
+}
+
+// AI operational evidence deliberately has no business foreign keys and no
+// recoverable submitted/provider text. Business fixture cleanup cannot erase it.
+enum AiOutcome {
+  SUCCESS
+  STALE
+  REJECTED
+  FAILED
+  CANCELLED
+}
+enum AiErrorClass {
+  DISABLED
+  CONFIGURATION
+  INPUT_LIMIT
+  SECRET_DETECTED
+  UNSUPPORTED_INPUT
+  ACCESS_LOST
+  SCOPE_CHANGED
+  DEADLINE
+  RATE_LIMIT
+  QUEUE_FULL
+  PROVIDER_AUTH
+  PROVIDER_REQUEST
+  PROVIDER_QUOTA
+  PROVIDER_TRANSIENT
+  TRANSPORT
+  INVALID_OUTPUT
+  CANCELLED
+  INTERNAL
+}
+model AiRequest {
+  id String @id @default(uuid())
+  correlationId String
+  actorId String
+  proposalId String
+  revisionId String
+  assignmentId String
+  accessGenerationId String
+  expectedVersion Int
+  expectedAssignmentVersion Int
+  selectedCriterionCount Int
+  templateVersion String
+  contextHash String?
+  requestedAt DateTime @default(now())
+  completedAt DateTime?
+  latencyMs Int?
+  outcome AiOutcome?
+  errorClass AiErrorClass?
+  retainedUntil DateTime @default(dbgenerated("(CURRENT_TIMESTAMP + '90 days'::interval)"))
+  attempts AiOutboundAttempt[]
+  @@index([actorId, proposalId, requestedAt, id])
+  @@index([retainedUntil])
+}
+model AiOutboundAttempt {
+  id String @id @default(uuid())
+  requestId String
+  actorId String
+  ordinal Int
+  dispatchedAt DateTime @default(now())
+  completedAt DateTime?
+  latencyMs Int?
+  outcome AiOutcome?
+  errorClass AiErrorClass?
+  promptTokens Int?
+  completionTokens Int?
+  totalTokens Int?
+  cachedTokens Int?
+  request AiRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  @@unique([requestId, ordinal])
+  @@index([actorId, dispatchedAt])
+  @@index([dispatchedAt])
+}
+// Waiting slots are distinct from dispatch reservations/usage. Expired rows can
+// be reclaimed atomically under the coordinator without business-root locks.
+model AiQueueLease {
+  id String @id @default(uuid())
+  requestId String @unique
+  actorId String
+  enqueuedAt DateTime @default(now())
+  expiresAt DateTime
+  @@index([expiresAt, enqueuedAt, id])
+}
+model AiQuotaCoordinator {
+  id String @id
+  // Durable single-row serialization point across all application processes.
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 

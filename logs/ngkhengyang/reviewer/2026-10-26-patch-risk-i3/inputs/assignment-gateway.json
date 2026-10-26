@@ -1,0 +1,13 @@
+{
+  "id": "gateway",
+  "agent": "gateway",
+  "role": "implementer",
+  "dependencies": [
+    "foundation"
+  ],
+  "paths": [
+    "src/server/src/ai/gateway",
+    "src/server/test/ai-gateway.spec.ts",
+    "workflow/tests/ai/reviewer"
+  ]
+}

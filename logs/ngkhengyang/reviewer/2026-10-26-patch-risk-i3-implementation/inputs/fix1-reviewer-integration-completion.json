@@ -1,0 +1,20 @@
+{
+  "assignment": "reviewer-integration",
+  "record_id": "rec-019333d4d6154837",
+  "snapshot_id": "findings-fix-1-source",
+  "commands": [
+    "verify-f844c87c574f43f6",
+    "verify-d677600fb4884517"
+  ],
+  "changed_paths": [
+    "src/server/test/patch-risk.integration.ts"
+  ],
+  "summary": "Replaced six sequential save/lifecycle cases with real overlapping original-scope HTTP operations; observed PG blocker PID, lock wait and ungranted lock before release, then verified atomic winner-only outcomes. Registered full PostgreSQL and static checks passed.",
+  "risks": "Independent revalidation pending; drop and reclaim remain two actual transactions, with racing stale save denied before explicit reclaim and denied again afterward.",
+  "next_action": "Independent F-005 revalidation of semantic concurrency evidence",
+  "references": [
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-patch-risk-i3-implementation\\reports\\fix1-source-manifest.json",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-patch-risk-i3-implementation\\inputs\\fix1-reviewer-integration-handoff.json"
+  ],
+  "unavailable_reason": "Exact aligned token/cache/tool/retry counters and observed settings unavailable; fresh external samples retained."
+}

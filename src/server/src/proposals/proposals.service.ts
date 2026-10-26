@@ -7,7 +7,7 @@ export const rootSelect = {
   currentAssignmentId: true, firstSubmittedAt: true, releaseAttachmentRef: true,
   owner: { select: { id: true, username: true } },
   currentRevision: { select: { id: true, number: true, summary: true, submittedAt: true } },
-  currentAssignment: { select: { id: true, revisionId: true, reviewerId: true, status: true, version: true,
+  currentAssignment: { select: { id: true, revisionId: true, reviewerId: true, status: true, version: true, accessGenerationId: true,
     reviewer: { select: { id: true, username: true } } } },
 } as const;
 

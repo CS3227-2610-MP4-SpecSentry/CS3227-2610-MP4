@@ -1,0 +1,28 @@
+{
+  "id": "integration-build-captured",
+  "kind": "build",
+  "argv": [
+    "C:\\Users\\User\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-patch-risk-i3-implementation\\inputs\\run-check.py",
+    "integration-build"
+  ],
+  "paths": [
+    "src/shared/src",
+    "src/server/src",
+    "src/client/src",
+    "src/server/prisma/schema.prisma",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json",
+    "src/shared/package.json"
+  ],
+  "depends_on": [
+    "baseline-fixture"
+  ],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 360
+}

@@ -1,0 +1,19 @@
+{
+  "id": "ui",
+  "agent": "ui",
+  "role": "implementer",
+  "dependencies": [
+    "foundation"
+  ],
+  "paths": [
+    "src/client/src/features/reviewer/PatchRiskAssistant.tsx",
+    "src/client/src/features/reviewer/PatchRiskAssistant.test.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ManualReview.tsx",
+    "src/client/src/features/reviewer/ManualReview.test.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "playwright.config.ts"
+  ]
+}

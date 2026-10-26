@@ -1,0 +1,27 @@
+{
+  "assignment": "ui",
+  "record_id": "rec-4e53075a0fb3470f",
+  "snapshot_id": "integrated-before-review",
+  "commands": [
+    "verify-239ea34910ca4c2c",
+    "verify-377b639e18d74cd2",
+    "verify-c2149121fd8c4c07"
+  ],
+  "changed_paths": [
+    "playwright.config.ts",
+    "src/client/src/features/reviewer/PatchRiskAssistant.test.tsx",
+    "src/client/src/features/reviewer/PatchRiskAssistant.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts"
+  ],
+  "summary": "Completed ui under coordinator takeover after worker usage-limit interruption; settled source and named acceptance checks passed.",
+  "risks": "Independent implementation review is intentionally unstarted. Live provider compatibility/usefulness/latency remain unverified and live configuration disabled. Logical role executed by the same actual main thread, not a new independent agent.",
+  "next_action": "Pause for user before independent implementation review; retain original failed/interrupted attempts.",
+  "references": [
+    "workflow/specs/AI-SECURITY-SPEC.md",
+    "workflow/specs/ROLE-REVIEWER.md",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-patch-risk-i3-implementation\\reports\\source-manifest.json"
+  ],
+  "unavailable_reason": "Exact record-aligned usage and observed settings unavailable. Logical coordinator role overlaps main integration; do not duplicate main token counters or same-thread elapsed time."
+}

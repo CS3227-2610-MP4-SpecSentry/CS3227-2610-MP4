@@ -1,0 +1,21 @@
+{
+  "id": "runtime",
+  "kind": "preflight",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "-e",
+    "const f=require(\"node:fs\"); if(Number(process.versions.node.split(\".\")[0])!==24)process.exit(1); for(const p of [\"node_modules/jest/bin/jest.js\",\"node_modules/prisma/build/index.js\",\"src/shared/dist/index.js\",\"src/server/src/generated/prisma/client.ts\"])if(!f.existsSync(p))process.exit(1); console.log(\"Node 24, installed test tools and generated sources present\");"
+  ],
+  "paths": [
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/shared/package.json",
+    "src/shared/src"
+  ],
+  "depends_on": [],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 30
+}

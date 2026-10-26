@@ -1,5 +1,42 @@
 # Requirement traceability
 
+## Reviewer Patch Risk increment — 26 October 2026
+
+Implementation and integration are recorded in the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)
+and its [canonical version 3 run](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json).
+Independent implementation/security review and fix revalidation closed all five
+findings; see the [final fix report](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/final-fix-review.md).
+Human teammate approval remains pending. Live provider operation remains
+disabled under OPEN-002. Synthetic tests do not establish live compatibility,
+usefulness/latency or all-role evaluation gates. This section supersedes older
+AI-pending markers only for the bounded Reviewer implementation and actual linked
+checks, not for provider or release acceptance.
+
+| Requirements / cases | Implementation and executable evidence | Boundary |
+| --- | --- | --- |
+| REV-003; ai-selected-batch, ai-boundary-batch/scope, ai-context-isolation | shared/contracts/ai.ts; reviews/patch-risk.service/controller.ts; ai-foundation.spec.ts and patch-risk.integration.ts | Current assigned latest revision; complete submitted summary/spec/diff/evidence; selected 1–5 exact IDs; no manual coverage writes |
+| REV-003/014; ai-output-rejection, ai-secret-injection, ai-budget-retry, ai-live-disabled | ai/gateway strict-json.ts, transport.ts, accounting.ts and index.ts; ai-gateway.spec.ts; versioned workflow/tests/ai/reviewer/v1.json | Strict duplicate-key/envelope/grounding validation, secret controls, timeout/retry/quota/queue limits, unknown usage and safe disabled fallback; deterministic synthetic provider only |
+| REV-012; ai-access-recheck, ai-response-*, ai-save-*, ai-generation-lineage, ai-session-final-wait, ai-whole-deadline | patch-risk.service.ts; business-context.ts; retained generation in proposal-lifecycle.service.ts; immutable migration; patch-risk.integration.ts | Fresh account/session/access and assignment-generation checks; delayed provider versus real lifecycle operations; original-scope human save; bounded DB waits |
+| REV-013; ai-human-save, ai-transient-page, ai-failed-call-isolation, ai-save-rollback | PatchRiskAssistant.tsx/component tests; reviewer-patch-risk browser spec/fixture; existing deterministic manual finding transaction; PostgreSQL failure/rollback cases | Editable explicit human save/cancel, page-session-only suggestions/prefilled forms, escaped rendering, atomic finding/activity and no AI business mutations |
+| REV-014; ai-size-fallback, ai-ui-fallback | Gateway full-context caps; PatchRiskAssistant; server/component/API-backed browser tests | No truncation or evidence omission, no outbound attempt on preflight rejection, manual forms remain usable |
+| REV-015; ai-private-metadata | AiRequest/AiOutboundAttempt operational schema; scoped AI audit; integration privacy/retention checks | Own safe bounded metadata separate from human/shared history; no raw suggestion or prompt retention, no previous-reviewer metadata disclosure |
+
+The run matrix binds all 47 named cases to explicit executable selectors. Final
+source snapshots and command records identify the verified state; consult current
+results and any superseded failures in the canonical run. The existing manual
+review/revision-cycle regression suites are retained. Real release-candidate
+operations and Reviewer approval revocation remain outside this increment.
+
+Fix evidence: F-001 adds normalized credential/token cases without changing exact
+grounding IDs; F-002 checks bounded abort/cancel on rejected/open streams; F-003
+preserves valid failed-output usage and isolates retries. F-004 checks allowlisted
+complete-context size feedback and manual entry preservation. F-005 replaces six
+sequential cases with overlapping original-scope operations, observed PostgreSQL
+blocking and atomic winner-only outcomes. Current checks pass: 73 server and 71
+client unit tests, 130 PostgreSQL tests, 11 Chromium scenarios, typechecks, lint
+and build. Actual BFCache navigation and scheduled physical 90-day pruning remain
+unverified; these results do not establish the live-provider or release gates.
+
 ## Reviewer revision-cycle increment — 26 October 2026
 
 This section supersedes earlier pending markers only for the bounded behavior

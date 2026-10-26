@@ -1,0 +1,190 @@
+{
+  "base": "HEAD",
+  "base_commit": "b8daea2dac771a0c372a01e4d0a23da4e44690e3",
+  "diff_sha256": "f82c5ce3fc21159eb90cd773cc1da9911cdcf4ab841ac6f37fbd1c0df1d12408",
+  "files": {
+    "docs/AI-Integration.md": {
+      "bytes": 5434,
+      "sha256": "d4177708c0a5d9791bb3ea120053a67d3b3e0709cb1f6c9e950ef38cc1ec743e"
+    },
+    "docs/Architecture.md": {
+      "bytes": 7636,
+      "sha256": "da57b5eaef6f22836132a6fe223eb1a5b535a1354a7970449077bcdbd8cfea7d"
+    },
+    "docs/DeveloperGuide.md": {
+      "bytes": 22076,
+      "sha256": "8304882867067df080a87bb9e724c3576af6ce08fe2a2ffe470df7045d4291e4"
+    },
+    "docs/UserGuide.md": {
+      "bytes": 10544,
+      "sha256": "c8430bac572af8a20dab59b0f69fe90458607bd5cf0a4c196fac133e34d66604"
+    },
+    "playwright.config.ts": {
+      "bytes": 887,
+      "sha256": "b248546e4021f4c246697bba7f6b6ed6059c8a89df95bf936c4327f2aa4cbb79"
+    },
+    "src/client/src/features/reviewer/PatchRiskAssistant.test.tsx": {
+      "bytes": 9318,
+      "sha256": "83088c073e8e0a36b9d60b857330bdc1da8c8ea283ce8471132c4459254fa663"
+    },
+    "src/client/src/features/reviewer/PatchRiskAssistant.tsx": {
+      "bytes": 13847,
+      "sha256": "a855094272105ee8411d60419f1c32a39024d747dd4e77754fac32c066ad74b6"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+      "bytes": 19770,
+      "sha256": "973ebf838417d3e01db34eae23ccc2c19090846930134d081b6e3aac6ab09723"
+    },
+    "src/server/prisma/migrations/20261026090000_reviewer_ai/migration.sql": {
+      "bytes": 4566,
+      "sha256": "d6a96a289b1bfdcc11671df3f37382efe63f3b9f2ee50f722ec6b6f19b9ec756"
+    },
+    "src/server/prisma/schema.prisma": {
+      "bytes": 16119,
+      "sha256": "bc9f607222a9134ac3964dd08f9382e8beda7563d092d05d11a6b0b5efb4577e"
+    },
+    "src/server/src/ai/ai.module.ts": {
+      "bytes": 1858,
+      "sha256": "1cd1fc33acabbbf87aebb92e77285547d437f941a8b7b247df52f0db72313d79"
+    },
+    "src/server/src/ai/contracts.ts": {
+      "bytes": 3557,
+      "sha256": "fcda6192f3220a90091745a71fd432076ba2b1ddf6e6ab8f2cc267c3c9f9491b"
+    },
+    "src/server/src/ai/gateway/accounting.ts": {
+      "bytes": 6065,
+      "sha256": "0da3fb1ed74d0c75c4787c3f6270641f98e2c5e3e0ae3486f09dd1a568bc38d2"
+    },
+    "src/server/src/ai/gateway/index.ts": {
+      "bytes": 16922,
+      "sha256": "e5dc6b85c7f7c3d5f93ebb868b81e551928dc04f2149c31bd76a7535b3526172"
+    },
+    "src/server/src/ai/gateway/strict-json.ts": {
+      "bytes": 2879,
+      "sha256": "8f6a7bfbe7cc9bb0b31ce1b9c83a543eb15fd4defe09b9679350b940299c5df3"
+    },
+    "src/server/src/ai/gateway/transport.ts": {
+      "bytes": 4726,
+      "sha256": "360c657c1d1ff1aed36d2e09d90f32b861634ae20689d2f9f71fdb1db8069055"
+    },
+    "src/server/src/app.module.ts": {
+      "bytes": 1110,
+      "sha256": "08f571170fe0f90cfcdd40e1da2545b69b4a2acf91f9ee77f9935207244f1d2d"
+    },
+    "src/server/src/config.ts": {
+      "bytes": 1572,
+      "sha256": "ec829c710d21a0afd752ad2f564792fcca957eabc75d7a6270594dbd037c6d2f"
+    },
+    "src/server/src/http.ts": {
+      "bytes": 3028,
+      "sha256": "dc68b184a1d13957a7d0d1311f5fc02f5973e156a9f2ef160d002081ed8dd184"
+    },
+    "src/server/src/identity/business-context.ts": {
+      "bytes": 4904,
+      "sha256": "f9615f3a40a089cec528981a04dffdb4eeaca2b4574556eaef14d6755a900b05"
+    },
+    "src/server/src/proposals/proposal-lifecycle.service.ts": {
+      "bytes": 14470,
+      "sha256": "9f57f137e35a2369531ba3b8f1e3109697faf7d4aa543aefd86c7fda56839ca5"
+    },
+    "src/server/src/proposals/proposals.service.ts": {
+      "bytes": 5951,
+      "sha256": "49d7e0660edcd1bdcc78cb6c2917cceb279a256c9a601a030aad1668af7dc922"
+    },
+    "src/server/src/reviews/patch-risk.controller.ts": {
+      "bytes": 1423,
+      "sha256": "97da65e915031c1ed7d187430f0adc069008b2f9fecdf55a17b1c63658dd089b"
+    },
+    "src/server/src/reviews/patch-risk.service.ts": {
+      "bytes": 10865,
+      "sha256": "9366d0cb01ad964953755979a5a2c18394676a2c7d014acae640c28581634a98"
+    },
+    "src/server/src/reviews/reviews.module.ts": {
+      "bytes": 1057,
+      "sha256": "0f1aa150206dab88d0cce74196e83a25529d7bce527ffd08d98e34de2907c546"
+    },
+    "src/server/test/ai-fixtures.ts": {
+      "bytes": 1900,
+      "sha256": "9b7f265d2a0cb0e81509c2d5250718528840502404c90804953baa5ffa58a86b"
+    },
+    "src/server/test/ai-foundation.spec.ts": {
+      "bytes": 9279,
+      "sha256": "1b2d83fc86f9b65d081ecc243b43934bf3478e261efc5cbe8be6f489090a6883"
+    },
+    "src/server/test/ai-gateway.spec.ts": {
+      "bytes": 22759,
+      "sha256": "c55f45cb86bc8b67019e2aaff101dbf9d0ea8c868d33d352e311e4d816adeedf"
+    },
+    "src/server/test/patch-risk-http.spec.ts": {
+      "bytes": 2461,
+      "sha256": "e5b6ecd54b9cc998aa69b2b82a556d5ae1fe2d46f06a541d88bb362e6f15f512"
+    },
+    "src/server/test/patch-risk.integration.ts": {
+      "bytes": 39864,
+      "sha256": "a598a57195e3f5c697784fae731103cb79fcc36f481eb5736e620b3d10e4a258"
+    },
+    "src/shared/src/contracts/ai.ts": {
+      "bytes": 7578,
+      "sha256": "6cae4ac6bc1b2607dc6b4b88da06b60de7ef73be4feee523976834c10f205fb1"
+    },
+    "src/shared/src/index.ts": {
+      "bytes": 386,
+      "sha256": "7bfe7d68bf2dfb25d8f3f429a152856a6ae9d154c076ceba32221cf0445479d1"
+    },
+    "workflow/TRACEABILITY.md": {
+      "bytes": 27069,
+      "sha256": "4d245143bf590c6f3ddcb4d276ddfe43208c05ffedbf9de5a184c8a8af5cdae5"
+    },
+    "workflow/tests/ai/reviewer/v1.json": {
+      "bytes": 1483,
+      "sha256": "4047c79842ef31274d8506abfa164e926c47009b2467b39935699eca52aa08df"
+    },
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts": {
+      "bytes": 6900,
+      "sha256": "36b0a905f5c7a9e8f3bdc1094b9c6cf9be5ca542e6f91ba7e6ab91c1e685f491"
+    },
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts": {
+      "bytes": 6353,
+      "sha256": "76cb1e81d68c647f6dce6ed05b62957ea6e5a9fda980a56120730d0d42b99077"
+    }
+  },
+  "head": "b8daea2dac771a0c372a01e4d0a23da4e44690e3",
+  "paths": [
+    "docs/AI-Integration.md",
+    "docs/Architecture.md",
+    "docs/DeveloperGuide.md",
+    "docs/UserGuide.md",
+    "playwright.config.ts",
+    "src/client/src/features/reviewer/PatchRiskAssistant.test.tsx",
+    "src/client/src/features/reviewer/PatchRiskAssistant.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/server/prisma/migrations/20261026090000_reviewer_ai/migration.sql",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/ai/ai.module.ts",
+    "src/server/src/ai/contracts.ts",
+    "src/server/src/ai/gateway/accounting.ts",
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/src/ai/gateway/strict-json.ts",
+    "src/server/src/ai/gateway/transport.ts",
+    "src/server/src/app.module.ts",
+    "src/server/src/config.ts",
+    "src/server/src/http.ts",
+    "src/server/src/identity/business-context.ts",
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "src/server/src/proposals/proposals.service.ts",
+    "src/server/src/reviews/patch-risk.controller.ts",
+    "src/server/src/reviews/patch-risk.service.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/server/test/ai-fixtures.ts",
+    "src/server/test/ai-foundation.spec.ts",
+    "src/server/test/ai-gateway.spec.ts",
+    "src/server/test/patch-risk-http.spec.ts",
+    "src/server/test/patch-risk.integration.ts",
+    "src/shared/src/contracts/ai.ts",
+    "src/shared/src/index.ts",
+    "workflow/TRACEABILITY.md",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "foundation-shared-build",
+  "kind": "build",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    ".tools/package/bin/npm-cli.js",
+    "run",
+    "build",
+    "-w",
+    "@specsentry/shared"
+  ],
+  "paths": [
+    "src/shared/src",
+    "src/shared/package.json",
+    "package.json",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "runtime"
+  ],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 120
+}

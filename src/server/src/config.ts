@@ -9,6 +9,13 @@ const environmentSchema = z.object({
     (value) => URL.canParse(value) && ['postgres:', 'postgresql:'].includes(new URL(value).protocol),
     'Must be a PostgreSQL URL',
   ),
+  // OPEN-002 is unresolved. Neither nonempty placeholders nor an env assertion
+  // can enable live traffic. Test providers are explicit in-process DI only.
+  AI_LIVE_ENABLED: z.preprocess((value) => value === 'false' ? false : value === 'true' ? true : value,
+    z.literal(false).default(false)),
+  AI_BASE_URL: z.literal('https://soclaas-api.comp.nus.edu.sg/v1').default('https://soclaas-api.comp.nus.edu.sg/v1'),
+  AI_API_KEY: z.string().max(4096).optional(),
+  AI_MODEL: z.string().min(1).max(256).optional(),
 });
 
 export type ServerConfig = z.infer<typeof environmentSchema>;

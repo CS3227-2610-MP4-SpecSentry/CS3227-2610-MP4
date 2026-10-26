@@ -1,0 +1,50 @@
+{
+  "base": "HEAD",
+  "base_commit": "b8daea2dac771a0c372a01e4d0a23da4e44690e3",
+  "diff_sha256": "66f77796ae8fddd7aca6c7fd0bd0936f3729294ead3dc3f2d861dce17f9d2ca6",
+  "files": {
+    "src/server/prisma/migrations/20261026090000_reviewer_ai/migration.sql": {
+      "bytes": 4566,
+      "sha256": "d6a96a289b1bfdcc11671df3f37382efe63f3b9f2ee50f722ec6b6f19b9ec756"
+    },
+    "src/server/prisma/schema.prisma": {
+      "bytes": 16119,
+      "sha256": "bc9f607222a9134ac3964dd08f9382e8beda7563d092d05d11a6b0b5efb4577e"
+    },
+    "src/server/src/ai/contracts.ts": {
+      "bytes": 3557,
+      "sha256": "fcda6192f3220a90091745a71fd432076ba2b1ddf6e6ab8f2cc267c3c9f9491b"
+    },
+    "src/server/src/config.ts": {
+      "bytes": 1572,
+      "sha256": "ec829c710d21a0afd752ad2f564792fcca957eabc75d7a6270594dbd037c6d2f"
+    },
+    "src/server/test/ai-fixtures.ts": {
+      "bytes": 1900,
+      "sha256": "9b7f265d2a0cb0e81509c2d5250718528840502404c90804953baa5ffa58a86b"
+    },
+    "src/server/test/ai-foundation.spec.ts": {
+      "bytes": 9213,
+      "sha256": "47225cf77007c4475bee4286b81a3ae14624ec08e2c26cef43b711ba511cc403"
+    },
+    "src/shared/src/contracts/ai.ts": {
+      "bytes": 7578,
+      "sha256": "6cae4ac6bc1b2607dc6b4b88da06b60de7ef73be4feee523976834c10f205fb1"
+    },
+    "src/shared/src/index.ts": {
+      "bytes": 386,
+      "sha256": "7bfe7d68bf2dfb25d8f3f429a152856a6ae9d154c076ceba32221cf0445479d1"
+    }
+  },
+  "head": "b8daea2dac771a0c372a01e4d0a23da4e44690e3",
+  "paths": [
+    "src/server/prisma/migrations/20261026090000_reviewer_ai/migration.sql",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/ai/contracts.ts",
+    "src/server/src/config.ts",
+    "src/server/test/ai-fixtures.ts",
+    "src/server/test/ai-foundation.spec.ts",
+    "src/shared/src/contracts/ai.ts",
+    "src/shared/src/index.ts"
+  ]
+}

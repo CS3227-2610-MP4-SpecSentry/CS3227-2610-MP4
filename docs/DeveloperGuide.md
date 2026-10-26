@@ -1,5 +1,16 @@
 # Developer Guide
 
+## Reviewer Patch Risk Assistant
+
+The [AI integration guide](AI-Integration.md) describes exact request/result
+contracts, authorization and assignment generations, transient UI retention,
+safe metadata, strict output validation, quotas and manual fallback. The default
+configured gateway remains disabled pending OPEN-002 live verification. Tests
+inject deterministic providers in-process; there is no browser-controlled model
+or production mock switch. Independent implementation/security review and
+revalidation closed all five findings. Use the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)
+for actual test results and source evidence.
+
 ## Reviewer revision cycles
 
 The owner API now supplies the minimal Contributor integration for real review cycles:
@@ -68,7 +79,9 @@ disablement. Manual review adds criterion assessments and individual takeover
 confirmation, append-only findings/transitions/amendments, human decisions,
 approval gates, decision idempotency and authorized history. Revision cycles add
 the minimal Contributor API, durable notifications and withdrawal/reopening.
-Full Contributor UI, releases and AI remain pending. See [Authentication](Authentication.md).
+Full Contributor UI, releases and Contributor/Maintainer AI remain pending.
+Reviewer AI is integrated with live operation disabled pending provider verification.
+See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
 See the root [directory map](../README.md#directory-map) for frontend/backend
@@ -270,7 +283,8 @@ may contain credentials. TLS verification must remain enabled for Neon.
 See [Architecture](Architecture.md) for responsibilities, the diagram and transaction
 seams. `AppModule` registers Identity, Proposals, Reviews, Releases, Activity,
 Notifications and AI modules. Identity, Proposals, Reviews, Activity and Notifications
-implement the documented bounded workflows; Releases and AI remain registrations.
+implement the documented bounded workflows. The AI module now provides the
+Reviewer gateway through dependency injection; Releases remains a registration.
 `DatabaseModule` encapsulates the configured Prisma provider. Add frontend role
 folders as their features are implemented; `shared/src/contracts` holds wire
 schemas while retaining the existing package exports.

@@ -1,0 +1,20 @@
+{
+  "id": "browser-runtime",
+  "kind": "preflight",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "-e",
+    "const f=require(\"node:fs\");if(!f.existsSync(require(\"playwright\").chromium.executablePath())){console.error(\"Configured Chromium executable unavailable\");process.exit(1);}"
+  ],
+  "paths": [
+    "playwright.config.ts",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "runtime"
+  ],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 120
+}

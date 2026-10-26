@@ -1,0 +1,14 @@
+
+(node:34544) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:34544) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:34544) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:34544) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:34544) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:34544) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+
+Test Suites: 11 passed, 11 total
+Tests:       130 passed, 130 total
+Snapshots:   0 total
+Time:        145.142 s
+Ran all test suites with tests matching "^PostgreSQL Patch Risk integration (ai-selected-batch|ai-access-recheck|ai-size-fallback|ai-private-metadata|ai-context-isolation|ai-http-access|ai-lifecycle|ai-failed-call-isolation|ai-save-rollback|ai-changes-requested|ai-generation-lineage|ai-whole-deadline|ai-session-final-wait|ai-response-drop-event-first|ai-response-drop-completion-first|ai-response-withdrawal-event-first|ai-response-withdrawal-completion-first|ai-response-disablement-event-first|ai-response-disablement-completion-first|ai-response-new-revision-event-first|ai-response-new-revision-completion-first|ai-response-drop-reclaim-event-first|ai-response-drop-reclaim-completion-first|ai-response-approval-event-first|ai-response-approval-completion-first|ai-response-logout-event-first|ai-response-logout-completion-first|ai-save-new-revision-event-first|ai-save-new-revision-save-first|ai-save-approval-event-first|ai-save-approval-save-first|ai-save-drop-reclaim-event-first|ai-save-drop-reclaim-save-first|ai-final-slot-user-window|ai-final-slot-user-day|ai-final-slot-global-window|ai-final-slot-queue)$|^(?!PostgreSQL Patch Risk integration ).+".

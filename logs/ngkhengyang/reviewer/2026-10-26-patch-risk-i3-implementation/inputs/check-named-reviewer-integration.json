@@ -1,0 +1,53 @@
+{
+  "id": "named-reviewer-integration",
+  "kind": "integration",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "node_modules/jest/bin/jest.js",
+    "--config",
+    "src/server/jest.integration.config.cjs",
+    "--runInBand",
+    "--runTestsByPath",
+    "src/server/test/patch-risk.integration.ts",
+    "--testNamePattern",
+    "(ai-selected-batch|ai-access-recheck|ai-size-fallback|ai-private-metadata|ai-context-isolation|ai-http-access|ai-lifecycle|ai-failed-call-isolation|ai-save-rollback|ai-changes-requested|ai-generation-lineage|ai-whole-deadline|ai-session-final-wait|ai-response-drop-event-first|ai-response-drop-completion-first|ai-response-withdrawal-event-first|ai-response-withdrawal-completion-first|ai-response-disablement-event-first|ai-response-disablement-completion-first|ai-response-new-revision-event-first|ai-response-new-revision-completion-first|ai-response-drop-reclaim-event-first|ai-response-drop-reclaim-completion-first|ai-response-approval-event-first|ai-response-approval-completion-first|ai-response-logout-event-first|ai-response-logout-completion-first|ai-save-new-revision-event-first|ai-save-new-revision-save-first|ai-save-approval-event-first|ai-save-approval-save-first|ai-save-drop-reclaim-event-first|ai-save-drop-reclaim-save-first|ai-final-slot-user-window|ai-final-slot-user-day|ai-final-slot-global-window|ai-final-slot-queue)"
+  ],
+  "paths": [
+    "package-lock.json",
+    "package.json",
+    "src/server/jest.integration.config.cjs",
+    "src/server/package.json",
+    "src/server/prisma/migrations",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/activity",
+    "src/server/src/ai",
+    "src/server/src/http.ts",
+    "src/server/src/identity",
+    "src/server/src/proposals",
+    "src/server/src/reviews",
+    "src/server/test/ai-fixtures.ts",
+    "src/server/test/business-fixtures.ts",
+    "src/server/test/patch-risk.integration.ts",
+    "src/shared/package.json",
+    "src/shared/src/contracts/ai.ts",
+    "src/shared/src/contracts/reviewer.ts",
+    "src/shared/src/contracts/revision-cycle.ts",
+    "src/server/test/ai-fixtures.ts",
+    "src/server/src/app.module.ts",
+    "src/server/src/ai/ai.module.ts"
+  ],
+  "depends_on": [
+    "baseline-fixture"
+  ],
+  "resources": [
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_reviewer_intake_test"
+  },
+  "timeout": 120
+}

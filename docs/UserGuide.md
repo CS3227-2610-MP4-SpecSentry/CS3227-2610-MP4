@@ -1,5 +1,31 @@
 # SpecSentry User Guide
 
+## Patch Risk Assistant
+
+On a current assigned review in IN_REVIEW or CHANGES_REQUESTED, select one to five
+acceptance criteria and request risk analysis. The panel identifies the analyzed
+revision and selected criteria; all other criteria remain not analyzed by that
+batch. Suggestions are advisory, confidence is model judgment, and rerunning may
+produce different results. AI coverage never changes your manual assessments.
+
+Choose Create finding on a current risk to open an editable human form. Review
+the severity, description and optional criterion before explicitly saving. Cancel
+creates nothing. A stale result cannot create a current finding; reconcile the
+latest revision instead. Saved findings follow the normal authorization and
+transaction rules.
+
+Raw suggestions and unsaved AI-prefilled forms disappear when the page session
+ends. They are not restored after reload or reopening. Live-provider verification
+is still pending, so the ordinary application currently offers a safe unavailable
+message. Manual coverage, findings and decisions remain usable while AI is
+pending or unavailable. If the complete context exceeds the AI size limits, the
+panel explains that limit; your manual entries remain available and the submitted
+specification, diff and evidence are not truncated to fit.
+
+See [AI integration and verification boundaries](AI-Integration.md). Independent
+implementation review and the five resulting fixes have completed. Live operation
+still awaits provider verification.
+
 ## Reviewing a replacement revision
 
 Reviewer notices identify each newly submitted revision. Choose **Open notified
@@ -48,7 +74,9 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-The full Contributor editing UI, releases and AI assistants remain pending.
+The full Contributor editing UI, releases and Contributor/Maintainer AI assistants
+remain pending. Reviewer AI has a bounded implementation with live operation
+disabled pending provider verification.
 
 Use **Sign out** to end your session. Sessions expire after 30 minutes idle or
 eight hours total; sign in again when prompted. Your browser does not retain

@@ -117,7 +117,8 @@ export class ProposalLifecycleService {
       if (assignment) {
         await tx.reviewAssignment.update({ where: { id: assignment.id }, data: { status: 'CLOSED', endReason: 'REVISION_REPLACED',
           endedAt: new Date(), version: nextVersion(assignment.version) } });
-        newAssignment = await tx.reviewAssignment.create({ data: { proposalId: id, revisionId: revision.id, reviewerId: assignment.reviewerId } });
+        newAssignment = await tx.reviewAssignment.create({ data: { proposalId: id, revisionId: revision.id, reviewerId: assignment.reviewerId,
+          accessGenerationId: assignment.accessGenerationId } });
       }
       const state = newAssignment ? 'IN_REVIEW' : 'SUBMITTED';
       await tx.changeProposal.update({ where: { id }, data: { version, state, title: content.title,

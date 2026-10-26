@@ -7,7 +7,6 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { ReleasesModule } from './releases/releases.module';
 import { ActivityModule } from './activity/activity.module';
 import { NotificationsModule } from './notifications/notifications.module';
-import { AiModule } from './ai/ai.module';
 import { HealthController } from './health/health.controller';
 
 @Module({})
@@ -23,7 +22,6 @@ export class AppModule {
         ReleasesModule,
         ActivityModule,
         NotificationsModule.register(config),
-        AiModule,
       ],
       controllers: [HealthController],
     };

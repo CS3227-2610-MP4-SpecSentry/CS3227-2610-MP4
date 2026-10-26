@@ -1,0 +1,25 @@
+{
+  "id": "integration-lint",
+  "kind": "static",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    ".tools/package/bin/npm-cli.js",
+    "run",
+    "lint"
+  ],
+  "paths": [
+    "src/shared/src",
+    "src/server/src",
+    "src/server/test",
+    "src/client/src",
+    "playwright.config.ts",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "baseline-fixture"
+  ],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 360
+}

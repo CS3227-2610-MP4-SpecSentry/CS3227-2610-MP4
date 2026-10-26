@@ -8,3 +8,4 @@ export {
 export * from './contracts/identity';
 export * from './contracts/reviewer';
 export * from './contracts/revision-cycle';
+export * from './contracts/ai';

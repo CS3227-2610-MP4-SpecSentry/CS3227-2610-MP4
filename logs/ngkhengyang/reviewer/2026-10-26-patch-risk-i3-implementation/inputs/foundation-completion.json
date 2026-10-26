@@ -1,0 +1,27 @@
+{
+  "assignment": "foundation",
+  "record_id": "rec-8c8537f789e446a3",
+  "snapshot_id": "foundation-settled",
+  "commands": [
+    "verify-cbe1fafa32714a31",
+    "verify-c224d4c8876a43e7"
+  ],
+  "changed_paths": [
+    "src/shared/src/contracts/ai.ts",
+    "src/shared/src/index.ts",
+    "src/server/src/config.ts",
+    "src/server/src/ai/contracts.ts",
+    "src/server/prisma/schema.prisma",
+    "src/server/prisma/migrations/20261026090000_reviewer_ai/migration.sql",
+    "src/server/test/ai-fixtures.ts",
+    "src/server/test/ai-foundation.spec.ts"
+  ],
+  "summary": "Strict shared/server AI contracts, fail-closed live config, immutable assignment generation and safe operational schema migrated and verified.",
+  "risks": "Live OPEN-002 disabled; independent implementation review intentionally pending. Sandbox shared-build failure preserved; unsandboxed registered build passed.",
+  "next_action": "Dispatch gateway, integration and UI against settled contracts.",
+  "references": [
+    "workflow/specs/AI-SECURITY-SPEC.md",
+    "src/server/src/ai/contracts.ts"
+  ],
+  "unavailable_reason": "Exact stage-aligned telemetry and observed model/effort unavailable; external collector sampled rows retained separately."
+}

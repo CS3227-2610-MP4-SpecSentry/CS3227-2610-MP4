@@ -1,6 +1,8 @@
 # Architecture
 
-Status: base authentication and the first Reviewer intake increment, 25 October 2026.
+Status: authentication, manual Reviewer/revision cycles and Reviewer AI integration,
+26 October 2026. Independent implementation/security review and fix revalidation
+of the bounded AI increment are complete; live provider verification remains pending.
 The remaining domain behavior is planned under the
 [technical specification](../workflow/specs/TECHNICAL-SPEC.md).
 
@@ -38,8 +40,10 @@ flowchart TB
 ```
 
 The diagram is the target design. Health/readiness, authentication, database
-connectivity and Reviewer intake are implemented; AI and release operations remain
-planned. See [Authentication](Authentication.md).
+connectivity, manual Reviewer/revision cycles and bounded Reviewer AI are
+implemented. Live AI stays disabled pending OPEN-002; release operations and the
+other role assistants remain planned. See [Authentication](Authentication.md) and
+[AI integration](AI-Integration.md).
 
 | Module / directory under server source | Single responsibility |
 | --- | --- |
@@ -54,9 +58,11 @@ planned. See [Authentication](Authentication.md).
 | health | Report liveness and database readiness |
 
 `AppModule` composes the modules. `ReviewsModule.register(config)` supplies Reviewer
-routes and imports transaction-aware Proposals and Activity services. Contributor
-writes, findings, coverage and decisions remain outside this increment. Releases,
-Notifications and AI remain empty registrations.
+routes and imports transaction-aware Proposals, Activity and configured AI
+services. The bounded Contributor lifecycle API, manual findings/coverage/decisions
+and Notifications are implemented. Releases remain an empty registration.
+`AiModule.register(config)` supplies a gateway through injectable transport,
+verified token-counting and clock contracts; its default options disable live AI.
 `DatabaseModule.register(config)` owns connectivity configuration and
 exports `DatabaseService` for the existing health controller without global state. `IdentityModule.register(config)` imports the same configured
 database module and registers the default-protected authentication/CSRF/role guard.
@@ -102,8 +108,9 @@ Participating module operations must accept the same transaction context, rather
 than independently committing. Publication and revocation serialize on shared
 candidate/approval records. Required activity and notices commit with the command;
 in-process events after commit are insufficient for those guarantees. These
-release and submission interfaces remain to be implemented against
-[integration contracts](../workflow/specs/INTEGRATION-SPEC.md).
+release publication and approval-revocation interfaces remain planned under the
+[integration contracts](../workflow/specs/INTEGRATION-SPEC.md). Submission and
+resubmission already commit revision state, activity and required notices together.
 
 ## Client, contracts and AI
 

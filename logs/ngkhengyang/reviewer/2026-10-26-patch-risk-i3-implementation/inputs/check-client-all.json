@@ -1,0 +1,26 @@
+{
+  "id": "client-all",
+  "kind": "unit",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    ".tools/package/bin/npm-cli.js",
+    "run",
+    "test",
+    "-w",
+    "@specsentry/client"
+  ],
+  "paths": [
+    "src/client/src",
+    "src/client/vite.config.ts",
+    "src/client/package.json",
+    "src/shared/src",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "baseline-fixture"
+  ],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 240
+}
