@@ -145,7 +145,11 @@ with activity and required notifications. Never grant access based on client rou
 The [workflow directory guide](../workflow/README.md) describes the specifications,
 agent definitions, procedures, templates, scripts and tests. Start at
 [Development](../workflow/DEVELOPMENT.md) for spec-driven development and coordinated
-agent responsibilities. Reviewer-specific execution starts at
+agent responsibilities. Contributor-specific execution starts at
+[its entry point](../workflow/contributor/README.md), with four agent responsibilities,
+bounded vertical slices, independent acceptance/security checks, and a shared run
+template. This is an instruction-based workflow, not an automated agent runner or
+evidence of implemented Contributor features. Reviewer-specific execution starts at
 [its entry point](../workflow/reviewer/README.md). Workflow-tool tests do not prove
 product acceptance. Root `AGENTS.md` and `.agents/skills` stay at natural discovery
 locations; workflow content is otherwise consolidated under `workflow/`.

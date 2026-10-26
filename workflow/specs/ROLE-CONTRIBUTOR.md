@@ -4,6 +4,10 @@ Baseline: 25 October 2026. Normative design; implementation evidence is tracked 
 
 [Product index](PRODUCT-SPEC.md) | [Open decisions](OPEN-DECISIONS.md)
 
+## Implementation process
+
+Contributor development uses the scoped [multi-agent workflow](../contributor/README.md): coordinator, implementer, security reviewer, and independent acceptance verifier. Its planned slices map to the requirements below; workflow documents and agent reports do not constitute delivered functionality or acceptance evidence. Product behavior remains governed by this specification and the linked shared/integration/AI requirements. Cross-role contracts require coordination with affected owners before implementation.
+
 ## Requirements
 
 | **ID** | **Capability** | **Acceptance criteria** |

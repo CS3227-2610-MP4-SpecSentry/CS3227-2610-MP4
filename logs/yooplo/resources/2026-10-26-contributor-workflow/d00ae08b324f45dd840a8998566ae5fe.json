@@ -1,0 +1,35 @@
+{
+  "id": "d00ae08b324f45dd840a8998566ae5fe",
+  "prompter": "yooplo",
+  "session": "2026-10-26-contributor-workflow",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "conformance-review",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family supplied by session; exact model identifier and effort not exposed",
+  "started_at": "2026-10-26T09:52:11.854566+00:00",
+  "ended_at": "2026-10-26T09:53:07.735840+00:00",
+  "elapsed_seconds": 55.881274,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Documentation conformance self-review and final whitespace check passed; product requirements unchanged; evidence and limitations logged",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable per-stage token/cache/tool/retry counters and exact runtime settings not exposed",
+    "output_tokens": "Attributable per-stage token/cache/tool/retry counters and exact runtime settings not exposed",
+    "cache_read_tokens": "Attributable per-stage token/cache/tool/retry counters and exact runtime settings not exposed",
+    "tool_calls": "Attributable per-stage token/cache/tool/retry counters and exact runtime settings not exposed",
+    "retries": "Attributable per-stage token/cache/tool/retry counters and exact runtime settings not exposed"
+  },
+  "unavailable_reason": "Attributable per-stage token/cache/tool/retry counters and exact runtime settings not exposed"
+}
