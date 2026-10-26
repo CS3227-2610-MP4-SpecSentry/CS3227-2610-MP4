@@ -1,0 +1,14 @@
+# Correct secret-scan scope on workflow PR
+
+- Prompter yooplo (Git identity); request: investigate/fix the failing GitHub Actions secret scan on the two documentation PRs. Existing authorization covers updating/pushing these branches. Human summary review pending.
+- Evidence: PR #8 CI run `40305669997`, job `121514040805`, and PR #7 run `40305664216`, job `121514019433`, fail with one finding after scanning 29 commits. The checksum-verified official Gitleaks 8.30.1 binary reproduces the failure locally.
+- Safe finding metadata: `generic-api-key`, `src/server/test/notifications.integration.ts:39`, commit `0becf9381c893bee8db3f50d6a7d61777f843898`, on `origin/reviewer-role` only. It is a test-config SESSION_SECRET (test marker verified); no raw value retained here. The unrelated Reviewer commit is outside both PR ancestries and is not changed by this task.
+- Root cause: default Git scan includes fetched unrelated refs. Fix `.github/workflows/ci.yml` to pass `--log-opts=HEAD`, scanning the checked-out revision and all ancestors (including both parents of a PR merge). Keep full checkout history, scanner rules, redaction and failure exit unchanged. No allowlist, baseline, history rewrite or exclusion of files added. The Reviewer branch's own check will still report its fixture until its owner addresses it.
+- Validation passed: HEAD-history scan (18 commits, no findings), whitespace, and four disposable-repository assertions: default scan detects an unrelated-ref fixture; HEAD history excludes that ref; HEAD history still detects current and subsequently deleted synthetic secrets. Regression fixture and scanner remain temporary, not project dependencies. This is a scoped CI fix, not product security certification. Local Docker unavailable; remote CI is the container validation. Application tests omitted because application code is unchanged.
+- Resource record: [main stage](resources/2026-10-26-secret-scan-workflow/f01881b1851044d7a70b5742e3d5a25a.json), started before edits. Shared report passed; one stage, no subagents.
+
+| Stage | Model / effort | Start / end UTC | Elapsed seconds | Tokens/cache/calls/retries | Outcome |
+| --- | --- | --- | --- | --- | --- |
+| fix-and-verify | GPT-6 / unavailable | 2026-10-26T10:18:08.120504+00:00 / 2026-10-26T10:19:04.197223+00:00 | 56.076719 | unavailable | Local scan and regression checks passed |
+
+- Measured wall time and summed agent time: 56.076719 seconds. Exact runtime settings and attributable counters unavailable. Initial diagnosis/download and final measurement transcription, Git publication and remote-CI observation are outside the edit/check interval. This final transcription uses the recording exception. Fix is authorized for commit/push to the existing PR branch; live CI outcome will be checked after publication.

@@ -52,4 +52,5 @@ jobs:
         with:
           fetch-depth: 0
       - name: Scan Git history for secrets
-        run: docker run --rm -v "$PWD:/repo:ro" ghcr.io/gitleaks/gitleaks:v8.30.1 git /repo --redact --no-banner
+        # Include the checked-out revision's full ancestry, not unrelated remote branches.
+        run: docker run --rm -v "$PWD:/repo:ro" ghcr.io/gitleaks/gitleaks:v8.30.1 git /repo --log-opts=HEAD --redact --no-banner
