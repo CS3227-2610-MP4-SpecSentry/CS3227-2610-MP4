@@ -12,8 +12,24 @@
   "observed_effort": null,
   "settings_reason": "Model family supplied by session; exact runtime identifier and effort not exposed",
   "started_at": "2026-10-26T10:06:08.015815+00:00",
-  "ended_at": null,
-  "elapsed_seconds": null,
-  "status": "running",
-  "usage": null
+  "ended_at": "2026-10-26T10:08:55.085964+00:00",
+  "elapsed_seconds": 167.070149,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent instructions branch validated, committed as b877acd and pushed with upstream; Contributor files excluded",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage token/cache/tool/retry telemetry and exact runtime settings not exposed",
+    "output_tokens": "Per-stage token/cache/tool/retry telemetry and exact runtime settings not exposed",
+    "cache_read_tokens": "Per-stage token/cache/tool/retry telemetry and exact runtime settings not exposed",
+    "tool_calls": "Per-stage token/cache/tool/retry telemetry and exact runtime settings not exposed",
+    "retries": "Per-stage token/cache/tool/retry telemetry and exact runtime settings not exposed"
+  },
+  "unavailable_reason": "Per-stage token/cache/tool/retry telemetry and exact runtime settings not exposed"
 }
