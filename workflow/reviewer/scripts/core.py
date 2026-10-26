@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
+import time
 
 
 class Error(ValueError):
@@ -109,12 +110,17 @@ def validate_repo(repo):
     return path.resolve()
 
 
-def create_run(repo, name, run_id, requirements):
+def create_run(repo, name, run_id, requirements, workflow_version=2):
     repo = validate_repo(repo)
     identifier(name)
     identifier(run_id)
-    if not requirements or any(not re.fullmatch(r"REQ-REV-00[1-6]", r) for r in requirements):
-        raise Error("Reviewer runs require REQ-REV-001 through REQ-REV-006 references")
+    spec = repo / "workflow/specs/ROLE-REVIEWER.md"
+    known = set(re.findall(r"REQ-REV-\d{3}", spec.read_text(encoding="utf-8"))) if spec.is_file() else {
+        f"REQ-REV-{number:03}" for number in range(1, 7)}
+    if not requirements or any(r not in known for r in requirements):
+        raise Error("Reviewer runs require requirement IDs from ROLE-REVIEWER.md")
+    if workflow_version not in (2, 3):
+        raise Error("Unsupported workflow version")
     path = contained(repo, Path("logs") / name / "reviewer" / run_id)
     path.parent.mkdir(parents=True, exist_ok=True)
     contained(repo, path)
@@ -123,7 +129,8 @@ def create_run(repo, name, run_id, requirements):
     except FileExistsError as exc:
         raise Error("Run already exists; select a new run ID") from exc
     state = {
-        "schema_version": 1, "scope": "reviewer", "run_id": run_id, "prompter": name,
+        "schema_version": 1, "workflow_version": workflow_version,
+        "scope": "reviewer", "run_id": run_id, "prompter": name,
         "requirements": list(dict.fromkeys(requirements)), "created_at": now(),
         "required_stages": list(REQUIRED_STAGES), "expected": {}, "records": {},
         "assignments": {}, "findings": {}, "cycles": [], "snapshots": {},
@@ -158,12 +165,17 @@ class Run:
         return data
 
     @contextlib.contextmanager
-    def edit(self):
+    def edit(self, wait_seconds=0):
         lock = contained(self.repo, self.path / ".lock")
-        try:
-            fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-        except FileExistsError as exc:
-            raise Error("Run is locked; retry after its writer finishes (locks are never stolen)") from exc
+        deadline = time.monotonic() + wait_seconds
+        while True:
+            try:
+                fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+                break
+            except FileExistsError as exc:
+                if time.monotonic() >= deadline:
+                    raise Error("Run is locked; retry after its writer finishes (locks are never stolen)") from exc
+                time.sleep(min(0.05, max(0, deadline - time.monotonic())))
         try:
             os.close(fd)
             before = self.state()

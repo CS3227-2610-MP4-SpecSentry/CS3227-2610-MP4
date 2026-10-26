@@ -1,5 +1,7 @@
 # Reviewer workflow automation
 
+New runs use [version 3](V3.md): matrix dispatch gates, verification with resource leases, canonical completion and derived reports. Follow that procedure for new work. The reference below covers lower-level commands and version 2 compatibility; legacy examples explicitly select version 2.
+
 Python 3.11+ standard library only. Run from the repository root; use `python -B` to avoid bytecode artifacts. All scripts, tests, and this execution policy are Reviewer-specific. They neither start agents nor impose this workflow on other functionalities.
 
 ```powershell
@@ -14,7 +16,7 @@ Exit codes: `0` success, `1` a failed check or incomplete run, `2` invalid input
 ## 1. Initialize and record every agent/stage/attempt
 
 ```powershell
-python -B workflow/reviewer/scripts/workflow.py init --scope reviewer --prompter ngkhengyang --run-id coverage-validation --requirement REQ-REV-002
+python -B workflow/reviewer/scripts/workflow.py init --scope reviewer --workflow-version 2 --prompter ngkhengyang --run-id coverage-validation --requirement REQ-REV-002
 python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/coverage-validation expect --agent main --invocation main-1 --stage compile
 python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/coverage-validation start --agent main --invocation main-1 --stage compile --model unavailable --effort unavailable
 ```
@@ -148,17 +150,15 @@ Run completeness against valid active state before compaction. Preserve the exac
 
 The current CLI has **no archive/compaction command** and cannot resume or validate a separately compacted archive as active state. Preserve active CLI format and its referenced artifacts by default. An explicitly authorized manual archive must declare its different format, validate retained links/hashes/measurement totals, preserve the historical completeness result and state that it is not resumable by this CLI. Later work starts a new run. Do not overwrite source hashes or relabel an old review as approval of later changes.
 
-### Automation contract — not implemented by this specification revision
+### Remaining automation work
 
-Future tooling changes should provide the following behavior, with executable tests before advertising it as available:
+Version 3 implements canonical completion/generated views, grouped telemetry reasons, scoped snapshot reuse, cache exclusions, matrix gates and verification leases with executable tests. The following capabilities still need separate implementation and validation:
 
 | Capability | Required checks |
 | --- | --- |
-| Canonical completion/handoff recording with generated views | One source of truth; stable references, disjoint ownership and seven-section handoff validation; read-only reviewers gain no write permission |
-| Referenced, deduplicated snapshot manifests | Required untracked files included; dependencies/caches/secrets excluded; unchanged content reused; changed relevant files invalidate evidence |
-| Consistent generated-artifact hashing | Hash actual written bytes under a documented serialization/newline convention; verify Windows/LF behavior; keep source-file hash semantics explicit |
+| Cross-check manifest deduplication | Share identical manifests across distinct checks without losing provenance; the runner currently reuses evidence per check |
+| Repository-wide generated-artifact normalization | Handoffs use explicit LF bytes; extend and verify normalization for other generated artifact types without changing raw source-file hash semantics |
 | Observed lifecycle event capture | Close on actual completion/pause/failure when observable; record unknown gaps on recovery; distinguish elapsed/wait states without inventing inference/CPU time |
 | Validated closed-run archive | Preserve finding history, failed attempts, review independence and final check/hash provenance; check links and totals; keep schema/version compatibility and historical results explicit |
-| Compact reports | Deduplicate shared unavailable reasons while preserving per-record exceptions, provenance and measurement coverage |
 
-Until those capabilities exist, use the current operations and documented limitations above. This workflow revision changes procedures/templates only; it neither adds these CLI features nor automatically captures runtime usage.
+Use the implemented operations and documented limits. Runtime lifecycle/usage capture and closed-run archive validation remain unavailable; agent/coordinator invocation is still required.

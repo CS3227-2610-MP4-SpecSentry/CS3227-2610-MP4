@@ -398,6 +398,9 @@ def check_run(run):
             errors.append(f"{kind}: no current evidence recorded")
     if implementation_handoffs == 0:
         errors.append("handoffs: no current snapshot-bound implementation handoff recorded")
+    if state.get("workflow_version", 2) >= 3:
+        from planning import readiness_errors
+        errors.extend(readiness_errors(run, state, closing=True))
     return {"ok": not errors, "errors": errors, "warnings": warnings,
             "coverage": {"expected_records": len(expected), "resource_records": len(records),
                          "unavailable_token_metrics": unavailable},

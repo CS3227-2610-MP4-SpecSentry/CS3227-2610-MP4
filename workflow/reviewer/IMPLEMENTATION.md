@@ -4,7 +4,7 @@ Enter through the [Reviewer workflow context](README.md) for task routing and it
 
 ## Scope
 
-This procedure applies only to Reviewer functionality (REQ-REV-001 through REQ-REV-006), regardless of the implementer. It covers the review queue, evidence mapping, Patch Risk Assistant, findings, decisions, stale reviews, and supporting changes directly required by those behaviors. Standalone shared infrastructure work is outside this trigger even when assigned to the same person. For mixed-functionality tasks, apply this procedure to the Reviewer portion and coordinate shared interfaces. Shared invariants, resource recording, and prompt logging remain repository-wide.
+This procedure applies only to Reviewer functionality defined by the current [Reviewer requirements](../specs/ROLE-REVIEWER.md), regardless of the implementer. It covers the review queue, evidence mapping, Patch Risk Assistant, findings, decisions, stale reviews, and supporting changes directly required by those behaviors. Standalone shared infrastructure work is outside this trigger even when assigned to the same person. For mixed-functionality tasks, apply this procedure to the Reviewer portion and coordinate shared interfaces. Shared invariants, resource recording, and prompt logging remain repository-wide.
 
 ## Trigger and roles
 
@@ -15,6 +15,8 @@ The main agent owns the brief, design, contracts, split, model/effort selection,
 Use [run sections](templates/RUN.md) as needed in `logs/<name>/<log_name.md>` (use the prompting person's name); a run ID is a date plus short task name. Link source requirements with a commit or recorded document state. Keep one coordinator-owned run record; workers return summaries for incorporation rather than concurrently editing it.
 
 Use the [Reviewer automation CLI](scripts/README.md) to register expected work and record one boundary pair per agent, invocation, stage, and attempt. Include reused agents, fix/revalidation cycles, failures, and interruptions. Start/finish recording at execution boundaries; import directly attributable telemetry when exposed and record reasons otherwise. These commands require agent invocation; they are not automatic runtime instrumentation.
+
+New runs follow the [version 3 procedure](scripts/V3.md). Its canonical state generates completion handoffs and the final report; disposable inputs and derived reports are separate from interval records. Version 2 runs retain their existing compatibility rules.
 
 ## 1. Compile requirements and design
 
@@ -29,6 +31,8 @@ Perform a read-only environment preflight before dependent dispatch: discover re
 Resolve questions using requirements, decisions, and code. Code provides implementation evidence, not authority to contradict requirements. For a material unresolved ambiguity, ask the prompter with a recommendation, implications, and alternatives. Aim to resolve these before implementation; pause only dependent work if a question emerges later.
 
 **Exit:** the implementation brief accounts for all requested behavior, identifies its sources, and has no unresolved ambiguity blocking the proposed work.
+
+Draft named acceptance cases during compilation: requirement, scenario, preconditions, expected outcome, risk kind and competing events where applicable. Bind each to an assignment owner and an executable named test/check after contracts settle. Cover authorization, boundaries, lifecycle, concurrency and rollback or record reviewed applicability reasons; transactional expectations include audit and notifications.
 
 ## 2. Review security and settle contracts
 
@@ -49,6 +53,8 @@ The main agent chooses the split; the security reviewer challenges unsafe bounda
 
 Announce workers, scope, permitted files, shared-file owner, dependencies, model/effort with rationale under the [selection policy](RESOURCES.md#dispatch-policy), and expected checks. Proceed without a routine approval pause; keep the announcement visible for human intervention. Respect actual concurrency limits and dispatch ready work only.
 
+Register check contracts, assignment ownership and the acceptance matrix; run environment/fixture prerequisites and `readiness --assignment` before dispatch. Version 3 implementation/fix starts enforce that gate. Dependents wait for a current successful foundation completion. Use the verification runner's resource leases for shared builds, database and browser checks.
+
 Give each worker [implementer guidance](agents/IMPLEMENTER.md) and a focused assignment. Assign disjoint write sets, including tests, migrations, configuration, and generated files. Worktrees can isolate edits but do not resolve overlapping semantic ownership. Define cross-module contracts with names/signatures or schemas, errors, authorization, transaction/version semantics, and an owner where relevant.
 
 At assignment, completion, review, and fix boundaries, use [reviewer-role-agent-handoff](skills/reviewer-role-agent-handoff.md). Keep a concise task packet with authoritative references; subsequent packets emphasize changed contracts, findings and evidence. Use one authoritative handoff per actual boundary rather than extra copies for status updates. Read-only subagents return content for the coordinator to persist.
@@ -57,11 +63,15 @@ Workers request contract changes through the main agent. Update affected assignm
 
 **Exit:** assigned work has completion reports, scoped checks, known limitations, and no uncoordinated contract changes.
 
+For each successful implementation/fix boundary, use `complete` to finish its resource record and derive its seven-section handoff once. Workers return the structured completion payload; the authorized coordinator persists it. Preserve failed/interrupted attempts with ordinary recording commands.
+
 ## 4. Integrate
 
 The main agent owns integration. In a shared directory, inspect the assembled work; with worktrees, bring the changes together first. Check interfaces, configuration, migrations, security assumptions, and the combined diff. Run the available build and relevant integration checks.
 
 Snapshot settled files at verification boundaries, following [evidence efficiency and retention](scripts/README.md#7-evidence-efficiency-and-retention). Use explicit source scopes, relevant untracked files and command evidence. Reuse a fresh snapshot when selected content is unchanged; worker completion or user resumption alone does not require another snapshot. After fixes, retain prior failures and explicitly supersede stale evidence.
+
+Use `verify --changed` with all affected source/dependency paths to select declared checks, inspect selection when needed, and reuse current scoped evidence. Force checks after external database/server/browser state changes. A missing scope or test mapping remains an independent-review concern; hashing cannot establish unchanged external state.
 
 Fix small wiring issues directly and record them. Return substantive defects to the responsible worker. Wait for writers to finish before creating a stable review state. Record a commit, or base commit plus diff/content hashes and relevant untracked-file hashes, so evidence identifies the actual reviewed content. Do not commit solely to satisfy this step without task authorization.
 
@@ -93,6 +103,8 @@ Run the CLI's completeness check and address missing declared records, unresolve
 
 Produce one final evidence index and resource summary referencing canonical records. Follow the retention policy before any compaction; preserve requests, findings, failed/interrupted attempts and final review/test provenance. Distinguish validated active runs from historical closed-run archives. Evaluate useful outcomes and resource limitations using [resource guidance](RESOURCES.md#evaluation), not artifact counts or token consumption as success measures.
 
+Generate the final view using `report` from canonical state, after `completeness` verifies current matrix checks and implementer completions. Link it from the prompter-named log; retain independent review and unresolved semantic gaps explicitly.
+
 **Exit:** the final report and evidence refer to the same implementation state, and any incomplete work is explicit.
 
 ## Changelog
@@ -102,3 +114,4 @@ For each future workflow specification revision, append a dated entry here linki
 | Date | Revision | Corresponding change log |
 | --- | --- | --- |
 | 2026-10-25 | Efficiency revision: conditional decomposition/preflight, concise context, snapshot/evidence reuse and retention, focused revalidation, task-proportionate effort with Astra by exception, honest timing and tooling capability boundaries. | [Changes and validation](../../logs/ngkhengyang/2026-10-25-reviewer-intake.md#workflow-improvements-made) |
+| 2026-10-26 | Version 3 tooling: canonical completion and generated reports, executable acceptance/race matrices and dispatch gates, dependency-aware verification with environment/fixture prerequisites and checkout-wide resource leases; short command writer locks and current requirement-ID discovery. | [Changes and validation](../../logs/ngkhengyang/2026-10-26-reviewer-workflow-v3.md) |
