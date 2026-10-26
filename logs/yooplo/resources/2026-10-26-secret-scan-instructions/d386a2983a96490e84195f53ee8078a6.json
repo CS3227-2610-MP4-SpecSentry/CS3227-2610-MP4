@@ -1,0 +1,35 @@
+{
+  "id": "d386a2983a96490e84195f53ee8078a6",
+  "prompter": "yooplo",
+  "session": "2026-10-26-secret-scan-instructions",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "apply-and-verify",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family supplied by session; exact identifier and effort not exposed",
+  "started_at": "2026-10-26T10:19:32.457696+00:00",
+  "ended_at": "2026-10-26T10:19:56.259642+00:00",
+  "elapsed_seconds": 23.801946,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Assignment branch full reachable history clean; workflow identical to verified PR8 fix; whitespace passed",
+  "unavailable_reasons": {
+    "input_tokens": "Exact runtime settings and attributable token/cache/tool/retry counters not exposed",
+    "output_tokens": "Exact runtime settings and attributable token/cache/tool/retry counters not exposed",
+    "cache_read_tokens": "Exact runtime settings and attributable token/cache/tool/retry counters not exposed",
+    "tool_calls": "Exact runtime settings and attributable token/cache/tool/retry counters not exposed",
+    "retries": "Exact runtime settings and attributable token/cache/tool/retry counters not exposed"
+  },
+  "unavailable_reason": "Exact runtime settings and attributable token/cache/tool/retry counters not exposed"
+}
