@@ -1,0 +1,672 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-26T08:05:39.869718+00:00",
+  "scope": [
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2"
+  ],
+  "baseline_head": "d6a0dee61e07b9d536def19b2de396e01cea64f2",
+  "status": "completed",
+  "policy": "Remove only consumed inputs with verified retained data and no incoming repository references, plus byte-identical duplicate reports. Retain all authoritative records, failures, reviews, snapshots and traceability. No archive conversion.",
+  "removed": [
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/final-handoff-input.json",
+      "sha256": "b595c66f1fa7e3db5187631f3915915d6843b2bfd8babc2d2245f71e15c4ddbc",
+      "bytes": 1883,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/06-final-closure.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/main-assignment.json",
+      "sha256": "c9c626af9dca1c59ce683c906401de92fd294cccce12638b29378282049fd3d8",
+      "bytes": 259,
+      "reason": "Consumed assignment input; exact payload fields retained in canonical assignments",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/state.json#/assignments/main-integration"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/review-handoff-input.json",
+      "sha256": "57d18844dfc727fa3042385d12d3ab6ceea3c97519a4945db4a83f6de0efc65d",
+      "bytes": 2048,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/05-main-to-review.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/security-design-input.json",
+      "sha256": "d0e7ea8aa3175b29bb2157dd7f93e295641721c24a1718c8dc6aa5f093825927",
+      "bytes": 1630,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/04-security-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/server-assignment.json",
+      "sha256": "e0c86ad65cedeaaa3db4b66cc8082cb6ebeccd64da56221f6928c35993a4a074",
+      "bytes": 322,
+      "reason": "Consumed assignment input; exact payload fields retained in canonical assignments",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/state.json#/assignments/server"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/server-handoff-input.json",
+      "sha256": "a6fcf9fcd67e58bb35cdfe2e1cbe9b694ff3daaaf3dec591caf871e84db6d0fc",
+      "bytes": 1398,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/01-main-to-server.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/tests-assignment.json",
+      "sha256": "2aa5a5bc5e0002621718eddbafe5f1084b28db0758603e365d625a233a463c6c",
+      "bytes": 209,
+      "reason": "Consumed assignment input; exact payload fields retained in canonical assignments",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/state.json#/assignments/tests"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/tests-handoff-input.json",
+      "sha256": "d023c9ed6aabf702679f85ba4f39bb58cc4bd371972fad081080d732619105e4",
+      "bytes": 1386,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/02-main-to-tests.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/ui-assignment.json",
+      "sha256": "d146d0cdb09ce5a7709d3f2fbb4297df3c1e2ed27496367e72118874222df4d0",
+      "bytes": 165,
+      "reason": "Consumed assignment input; exact payload fields retained in canonical assignments",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/state.json#/assignments/ui"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-25-manual-review/ui-handoff-input.json",
+      "sha256": "ae8e9c83517351575177971f1715509c29f9ec53cb5fec09832c2f3d892579fb",
+      "bytes": 1445,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/03-main-to-ui.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/06-lifecycle-to-main-input.json",
+      "sha256": "e5410cf965b86a24118f7fac81552e28027002793fc508ca7158831c57ed8fa8",
+      "bytes": 1992,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/06-lifecycle-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/06-notifications-to-main-input.json",
+      "sha256": "a0bf1e51f5c2be364035b4392e1eb4b70f8cc33fe601f84b69caaa4c2d5421c6",
+      "bytes": 1981,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/06-notifications-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/06-ui-to-main-input.json",
+      "sha256": "8a44798d042121979d916c1e98a54a84c676069baca21b6e7562c1d2646c69bf",
+      "bytes": 1982,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/06-ui-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/07-lifecycle-fix-to-main-input.json",
+      "sha256": "ab23208d5451546439b164fead54b5662bb6d20c73298c9cd0062cb5db113a89",
+      "bytes": 2134,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/07-lifecycle-fix-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/final-implementation-input.json",
+      "sha256": "81b9d5baaacf4081c7292e6e64a1e4f504d83d2b1c87c9542417654b5e72cf30",
+      "bytes": 2662,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/14-main-final-implementation.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/fixes-complete-input.json",
+      "sha256": "8972d21dfd04bb2df3eacba6fefdb6990b735062caf83e5b72efc2c88689d8e4",
+      "bytes": 2302,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/12-fixes-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/independent-closure-input.json",
+      "sha256": "aae959ea24537ad953c912e0e949c0a7d43f027a8244c68423e1b047cc33bd5f",
+      "bytes": 2948,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/13-independent-revalidation-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/independent-initial-review-usage.json",
+      "sha256": "d6117b44b0cf8bb8e2540e3caa3c8069b423a42872c2d24ba97e69e1868c5669",
+      "bytes": 747,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-dabe716321514ad1"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/independent-return-input.json",
+      "sha256": "72ee766a75c5ebce95c40a0ad17c18819a54c33fe63f2cb57f2f0c6eea5e3a2a",
+      "bytes": 2810,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/09-independent-review-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/independent-revalidation-usage.json",
+      "sha256": "87f396bdcc95a174587de5f9216925993af3a4e07c79e1ba9afe89a396a8ef08",
+      "bytes": 751,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-dcff736f96464f35"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/independent-review-input.json",
+      "sha256": "59874b89f69ad02181bafefd75239daee21d17671ec9d30a069c61f25d5d9cfb",
+      "bytes": 3816,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/08-main-to-independent-review.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/lifecycle-assignment.json",
+      "sha256": "ebe565ed7f5d795c031d214d4e6786842e4dc4d29db0198a40f2df56250c07a7",
+      "bytes": 425,
+      "reason": "Consumed assignment input; exact payload fields retained in canonical assignments",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/assignments/lifecycle"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/lifecycle-handoff-input.json",
+      "sha256": "210c2bcddb647a647dd068055cb449e92bde90d223b23e0a02b03757dc6ddbda",
+      "bytes": 2432,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/05-main-to-lifecycle.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/lifecycle-initial-usage.json",
+      "sha256": "e64fb0662d737cb0777d08eccd4985dae82ea919fa16a69b181fb13a2ab890cf",
+      "bytes": 680,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-5a1e87ce6bf54f4a"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/lifecycle-races-fix-usage.json",
+      "sha256": "5d68b4c35ccfbc760152f5c53bec51046dba149a3ee331ffb15430021928bec7",
+      "bytes": 737,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-8c029ecaa35a449a"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/lifecycle-reopen-fix-usage.json",
+      "sha256": "ad14116b4cb0de9c7b538b4cbda9c1f6aa5471ada3a7bdf7ab9eba216e5ecdfb",
+      "bytes": 735,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-4a51441ad3544afc"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-compile-usage.json",
+      "sha256": "d8579c6ceadff5715f029377fc72aad8954952fc55240db90076984f7331b2c0",
+      "bytes": 643,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-5a0aea8faaf54261"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-final-integration-usage.json",
+      "sha256": "437051f6b56eeb190caef7c4854ee677c0fc9ba6f1828549287431f1c22c286f",
+      "bytes": 729,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-101d10bfd1d2410d"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-foundation-usage.json",
+      "sha256": "0f807664395c097cf5be36c81ab876b74a2a76503f834860bf743ba20cb40113",
+      "bytes": 698,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-c2b5dc00315e4013"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-integration-interrupted-usage.json",
+      "sha256": "85e370cd33e07a7647b2928b9c0ea363c342c403e211f492c9e9847eaa008d15",
+      "bytes": 752,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-c1dee73208e444c8"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-integration-recovery-usage.json",
+      "sha256": "1f519733b10e5ddc339ec0dba3814edf82a5556b405fd594ccb05f0980471fed",
+      "bytes": 731,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-917db1a6d6534fb6"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-review-coordination-usage.json",
+      "sha256": "dc557b088a13c31f4efb0e7cecd671ddf6a2dab13e704d80392ede020d14f98d",
+      "bytes": 727,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-7d87282575ee45de"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-run-close-usage.json",
+      "sha256": "0f93b5c65b6c6680d087c73b8690a0a3a77ea81ec0468689707598f124caa46f",
+      "bytes": 722,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-5773293dd44d4a89"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-security-fix-usage.json",
+      "sha256": "45dfbfb4f497345fd4e46c338df790b4fd1c6a2749e4a974a4d35d70b3638820",
+      "bytes": 722,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-0009a0a9bc7e406a"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/notifications-assignment.json",
+      "sha256": "f3bd14cd70784197fc704ba1d14b0b916812f3d6c3b36905201be142ac9e85af",
+      "bytes": 364,
+      "reason": "Consumed assignment input; exact payload fields retained in canonical assignments",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/assignments/notifications"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/notifications-handoff-input.json",
+      "sha256": "168bb0ed3b009abee4c67abfddbea2d71ec3acc3b0734fd3e58d819f361c273b",
+      "bytes": 2378,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/05-main-to-notifications.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/notifications-initial-usage.json",
+      "sha256": "87ad63dbb930b299da5ca814b29206843ae61c1644a31db9fb2989cf08fb7d91",
+      "bytes": 694,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-3cd067dec9c34a57"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/revalidation-input.json",
+      "sha256": "bf37b112e63298fb7eb072c5f6ff2ba149380445954ab7e3a2bfed117089a834",
+      "bytes": 3007,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/11-main-to-independent-revalidation.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/security-handoff-input.json",
+      "sha256": "c7db04ade55fe9d81f9610aa0e5d9029af22f8e27054e30708ef371d44dc72e3",
+      "bytes": 3193,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/01-main-to-security.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/security-recheck-input.json",
+      "sha256": "573c25a33a48b63f3ef4ab6f19b3f32ce32b1423a8cdd0b1c2daadd5a10acb3b",
+      "bytes": 2396,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/03-main-to-security-recheck.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/security-recheck-return-input.json",
+      "sha256": "05ff670b9daa6999b52a55786a6928bfb9ec2e5d7214922a75642b9623dd9e74",
+      "bytes": 2465,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/04-security-to-main-recheck.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/security-return-input.json",
+      "sha256": "e9221c8593d7141b8b21ce9b84eb728d0bbe5e3d7ad5b82f36155973eac20485",
+      "bytes": 3320,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/02-security-to-main.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/ui-assignment.json",
+      "sha256": "f7f442a8ecefc58646e87e9427e688056d3aed3ee88b981246d0486c263fefda",
+      "bytes": 277,
+      "reason": "Consumed assignment input; exact payload fields retained in canonical assignments",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/assignments/ui"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/ui-handoff-input.json",
+      "sha256": "f1c7a4e823e8e5d2b04c479204fef0d742dfab2e09014e638980ce4487e492e8",
+      "bytes": 2300,
+      "reason": "Consumed handoff input; original input hash and rendered seven-section handoff retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/05-main-to-ui.md"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/ui-initial-usage.json",
+      "sha256": "41ea7d8690400c24f6e02062736ebb2d384e62817e51813d9d7d7dc74ad76154",
+      "bytes": 668,
+      "reason": "Consumed usage import; import ID, exact counters and telemetry source retained in canonical resource record",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json#/records/rec-00b844ad31cd4b91"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/consolidation-completeness-check.json",
+      "sha256": "bf3ef3e19f4166f568b27e9b2b71695271b78cdec9c3cf16a8e0648f92d567e5",
+      "bytes": 5142,
+      "reason": "Byte-identical duplicate of retained evidence",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/final-completeness.json"
+      ]
+    }
+  ],
+  "kept_exceptions": [
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-security-usage.json",
+      "reason": "Original import carries differing historical metadata; preserve input",
+      "fields": [
+        "unavailable_reasons/tool_calls",
+        "unavailable_reasons/retries"
+      ]
+    }
+  ],
+  "baseline": {
+    "2026-10-25-manual-review": {
+      "state_sha256": "51e15a0397737909cfb19ab69d7f3f38de7495af471f3b3b3acb996a579e952c",
+      "files": 41,
+      "bytes": 166937,
+      "counts": {
+        "records": 19,
+        "expected": 19,
+        "assignments": 4,
+        "findings": 1,
+        "snapshots": 3,
+        "commands": 8,
+        "handoffs": 6
+      },
+      "current_completeness": {
+        "ok": false,
+        "errors": 6,
+        "warnings": 114,
+        "diagnostic_sha256": "3e7601887d053e7849c35e611ced759bac9038de1c95caa1f0eee3a902d002a8"
+      },
+      "golden_completeness": {
+        "completeness-final.json": {
+          "sha256": "52292f61c9864714f782608597e03cfb9529642263e5f0d443c4ff1339962d97",
+          "ok": false
+        },
+        "completeness-reconciled.json": {
+          "sha256": "3560300c758a20b89f918271b932c002936f7bca94db0b29e851a46dbcd6bb70",
+          "ok": true
+        }
+      }
+    },
+    "2026-10-26-reviewer-iteration2": {
+      "state_sha256": "441dfa8286e99b3d854df8f9bcd7facea97d53636961c687eb3bf6a11b39da1a",
+      "files": 117,
+      "bytes": 648550,
+      "counts": {
+        "records": 19,
+        "expected": 19,
+        "assignments": 3,
+        "findings": 3,
+        "snapshots": 9,
+        "commands": 12,
+        "handoffs": 17
+      },
+      "current_completeness": {
+        "ok": false,
+        "errors": 14,
+        "warnings": 42,
+        "diagnostic_sha256": "44553ac6f8f1b77a381e5b70b2cacff2172b8f2770222c02abddd83d4e6d6c38"
+      },
+      "golden_completeness": {
+        "final-completeness.json": {
+          "sha256": "bf3ef3e19f4166f568b27e9b2b71695271b78cdec9c3cf16a8e0648f92d567e5",
+          "ok": true
+        },
+        "preimplementation-completeness.json": {
+          "sha256": "e209587653a3df8623b987036fbaaac2a628b860b8c4cb444612f8754e15d0ab",
+          "ok": false
+        }
+      }
+    }
+  },
+  "retained_files": {
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/completeness-final.json": "52292f61c9864714f782608597e03cfb9529642263e5f0d443c4ff1339962d97",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/completeness-reconciled.json": "3560300c758a20b89f918271b932c002936f7bca94db0b29e851a46dbcd6bb70",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/finding-sec-i01.json": "8469aa80ce43d29e4ade144c2431b069b2cbcf55f0e6f614cebf07f36715d774",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/independent-closure.md": "826f89e939c543622555d3172c2d29cb0fb00a721d6cd564ffa918733f29a5c3",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/resource-summary.md": "2613298ba5d36a22ca788305381df797b33a1b766d260324d0945bdf0a9a172d",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/state.json": "51e15a0397737909cfb19ab69d7f3f38de7495af471f3b3b3acb996a579e952c",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/token-comparison-2026-10-26.json": "d26f63cd499640dd3e44faca9835111cf44c6134798d2e2632be2b4694a67ac0",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/token-comparison-2026-10-26.md": "6007b4304a40e0af2adf08cf9786dc1cca18a2b55c0f1dee2a591d54aa3daeca",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/closure-postgres-stderr.json": "296b7e5a8774e2de82ddc7ec4e29368a0d4c422a9414e485a22f3f5b834ad1e9",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/closure-postgres-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-2-stderr.json": "2dbfad5b83cce94e7a68d263980c62f1d730823a95a7671b136c4ca1995ed4ea",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-2-stdout.json": "6d8108ef5f94712882c1bc0549f191b128cc397ef8a218c53babfc6975b0dbcb",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-stderr.json": "2de4887a84cdfceeab1633d2b55f4c36239e14c8c9e9636f0ce688a41d13bd0c",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-browser-stdout.json": "a4a6aa6153a50ed17f9df1039280b4064420f7449fb818b7960a14e25bf0af3c",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-3-stderr.json": "b4b3bd8259f85bc755e7ef8a972a211067f47a652f38705e90c1522efc5de1a5",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-3-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-stderr.json": "b4b3bd8259f85bc755e7ef8a972a211067f47a652f38705e90c1522efc5de1a5",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-lint-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-postgres-stderr.json": "addafc0e8c0cbe9dda6e5767fa77a22ed6264649a0fc407c8bbb37487bea63fa",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/final-postgres-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/integrated-lint-1-stderr.json": "bd129125fed9866d2080efde0e978d76c046e6993054ea7cc0884609e21a70de",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/commands/integrated-lint-1-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/01-main-to-server.md": "b01a3b781ae0ac1f55d27294bde37c8c3a8a90ed5064b0e9681c8a28cfe55c11",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/02-main-to-tests.md": "6b90a4cd354022718c29540d05c64761a226e413be1b35bab04cc56bf0ccf349",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/03-main-to-ui.md": "5a4048275b8d63a4fdb10b344a87cdeeae55219a012687d71935a669d67c7ef5",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/04-security-to-main.md": "29b2d15f8c2e951af887c3d6e439f443d0b56263cb777a3e18d0b27cc71301f1",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/05-main-to-review.md": "2f79bcf5eed4d503fdc336207bab93d8da98c0ec941cb2d3268e44f069cfa2dc",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/handoffs/06-final-closure.md": "024fcf163964ca253b03cca9e472c36178d72c1fffe756267bf7e1a0547193fa",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/snapshots/final-source-2.json": "2a60e5a4db52ffe0c94e7deea72e5e053874fb6a1da263480b63923b3761c211",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/snapshots/final-source-3.json": "bbcb2a3e1545c603148088c0c36ceab71a3770ce46839b29a3f0d1668db79ef6",
+    "logs/ngkhengyang/reviewer/2026-10-25-manual-review/snapshots/integrated-source-1.json": "900038adb8e441cb17fe654216e34a3ffe8d2de77423eb61ce1356fed46bf317",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/consolidation-resource-initial.md": "ccca059e40a30eeed700eceda6489012c4699b874db7a002b88135716b5c20f5",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/consolidation-resource-report.json": "d384a4de371c24be1e97f9f4de32fb62bcc3450fafd7bc4438a089e465204e77",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/consolidation-usage.json": "20a3eb1775f491c5acd1aa01314b1458f08e0acf207b0c98da40866b10705185",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/consolidation-validation.json": "1c9440b1409a37e3c1ea25e06681df6d58075fd9895820fcef8bd19404ef813c",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/final-completeness.json": "bf3ef3e19f4166f568b27e9b2b71695271b78cdec9c3cf16a8e0648f92d567e5",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/hibernation-clarification.json": "ca6e0fba93e6f0a5293e1fcafde0e91e0bec3d0f4c4d853b7581ff5c1de5c08c",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/integration-first.txt": "083dd0e25bf17e6f6c00536d4187c3d2d03ac1c0d15f0a93df884bf8c4d8c4a8",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/integration-second.txt": "916c3d537f093e1c943ccfcf6a9fa46f2136745e53db2d70d803aad1d442f296",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/integration-summary-finding.json": "b1c674f0d9eee3fe8d1a7e8d3dea32a7d6f66594003423f3a166d5949424fdcb",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/lifecycle-races-retry.txt": "c7a087148e0f6eac41c69c5707b338a8934b65e539d22e5ebdc43dec55cc2654",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/main-security-usage.json": "a898571d32f231acb5972a5877ebf2ef0097bbc09b27318e8a0e555a1775b1e4",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/observed-settings.json": "faaca12acf2702669a0372755af603c0f86a702c7b5984da770d9547e16e50d5",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/pause-validation.json": "4b0716782d73070a34216a9df824c65fba554bb58979c8a09a26f12820fdd3cb",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/preimplementation-completeness.json": "e209587653a3df8623b987036fbaaac2a628b860b8c4cb444612f8754e15d0ab",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/preparation-resource-summary.md": "eb113d7fa7109c4c12e074c8278a5b35ab79624ae4e183601bdbee552f63039c",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/prepare-usage.py": "182544c52f375cc5b17c5b85370f19fcbc26b371c97d6ef8973c2294acd8e130",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/production-build-final.txt": "787f6c39be9a8e3b73a71ee265c01ee7a4382f56496e5dcfee1a8d5223faf760",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/production-build.txt": "14ce979a3bb12c0201ca31d9e34fa764762c7831145c3964ba2f7a08efa1bf74",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/reopen-disabled-finding.json": "9c82778988d8a7a9b9a5d81c7ff825f54f44ef903559c202209e6ffc22d88596",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/report-resources.py": "32f515feb6992a0c09284f8508b36943003881525c02f189b1f376a70e243178",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/report-validation.json": "80846e68075d4d5d8de03a58373a6f99abf27a434e5b8ea17f5b15aa1074255a",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/resource-analysis.json": "5f967215d848c5ff7baa14e6f236a67116858d7769ce80fe950307be44c1032f",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/resource-analysis.md": "386857a62fbd62df8dd983ab66a5c765650b7deaf62d397a0f950f3f7d5d6c91",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/resource-summary.md": "5b097dc67c89fe1924aa577f05020be265414389bf591d0704218f1db14c7353",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/review-fix-focused-tests.txt": "e50e398317ad0e1e9f7f1cda4f3ad1ee455b72f35afd015c3e794fa9966f0e07",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/security-initial-usage.json": "c73b492640aa2b5ac9e21ba9613ed29bb8ce17e31812a30d6d489a4d3836eb34",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/security-recheck-usage.json": "ce62cedfad9f64a213cbbae9ef0bfeb432d19ca7a6eee32c4e1203405e99453b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json": "441dfa8286e99b3d854df8f9bcd7facea97d53636961c687eb3bf6a11b39da1a",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/static-build-final.txt": "63488aaa267e8baa1c7c1e1fd0e2a55b60180d8287a8cfe74e1939a739447ebb",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/touch-fix-tests.txt": "c983c87cd9f14d314122a83b98b4d076b80478af7560f9f598b38969213becc0",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/touch-wait-finding.json": "8925282cbc9d3e6b848d91a935f1ffe0c32a64012e660c4e70ea2a99753f5ee2",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-browser-stderr.json": "47a458f8255e79c90500531993c426edcbefa29e72a4971cd45833bb7980cce3",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-browser-stdout.json": "1d284b1f99c781391e32c4c7000e67fa6d2291fdca0639b655f2ad961e1f68f8",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-postgres-combined-stderr.json": "28abc4e5bbd121bd9b99a1597a1990457f788f117210462a8f6170c2433a9ad2",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-postgres-combined-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-postgres-fixed-stderr.json": "4250e620f4bb3751d8e05b47e66566e8d5cd7d53cd5dace0035a27b1ea69c9a7",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-postgres-fixed-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-postgres-stderr.json": "6bb159041982516c7c9ba7458f360c0ad8a51e99ef58d48af2b1597713decb50",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-postgres-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-unit-stderr.json": "d37a4f9f897bcdf326972a770e083fe1300ec0b89d5f5fb0f67b9d184070f366",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/final-unit-stdout.json": "d6ba2165f7b5e9f59015f7932eea61e596dba96090dd3c03be913e09b28808e5",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/integrated-browser-stderr.json": "7806b6299a5e474893d2a75fa0f2f8f3cc3de907f1e0a1f67b8bede658afca99",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/integrated-browser-stdout.json": "38875903622360f690979a42f2f37ba998bd77bee609e449d0b95a25dcd9993e",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/integrated-postgres-retry-stderr.json": "ad14d3d2c2533fef7b2db59874dc33efe4c61cdd5b359de741646c2e2539c744",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/integrated-postgres-retry-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/integrated-postgres-stderr.json": "acfb90f1b54dd36038fcd94e50b6ed4cadeece9b50862ea12a1a4316af27da5a",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/integrated-postgres-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/prerequisite-postgres-stderr.json": "d31a806ba887af00e65deb7b1a371b82702d6e74184a9c94d405ab9316d91798",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/prerequisite-postgres-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/prerequisite-unit-retry-stderr.json": "b49ebe90bb2639b043e93d14df6ff4c67b85559ac7a82acefc90650fd008061c",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/prerequisite-unit-retry-stdout.json": "0dd8dc239f846d13466107fcecd8d185d243015673e35a8ab7098d04b5f6be27",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/prerequisite-unit-stderr.json": "b8824227966298dd5e1935dddfe0b01e681d95e8b710dc5bd01ec7f677a06856",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/prerequisite-unit-stdout.json": "c4b6fc1d59f88566d6d200740418cd7d9a344aefcdf6c8740f9533e8167cc058",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/recovery-lifecycle-stderr.json": "064f9334078320d4330cb95eea325e09c0d12663a5978a103fcc3d60c5bc743f",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/commands/recovery-lifecycle-stdout.json": "9fbd6225669c45f035545f787e24530bae8523bc443ca3f116e4bf3a510e7d9b",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/01-main-to-security.md": "21c2d3ddea038dd0ad8adc7e2ecd5d76e7a0903f43b786f7d931e2440f032ed7",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/02-security-to-main.md": "c40f90d96c2e6169697b33b2f658c426acc7c4609eb5b7e8f644f05750c082aa",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/03-main-to-security-recheck.md": "3bf498d779781069b6adf51833da78c104018b84491aab8baf00222773aa7696",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/04-security-to-main-recheck.md": "b4363b1a7a33151d15dba730449ddd8a2fd316b295421b992e0ba007e0582a29",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/05-main-to-lifecycle.md": "3a2186d86eec169bd99923248b3d7f20ae0ea5ea98fbd33ee26ae6eac445f699",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/05-main-to-notifications.md": "c7422bd7ed398338f6e13426672c40b36bb4b6ed4e18ca9b6b296979e5f66157",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/05-main-to-ui.md": "5e0bb8d724e5e92e03e83be4d3410774c660848b8bd83fd0a4e3a04ec9fd3e9d",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/06-lifecycle-to-main.md": "dd2b4391875cfbf41ecd3fdc752a550dafeea287c8e69902850b9bd047dffcc1",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/06-notifications-to-main.md": "d5dfe3f0fb142c39338c01af4f8250fc2a8a1285e292db4cb671e0f67058a067",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/06-ui-to-main.md": "2d2a72461492b9fae11c1068644b95fb4b6f73d320fc7d8564c90340f4dfcba1",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/07-lifecycle-fix-to-main.md": "aeadccf525faede974f6e82f7e2e66188d6d8d5da8634834f41a5920b366e443",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/08-main-to-independent-review.md": "21c38ab52ccc8a2ddcf83be46d7dbf803cacbbd7db31b639690882e9d9d54c72",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/09-independent-review-to-main.md": "b0ef1faf6405e0c507073b7bba9c50b110d586c88edff071ddd7b215d8f8e522",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/11-main-to-independent-revalidation.md": "8ea748befa3bacbdd7a3799db19ee88b2858cb25369a4619e4e8d320d717711a",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/12-fixes-to-main.md": "a06dd9a23c1292a64d874b162841a489c9b5a25ad739d9ac6d4c817f075c5ebc",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/13-independent-revalidation-to-main.md": "300ee2948fc263ee95a96a06510d9425a310c1ca158b7d8511d662de5962db9f",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/handoffs/14-main-final-implementation.md": "1bf82ecab97f180a85bd4c95f37318a856dd798ae7fca69f19f71b221b0c742a",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/browser-1.json": "1dc8b4a7f5faaed09169d1b96571e94f017ddff887f5566ae27cf8085568ee17",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/final-docs-1.json": "6a3dba85eb33478a927fb4c2ea6b363d0b2c147cb98447f0dc656d14e41a0a8c",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/final-docs-2.json": "46e3b0da24fd7453d86504df2a8818d7ab86aa30179e5441563fe38af5db81aa",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/final-source-1.json": "76b839c70fe668e9b307845f3199c6d4519514444e208e160dfd12649341b71f",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/final-source-2.json": "a9c88398954fef5cd049e51ce137db0dd48c94752c5fac9872bafc246bcb480e",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/final-source-3.json": "33b30d0364fd4a562e5bad37393d189df6c03029bc9ffa6c373933b7cf544cee",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/integrated-1.json": "d02c8c3afba1a1f46a3feddfef3bee3dd389eb6bb3edfcdae4295369c276f5ec",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/integrated-2.json": "a7dba89dffb9cf072f6e28bc6e263f29033b0fe0a9853bf371315b76f2e1aaa2",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/snapshots/preparation-baseline.json": "977cbdf8fcf508bd061e48e90400ee5a6ad7d7386b677792ab92647ea7efd50c"
+  },
+  "traceability_files": {
+    "workflow/TRACEABILITY.md": "07a1d0f1a354e1822112c0f66b5f1920dcdfdbae2fbc650b5bbd557db856e42a",
+    "docs/UserGuide.md": "d7e28558f9b515967d86e8d6eb502c859617b8eae87f8659456fd28131ef99f9",
+    "docs/DeveloperGuide.md": "203563b270009ca824099639ae72881fb6db60ee65f88932d2b33eafff5341af",
+    "logs/ngkhengyang/2026-10-25-manual-review.md": "415bd4a48ee664e23ceba895f8d878d0ce9d9327165011d6a6904f08ec69006e",
+    "logs/ngkhengyang/2026-10-26-reviewer-iteration2.md": "6e60d0c3b40a147bd64e7594c19e05662857f82e9e69cbeb9cc9661fcb446be2"
+  },
+  "validated_at": "2026-10-26T08:08:16.732478+00:00",
+  "validation": {
+    "removed_files": 46,
+    "removed_bytes": 71807,
+    "retained_hashes_verified": 112,
+    "traceability_hashes_verified": 5,
+    "local_links_checked": 348,
+    "broken_links": [],
+    "categories": {
+      "Consumed handoff input": 23,
+      "Consumed assignment input": 7,
+      "Consumed usage import": 15,
+      "Byte-identical duplicate of retained evidence": 1
+    },
+    "runs": {
+      "2026-10-25-manual-review": {
+        "files_before": 41,
+        "files_after": 31,
+        "bytes_before": 166937,
+        "bytes_after": 156192,
+        "current_completeness_unchanged": true,
+        "historical_pass_and_fail_reports_unchanged": true,
+        "counts": {
+          "records": 19,
+          "expected": 19,
+          "assignments": 4,
+          "findings": 1,
+          "snapshots": 3,
+          "commands": 8,
+          "handoffs": 6
+        }
+      },
+      "2026-10-26-reviewer-iteration2": {
+        "files_before": 117,
+        "files_after": 81,
+        "bytes_before": 648550,
+        "bytes_after": 587488,
+        "current_completeness_unchanged": true,
+        "historical_pass_and_fail_reports_unchanged": true,
+        "counts": {
+          "records": 19,
+          "expected": 19,
+          "assignments": 3,
+          "findings": 3,
+          "snapshots": 9,
+          "commands": 12,
+          "handoffs": 17
+        }
+      }
+    },
+    "scope": "Historical evidence integrity and unchanged current-completeness diagnostics; not fresh product acceptance"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "f71d39106b3d489baace8e0607f2cd63",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-26-iteration-evidence-cleanup",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "consolidate",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Selected settings supplied by caller; observed metadata may be unavailable",
+  "started_at": "2026-10-26T07:59:02.107478+00:00",
+  "ended_at": "2026-10-26T08:10:22.867625+00:00",
+  "elapsed_seconds": 680.760147,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Removed 46 redundant inputs/report copies; 112 retained file hashes, 5 canonical traceability files and 348 evidence links verified; historical diagnostics unchanged",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "output_tokens": "Attributable per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "cache_read_tokens": "Attributable per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "tool_calls": "Attributable per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "retries": "Attributable per-stage token, cache, tool-call and retry telemetry is not exposed"
+  },
+  "unavailable_reason": "Attributable per-stage token, cache, tool-call and retry telemetry is not exposed"
+}
