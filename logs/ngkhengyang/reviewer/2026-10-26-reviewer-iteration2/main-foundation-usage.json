@@ -1,0 +1,17 @@
+{
+  "import_id": "main-foundation-usage",
+  "record_id": "rec-c2b5dc00315e4013",
+  "scope": "record",
+  "source": "MP4 sessions/local-resource-tracking/i2-resume-foundation-start.json -> i2-foundation-end-cumulative.json; agent main ONLY; sampled cutoff 2026-10-25T19:17:06.746Z; cached/reasoning subsets not added. Boundary bookkeeping excluded.",
+  "input_tokens": 5407798,
+  "output_tokens": 19032,
+  "cache_read_tokens": 5377152,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": "gpt-6.1-sol",
+  "observed_effort": "high",
+  "unavailable_reasons": {
+    "tool_calls": "Attributable aggregate unavailable",
+    "retries": "Runtime retry aggregate unavailable"
+  }
+}

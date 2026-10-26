@@ -1,0 +1,13 @@
+{
+  "id": "lifecycle",
+  "agent": "lifecycle",
+  "role": "implementer",
+  "paths": [
+    "src/server/src/proposals/contributor-proposals.controller.ts",
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "src/server/src/proposals/working-revisions.ts",
+    "src/server/test/proposal-lifecycle.integration.ts",
+    "src/server/test/proposal-lifecycle-contracts.spec.ts"
+  ],
+  "dependencies": []
+}

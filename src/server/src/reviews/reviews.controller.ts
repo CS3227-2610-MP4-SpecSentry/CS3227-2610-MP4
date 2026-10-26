@@ -8,9 +8,9 @@ import { Roles, type AuthRequest } from '../identity/access';
 import { DatabaseService } from '../database/database.service';
 import { validate, type ReviewerActor } from './reviewer-context';
 import { ReviewsService } from './reviews.service';
+import { businessActor } from '../identity/business-context';
 
-const actor = (request: AuthRequest): ReviewerActor => ({ accountId: request.account!.id,
-  accountVersion: request.session.accountVersion!, correlationId: request.res?.getHeader('x-request-id')?.toString() });
+const actor = (request: AuthRequest): ReviewerActor => businessActor(request);
 
 const validationTargets = {
   POOL: 'review-pool', ASSIGNED: 'assigned-reviews', CLAIM: 'proposal-claim', DROP: 'proposal-drop',
@@ -57,16 +57,19 @@ export class ReviewsController {
     const input = await this.parsed(request, 'DROP', () => ({ id: validate(reviewerIdSchema, id), body: validate(dropProposalRequestSchema, body) }));
     return this.reviews.drop(actor(request), input.id, input.body);
   }
+  @Roles('REVIEWER', 'CONTRIBUTOR', 'RELEASE_MAINTAINER')
   @Get('proposals/:id')
   async detail(@Req() request: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
     const input = await this.parsed(request, 'DETAIL', () => ({ id: validate(reviewerIdSchema, id), query: validate(proposalDetailQuerySchema, query) }));
     return this.reviews.detail(actor(request), input.id, input.query.revisionId);
   }
+  @Roles('REVIEWER', 'CONTRIBUTOR', 'RELEASE_MAINTAINER')
   @Get('proposals/:id/revisions')
   async revisions(@Req() request: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
     const input = await this.parsed(request, 'REVISIONS', () => ({ id: validate(reviewerIdSchema, id), query: validate(submittedRevisionsQuerySchema, query) }));
     return this.reviews.revisions(actor(request), input.id, input.query);
   }
+  @Roles('REVIEWER', 'CONTRIBUTOR', 'RELEASE_MAINTAINER')
   @Get('proposals/:id/activity')
   async activity(@Req() request: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
     const input = await this.parsed(request, 'ACTIVITY', () => ({ id: validate(reviewerIdSchema, id), query: validate(proposalActivityQuerySchema, query) }));
@@ -77,21 +80,25 @@ export class ReviewsController {
     const input = await this.parsed(request, 'HUMAN', () => ({ id: validate(reviewerIdSchema, id), query: validate(humanReviewQuerySchema, query) }));
     return this.reviews.review(actor(request), input.id, input.query);
   }
+  @Roles('REVIEWER', 'CONTRIBUTOR', 'RELEASE_MAINTAINER')
   @Get('proposals/:id/findings')
   async findings(@Req() request: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
     const input = await this.parsed(request, 'HUMAN', () => ({ id: validate(reviewerIdSchema, id), query: validate(humanReviewPageQuerySchema, query) }));
     return this.reviews.findings(actor(request), input.id, input.query);
   }
+  @Roles('REVIEWER', 'CONTRIBUTOR', 'RELEASE_MAINTAINER')
   @Get('proposals/:id/decisions')
   async decisions(@Req() request: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
     const input = await this.parsed(request, 'HUMAN', () => ({ id: validate(reviewerIdSchema, id), query: validate(humanReviewPageQuerySchema, query) }));
     return this.reviews.decisions(actor(request), input.id, input.query);
   }
+  @Roles('REVIEWER', 'CONTRIBUTOR', 'RELEASE_MAINTAINER')
   @Get('proposals/:id/coverage-history')
   async coverageHistory(@Req() request: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
     const input = await this.parsed(request, 'HUMAN', () => ({ id: validate(reviewerIdSchema, id), query: validate(coverageHistoryQuerySchema, query) }));
     return this.reviews.coverageHistory(actor(request), input.id, input.query);
   }
+  @Roles('REVIEWER', 'CONTRIBUTOR', 'RELEASE_MAINTAINER')
   @Get('proposals/:proposalId/findings/:id/history')
   async findingHistory(@Req() request: AuthRequest, @Param('proposalId') proposalId: string, @Param('id') id: string, @Query() query: unknown) {
     const input = await this.parsed(request, 'HUMAN', () => ({ proposalId: validate(reviewerIdSchema, proposalId), id: validate(reviewerIdSchema, id), query: validate(humanReviewPageQuerySchema, query) }));

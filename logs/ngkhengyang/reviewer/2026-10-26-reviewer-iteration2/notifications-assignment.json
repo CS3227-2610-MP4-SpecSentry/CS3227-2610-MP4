@@ -1,0 +1,12 @@
+{
+  "id": "notifications",
+  "agent": "notifications",
+  "role": "implementer",
+  "paths": [
+    "src/server/src/notifications/notifications.service.ts",
+    "src/server/src/notifications/notifications.controller.ts",
+    "src/server/test/notifications.integration.ts",
+    "src/server/test/notifications-contracts.spec.ts"
+  ],
+  "dependencies": []
+}

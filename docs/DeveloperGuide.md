@@ -1,5 +1,62 @@
 # Developer Guide
 
+## Reviewer revision cycles
+
+The owner API now supplies the minimal Contributor integration for real review cycles:
+`POST /api/proposals` creates private working content, `GET/PATCH /api/proposals/:id/draft`
+reads/saves it, and `POST /api/proposals/:id/submit` publishes an immutable revision.
+Save uses `{expectedVersion, content}`; submit uses `{expectedVersion, workingRevisionId}`
+and `Idempotency-Key`. Content includes title, summary, problem, constraints,
+expectedBehavior, criteria (statement/required, optional server-issued stableKey),
+diffText (valid unified diff), and optional plain-text evidence. Get the current
+draft/committed version before saving; use the original key/body after an uncertain
+submit response. GET never creates a working revision. Seeded submissions without
+working content need an explicit owner save before submit. The full Contributor
+drafting interface remains future work.
+
+`POST /api/proposals/:id/withdraw` requires expectedVersion, confirmed=true and a
+reason. `POST /api/proposals/:id/reopen` requires expectedVersion and an unattached
+APPROVED proposal. Reopening preserves the decision and appends an approval
+invalidation; another decision requires resubmission. The server-owned
+releaseAttachmentRef is an integration guard for future release membership, with
+no public attachment writer. Candidate membership/publication are not delivered.
+
+If a completed approval's Reviewer has since been disabled, reopening releases
+that now-unfinished assignment atomically while preserving its history. The owner
+can resubmit to the pool or withdraw; the proposal does not remain assigned to an
+account that cannot act. Reopening and disablement use the same account/root order.
+
+Submission closes the old revision-specific assignment and creates a new one for
+the retained reviewer. Findings keep their original identity and provenance;
+coverage starts fresh per revision. The revision/assignment/version coordinates
+captured by old forms cannot mutate the new review round. Original submission
+age remains fixed. Working content/title remain private until submission.
+
+`GET /api/notifications` returns recipient-scoped bounded cursor pages.
+`POST /api/notifications/:id/acknowledge` requires CSRF and an exact NEW_REVISION
+revision/current-assignment context, or the separate WITHDRAWN payload. Reading
+does not acknowledge. Only opening a current rendered view triggers the UI's
+explicit acknowledgement. Withdrawal notices expose only status/opaque IDs and
+times; they never grant access to withdrawn content. Owners and scoped Maintainers
+retain submitted/human history; only owners can read working content.
+
+All business reads/writes use sorted account locks, persisted-session validation,
+then sorted proposal roots. Contributor handover pre-reads only opaque reviewer
+pointers, then rechecks the lock set under the root. Session expiry is rechecked
+before transaction return; logout serializes on the persisted session row.
+Rolling session touch also locks that row before evaluating current idle/absolute
+expiry and calculating renewal, so a lock wait cannot revive an expired session.
+Dependent activity, notice, assignment and idempotency writes share one transaction.
+Notifications and approval invalidations have database provenance/append-only
+constraints; read acknowledgements use restricted operational audit only.
+
+Real PostgreSQL suites include proposal-lifecycle, notifications, business-context
+and submitted-access integration. They and browser fixtures share an explicitly
+disposable TEST_DATABASE_URL and must run serially. New tables participate in test
+cleanup; never run these truncating suites on development/production data.
+Current evidence and independent review are recorded in the
+[iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md).
+
 ## Current state
 
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
@@ -9,8 +66,9 @@ Reviewer increment adds pool/assigned queues, claim/drop, immutable submitted
 detail/history, business activity and transactional assignment release on account
 disablement. Manual review adds criterion assessments and individual takeover
 confirmation, append-only findings/transitions/amendments, human decisions,
-approval gates, decision idempotency and authorized history. Contributor writes,
-notifications, releases and AI integration remain pending. See [Authentication](Authentication.md).
+approval gates, decision idempotency and authorized history. Revision cycles add
+the minimal Contributor API, durable notifications and withdrawal/reopening.
+Full Contributor UI, releases and AI remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
 See the root [directory map](../README.md#directory-map) for frontend/backend
@@ -137,14 +195,11 @@ return the original outcome; changed payloads conflict. Account and current obje
 access are reauthorized before replay. A key never grants access after drop or
 disablement. Ordinary edits remain frozen after approval and in release states.
 
-Future Contributor resubmission must lock the same proposal root, append a fresh
-immutable revision and revision-specific assignment while retaining the reviewer,
-and advance versions. Coverage is selected by revision and therefore starts empty;
-proposal findings retain history and unresolved status. The existing seed/history
-fixtures do not implement a Contributor submission API. Notifications,
-acknowledgments, approval revocation and release hooks remain separate integration
-work. Do not add another decision to a CHANGES_REQUESTED round to emulate
-resubmission.
+Contributor resubmission now appends a fresh immutable revision and revision-specific
+assignment while retaining the reviewer and advancing versions. Coverage starts
+empty; proposal findings retain history/status. The owner API, notifications and
+acknowledgements are described above. Reviewer approval revocation and real release
+hooks remain future work. Do not add another decision to CHANGES_REQUESTED to emulate resubmission.
 
 ## Browser verification
 
@@ -214,7 +269,8 @@ may contain credentials. TLS verification must remain enabled for Neon.
 
 See [Architecture](Architecture.md) for responsibilities, the diagram and transaction
 seams. `AppModule` registers Identity, Proposals, Reviews, Releases, Activity,
-Notifications and AI modules. These are empty registrations, not working features.
+Notifications and AI modules. Identity, Proposals, Reviews, Activity and Notifications
+implement the documented bounded workflows; Releases and AI remain registrations.
 `DatabaseModule` encapsulates the configured Prisma provider. Add frontend role
 folders as their features are implemented; `shared/src/contracts` holds wire
 schemas while retaining the existing package exports.

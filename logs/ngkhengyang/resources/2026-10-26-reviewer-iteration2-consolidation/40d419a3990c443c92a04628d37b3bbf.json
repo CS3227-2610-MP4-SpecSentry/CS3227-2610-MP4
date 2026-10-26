@@ -1,0 +1,32 @@
+{
+  "id": "40d419a3990c443c92a04628d37b3bbf",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-26-reviewer-iteration2-consolidation",
+  "agent": "main",
+  "invocation": "consolidation-1",
+  "stage": "consolidate",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": "gpt-6.1-sol",
+  "observed_effort": "high",
+  "settings_reason": "Selected settings supplied by caller; observed metadata may be unavailable",
+  "started_at": "2026-10-26T03:23:14.653560+00:00",
+  "ended_at": "2026-10-26T03:42:17.034645+00:00",
+  "elapsed_seconds": 1142.381085,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": 1783541,
+    "output_tokens": 11272,
+    "cache_read_tokens": 1779584,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": "MP4 sessions/local-resource-tracking/i2-consolidation-start.json -> i2-consolidation-end.json; main ONLY; sampled cutoff 2026-10-26T03:41:37.324Z; descendants excluded; final report/response rendering after cutoff excluded",
+  "outcome": "Canonical consolidation validated:18Markdown files/141local links,104reviewed hashes unchanged,19/19finished intervals,3closed findings, matching totals and successful original/current completeness. No application tests/edits/subagents. Final rendering outside interval.",
+  "unavailable_reasons": {
+    "tool_calls": "Attributable aggregate not exposed",
+    "retries": "Runtime retry aggregate not exposed"
+  },
+  "unavailable_reason": "Active computation/tool/retry aggregate unavailable; main-only sampled token delta provided"
+}

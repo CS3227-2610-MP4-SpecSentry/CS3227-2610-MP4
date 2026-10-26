@@ -1,5 +1,6 @@
-import { ConflictException, ForbiddenException, HttpException, Injectable } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Injectable } from '@nestjs/common';
 import { ManualReviewService } from './manual-review';
+import { businessTransaction } from '../identity/business-context';
 import type { CoverageHistoryQuery, CoverageWriteRequest, CreateFindingRequest, FindingAmendmentRequest, FindingTransitionRequest, HumanReviewPageQuery, ReviewDecisionRequest } from '@specsentry/shared';
 import { assignedReviewsResponseSchema, reviewCommandResponseSchema, reviewPoolResponseSchema,
   type AssignedReviewsQuery, type ClaimProposalRequest, type DropProposalRequest, type ReviewPoolQuery } from '@specsentry/shared';
@@ -7,7 +8,7 @@ import { ActivityService } from '../activity/activity.service';
 import { DatabaseService } from '../database/database.service';
 import type { Prisma } from '../generated/prisma/client';
 import { ProposalsService, rootSelect } from '../proposals/proposals.service';
-import { decodeCursor, encodeCursor, lockReviewer, nextVersion, type ReviewerActor, type ReviewTransaction } from './reviewer-context';
+import { decodeCursor, encodeCursor, nextVersion, type ReviewerActor, type ReviewTransaction } from './reviewer-context';
 
 @Injectable()
 export class ReviewsService {
@@ -17,22 +18,11 @@ export class ReviewsService {
   private get manual() { return new ManualReviewService(this.proposals, this.activity); }
 
   private async authorized<T>(actor: ReviewerActor, target: string, operation: string, work: (tx: ReviewTransaction) => Promise<T>): Promise<T> {
-    try {
-      return await this.database.client.$transaction(async (tx) => {
-        await lockReviewer(tx, actor);
-        const result = await work(tx);
-        if (operation === 'VIEW') await tx.securityEvent.create({ data: { actorId: actor.accountId,
-          action: 'REVIEW_VIEWED', target, outcome: 'success', correlationId: actor.correlationId } });
-        return result;
-      }, { maxWait: 5000, timeout: 10000 });
-    } catch (error) {
-      await this.database.client.securityEvent.create({ data: { actorId: actor.accountId, action: `REVIEW_${operation}_REJECTED`,
-        target, outcome: 'rejected', correlationId: actor.correlationId } });
-      if (error instanceof HttpException) throw error;
-      const code = error && typeof error === 'object' && 'code' in error ? error.code : undefined;
-      if (['P2002', 'P2034', 'P2028'].includes(String(code))) throw new ConflictException();
-      throw error;
-    }
+    return businessTransaction(this.database, actor, "REVIEWER", target, `REVIEW_${operation}`, async (tx) => {
+      const result = await work(tx);
+      if (operation === "VIEW") await tx.securityEvent.create({ data: { actorId: actor.accountId, action: "REVIEW_VIEWED", target, outcome: "success", correlationId: actor.correlationId } });
+      return result;
+    });
   }
 
   queue(actor: ReviewerActor, query: ReviewPoolQuery | AssignedReviewsQuery, assigned = false) {
@@ -68,12 +58,13 @@ export class ReviewsService {
       const rows = await tx.changeProposal.findMany({ where, orderBy: [{ firstSubmittedAt: 'asc' }, { id: 'asc' }], take: query.limit + 1,
         select: rootSelect });
       const page = rows.slice(0, query.limit);
-      const items = page.map((row) => ({ id: row.id, version: row.version, title: row.title, author: row.owner,
+      const items = await Promise.all(page.map(async (row) => ({ id: row.id, version: row.version, title: row.title, author: row.owner,
         summary: row.currentRevision!.summary, firstSubmittedAt: row.firstSubmittedAt!.toISOString(),
         latestSubmittedAt: row.currentRevision!.submittedAt.toISOString(), awaitingRevision: row.state === 'CHANGES_REQUESTED',
         ...(assigned ? { state: row.state, assignmentId: row.currentAssignment!.id,
-          revisionId: row.currentAssignment!.revisionId, assignmentVersion: row.currentAssignment!.version } : {}),
-      }));
+          revisionId: row.currentAssignment!.revisionId, assignmentVersion: row.currentAssignment!.version,
+          hasUnreadLatestRevision: await tx.notification.count({ where: { recipientId: actor.accountId, proposalId: row.id, revisionId: row.currentRevisionId!, kind: 'NEW_REVISION', readAt: null } }) > 0 } : {}),
+      })));
       const last = page.at(-1);
       const result = { items, nextCursor: rows.length > query.limit && last ?
         encodeCursor(scope, { id: last.id, timestamp: last.firstSubmittedAt!.toISOString() }) : null };
@@ -118,17 +109,28 @@ export class ReviewsService {
   }
 
   detail(actor: ReviewerActor, id: string, revisionId?: string) {
-    return this.authorized(actor, id, 'VIEW', (tx) => this.proposals.detail(tx, id, actor.accountId, revisionId));
+    return this.submittedRead(actor, id, tx => this.proposals.detail(tx, id, actor.accountId, revisionId, actor.role));
   }
 
   revisions(actor: ReviewerActor, id: string, query: { limit: number; cursor?: string }) {
-    return this.authorized(actor, id, 'VIEW', (tx) => this.proposals.revisions(tx, id, actor.accountId, query));
+    return this.submittedRead(actor, id, tx => this.proposals.revisions(tx, id, actor.accountId, query, actor.role));
   }
 
   timeline(actor: ReviewerActor, id: string, cursor?: string) {
-    return this.authorized(actor, id, 'VIEW', async (tx) => {
-      await this.proposals.assignedRoot(tx, id, actor.accountId);
+    return this.submittedRead(actor, id, async (tx) => {
+      await this.proposals.viewerRoot(tx, id, actor.accountId, actor.role);
       return this.activity.page(tx, id, cursor);
+    });
+  }
+
+  private submittedRead<T>(actor: ReviewerActor, id: string, work: (tx: ReviewTransaction) => Promise<T>) {
+    if (!actor.role || actor.role === 'REVIEWER') return this.authorized(actor, id, 'VIEW', work);
+    return businessTransaction(this.database, actor, actor.role, id, 'SUBMISSION_VIEW', async tx => {
+      await this.proposals.viewerRoot(tx, id, actor.accountId, actor.role);
+      const result = await work(tx);
+      await tx.securityEvent.create({ data: { actorId: actor.accountId, action: 'SUBMISSION_VIEWED', target: id,
+        outcome: 'success', correlationId: actor.correlationId } });
+      return result;
     });
   }
 
@@ -136,16 +138,16 @@ export class ReviewsService {
     return this.authorized(actor, id, 'VIEW', (tx) => this.manual.review(tx, actor, id, query));
   }
   findings(actor: ReviewerActor, id: string, query: HumanReviewPageQuery) {
-    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.findings(tx, actor, id, query));
+    return this.submittedRead(actor, id, (tx) => this.manual.findings(tx, actor, id, query));
   }
   decisions(actor: ReviewerActor, id: string, query: HumanReviewPageQuery) {
-    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.decisions(tx, actor, id, query));
+    return this.submittedRead(actor, id, (tx) => this.manual.decisions(tx, actor, id, query));
   }
   coverageHistory(actor: ReviewerActor, id: string, query: CoverageHistoryQuery) {
-    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.coverageHistory(tx, actor, id, query));
+    return this.submittedRead(actor, id, (tx) => this.manual.coverageHistory(tx, actor, id, query));
   }
   findingHistory(actor: ReviewerActor, id: string, findingId: string, query: HumanReviewPageQuery) {
-    return this.authorized(actor, id, 'VIEW', (tx) => this.manual.findingHistory(tx, actor, id, findingId, query));
+    return this.submittedRead(actor, id, (tx) => this.manual.findingHistory(tx, actor, id, findingId, query));
   }
   coverage(actor: ReviewerActor, id: string, criterionId: string, body: CoverageWriteRequest) {
     return this.authorized(actor, id, 'COVERAGE', (tx) => this.manual.coverage(tx, actor, id, criterionId, body));

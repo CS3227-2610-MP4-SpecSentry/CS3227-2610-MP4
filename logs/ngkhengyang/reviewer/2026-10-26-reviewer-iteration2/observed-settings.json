@@ -1,0 +1,32 @@
+[
+  {
+    "agent": "main",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "source": "Local turn_context setting fields only; verified during consolidation, no prompt/reasoning retained"
+  },
+  {
+    "agent": "/root/security_review",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "source": "Local turn_context setting fields only; verified during consolidation, no prompt/reasoning retained"
+  },
+  {
+    "agent": "/root/lifecycle",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "source": "Local turn_context setting fields only; verified during consolidation, no prompt/reasoning retained"
+  },
+  {
+    "agent": "/root/notifications",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "source": "Local turn_context setting fields only; verified during consolidation, no prompt/reasoning retained"
+  },
+  {
+    "agent": "/root/ui",
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "source": "Local turn_context setting fields only; verified during consolidation, no prompt/reasoning retained"
+  }
+]

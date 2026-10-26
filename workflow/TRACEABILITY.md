@@ -1,5 +1,25 @@
 # Requirement traceability
 
+## Reviewer revision-cycle increment — 26 October 2026
+
+This section supersedes earlier pending markers only for the bounded behavior
+listed here. The [iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md)
+records final source identity, actual checks, independent findings and resources;
+implementation existence alone is not acceptance. Full Contributor UI, AI, release
+membership/publication and Reviewer approval revocation remain outside this increment.
+
+| Requirements / scenarios | Implementation and test sources | Boundary |
+| --- | --- | --- |
+| REV-006, AC-REV-006; CON-004/005/007/009 | proposal-lifecycle.service.ts, working-revisions.ts; proposal-lifecycle.integration.ts/contracts | Real owner save/submit, immutable rounds, retained reviewer, fresh coverage, finding continuity, original age, stale writes and idempotency |
+| REV-008, AC-REV-008 | notifications.service/controller.ts; notifications.integration.ts/contracts; RevisionCycle.test.tsx | Exact-revision notice/ack, recipient/current access, newer unread preservation and safe withdrawal |
+| CON-006; REV-011/015; SHR-001/002/003/004/007 | lifecycle/notifications; business-context.integration.ts, submitted-access.integration.ts | Atomic withdrawal, account/session/root checks, durable safe draft activity, private drafts, owner/Maintainer submitted/human history |
+| REV-006 reopening; product lifecycle | ApprovalInvalidation/releaseAttachmentRef migration; lifecycle integration | Effective approval invalidation/history/replay and attachment guard seam; real candidate operations absent |
+| REV-001/004/005/007/009/010 supporting regressions | Existing reviews/manual-review PostgreSQL suites; reviewer-revision-cycle.spec.ts | Human review/intake/provenance/takeover invariants; API-backed browser cycle, stale forms and withdrawal |
+
+New behavior requires the source-bound results in the canonical run. Full
+performance/deployed portability/WCAG and human teammate approval are separate
+checks, not inferred from automated acceptance counts.
+
 Baseline review: 25 October 2026. Every existing requirement ID has one definition and a planned acceptance scenario. Product acceptance and deployed evidence remain **pending** until verified; existing workflow-tool tests do not satisfy product acceptance. The infrastructure evidence below covers only the initialized scaffold.
 
 ## Base infrastructure evidence — 25 October 2026

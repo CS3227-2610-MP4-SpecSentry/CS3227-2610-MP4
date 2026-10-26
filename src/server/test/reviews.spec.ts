@@ -40,11 +40,15 @@ describe('Reviewer HTTP authorization and validation (INT-01/07/11)', () => {
     return { agent, token: response.body.csrfToken as string };
   }
   const reads = ['/api/review-pool', '/api/reviews/assignments', '/api/proposals/p', '/api/proposals/p/revisions', '/api/proposals/p/activity'];
-  it('requires an enabled Reviewer session on every read and command', async () => {
+  it('requires authentication and keeps Reviewer queues/commands role-scoped while submitted reads delegate object checks', async () => {
     for (const url of reads) await request(app.getHttpServer()).get(url).expect(401);
     for (const index of [1, 2]) {
       const { agent, token } = await login(index);
-      for (const url of reads) await agent.get(url).expect(403);
+      for (const url of reads.slice(0, 2)) await agent.get(url).expect(403);
+      // Owner/Maintainer submitted reads now delegate to deterministic service
+      // scope checks; this HTTP test replaces that service with a stub.
+      for (const url of reads.slice(2)) await agent.get(url).expect(200);
+      expect(service.detail).toHaveBeenLastCalledWith(expect.objectContaining({ role: accounts[index]!.role }), 'p', undefined);
       for (const command of ['claim', 'drop']) await agent.post(`/api/proposals/p/${command}`).set('x-csrf-token', token).send({ expectedVersion: 0 }).expect(403);
     }
   });

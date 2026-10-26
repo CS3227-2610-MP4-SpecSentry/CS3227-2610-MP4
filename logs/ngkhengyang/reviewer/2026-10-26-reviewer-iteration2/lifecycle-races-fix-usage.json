@@ -1,0 +1,17 @@
+{
+  "record_id": "rec-8c029ecaa35a449a",
+  "import_id": "lifecycle-races-fix-usage",
+  "scope": "record",
+  "source": "MP4 sessions/local-resource-tracking/i2-lifecycle-races-start.json -> i2-lifecycle-races-end.json; ONLY /root/lifecycle; cutoff 2026-10-25T19:29:15.825Z. Sample excludes unflushed events, boundary bookkeeping and final rendering. Cache/reasoning subsets not added.",
+  "input_tokens": 752159,
+  "output_tokens": 6583,
+  "cache_read_tokens": 632448,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": "gpt-6.1-sol",
+  "observed_effort": "high",
+  "unavailable_reasons": {
+    "tool_calls": "Attributable full aggregate unavailable",
+    "retries": "Runtime retry aggregate unavailable"
+  }
+}

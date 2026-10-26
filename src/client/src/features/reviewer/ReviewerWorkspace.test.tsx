@@ -13,7 +13,7 @@ const { awaitingRevision: _awaiting, summary: _summary, ...projection } = detail
 void _awaiting; void _summary;
 const page = { items: [], nextCursor: null };
 const reply = (body: unknown, status = 200) => ({ ok: status < 400, status, json: async () => body });
-function setup(fetch: ReturnType<typeof vi.fn>) { vi.stubGlobal('fetch', fetch); let generation = 0; return render(<ReviewerWorkspace session={session} authorization={{ current: () => generation, invalidate: () => { generation++; } }} onUnauthorized={vi.fn()} />); }
+function setup(fetch: ReturnType<typeof vi.fn>) { vi.stubGlobal('fetch', (url: string, ...args: unknown[]) => url.startsWith('/api/notifications') ? Promise.resolve(reply(page)) : (fetch as (...args: unknown[]) => unknown)(url, ...args)); let generation = 0; return render(<ReviewerWorkspace session={session} authorization={{ current: () => generation, invalidate: () => { generation++; } }} onUnauthorized={vi.fn()} />); }
 function deferred() { let resolve!: (value: unknown) => void; const promise = new Promise(yes => { resolve = yes; }); return { promise, resolve }; }
 afterEach(() => vi.unstubAllGlobals());
 

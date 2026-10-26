@@ -1,0 +1,13 @@
+{
+  "owner": "main",
+  "evidence": [
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "src/server/src/identity/session.store.ts",
+    "logs/ngkhengyang/2026-10-26-reviewer-iteration2.md"
+  ],
+  "severity": "HIGH",
+  "blocks": true,
+  "requirement": "REQ-SHR-001; SEC-I2-001",
+  "description": "Independent review F-003: session touch computes expiresAt predicate before waiting on a row lock, so it can renew an expired session after acquiring the lock. Touch must explicitly lock persisted session row, then check current idle/absolute expiry before update, never resurrect missing/expired row; session-only lock ordering. Barrier test touch begins live, waits past expiry, then rejects renewal.",
+  "reviewer": "security-reviewer"
+}

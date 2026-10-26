@@ -1,0 +1,55 @@
+(node:15708) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL src/server/test/notifications.integration.ts (32.322 s)
+  ● PostgreSQL exact-revision notifications (REQ-REV-008; SEC-I2-003/006/007) › acks only exact r1 using the current r2 assignment; stale submit/ack cannot clear r2 or advance business versions
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 4
+    Received: 3
+
+      127 |     await acknowledge(a, r2.noticeId, ackBody(r2)).expect(200);
+      128 |     expect(await database.client.proposalActivity.count({ where: { action: 'NOTIFICATION_CREATED' } })).toBe(2);
+    > 129 |     expect(await database.client.securityEvent.count({ where: { actorId: ids.a, action: 'NOTIFICATION_ACKNOWLEDGED' } })).toBe(3);
+          |                                                                                                                           ^
+      130 |   });
+      131 |   it('denies wrong recipient, CSRF, role and disabled account without changing notice state', async () => {
+      132 |     const root = await fixture();
+
+      at Object.<anonymous> (test/notifications.integration.ts:129:123)
+
+FAIL src/server/test/business-context.integration.ts
+  ● Persisted business session authorization (SEC-I2-001) › expiry while waiting for the account lock and expiry at final checkpoint roll back
+
+    expect(received).rejects.toMatchObject(expected)
+
+    - Expected  - 3
+    + Received  + 5
+
+    - Object {
+    -   "status": 401,
+    - }
+    + [PrismaClientKnownRequestError: 
+    + Invalid `prisma.$queryRaw()` invocation:
+    +
+    +
+    + Raw query failed. Code: `N/A`. Message: `Failed to deserialize column of type 'void'. If you're using $queryRaw and this column is explicitly marked as `Unsupported` in your Prisma schema, try casting this column to any supported Prisma type such as `String`.`]
+
+      69 |       await tx.securityEvent.create({ data: { actorId: id, action: 'MUST_ROLL_BACK', target: id, outcome: 'success' } });
+      70 |       await tx.$queryRaw`SELECT pg_sleep(0.4)`;
+    > 71 |     })).rejects.toMatchObject({ status: 401 });
+         |                 ^
+      72 |     expect(await db.client.securityEvent.count({ where: { actorId: id, action: 'MUST_ROLL_BACK' } })).toBe(0);
+      73 |   });
+      74 |   it('rolling touch cannot renew expired or deleted sessions', async () => {
+
+      at Object.toMatchObject (../../node_modules/expect/build/index.js:2155:20)
+      at Object.<anonymous> (test/business-context.integration.ts:71:17)
+
+(node:15708) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+
+Test Suites: 2 failed, 1 passed, 3 total
+Tests:       2 failed, 26 passed, 28 total
+Snapshots:   0 total
+Time:        48.145 s
+Ran all test suites within paths "src/server/test/business-context.integration.ts", "src/server/test/notifications.integration.ts", "src/server/test/reviews.integration.ts".

@@ -1,0 +1,14 @@
+{
+  "evidence": [
+    "src/shared/src/contracts/revision-cycle.ts",
+    "src/shared/src/contracts/reviewer.ts",
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "logs/ngkhengyang/2026-10-26-reviewer-iteration2.md"
+  ],
+  "reviewer": "security-reviewer",
+  "requirement": "REQ-CON-004 / REQ-REV-006 immutable reviewability",
+  "owner": "lifecycle",
+  "blocks": true,
+  "severity": "HIGH",
+  "description": "Integration audit: working draft summary permits empty text, submit originally accepted it, but immutable submittedRevisionSchema requires nonempty summary. This could commit a revision that Reviewer detail cannot parse. Reject blank/whitespace summary at submit before writes; preserve drafts, and independently verify422/full rollback regression plus valid submission."
+}

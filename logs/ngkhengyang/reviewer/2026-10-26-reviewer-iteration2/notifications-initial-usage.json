@@ -1,0 +1,17 @@
+{
+  "import_id": "notifications-initial-usage",
+  "record_id": "rec-3cd067dec9c34a57",
+  "scope": "record",
+  "source": "MP4 sessions/local-resource-tracking/new child -> i2-notifications-complete.json; agent /root/notifications ONLY; sampled cutoff 2026-10-25T19:19:45.654Z; cached/reasoning subsets not added. Boundary bookkeeping excluded.",
+  "input_tokens": 1663502,
+  "output_tokens": 15794,
+  "cache_read_tokens": 1626880,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": "gpt-6.1-sol",
+  "observed_effort": "high",
+  "unavailable_reasons": {
+    "tool_calls": "Attributable aggregate unavailable",
+    "retries": "Runtime retry aggregate unavailable"
+  }
+}

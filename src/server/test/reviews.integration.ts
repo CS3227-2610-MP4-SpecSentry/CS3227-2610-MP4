@@ -14,6 +14,7 @@ import { AccountAdministrationService } from '../src/identity/account-administra
 import { hashPassword } from '../src/identity/identity.service';
 import { ReviewsService } from '../src/reviews/reviews.service';
 import { reviewerFixtureRevision } from '../src/reviews/seed-reviewer';
+import { persistedTestActor } from './business-fixtures';
 import type { ReviewerActor } from '../src/reviews/reviewer-context';
 
 describe('PostgreSQL Reviewer intake acceptance (INT-01–11)', () => {
@@ -28,7 +29,7 @@ describe('PostgreSQL Reviewer intake acceptance (INT-01–11)', () => {
   const ownerId = `${prefix}-owner`;
   const password = 'synthetic-reviewer-integration-password';
   let sequence = 0;
-  const businessTables = '"CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+  const businessTables = '"Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
   async function clearBusiness() {
     // Explicit disposable TEST_DATABASE_URL is mandatory; never truncate authentication tables.
     if (!process.env.TEST_DATABASE_URL) throw new Error('Explicit disposable TEST_DATABASE_URL is required');
@@ -48,8 +49,8 @@ describe('PostgreSQL Reviewer intake acceptance (INT-01–11)', () => {
       { id: `${prefix}-a`, username: `${prefix}-a`, role: 'REVIEWER', passwordHash },
       { id: `${prefix}-b`, username: `${prefix}-b`, role: 'REVIEWER', passwordHash },
     ] });
-    a = { accountId: `${prefix}-a`, accountVersion: 1, correlationId: prefix };
-    b = { accountId: `${prefix}-b`, accountVersion: 1, correlationId: prefix };
+    a = await persistedTestActor(database, `${prefix}-a`, prefix);
+    b = await persistedTestActor(database, `${prefix}-b`, prefix);
   });
   beforeEach(async () => {
     await clearBusiness();

@@ -17,7 +17,7 @@ import { ReviewsService } from '../src/reviews/reviews.service';
 import type { Prisma } from '../src/generated/prisma/client';
 
 // The suite uses only its explicitly supplied disposable PostgreSQL database.
-const businessTables = '"CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const businessTables = '"Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 describe('PostgreSQL manual Reviewer acceptance (REQ-REV-001/002/004/005/006/007/009/010/011/015)', () => {
   let app: NestExpressApplication;
   let database: DatabaseService;
@@ -314,7 +314,7 @@ describe('PostgreSQL manual Reviewer acceptance (REQ-REV-001/002/004/005/006/007
     const paths = ['review', 'findings', 'decisions', 'coverage-history', 'findings/unknown/history'];
     for (const path of paths) {
       await request(app.getHttpServer()).get(`/api/proposals/${root.id}/${path}`).expect(401);
-      await owner.agent.get(`/api/proposals/${root.id}/${path}`).expect(403);
+      await owner.agent.get(`/api/proposals/${root.id}/${path}`).expect(path === 'review' ? 403 : path === 'findings/unknown/history' ? 404 : 200);
       await b.agent.get(`/api/proposals/${root.id}/${path}`).expect(403);
     }
     await a.agent.post(`/api/proposals/${root.id}/decision`).set('Idempotency-Key', randomUUID()).send({ ...scope(command), decision: 'REQUEST_CHANGES', note: 'Human note' }).expect(403);

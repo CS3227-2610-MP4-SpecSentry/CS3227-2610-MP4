@@ -1,6 +1,38 @@
 # SpecSentry User Guide
 
-Status: authentication and manual Reviewer review, 25 October 2026. No live application URL or
+## Reviewing a replacement revision
+
+Reviewer notices identify each newly submitted revision. Choose **Open notified
+revision** to inspect it. Opening a revision acknowledges only that revision;
+opening older history leaves newer notices unread. The workspace shows the latest
+submitted revision separately from the revision currently viewed, plus a
+new-revision badge when the latest notice is unread.
+
+A Contributor resubmission retains the assigned Reviewer and starts fresh
+criterion coverage. Earlier assessments and decisions remain in history.
+Findings preserve original authorship and transitions; unresolved HIGH/CRITICAL
+findings still block approval, and resolved findings do not reopen automatically.
+A request for changes cannot be reversed without Contributor resubmission. The
+Contributor API supports this cycle; the full Contributor drafting screen remains
+future work. Original submission age does not reset on resubmission.
+
+If another revision arrives or the assignment changes, the server rejects an old
+form. The workspace freezes those forms and retains entered text while access
+remains valid. Explicitly refresh/reconcile before assessing the new revision;
+old edits are never silently moved to it. Explicit refresh discards unsaved edits.
+
+Withdrawal ends the assignment and full-content access. A safe status notice stays
+for the intended Reviewer with no content link. Protected client state is cleared
+when access loss/withdrawal is observed. Owners and scoped Maintainers retain
+submitted history. Reopening an unattached approval invalidates its effect while
+preserving the decision; attached/released proposals cannot be reopened.
+If its previous Reviewer was disabled, reopening returns the unfinished work to
+the unassigned awaiting-revision queue so the owner can resubmit or withdraw.
+
+Manual review remains usable without AI. Verification boundaries and current
+evidence are in the [iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md).
+
+Status: authentication, manual review and revision cycles, 26 October 2026. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
 the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
@@ -15,8 +47,8 @@ username and password; your account's Contributor, Reviewer, or Release Maintain
 workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
-human decisions. Contributor editing, revision notifications, releases and AI
-assistants remain pending.
+human decisions, receive revision notices and review owner-API submissions.
+The full Contributor editing UI, releases and AI assistants remain pending.
 
 Use **Sign out** to end your session. Sessions expire after 30 minutes idle or
 eight hours total; sign in again when prompted. Your browser does not retain
@@ -48,8 +80,8 @@ the first submission; latest revision age is shown separately.
 2. Inspect the submitted specification, criteria, diff and optional plain-text
    evidence. These are the immutable submitted revision, not a working draft.
 3. Use **Submitted revision history** to inspect an older submitted revision.
-   History and activity load in bounded pages. Opening history does not acknowledge
-   revision notifications; notifications are outside this increment.
+   History and activity load in bounded pages. Opening a revision acknowledges only
+   its own notice; a newer revision's notice remains unread.
 4. Assess each criterion as covered, partially covered, not covered or not
    applicable. The last three require a rationale. Evidence links are optional,
    including for covered criteria; the same evidence may support several criteria.
@@ -68,8 +100,7 @@ the first submission; latest revision age is shown separately.
    Dropping ends your access to full content. Another Reviewer can then claim it.
 
 An awaiting-revision item can be claimed, inspected and edited, but another
-decision requires Contributor resubmission. That submission flow is a later
-increment. After takeover on the same revision, confirm or replace each preserved
+decision requires Contributor resubmission through the owner API. After takeover on the same revision, confirm or replace each preserved
 assessment individually. Findings retain their original author and history;
 unresolved findings remain actionable. A new revision needs fresh assessments.
 Resolved findings stay historical until explicitly reopened. Approval freezes
@@ -87,7 +118,7 @@ prompted. Previously displayed information is not saved in browser storage.
 
 Local demonstration submissions are supplied through the development fixture
 command described in the [Developer Guide](DeveloperGuide.md#reviewer-intake-fixtures).
-There is no public submission-creation or fixture endpoint.
+The authenticated owner API can create submissions; there is no public fixture endpoint.
 
 ## Troubleshooting
 

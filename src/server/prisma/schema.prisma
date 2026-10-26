@@ -83,6 +83,11 @@ enum AssignmentEndReason {
 }
 
 enum ProposalActivityAction {
+  DRAFT_CREATED
+  DRAFT_SAVED
+  WITHDRAWN
+  REOPENED
+  NOTIFICATION_CREATED
   SUBMITTED
   RESUBMITTED
   CLAIMED
@@ -108,6 +113,7 @@ model ChangeProposal {
   firstSubmittedAt    DateTime?
   createdAt           DateTime          @default(now())
   version             Int               @default(0)
+  releaseAttachmentRef String?
   owner               UserAccount       @relation(fields: [ownerId], references: [id], onDelete: Restrict)
   revisions           ProposalRevision[] @relation("ProposalRevisions")
   currentRevision     ProposalRevision? @relation("CurrentRevision", fields: [id, currentRevisionId], references: [proposalId, id], onDelete: Restrict, onUpdate: NoAction)
@@ -216,7 +222,7 @@ model ReviewAssignment {
 model ProposalActivity {
   id           String                 @id @default(uuid())
   proposalId   String
-  revisionId   String
+  revisionId   String?
   assignmentId String?
   actorId      String?
   action       ProposalActivityAction
@@ -225,11 +231,50 @@ model ProposalActivity {
   reason       String?
   timestamp    DateTime               @default(now())
   proposal     ChangeProposal         @relation(fields: [proposalId], references: [id], onDelete: Restrict)
-  revision     ProposalRevision       @relation(fields: [proposalId, revisionId], references: [proposalId, id], onDelete: Restrict)
+  revision     ProposalRevision?      @relation(fields: [proposalId, revisionId], references: [proposalId, id], onDelete: Restrict)
   assignment   ReviewAssignment?      @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
   actor        UserAccount?           @relation(fields: [actorId], references: [id], onDelete: Restrict)
 
   @@index([proposalId, timestamp, id])
+}
+
+// Private working content; never selected by submitted-review projections.
+model WorkingRevision {
+  id String @id @default(uuid())
+  proposalId String @unique
+  content Json
+  updatedAt DateTime @updatedAt
+}
+
+enum NotificationKind {
+  NEW_REVISION
+  WITHDRAWN
+}
+
+model Notification {
+  id String @id @default(uuid())
+  recipientId String
+  kind NotificationKind
+  proposalId String
+  revisionId String
+  assignmentId String
+  activityId String @unique
+  createdAt DateTime @default(now())
+  readAt DateTime?
+  @@unique([recipientId, kind, revisionId])
+  @@index([recipientId, createdAt, id])
+}
+
+model ApprovalInvalidation {
+  id String @id @default(uuid())
+  proposalId String
+  revisionId String
+  assignmentId String
+  decisionId String @unique
+  actorId String
+  mutationVersion Int
+  createdAt DateTime @default(now())
+  @@unique([proposalId, mutationVersion])
 }
 
 enum CoverageStatus {

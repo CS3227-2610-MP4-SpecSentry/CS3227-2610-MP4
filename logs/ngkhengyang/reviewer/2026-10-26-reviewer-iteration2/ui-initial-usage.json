@@ -1,0 +1,17 @@
+{
+  "import_id": "ui-initial-usage",
+  "record_id": "rec-00b844ad31cd4b91",
+  "scope": "record",
+  "source": "MP4 sessions/local-resource-tracking/new child -> i2-workers-complete.json; agent /root/ui ONLY; sampled cutoff 2026-10-25T19:19:55.269Z; cached/reasoning subsets not added. Boundary bookkeeping excluded.",
+  "input_tokens": 2542239,
+  "output_tokens": 13726,
+  "cache_read_tokens": 2444544,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": "gpt-6.1-sol",
+  "observed_effort": "medium",
+  "unavailable_reasons": {
+    "tool_calls": "Attributable aggregate unavailable",
+    "retries": "Runtime retry aggregate unavailable"
+  }
+}

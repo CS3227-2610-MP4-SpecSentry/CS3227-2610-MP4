@@ -18,11 +18,11 @@ export class AppModule {
       imports: [
         DatabaseModule.register(config),
         IdentityModule.register(config),
-        ProposalsModule,
+        ProposalsModule.register(config),
         ReviewsModule.register(config),
         ReleasesModule,
         ActivityModule,
-        NotificationsModule,
+        NotificationsModule.register(config),
         AiModule,
       ],
       controllers: [HealthController],

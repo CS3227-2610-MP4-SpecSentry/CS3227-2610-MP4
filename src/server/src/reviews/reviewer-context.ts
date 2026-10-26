@@ -1,23 +1,16 @@
-import { ConflictException, ForbiddenException, UnauthorizedException, UnprocessableEntityException } from '@nestjs/common';
+import { ConflictException, UnprocessableEntityException } from '@nestjs/common';
 import { z } from 'zod';
 import { REVIEWER_LIMITS, reviewerIdSchema, reviewerTimestampSchema } from '@specsentry/shared';
 import type { Prisma } from '../generated/prisma/client';
+import type { BusinessActor } from '../identity/business-context';
 
 export type ReviewTransaction = Prisma.TransactionClient;
-export interface ReviewerActor { accountId: string; accountVersion: number; correlationId?: string }
+export type ReviewerActor = BusinessActor;
 
 export function validate<T>(schema: z.ZodType<T>, input: unknown): T {
   const result = schema.safeParse(input);
   if (!result.success) throw new UnprocessableEntityException();
   return result.data;
-}
-
-export async function lockReviewer(tx: ReviewTransaction, actor: ReviewerActor): Promise<void> {
-  const accounts = await tx.$queryRaw<{ enabled: boolean; version: number; role: string }[]>`
-    SELECT "enabled", "version", "role" FROM "UserAccount" WHERE "id" = ${actor.accountId} FOR UPDATE`;
-  const account = accounts[0];
-  if (!account?.enabled || account.version !== actor.accountVersion) throw new UnauthorizedException();
-  if (account.role !== 'REVIEWER') throw new ForbiddenException();
 }
 
 const cursorData = z.object({ v: z.literal(1), scope: z.string().max(800), id: reviewerIdSchema,

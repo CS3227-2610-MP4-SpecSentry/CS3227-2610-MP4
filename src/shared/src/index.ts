@@ -7,3 +7,4 @@ export {
 } from './contracts/health';
 export * from './contracts/identity';
 export * from './contracts/reviewer';
+export * from './contracts/revision-cycle';

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { assignedReviewsResponseSchema, proposalActivityResponseSchema, proposalDetailResponseSchema, reviewCommandResponseSchema, reviewPoolResponseSchema, submittedRevisionsResponseSchema, type AssignedReviewItem, type PoolItem, type ProposalDetailResponse, type ProposalActivityResponse, type SubmittedRevisionsResponse, type SessionResponse } from '@specsentry/shared';
 import type { AuthorizationGeneration } from '../../shared/authorization';
 import { ManualReview } from './ManualReview';
+import { RevisionNotices } from './RevisionNotices';
+import { acknowledgeNotificationResponseSchema } from '@specsentry/shared';
 
 type Queue = { items: (PoolItem | AssignedReviewItem)[]; nextCursor: string | null };
 type Parser<T> = { parse: (value: unknown) => T };
@@ -23,11 +25,15 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [stale, setStale] = useState(false);
+  const [noticeRefresh, setNoticeRefresh] = useState(0);
+  const [latest, setLatest] = useState<ProposalDetailResponse['latestRevision']>();
+  const renderedView = useRef<{ detail: ProposalDetailResponse; generation: number } | null>(null);
+  const acknowledged = useRef(new Set<string>());
   const generation = useRef(0);
   const mutationPending = useRef(false);
   const initialLoadNeeded = useRef(true);
   const title = useRef<HTMLHeadingElement>(null);
-  const clearProtected = useCallback(() => { generation.current++; if (!mutationPending.current) setPending(false); setSelected(null); setDetail(null); setHistory(null); setActivity(null); setLoading(false); }, []);
+  const clearProtected = useCallback(() => { generation.current++; if (!mutationPending.current) setPending(false); setSelected(null); renderedView.current = null; setLatest(undefined); setDetail(null); setHistory(null); setActivity(null); setLoading(false); }, []);
   useEffect(() => () => { generation.current++; }, []);
   useEffect(() => { if (detail) title.current?.focus(); }, [detail]);
 
@@ -81,9 +87,10 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
       // A focus read may replace pagination, but must not supersede a command
       // whose committed outcome is still being established.
       if (mutationPending.current) return;
+      setNoticeRefresh(value => value + 1);
       if (selected && detail) {
         generation.current++; const local = generation.current; setPending(false); setStale(true);
-        void request(`/api/proposals/${encodeURIComponent(selected)}?revisionId=${encodeURIComponent(detail.revision.id)}`, proposalDetailResponseSchema, local).catch(cause => { if (!(cause instanceof StaleResponse)) { setDetail(null); failed(cause); } });
+        void request(`/api/proposals/${encodeURIComponent(selected)}?revisionId=${encodeURIComponent(detail.revision.id)}`, proposalDetailResponseSchema, local).then(value => { setLatest(value.latestRevision); }).catch(cause => { if (!(cause instanceof StaleResponse)) { if (!(cause instanceof RequestFailure && cause.status === 409)) setDetail(null); failed(cause); } });
       } else void loadQueue();
     };
     window.addEventListener('focus', revalidate);
@@ -93,14 +100,28 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
     initialLoadNeeded.current = false;
     generation.current++; const local = generation.current;
     if (!mutationPending.current) setPending(false);
-    setStale(false); setSelected(id); setDetail(null); setHistory(null); setActivity(null); setError(''); setLoading(true);
+    renderedView.current = null; setLatest(undefined); setStale(false); setSelected(id); setDetail(null); setHistory(null); setActivity(null); setError(''); setLoading(true);
     try {
       const value = await request(`/api/proposals/${encodeURIComponent(id)}${revisionId ? `?revisionId=${encodeURIComponent(revisionId)}` : ''}`, proposalDetailResponseSchema, local);
-      setDetail(value);
+      renderedView.current = { detail: value, generation: local };
+      setLatest(value.latestRevision); setDetail(value);
       await Promise.all([request(`/api/proposals/${encodeURIComponent(id)}/revisions`, submittedRevisionsResponseSchema, local).then(setHistory), request(`/api/proposals/${encodeURIComponent(id)}/activity`, proposalActivityResponseSchema, local).then(setActivity)]);
     } catch (cause) { failed(cause); }
     finally { if (local === generation.current) setLoading(false); }
   }
+  // Only committed, current view renders acknowledge a revision. Focus probes do not.
+  useEffect(() => {
+    const view = renderedView.current;
+    const notice = detail?.revisionNotice;
+    if (!view || view.detail !== detail || view.generation !== generation.current || !detail || !notice || notice.readAt) return;
+    const token = `${view.generation}:${notice.id}`;
+    if (acknowledged.current.has(token)) return;
+    acknowledged.current.add(token);
+    void request(`/api/notifications/${encodeURIComponent(notice.id)}/acknowledge`, acknowledgeNotificationResponseSchema, view.generation,
+      { kind: 'NEW_REVISION', revisionId: detail.revision.id, assignmentId: detail.assignment.id, expectedAssignmentVersion: detail.assignment.version })
+      .then(result => { setNoticeRefresh(value => value + 1); setDetail(current => current === detail ? { ...current, hasUnreadLatestRevision: current.revision.id === (current.latestRevision?.id ?? current.assignment.revisionId) ? false : current.hasUnreadLatestRevision, revisionNotice: { id: notice.id, readAt: result.readAt } } : current); })
+      .catch(cause => { if (cause instanceof StaleResponse) return; if (cause instanceof RequestFailure && cause.status === 409) { setStale(true); setNotice('Revision notice changed. Refresh review explicitly to reconcile; the newer revision remains unread.'); setNoticeRefresh(value => value + 1); } else failed(cause); });
+  }, [detail]); // eslint-disable-line react-hooks/exhaustive-deps
   async function command(item: PoolItem | ProposalDetailResponse, action: 'claim' | 'drop') {
     if (mutationPending.current) return;
     mutationPending.current = true;
@@ -110,7 +131,7 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
       const result = await request(`/api/proposals/${encodeURIComponent(item.id)}/${action}`, reviewCommandResponseSchema, local, body);
       if (action === 'claim') { setNotice('Proposal claimed.'); await open(result.proposalId); }
       else { clearProtected(); setNotice('Assignment dropped. Full proposal access has ended.'); await loadQueue(); }
-    } catch (cause) { if (!(cause instanceof StaleResponse)) { clearProtected(); setQueue(null); failed(cause); } }
+    } catch (cause) { if (!(cause instanceof StaleResponse)) { if (cause instanceof RequestFailure && cause.status === 409) setStale(true); else { clearProtected(); setQueue(null); } failed(cause); } }
     finally { mutationPending.current = false; setPending(false); }
   }
   async function more(kind: 'history' | 'activity') {
@@ -134,6 +155,10 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
   const revision = detail?.revision;
   return <section aria-label="Reviewer workspace">
     <h2>Reviewer workspace</h2>
+    <RevisionNotices session={session} authorization={authorization} refresh={noticeRefresh} selected={selected}
+      onOpen={(id, revisionId) => void open(id, revisionId)}
+      onWithdrawn={() => { clearProtected(); setQueue(null); setNotice('Proposal withdrawn. Full proposal access has ended.'); }}
+      onAccessLost={() => { authorization.invalidate(); clearProtected(); setQueue(null); }} onUnauthorized={onUnauthorized} />
     <nav aria-label="Review queues">{(['pool', 'assigned'] as const).map(value => <button key={value} disabled={pending} aria-pressed={tab === value} onClick={() => { setTab(value); setQuery(''); void loadQueue(undefined, value, ''); }}>{value === 'pool' ? 'Review pool' : 'My assignments'}</button>)}</nav>
     {notice && <p role="status">{notice}</p>}{error && <p role="alert">{error}</p>}
     <button disabled={pending} onClick={() => void loadQueue()}>Refresh queue</button>
@@ -147,12 +172,14 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
         <button disabled={pending || loading}>Apply filters</button>
       </form>
       {queue?.items.length === 0 && <p>No proposals match these filters.</p>}
-      <ul className="proposal-list">{queue?.items.map(item => <li key={item.id}><h4>{item.title}</h4><p>{item.summary}</p><p>Author: {item.author.username} ({item.author.id})</p><p>Original age: {age(item.firstSubmittedAt)} days · Latest revision age: {age(item.latestSubmittedAt)} days</p><p>First submitted: {date(item.firstSubmittedAt)} · Latest submitted: {date(item.latestSubmittedAt)}</p>{item.awaitingRevision && <p>Awaiting revision</p>}{'state' in item && <p>State: {item.state}</p>}{tab === 'pool' ? <button disabled={pending} onClick={() => void command(item, 'claim')}>Claim {item.title}</button> : <button disabled={pending} onClick={() => void open(item.id)}>Open {item.title}</button>}</li>)}</ul>
+      <ul className="proposal-list">{queue?.items.map(item => <li key={item.id}><h4>{item.title}</h4><p>{item.summary}</p><p>Author: {item.author.username} ({item.author.id})</p><p>Original age: {age(item.firstSubmittedAt)} days · Latest revision age: {age(item.latestSubmittedAt)} days</p><p>First submitted: {date(item.firstSubmittedAt)} · Latest submitted: {date(item.latestSubmittedAt)}</p>{item.awaitingRevision && <p>Awaiting revision</p>}{'state' in item && <p>State: {item.state}</p>}{'hasUnreadLatestRevision' in item && item.hasUnreadLatestRevision && <p>Unread latest revision</p>}{tab === 'pool' ? <button disabled={pending} onClick={() => void command(item, 'claim')}>Claim {item.title}</button> : <button disabled={pending} onClick={() => void open(item.id)}>Open {item.title}</button>}</li>)}</ul>
       {queue?.nextCursor && <button disabled={pending || loading} onClick={() => void loadQueue(queue.nextCursor!)}>Next queue page</button>}
     </>}
     {loading && <p role="status">Loading review information…</p>}{pending && <p role="status">Request in progress…</p>}
     {detail && revision && <article>
       <h3 ref={title} tabIndex={-1}>{detail.title} — revision {revision.number}</h3><p>State: {detail.state}{detail.state === 'CHANGES_REQUESTED' ? ' · Awaiting revision' : ''}</p><p>Author: {detail.author.username} · Submitted: {date(revision.submittedAt)}</p>
+      <p>Viewed revision: {revision.number} ({revision.id}); Latest revision: {(latest ?? detail.latestRevision)?.number ?? revision.number} ({(latest ?? detail.latestRevision)?.id ?? detail.assignment.revisionId})</p>
+      {detail.hasUnreadLatestRevision && <p>Unread latest revision</p>}
       <p>This submitted revision is immutable. {revision.id === detail.assignment.revisionId ? 'Current assigned revision.' : 'Historical submitted revision (read only).'}</p><h4>Summary</h4><p className="plain-text">{revision.summary}</p><h4>Problem</h4><p className="plain-text">{revision.problem}</p><h4>Constraints</h4><p className="plain-text">{revision.constraints || 'None provided.'}</p><h4>Expected behavior</h4><p className="plain-text">{revision.expectedBehavior}</p>
       <h4>Acceptance criteria</h4><ul>{revision.criteria.map(criterion => <li key={criterion.id}><p>{criterion.stableKey}: {criterion.statement} ({criterion.required ? 'Required' : 'Optional'})</p><p>Linked evidence: {revision.criterionEvidenceLinks.filter(link => link.criterionId === criterion.id).map(link => link.evidenceId).join(', ') || 'None'}</p></li>)}</ul>
       <h4>Submitted diff</h4><pre>{revision.diffText || 'No diff provided.'}</pre><h4>Test evidence</h4>{revision.evidence.length === 0 ? <p>No evidence provided.</p> : revision.evidence.map(evidence => <section key={evidence.id}><h5>{evidence.id}</h5><pre>{evidence.text}</pre><p>Evidence hash: {evidence.evidenceHash}</p></section>)}

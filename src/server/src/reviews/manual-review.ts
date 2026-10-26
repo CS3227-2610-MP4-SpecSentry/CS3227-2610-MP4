@@ -156,21 +156,21 @@ export class ManualReviewService {
     return { items, nextCursor: rows.length > query.limit && last ? encodeCursor(scope, { id: last.id, number: last.mutationVersion }) : null };
   }
   async findings(tx: ReviewTransaction, actor: ReviewerActor, id: string, query: HumanReviewPageQuery) {
-    await this.proposals.assignedRoot(tx, id, actor.accountId);
+    await this.proposals.viewerRoot(tx, id, actor.accountId, actor.role);
     const scope = JSON.stringify(['human-findings', id]); const cursor = this.position(query.cursor, scope);
     const rows = await tx.reviewFinding.findMany({ where: { proposalId: id, ...(cursor ? { mutationVersion: { gt: cursor.number } } : {}) },
       orderBy: { mutationVersion: 'asc' }, take: query.limit + 1, include: findingInclude });
     return findingsResponseSchema.parse(this.paged(rows.map(findingDto), query, scope));
   }
   async decisions(tx: ReviewTransaction, actor: ReviewerActor, id: string, query: HumanReviewPageQuery) {
-    await this.proposals.assignedRoot(tx, id, actor.accountId);
+    await this.proposals.viewerRoot(tx, id, actor.accountId, actor.role);
     const scope = JSON.stringify(['human-decisions', id]); const cursor = this.position(query.cursor, scope);
     const rows = await tx.reviewDecision.findMany({ where: { proposalId: id, ...(cursor ? { mutationVersion: { gt: cursor.number } } : {}) },
       orderBy: { mutationVersion: 'asc' }, take: query.limit + 1, include: { actor: author } });
     return decisionsResponseSchema.parse(this.paged(rows.map(decisionDto), query, scope));
   }
   async coverageHistory(tx: ReviewTransaction, actor: ReviewerActor, id: string, query: CoverageHistoryQuery) {
-    const root = await this.proposals.assignedRoot(tx, id, actor.accountId);
+    const root = await this.proposals.viewerRoot(tx, id, actor.accountId, actor.role);
     if (query.revisionId) await this.revision(tx, root, query.revisionId);
     if (query.criterionId && !await tx.acceptanceCriterion.findFirst({ where: { id: query.criterionId,
       revision: { proposalId: id }, ...(query.revisionId ? { revisionId: query.revisionId } : {}) }, select: { id: true } })) throw new NotFoundException();
@@ -180,7 +180,7 @@ export class ManualReviewService {
     return coverageHistoryResponseSchema.parse(this.paged(rows.map(coverageDto), query, scope));
   }
   async findingHistory(tx: ReviewTransaction, actor: ReviewerActor, proposalId: string, findingId: string, query: HumanReviewPageQuery) {
-    await this.proposals.assignedRoot(tx, proposalId, actor.accountId);
+    await this.proposals.viewerRoot(tx, proposalId, actor.accountId, actor.role);
     if (!await tx.reviewFinding.findFirst({ where: { id: findingId, proposalId }, select: { id: true } })) throw new NotFoundException();
     const scope = JSON.stringify(['human-finding-history', proposalId, findingId]); const cursor = this.position(query.cursor, scope);
     const rows = await tx.findingEvent.findMany({ where: { proposalId, findingId, ...(cursor ? { mutationVersion: { gt: cursor.number } } : {}) },
@@ -196,7 +196,7 @@ export class ManualReviewService {
     const where = { actorId_operation_proposalId_keyHash: { actorId: actor.accountId, operation, proposalId: id, keyHash } };
     const replay = await tx.reviewIdempotency.findUnique({ where });
     if (replay && replay.expiresAt.getTime() > Date.now()) {
-      if (replay.requestHash !== requestHash) throw new ConflictException();
+      if (replay.requestHash !== requestHash || await tx.approvalInvalidation.count({ where: { proposalId: id, revisionId: body.revisionId } })) throw new ConflictException();
       if (root.currentRevisionId !== body.revisionId || root.currentAssignment!.id !== body.assignmentId ||
         root.currentAssignment!.version !== body.expectedAssignmentVersion) throw new ConflictException();
       return decisionCommandResponseSchema.parse(replay.response);

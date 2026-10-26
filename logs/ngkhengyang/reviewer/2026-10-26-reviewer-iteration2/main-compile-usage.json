@@ -1,0 +1,15 @@
+{
+  "source": "MP4 sessions/local-resource-tracking/reviewer-iteration2-20261026-main-compile-start.json and main-compile-end.json; sampled runtime delta, cutoff 10/25/2026 18:49:42; initialization boundary overhead included; post-cutoff bookkeeping excluded",
+  "cache_read_tokens": 1592448,
+  "input_tokens": 1664260,
+  "record_id": "rec-5a0aea8faaf54261",
+  "unavailable_reasons": {
+    "tool_calls": "Attributable aggregate not exposed",
+    "retries": "Runtime retry aggregate not exposed"
+  },
+  "output_tokens": 11715,
+  "scope": "record",
+  "retries": null,
+  "tool_calls": null,
+  "import_id": "main-compile-usage-1"
+}

@@ -1,0 +1,14 @@
+{
+  "identity": "Run iteration2, main -> notifications/notifications-1; implement after reviewed design v2 and user resumption. Model gpt-6.1-sol/high",
+  "requirements": "Read canonical run log acceptance I2-01\u201311/security SEC-I2-001\u2013007 and focused role specs. Shared revision-cycle.ts and reviewer.ts wire schemas are main-owned; require exact revision/current assignment and all deterministic gates. No AI or full Contributor editor.",
+  "permissions": "Owned files: src/server/src/notifications/notifications.service.ts, src/server/src/notifications/notifications.controller.ts, src/server/test/notifications.integration.ts, src/server/test/notifications-contracts.spec.ts. You are not alone: preserve others changes and request shared contract changes. Do not edit schema/migration/contracts/modules/canonical log. Main persists resources/handoffs. Do not run DB suites or shared build concurrently; request main coordination.",
+  "state": "design: reviewed version2 foundation contracts now implemented in schema, revision-cycle.ts and identity/business-context.ts; baseline HEAD a58fd52e5262911600b671aae44a5a1fb0a87ad2. Main continues wiring/migrations in disjoint files. Existing findings are proposal scoped, coverage revision scoped.",
+  "verification": "Derive meaningful tests from normative acceptance. Return changed files, commands/pass/fail/gaps, safe resources and seven-section completion. Full real PostgreSQL/browser checks run serialized by main after integration; no mock claim for transactions.",
+  "risks": "Use caller-owned transaction for all writes; account -> session -> root lock order, exact notice acknowledgement and narrow withdrawal safe exception. No sensitive metadata logging. Material contract changes must go through main. Follow direct dispatch message for exact API/helper signatures.",
+  "resources": "Coordinator-observed resource interval already running; new child counters baseline is i2-workers-start.json in MP4 sessions. Selected Sol family; high for lifecycle/notification race/privacy semantics, medium for established UI patterns. Do not write resource/log records; main does so. Report failed/interrupted attempts.",
+  "references": [
+    "logs/ngkhengyang/2026-10-26-reviewer-iteration2.md",
+    "src/shared/src/contracts/revision-cycle.ts",
+    "src/server/src/identity/business-context.ts"
+  ]
+}

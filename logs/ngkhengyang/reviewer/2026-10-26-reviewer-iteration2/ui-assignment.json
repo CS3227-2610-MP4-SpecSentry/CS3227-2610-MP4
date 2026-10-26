@@ -1,0 +1,11 @@
+{
+  "id": "ui",
+  "agent": "ui",
+  "role": "implementer",
+  "paths": [
+    "src/client/src/features/reviewer",
+    "workflow/tests/browser/reviewer-revision-cycle.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-revision-cycle.ts"
+  ],
+  "dependencies": []
+}
