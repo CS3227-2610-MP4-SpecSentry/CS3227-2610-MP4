@@ -11,7 +11,7 @@ Independent specification/server/UI assessment; five confirmed findings includin
 Referenced repository files:
 
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/review\-results.json](../inputs-summary.json#/entries/review-results.json)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/reports/review\-finding\-index.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/review-finding-index.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/reports/review\-finding\-index.json](../reports/checkpoints.json#/entries/review-finding-index.json)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/reports/source\-manifest.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/source-manifest.json)
 - [workflow/specs/AI\-SECURITY\-SPEC.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/AI-SECURITY-SPEC.md)
 - [workflow/specs/ROLE\-REVIEWER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/ROLE-REVIEWER.md)

@@ -26,7 +26,7 @@ duplicate observations share one canonical finding each.
 All five are open and assigned to `independent-review` for eventual independent
 closure, with the original logical implementation owners retained. Authoritative
 status lives in [state.json](../state.json), with
-[origin mapping](review-finding-index.json) and
+[origin mapping](checkpoints.json#/entries/review-finding-index.json) and
 [detailed observations/probe controls](../inputs-summary.json#/entries/review-results.json).
 
 ## Requirement assessment
@@ -79,6 +79,6 @@ request. Source is preserved for bounded fixes and independent revalidation.
 
 Review-only resources and measurement limitations are in
 [independent-review-resources.md](independent-review-resources.md). The
-[derived canonical report](after-review-report.md) retains unresolved findings,
+[derived canonical report](checkpoints.json#/entries/after-review-report.md) retains unresolved findings,
 past unsuccessful worker attempts and workflow incompleteness; it must not be
 presented as approval or full delivery.

@@ -15,7 +15,8 @@
     "historical_gate_report": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/reports/final-close-bundle.json",
     "historical_gate": {"ok": false, "errors": 69, "interpretation": "Original retained result; not rerun during compaction. Full diagnostics remain in the report."},
     "consumed_input_summary": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/inputs-summary.json",
-    "input_reference_migration": "Input evidence links now target per-run summaries; original artifact hashes describe pre-migration content."
+    "input_reference_migration": "Input evidence links now target per-run summaries; original artifact hashes describe pre-migration content.",
+    "checkpoint_ledger": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/reports/checkpoints.json"
   },
   "run_id": "2026-10-26-reviewer-iteration4",
   "prompter": "ngkhengyang",

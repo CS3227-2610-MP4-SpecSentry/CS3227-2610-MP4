@@ -1,9 +1,0 @@
-{
-  "ok": false,
-  "errors": [
-    "prerequisite database-preflight: no current passing verification",
-    "prerequisite browser-runtime: no current passing verification",
-    "prerequisite ai-fixture: no current passing verification"
-  ],
-  "scope": "Declared coverage and prerequisites; scenario quality still requires independent review."
-}
