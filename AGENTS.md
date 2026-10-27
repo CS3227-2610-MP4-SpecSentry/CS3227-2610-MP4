@@ -23,7 +23,7 @@ Use [PRODUCT-SPEC](workflow/specs/PRODUCT-SPEC.md) for requirements, scope, arch
 
 Repository-wide skills are available for [specification conformance review](.agents/skills/review-changes-to-specs/SKILL.md), [security review](.agents/skills/review-security/SKILL.md), and [change-session logging](.agents/skills/log-change-session/SKILL.md). Invoke [resource-use analysis](.agents/skills/analyze-resource-use/SKILL.md) explicitly when comparing recorded runs. These capabilities do not prescribe an agent orchestration process.
 
-When working on Reviewer functionality, read the [Reviewer workflow entry point](workflow/reviewer/README.md).
+When working on Contributor functionality, read the [Contributor workflow entry point](workflow/contributor/README.md). When working on Reviewer functionality, read the [Reviewer workflow entry point](workflow/reviewer/README.md). Apply each procedure only to its role portion; standalone shared infrastructure retains the generic [development process](workflow/DEVELOPMENT.md). Coordinate shared contracts before editing them.
 
 Discover current source, commands, and CI from the repository before checks. Product-spec paths may describe planned artifacts; distinguish those from working controls. Link authoritative artifacts instead of copying broad histories.
 

@@ -34,7 +34,7 @@ These focuses organize work and do not create exclusive ownership. The contribut
 | --- | --- |
 | src | All production source code and resources |
 | workflow/specs | Living product, role, technical, integration, and AI security specifications |
-| workflow/agents | Specialized agent definitions, permissions, inputs, outputs, and stop rules |
+| workflow/contributor/agents and workflow/reviewer/agents | Scoped agent definitions, permissions, inputs, outputs, and stop rules; generic responsibilities in DEVELOPMENT.md |
 | workflow/evaluations | AI evaluation cases, rubrics, scripts, results, and resource measurements |
 | workflow/decisions | Architecture, security, context, and model-choice decision records |
 | workflow/PLAN.md | Dependencies, ownership, status, estimates, and actual outcomes |
@@ -92,7 +92,7 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | --- | --- | --- | --- | --- |
 | TASK-001 | Resolve validation, identity, API and AI blocking decisions | None | Relevant role owners | Policy baseline approved 25 October; actual live provider verification remains pending |
 | TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Partial: base server/client/shared workspaces, connectivity, local Compose, Docker/CI templates and setup docs initialized 25 October; source/build/browser/PostgreSQL checks recorded in base-source log. Sessions, CSRF, domain migrations and audit remain pending; Docker/remote CI unexecuted locally |
-| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Planned; REQ-CON evidence |
+| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Product implementation planned; Contributor workflow instructions and run template established 26 October in [contributor/README.md](contributor/README.md); REQ-CON acceptance evidence remains pending |
 | TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Planned; normal/denial/race tests |
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
 | TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Planned; publication/revocation race evidence |
