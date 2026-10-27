@@ -12,8 +12,24 @@
   "observed_effort": null,
   "settings_reason": "Exact execution settings not exposed",
   "started_at": "2026-10-27T15:45:38.380066+00:00",
-  "ended_at": null,
-  "elapsed_seconds": null,
-  "status": "running",
-  "usage": null
+  "ended_at": "2026-10-27T15:50:57.417972+00:00",
+  "elapsed_seconds": 319.037906,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Exact Increment1 scope/source/evidence checked; Gitleaks no leaks; commit8448a002 pushed and PR10 opened against master; final patch approval pending; three cosmetic staged whitespace warnings disclosed",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and attributable runtime token cache tool retry telemetry not exposed",
+    "output_tokens": "Exact execution settings and attributable runtime token cache tool retry telemetry not exposed",
+    "cache_read_tokens": "Exact execution settings and attributable runtime token cache tool retry telemetry not exposed",
+    "tool_calls": "Exact execution settings and attributable runtime token cache tool retry telemetry not exposed",
+    "retries": "Exact execution settings and attributable runtime token cache tool retry telemetry not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and attributable runtime token cache tool retry telemetry not exposed"
 }
