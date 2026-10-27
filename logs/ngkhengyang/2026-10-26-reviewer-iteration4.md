@@ -1,5 +1,7 @@
 # Reviewer iteration 4 â€” preparation and implementation pause
 
+> Retention update, 27 October 2026: duplicate snapshot files were removed; complete payloads remain in original state records. See [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Original results below are historical.
+
 ## Resumption: implementation authorized, pause before integration
 
 Explicit steering on 27 October 2026 (Asia/Singapore): **“Go with the implementation but immediately before the integration, report the status and what needs to be integrated.”** This lifts the implementation pause. Integration and independent implementation review remain unstarted. Prior preparation and security evidence below remain historical.

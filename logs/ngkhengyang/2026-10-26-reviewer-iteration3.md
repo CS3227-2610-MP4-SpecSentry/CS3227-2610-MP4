@@ -1,5 +1,7 @@
 # Reviewer iteration 3 — preparation, implementation, integration and review pause
 
+> Retention update, 27 October 2026: duplicate snapshot files were removed; complete payloads remain in original state records. See [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Original results below are historical.
+
 ## Independent review resumption
 
 Subsequent explicit request: **“Continue with the reviwer.”** The prior review pause is lifted for independent review. Application source remains frozen at the existing 36-path SHA-256 manifest while two read-only independent agents assess it: implementation/specification reviewer `/root/independent_reviewer` and code-security reviewer `/root/code_security`, both selected **gpt-6.1-sol/high**. High effort is justified by coupled session/assignment/lifecycle races and strict parsing/resource/privacy contracts; no Astra exception is warranted. Neither reviewer implemented this source.
