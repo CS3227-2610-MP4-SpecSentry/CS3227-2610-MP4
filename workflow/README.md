@@ -2,7 +2,7 @@
 
 | Path | Purpose |
 | --- | --- |
-| specs/ | Authoritative product, role, shared, technical, integration, AI security and open-decision requirements; start at PRODUCT-SPEC.md |
+| specs/ | Product, role, shared, technical, integration, AI security and open-decision requirements; start at PRODUCT-SPEC.md; ASSIGNMENT-SPEC.md captures page-referenced MP4 constraints |
 | PLAN.md | Team allocation, delivery dependencies and planned work |
 | TRACEABILITY.md | Requirement-to-implementation/test evidence; pending is explicit |
 | DEVELOPMENT.md | Spec-driven process, agent coordination and verification rules |

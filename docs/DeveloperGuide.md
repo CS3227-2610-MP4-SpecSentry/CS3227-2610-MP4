@@ -142,6 +142,15 @@ with activity and required notifications. Never grant access based on client rou
 
 ## Development process and grading artifacts
 
+The [MP4 assignment specification](../workflow/specs/ASSIGNMENT-SPEC.md) preserves
+the five-page brief with page references: restrictions, team responsibilities,
+required artifacts, reflection topics, deadlines, tentative grading and individual
+presentation/peer-evaluation logistics. Use its evidence links and
+[submission checklist](../workflow/SUBMISSION.md); neither document certifies completion.
+The team must manage specialized agents even when using an SDD toolkit. Development
+security includes the [planned workflow abuse checks](../workflow/specs/AI-SECURITY-SPEC.md#development-agent-security-and-evidence),
+separately from product-AI security tests.
+
 The [workflow directory guide](../workflow/README.md) describes the specifications,
 agent definitions, procedures, templates, scripts and tests. Start at
 [Development](../workflow/DEVELOPMENT.md) for spec-driven development and coordinated
@@ -163,6 +172,8 @@ evidence, not inferred from module names or configuration.
 Record prompt/change summaries under `logs/<prompter>/` using
 [the prompt log template](../workflow/templates/PROMPT-LOG.md), with measurements
 following [RESOURCES](../workflow/RESOURCES.md). Humans must verify summaries.
+Include all development interactions, including advice, read-only reviews,
+corrections and failed attempts, with safe summaries rather than sensitive transcripts.
 Controlled context, coordination, model and cache experiments use
 [EXPERIMENT](../workflow/templates/EXPERIMENT.md); store safe results under
 `workflow/evaluations/` (create it with the first result) and analyze them in
@@ -206,3 +217,14 @@ prior-MP source or documentation was imported by this initialization. The AI
 specification separately cites earlier public protocol compatibility references;
 those are references, not imported application code. Record future adapted ideas,
 code, text or assets here with source, license and affected files.
+
+### AI-use declaration
+
+Codex assisted with architecture/scaffolding and documentation as recorded above,
+Contributor workflow instructions, and reading/mapping the supplied MP4 PDF into
+repository specifications and checklists. AI-generated changes and summaries
+require human review; the team remains responsible for the submitted content and
+quality. Each member must verify and extend this declaration with their actual
+tools, specific uses and adapted-source acknowledgements before submission. No
+human verification of this draft declaration is implied. The assignment's cited
+academic integrity policies are indexed in [ASSIGNMENT-SPEC](../workflow/specs/ASSIGNMENT-SPEC.md#references-supplied-by-the-brief).

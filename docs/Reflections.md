@@ -19,10 +19,21 @@ executed run evidence must be assessed separately.
 
 ## Multi-Agent Software Engineering
 
+The [assignment discussion guide](../workflow/specs/ASSIGNMENT-SPEC.md#reflection-discussion-guide)
+preserves the PDF's sample questions. These guide evidence-based discussion;
+the controlled experiment protocol below is the team's chosen method, not a
+claim that the PDF mandates an experiment for every question. Distinguish
+application-AI findings from development-agent findings in each result.
+
 For each real coordinated run, record triggering, responsibility, context supplied,
 file ownership, handoff, independent verification, conflicts, retries and blocked
 time. Compare against a single-agent task of similar scope using the protocol in
 [Development](../workflow/DEVELOPMENT.md#required-experiments-for-reflections).
+
+Include resource sharing, idle/overloaded agents, repeated analysis and unnecessary
+calls. Explain whether actual verification showed the coordination pattern was
+followed. Development-process security needs its own implemented/tested evidence;
+use the planned AC-DEVSEC cases without presenting them as completed experiments.
 
 Results pending: no controlled comparison is reported by this initialization.
 Analyze whether reduced defects or parallel progress justified coordination cost,

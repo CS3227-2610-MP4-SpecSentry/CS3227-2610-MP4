@@ -10,7 +10,7 @@ As of 25 October 2026. Imported dates are targets, not completion evidence. Hist
 | ngkhengyang | Reviewer | AI Gateway, typed output, rate limits, evaluation harness, and AI observability | Reviewer spec, interface, service, tests, and AI evaluation |
 | yu-sutong | Release Maintainer | PostgreSQL migrations, audit model, CI/CD, deployment, and release evidence | Maintainer spec, interface, service, tests, and release operations |
 
-These focuses organize work and do not create exclusive ownership. The contributor to a feature owns its interface, service behavior, persistence integration, authorization tests, documentation, traceability, session summary, and reflection evidence. At least one teammate reviews every non-trivial change. Each member must also complete a substantial share of team-level work.
+These focuses organize work and do not create exclusive ownership. The contributor to a feature owns its interface, service behavior, persistence integration, authorization tests, documentation, traceability, session summary, and reflection evidence. At least one teammate reviews every non-trivial change. Each member must complete the full feature set for their role and substantial team-level work; the assignment estimates individual workload at 1.5 times MP1. Record actual contributions rather than treating allocation as evidence. Team/role counts and assessment logistics are captured in [ASSIGNMENT-SPEC](specs/ASSIGNMENT-SPEC.md).
 
 ## Delivery Schedule
 
@@ -74,13 +74,14 @@ These focuses organize work and do not create exclusive ownership. The contribut
 
 | **Source** | **Use** |
 | --- | --- |
-| MP4 assignment brief supplied on 22 October and pasted again on 24 October 2026 | Product constraints, team size, role and AI requirements, security, SDD, Multi-Agent SE, environment separation, resource use, repository structure, deadlines, grading focus, simple UI, and prohibition on AI build-and-host environments; no Java-specific stack requirement |
+| MP4 brief previously supplied as text; five-page PDF checked 26 October 2026 | [ASSIGNMENT-SPEC](specs/ASSIGNMENT-SPEC.md) captures page-referenced constraints, academic integrity, restrictions, deliverables, deadlines, tentative grading and presentation/evaluation logistics; no prescribed Java stack |
 | SoC LLM start guide | The implementation team must confirm current authentication, model, rate, token, and data-handling rules before the live integration is accepted |
 | Existing team repository metadata | GitHub usernames ngkhengyang, yooplo, and yu-sutong; used only for planning ownership and organization invitations |
 
 - The team must confirm the SoC LLM's current rate limits and approved model before replacing the initial configurable budgets.
 - The team must review role ownership, Render as the deployment platform, and the proposed schedule before treating this plan as approved.
 - The GitHub organization name must be submitted through Canvas by 23 October 2026 at 2:00 PM SGT even if the same team worked together previously.
+- Confirm historical organization registration, Canvas ZIP-upload expectations, presentation sign-up/slot, and later peer-evaluation details; do not infer them from the PDF availability window. See [submission readiness](SUBMISSION.md).
 
 **Product decision.** Build SpecSentry as a new, narrowly scoped software engineering web application in the GitHub organization CS3227-2610-MP4-SpecSentry. Keep every AI capability advisory, typed, rate limited, reviewable, and separate from state-changing endpoints. Prioritize three complete role workflows, explicit security evidence, measurable context and resource experiments, and a reproducible two-environment release over optional integrations.
 

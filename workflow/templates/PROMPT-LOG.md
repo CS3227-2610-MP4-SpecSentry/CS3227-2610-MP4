@@ -2,11 +2,15 @@
 
 Use `logs/<name>/<log_name.md>` for every prompt explicitly requesting code or specification changes. Resolve the name using the [logging skill](../../.agents/skills/log-change-session/SKILL.md) and record whether it was explicit or inferred and from which source. Prefer a date and short task in the filename. Related prompts may share one conversation log, with each change request and outcome accounted for. This recording rule applies to every member and does not prescribe their execution workflow.
 
+The [assignment](../specs/ASSIGNMENT-SPEC.md) additionally requires summaries of all development prompts/interactions: include relevant advice, read-only work, coordination, corrections, and failed/interrupted attempts. Summarize safely; omit credentials, hidden reasoning and raw sensitive content. Humans must verify AI-generated summaries. Do not claim past interaction coverage or timestamps that cannot be reconstructed.
+
 ## Context and requests
 
 - Prompter, date/timezone:
 - General task/conversation context:
 - Explicit change requests and subsequent corrections or decisions:
+- Other development prompts/interactions and outcomes (including no-change advice/reviews):
+- Human summary verification: pending or actual reviewer/date/reference:
 
 ## Changes and evidence
 
