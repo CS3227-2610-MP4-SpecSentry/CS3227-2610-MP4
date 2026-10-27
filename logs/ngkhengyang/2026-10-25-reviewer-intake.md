@@ -1,5 +1,7 @@
 # Reviewer intake — consolidated multi-agent workflow log
 
+> State retention update, 27 October 2026: linked state files are now compact historical summaries. Full original payloads are recoverable from Git; see [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Earlier preservation/replay claims below describe their original checkpoint.
+
 ## Overview
 
 - Run: `2026-10-25-reviewer-intake`; prompter: **ngkhengyang**, inferred from Git identity. Date: **25 October 2026**, Asia/Singapore (UTC+08:00).

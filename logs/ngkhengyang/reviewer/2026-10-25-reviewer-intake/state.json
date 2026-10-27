@@ -1,17 +1,74 @@
 {
-  "format": "reviewer-closed-run-archive-v1",
-  "status": "completed; compacted at user request",
+  "format": "reviewer-historical-evidence-summary-v1",
+  "retention": {
+    "status": "historical-summary; not resumable by the workflow CLI",
+    "source_commit": "62a807d7082410d10192f55196e718018ad08d8a",
+    "source_path": "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/state.json",
+    "original_worktree_sha256": "e083deea54a331f352897c094288e10478166b091c710f4723368ea8f9059183",
+    "original_git_blob_sha256": "410dc2646a0ab5c578101b3a8144dda17611750257b032ae287d573a94fce2bc",
+    "original_lines": 914,
+    "original_bytes": 33881,
+    "original_file_url": "https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/62a807d7082410d10192f55196e718018ad08d8a/logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/state.json",
+    "interpretation": "Historical observations only. No current source freshness, acceptance or formal closure is inferred. Full original state remains in the identified Git commit.",
+    "omitted": "Embedded per-file snapshot manifests, repeated path arrays and repeated matrix cases. Snapshot revision/hash metadata and compact matrix history remain.",
+    "main_report": "logs/ngkhengyang/2026-10-25-reviewer-intake.md",
+    "original_status": "completed; compacted at user request"
+  },
   "run_id": "2026-10-25-reviewer-intake",
   "prompter": "ngkhengyang",
-  "created_at": "2026-10-25T06:42:42.409924+00:00",
-  "archived_at": "2026-10-25T13:14:20.750377+00:00",
   "requirement_trigger": [
     "REQ-REV-001"
   ],
-  "scope": "Reviewer intake: pool, claim, immutable assigned detail/history/activity, drop/takeover and account-disable release. Partial role requirements; deferred scope remains in briefs.",
+  "created_at": "2026-10-25T06:42:42.409924+00:00",
+  "archived_at": "2026-10-25T13:14:20.750377+00:00",
   "briefs": [
     "brief-v1.md",
     "brief-v2.md"
+  ],
+  "assignments": [
+    {"id": "foundation", "agent": "foundation", "role": "implementer", "paths": ["src/server/prisma/schema.prisma", "src/server/prisma/migrations/20261025070000_reviewer_intake", "src/server/src/generated/prisma", "src/shared/src/contracts/reviewer.ts", "src/shared/src/index.ts"], "dependencies": [], "created_at": "2026-10-25T06:55:55.388339+00:00"},
+    {"id": "backend", "agent": "backend", "role": "implementer", "paths": ["src/server/src/reviews", "src/server/src/proposals", "src/server/src/activity", "src/server/src/identity/manage-account.ts", "src/server/src/identity/account-administration.service.ts", "src/server/test/reviewer-contracts.spec.ts", "src/server/test/reviews.spec.ts", "src/server/test/reviews.integration.ts", "src/server/test/reviewer-seed.integration.ts", "src/server/test/reviewer-disable.integration.ts"], "dependencies": ["foundation"], "created_at": "2026-10-25T06:55:55.748240+00:00"},
+    {"id": "frontend", "agent": "frontend", "role": "implementer", "paths": ["src/client/src", "workflow/tests/browser/reviewer-intake.spec.ts", "workflow/tests/browser/fixtures/reviewer-intake.ts"], "dependencies": ["foundation"], "created_at": "2026-10-25T06:55:56.063346+00:00"},
+    {"id": "main-integration", "agent": "main", "role": "coordinator", "paths": ["src/server/src/app.module.ts", "src/server/src/http.ts", "src/server/src/identity/identity.module.ts", "package.json", "src/server/package.json", "playwright.config.ts", "docs/Architecture.md", "docs/UserGuide.md", "docs/DeveloperGuide.md", "docs/Authentication.md", "workflow/TRACEABILITY.md", "logs/ngkhengyang/2026-10-25-reviewer-intake.md", "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake"], "dependencies": ["foundation", "backend", "frontend"], "created_at": "2026-10-25T06:55:56.397671+00:00"}
+  ],
+  "findings": [
+    {"id": "F-001", "requirement": "REQ-SHR-001/002; INT-10", "severity": "MEDIUM", "blocks": true, "owner": "main", "reviewer": "security", "description": "DS-001: terminal client session loss does not invalidate older successful session responses; freeze access-generation control and frontend App.tsx ownership/tests before implementation.", "status": "closed", "created_at": "2026-10-25T06:52:08.118519+00:00", "history": [{"status": "open", "reviewer": "security", "at": "2026-10-25T06:52:08.118519+00:00"}, {"status": "closed", "reviewer": "security", "at": "2026-10-25T06:54:55.002093+00:00", "record_id": "rec-1438c2de2205461a", "snapshot_id": "preimplementation-source", "reason": "Independent v2 design revalidation closes design-control finding only; implementation and executed acceptance checks remain pending"}, {"status": "open", "reviewer": "security", "at": "2026-10-25T07:53:16.612563+00:00", "reason": "Refresh design findings against implemented current source and current snapshot; prior design closure retained, no claim of new design regression"}, {"status": "closed", "reviewer": "security", "at": "2026-10-25T12:26:26.038676+00:00", "record_id": "rec-35d0b9eed41d4631", "snapshot_id": "final-review-state"}], "final_evidence": "security-final-review.md"},
+    {"id": "F-002", "requirement": "REQ-REV-015; integration paging; INT-11", "severity": "LOW", "blocks": true, "owner": "main", "reviewer": "security", "description": "DS-002: v1 submitted detail embeds unbounded revision index; freeze scoped paginated summaries and explicit wire bounds before implementation.", "status": "closed", "created_at": "2026-10-25T06:52:08.464787+00:00", "history": [{"status": "open", "reviewer": "security", "at": "2026-10-25T06:52:08.464787+00:00"}, {"status": "closed", "reviewer": "security", "at": "2026-10-25T06:54:55.722434+00:00", "record_id": "rec-1438c2de2205461a", "snapshot_id": "preimplementation-source", "reason": "Independent v2 design revalidation closes design-control finding only; implementation and executed acceptance checks remain pending"}, {"status": "open", "reviewer": "security", "at": "2026-10-25T07:53:17.019764+00:00", "reason": "Refresh design findings against implemented current source and current snapshot; prior design closure retained, no claim of new design regression"}, {"status": "closed", "reviewer": "security", "at": "2026-10-25T12:26:27.542358+00:00", "record_id": "rec-35d0b9eed41d4631", "snapshot_id": "final-review-state"}], "final_evidence": "security-final-review.md"},
+    {"id": "F-003", "requirement": "INT-10; REQ-SHR-005; shared client failure contract", "severity": "MEDIUM", "blocks": true, "owner": "frontend", "reviewer": "implementation-reviewer", "description": "Integrated unit-client-1 command failed two expiry-response cases: assigned queue became empty before Open Protected proposal. Suspected deferred initial pool load starts after user selects My assignments and overrides later navigation. Frontend must diagnose, preserve regression intent and prevent older initial loads overriding user actions; do not merely suppress assertions.", "status": "closed", "created_at": "2026-10-25T07:42:19.794093+00:00", "history": [{"status": "open", "reviewer": "implementation-reviewer", "at": "2026-10-25T07:42:19.794093+00:00"}, {"status": "closed", "reviewer": "implementation-reviewer", "at": "2026-10-25T12:26:30.588340+00:00", "record_id": "rec-824f066dbd11405c", "snapshot_id": "final-review-state"}], "final_evidence": "implementation-final-review.md"},
+    {"id": "F-004", "requirement": "REQ-SHR-004/007; INT-09", "severity": "MEDIUM", "blocks": true, "owner": "backend", "reviewer": "security", "description": "DS-003: authenticated valid-CSRF controller ID/query/body validation failures throw422 before service audited boundary; missing required restricted audit for malformed Reviewer actions. Add safe exactly-once validationreject audit afterguard, no payload/timeline leakage, preserve422 and no businessmutation; serviceerrors stay singlyaudited.", "status": "closed", "created_at": "2026-10-25T08:02:28.337071+00:00", "history": [{"status": "open", "reviewer": "security", "at": "2026-10-25T08:02:28.337071+00:00"}, {"status": "closed", "reviewer": "security", "at": "2026-10-25T12:26:29.171525+00:00", "record_id": "rec-35d0b9eed41d4631", "snapshot_id": "final-review-state"}], "final_evidence": "security-final-review.md"},
+    {"id": "F-005", "requirement": "INT-10;REQ-SHR-005;sharedfailurecontract", "severity": "MEDIUM", "blocks": true, "owner": "frontend", "reviewer": "implementation-reviewer", "description": "Independent React/jsdom reproduction: held next-history/activity page thenwindowfocus invokes open, incrementsgeneration butneverresetspending; oldfinally cannotclear. Allqueue/drop/refreshcontrolsstuckdisabled afterresponses. Introducependingownership/reset and deterministichistory/activityfocusregressions.", "status": "closed", "created_at": "2026-10-25T08:04:33.782572+00:00", "history": [{"status": "open", "reviewer": "implementation-reviewer", "at": "2026-10-25T08:04:33.782572+00:00"}, {"status": "closed", "reviewer": "implementation-reviewer", "at": "2026-10-25T12:26:31.960878+00:00", "record_id": "rec-824f066dbd11405c", "snapshot_id": "final-review-state"}], "final_evidence": "implementation-final-review.md"},
+    {"id": "F-006", "requirement": "INT-09;REQ-SHR-007", "severity": "MEDIUM", "blocks": true, "owner": "frontend", "reviewer": "implementation-reviewer", "description": "ActivityUI omitssupplied revisionId/assignmentId/outcome,showsonlyactor/time/action/summary. Identicaleventsacrossrevisionslackrequired affectedrevision/entityandoutcome. Renderauthorizedcontextandsuccessoutcome;testdistinctrevisionevents.", "status": "closed", "created_at": "2026-10-25T08:04:34.236117+00:00", "history": [{"status": "open", "reviewer": "implementation-reviewer", "at": "2026-10-25T08:04:34.236117+00:00"}, {"status": "closed", "reviewer": "implementation-reviewer", "at": "2026-10-25T12:26:33.585893+00:00", "record_id": "rec-824f066dbd11405c", "snapshot_id": "final-review-state"}], "final_evidence": "implementation-final-review.md"}
+  ],
+  "review_cycles": [
+    {"reviewer": "implementation-reviewer", "outcome": "failed", "reassessment": null, "at": "2026-10-25T08:06:00.472769+00:00"},
+    {"reviewer": "implementation-reviewer", "outcome": "passed", "reassessment": null, "at": "2026-10-25T12:26:35.190167+00:00"}
+  ],
+  "reviews": {
+    "security": {"result": "PASS", "resource_record": "rec-35d0b9eed41d4631", "report": "security-final-review.md"},
+    "implementation": {"result": "PASS", "resource_record": "rec-824f066dbd11405c", "report": "implementation-final-review.md"},
+    "initial_matrix_and_rework": "review-history.md"
+  },
+  "resource_records": "resources.json",
+  "commands": [
+    {"id": "preparation-checks", "started_at": "2026-10-25T06:57:15.669090+00:00", "ended_at": "2026-10-25T06:57:16.779816+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "python.exe", "argv_sha256": "6da184b88ccf1a8a84e47de2c0535f221acca3e3324f95553adb18023d940e00", "original_snapshot_id": "preimplementation-source", "streams": {"stdout": {"sha256": "5cc3337bd9e56803d4219c303e3994dc118b58a3a7f9559e12e364da3d58980a", "bytes": 214}, "stderr": {"sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bytes": 0}}, "superseded_by": "final-record-check", "output_retained": false},
+    {"id": "typecheck-1", "started_at": "2026-10-25T07:39:22.849686+00:00", "ended_at": "2026-10-25T07:39:38.634887+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "35c288543b3b72748d9ce3ea9028141758d139a34cf81d9937f899f0839f35fd", "original_snapshot_id": "integrated-1", "streams": {"stdout": {"sha256": "68f54b4393b244fd91ff6f7b8d8e1a054c5f486e653bf96b0cee51a9fe4608f6", "bytes": 393}, "stderr": {"sha256": "a5958c98881c40a10d63b73423590849528b74a7ecf67c2af87099de137c24f2", "bytes": 428}}, "superseded_by": "typecheck-2", "output_retained": false},
+    {"id": "lint-1", "started_at": "2026-10-25T07:39:46.321524+00:00", "ended_at": "2026-10-25T07:40:02.279739+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "093565c3910e8ca2f2344d6aa30db0083c713d6616a54ac78022284da8514c7c", "original_snapshot_id": "integrated-1", "streams": {"stdout": {"sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bytes": 0}, "stderr": {"sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d", "bytes": 107}}, "superseded_by": "lint-2", "output_retained": false},
+    {"id": "unit-client-1", "started_at": "2026-10-25T07:40:10.815115+00:00", "ended_at": "2026-10-25T07:40:32.212019+00:00", "exit_code": 1, "passed": false, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "e18067d5309d66e622a3c3c6c2af03bed2f719063ab61229ba0f8c8a3902d672", "original_snapshot_id": "integrated-1", "streams": {"stdout": {"sha256": "d10126ff34cb324cd8e2cecfb7940b6a33b64962c0effa5de28a1381ec3ec996", "bytes": 818}, "stderr": {"sha256": "b4447a669d26ecc19c93b3571db590d3e32b2f2d764de945e8801ab8ab5385f9", "bytes": 10971}}, "superseded_by": "unit-client-2", "output_retained": true},
+    {"id": "postgresql-1", "started_at": "2026-10-25T07:44:16.364147+00:00", "ended_at": "2026-10-25T07:44:43.384123+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "e90a9f9c514b131fe954828b3739445b4762f01ecdb9211fbc74f9ccc2718c92", "original_snapshot_id": "backend-validation-1", "streams": {"stdout": {"sha256": "d5a26526185ab3e4b055fd21f49aa76dba2de4fa4add6b56d2f78678fdeeaf33", "bytes": 393}, "stderr": {"sha256": "5ea0b81c5831de9f7c2756a807eb908a6d1beec05ddd5c598fde4a1299a3c4c2", "bytes": 820}}, "superseded_by": "postgresql-final", "output_retained": false},
+    {"id": "typecheck-2", "started_at": "2026-10-25T07:48:09.938745+00:00", "ended_at": "2026-10-25T07:48:26.478251+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "35c288543b3b72748d9ce3ea9028141758d139a34cf81d9937f899f0839f35fd", "original_snapshot_id": "integrated-source-2", "streams": {"stdout": {"sha256": "8c25a02b56c1fa4020a298209784d4fa349e1d04a8380d2721f71b0dada85c34", "bytes": 393}, "stderr": {"sha256": "a5958c98881c40a10d63b73423590849528b74a7ecf67c2af87099de137c24f2", "bytes": 428}}, "superseded_by": "typecheck-final", "output_retained": false},
+    {"id": "lint-2", "started_at": "2026-10-25T07:48:27.938621+00:00", "ended_at": "2026-10-25T07:48:32.104752+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "093565c3910e8ca2f2344d6aa30db0083c713d6616a54ac78022284da8514c7c", "original_snapshot_id": "integrated-source-2", "streams": {"stdout": {"sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bytes": 0}, "stderr": {"sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d", "bytes": 107}}, "superseded_by": "lint-final", "output_retained": false},
+    {"id": "unit-client-2", "started_at": "2026-10-25T07:48:33.796728+00:00", "ended_at": "2026-10-25T07:48:51.407939+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "e18067d5309d66e622a3c3c6c2af03bed2f719063ab61229ba0f8c8a3902d672", "original_snapshot_id": "integrated-source-2", "streams": {"stdout": {"sha256": "1f19bf8139991b073ac5911875014bec29483ecda51d50b8f6c1219880937a64", "bytes": 631}, "stderr": {"sha256": "d818a9f301a910a7f225d2b5a8f4861c10e80a049fcc6ba9be891f4d4b534177", "bytes": 575}}, "superseded_by": "tests-final", "output_retained": false},
+    {"id": "build-1", "started_at": "2026-10-25T07:48:52.917985+00:00", "ended_at": "2026-10-25T07:49:08.012979+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "dabe967dfa2f3769eec6ac83598ebf8a55d2c00cd6611b0c9c5fc27224a97f11", "original_snapshot_id": "integrated-source-2", "streams": {"stdout": {"sha256": "45be5a440ea0afc33c1d5a00d3f2e1f9f3a5e741a136b92a61df15055716016a", "bytes": 745}, "stderr": {"sha256": "86d2cbc575e869dd94ee273d8f009aa25741e4b1c15c471d129d7b27ccc9a6ca", "bytes": 453}}, "superseded_by": "build-final", "output_retained": false},
+    {"id": "browser-1", "started_at": "2026-10-25T07:49:09.553231+00:00", "ended_at": "2026-10-25T07:49:22.139290+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "5b5e695224b4d6acac10c2e4b5227295591db742ce4dcb6f895fc6300b01849e", "original_snapshot_id": "integrated-source-2", "streams": {"stdout": {"sha256": "96add964bd7dac214c4f24bd0860bfbfa3d9fee8337166744948bf34756d1081", "bytes": 815}, "stderr": {"sha256": "aa3f5b8b2274c484b28ba30d83c78770116e7eb37a8082b9bf81f443338bcde9", "bytes": 930}}, "superseded_by": "browser-final", "output_retained": false},
+    {"id": "schema-final", "started_at": "2026-10-25T08:08:50.254520+00:00", "ended_at": "2026-10-25T08:09:20.073976+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "45a1fbaf3655dc44e0a923038931fb8800fb0ddbde9d7b66859aca23f73e3bda", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "6381c2dba0dcd378ea2cc5d0f63d1a2c895dc6ae0f2193d0b39f2a1735a50228", "bytes": 49}, "stderr": {"sha256": "1f66e6bfcfad8b7972e9feda8dfdf55356caf5f7776b60115e256ef68040d8b9", "bytes": 277}}, "superseded_by": null, "output_retained": true},
+    {"id": "typecheck-final", "started_at": "2026-10-25T08:09:21.794006+00:00", "ended_at": "2026-10-25T08:09:37.962629+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "35c288543b3b72748d9ce3ea9028141758d139a34cf81d9937f899f0839f35fd", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "851b0f9fe41c4b49bae0e48e99df33df2d34497cba500e22c51e02208790f85a", "bytes": 395}, "stderr": {"sha256": "a5958c98881c40a10d63b73423590849528b74a7ecf67c2af87099de137c24f2", "bytes": 428}}, "superseded_by": null, "output_retained": true},
+    {"id": "lint-final", "started_at": "2026-10-25T08:09:39.505957+00:00", "ended_at": "2026-10-25T08:09:44.521239+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "093565c3910e8ca2f2344d6aa30db0083c713d6616a54ac78022284da8514c7c", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bytes": 0}, "stderr": {"sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d", "bytes": 107}}, "superseded_by": null, "output_retained": true},
+    {"id": "tests-final", "started_at": "2026-10-25T08:09:46.411961+00:00", "ended_at": "2026-10-25T08:10:03.516838+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "e18067d5309d66e622a3c3c6c2af03bed2f719063ab61229ba0f8c8a3902d672", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "12e0961be9492e8a838aa9b42c0b57faf85aea83ab68e76d5835312cc1dc01e7", "bytes": 631}, "stderr": {"sha256": "5691410a61c74d40645ecfdc031c819562690bd399f51e8a483bfa3027f708d8", "bytes": 590}}, "superseded_by": null, "output_retained": true},
+    {"id": "postgresql-final", "started_at": "2026-10-25T08:10:05.047857+00:00", "ended_at": "2026-10-25T08:10:30.419925+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "e90a9f9c514b131fe954828b3739445b4762f01ecdb9211fbc74f9ccc2718c92", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "0738b1e6a9c26338c60635922d333a4f936df993f4cb6807a95ea8418d0610d7", "bytes": 393}, "stderr": {"sha256": "9c6e118c3924dfe819b428d6ca7e52232c50ea281940bb55c5c6005397f6cb48", "bytes": 821}}, "superseded_by": null, "output_retained": true},
+    {"id": "build-final", "started_at": "2026-10-25T08:10:32.415060+00:00", "ended_at": "2026-10-25T08:10:45.947284+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "dabe967dfa2f3769eec6ac83598ebf8a55d2c00cd6611b0c9c5fc27224a97f11", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "7fb72d94a8e8bda96cb5350d22480babc715727eb3d939b4bec68c465cf7fc07", "bytes": 745}, "stderr": {"sha256": "86d2cbc575e869dd94ee273d8f009aa25741e4b1c15c471d129d7b27ccc9a6ca", "bytes": 453}}, "superseded_by": null, "output_retained": true},
+    {"id": "browser-final", "started_at": "2026-10-25T08:10:47.693607+00:00", "ended_at": "2026-10-25T08:10:59.844139+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "5b5e695224b4d6acac10c2e4b5227295591db742ce4dcb6f895fc6300b01849e", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "fdfb8326ad068fcca68f0761679269d0baea3b337e6a76f9c74bcd911645fbf0", "bytes": 814}, "stderr": {"sha256": "cc44c5a0d80fa8398d2b579b5842900da535b242a439bfc2482af7ce31278122", "bytes": 930}}, "superseded_by": null, "output_retained": true},
+    {"id": "submission-final", "started_at": "2026-10-25T08:11:01.808533+00:00", "ended_at": "2026-10-25T08:11:02.278339+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "node", "argv_sha256": "6a149aab59caf334e400bb14e05482f7c1443c5b71027a8b2844ddcfde7d57a8", "original_snapshot_id": "final-source-1", "streams": {"stdout": {"sha256": "32cb236a6cf4e7cf44598ca2393c5022c29498f092fcaad142f058a47922a5a7", "bytes": 802}, "stderr": {"sha256": "c0dfae11aad139c33932a0502e0d6b4d09d34e5ec5679b996250b33158845af4", "bytes": 107}}, "superseded_by": null, "output_retained": true},
+    {"id": "final-record-check", "started_at": "2026-10-25T12:27:38.838971+00:00", "ended_at": "2026-10-25T12:27:44.796968+00:00", "exit_code": 0, "passed": true, "timed_out": false, "incomplete": false, "truncated": false, "executable": "python.exe", "argv_sha256": "2c61e5d0060f6a7bd01398fc080a9fa9cfa0e17153646490a0228932f7b054ca", "original_snapshot_id": "final-review-state", "streams": {"stdout": {"sha256": "95c38246aa343ad46c50d1ebe706ba1ff6dd9c9cb0394170a8e26e3e7d6920f5", "bytes": 451}, "stderr": {"sha256": "b9e6f21d30099c4464a37a378bbc50b563e17b31c83328d4a1ccbf2fee89c061", "bytes": 706}}, "superseded_by": null, "output_retained": true}
   ],
   "source_state": {
     "initial_preparation_base": "ccada71d5ad282ee342263fe7bcabdeb078a894f",
@@ -28,887 +85,42 @@
     "original_recorder_artifact_sha256": "f73047b24cdb44c557f9892f693837e3d8710d16fc518eb921db97372b5da826",
     "artifact_hash_note": "Original recorder hash matches LF-normalized UTF-8 content; retained on-disk file has CRLF line endings. Both hashes retained; file content not rewritten."
   },
-  "assignments": [
-    {
-      "id": "foundation",
-      "agent": "foundation",
-      "role": "implementer",
-      "paths": [
-        "src/server/prisma/schema.prisma",
-        "src/server/prisma/migrations/20261025070000_reviewer_intake",
-        "src/server/src/generated/prisma",
-        "src/shared/src/contracts/reviewer.ts",
-        "src/shared/src/index.ts"
-      ],
-      "dependencies": [],
-      "created_at": "2026-10-25T06:55:55.388339+00:00"
-    },
-    {
-      "id": "backend",
-      "agent": "backend",
-      "role": "implementer",
-      "paths": [
-        "src/server/src/reviews",
-        "src/server/src/proposals",
-        "src/server/src/activity",
-        "src/server/src/identity/manage-account.ts",
-        "src/server/src/identity/account-administration.service.ts",
-        "src/server/test/reviewer-contracts.spec.ts",
-        "src/server/test/reviews.spec.ts",
-        "src/server/test/reviews.integration.ts",
-        "src/server/test/reviewer-seed.integration.ts",
-        "src/server/test/reviewer-disable.integration.ts"
-      ],
-      "dependencies": [
-        "foundation"
-      ],
-      "created_at": "2026-10-25T06:55:55.748240+00:00"
-    },
-    {
-      "id": "frontend",
-      "agent": "frontend",
-      "role": "implementer",
-      "paths": [
-        "src/client/src",
-        "workflow/tests/browser/reviewer-intake.spec.ts",
-        "workflow/tests/browser/fixtures/reviewer-intake.ts"
-      ],
-      "dependencies": [
-        "foundation"
-      ],
-      "created_at": "2026-10-25T06:55:56.063346+00:00"
-    },
-    {
-      "id": "main-integration",
-      "agent": "main",
-      "role": "coordinator",
-      "paths": [
-        "src/server/src/app.module.ts",
-        "src/server/src/http.ts",
-        "src/server/src/identity/identity.module.ts",
-        "package.json",
-        "src/server/package.json",
-        "playwright.config.ts",
-        "docs/Architecture.md",
-        "docs/UserGuide.md",
-        "docs/DeveloperGuide.md",
-        "docs/Authentication.md",
-        "workflow/TRACEABILITY.md",
-        "logs/ngkhengyang/2026-10-25-reviewer-intake.md",
-        "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake"
-      ],
-      "dependencies": [
-        "foundation",
-        "backend",
-        "frontend"
-      ],
-      "created_at": "2026-10-25T06:55:56.397671+00:00"
-    }
-  ],
-  "resource_records": "resources.json",
-  "reviews": {
-    "security": {
-      "result": "PASS",
-      "resource_record": "rec-35d0b9eed41d4631",
-      "report": "security-final-review.md"
-    },
-    "implementation": {
-      "result": "PASS",
-      "resource_record": "rec-824f066dbd11405c",
-      "report": "implementation-final-review.md"
-    },
-    "initial_matrix_and_rework": "review-history.md"
-  },
-  "findings": [
-    {
-      "id": "F-001",
-      "requirement": "REQ-SHR-001/002; INT-10",
-      "severity": "MEDIUM",
-      "blocks": true,
-      "owner": "main",
-      "reviewer": "security",
-      "description": "DS-001: terminal client session loss does not invalidate older successful session responses; freeze access-generation control and frontend App.tsx ownership/tests before implementation.",
-      "status": "closed",
-      "created_at": "2026-10-25T06:52:08.118519+00:00",
-      "history": [
-        {
-          "status": "open",
-          "reviewer": "security",
-          "at": "2026-10-25T06:52:08.118519+00:00"
-        },
-        {
-          "status": "closed",
-          "reviewer": "security",
-          "at": "2026-10-25T06:54:55.002093+00:00",
-          "record_id": "rec-1438c2de2205461a",
-          "snapshot_id": "preimplementation-source",
-          "reason": "Independent v2 design revalidation closes design-control finding only; implementation and executed acceptance checks remain pending"
-        },
-        {
-          "status": "open",
-          "reviewer": "security",
-          "at": "2026-10-25T07:53:16.612563+00:00",
-          "reason": "Refresh design findings against implemented current source and current snapshot; prior design closure retained, no claim of new design regression"
-        },
-        {
-          "status": "closed",
-          "reviewer": "security",
-          "at": "2026-10-25T12:26:26.038676+00:00",
-          "record_id": "rec-35d0b9eed41d4631",
-          "snapshot_id": "final-review-state"
-        }
-      ],
-      "final_evidence": "security-final-review.md"
-    },
-    {
-      "id": "F-002",
-      "requirement": "REQ-REV-015; integration paging; INT-11",
-      "severity": "LOW",
-      "blocks": true,
-      "owner": "main",
-      "reviewer": "security",
-      "description": "DS-002: v1 submitted detail embeds unbounded revision index; freeze scoped paginated summaries and explicit wire bounds before implementation.",
-      "status": "closed",
-      "created_at": "2026-10-25T06:52:08.464787+00:00",
-      "history": [
-        {
-          "status": "open",
-          "reviewer": "security",
-          "at": "2026-10-25T06:52:08.464787+00:00"
-        },
-        {
-          "status": "closed",
-          "reviewer": "security",
-          "at": "2026-10-25T06:54:55.722434+00:00",
-          "record_id": "rec-1438c2de2205461a",
-          "snapshot_id": "preimplementation-source",
-          "reason": "Independent v2 design revalidation closes design-control finding only; implementation and executed acceptance checks remain pending"
-        },
-        {
-          "status": "open",
-          "reviewer": "security",
-          "at": "2026-10-25T07:53:17.019764+00:00",
-          "reason": "Refresh design findings against implemented current source and current snapshot; prior design closure retained, no claim of new design regression"
-        },
-        {
-          "status": "closed",
-          "reviewer": "security",
-          "at": "2026-10-25T12:26:27.542358+00:00",
-          "record_id": "rec-35d0b9eed41d4631",
-          "snapshot_id": "final-review-state"
-        }
-      ],
-      "final_evidence": "security-final-review.md"
-    },
-    {
-      "id": "F-003",
-      "requirement": "INT-10; REQ-SHR-005; shared client failure contract",
-      "severity": "MEDIUM",
-      "blocks": true,
-      "owner": "frontend",
-      "reviewer": "implementation-reviewer",
-      "description": "Integrated unit-client-1 command failed two expiry-response cases: assigned queue became empty before Open Protected proposal. Suspected deferred initial pool load starts after user selects My assignments and overrides later navigation. Frontend must diagnose, preserve regression intent and prevent older initial loads overriding user actions; do not merely suppress assertions.",
-      "status": "closed",
-      "created_at": "2026-10-25T07:42:19.794093+00:00",
-      "history": [
-        {
-          "status": "open",
-          "reviewer": "implementation-reviewer",
-          "at": "2026-10-25T07:42:19.794093+00:00"
-        },
-        {
-          "status": "closed",
-          "reviewer": "implementation-reviewer",
-          "at": "2026-10-25T12:26:30.588340+00:00",
-          "record_id": "rec-824f066dbd11405c",
-          "snapshot_id": "final-review-state"
-        }
-      ],
-      "final_evidence": "implementation-final-review.md"
-    },
-    {
-      "id": "F-004",
-      "requirement": "REQ-SHR-004/007; INT-09",
-      "severity": "MEDIUM",
-      "blocks": true,
-      "owner": "backend",
-      "reviewer": "security",
-      "description": "DS-003: authenticated valid-CSRF controller ID/query/body validation failures throw422 before service audited boundary; missing required restricted audit for malformed Reviewer actions. Add safe exactly-once validationreject audit afterguard, no payload/timeline leakage, preserve422 and no businessmutation; serviceerrors stay singlyaudited.",
-      "status": "closed",
-      "created_at": "2026-10-25T08:02:28.337071+00:00",
-      "history": [
-        {
-          "status": "open",
-          "reviewer": "security",
-          "at": "2026-10-25T08:02:28.337071+00:00"
-        },
-        {
-          "status": "closed",
-          "reviewer": "security",
-          "at": "2026-10-25T12:26:29.171525+00:00",
-          "record_id": "rec-35d0b9eed41d4631",
-          "snapshot_id": "final-review-state"
-        }
-      ],
-      "final_evidence": "security-final-review.md"
-    },
-    {
-      "id": "F-005",
-      "requirement": "INT-10;REQ-SHR-005;sharedfailurecontract",
-      "severity": "MEDIUM",
-      "blocks": true,
-      "owner": "frontend",
-      "reviewer": "implementation-reviewer",
-      "description": "Independent React/jsdom reproduction: held next-history/activity page thenwindowfocus invokes open, incrementsgeneration butneverresetspending; oldfinally cannotclear. Allqueue/drop/refreshcontrolsstuckdisabled afterresponses. Introducependingownership/reset and deterministichistory/activityfocusregressions.",
-      "status": "closed",
-      "created_at": "2026-10-25T08:04:33.782572+00:00",
-      "history": [
-        {
-          "status": "open",
-          "reviewer": "implementation-reviewer",
-          "at": "2026-10-25T08:04:33.782572+00:00"
-        },
-        {
-          "status": "closed",
-          "reviewer": "implementation-reviewer",
-          "at": "2026-10-25T12:26:31.960878+00:00",
-          "record_id": "rec-824f066dbd11405c",
-          "snapshot_id": "final-review-state"
-        }
-      ],
-      "final_evidence": "implementation-final-review.md"
-    },
-    {
-      "id": "F-006",
-      "requirement": "INT-09;REQ-SHR-007",
-      "severity": "MEDIUM",
-      "blocks": true,
-      "owner": "frontend",
-      "reviewer": "implementation-reviewer",
-      "description": "ActivityUI omitssupplied revisionId/assignmentId/outcome,showsonlyactor/time/action/summary. Identicaleventsacrossrevisionslackrequired affectedrevision/entityandoutcome. Renderauthorizedcontextandsuccessoutcome;testdistinctrevisionevents.",
-      "status": "closed",
-      "created_at": "2026-10-25T08:04:34.236117+00:00",
-      "history": [
-        {
-          "status": "open",
-          "reviewer": "implementation-reviewer",
-          "at": "2026-10-25T08:04:34.236117+00:00"
-        },
-        {
-          "status": "closed",
-          "reviewer": "implementation-reviewer",
-          "at": "2026-10-25T12:26:33.585893+00:00",
-          "record_id": "rec-824f066dbd11405c",
-          "snapshot_id": "final-review-state"
-        }
-      ],
-      "final_evidence": "implementation-final-review.md"
-    }
-  ],
-  "review_cycles": [
-    {
-      "reviewer": "implementation-reviewer",
-      "outcome": "failed",
-      "reassessment": null,
-      "at": "2026-10-25T08:06:00.472769+00:00"
-    },
-    {
-      "reviewer": "implementation-reviewer",
-      "outcome": "passed",
-      "reassessment": null,
-      "at": "2026-10-25T12:26:35.190167+00:00"
-    }
-  ],
-  "commands": [
-    {
-      "id": "preparation-checks",
-      "started_at": "2026-10-25T06:57:15.669090+00:00",
-      "ended_at": "2026-10-25T06:57:16.779816+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "python.exe",
-      "argv_sha256": "6da184b88ccf1a8a84e47de2c0535f221acca3e3324f95553adb18023d940e00",
-      "original_snapshot_id": "preimplementation-source",
-      "streams": {
-        "stdout": {
-          "sha256": "5cc3337bd9e56803d4219c303e3994dc118b58a3a7f9559e12e364da3d58980a",
-          "bytes": 214
-        },
-        "stderr": {
-          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "bytes": 0
-        }
-      },
-      "superseded_by": "final-record-check",
-      "output_retained": false
-    },
-    {
-      "id": "typecheck-1",
-      "started_at": "2026-10-25T07:39:22.849686+00:00",
-      "ended_at": "2026-10-25T07:39:38.634887+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "35c288543b3b72748d9ce3ea9028141758d139a34cf81d9937f899f0839f35fd",
-      "original_snapshot_id": "integrated-1",
-      "streams": {
-        "stdout": {
-          "sha256": "68f54b4393b244fd91ff6f7b8d8e1a054c5f486e653bf96b0cee51a9fe4608f6",
-          "bytes": 393
-        },
-        "stderr": {
-          "sha256": "a5958c98881c40a10d63b73423590849528b74a7ecf67c2af87099de137c24f2",
-          "bytes": 428
-        }
-      },
-      "superseded_by": "typecheck-2",
-      "output_retained": false
-    },
-    {
-      "id": "lint-1",
-      "started_at": "2026-10-25T07:39:46.321524+00:00",
-      "ended_at": "2026-10-25T07:40:02.279739+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "093565c3910e8ca2f2344d6aa30db0083c713d6616a54ac78022284da8514c7c",
-      "original_snapshot_id": "integrated-1",
-      "streams": {
-        "stdout": {
-          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "bytes": 0
-        },
-        "stderr": {
-          "sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d",
-          "bytes": 107
-        }
-      },
-      "superseded_by": "lint-2",
-      "output_retained": false
-    },
-    {
-      "id": "unit-client-1",
-      "started_at": "2026-10-25T07:40:10.815115+00:00",
-      "ended_at": "2026-10-25T07:40:32.212019+00:00",
-      "exit_code": 1,
-      "passed": false,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "e18067d5309d66e622a3c3c6c2af03bed2f719063ab61229ba0f8c8a3902d672",
-      "original_snapshot_id": "integrated-1",
-      "streams": {
-        "stdout": {
-          "sha256": "d10126ff34cb324cd8e2cecfb7940b6a33b64962c0effa5de28a1381ec3ec996",
-          "bytes": 818
-        },
-        "stderr": {
-          "sha256": "b4447a669d26ecc19c93b3571db590d3e32b2f2d764de945e8801ab8ab5385f9",
-          "bytes": 10971
-        }
-      },
-      "superseded_by": "unit-client-2",
-      "output_retained": true
-    },
-    {
-      "id": "postgresql-1",
-      "started_at": "2026-10-25T07:44:16.364147+00:00",
-      "ended_at": "2026-10-25T07:44:43.384123+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "e90a9f9c514b131fe954828b3739445b4762f01ecdb9211fbc74f9ccc2718c92",
-      "original_snapshot_id": "backend-validation-1",
-      "streams": {
-        "stdout": {
-          "sha256": "d5a26526185ab3e4b055fd21f49aa76dba2de4fa4add6b56d2f78678fdeeaf33",
-          "bytes": 393
-        },
-        "stderr": {
-          "sha256": "5ea0b81c5831de9f7c2756a807eb908a6d1beec05ddd5c598fde4a1299a3c4c2",
-          "bytes": 820
-        }
-      },
-      "superseded_by": "postgresql-final",
-      "output_retained": false
-    },
-    {
-      "id": "typecheck-2",
-      "started_at": "2026-10-25T07:48:09.938745+00:00",
-      "ended_at": "2026-10-25T07:48:26.478251+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "35c288543b3b72748d9ce3ea9028141758d139a34cf81d9937f899f0839f35fd",
-      "original_snapshot_id": "integrated-source-2",
-      "streams": {
-        "stdout": {
-          "sha256": "8c25a02b56c1fa4020a298209784d4fa349e1d04a8380d2721f71b0dada85c34",
-          "bytes": 393
-        },
-        "stderr": {
-          "sha256": "a5958c98881c40a10d63b73423590849528b74a7ecf67c2af87099de137c24f2",
-          "bytes": 428
-        }
-      },
-      "superseded_by": "typecheck-final",
-      "output_retained": false
-    },
-    {
-      "id": "lint-2",
-      "started_at": "2026-10-25T07:48:27.938621+00:00",
-      "ended_at": "2026-10-25T07:48:32.104752+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "093565c3910e8ca2f2344d6aa30db0083c713d6616a54ac78022284da8514c7c",
-      "original_snapshot_id": "integrated-source-2",
-      "streams": {
-        "stdout": {
-          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "bytes": 0
-        },
-        "stderr": {
-          "sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d",
-          "bytes": 107
-        }
-      },
-      "superseded_by": "lint-final",
-      "output_retained": false
-    },
-    {
-      "id": "unit-client-2",
-      "started_at": "2026-10-25T07:48:33.796728+00:00",
-      "ended_at": "2026-10-25T07:48:51.407939+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "e18067d5309d66e622a3c3c6c2af03bed2f719063ab61229ba0f8c8a3902d672",
-      "original_snapshot_id": "integrated-source-2",
-      "streams": {
-        "stdout": {
-          "sha256": "1f19bf8139991b073ac5911875014bec29483ecda51d50b8f6c1219880937a64",
-          "bytes": 631
-        },
-        "stderr": {
-          "sha256": "d818a9f301a910a7f225d2b5a8f4861c10e80a049fcc6ba9be891f4d4b534177",
-          "bytes": 575
-        }
-      },
-      "superseded_by": "tests-final",
-      "output_retained": false
-    },
-    {
-      "id": "build-1",
-      "started_at": "2026-10-25T07:48:52.917985+00:00",
-      "ended_at": "2026-10-25T07:49:08.012979+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "dabe967dfa2f3769eec6ac83598ebf8a55d2c00cd6611b0c9c5fc27224a97f11",
-      "original_snapshot_id": "integrated-source-2",
-      "streams": {
-        "stdout": {
-          "sha256": "45be5a440ea0afc33c1d5a00d3f2e1f9f3a5e741a136b92a61df15055716016a",
-          "bytes": 745
-        },
-        "stderr": {
-          "sha256": "86d2cbc575e869dd94ee273d8f009aa25741e4b1c15c471d129d7b27ccc9a6ca",
-          "bytes": 453
-        }
-      },
-      "superseded_by": "build-final",
-      "output_retained": false
-    },
-    {
-      "id": "browser-1",
-      "started_at": "2026-10-25T07:49:09.553231+00:00",
-      "ended_at": "2026-10-25T07:49:22.139290+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "5b5e695224b4d6acac10c2e4b5227295591db742ce4dcb6f895fc6300b01849e",
-      "original_snapshot_id": "integrated-source-2",
-      "streams": {
-        "stdout": {
-          "sha256": "96add964bd7dac214c4f24bd0860bfbfa3d9fee8337166744948bf34756d1081",
-          "bytes": 815
-        },
-        "stderr": {
-          "sha256": "aa3f5b8b2274c484b28ba30d83c78770116e7eb37a8082b9bf81f443338bcde9",
-          "bytes": 930
-        }
-      },
-      "superseded_by": "browser-final",
-      "output_retained": false
-    },
-    {
-      "id": "schema-final",
-      "started_at": "2026-10-25T08:08:50.254520+00:00",
-      "ended_at": "2026-10-25T08:09:20.073976+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "45a1fbaf3655dc44e0a923038931fb8800fb0ddbde9d7b66859aca23f73e3bda",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "6381c2dba0dcd378ea2cc5d0f63d1a2c895dc6ae0f2193d0b39f2a1735a50228",
-          "bytes": 49
-        },
-        "stderr": {
-          "sha256": "1f66e6bfcfad8b7972e9feda8dfdf55356caf5f7776b60115e256ef68040d8b9",
-          "bytes": 277
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "typecheck-final",
-      "started_at": "2026-10-25T08:09:21.794006+00:00",
-      "ended_at": "2026-10-25T08:09:37.962629+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "35c288543b3b72748d9ce3ea9028141758d139a34cf81d9937f899f0839f35fd",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "851b0f9fe41c4b49bae0e48e99df33df2d34497cba500e22c51e02208790f85a",
-          "bytes": 395
-        },
-        "stderr": {
-          "sha256": "a5958c98881c40a10d63b73423590849528b74a7ecf67c2af87099de137c24f2",
-          "bytes": 428
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "lint-final",
-      "started_at": "2026-10-25T08:09:39.505957+00:00",
-      "ended_at": "2026-10-25T08:09:44.521239+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "093565c3910e8ca2f2344d6aa30db0083c713d6616a54ac78022284da8514c7c",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "bytes": 0
-        },
-        "stderr": {
-          "sha256": "d3d27e9f1e98a690ca3b6b3e9d84ee76a83f00d2c18e81218d7e8b9c22f76d5d",
-          "bytes": 107
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "tests-final",
-      "started_at": "2026-10-25T08:09:46.411961+00:00",
-      "ended_at": "2026-10-25T08:10:03.516838+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "e18067d5309d66e622a3c3c6c2af03bed2f719063ab61229ba0f8c8a3902d672",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "12e0961be9492e8a838aa9b42c0b57faf85aea83ab68e76d5835312cc1dc01e7",
-          "bytes": 631
-        },
-        "stderr": {
-          "sha256": "5691410a61c74d40645ecfdc031c819562690bd399f51e8a483bfa3027f708d8",
-          "bytes": 590
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "postgresql-final",
-      "started_at": "2026-10-25T08:10:05.047857+00:00",
-      "ended_at": "2026-10-25T08:10:30.419925+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "e90a9f9c514b131fe954828b3739445b4762f01ecdb9211fbc74f9ccc2718c92",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "0738b1e6a9c26338c60635922d333a4f936df993f4cb6807a95ea8418d0610d7",
-          "bytes": 393
-        },
-        "stderr": {
-          "sha256": "9c6e118c3924dfe819b428d6ca7e52232c50ea281940bb55c5c6005397f6cb48",
-          "bytes": 821
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "build-final",
-      "started_at": "2026-10-25T08:10:32.415060+00:00",
-      "ended_at": "2026-10-25T08:10:45.947284+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "dabe967dfa2f3769eec6ac83598ebf8a55d2c00cd6611b0c9c5fc27224a97f11",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "7fb72d94a8e8bda96cb5350d22480babc715727eb3d939b4bec68c465cf7fc07",
-          "bytes": 745
-        },
-        "stderr": {
-          "sha256": "86d2cbc575e869dd94ee273d8f009aa25741e4b1c15c471d129d7b27ccc9a6ca",
-          "bytes": 453
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "browser-final",
-      "started_at": "2026-10-25T08:10:47.693607+00:00",
-      "ended_at": "2026-10-25T08:10:59.844139+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "5b5e695224b4d6acac10c2e4b5227295591db742ce4dcb6f895fc6300b01849e",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "fdfb8326ad068fcca68f0761679269d0baea3b337e6a76f9c74bcd911645fbf0",
-          "bytes": 814
-        },
-        "stderr": {
-          "sha256": "cc44c5a0d80fa8398d2b579b5842900da535b242a439bfc2482af7ce31278122",
-          "bytes": 930
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "submission-final",
-      "started_at": "2026-10-25T08:11:01.808533+00:00",
-      "ended_at": "2026-10-25T08:11:02.278339+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "node",
-      "argv_sha256": "6a149aab59caf334e400bb14e05482f7c1443c5b71027a8b2844ddcfde7d57a8",
-      "original_snapshot_id": "final-source-1",
-      "streams": {
-        "stdout": {
-          "sha256": "32cb236a6cf4e7cf44598ca2393c5022c29498f092fcaad142f058a47922a5a7",
-          "bytes": 802
-        },
-        "stderr": {
-          "sha256": "c0dfae11aad139c33932a0502e0d6b4d09d34e5ec5679b996250b33158845af4",
-          "bytes": 107
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    },
-    {
-      "id": "final-record-check",
-      "started_at": "2026-10-25T12:27:38.838971+00:00",
-      "ended_at": "2026-10-25T12:27:44.796968+00:00",
-      "exit_code": 0,
-      "passed": true,
-      "timed_out": false,
-      "incomplete": false,
-      "truncated": false,
-      "executable": "python.exe",
-      "argv_sha256": "2c61e5d0060f6a7bd01398fc080a9fa9cfa0e17153646490a0228932f7b054ca",
-      "original_snapshot_id": "final-review-state",
-      "streams": {
-        "stdout": {
-          "sha256": "95c38246aa343ad46c50d1ebe706ba1ff6dd9c9cb0394170a8e26e3e7d6920f5",
-          "bytes": 451
-        },
-        "stderr": {
-          "sha256": "b9e6f21d30099c4464a37a378bbc50b563e17b31c83328d4a1ccbf2fee89c061",
-          "bytes": 706
-        }
-      },
-      "superseded_by": null,
-      "output_retained": true
-    }
+  "snapshot_history": [
+    {"id": "preimplementation-source", "created_at": "2026-10-25T06:52:10.013273+00:00", "manifest_sha256": "3671717c92441b3fef7e36f460e7f9792ed2fe81d32506cf72ad0b7a4a3d37e8", "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "file_count": 20, "retained": false},
+    {"id": "resume-source", "created_at": "2026-10-25T07:16:15.968701+00:00", "manifest_sha256": "d3530831970bde519211c5f960d7d0d763295089429b3b4ae2079476f0617a80", "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "file_count": 1002, "retained": false},
+    {"id": "foundation-complete", "created_at": "2026-10-25T07:26:14.985789+00:00", "manifest_sha256": "8c71a3470456a37834383ecc9b82613a4f186d0401194a6da5d2021733b50e11", "diff_sha256": "955a8db10a10afeb19bd2e47c48b5e12b09ab7f9376f11bb8b26f8def42f66ce", "file_count": 8, "retained": false},
+    {"id": "frontend-complete", "created_at": "2026-10-25T07:37:46.011955+00:00", "manifest_sha256": "e615101faec1d0374a744fc102545fed1aed073de19857c8b9fe38374b81a7c7", "diff_sha256": "15365f64224422fa72439a64d6a609dae688b50735300e0678de779a4f41edb4", "file_count": 10, "retained": false},
+    {"id": "integrated-1", "created_at": "2026-10-25T07:39:13.687726+00:00", "manifest_sha256": "e7b8e6646446edb6b3cde0ebd1324eb37d45a946395120ce87cbc69527040455", "diff_sha256": "fe7cd117f96cfe6a81ae1ff2e39546949faf826323cc6f4fbe32fc5d29e26117", "file_count": 994, "retained": false},
+    {"id": "integrated-source-1", "created_at": "2026-10-25T07:43:05.746328+00:00", "manifest_sha256": "0883b6b3a00f72b9b2cf25892abe0ed2b11b659a0551d2f86e73764ec06b2428", "diff_sha256": "fe7cd117f96cfe6a81ae1ff2e39546949faf826323cc6f4fbe32fc5d29e26117", "file_count": 83, "retained": false},
+    {"id": "backend-validation-1", "created_at": "2026-10-25T07:44:15.474986+00:00", "manifest_sha256": "b8429c47106b7ca82ae8ae9f60b4b68575097436cdfc8b8dc9d234a7718f845d", "diff_sha256": "0c2a7aef9e0a31a5b84c1de5394174e1d4053dd48c794e0b92755d959c52d07c", "file_count": 67, "retained": false},
+    {"id": "integrated-source-2", "created_at": "2026-10-25T07:48:04.836305+00:00", "manifest_sha256": "e7c18fa49cb143d29e9c0ab8a36e3993824f6b1850b0ba175c94a109f06bb140", "diff_sha256": "b367d2d7e40d43d195fbae3a97a898193d78de945e609555d2a23e5b14eedbda", "file_count": 83, "retained": false},
+    {"id": "review-state-1", "created_at": "2026-10-25T07:53:16.188831+00:00", "manifest_sha256": "6329277fb724dd9ac432ff146d10105d64a53bacc3f9118ec9ad18f87fd6dfaf", "diff_sha256": "9abf3a91e119c1397e0e89ea94b5d6781375be813a5bd8c50fcbce93888a668c", "file_count": 100, "retained": false},
+    {"id": "final-source-1", "created_at": "2026-10-25T08:08:49.190606+00:00", "manifest_sha256": "cd2b2b9f4856b657d0558f58584b6fb99ec4ba5d5b60ec0b6a78337e56c3d11e", "diff_sha256": "0c66f1479dd7fc0c72ee4976325598bd5b3f4020ae021bdebb068f6bcebb5d9d", "file_count": 83, "retained": false},
+    {"id": "final-review-state", "created_at": "2026-10-25T08:12:26.645032+00:00", "manifest_sha256": "f73047b24cdb44c557f9892f693837e3d8710d16fc518eb921db97372b5da826", "diff_sha256": "56eaf612857de5a0689e062ef44e4b327bba850aeeecd2e43ee805c4a60ce5b1", "file_count": 100, "retained": true}
   ],
   "verification_output": "verification-output.txt",
   "historical_completeness": {
     "ok": true,
     "errors": [],
-    "coverage": {
-      "expected_records": 30,
-      "resource_records": 30,
-      "unavailable_token_metrics": 90
-    },
+    "coverage": {"expected_records": 30, "resource_records": 30, "unavailable_token_metrics": 90},
     "warning_summary": "Only explicitly unavailable runtime telemetry; repeated per-record warnings deduplicated into resources.json defaults.",
     "scope": "Local consistency checks do not establish semantic correctness.",
     "original_result_sha256": "fb957feb18970c06be3ed445b85335c0ca815c3bdb71d9b28f3429462bab28dd",
     "recorded_before_compaction": true
   },
-  "snapshot_history": [
-    {
-      "id": "preimplementation-source",
-      "created_at": "2026-10-25T06:52:10.013273+00:00",
-      "manifest_sha256": "3671717c92441b3fef7e36f460e7f9792ed2fe81d32506cf72ad0b7a4a3d37e8",
-      "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "file_count": 20,
-      "retained": false
-    },
-    {
-      "id": "resume-source",
-      "created_at": "2026-10-25T07:16:15.968701+00:00",
-      "manifest_sha256": "d3530831970bde519211c5f960d7d0d763295089429b3b4ae2079476f0617a80",
-      "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "file_count": 1002,
-      "retained": false
-    },
-    {
-      "id": "foundation-complete",
-      "created_at": "2026-10-25T07:26:14.985789+00:00",
-      "manifest_sha256": "8c71a3470456a37834383ecc9b82613a4f186d0401194a6da5d2021733b50e11",
-      "diff_sha256": "955a8db10a10afeb19bd2e47c48b5e12b09ab7f9376f11bb8b26f8def42f66ce",
-      "file_count": 8,
-      "retained": false
-    },
-    {
-      "id": "frontend-complete",
-      "created_at": "2026-10-25T07:37:46.011955+00:00",
-      "manifest_sha256": "e615101faec1d0374a744fc102545fed1aed073de19857c8b9fe38374b81a7c7",
-      "diff_sha256": "15365f64224422fa72439a64d6a609dae688b50735300e0678de779a4f41edb4",
-      "file_count": 10,
-      "retained": false
-    },
-    {
-      "id": "integrated-1",
-      "created_at": "2026-10-25T07:39:13.687726+00:00",
-      "manifest_sha256": "e7b8e6646446edb6b3cde0ebd1324eb37d45a946395120ce87cbc69527040455",
-      "diff_sha256": "fe7cd117f96cfe6a81ae1ff2e39546949faf826323cc6f4fbe32fc5d29e26117",
-      "file_count": 994,
-      "retained": false
-    },
-    {
-      "id": "integrated-source-1",
-      "created_at": "2026-10-25T07:43:05.746328+00:00",
-      "manifest_sha256": "0883b6b3a00f72b9b2cf25892abe0ed2b11b659a0551d2f86e73764ec06b2428",
-      "diff_sha256": "fe7cd117f96cfe6a81ae1ff2e39546949faf826323cc6f4fbe32fc5d29e26117",
-      "file_count": 83,
-      "retained": false
-    },
-    {
-      "id": "backend-validation-1",
-      "created_at": "2026-10-25T07:44:15.474986+00:00",
-      "manifest_sha256": "b8429c47106b7ca82ae8ae9f60b4b68575097436cdfc8b8dc9d234a7718f845d",
-      "diff_sha256": "0c2a7aef9e0a31a5b84c1de5394174e1d4053dd48c794e0b92755d959c52d07c",
-      "file_count": 67,
-      "retained": false
-    },
-    {
-      "id": "integrated-source-2",
-      "created_at": "2026-10-25T07:48:04.836305+00:00",
-      "manifest_sha256": "e7c18fa49cb143d29e9c0ab8a36e3993824f6b1850b0ba175c94a109f06bb140",
-      "diff_sha256": "b367d2d7e40d43d195fbae3a97a898193d78de945e609555d2a23e5b14eedbda",
-      "file_count": 83,
-      "retained": false
-    },
-    {
-      "id": "review-state-1",
-      "created_at": "2026-10-25T07:53:16.188831+00:00",
-      "manifest_sha256": "6329277fb724dd9ac432ff146d10105d64a53bacc3f9118ec9ad18f87fd6dfaf",
-      "diff_sha256": "9abf3a91e119c1397e0e89ea94b5d6781375be813a5bd8c50fcbce93888a668c",
-      "file_count": 100,
-      "retained": false
-    },
-    {
-      "id": "final-source-1",
-      "created_at": "2026-10-25T08:08:49.190606+00:00",
-      "manifest_sha256": "cd2b2b9f4856b657d0558f58584b6fb99ec4ba5d5b60ec0b6a78337e56c3d11e",
-      "diff_sha256": "0c66f1479dd7fc0c72ee4976325598bd5b3f4020ae021bdebb068f6bcebb5d9d",
-      "file_count": 83,
-      "retained": false
-    },
-    {
-      "id": "final-review-state",
-      "created_at": "2026-10-25T08:12:26.645032+00:00",
-      "manifest_sha256": "f73047b24cdb44c557f9892f693837e3d8710d16fc518eb921db97372b5da826",
-      "diff_sha256": "56eaf612857de5a0689e062ef44e4b327bba850aeeecd2e43ee805c4a60ce5b1",
-      "file_count": 100,
-      "retained": true
-    }
-  ],
-  "cleanup": {
-    "request": "Keep only records sufficient for traceability and important information.",
-    "prior_state_sha256": "adf7decdfc5fcd5575715034cc148fa3e40f30d9b3cb8e16ba343c1e06861c10",
-    "before_files": 148,
-    "before_bytes": 1614457,
-    "retired_handoffs": 28,
-    "retained_snapshot_manifests": 1,
-    "reason": "Superseded snapshots, generated handoff inputs, repeated reports and temporary validators consolidated; important outcomes retained.",
-    "archive_limitation": "Closed-run archive, not the active workflow CLI schema. Do not feed this state to resume/completeness commands; the original CLI PASS is retained as historical evidence. No tooling behavior changed.",
-    "cleanup_resource_record": "logs/ngkhengyang/resources/2026-10-25-reviewer-record-cleanup/5d68b1a2fa5b4f93955db206c737d91f.json"
+  "record_counts": {
+    "assignments": 4,
+    "findings": 6,
+    "records": 0,
+    "commands": 19,
+    "handoffs": 0,
+    "snapshots": 0,
+    "verification_checks": 0,
+    "verification_runs": 0,
+    "completions": 0,
+    "acceptance_matrices": 0
+  },
+  "finding_status_counts": {
+    "closed": 6
   }
 }

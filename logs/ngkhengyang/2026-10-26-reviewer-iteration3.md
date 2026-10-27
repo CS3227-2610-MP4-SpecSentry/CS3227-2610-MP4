@@ -1,5 +1,7 @@
 # Reviewer iteration 3 — preparation, implementation, integration and review pause
 
+> State retention update, 27 October 2026: linked state files are now compact historical summaries. Full original payloads are recoverable from Git; see [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Earlier preservation/replay claims below describe their original checkpoint.
+
 > Retention update, 27 October 2026: duplicate snapshot files were removed; complete payloads remain in original state records. See [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Original results below are historical.
 
 ## Independent review resumption

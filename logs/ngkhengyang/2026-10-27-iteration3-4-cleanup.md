@@ -1,5 +1,7 @@
 # Iterations 3 and 4: evidence cleanup
 
+> State retention update, 27 October 2026: linked state files are now compact historical summaries. Full original payloads are recoverable from Git; see [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Earlier preservation/replay claims below describe their original checkpoint.
+
 Prompter: **ngkhengyang**, inferred from the current Git identity (`git config user.name`). Date: 27 October 2026, Asia/Singapore. Main execution identifies the GPT-6 family; exact alias/effort and attributable usage counters are unavailable. No subagents were launched.
 
 ## Request and outcome

@@ -89,8 +89,10 @@ retry fits the same deadline and Retry-After; validation/auth/refusal and ambigu
 or exhausted-quota errors are not retried. Application SGT windows remain distinct
 from provider UTC spend windows. No business lock crosses the network call.
 
-Executable checks, failures and source snapshots are recorded in the
-[active canonical run](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json).
+Historical checks, failures and source-revision fingerprints are recorded in the
+[compact evidence summary](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json).
+The [retention index](../logs/ngkhengyang/reviewer/RETAINED-EVIDENCE.md) explains
+Git recovery of full original state and the retired replay/freshness boundary.
 Read its [fix and review report](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/final-fix-review.md)
 for actual verification; this guide is not a
 claim that every acceptance or live-provider gate has passed.

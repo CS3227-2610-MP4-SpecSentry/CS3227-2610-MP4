@@ -1,5 +1,7 @@
 # Iterations 1 and 2: evidence cleanup
 
+> State retention update, 27 October 2026: linked state files are now compact historical summaries. Full original payloads are recoverable from Git; see [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Earlier preservation/replay claims below describe their original checkpoint.
+
 Prompter: **ngkhengyang**, inferred from Git identity and the existing session. Date: 26 October 2026, Asia/Singapore. Main agent: **gpt-6.1-sol / high**; no subagents launched. Applied change-session logging and consolidation skills.
 
 ## Requests and outcome

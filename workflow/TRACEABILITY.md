@@ -1,5 +1,12 @@
 # Requirement traceability
 
+Historical retention note, 27 October 2026: linked `state.json` files are now
+compact evidence summaries. Source fingerprints, original results and matrix
+history remain; full original state is recoverable from Git. See the
+[retention index](../logs/ngkhengyang/reviewer/RETAINED-EVIDENCE.md) for the
+retired replay/freshness boundary. Requirement and acceptance claims below are
+unchanged historical observations.
+
 ## Reviewer approval revocation increment - 27 October 2026
 
 Iteration 4 implements approval revocation plus the smallest supporting real
@@ -18,7 +25,7 @@ named-case structure and earlier scoped test passes do not establish final appro
 | REL-008; SHR-001/002/003/004/007; NFR-REL-001 | approval-revocation-races.integration.ts plus rollback/access cases | Overlapping PostgreSQL barriers/blocking and winner-only histories for publication, removal, reopening, duplicate keys, disable/session and attachment races |
 | Shared UI/accessibility and real API interaction | reviewer-revocation.spec.ts/fixture plus component tests | Real browser acceptance requires integrated root/fixture wiring and current executable results; syntax and component checks alone are insufficient |
 
-The 49-case matrix and its revisions are retained in canonical state. At the
+The final 49-case matrix and compact revision deltas are retained in the summaries. At the
 pre-integration boundary, scoped checks passed 7 contract, 41 PostgreSQL and
 55 Reviewer component tests; these are historical suite totals, not new-test or
 full-product counts. Initial independent review found release gate/ownership,
@@ -33,7 +40,7 @@ acceptance remain separate gates.
 ## Reviewer Patch Risk increment — 26 October 2026
 
 Implementation and integration are recorded in the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)
-and its [canonical version 3 run](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json).
+and its [historical evidence summary](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json).
 Independent implementation/security review and fix revalidation closed all five
 findings; see the [final fix report](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/final-fix-review.md).
 Human teammate approval remains pending. Live provider operation remains

@@ -1604,5 +1604,23 @@
     "files": 429,
     "bytes": 6819677,
     "inventory_sha256": "55403203dcf775e69ebf584109edab99e53925c0b44d4b5371f79676b8d37723"
+  },
+  "state_compaction_update": {
+    "date": "2026-10-27",
+    "supersedes_current_payload_retention_claims": true,
+    "interpretation": "Original removal, exact-equivalence and reconstruction checks describe the earlier checkpoint. Current retained state pointers locate compact historical summaries and metadata, not all original payload fields.",
+    "full_original_state_commit": "62a807d7082410d10192f55196e718018ad08d8a",
+    "original_state_files": [
+      "logs/ngkhengyang/reviewer/2026-10-25-manual-review/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json"
+    ],
+    "current_policy": "logs/ngkhengyang/reviewer/RETAINED-EVIDENCE.md",
+    "change_log": "logs/ngkhengyang/2026-10-27-state-summary.md"
   }
 }

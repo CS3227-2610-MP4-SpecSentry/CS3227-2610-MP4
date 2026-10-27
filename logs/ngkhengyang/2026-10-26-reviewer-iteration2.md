@@ -1,5 +1,7 @@
 # Reviewer iteration 2 â€” consolidated run report
 
+> State retention update, 27 October 2026: linked state files are now compact historical summaries. Full original payloads are recoverable from Git; see [retained evidence and verification limits](reviewer/RETAINED-EVIDENCE.md). Earlier preservation/replay claims below describe their original checkpoint.
+
 ## Outcome and report boundary
 
 **Subsequent user clarification (26 October 2026):** no computation or implementation occurred during the long dormant period within the approximately 460-minute interrupted integration interval; the device had been left idle and hibernated. Treat that dormant time as device inactivity, not agent work or evidence of workflow inefficiency. This supersedes the earlier unknown-idle/runtime-delay interpretation of that period. Original elapsed records/totals are retained; exact suspend/resume timestamps were not captured, so no precise adjusted active-work duration is invented. See [structured clarification](reviewer/2026-10-26-reviewer-iteration2/hibernation-clarification.json).

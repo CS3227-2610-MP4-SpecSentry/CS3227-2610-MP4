@@ -1,31 +1,38 @@
-# Iteration 3 and 4 retained evidence
+# Reviewer historical evidence
 
-Retention updated 27 October 2026. These completed runs are retained for historical traceability. Their separate `snapshots/*.json` copies have been removed; their complete payloads, original artifact hashes, source scopes and Git identifiers remain in each original `state.json`. State records and their original artifact-path fields are unchanged historical records, not claims that those files still exist.
+Retention updated 27 October 2026. The eight completed runs below use **compact historical evidence summaries**, retaining the filename `state.json` for existing links. They are not executable workflow state and cannot be resumed by the workflow CLI. The summary format is `reviewer-historical-evidence-summary-v1`.
 
-## Where to read the outcomes
+| Historical run | Compact evidence summary | Authoritative workflow report |
+| --- | --- | --- |
+| Reviewer intake | [state.json](2026-10-25-reviewer-intake/state.json) | [Intake report](../2026-10-25-reviewer-intake.md) |
+| Manual review | [state.json](2026-10-25-manual-review/state.json) | [Manual-review report](../2026-10-25-manual-review.md) |
+| Revision cycle / Iteration 2 | [state.json](2026-10-26-reviewer-iteration2/state.json) | [Iteration 2 report](../2026-10-26-reviewer-iteration2.md) |
+| Iteration 3 preparation | [state.json](2026-10-26-patch-risk-i3/state.json) | [Iteration 3 report](../2026-10-26-reviewer-iteration3.md) |
+| Iteration 3 implementation/review/fixes | [state.json](2026-10-26-patch-risk-i3-implementation/state.json) | [Iteration 3 report](../2026-10-26-reviewer-iteration3.md) |
+| Iteration 4 preparation | [state.json](2026-10-26-reviewer-iteration4/state.json) | [Iteration 4 report](../2026-10-26-reviewer-iteration4.md) |
+| Iteration 4 implementation/integration | [state.json](2026-10-27-reviewer-iteration4-implementation/state.json) | [Iteration 4 report](../2026-10-26-reviewer-iteration4.md) |
+| Iteration 4 independent review/fixes | [state.json](2026-10-27-reviewer-iteration4-review-fixes/state.json) | [Iteration 4 report](../2026-10-26-reviewer-iteration4.md) |
 
-- [Iteration 3 consolidated workflow report](../2026-10-26-reviewer-iteration3.md): requirements, implementation, independent findings and fixes, tests, resources and limitations. [Final independent fix review](2026-10-26-patch-risk-i3-implementation/reports/final-fix-review.md).
-- [Iteration 4 consolidated workflow report](../2026-10-26-reviewer-iteration4.md): assignments, integration, independent findings and fixes, tests, resources and limitations. [Final validation](2026-10-27-reviewer-iteration4-review-fixes/reports/final-validation.json), [independent revalidation](2026-10-27-reviewer-iteration4-review-fixes/reports/revalidation.json) and [historical structural status](2026-10-27-reviewer-iteration4-review-fixes/reports/structural-status.json).
-- [Requirements traceability](../../../workflow/TRACEABILITY.md), [User Guide](../../../docs/UserGuide.md) and [Developer Guide](../../../docs/DeveloperGuide.md) remain authoritative for their respective purposes.
+## How to read the summaries
 
-## Retained provenance
+- Requirements, assignment ownership, findings and all closure/reopen histories, command outcomes and supersession, completions, review cycles and resource records retain their original values. Missing telemetry remains unavailable. Existing briefs, independent reviews, test outputs and final reports remain alongside them.
+- `snapshots` retains ID, date, artifact hash, scope reference, Git/diff identifiers and file count. Embedded per-file hash lists are omitted. These fingerprints describe historical source; they do not establish current freshness.
+- `source_scopes` stores each distinct path list once. Verification-check and snapshot `scope_ref` values identify those lists. Verification definitions otherwise retain their original fields.
+- `acceptance_cases` holds the final cases. Each `acceptance_matrices` entry retains its date, reason, applicability and original case order/hash. Its `case_deltas_from_latest` records changed fields or removed fields relative to the final cases. These preserve earlier matrix contents without repeating all cases. Matrix history is a plan/evidence index, not proof that every case passed.
+- `retention.main_report` identifies the authoritative consolidated outcome. Where available, `historical_gate` records the original retained checker's verdict and error count, with its complete diagnostics referenced. It is not a fresh check.
 
-| Historical run | Original state, including snapshot payloads | Removed duplicate files |
-| --- | --- | ---: |
-| Iteration 3 preparation | [state.json](2026-10-26-patch-risk-i3/state.json) | 2 |
-| Iteration 3 implementation/review/fixes | [state.json](2026-10-26-patch-risk-i3-implementation/state.json) | 145 |
-| Iteration 4 preparation | [state.json](2026-10-26-reviewer-iteration4/state.json) | 4 |
-| Iteration 4 implementation/integration | [state.json](2026-10-27-reviewer-iteration4-implementation/state.json) | 89 |
-| Iteration 4 independent review/fixes | [state.json](2026-10-27-reviewer-iteration4-review-fixes/state.json) | 21 |
+## Recovery and verification limits
 
-In each state file, `snapshots[ID].snapshot` retains the complete manifest; `artifact_sha256` retains the removed file's original hash. Command, completion, handoff and finding references to snapshot IDs still resolve to those records. All original states, briefs, acceptance matrices, handoffs, review reports, recorded results, failure histories, resource records and original usage provenance are retained.
+The complete pre-compaction states are committed at [62a807d](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/commit/62a807d7082410d10192f55196e718018ad08d8a). Each summary's `retention` records its original path, working-file and Git-content SHA-256, original size/line count and exact source URL. Locally, `git show 62a807d7082410d10192f55196e718018ad08d8a:<repository-relative-state-path>` retrieves the original committed JSON. Its decoded payload was verified equal to the pre-edit working file; original Windows newline differences are distinguished by the two hashes.
 
-The [snapshot-removal manifest](../2026-10-27-iteration3-4-cleanup/snapshot-retirement.json) maps each removed path to its original size/hash and retained JSON pointer. Before deletion, all 261 file payloads and hashes matched state, and all 261 were reconstructed byte-for-byte with the existing canonical serialization: UTF-8 encoding of `json.dumps(snapshot, sort_keys=True, indent=2, ensure_ascii=True) + "\n"`. Reconstructing a manifest does not reconstruct old application source or make stale evidence current.
+This supersedes earlier claims that full snapshot payloads remain in current `state.json` files or can be reconstructed from them. Full payloads now require the identified Git revision. The earlier [snapshot-removal manifest](../2026-10-27-iteration3-4-cleanup/snapshot-retirement.json) remains a historical removal record; its retention update explains that current pointers locate compact metadata, not full original manifests. Its original removal/reconstruction claims describe the earlier cleanup checkpoint.
 
-## Verification boundary
+The current harness has not been weakened to accept these summaries. Direct automated replay/freshness verification of the compacted historical runs is retired. Recovering original metadata does not restore historical source or resolve workflow gaps; current acceptance requires current source and checks.
 
-The existing CLI requires separate snapshot artifacts when verifying freshness. These historical runs are therefore **not directly replayable/verifiable in their compacted worktree form**. Recreating the manifests would restore those file prerequisites, but original source freshness and previously documented workflow gaps would still need separate assessment. The harness has not been relaxed, and old successful reports remain historical observations.
+Iteration 3's five original invocation issues and Iteration 4's final 34 cross-run acceptance-evidence gaps remain recorded. Independent finding closures retain their historical meaning. Live AI, human approval and deployment limitations remain as documented. Earlier green results are original observations, not certification of this compacted worktree.
 
-Iteration 3's original five invocation issues and Iteration 4's final 34 cross-run acceptance-evidence gaps remain recorded. This retention change neither closes those gaps nor invalidates the historical independent finding resolutions. Live AI, human approval and deployment limitations remain as documented. Current product acceptance requires current checks against current source.
+## Important supporting evidence
 
-The [cleanup log](../2026-10-27-iteration3-4-cleanup.md) records the user's requests, the superseded conservative assessment, actual removals, validation and resources. This notice applies only to the five runs listed above.
+[Requirement traceability](../../../workflow/TRACEABILITY.md), [User Guide](../../../docs/UserGuide.md) and [Developer Guide](../../../docs/DeveloperGuide.md) remain authoritative for their respective purposes. Iteration 3's [final independent fix review](2026-10-26-patch-risk-i3-implementation/reports/final-fix-review.md), and Iteration 4's [final validation](2026-10-27-reviewer-iteration4-review-fixes/reports/final-validation.json), [independent revalidation](2026-10-27-reviewer-iteration4-review-fixes/reports/revalidation.json) and [structural status](2026-10-27-reviewer-iteration4-review-fixes/reports/structural-status.json) remain intact.
+
+The [state-compaction log](../2026-10-27-state-summary.md) records this request, measurements, preservation checks and resources. The [earlier cleanup log](../2026-10-27-iteration3-4-cleanup.md) retains the superseded assessments and earlier removal history. This policy applies only to the eight historical runs listed above; new workflow runs use the existing CLI formats.
