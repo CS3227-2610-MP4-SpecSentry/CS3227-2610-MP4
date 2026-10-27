@@ -17,7 +17,7 @@ describe('base authentication', () => {
   });
   it('signs in with CSRF and signs out', async () => {
     const fetch = vi.fn().mockResolvedValueOnce(reply({}, 401)).mockResolvedValueOnce(reply({ csrfToken }))
-      .mockResolvedValueOnce(reply(session())).mockResolvedValueOnce(reply({}, 204));
+      .mockResolvedValueOnce(reply(session())).mockResolvedValueOnce(reply({ items: [], nextCursor: null })).mockResolvedValueOnce(reply({}, 204));
     vi.stubGlobal('fetch', fetch);
     render(<MemoryRouter><App /></MemoryRouter>);
     fireEvent.change(await screen.findByLabelText('Username'), { target: { value: 'alice' } });

@@ -1,0 +1,35 @@
+{
+  "id": "edc01772b6084c17a0f344acaa75791b",
+  "prompter": "yooplo",
+  "session": "2026-10-27-contributor-increment-1",
+  "agent": "security",
+  "invocation": "security-design-1",
+  "stage": "design-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-27T14:58:00.470788+00:00",
+  "ended_at": "2026-10-27T15:00:46.485544+00:00",
+  "elapsed_seconds": 166.014756,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only security design assessment complete; integration blockers and read-audit gap returned; coordinator-observed boundary includes scheduling",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent runtime usage telemetry not exposed",
+    "output_tokens": "Per-agent runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-agent runtime usage telemetry not exposed",
+    "tool_calls": "Per-agent runtime usage telemetry not exposed",
+    "retries": "Per-agent runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-agent runtime usage telemetry not exposed"
+}

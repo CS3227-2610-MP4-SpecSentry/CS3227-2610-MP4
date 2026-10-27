@@ -1,0 +1,35 @@
+{
+  "id": "431d7b2a9c0743279306ca92923873c9",
+  "prompter": "yooplo",
+  "session": "2026-10-27-contributor-foundation-proposal",
+  "agent": "main",
+  "invocation": "coordinator-proposal-1",
+  "stage": "dependency-proposal",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-27T15:03:27.402795+00:00",
+  "ended_at": "2026-10-27T15:07:43.504381+00:00",
+  "elapsed_seconds": 256.101586,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Prepared pinned 17-file foundation proposal, unsent coordination message and interface-independent acceptance design; source identity, migration equality, whitespace and 12 document links checked; no product edits",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable model effort token cache and tool retry telemetry not exposed",
+    "output_tokens": "Attributable model effort token cache and tool retry telemetry not exposed",
+    "cache_read_tokens": "Attributable model effort token cache and tool retry telemetry not exposed",
+    "tool_calls": "Attributable model effort token cache and tool retry telemetry not exposed",
+    "retries": "Attributable model effort token cache and tool retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable model effort token cache and tool retry telemetry not exposed"
+}

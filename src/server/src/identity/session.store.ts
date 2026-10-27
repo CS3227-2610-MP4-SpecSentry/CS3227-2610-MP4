@@ -33,8 +33,17 @@ export class PostgresSessionStore extends Store {
   }
 
   touch(id: string, data: SessionData, callback?: (error?: unknown) => void): void {
-    // updateMany deliberately cannot resurrect a logged-out session.
-    void this.database.client.authSession.updateMany({ where: { id: digest(id) }, data: { expiresAt: this.expiry(data) } })
+    // Lock first: an UPDATE predicate bound before a row-lock wait can renew an
+    // already expired session. This transaction acquires no account/root locks.
+    void this.database.client.$transaction(async tx => {
+      const key = digest(id);
+      const rows = await tx.$queryRaw<{ expiresAt: Date }[]>`
+        SELECT "expiresAt" FROM "AuthSession" WHERE "id"=${key} FOR UPDATE`;
+      const now = Date.now();
+      if (!rows[0] || rows[0].expiresAt.getTime() <= now || typeof data.issuedAt !== 'number' ||
+          !Number.isFinite(data.issuedAt) || data.issuedAt > now || data.issuedAt + ABSOLUTE_MS <= now) return;
+      await tx.authSession.updateMany({ where: { id: key }, data: { expiresAt: this.expiry(data) } });
+    }, { maxWait: 5000, timeout: 10000 })
       .then(() => callback?.()).catch((error: unknown) => callback?.(error));
   }
 

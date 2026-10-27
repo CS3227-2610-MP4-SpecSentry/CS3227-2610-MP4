@@ -10,7 +10,8 @@ import { SERVER_CONFIG, type ServerConfig } from './config';
 class SafeExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost): void {
     const response = host.switchToHttp().getResponse<Response>();
-    const status = exception instanceof HttpException ? exception.getStatus() : 500;
+    const oversizedBody = exception && typeof exception === 'object' && 'type' in exception && exception.type === 'entity.too.large';
+    const status = exception instanceof HttpException ? exception.getStatus() : oversizedBody ? 413 : 500;
     const codes: Record<number, string> = {
       401: 'UNAUTHENTICATED', 403: 'FORBIDDEN', 404: 'NOT_FOUND',
       409: 'CONFLICT', 413: 'VALIDATION_FAILED', 422: 'VALIDATION_FAILED', 429: 'RATE_LIMITED',
@@ -31,6 +32,7 @@ export function configureHttp(app: NestExpressApplication, clientDirectory?: str
     response.setHeader('Cache-Control', 'no-store');
     next();
   });
+  app.useBodyParser('json', { limit: '1mb' });
   app.useGlobalFilters(new SafeExceptionFilter());
   if (clientDirectory) {
     const server: express.Express = app.getHttpAdapter().getInstance();

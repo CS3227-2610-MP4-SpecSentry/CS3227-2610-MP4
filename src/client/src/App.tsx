@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import { csrfResponseSchema, sessionResponseSchema, type AccountRole, type SessionResponse } from '@specsentry/shared';
+import { ContributorWorkspace } from './features/contributor/ContributorWorkspace';
 
 const workspaces: Record<AccountRole, { path: string; label: string }> = {
   CONTRIBUTOR: { path: '/contributor', label: 'Contributor' },
@@ -55,6 +56,7 @@ export function App() {
   const [notice, setNotice] = useState('');
   const [loggingOut, setLoggingOut] = useState(false);
   const generation = useRef(0);
+  const sessionLost = useCallback(() => { generation.current++; setSession(null); setNotice('Your session expired. Please sign in again.'); }, []);
   const checkSession = useCallback(async (signal?: AbortSignal) => {
     const currentGeneration = generation.current;
     if (signal?.aborted) return;
@@ -107,7 +109,10 @@ export function App() {
         <Routes>
           <Route path="/" element={<Navigate to={workspace.path} replace />} />
           <Route path="/login" element={<Navigate to={workspace.path} replace />} />
-          {Object.entries(workspaces).map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? <>
+          <Route path="/contributor/*" element={session.account.role === 'CONTRIBUTOR'
+            ? <ContributorWorkspace key={session.account.id} session={session} onSessionLost={sessionLost} />
+            : <><h2>Access denied</h2><p>This workspace requires a different account role.</p></>} />
+          {Object.entries(workspaces).filter(([role]) => role !== 'CONTRIBUTOR').map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? <>
             <h2>{item.label} workspace</h2><p className="notice">Your account is ready. Workflow features will appear here as they become available.</p>
           </> : <><h2>Access denied</h2><p>This workspace requires a different account role.</p></>} />)}
           <Route path="*" element={<><h2>Page not found</h2><Link to={workspace.path}>Return to your workspace</Link></>} />

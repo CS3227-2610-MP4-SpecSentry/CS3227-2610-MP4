@@ -93,7 +93,7 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | --- | --- | --- | --- | --- |
 | TASK-001 | Resolve validation, identity, API and AI blocking decisions | None | Relevant role owners | Policy baseline approved 25 October; actual live provider verification remains pending |
 | TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Partial: base server/client/shared workspaces, connectivity, local Compose, Docker/CI templates and setup docs initialized 25 October; source/build/browser/PostgreSQL checks recorded in base-source log. Sessions, CSRF, domain migrations and audit remain pending; Docker/remote CI unexecuted locally |
-| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Product implementation planned; Contributor workflow instructions and run template established 26 October in [contributor/README.md](contributor/README.md); REQ-CON acceptance evidence remains pending |
+| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Increment 1 private create/list/detail locally implemented and independently acceptance-verified 27 October; [run evidence](../logs/yooplo/2026-10-27-contributor-increment-1-run.md). Editing/submission/revisions and deployed verification remain pending |
 | TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Planned; normal/denial/race tests |
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
 | TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Planned; publication/revocation race evidence |
@@ -101,3 +101,18 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Planned; verified dev/prod release |
 
 Record actual commands, failures and outcomes rather than marking elapsed dates complete. Produce detailed task breakdown for each approved slice.
+
+### Contributor Increment 1 dependency checkpoint — 27 October 2026
+
+The initial foundation gate was resolved by two teammate agreements relayed by yooplo
+to the [concrete proposal](../logs/yooplo/2026-10-27-contributor-foundation-proposal.md).
+Increment 1 on `feature/contributor-private-drafts` reuses the pinned `0becf938` schema/
+migration/service foundation and adds owner list, restricted successful-read audit and
+create/list/detail UI. Review/notification storage is prerequisite support only; no later
+Contributor/Reviewer/AI routes are imported. Independent security and acceptance results,
+including remaining evidence gaps, are recorded in the
+[run record](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
+Independent acceptance revalidation passed 26 server/15 client unit, 22 PostgreSQL and
+five Chromium tests, typecheck/lint/build and UTC/append-only checks. Security disposition
+is recorded in the run log. No full role completion, deployed release or final teammate
+patch approval is claimed. Increment 2 remains unstarted.

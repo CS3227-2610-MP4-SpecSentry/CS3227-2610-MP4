@@ -18,7 +18,7 @@ export class AppModule {
       imports: [
         DatabaseModule.register(config),
         IdentityModule.register(config),
-        ProposalsModule,
+        ProposalsModule.register(config),
         ReviewsModule,
         ReleasesModule,
         ActivityModule,

@@ -4,9 +4,50 @@
 
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
-PostgreSQL sessions, CSRF, role guards and restricted security events. Domain
-workflows and AI integration remain pending. See [Authentication](Authentication.md).
+PostgreSQL sessions, CSRF, role guards and restricted security events. Contributor
+Increment 1 adds private draft create/list/detail; other domain workflows and AI
+integration remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
+
+Contributor foundation coordination was resolved through two teammate agreements relayed
+by yooplo; exact scope/evidence limits are recorded in the
+[integration proposal](../logs/yooplo/2026-10-27-contributor-foundation-proposal.md).
+The implementation reuses the same-repository pre-AI foundation at `0becf938` by files
+and symbols, with its unchanged intake, manual-review and revision-cycle migrations.
+Review/notification tables are shared storage prerequisites; only Contributor create,
+owner list and private-detail routes are registered. No whole Reviewer branch, prior-MP
+source or product AI was imported. Current local verification and remaining gaps belong
+in the [run record](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
+
+### Private draft API and persistence
+
+- `POST /api/proposals`: Contributor session and CSRF required. Existing strict working-content
+  schema; UI sends title/problem/constraints/expectedBehavior with empty summary/diff/criteria/evidence.
+  Creates root, private WorkingRevision JSON and DRAFT_CREATED activity atomically. Response 201
+  contains proposalId, workingRevisionId, DRAFT, version and null submitted/assignment pointers.
+- `GET /api/proposals`: Contributor's never-submitted DRAFTs only; limit 20 default/100 maximum,
+  owner-scoped cursor, createdAt descending then ID ascending, `{items,nextCursor}`. Private titles
+  come from bounded owner-authorized WorkingRevision lookups; public root title remains a placeholder.
+- `GET /api/proposals/:id/draft`: owner-only private content; another Contributor gets 403;
+  missing root 404. Existing submitted-detail semantics are not repurposed.
+
+Business transactions recheck enabled/versioned account, role and persisted session under
+account → session → root locking, including transaction-end expiry. Successful list/detail reads
+write content-free restricted SecurityEvent records in the same transaction; failures withhold
+content. Read evidence uses existing operational retention; business ProposalActivity remains
+append-only and separate. Apply all four migrations to a clean test database; do not edit reused
+migration history. JSON bodies are capped at 1 MiB; strings use normalized Unicode code-point limits.
+The React manual flow has no browser draft persistence and requires list inspection after an
+uncertain create response. Product AI remains absent.
+
+The reused PostgreSQL migrations use `TIMESTAMP WITHOUT TIME ZONE` defaults and Prisma
+interprets those values as UTC. Configure the application database's default timezone to UTC
+before opening application connections (for an owner-managed database: `ALTER DATABASE <name> SET timezone TO 'UTC'`),
+then reconnect and verify `SHOW timezone` returns UTC. This keeps generated creation/audit
+timestamps accurate; local authorization tests on a non-UTC session alone do not verify it.
+See [deployment checks](Deployment.md). On Windows ARM, the pinned argon2 package provides
+an x64 native binary; use an x64 Node 24 runtime for these commands or provision a supported
+native build. The implementation run used ignored portable x64 tools, not dependency changes.
 
 See the root [directory map](../README.md#directory-map) for frontend/backend
 ownership and important files. Production uses one same-origin Docker service;
@@ -63,7 +104,9 @@ npm run test:integration
 ```
 
 Auth integration tests create and remove synthetic fixtures in the migrated test
-database. Never substitute production URLs.
+database. Contributor integration/browser tests retain synthetic append-only business
+fixtures until the disposable database is discarded; this preserves the production
+immutability triggers. Never substitute development or production URLs.
 
 For the built-client browser/accessibility smoke test:
 
@@ -222,7 +265,10 @@ code, text or assets here with source, license and affected files.
 
 Codex assisted with architecture/scaffolding and documentation as recorded above,
 Contributor workflow instructions, and reading/mapping the supplied MP4 PDF into
-repository specifications and checklists. AI-generated changes and summaries
+repository specifications and checklists. It also coordinated Contributor foundation reuse,
+implemented Increment 1 and supplied separate design/security and acceptance review agents;
+actual results and unavailable evidence are linked in the run log. Same-repository reused source
+is attributed to the pinned Reviewer foundation above. AI-generated changes and summaries
 require human review; the team remains responsible for the submitted content and
 quality. Each member must verify and extend this declaration with their actual
 tools, specific uses and adapted-source acknowledgements before submission. No

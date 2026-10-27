@@ -1,5 +1,16 @@
 # Render application + Neon PostgreSQL
 
+## Database timezone prerequisite
+
+The shared proposal/activity migrations use `TIMESTAMP WITHOUT TIME ZONE` defaults;
+Prisma interprets stored values as UTC. Before starting application connections in
+each environment, configure the database default timezone to UTC, reconnect and
+verify `SHOW timezone` returns UTC. Database owners can set the per-database default
+with `ALTER DATABASE <name> SET timezone TO 'UTC'`; use the actual authorized environment
+database name. Check a newly generated creation/audit timestamp against current UTC
+time during smoke verification. Do not rewrite shared migration history to compensate
+for a local timezone. No deployed configuration or smoke result is implied by this guide.
+
 ## Intended topology
 
 Each environment uses one Render web service serving the built React client and
@@ -21,7 +32,7 @@ endpoint is `/api/ready`. Do not add a Render source-build command.
    Keep the provider's TLS parameters; never disable certificate verification.
 3. Store each non-pooler connection URL as `DIRECT_DATABASE_URL` in the corresponding
    protected GitHub Environment for migration jobs. It is not needed by the runtime.
-4. Apply the authentication migration before first sign-in. Run `npm ci --ignore-scripts`,
+4. Apply the reviewed identity/proposal migration chain before first use. Run `npm ci --ignore-scripts`,
    `npm run db:generate` and `npm run db:migrate:deploy` in the release job using
    the matching environment's direct URL. Review SQL before committing it.
 5. Build/test/scan/sign/publish one image in CI, deploy its digest to development,
@@ -35,8 +46,9 @@ IDs, credentials, environment approvals and release workflows remain unconfigure
 Set an independent random `SESSION_SECRET` of at least 32 characters per service
 and configure `TRUST_PROXY_HOPS` to the verified TLS proxy topology (the template
 assumes one trusted hop). Provision accounts from a trusted checkout using
-[Authentication](Authentication.md). Base authentication is implemented; domain
-workflows remain pending. No AI keys are needed or used at this stage.
+[Authentication](Authentication.md). Base authentication and Contributor private drafts
+are implemented locally; other domain workflows and actual deployed verification
+remain pending. No AI keys are needed or used at this stage.
 
 ## Free-tier considerations
 

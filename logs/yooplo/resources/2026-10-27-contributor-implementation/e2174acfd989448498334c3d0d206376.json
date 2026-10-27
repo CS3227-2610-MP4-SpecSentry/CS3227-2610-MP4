@@ -1,0 +1,35 @@
+{
+  "id": "e2174acfd989448498334c3d0d206376",
+  "prompter": "yooplo",
+  "session": "2026-10-27-contributor-implementation",
+  "agent": "security",
+  "invocation": "amended-design-1",
+  "stage": "amended-design-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-27T15:10:47.791057+00:00",
+  "ended_at": "2026-10-27T15:12:07.436236+00:00",
+  "elapsed_seconds": 79.645179,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Amended security design allows implementation; read audit and 1MiB JSON parser obligations recorded; no runtime certification",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent runtime counters not exposed",
+    "output_tokens": "Per-agent runtime counters not exposed",
+    "cache_read_tokens": "Per-agent runtime counters not exposed",
+    "tool_calls": "Per-agent runtime counters not exposed",
+    "retries": "Per-agent runtime counters not exposed"
+  },
+  "unavailable_reason": "Per-agent runtime counters not exposed"
+}

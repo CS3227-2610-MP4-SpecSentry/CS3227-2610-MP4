@@ -59,10 +59,29 @@ page axe scan reported zero violations; full product accessibility is unverified
 
 ## Product acceptance plan
 
+Contributor Increment 1 local acceptance (27 October 2026): the initial foundation
+gate was resolved by the two agreements relayed by yooplo, scoped in the
+[integration proposal](../logs/yooplo/2026-10-27-contributor-foundation-proposal.md).
+Independent acceptance revalidation executed 26 server/15 client unit tests, 22 PostgreSQL
+tests and five Chromium cases, plus typecheck/lint/build. See
+[run evidence, findings and security disposition](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
+This verifies local create/list/detail, not editing, the full Contributor role, deployed
+behavior, complete WCAG compliance or performance targets.
+
+| Requirement / tested portion | Implementation | Executed evidence |
+| --- | --- | --- |
+| REQ-CON-001 / AC-CON-001 | [proposal create/list/detail service](../src/server/src/proposals/proposal-lifecycle.service.ts), strict contracts, private WorkingRevision and root/activity transaction | [PostgreSQL HTTP acceptance](../src/server/test/contributor-drafts.integration.ts): session-owned DRAFT, persistence, creation/activity rollback |
+| REQ-CON-002 / AC-CON-002 private read only | Owner-scoped list and detail; private title remains outside shared root projection | Same PG suite: other-owner/role denial, cursor isolation and bounded equal-timestamp pages. Editing/attached-state/revision behavior unimplemented in this slice |
+| REQ-SHR-001/002, NFR-SEC-001 local domain checks | Guard plus [business transaction context](../src/server/src/identity/business-context.ts), session-touch locking | Same PG suite: CSRF/role/unknown fields/account/session denials; pg_blocking_pids barriers for disable/logout/expiry, transaction-end expiry and touch wait |
+| REQ-SHR-004/007 draft audit portion | Atomic DRAFT_CREATED activity; restricted content-free successful read audit | PG rollback/fail-closed assertions; independent rollback-only activity UPDATE rejected SQLSTATE 23514. UTC session/default-timestamp checked; remaining lifecycle activity not implemented |
+| Authoritative limits / safe failures | [contracts](../src/server/test/contributor-contracts.spec.ts), 1 MiB [HTTP parser/filter](../src/server/src/http.ts) | Normalized Unicode max/max+1, >100 KiB valid payload, safe >1 MiB 413, strict injected-field rejection |
+| REQ-SHR-005 / NFR-A11Y-001 tested draft flow | [Contributor workspace](../src/client/src/features/contributor/ContributorWorkspace.tsx) | [RTL cases](../src/client/src/features/contributor/ContributorWorkspace.test.tsx) and [Chromium flow](tests/browser/contributor-drafts.spec.ts): labels/error focus, keyboard, axe form/list/detail, 200% text at 640px and session loss. Full manual WCAG audit unavailable |
+| Shared failure contract, DRAFT-SEC-005 | Workspace-level pending/uncertain creation state | RTL deferred Back→New request test: no duplicate POST, retained input and required reconciliation; independently rerun |
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
-| [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |
+| [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local private-read denial portion verified above; editing/revisions/attachment rules pending |
 | [REQ-CON-003](specs/ROLE-CONTRIBUTOR.md#requirements) | AI specification draft | [AC-CON-003](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-005](specs/ROLE-CONTRIBUTOR.md#requirements) | Respond to changes | [AC-CON-005](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
