@@ -1,0 +1,8 @@
+[
+  {
+    "migration_name": "20261026160000_approval_revocation",
+    "finished": false,
+    "rolled_back": false,
+    "logs": "A migration failed to apply. New migrations cannot be applied before the error is recovered from. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve\n\nMigration name: 20261026160000_approval_revocation\n\nDatabase error code: 42P17\n\nDatabase error:\nERROR: functions in index predicate must be marked IMMUTABLE\n\nDbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E42P17), message: \"functions in index predicate must be marked IMMUTABLE\", detail: None, hint: None, position: None, where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some(\"indexcmds.c\"), line: Some(1810), routine: Some(\"CheckPredicate\") }\n\n"
+  }
+]

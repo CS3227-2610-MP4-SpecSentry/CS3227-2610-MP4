@@ -1,0 +1,16 @@
+{
+  "id": "ui",
+  "agent": "ui",
+  "role": "implementer",
+  "paths": [
+    "src/client/src/features/reviewer",
+    "workflow/tests/browser/reviewer-revocation.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-revocation.ts",
+    "playwright.config.ts"
+  ],
+  "dependencies": [
+    "foundation",
+    "reviewer",
+    "release"
+  ]
+}

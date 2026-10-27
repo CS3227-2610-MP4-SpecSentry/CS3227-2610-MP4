@@ -1,0 +1,38 @@
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 47.57 KB
+CJS ⚡️ Build success in 61ms
+ESM dist\index.mjs 36.53 KB
+ESM ⚡️ Build success in 62ms
+DTS Build start
+DTS ⚡️ Build success in 2777ms
+DTS dist\index.d.ts  82.33 KB
+DTS dist\index.d.mts 82.33 KB
+
+npm notice run specsentry@0.1.0 test:integration
+npm notice run npm run build -w @specsentry/shared && npm run test:integration -w @specsentry/server
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/server@0.1.0 test:integration
+npm notice run jest --runInBand --config jest.integration.config.cjs
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:4072) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+
+Test Suites: 15 passed, 15 total
+Tests:       171 passed, 171 total
+Snapshots:   0 total
+Time:        202.487 s
+Ran all test suites.

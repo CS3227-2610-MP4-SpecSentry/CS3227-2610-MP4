@@ -19,7 +19,7 @@ export class AppModule {
         IdentityModule.register(config),
         ProposalsModule.register(config),
         ReviewsModule.register(config),
-        ReleasesModule,
+        ReleasesModule.register(config),
         ActivityModule,
         NotificationsModule.register(config),
       ],

@@ -29,6 +29,9 @@ model UserAccount {
   findingEvents FindingEvent[]
   decisions ReviewDecision[]
   reviewIdempotency ReviewIdempotency[]
+  createdReleaseCandidates ReleaseCandidate[]
+  releaseSmokeTests ReleaseSmokeTest[]
+  releasePublications ReleasePublicationSnapshot[]
 }
 
 model AuthSession {
@@ -100,6 +103,10 @@ enum ProposalActivityAction {
   FINDING_AMENDED
   REVIEW_APPROVED
   CHANGES_REQUESTED
+  APPROVAL_REVOKED
+  RELEASE_ATTACHED
+  RELEASE_REMOVED
+  RELEASE_PUBLISHED
 }
 
 // Lifecycle root. Composite foreign keys prevent cross-proposal pointers.
@@ -124,6 +131,7 @@ model ChangeProposal {
   findings ReviewFinding[]
   decisions ReviewDecision[]
   reviewIdempotency ReviewIdempotency[]
+  releaseMembers ReleaseCandidateMember[]
 
   @@index([state, firstSubmittedAt, id])
   @@index([ownerId])
@@ -148,6 +156,7 @@ model ProposalRevision {
   evidence         TestEvidence[]
   assignments      ReviewAssignment[]
   activities       ProposalActivity[]
+  releaseMembers ReleaseCandidateMember[]
 
   @@unique([proposalId, id])
   @@unique([proposalId, number])
@@ -213,6 +222,7 @@ model ReviewAssignment {
   findings ReviewFinding[]
   findingEvents FindingEvent[]
   decisions ReviewDecision[]
+  releaseMembers ReleaseCandidateMember[]
 
 
   @@unique([proposalId, revisionId, id])
@@ -228,6 +238,7 @@ model ProposalActivity {
   revisionId   String?
   assignmentId String?
   actorId      String?
+  candidateId  String?
   action       ProposalActivityAction
   outcome      String                 @default("SUCCESS")
   summary      String
@@ -237,6 +248,7 @@ model ProposalActivity {
   revision     ProposalRevision?      @relation(fields: [proposalId, revisionId], references: [proposalId, id], onDelete: Restrict)
   assignment   ReviewAssignment?      @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
   actor        UserAccount?           @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  candidate    ReleaseCandidate?      @relation(fields: [candidateId], references: [id], onDelete: Restrict)
 
   @@index([proposalId, timestamp, id])
 }
@@ -252,6 +264,7 @@ model WorkingRevision {
 enum NotificationKind {
   NEW_REVISION
   WITHDRAWN
+  APPROVAL_REVOKED
 }
 
 model Notification {
@@ -262,10 +275,20 @@ model Notification {
   revisionId String
   assignmentId String
   activityId String @unique
+  candidateId String?
+  invalidationId String? @unique
+  reviewerId String?
+  reason String?
   createdAt DateTime @default(now())
   readAt DateTime?
-  @@unique([recipientId, kind, revisionId])
+  candidate ReleaseCandidate? @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  invalidation ApprovalInvalidation? @relation(fields: [invalidationId], references: [id], onDelete: Restrict)
   @@index([recipientId, createdAt, id])
+}
+
+enum ApprovalInvalidationCause {
+  REOPENED
+  REVOKED
 }
 
 model ApprovalInvalidation {
@@ -276,8 +299,97 @@ model ApprovalInvalidation {
   decisionId String @unique
   actorId String
   mutationVersion Int
+  cause ApprovalInvalidationCause @default(REOPENED)
+  reason String?
+  candidateId String?
   createdAt DateTime @default(now())
+  candidate ReleaseCandidate? @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  notifications Notification[]
   @@unique([proposalId, mutationVersion])
+}
+
+enum ReleaseCandidateStatus {
+  OPEN
+  RELEASED
+}
+
+enum ReleaseMemberStatus {
+  ATTACHED
+  REMOVED
+  RELEASED
+}
+
+enum ReleaseSmokeOutcome {
+  PASS
+  FAIL
+}
+
+model ReleaseCandidate {
+  id String @id @default(uuid())
+  projectKey String
+  semanticVersion String
+  createdById String
+  status ReleaseCandidateStatus @default(OPEN)
+  version Int @default(0)
+  contentVersion Int @default(0)
+  rollbackPlan String
+  dependencyNotes String
+  createdAt DateTime @default(now())
+  publishedAt DateTime?
+  createdBy UserAccount @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  members ReleaseCandidateMember[]
+  smokeTests ReleaseSmokeTest[]
+  publication ReleasePublicationSnapshot?
+  invalidations ApprovalInvalidation[]
+  notifications Notification[]
+  activities ProposalActivity[]
+  @@unique([projectKey, semanticVersion])
+  @@index([createdById, status, createdAt, id])
+}
+
+model ReleaseCandidateMember {
+  id String @id @default(uuid())
+  candidateId String
+  proposalId String
+  revisionId String
+  assignmentId String
+  approvalId String
+  status ReleaseMemberStatus @default(ATTACHED)
+  attachedAt DateTime @default(now())
+  removedAt DateTime?
+  candidate ReleaseCandidate @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  proposal ChangeProposal @relation(fields: [proposalId], references: [id], onDelete: Restrict)
+  revision ProposalRevision @relation(fields: [proposalId, revisionId], references: [proposalId, id], onDelete: Restrict)
+  assignment ReviewAssignment @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
+  approval ReviewDecision @relation(fields: [proposalId, revisionId, assignmentId, approvalId], references: [proposalId, revisionId, assignmentId, id], onDelete: Restrict)
+  @@index([candidateId, status, proposalId])
+  @@index([proposalId, status])
+}
+
+model ReleaseSmokeTest {
+  id String @id @default(uuid())
+  candidateId String
+  testedContentVersion Int
+  outcome ReleaseSmokeOutcome
+  procedure String
+  results String
+  actorId String
+  createdAt DateTime @default(now())
+  candidate ReleaseCandidate @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  @@index([candidateId, testedContentVersion, createdAt, id], map: "ReleaseSmokeTest_candidate_content_time_idx")
+}
+
+model ReleasePublicationSnapshot {
+  id String @id @default(uuid())
+  candidateId String @unique
+  actorId String
+  candidateVersion Int
+  contentVersion Int
+  evidence Json
+  createdAt DateTime @default(now())
+  candidate ReleaseCandidate @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
 }
 
 enum CoverageStatus {
@@ -392,7 +504,9 @@ model ReviewDecision {
   proposal ChangeProposal @relation(fields: [proposalId], references: [id], onDelete: Restrict)
   assignment ReviewAssignment @relation(fields: [proposalId, revisionId, assignmentId], references: [proposalId, revisionId, id], onDelete: Restrict)
   actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  releaseMembers ReleaseCandidateMember[]
   @@unique([proposalId, revisionId])
+  @@unique([proposalId, revisionId, assignmentId, id], map: "ReviewDecision_exact_release_approval_key")
   @@unique([proposalId, mutationVersion])
   @@index([proposalId, mutationVersion, id])
 }

@@ -1,0 +1,62 @@
+{
+  "scope": "Planned implementation owner mapping; executable results recorded separately",
+  "cases": {
+    "foundation": [
+      "revoke-reason-empty",
+      "revoke-reason-limit",
+      "revoke-strict-body",
+      "revoke-foundation-provenance",
+      "revoke-foundation-fixture"
+    ],
+    "reviewer": [
+      "revoke-unattached",
+      "revoke-decision-round",
+      "revoke-history",
+      "revoke-access",
+      "revoke-session",
+      "revoke-stale",
+      "revoke-released",
+      "revoke-invalid",
+      "revoke-idempotency",
+      "revoke-replay-access",
+      "revoke-rollback"
+    ],
+    "release": [
+      "revoke-attached-freeze",
+      "revoke-attached",
+      "revoke-readiness",
+      "revoke-notice-ack",
+      "revoke-notice-scope",
+      "revoke-remove",
+      "release-ownership",
+      "release-gates",
+      "release-rollback",
+      "revoke-publish-revoke-first",
+      "revoke-publish-publish-first",
+      "revoke-remove-revoke-first",
+      "revoke-remove-remove-first",
+      "revoke-reopen-revoke-first",
+      "revoke-reopen-reopen-first",
+      "revoke-duplicate-same-key",
+      "revoke-duplicate-different-keys",
+      "revoke-disable-disable-first",
+      "revoke-disable-revoke-first",
+      "revoke-session-invalidate-first",
+      "revoke-session-revoke-first",
+      "revoke-attach-attach-first",
+      "revoke-attach-revoke-first",
+      "revoke-remove-disable-first",
+      "revoke-remove-removal-first",
+      "revoke-same-key-changed-body",
+      "revoke-notice-get",
+      "revoke-notice-csrf",
+      "revoke-notice-newer",
+      "revoke-candidate-privacy"
+    ],
+    "ui": [
+      "revoke-ui",
+      "revoke-ui-recovery",
+      "revoke-ui-accessibility"
+    ]
+  }
+}

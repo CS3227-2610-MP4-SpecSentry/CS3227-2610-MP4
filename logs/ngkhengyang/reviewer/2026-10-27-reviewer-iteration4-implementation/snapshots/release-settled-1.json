@@ -1,0 +1,50 @@
+{
+  "base": "HEAD",
+  "base_commit": "9556b72b5cce9da8df0b40887c8ba816cccdaaf8",
+  "diff_sha256": "d81892315361942af45e4891bb4c408aedfd24a3673ad6c2c28c9680289b7ee7",
+  "files": {
+    "src/server/src/notifications/notifications.controller.ts": {
+      "bytes": 2085,
+      "sha256": "3877a556dfafe1d270698ce796165b5ccff3167bec3b07015e32abe9d53b399a"
+    },
+    "src/server/src/notifications/notifications.module.ts": {
+      "bytes": 812,
+      "sha256": "9d61006b8b2473ae3b1797273b63873698e69f4714006b02131c39c8b835de8c"
+    },
+    "src/server/src/notifications/notifications.service.ts": {
+      "bytes": 12248,
+      "sha256": "bb3d88d676a4d181ebd591296cb33c597ec35e959b1258477aff58a3173297a2"
+    },
+    "src/server/src/releases/releases.controller.ts": {
+      "bytes": 2572,
+      "sha256": "0c56003ab04a5b4713b67c10d23a3734c46016dd7492a628ea36260ff8ff884d"
+    },
+    "src/server/src/releases/releases.module.ts": {
+      "bytes": 787,
+      "sha256": "c2527fbf70d37edae2463b596d4accc1921ac3f0ac136714f638d3dd620519ba"
+    },
+    "src/server/src/releases/releases.service.ts": {
+      "bytes": 22256,
+      "sha256": "8ea63d4564367ba0611a2a7104fecf4debe7327e537220f0bb00cc5646f7dc51"
+    },
+    "src/server/test/approval-revocation-races.integration.ts": {
+      "bytes": 29646,
+      "sha256": "520c321b9418f8d77d5325a9a2ef66f7101ff53caf047587000f96429a11cc17"
+    },
+    "src/server/test/release-revocation.integration.ts": {
+      "bytes": 20447,
+      "sha256": "81cfc32f1d49c0ec77a7057bacce3d7bd9f52b420307506a72953b2e3763f4f4"
+    }
+  },
+  "head": "9556b72b5cce9da8df0b40887c8ba816cccdaaf8",
+  "paths": [
+    "src/server/src/notifications/notifications.controller.ts",
+    "src/server/src/notifications/notifications.module.ts",
+    "src/server/src/notifications/notifications.service.ts",
+    "src/server/src/releases/releases.controller.ts",
+    "src/server/src/releases/releases.module.ts",
+    "src/server/src/releases/releases.service.ts",
+    "src/server/test/approval-revocation-races.integration.ts",
+    "src/server/test/release-revocation.integration.ts"
+  ]
+}

@@ -1,0 +1,25 @@
+
+(node:48356) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL src/server/test/approval-revocation-races.integration.ts (22.41 s)
+  ● PostgreSQL approval revocation release races › revoke-session-revoke-first commits before session deletion
+
+    Expected actual PostgreSQL lock waiter was not observed
+
+       97 |       if (rows.some(row => row.pid !== blockerPid)) return;
+       98 |     }
+    >  99 |     throw new Error('Expected actual PostgreSQL lock waiter was not observed');
+          |           ^
+      100 |   }
+      101 |   async function race<T, U>(action: string, first: () => Promise<T>, second: () => Promise<U>) {
+      102 |     const entered = barrier(); const release = barrier(); let pid = 0;
+
+      at observedBlock (test/approval-revocation-races.integration.ts:99:11)
+      at race (test/approval-revocation-races.integration.ts:119:33)
+      at Object.<anonymous> (test/approval-revocation-races.integration.ts:302:29)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 17 passed, 18 total
+Snapshots:   0 total
+Time:        22.824 s
+Ran all test suites within paths "src/server/test/approval-revocation-races.integration.ts".

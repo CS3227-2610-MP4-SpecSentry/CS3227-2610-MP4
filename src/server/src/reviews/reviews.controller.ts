@@ -4,6 +4,7 @@ import { assignedReviewsQuerySchema, claimProposalRequestSchema, dropProposalReq
 import { coverageHistoryQuerySchema, coverageWriteRequestSchema, createFindingRequestSchema, findingAmendmentRequestSchema,
   findingTransitionRequestSchema, humanReviewPageQuerySchema, humanReviewQuerySchema, reviewDecisionRequestSchema,
   reviewIdempotencyKeySchema } from '@specsentry/shared';
+import { revokeApprovalRequestSchema } from '@specsentry/shared';
 import { Roles, type AuthRequest } from '../identity/access';
 import { DatabaseService } from '../database/database.service';
 import { validate, type ReviewerActor } from './reviewer-context';
@@ -15,7 +16,7 @@ const actor = (request: AuthRequest): ReviewerActor => businessActor(request);
 const validationTargets = {
   POOL: 'review-pool', ASSIGNED: 'assigned-reviews', CLAIM: 'proposal-claim', DROP: 'proposal-drop',
   DETAIL: 'proposal-detail', REVISIONS: 'proposal-revisions', ACTIVITY: 'proposal-activity',
-  HUMAN: 'human-review', COVERAGE: 'review-coverage', FINDING: 'review-finding', DECISION: 'review-decision',
+  HUMAN: 'human-review', COVERAGE: 'review-coverage', FINDING: 'review-finding', DECISION: 'review-decision', REVOKE: 'approval-revocation',
 } as const;
 
 @Roles('REVIEWER')
@@ -133,5 +134,13 @@ export class ReviewsController {
     const input = await this.parsed(request, 'DECISION', () => ({ id: validate(reviewerIdSchema, id), body: validate(reviewDecisionRequestSchema, body),
       key: validate(reviewIdempotencyKeySchema, request.headers['idempotency-key']) }));
     return this.reviews.decide(actor(request), input.id, input.body, input.key);
+  }
+  @Post('proposals/:id/revoke-approval')
+  @HttpCode(200)
+  async revoke(@Req() request: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
+    const input = await this.parsed(request, 'REVOKE', () => ({ id: validate(reviewerIdSchema, id),
+      body: validate(revokeApprovalRequestSchema, body),
+      key: validate(reviewIdempotencyKeySchema, request.headers['idempotency-key']) }));
+    return this.reviews.revoke(actor(request), input.id, input.body, input.key);
   }
 }

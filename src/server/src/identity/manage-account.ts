@@ -6,8 +6,10 @@ import { DatabaseService } from '../database/database.service';
 import { hashPassword } from './identity.service';
 import { AccountAdministrationService } from './account-administration.service';
 import { ReviewsService } from '../reviews/reviews.service';
+import { ApprovalRevocationService } from '../reviews/approval-revocation.service';
 import { ProposalsService } from '../proposals/proposals.service';
 import { ActivityService } from '../activity/activity.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 async function main(): Promise<void> {
   loadEnvironment({ path: resolve(__dirname, '../../../../.env'), quiet: true });
@@ -26,8 +28,12 @@ async function main(): Promise<void> {
       });
     } else if (action === 'disable') {
       const username = usernameSchema.parse(process.env.ACCOUNT_USERNAME);
+      const proposals = new ProposalsService();
+      const activity = new ActivityService();
+      const notifications = new NotificationsService(database, proposals, activity);
+      const revocation = new ApprovalRevocationService(database, proposals, activity, notifications);
       await new AccountAdministrationService(database,
-        new ReviewsService(database, new ProposalsService(), new ActivityService())).disable(username);
+        new ReviewsService(database, proposals, activity, revocation)).disable(username);
     } else if (action === 'prune') {
       const now = new Date();
       await database.client.$transaction([

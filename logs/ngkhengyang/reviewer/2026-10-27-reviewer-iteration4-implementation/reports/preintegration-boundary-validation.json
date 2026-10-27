@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "baseline_head": "9556b72b5cce9da8df0b40887c8ba816cccdaaf8",
+  "changed_product_files": 36,
+  "owner_completions": 4,
+  "integration_started": false,
+  "deferred_wiring_unchanged": [
+    "src/server/src/app.module.ts",
+    "src/server/src/identity/manage-account.ts",
+    "playwright.config.ts"
+  ],
+  "running_product_checks": 0,
+  "source_manifest_hashes": 36,
+  "full_server_typecheck": "fails only deferred CLI constructor TS2554; initial race-mock type issue corrected",
+  "browser_acceptance": "not executed; source syntax and component evidence only",
+  "independent_code_review": "not started",
+  "finished_records": 10,
+  "running_records": 0,
+  "markdown_links_checked": 14,
+  "bundle_exit_code": 1
+}

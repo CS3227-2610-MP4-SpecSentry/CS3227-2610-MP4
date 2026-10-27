@@ -46,9 +46,16 @@ export class ProposalsService {
     if (!revision) throw new NotFoundException();
     const notice = await tx.notification.findFirst({ where: { recipientId: accountId, proposalId: id, revisionId: revision.id, kind: 'NEW_REVISION' }, select: { id: true, readAt: true } });
     const unread = await tx.notification.count({ where: { recipientId: accountId, proposalId: id, revisionId: root.currentRevisionId!, kind: 'NEW_REVISION', readAt: null } });
-    const approvals = await tx.$queryRaw<{ id: string }[]>`SELECT d."id" FROM "ReviewDecision" d
-      WHERE d."proposalId"=${id} AND d."revisionId"=${root.currentRevisionId} AND d."decision"='APPROVE'
+    const approvals = await tx.$queryRaw<{ id: string; mutationVersion: number }[]>`SELECT d."id", d."mutationVersion" FROM "ReviewDecision" d
+      WHERE d."proposalId"=${id} AND d."revisionId"=${root.currentRevisionId}
+      AND d."assignmentId"=${root.currentAssignmentId} AND d."decision"='APPROVE'
       AND NOT EXISTS (SELECT 1 FROM "ApprovalInvalidation" i WHERE i."decisionId"=d."id")`;
+    const member = role === 'REVIEWER' && root.releaseAttachmentRef ? await tx.releaseCandidateMember.findFirst({
+      where: { proposalId: id, status: 'ATTACHED', candidateId: root.releaseAttachmentRef },
+      select: { candidateId: true, approvalId: true, candidate: { select: { version: true } } },
+    }) : null;
+    const ownInvalidApprovalBlocker = member ? await tx.approvalInvalidation.count({
+      where: { proposalId: id, decisionId: member.approvalId } }) > 0 : false;
     const schema = role === 'REVIEWER' ? proposalDetailResponseSchema : submittedProposalDetailResponseSchema;
     return schema.parse({ id: root.id, version: root.version, title: root.title, state: root.state,
       author: root.owner, firstSubmittedAt: root.firstSubmittedAt!.toISOString(), latestSubmittedAt: root.currentRevision!.submittedAt.toISOString(),
@@ -57,6 +64,10 @@ export class ProposalsService {
       latestRevision: { id: root.currentRevision!.id, number: root.currentRevision!.number, submittedAt: root.currentRevision!.submittedAt.toISOString() },
       hasUnreadLatestRevision: unread > 0,
       effectiveApproval: ['APPROVED', 'IN_RELEASE', 'RELEASED'].includes(root.state) && approvals.length > 0,
+      approvalContext: approvals[0] && ['APPROVED', 'IN_RELEASE'].includes(root.state)
+        ? { id: approvals[0].id, mutationVersion: approvals[0].mutationVersion } : null,
+      candidateContext: member ? { candidateId: member.candidateId, candidateVersion: member.candidate.version,
+        ownInvalidApprovalBlocker } : null,
       revisionNotice: notice ? { id: notice.id, readAt: notice.readAt?.toISOString() ?? null } : null,
       revision: { ...revision, submittedAt: revision.submittedAt.toISOString(),
         criterionEvidenceLinks: revision.criteria.flatMap((criterion) => criterion.evidenceLinks),

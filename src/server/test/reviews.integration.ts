@@ -29,7 +29,7 @@ describe('PostgreSQL Reviewer intake acceptance (INT-01–11)', () => {
   const ownerId = `${prefix}-owner`;
   const password = 'synthetic-reviewer-integration-password';
   let sequence = 0;
-  const businessTables = '"Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+  const businessTables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
   async function clearBusiness() {
     // Explicit disposable TEST_DATABASE_URL is mandatory; never truncate authentication tables.
     if (!process.env.TEST_DATABASE_URL) throw new Error('Explicit disposable TEST_DATABASE_URL is required');

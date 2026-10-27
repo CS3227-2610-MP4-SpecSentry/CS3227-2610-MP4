@@ -10,7 +10,7 @@ describe('Reviewer development/test fixtures (INT-11)', () => {
     if (!process.env.TEST_DATABASE_URL) throw new Error('Explicit disposable TEST_DATABASE_URL is required');
     database = new DatabaseService(readConfig({ NODE_ENV: 'test', DATABASE_URL: process.env.TEST_DATABASE_URL,
       SESSION_SECRET: 'reviewer-seed-test-secret-at-least-32' }));
-    await database.client.$executeRawUnsafe('TRUNCATE "Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
+    await database.client.$executeRawUnsafe('TRUNCATE "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
     for (const [username, role] of [['contributor1', 'CONTRIBUTOR'], ['reviewer1', 'REVIEWER']] as const) {
       if (!await database.client.userAccount.findUnique({ where: { username } })) {
         const account = await database.client.userAccount.create({ data: { username, role, passwordHash: await hashPassword('synthetic-fixture-test-password') } });
@@ -20,7 +20,7 @@ describe('Reviewer development/test fixtures (INT-11)', () => {
   });
   afterAll(async () => {
     if (!database) return;
-    await database.client.$executeRawUnsafe('TRUNCATE "Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
+    await database.client.$executeRawUnsafe('TRUNCATE "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
     await database.client.userAccount.deleteMany({ where: { id: { in: ownedAccounts } } });
     await database.onModuleDestroy();
   });

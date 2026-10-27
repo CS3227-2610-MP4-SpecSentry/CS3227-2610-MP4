@@ -24,7 +24,7 @@ describe('PostgreSQL exact-revision notifications (REQ-REV-008; SEC-I2-003/006/0
   async function clean() {
     if (!process.env.TEST_DATABASE_URL) throw new Error('Explicit disposable TEST_DATABASE_URL is required');
     // The coordinator serializes this suite with every other disposable-DB suite.
-    await database.client.$executeRawUnsafe('TRUNCATE "Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
+    await database.client.$executeRawUnsafe('TRUNCATE "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
   }
   async function login(name: keyof typeof ids): Promise<Session> {
     const agent = request.agent(app.getHttpServer());

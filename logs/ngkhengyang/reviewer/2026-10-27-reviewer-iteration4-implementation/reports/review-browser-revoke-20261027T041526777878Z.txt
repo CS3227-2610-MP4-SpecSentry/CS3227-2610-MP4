@@ -1,0 +1,14 @@
+
+Running 3 tests using 1 worker
+
+  ok 1 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:28:5 › revoke-ui API-backed current approval, candidate blocker, and safe history (3.9s)
+  ok 2 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:82:5 › revoke-ui-unattached supports keyboard submission and preserves original approval history (2.7s)
+  ok 3 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:105:5 › revoke-ui-access-loss clears a drafted reason after external session invalidation (2.3s)
+
+  3 passed (13.9s)
+
+[WebServer] (node:16168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:27804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:16168) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.

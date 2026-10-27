@@ -1,0 +1,29 @@
+{
+  "id": "database-preflight",
+  "kind": "preflight",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "-e",
+    "const {Client}=require('pg'),{readdirSync}=require('node:fs'); (async()=>{const u=new URL(process.env.TEST_DATABASE_URL);if(!['127.0.0.1','localhost'].includes(u.hostname)||u.pathname!='/specsentry_reviewer_intake_test')throw Error();const c=new Client({connectionString:u.href,connectionTimeoutMillis:5000});try{await c.connect();const r=await c.query('SELECT current_database() AS name');if(r.rows[0].name!=='specsentry_reviewer_intake_test')throw Error();const m=await c.query('SELECT migration_name FROM _prisma_migrations WHERE finished_at IS NOT NULL AND rolled_back_at IS NULL');const applied=new Set(m.rows.map(x=>x.migration_name));for(const f of readdirSync('src/server/prisma/migrations',{withFileTypes:true}).filter(x=>x.isDirectory()))if(!applied.has(f.name))throw Error();console.log('Disposable connection and current migration ledger passed');}finally{await c.end();}})().catch(()=>{console.error('Disposable database connection/migration status failed');process.exit(1);});"
+  ],
+  "paths": [
+    "src/server/prisma/schema.prisma",
+    "src/server/prisma/migrations",
+    "src/server/prisma.config.ts",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "runtime"
+  ],
+  "resources": [
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_reviewer_intake_test"
+  },
+  "timeout": 60
+}

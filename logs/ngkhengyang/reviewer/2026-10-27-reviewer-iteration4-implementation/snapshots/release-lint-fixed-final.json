@@ -1,0 +1,15 @@
+{
+  "base": "HEAD",
+  "base_commit": "9556b72b5cce9da8df0b40887c8ba816cccdaaf8",
+  "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "files": {
+    "src/server/test/release-revocation.integration.ts": {
+      "bytes": 20380,
+      "sha256": "eb362c57ba762ac5eda8ef97af91fc31b9f5473a1d2cfc19cc252aa287efda0c"
+    }
+  },
+  "head": "9556b72b5cce9da8df0b40887c8ba816cccdaaf8",
+  "paths": [
+    "src/server/test/release-revocation.integration.ts"
+  ]
+}

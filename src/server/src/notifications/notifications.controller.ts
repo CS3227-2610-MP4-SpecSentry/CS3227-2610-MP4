@@ -6,7 +6,7 @@ import { businessActor } from '../identity/business-context';
 import { validate } from '../reviews/reviewer-context';
 import { NotificationsService } from './notifications.service';
 
-@Roles('REVIEWER')
+@Roles('REVIEWER', 'RELEASE_MAINTAINER')
 @Controller('notifications')
 export class NotificationsController {
   constructor(private readonly notifications: NotificationsService, private readonly database: DatabaseService) {}

@@ -1,0 +1,39 @@
+{
+  "id": "baseline-fixture",
+  "kind": "fixture",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "node_modules/jest/bin/jest.js",
+    "--config",
+    "src/server/jest.integration.config.cjs",
+    "--runInBand",
+    "--runTestsByPath",
+    "src/server/test/demo-seed.integration.ts",
+    "src/server/test/reviewer-seed.integration.ts",
+    "--testNamePattern",
+    "creates two enabled accounts per role|creates atomic synthetic submitted graphs"
+  ],
+  "paths": [
+    "src/server/test/demo-seed.integration.ts",
+    "src/server/test/reviewer-seed.integration.ts",
+    "src/server/src/identity/seed-demo.ts",
+    "src/server/src/reviews/seed-reviewer.ts",
+    "src/server/prisma",
+    "src/server/package.json",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "database-preflight"
+  ],
+  "resources": [
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_reviewer_intake_test"
+  },
+  "timeout": 120
+}

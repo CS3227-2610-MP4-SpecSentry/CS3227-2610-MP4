@@ -9,3 +9,5 @@ export * from './contracts/identity';
 export * from './contracts/reviewer';
 export * from './contracts/revision-cycle';
 export * from './contracts/ai';
+export * from './contracts/revocation';
+export * from './contracts/release';

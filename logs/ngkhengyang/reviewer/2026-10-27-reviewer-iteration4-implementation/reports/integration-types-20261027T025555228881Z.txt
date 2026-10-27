@@ -1,0 +1,24 @@
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 47.57 KB
+CJS ⚡️ Build success in 79ms
+ESM dist\index.mjs 36.53 KB
+ESM ⚡️ Build success in 80ms
+DTS Build start
+DTS ⚡️ Build success in 2616ms
+DTS dist\index.d.ts  82.33 KB
+DTS dist\index.d.mts 82.33 KB
+
+npm notice run specsentry@0.1.0 typecheck
+npm notice run npm run build -w @specsentry/shared && npm run typecheck --workspaces --if-present
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/shared@0.1.0 typecheck
+npm notice run tsc --noEmit
+npm notice run @specsentry/server@0.1.0 typecheck
+npm notice run @specsentry/client@0.1.0 typecheck

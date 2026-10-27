@@ -1,5 +1,35 @@
 # Requirement traceability
 
+## Reviewer approval revocation increment - 27 October 2026
+
+Iteration 4 implements approval revocation plus the smallest supporting real
+release API. The [implementation run](../logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json),
+[review and replacement-fixer run](../logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json)
+and [session log](../logs/ngkhengyang/2026-10-26-reviewer-iteration4.md) record the
+actual integration checks, independent findings, fixes and revalidation. This section supersedes
+older pending markers only for the bounded source below. Implementation existence,
+named-case structure and earlier scoped test passes do not establish final approval.
+
+| Requirement / scenario | Source and named verification | Evidence boundary |
+| --- | --- | --- |
+| REQ-REV-016 / AC-REV-016 | approval-revocation.service.ts/controller; approval-revocation.integration.ts; ApprovalRevocation.tsx/tests | Explicit assigned-human reasoned revocation, preserved approval/history, versions, replay access, atomic activity/notice, recoverable UI failures |
+| REV-004/005/006 | Same transaction, proposals detail, existing lifecycle/manual-review regressions | Ordinary attached edits remain frozen; removal enters CHANGES_REQUESTED; resubmission required before another decision |
+| REL-001/002/004/007 | releases.service/controller.ts, notifications.service/controller.ts; release-revocation.integration.ts | Real creator membership/gates/smoke/removal/publication and durable responsible-Maintainer notices; broad release UI remains excluded |
+| REL-008; SHR-001/002/003/004/007; NFR-REL-001 | approval-revocation-races.integration.ts plus rollback/access cases | Overlapping PostgreSQL barriers/blocking and winner-only histories for publication, removal, reopening, duplicate keys, disable/session and attachment races |
+| Shared UI/accessibility and real API interaction | reviewer-revocation.spec.ts/fixture plus component tests | Real browser acceptance requires integrated root/fixture wiring and current executable results; syntax and component checks alone are insufficient |
+
+The 49-case matrix and its revisions are retained in canonical state. At the
+pre-integration boundary, scoped checks passed 7 contract, 41 PostgreSQL and
+55 Reviewer component tests; these are historical suite totals, not new-test or
+full-product counts. Initial independent review found release gate/ownership,
+publication rollback and browser evidence gaps (F-001 through F-004). Their actual
+fixes and independent closure evidence are retained in the follow-on run; a test
+name or matrix mapping alone does not establish those assertions. Current assembled
+checks and independently revalidated findings supersede
+that boundary only where linked in the run log. Live AI under OPEN-002, deployment,
+human teammate approval, broader Maintainer UI/AI, full performance and full WCAG
+acceptance remain separate gates.
+
 ## Reviewer Patch Risk increment — 26 October 2026
 
 Implementation and integration are recorded in the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)

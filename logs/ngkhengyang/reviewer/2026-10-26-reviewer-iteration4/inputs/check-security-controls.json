@@ -1,0 +1,45 @@
+{
+  "id": "security-controls",
+  "kind": "integration",
+  "argv": [
+    "C:/Users/User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "node_modules/jest/bin/jest.js",
+    "--config",
+    "src/server/jest.integration.config.cjs",
+    "--runInBand",
+    "--runTestsByPath",
+    "src/server/test/release-revocation.integration.ts",
+    "--testNamePattern",
+    "revoke-notice-get|revoke-notice-csrf|revoke-candidate-privacy"
+  ],
+  "paths": [
+    "package.json",
+    "package-lock.json",
+    "src/shared/src",
+    "src/server/src/identity",
+    "src/server/src/proposals",
+    "src/server/src/activity",
+    "src/server/prisma",
+    "src/server/test/business-fixtures.ts",
+    "src/server/package.json",
+    "src/server/jest.integration.config.cjs",
+    "src/server/test/release-revocation.integration.ts",
+    "src/server/src/releases",
+    "src/server/src/notifications",
+    "src/server/src/reviews"
+  ],
+  "depends_on": [
+    "runtime"
+  ],
+  "resources": [
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_reviewer_intake_test"
+  },
+  "timeout": 180
+}

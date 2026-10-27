@@ -1,0 +1,18 @@
+{
+  "assignment": "foundation",
+  "record_id": "rec-9eb0b58e15c74559",
+  "snapshot_id": "foundation-order-fix-source",
+  "commands": [
+    "verify-87957dde026d4987"
+  ],
+  "changed_paths": [
+    "src/server/test/patch-risk.integration.ts"
+  ],
+  "summary": "Deterministically ordered existing Patch Risk snapshot arrays while retaining every state/history field and PostgreSQL waiter oracle; focused real DB race passed",
+  "risks": "Full assembled PostgreSQL rerun and independent first review remain pending",
+  "next_action": "Allow bounded UI/release integration-discovered lint/fixture fixes, then resume integrator checks",
+  "references": [
+    "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-implementation\\handoffs\\08-main-to-foundation-fix.md"
+  ],
+  "unavailable_reason": "Exact aligned token/model/tool metrics unavailable; coordinator-observed fix and sampled thread evidence retained"
+}

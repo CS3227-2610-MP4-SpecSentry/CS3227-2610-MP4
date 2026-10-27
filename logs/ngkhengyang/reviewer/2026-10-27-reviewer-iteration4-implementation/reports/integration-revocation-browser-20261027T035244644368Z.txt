@@ -1,0 +1,40 @@
+
+Running 1 test using 1 worker
+
+  x  1 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history (684ms)
+
+
+  1) [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history 
+
+    Error: connect ECONNREFUSED 127.0.0.1:55436
+
+       at fixtures\reviewer-revocation.ts:16
+
+      14 |   const hash = await argon2.hash(password, { type: argon2.argon2id });
+      15 |   try {
+    > 16 |     for (const [name, id] of Object.entries(users)) await pool.query(
+         |                                                     ^
+      17 |       'INSERT INTO "UserAccount" (id,username,"passwordHash",role) VALUES ($1,$2,$3,$4)',
+      18 |       [id, `${prefix}-${name}`, hash, name === 'owner' ? 'CONTRIBUTOR' : name === 'reviewer' ? 'REVIEWER' : 'RELEASE_MAINTAINER']);
+      19 |   } catch (cause) { await pool.end(); throw cause; }
+        at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\pg-pool\index.js:45:11
+        at createRevocationFixture (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\workflow\tests\browser\fixtures\reviewer-revocation.ts:16:53)
+        at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\workflow\tests\browser\reviewer-revocation.spec.ts:5:19
+
+    Error Context: test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history 
+
+[WebServer] (node:31344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:4584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

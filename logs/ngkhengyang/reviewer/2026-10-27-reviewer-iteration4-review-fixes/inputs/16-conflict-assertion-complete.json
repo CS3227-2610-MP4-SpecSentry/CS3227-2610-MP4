@@ -1,0 +1,18 @@
+{
+  "assignment": "fixer",
+  "record_id": "rec-cf8f513f9aa24450",
+  "snapshot_id": "conflict-assertion-final",
+  "commands": [
+    "verify-606dc371254e43cb"
+  ],
+  "changed_paths": [
+    "src/server/test/release-revocation.integration.ts"
+  ],
+  "summary": "Tightened duplicate semantic version rejection to expected409 conflict;18 focused PostgreSQL tests pass",
+  "risks": "Independent final closure pending; historicalunit/fullPG evidence unchanged and explicitly reused",
+  "next_action": "Same reviewer verifies assertion and final manifest, closes evidence-backed findings",
+  "references": [
+    "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\initial-review.json"
+  ],
+  "unavailable_reason": "Stage-aligned counters unavailable; retrospective thread totals separate"
+}

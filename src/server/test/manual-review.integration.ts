@@ -17,7 +17,7 @@ import { ReviewsService } from '../src/reviews/reviews.service';
 import type { Prisma } from '../src/generated/prisma/client';
 
 // The suite uses only its explicitly supplied disposable PostgreSQL database.
-const businessTables = '"Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const businessTables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 describe('PostgreSQL manual Reviewer acceptance (REQ-REV-001/002/004/005/006/007/009/010/011/015)', () => {
   let app: NestExpressApplication;
   let database: DatabaseService;

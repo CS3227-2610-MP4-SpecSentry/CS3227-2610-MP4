@@ -1,0 +1,11 @@
+{
+  "requirement": "REQ-REV-016",
+  "severity": "MEDIUM",
+  "blocks": true,
+  "description": "UI acceptance browser covers attached happy path only; component network/conflict mocks and label/limit assertions do not establish unattached real browser flow, keyboard/focus or access-loss clearing. Add focused browser evidence without duplicating every mock. Preserve hostile-text safe rendering assertion.",
+  "owner": "fixer",
+  "reviewer": "independent-reviewer",
+  "evidence": [
+    "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\initial-review.json"
+  ]
+}

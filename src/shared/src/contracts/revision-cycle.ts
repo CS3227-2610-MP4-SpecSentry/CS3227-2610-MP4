@@ -34,11 +34,14 @@ const noticeBase = { id, proposalId: id, createdAt: timestamp, readAt: timestamp
 export const notificationSchema = z.discriminatedUnion('kind', [
   z.object({ ...noticeBase, kind: z.literal('NEW_REVISION'), revisionId: id }).strict(),
   z.object({ ...noticeBase, kind: z.literal('WITHDRAWN') }).strict(),
+  z.object({ ...noticeBase, kind: z.literal('APPROVAL_REVOKED'), revisionId: id,
+    candidateId: id, invalidationId: id, reviewerId: id, reason: text(2000, true) }).strict(),
 ]);
 export const notificationsResponseSchema = z.object({ items: z.array(notificationSchema).max(100), nextCursor: z.string().nullable() }).strict();
 export const acknowledgeNotificationRequestSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('NEW_REVISION'), revisionId: id, assignmentId: id, expectedAssignmentVersion: version }).strict(),
   z.object({ kind: z.literal('WITHDRAWN') }).strict(),
+  z.object({ kind: z.literal('APPROVAL_REVOKED'), candidateId: id, invalidationId: id }).strict(),
 ]);
 export const acknowledgeNotificationResponseSchema = z.object({ id, readAt: timestamp }).strict();
 export { reviewIdempotencyKeySchema as submissionIdempotencyKeySchema };

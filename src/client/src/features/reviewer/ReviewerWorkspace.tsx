@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { assignedReviewsResponseSchema, proposalActivityResponseSchema, proposalDetailResponseSchema, reviewCommandResponseSchema, reviewPoolResponseSchema, submittedRevisionsResponseSchema, type AssignedReviewItem, type PoolItem, type ProposalDetailResponse, type ProposalActivityResponse, type SubmittedRevisionsResponse, type SessionResponse } from '@specsentry/shared';
 import type { AuthorizationGeneration } from '../../shared/authorization';
 import { ManualReview } from './ManualReview';
+import { ApprovalRevocation } from './ApprovalRevocation';
 import { PatchRiskAssistant } from './PatchRiskAssistant';
 import { RevisionNotices } from './RevisionNotices';
 import { acknowledgeNotificationResponseSchema } from '@specsentry/shared';
@@ -185,6 +186,10 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
       <h4>Acceptance criteria</h4><ul>{revision.criteria.map(criterion => <li key={criterion.id}><p>{criterion.stableKey}: {criterion.statement} ({criterion.required ? 'Required' : 'Optional'})</p><p>Linked evidence: {revision.criterionEvidenceLinks.filter(link => link.criterionId === criterion.id).map(link => link.evidenceId).join(', ') || 'None'}</p></li>)}</ul>
       <h4>Submitted diff</h4><pre>{revision.diffText || 'No diff provided.'}</pre><h4>Test evidence</h4>{revision.evidence.length === 0 ? <p>No evidence provided.</p> : revision.evidence.map(evidence => <section key={evidence.id}><h5>{evidence.id}</h5><pre>{evidence.text}</pre><p>Evidence hash: {evidence.evidenceHash}</p></section>)}
       <ManualReview key={`${detail.id}:${revision.id}:${detail.version}:${detail.assignment.id}:${detail.assignment.version}`} detail={detail} stale={stale} busy={pending} request={(url, schema, body, method, key) => request(url, schema, generation.current, body, method, key)} onRefresh={() => void open(detail.id)} onChanged={message => { setNotice(message); void open(detail.id); }} onBusy={value => { mutationPending.current = value; setPending(value); }} />
+      <ApprovalRevocation key={`revoke:${detail.id}:${revision.id}:${detail.version}:${detail.assignment.id}:${detail.assignment.version}:${detail.approvalContext?.id ?? ''}:${detail.candidateContext?.candidateVersion ?? ''}`}
+        detail={detail} currentReviewerId={session.account.id} stale={stale} busy={pending} request={(url, schema, body, method, key) => request(url, schema, generation.current, body, method, key)}
+        onRefresh={() => void open(detail.id)} onChanged={message => { setNotice(message); void open(detail.id); }}
+        onBusy={value => { mutationPending.current = value; setPending(value); }} />
       <PatchRiskAssistant key={`ai:${detail.id}:${revision.id}:${detail.version}:${detail.assignment.id}:${detail.assignment.version}`} detail={detail} stale={stale} authorization={authorization} csrfToken={session.csrfToken} onAccessLost={() => { authorization.invalidate(); clearProtected(); setQueue(null); }} onSaved={() => { setNotice('Finding created.'); void open(detail.id); }} />
       <button disabled={stale || pending || !['IN_REVIEW', 'CHANGES_REQUESTED'].includes(detail.state)} onClick={() => void command(detail, 'drop')}>Drop assignment</button>
       <h4>Submitted revision history</h4>{history?.items.length === 0 && <p>No submitted revisions.</p>}<ul>{history?.items.map(item => <li key={item.id}><button disabled={pending || item.id === revision.id} onClick={() => void open(detail.id, item.id)}>View revision {item.number}</button> {item.summary} · {date(item.submittedAt)}</li>)}</ul>{history?.nextCursor && <button disabled={pending} onClick={() => void more('history')}>Next history page</button>}

@@ -1,5 +1,47 @@
 # Developer Guide
 
+## Approval revocation and supporting release API
+
+Iteration 4 adds `POST /api/proposals/:id/revoke-approval` for the current assigned
+Reviewer. Use the shared strict revocation request/response schemas. The request
+binds proposal, revision, assignment and immutable approval mutation versions,
+plus explicit null or current candidate context. Reasons are nonblank and at most
+2,000 normalized Unicode code points. Session/CSRF, current object access and
+versions are checked server-side; idempotency is actor/operation/target scoped.
+
+`ApprovalInvalidation` appends REVOKED provenance without changing the original
+decision; existing owner reopening records retain REOPENED provenance. Unattached
+revocation enters CHANGES_REQUESTED. Attached revocation stays IN_RELEASE and
+increments the candidate's general version, preserving membership/contentVersion,
+while invalidating approval and appending activity plus its responsible Maintainer's
+notice in one transaction. Candidate context returned to a Reviewer contains only
+their member blocker, never aggregate readiness or other members. Replay rechecks
+current access, including candidate scope after removal.
+
+The supporting creator-scoped release API implements candidate create/read/edit,
+member add/remove, smoke tests and publication under `/api/release-candidates`.
+It uses server-owned single-project scope, plain major.minor.patch labels, current
+approval/coverage/finding gates, rollback notes and a PASS smoke record for current
+content. Publication snapshots immutable evidence atomically. Membership changes
+advance contentVersion; explicit removal of a revoked item enters CHANGES_REQUESTED.
+New API contracts are in `src/shared/src/contracts/release.ts` and `revocation.ts`.
+
+Lock order is sorted relevant accounts, actor session, candidates, then sorted
+proposals before approval/membership writes. Resolve opaque pointers before locking
+and revalidate under locks; never acquire a candidate after a proposal lock.
+Removal always locks the affected Reviewer account before deciding unavailable
+assignment recovery. Revocation and publication use the same roots, so only one
+can win against the same approval. Reading candidate detail is side-effect-free;
+notification acknowledgement is a recipient/candidate-scoped CSRF-protected POST.
+
+The migration under `20261026160000_approval_revocation` supports a guarded forward
+retry of its failed partial development application while preserving prior history.
+Normal deployments still apply it once through Prisma. Use only an explicitly
+authorized disposable `*_test` database for fixture cleanup; do not reset a runtime
+database or bypass Prisma's reset safeguard. Resource/check details and first review
+results are in the [iteration-4 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration4.md).
+Local checks do not establish deployment, live AI compatibility or teammate approval.
+
 ## Reviewer Patch Risk Assistant
 
 The [AI integration guide](AI-Integration.md) describes exact request/result
@@ -29,8 +71,9 @@ drafting interface remains future work.
 reason. `POST /api/proposals/:id/reopen` requires expectedVersion and an unattached
 APPROVED proposal. Reopening preserves the decision and appends an approval
 invalidation; another decision requires resubmission. The server-owned
-releaseAttachmentRef is an integration guard for future release membership, with
-no public attachment writer. Candidate membership/publication are not delivered.
+releaseAttachmentRef is maintained with real candidate membership by the release
+API. Legacy synthetic attachment markers remain fixture guards and are never
+promoted automatically into membership or accepted as proof of publication.
 
 If a completed approval's Reviewer has since been disabled, reopening releases
 that now-unfinished assignment atomically while preserving its history. The owner
@@ -79,7 +122,8 @@ disablement. Manual review adds criterion assessments and individual takeover
 confirmation, append-only findings/transitions/amendments, human decisions,
 approval gates, decision idempotency and authorized history. Revision cycles add
 the minimal Contributor API, durable notifications and withdrawal/reopening.
-Full Contributor UI, releases and Contributor/Maintainer AI remain pending.
+Full Contributor UI, broader release UI and Contributor/Maintainer AI remain pending.
+The bounded revocation/release API is described above; consult its current review status.
 Reviewer AI is integrated with live operation disabled pending provider verification.
 See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
@@ -212,7 +256,8 @@ Contributor resubmission now appends a fresh immutable revision and revision-spe
 assignment while retaining the reviewer and advancing versions. Coverage starts
 empty; proposal findings retain history/status. The owner API, notifications and
 acknowledgements are described above. Reviewer approval revocation and real release
-hooks remain future work. Do not add another decision to CHANGES_REQUESTED to emulate resubmission.
+operations are implemented in iteration 4 with separate independent review status.
+Do not add another decision to CHANGES_REQUESTED to emulate resubmission.
 
 ## Browser verification
 

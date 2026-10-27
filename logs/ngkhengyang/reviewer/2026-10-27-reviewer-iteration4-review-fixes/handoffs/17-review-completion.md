@@ -1,0 +1,48 @@
+# Agent handoff
+
+## 1. Identity and goal
+
+Independent reviewer to main: final review/fix completion, all four findings closed with independent evidence.
+
+## 2. Requirements and focused context
+
+Review REQ\-REV\-016 plus004/005/006 and supporting release/security contracts against approved design and49 cases. Explicit revoke preserves original approval; candidate blocker/notice/publish locks; manual UI/retry/history. No broad Maintainer UI, deployment or live AI. Apply review\-changes\-to\-specs and review\-security skills. Requirement authority outranks implementation summaries.
+
+Referenced repository files:
+
+- [workflow/reviewer/agents/REVIEWER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/reviewer/agents/REVIEWER.md)
+- [workflow/reviewer/IMPLEMENTATION.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/reviewer/IMPLEMENTATION.md)
+- [workflow/specs/ROLE\-REVIEWER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/ROLE-REVIEWER.md)
+- [workflow/specs/ROLE\-MAINTAINER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/ROLE-MAINTAINER.md)
+- [workflow/specs/INTEGRATION\-SPEC.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/INTEGRATION-SPEC.md)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/reports/security\-design.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/reports/security-design.md)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/initial\-reviewed\-manifest.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/initial-reviewed-manifest.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/inputs/matrix\-targeted\-checks.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/matrix-targeted-checks.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/replacement\-ownership\-plan.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/replacement-ownership-plan.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/handoffs/14\-assertions\-complete.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/handoffs/14-assertions-complete.md)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/final\-reviewed\-manifest.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/final-reviewed-manifest.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/final\-validation.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/final-validation.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/revalidation.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/revalidation.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/security\-final.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/security-final.json)
+
+## 3. Scope, permissions, and dependencies
+
+Production/tests/docs READ ONLY. No source edits, new agents, migrations, reset, secrets or broad repeated checks. Send batched findings directly to NEW fixer when assigned, and root. Root records findings/intervals. Fixer alone owns reviewed production/test set under explicit follow\-on plan; coordinator owns logs/docs. You are independent of all code authors. Request targeted leased checks from fixer/root only when discriminating.
+
+## 4. Current state and changes
+
+Independent implementation revalidation supports closing F\-001 through F\-004. All43 manifest file hashes match. Current releasePG18/18, focusedbrowser3/3 and defaultbrowser14/14 pass; unchanged\-source priorunit/fullPG evidence adequately reused. No unresolved implementation blocker within reviewed scope.
+
+## 5. Verification and findings
+
+Current verification IDs/results and historical reuse basis in final\-validation.json; revalidation.json and security\-final.json record actual independent assessment. All43 current hashes match final\-reviewed\-manifest. Earlier failed/interrupted attempts retained, no production changes after initial assessment.
+
+## 6. Risks, questions, and next action
+
+Agent review/fix complete in bounded scope. CLI historical/cross\-run stale evidence remains a structural limitation, not a new product failure or freshexecution claim. Deployment, liveAI and human approval separate.
+
+## 7. Resource record
+
+Same independent gpt\-6\-sol/high reviewer; final transaction/assertion evidence assessment. Record rec\-9e6335caa7e5464b. Per\-stage telemetry unavailable; cumulative thread at closure.
+

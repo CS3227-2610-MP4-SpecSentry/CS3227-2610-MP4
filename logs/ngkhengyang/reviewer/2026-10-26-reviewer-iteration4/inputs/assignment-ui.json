@@ -1,0 +1,15 @@
+{
+  "id": "ui",
+  "agent": "ui",
+  "paths": [
+    "src/client/src/features/reviewer",
+    "workflow/tests/browser/reviewer-revocation.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-revocation.ts"
+  ],
+  "dependencies": [
+    "foundation",
+    "reviewer",
+    "release"
+  ],
+  "role": "implementer"
+}

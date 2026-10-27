@@ -1,0 +1,39 @@
+{
+  "assignment": "foundation",
+  "record_id": "rec-e68edb5dfbec4794",
+  "snapshot_id": "foundation-settled-1",
+  "commands": [
+    "verify-f1c3938859164c10",
+    "verify-9665884e16544e88",
+    "verify-305c4f696fdd4acf",
+    "verify-629251bc47ab4191"
+  ],
+  "changed_paths": [
+    "src/server/prisma/migrations/20261026160000_approval_revocation/migration.sql",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/activity/activity.service.ts",
+    "src/server/src/releases/release-locks.ts",
+    "src/server/test/approval-revocation-contracts.spec.ts",
+    "src/server/test/manual-review.integration.ts",
+    "src/server/test/notifications.integration.ts",
+    "src/server/test/patch-risk.integration.ts",
+    "src/server/test/proposal-lifecycle.integration.ts",
+    "src/server/test/release-foundation.integration.ts",
+    "src/server/test/reviewer-seed.integration.ts",
+    "src/server/test/reviews.integration.ts",
+    "src/server/test/submitted-access.integration.ts",
+    "src/shared/src/contracts/release.ts",
+    "src/shared/src/contracts/reviewer.ts",
+    "src/shared/src/contracts/revision-cycle.ts",
+    "src/shared/src/contracts/revocation.ts",
+    "src/shared/src/index.ts"
+  ],
+  "summary": "Implemented strict revocation/release contracts, provenance-preserving guarded migration, real release persistence and sorted lock helpers; foundation unit/data checks pass",
+  "risks": "Feature endpoints, UI, integration and independent code/security review remain pending; migration repaired partial failed DDL without reset",
+  "next_action": "Dispatch Reviewer and release implementation on settled contracts, preserving pre-integration user pause",
+  "references": [
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md",
+    "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-implementation\\inputs\\matrix-foundation-verified.json"
+  ],
+  "unavailable_reason": "Exact stage-aligned runtime tokens/model/tool/retry counters unavailable; coordinator-observed interval and sampled per-thread collector evidence retained"
+}

@@ -1,0 +1,315 @@
+
+FAIL src/server/test/approval-revocation.integration.ts (19.31 s)
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-unattached: commits one invalidation, state, and activity while retaining approval and assignee
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:108:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-decision-round: refuses another decision on the old revision
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:117:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-history: keeps original decision and shows attributed reason, cause, and IDs to authorized viewers
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:124:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-access: denies nonassignee and other roles before business mutation
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:135:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-session: denies missing, expired, disabled, mismatched and CSRF invalid sessions
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:140:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-stale: rejects stale root, assignment, revision, approval and candidate versions
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:158:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-released: rejects released proposal and candidate without changing snapshot history
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:165:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-invalid: rejects wrong and previously invalid approvals without duplicates
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:173:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-idempotency: repeats identical live result, conflicts on changed body and revalidates expired key
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:180:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-replay-access: denies replay after assignment or attached candidate scope loss
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:189:15)
+
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-rollback: database failures at each write stage leave no business fragments
+
+    PrismaClientKnownRequestError: 
+    Invalid `tx.changeProposal.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:44:31
+
+      41 const proposalId = randomUUID(); const revisionId = randomUUID(); const assignmentId = randomUUID();
+      42 const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    → 44   await tx.changeProposal.create(
+    Foreign key constraint violated on the constraint: `ChangeProposal_id_currentRevisionId_fkey`
+
+      42 |     const approvalId = randomUUID(); const candidateId = attached ? randomUUID() : null;
+      43 |     return db.client.$transaction(async (tx: Prisma.TransactionClient) => {
+    > 44 |       await tx.changeProposal.create({ data: { id: proposalId, ownerId: users.owner, title: 'Revocation case',
+         |       ^
+      45 |         state: attached ? 'IN_RELEASE' : 'APPROVED', version: attached ? 2 : 1, firstSubmittedAt: new Date(),
+      46 |         currentRevisionId: revisionId, currentAssignmentId: assignmentId,
+      47 |         releaseAttachmentRef: candidateId } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/approval-revocation.integration.ts:44:7
+      at Proxy._transactionWithCallback (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:859:18)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:203:17)
+
+Test Suites: 1 failed, 1 total
+Tests:       11 failed, 11 total
+Snapshots:   0 total
+Time:        19.761 s
+Ran all test suites within paths "src/server/test/approval-revocation.integration.ts".

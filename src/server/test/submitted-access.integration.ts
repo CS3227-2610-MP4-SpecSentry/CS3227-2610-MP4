@@ -23,7 +23,7 @@ describe('Owner/Maintainer submitted history and private draft boundary', () => 
     await db.client.userAccount.createMany({ data: Object.entries(roles).map(([name, role]) => ({ id: `${prefix}-${name}`, username: `${prefix}-${name}`, role, passwordHash })) });
   });
   afterAll(async () => {
-    await db.client.$executeRawUnsafe('TRUNCATE "Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
+    await db.client.$executeRawUnsafe('TRUNCATE "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"');
     await db.client.authSession.deleteMany({ where: { data: { contains: prefix } } });
     await db.client.securityEvent.deleteMany({ where: { actorId: { startsWith: prefix } } });
     await db.client.userAccount.deleteMany({ where: { id: { startsWith: prefix } } }); await app.close();

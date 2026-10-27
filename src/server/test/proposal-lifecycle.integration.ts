@@ -16,7 +16,7 @@ import { ProposalLifecycleService } from '../src/proposals/proposal-lifecycle.se
 import { ProposalsService } from '../src/proposals/proposals.service';
 import { ReviewsService } from '../src/reviews/reviews.service';
 
-const businessTables = '"Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const businessTables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const content: WorkingContent = { title: 'Private synthetic title', summary: 'Frozen summary', problem: 'Synthetic problem', constraints: '',
   expectedBehavior: 'Expected behavior', diffText: '--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n',
   criteria: [{ statement: 'Required result', required: true }], evidence: [{ text: 'Optional text evidence' }] };

@@ -1,0 +1,16 @@
+
+C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\client\src\features\reviewer\ApprovalRevocation.test.tsx
+  24:32  error  '_url' is defined but never used     @typescript-eslint/no-unused-vars
+  24:46  error  '_schema' is defined but never used  @typescript-eslint/no-unused-vars
+  24:64  error  '_body' is defined but never used    @typescript-eslint/no-unused-vars
+  24:81  error  '_method' is defined but never used  @typescript-eslint/no-unused-vars
+  24:99  error  '_key' is defined but never used     @typescript-eslint/no-unused-vars
+
+C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-revocation.integration.ts
+  26:7  error  'owner' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 6 problems (6 errors, 0 warnings)
+
+
+npm notice run specsentry@0.1.0 lint
+npm notice run eslint src workflow/tooling/*.mjs playwright.config.ts

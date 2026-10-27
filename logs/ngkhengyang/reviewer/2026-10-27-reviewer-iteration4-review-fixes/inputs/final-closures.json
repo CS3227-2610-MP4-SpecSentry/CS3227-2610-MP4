@@ -1,0 +1,39 @@
+{
+  "reviewer": "independent-reviewer",
+  "record_id": "rec-5bbcfe79f3b84438",
+  "snapshot_id": "final-application-tightened",
+  "findings": [
+    {
+      "id": "F-001",
+      "evidence": [
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\revalidation.json",
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\security-final.json"
+      ],
+      "reason": "CLOSE: form-scoped Decision combobox locator works in real browser; focused3/default14 passed."
+    },
+    {
+      "id": "F-002",
+      "evidence": [
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\revalidation.json",
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\security-final.json"
+      ],
+      "reason": "CLOSE: noncreator add, isolated COVERAGE/REVISION/HIGH/CRITICAL blockers, empty/no smoke, real contentVersion stale smoke, duplicate version exact409 all asserted. Empty rollback plan rejected by DB CHECK; invalid persisted row is unreachable, so constraint assertion appropriate. Current release18 pass."
+    },
+    {
+      "id": "F-003",
+      "evidence": [
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\revalidation.json",
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\security-final.json"
+      ],
+      "reason": "CLOSE: second-member RELEASE_PUBLISHED activity failure after first member writes/snapshot attempt causes complete publicationState equality across candidate, both members/proposals, snapshots, activities, decisions, invalidations and notices. Trigger/function finally cleanup inspected."
+    },
+    {
+      "id": "F-004",
+      "evidence": [
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\revalidation.json",
+        "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-review-fixes\\reports\\security-final.json"
+      ],
+      "reason": "CLOSE: real attached hostile-text browser, unattached keyboard/focus/history and logout401 protected reason clearing; existing component uncertain-retry original key/body and conflict retention. Focused3/default14 pass."
+    }
+  ]
+}

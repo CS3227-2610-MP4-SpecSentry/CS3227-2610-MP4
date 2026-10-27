@@ -17,7 +17,7 @@ export class ActivityService {
       { timestamp: { gt: new Date(cursor.timestamp!) } }, { timestamp: new Date(cursor.timestamp!), id: { gt: cursor.id } },
     ] } : {}) }, take: REVIEWER_LIMITS.activityPage + 1, orderBy: [{ timestamp: 'asc' }, { id: 'asc' }],
     select: { id: true, actor: { select: { id: true, username: true } }, timestamp: true, action: true, proposalId: true,
-      revisionId: true, assignmentId: true, outcome: true, summary: true, reason: true } });
+      revisionId: true, assignmentId: true, candidateId: true, outcome: true, summary: true, reason: true } });
     const page = rows.slice(0, REVIEWER_LIMITS.activityPage);
     const last = page.at(-1);
     return proposalActivityResponseSchema.parse({ items: page.map((row) => ({ ...row, timestamp: row.timestamp.toISOString() })),

@@ -1,0 +1,18 @@
+{
+  "id": "release",
+  "agent": "release",
+  "role": "implementer",
+  "paths": [
+    "src/server/src/releases/releases.module.ts",
+    "src/server/src/releases/releases.controller.ts",
+    "src/server/src/releases/releases.service.ts",
+    "src/server/src/notifications/notifications.controller.ts",
+    "src/server/src/notifications/notifications.service.ts",
+    "src/server/src/notifications/notifications.module.ts",
+    "src/server/test/release-revocation.integration.ts",
+    "src/server/test/approval-revocation-races.integration.ts"
+  ],
+  "dependencies": [
+    "foundation"
+  ]
+}

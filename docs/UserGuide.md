@@ -1,5 +1,30 @@
 # SpecSentry User Guide
 
+## Revoke an approval before release
+
+The assigned Reviewer can revoke an effective approval from the current submitted
+proposal. Enter a reason and review the impact explanation before submitting.
+The original approval stays in decision history; the revocation and its reason
+appear in activity. Released records show history without a revoke action.
+
+For an unattached approved proposal, revocation enters `CHANGES_REQUESTED` and
+retains its Reviewer. The Contributor must revise and resubmit before another
+decision. For a proposal already in an open release candidate, revocation keeps
+it attached in `IN_RELEASE`, blocks publication and creates a durable notice for
+the responsible Maintainer. Ordinary review edits and Contributor revision stay
+blocked until that Maintainer explicitly removes the item. Reading a notice does
+not restore approval or remove the blocker.
+
+Recoverable errors keep the entered reason. After a conflict, refresh and reconcile
+the displayed state before another submission. An offered uncertain-response retry
+uses the original request identity. Session expiry or lost access clears protected
+page content. General release management and Maintainer notice viewing are currently
+available through the API; a broader Maintainer workspace is outside this increment.
+
+This is the local iteration-4 implementation. Its verification, independent review
+and fix status are recorded in the [iteration log](../logs/ngkhengyang/2026-10-26-reviewer-iteration4.md).
+Deployment and teammate approval remain separate.
+
 ## Patch Risk Assistant
 
 On a current assigned review in IN_REVIEW or CHANGES_REQUESTED, select one to five
@@ -74,8 +99,9 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-The full Contributor editing UI, releases and Contributor/Maintainer AI assistants
-remain pending. Reviewer AI has a bounded implementation with live operation
+The full Contributor editing UI, broader release workspace and Contributor/Maintainer AI assistants
+remain pending. Approval revocation and the supporting release API are described above.
+Reviewer AI has a bounded implementation with live operation
 disabled pending provider verification.
 
 Use **Sign out** to end your session. Sessions expire after 30 minutes idle or

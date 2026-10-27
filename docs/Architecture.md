@@ -1,8 +1,10 @@
 # Architecture
 
-Status: authentication, manual Reviewer/revision cycles and Reviewer AI integration,
-26 October 2026. Independent implementation/security review and fix revalidation
-of the bounded AI increment are complete; live provider verification remains pending.
+Status: authentication, manual Reviewer/revision cycles, bounded Reviewer AI, and
+iteration-4 approval revocation/supporting release API, 27 October 2026.
+The AI increment's independent review is complete; the revocation increment's
+independent findings, fixes and revalidation are recorded separately in its iteration log.
+Live provider verification remains pending.
 The remaining domain behavior is planned under the
 [technical specification](../workflow/specs/TECHNICAL-SPEC.md).
 
@@ -41,8 +43,9 @@ flowchart TB
 
 The diagram is the target design. Health/readiness, authentication, database
 connectivity, manual Reviewer/revision cycles and bounded Reviewer AI are
-implemented. Live AI stays disabled pending OPEN-002; release operations and the
-other role assistants remain planned. See [Authentication](Authentication.md) and
+implemented. Approval revocation and bounded real release operations are added in
+iteration 4; broader Maintainer UI and other role assistants remain planned.
+Live AI stays disabled pending OPEN-002. See [Authentication](Authentication.md) and
 [AI integration](AI-Integration.md).
 
 | Module / directory under server source | Single responsibility |
@@ -108,8 +111,9 @@ Participating module operations must accept the same transaction context, rather
 than independently committing. Publication and revocation serialize on shared
 candidate/approval records. Required activity and notices commit with the command;
 in-process events after commit are insufficient for those guarantees. These
-release publication and approval-revocation interfaces remain planned under the
-[integration contracts](../workflow/specs/INTEGRATION-SPEC.md). Submission and
+release publication and approval-revocation interfaces now implement the bounded
+[integration contracts](../workflow/specs/INTEGRATION-SPEC.md); independent review
+and evidence are in the [iteration-4 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration4.md). Submission and
 resubmission already commit revision state, activity and required notices together.
 
 ## Client, contracts and AI

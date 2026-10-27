@@ -1,0 +1,25 @@
+{
+  "assignment": "ui",
+  "record_id": "rec-dd9d79ed13584a5a",
+  "snapshot_id": "ui-settled-1",
+  "commands": [
+    "verify-2490b4e25dc04765",
+    "verify-e7f212822aee415d",
+    "verify-96d6238f037643e6"
+  ],
+  "changed_paths": [
+    "src/client/src/features/reviewer/ApprovalRevocation.test.tsx",
+    "src/client/src/features/reviewer/ApprovalRevocation.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "workflow/tests/browser/fixtures/reviewer-revocation.ts",
+    "workflow/tests/browser/reviewer-revocation.spec.ts"
+  ],
+  "summary": "Implemented ui owned scope with passing scoped checks; integration deliberately not started",
+  "risks": "Root release registration and administrative CLI constructor wiring, assembled browser/regression/type checks and independent code/security review remain pending; named evidence does not certify full product completion",
+  "next_action": "Preserve settled owned source and report pre-integration dependencies; no integration without further user-directed resumption",
+  "references": [
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md",
+    "logs\\ngkhengyang\\reviewer\\2026-10-27-reviewer-iteration4-implementation\\reports\\integration-plan.md"
+  ],
+  "unavailable_reason": "Exact record-aligned runtime tokens/cache/settings/tool/retry counters unavailable; coordinator-observed elapsed and sampled thread windows retained separately"
+}

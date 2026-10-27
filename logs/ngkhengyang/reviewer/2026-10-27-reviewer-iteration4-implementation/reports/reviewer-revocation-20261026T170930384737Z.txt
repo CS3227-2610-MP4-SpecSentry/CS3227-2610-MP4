@@ -1,0 +1,35 @@
+
+(node:39020) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL src/server/test/approval-revocation.integration.ts (17.677 s)
+  ● PostgreSQL Reviewer approval revocation (REQ-REV-016) › revoke-replay-access: denies replay after assignment or attached candidate scope loss
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.reviewAssignment.update()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\approval-revocation.integration.ts:196:38
+
+      193 await db.client.changeProposal.update({ where: { id: f.proposalId },
+      194   data: { releaseAttachmentRef: null, state: 'CHANGES_REQUESTED' } });
+      195 await revoke(reviewer, f, payload, key).expect(403);
+    → 196 await db.client.reviewAssignment.update(
+    Database error. Code: `23514`. Message: `Current assignment pointer must identify the active same-revision assignment`
+
+      194 |       data: { releaseAttachmentRef: null, state: 'CHANGES_REQUESTED' } });
+      195 |     await revoke(reviewer, f, payload, key).expect(403);
+    > 196 |     await db.client.reviewAssignment.update({ where: { id: f.assignmentId },
+          |     ^
+      197 |       data: { status: 'CLOSED', endReason: 'DROPPED', endedAt: new Date() } });
+      198 |     await db.client.changeProposal.update({ where: { id: f.proposalId }, data: { currentAssignmentId: null } });
+      199 |     await revoke(reviewer, f, payload, key).expect(403);
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/approval-revocation.integration.ts:196:5)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 10 passed, 11 total
+Snapshots:   0 total
+Time:        18.139 s, estimated 20 s
+Ran all test suites within paths "src/server/test/approval-revocation.integration.ts".

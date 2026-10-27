@@ -1,7 +1,8 @@
 import { ConflictException, ForbiddenException, Injectable } from '@nestjs/common';
 import { ManualReviewService } from './manual-review';
+import { ApprovalRevocationService } from './approval-revocation.service';
 import { businessTransaction } from '../identity/business-context';
-import type { CoverageHistoryQuery, CoverageWriteRequest, CreateFindingRequest, FindingAmendmentRequest, FindingTransitionRequest, HumanReviewPageQuery, ReviewDecisionRequest } from '@specsentry/shared';
+import type { CoverageHistoryQuery, CoverageWriteRequest, CreateFindingRequest, FindingAmendmentRequest, FindingTransitionRequest, HumanReviewPageQuery, ReviewDecisionRequest, RevokeApprovalRequest } from '@specsentry/shared';
 import { assignedReviewsResponseSchema, reviewCommandResponseSchema, reviewPoolResponseSchema,
   type AssignedReviewsQuery, type ClaimProposalRequest, type DropProposalRequest, type ReviewPoolQuery } from '@specsentry/shared';
 import { ActivityService } from '../activity/activity.service';
@@ -13,9 +14,13 @@ import { decodeCursor, encodeCursor, nextVersion, type ReviewerActor, type Revie
 @Injectable()
 export class ReviewsService {
   constructor(private readonly database: DatabaseService, private readonly proposals: ProposalsService,
-    private readonly activity: ActivityService) {}
+    private readonly activity: ActivityService, private readonly revocation: ApprovalRevocationService) {}
 
   private get manual() { return new ManualReviewService(this.proposals, this.activity); }
+
+  revoke(actor: ReviewerActor, id: string, body: RevokeApprovalRequest, key: string) {
+    return this.revocation.revoke(actor, id, body, key);
+  }
 
   private async authorized<T>(actor: ReviewerActor, target: string, operation: string, work: (tx: ReviewTransaction) => Promise<T>): Promise<T> {
     return businessTransaction(this.database, actor, "REVIEWER", target, `REVIEW_${operation}`, async (tx) => {

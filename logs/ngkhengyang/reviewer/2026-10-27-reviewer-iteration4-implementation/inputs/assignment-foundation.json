@@ -1,0 +1,32 @@
+{
+  "id": "foundation",
+  "agent": "foundation",
+  "role": "implementer",
+  "paths": [
+    "src/shared/src/contracts/revocation.ts",
+    "src/shared/src/contracts/release.ts",
+    "src/shared/src/contracts/reviewer.ts",
+    "src/shared/src/contracts/revision-cycle.ts",
+    "src/shared/src/index.ts",
+    "src/server/test/reviewer-seed.integration.ts",
+    "src/server/test/demo-seed.integration.ts",
+    "src/server/test/manual-review.integration.ts",
+    "src/server/test/proposal-lifecycle.integration.ts",
+    "src/server/test/notifications.integration.ts",
+    "src/server/test/reviews.integration.ts",
+    "src/server/test/submitted-access.integration.ts",
+    "src/server/test/patch-risk.integration.ts",
+    "src/server/test/ai-fixtures.ts",
+    "src/server/src/reviews/seed-reviewer.ts",
+    "workflow/tests/browser/fixtures/reviewer-intake.ts",
+    "workflow/tests/browser/fixtures/reviewer-revision-cycle.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "src/server/prisma/schema.prisma",
+    "src/server/prisma/migrations/20261026160000_approval_revocation",
+    "src/server/src/releases/release-locks.ts",
+    "src/server/src/activity/activity.service.ts",
+    "src/server/test/approval-revocation-contracts.spec.ts",
+    "src/server/test/release-foundation.integration.ts"
+  ],
+  "dependencies": []
+}

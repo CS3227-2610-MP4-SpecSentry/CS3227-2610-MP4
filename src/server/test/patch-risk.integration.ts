@@ -19,7 +19,7 @@ import { ProposalsService } from '../src/proposals/proposals.service';
 import { persistedTestActor } from './business-fixtures';
 import { aiTestOptions } from './ai-fixtures';
 
-const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "AiQuotaCoordinator", "Notification", "ApprovalInvalidation", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "AiQuotaCoordinator", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const content: WorkingContent = { title: 'Synthetic patch', summary: 'Entire submitted summary', problem: 'Entire submitted problem', constraints: 'Entire constraints',
   expectedBehavior: 'Entire expected behavior', diffText: '--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n',
   criteria: Array.from({ length: 5 }, (_, i) => ({ statement: `Criterion ${i}`, required: true })), evidence: [{ text: 'Entire evidence one' }, { text: 'Entire evidence two' }] };
@@ -92,16 +92,19 @@ describe('PostgreSQL Patch Risk integration', () => {
   }
   async function snapshot(id: string) {
     return { root: await database.client.changeProposal.findUnique({ where: { id } }),
-      revisions: await database.client.proposalRevision.findMany({ where: { proposalId: id }, orderBy: { number: 'asc' }, include: { criteria: true, evidence: true } }),
+      revisions: await database.client.proposalRevision.findMany({ where: { proposalId: id }, orderBy: [{ number: 'asc' }, { id: 'asc' }],
+        include: { criteria: { orderBy: { id: 'asc' } }, evidence: { orderBy: { id: 'asc' } } } }),
       working: await database.client.workingRevision.findUnique({ where: { proposalId: id } }),
-      assignments: await database.client.reviewAssignment.findMany({ where: { proposalId: id }, orderBy: { assignedAt: 'asc' } }),
-      findings: await database.client.reviewFinding.findMany({ where: { proposalId: id }, include: { events: true } }),
-      coverage: await database.client.coverageAssessment.findMany({ where: { proposalId: id }, include: { evidence: true } }),
-      decisions: await database.client.reviewDecision.findMany({ where: { proposalId: id } }),
-      invalidations: await database.client.approvalInvalidation.findMany({ where: { proposalId: id } }),
+      assignments: await database.client.reviewAssignment.findMany({ where: { proposalId: id }, orderBy: [{ assignedAt: 'asc' }, { id: 'asc' }] }),
+      findings: await database.client.reviewFinding.findMany({ where: { proposalId: id }, orderBy: { id: 'asc' },
+        include: { events: { orderBy: { id: 'asc' } } } }),
+      coverage: await database.client.coverageAssessment.findMany({ where: { proposalId: id }, orderBy: { id: 'asc' },
+        include: { evidence: { orderBy: { evidenceId: 'asc' } } } }),
+      decisions: await database.client.reviewDecision.findMany({ where: { proposalId: id }, orderBy: { id: 'asc' } }),
+      invalidations: await database.client.approvalInvalidation.findMany({ where: { proposalId: id }, orderBy: { id: 'asc' } }),
       activity: await database.client.proposalActivity.findMany({ where: { proposalId: id }, orderBy: [{ timestamp: 'asc' }, { id: 'asc' }] }),
-      notices: await database.client.notification.findMany({ where: { proposalId: id } }),
-      keys: await database.client.reviewIdempotency.findMany({ where: { proposalId: id } }) };
+      notices: await database.client.notification.findMany({ where: { proposalId: id }, orderBy: { id: 'asc' } }),
+      keys: await database.client.reviewIdempotency.findMany({ where: { proposalId: id }, orderBy: { id: 'asc' } }) };
   }
   async function cover(c: Case) {
     for (const criterion of c.criteria) c.command = (await a.agent.put(`/api/proposals/${c.id}/coverage/${criterion}`).set('x-csrf-token', a.token)
