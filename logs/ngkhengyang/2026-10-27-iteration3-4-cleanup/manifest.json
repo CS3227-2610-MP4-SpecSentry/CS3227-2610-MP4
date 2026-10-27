@@ -1,0 +1,1380 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T06:35:36.031640+00:00",
+  "status": "completed",
+  "scope": [
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3",
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4",
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation",
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes"
+  ],
+  "baseline_head": "81019188d443fcb377f6b1237cf802871a437a36",
+  "policy": "Prune only exact retained equivalents with no incoming repository references. Keep authoritative logs, state, briefs, reviews, failures, outputs, handoffs, snapshots, resource data and operational scripts. No archive conversion.",
+  "removed": [
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/01-security.json",
+      "sha256": "28315692956e5b48f25069eeff8e2a5229d6ffc08688f7359c1dfb07b76235ce",
+      "bytes": 2319,
+      "reason": "Consumed handoff input; exact input hash, all rendered sections, references and provenance retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/handoffs/01-main-to-security.md",
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/handoffs/01-main-to-security"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/02-security-result.json",
+      "sha256": "9219313b4f4a87d44db3f95ef7643b8e7fe1a993ef16a4a5a3334a347c10ae34",
+      "bytes": 3456,
+      "reason": "Consumed handoff input; exact input hash, all rendered sections, references and provenance retained",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/handoffs/02-security-to-main.md",
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/handoffs/02-security-to-main"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/assignment-main-records.json",
+      "sha256": "6d51055af968f72f8eeced097bedd2183a7222012730e3f9d4517787c420c512",
+      "bytes": 331,
+      "reason": "Consumed assignments input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/assignments/main-records"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/assignment-reviewer-contract-wiring.json",
+      "sha256": "45aa1c18a229be1e6caab38be430abcce085b3e8388f967795b30766eb0b6e39",
+      "bytes": 442,
+      "reason": "Consumed assignments input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/assignments/reviewer-contract-wiring"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/check-ai-boundary-batch.json",
+      "sha256": "7a00072b862bfaa816f24a35ff46e3d5777dd0f15b32946071604f5b909a98d3",
+      "bytes": 947,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/verification_checks/ai-boundary-batch"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/check-ai-boundary-scope.json",
+      "sha256": "3e829a542a49d41f05492e1c574414b3498dba4bed2ded8d5d24bf2ee01f01bc",
+      "bytes": 947,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/verification_checks/ai-boundary-scope"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/check-ai-budget-retry.json",
+      "sha256": "3979f5e2ddd8207b7ac6a6a269d590016ef8fffa96557174e0ddb450130c8387",
+      "bytes": 959,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/verification_checks/ai-budget-retry"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/check-ai-live-disabled.json",
+      "sha256": "91fcf5473bfb85f238b8121de6c710247abf113b367b187e82f90174af92991d",
+      "bytes": 961,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/verification_checks/ai-live-disabled"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/check-ai-output-rejection.json",
+      "sha256": "bb6abd43435cb45808a7277479282c39872ac9c4cb6577c24a42e0fd9992bd0e",
+      "bytes": 967,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/verification_checks/ai-output-rejection"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/check-ai-secret-injection.json",
+      "sha256": "b54b87767f149bed6ce6c8599010c56e969cfea378ce409785622c2aadb07a57",
+      "bytes": 967,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/verification_checks/ai-secret-injection"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/assignment-main-guides.json",
+      "sha256": "98064228696d888bbdb5ae655f312840e64f1cabb91879c86c2e6becd9ecd7ff",
+      "bytes": 210,
+      "reason": "Consumed assignments input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/assignments/main-existing-guides"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/assignment-main-integration.json",
+      "sha256": "49f6338692c6e801ff1dbc42aefc5901f555c1100f3a9af5516f7238881b65ae",
+      "bytes": 466,
+      "reason": "Consumed assignments input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/assignments/main-integration"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-access-recheck.json",
+      "sha256": "d90866fc0f052579cfff9f795cc2a395a7513d8c981cd5a1ab3b9a5df0f9894e",
+      "bytes": 1401,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-access-recheck"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-boundary-batch.json",
+      "sha256": "f2a2f4279791d4b9290223eee13a850dd79aa2ed0d2b9f007f14a27a7d945f3c",
+      "bytes": 945,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-boundary-batch"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-boundary-scope.json",
+      "sha256": "d324150a9bc4145af291ee4ad65bc7afadc336987a83e79a2dd17a745e9d75bd",
+      "bytes": 945,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-boundary-scope"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-budget-retry.json",
+      "sha256": "45e39568586e50a22dc505160f162101755b0c355e1750885fae3543a05e3a1e",
+      "bytes": 957,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-budget-retry"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-changes-requested.json",
+      "sha256": "dc73b4066be35d2814cf2272b9a181d14f35d269d101d7fba9501eae77a87455",
+      "bytes": 1407,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-changes-requested"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-context-isolation.json",
+      "sha256": "32a35354ca0754dc2a973253c9be76aab6de06cbc022d76f46acd1974a9ff691",
+      "bytes": 1407,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-context-isolation"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-failed-call-isolation.json",
+      "sha256": "fdd0a59e3db86e01b28a03575ecb2db301e23d5846839cb088ace708707b55d4",
+      "bytes": 1415,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-failed-call-isolation"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-final-slot-global-window.json",
+      "sha256": "3b7d87a70e5e71fdc80d44e0148bbb15dd420b67c31ab7ce131deee3bf794bb0",
+      "bytes": 1421,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-final-slot-global-window"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-final-slot-queue.json",
+      "sha256": "b95cb369c0c0bf3ebeca2b7ee73fe51a03e3b71982f183133665a00e15fa174b",
+      "bytes": 1405,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-final-slot-queue"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-final-slot-user-day.json",
+      "sha256": "c6c3b7eb45d6e92c05b2780e90dab48cf4e5fa653830870d7144a0b003e142f5",
+      "bytes": 1411,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-final-slot-user-day"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-final-slot-user-window.json",
+      "sha256": "37a30cbb9597842b119fe6119af95d3f74bc7b460180f543578e1d8f6f946938",
+      "bytes": 1417,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-final-slot-user-window"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-generation-lineage.json",
+      "sha256": "d4fe862d21219943a63dd09575d5ebb09bc975626c0621a5826b06d26ae234b3",
+      "bytes": 1409,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-generation-lineage"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-http-access.json",
+      "sha256": "c5960827165e6c8d7a32ce51d1cf43a886c5cce00c3db5f9d4f05ef63707e1d4",
+      "bytes": 1395,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-http-access"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-human-save.json",
+      "sha256": "5d8b33c28b1884172ad7276e551de4660a47b7c8eeffa922b65a27127590b46d",
+      "bytes": 1344,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-human-save"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-lifecycle.json",
+      "sha256": "d5719743c6485462bfd44c17d0bd04ce6a05b60aa7cb34a7d4fb30c3d79fe8a3",
+      "bytes": 1391,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-lifecycle"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-live-disabled.json",
+      "sha256": "a6953402fa74e889530119a24132fcd5ce391ddc66f8a123e32a90d84f1358de",
+      "bytes": 959,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-live-disabled"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-output-rejection.json",
+      "sha256": "f738ccc985840d149d023adbf282e946ed6dd0f6edd802f37279e5669127e47a",
+      "bytes": 965,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-output-rejection"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-private-metadata.json",
+      "sha256": "6f98587647a13b6d43f7ea15dd61c1d78d08295f2e3cbdf5577c2535c494759b",
+      "bytes": 1405,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-private-metadata"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-approval-completion-first.json",
+      "sha256": "4f91a3d8f2978c78bf29decd44d1de8e6aff8ee9307ee6ee11c79ca2ffc9de45",
+      "bytes": 1441,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-approval-completion-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-approval-event-first.json",
+      "sha256": "c64d5bdd1f56c96f589253930cd10fbfdc06a03b93d7b4d2ed4d0e1abe82ef51",
+      "bytes": 1431,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-approval-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-disablement-completion-first.json",
+      "sha256": "b30f987b3f24c246b7df45f62a13d3ac748fb9c1f6e09c18eb4479c6b70b8961",
+      "bytes": 1447,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-disablement-completion-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-disablement-event-first.json",
+      "sha256": "5630699742f1f6362474b24aa537426184e6abe464c828b68ded382d603dbff3",
+      "bytes": 1437,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-disablement-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-drop-completion-first.json",
+      "sha256": "75bf69606c0e33d81ea453b539533c33c1168af62e2b9affa290636c172abdfe",
+      "bytes": 1433,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-drop-completion-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-drop-event-first.json",
+      "sha256": "ff2fd3f513823c22cd691d7e085cc03eae58d82b8a0ead46c324dc14ed62c674",
+      "bytes": 1423,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-drop-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-drop-reclaim-completion-first.json",
+      "sha256": "054aab683818959c0ada014eb0b89786fa849650d801cb7eb8ae793d482a70c4",
+      "bytes": 1449,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-drop-reclaim-completion-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-drop-reclaim-event-first.json",
+      "sha256": "3142d3105620bde4c371459ec7b5bd14cf116f6cd44affa06dc9344b3c0dfead",
+      "bytes": 1439,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-drop-reclaim-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-logout-completion-first.json",
+      "sha256": "8960b6ab35271b133c29f55e8574dda1fad7b2430573013d387f3897fdf1f1d0",
+      "bytes": 1437,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-logout-completion-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-logout-event-first.json",
+      "sha256": "cf0eccb968d560cc6f835e05f1834ccf666f2d8498ce93424b360fe545eccd36",
+      "bytes": 1427,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-logout-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-new-revision-completion-first.json",
+      "sha256": "7d5211854d0e2120af88bd7ff178f72e88705368dffa5f07ac9c1ecc3cd1e76f",
+      "bytes": 1449,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-new-revision-completion-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-new-revision-event-first.json",
+      "sha256": "74d6c0240ddd229d167779bc1c56a44a05b45f9cd2ac2016a63b8477f234a3de",
+      "bytes": 1439,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-new-revision-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-withdrawal-completion-first.json",
+      "sha256": "2e7ec67ef71ffd80ef6354ccdeb061e902e4770852f6d1f16b184ce5361686d3",
+      "bytes": 1445,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-withdrawal-completion-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-response-withdrawal-event-first.json",
+      "sha256": "7c3436c6aab4a732a74654171421a0505d78a4b7312944d7b3383d5702056c2b",
+      "bytes": 1435,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-response-withdrawal-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-save-approval-event-first.json",
+      "sha256": "12ae0ddd0d0096d1319e39d15f5ae0f9076548f50fa7b867dc2332fbbd70b971",
+      "bytes": 1423,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-save-approval-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-save-approval-save-first.json",
+      "sha256": "d9ab17848034421ecc70adc1bb83ce850b75ff6a1d1cb781b842b0a896109fec",
+      "bytes": 1421,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-save-approval-save-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-save-drop-reclaim-event-first.json",
+      "sha256": "197fe5f7c63b2e5696a106aef3aaba30443b5ed5aeed53a440958b79f4e3f81f",
+      "bytes": 1431,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-save-drop-reclaim-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-save-drop-reclaim-save-first.json",
+      "sha256": "defa4be4c9487a2e11c9457876f920429b89eb4218bacd0507dd29af212f883d",
+      "bytes": 1429,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-save-drop-reclaim-save-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-save-new-revision-event-first.json",
+      "sha256": "9711344cc1fb582aded695449ca8ba62273d91cc6de55ba2bcefc9e5454b0edb",
+      "bytes": 1431,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-save-new-revision-event-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-save-new-revision-save-first.json",
+      "sha256": "96cd56b80cf0f9c1fa2c47036ad9886df2419eb39ef066c15e0831841cbcd92b",
+      "bytes": 1429,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-save-new-revision-save-first"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-save-rollback.json",
+      "sha256": "63028ffa017d0c15a8a790f6ecbeffc57a91e7e76041844e25f91c49401da01e",
+      "bytes": 1399,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-save-rollback"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-secret-injection.json",
+      "sha256": "5459c116d4e63270246e8f24fea495317972e2d5bbc1a681958128ce10ca068e",
+      "bytes": 965,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-secret-injection"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-selected-batch.json",
+      "sha256": "0ada2c755dbcdeae0aa46232052cabcd4bc3b8685e442679bfa2e3474c9a282f",
+      "bytes": 1401,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-selected-batch"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-session-final-wait.json",
+      "sha256": "2334a3e480a2740a7569e7d8c9cb77dad8a60bc951362e82767407922a7cb851",
+      "bytes": 1409,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-session-final-wait"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-size-fallback.json",
+      "sha256": "51a0f528d9719af993773b66ab6a424cfd7d603346aac4d0c40948a5d073fb59",
+      "bytes": 1399,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-size-fallback"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-transient-page.json",
+      "sha256": "5eb2b18333f98e473defea2bc9982a88df8ce7386c8c73c0aa975efbe98c71e7",
+      "bytes": 1352,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-transient-page"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-ui-fallback.json",
+      "sha256": "8c65a634f2d5b663d82ccbfa7edcd241ad46305487c0799fd40dfa3a956cace6",
+      "bytes": 1346,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-ui-fallback"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-ui-selection-stale.json",
+      "sha256": "a67dd018d6eb99978d25be69681c51102dfb4f1a3a183d5e182f8b6c91604ccd",
+      "bytes": 1360,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-ui-selection-stale"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-ai-whole-deadline.json",
+      "sha256": "55fe94cfce8013fa2bd4031373c234c4a10c5bb8f3d920f79e805ca06d691f08",
+      "bytes": 1401,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/ai-whole-deadline"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-client-all.json",
+      "sha256": "3a8ca10c5d5b39ef0137a603dd76533948b6065efa1ac162be2b94dc230deecc",
+      "bytes": 549,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/client-all"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-foundation-cases-v2.json",
+      "sha256": "4069549c5e0df2580d2ceb0fd506745d08bd1f7675f10883f56414dff0a27f15",
+      "bytes": 906,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/foundation-cases-v2"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-foundation-cases.json",
+      "sha256": "5f4fc4850afaa869b5582117c6c4ae4492230ce4e7e40cb20576061a68a82507",
+      "bytes": 864,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/foundation-cases"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-integration-lint-captured.json",
+      "sha256": "30bd48b4be997c882f3b59c1275b1137313b926587fce4e6041cab5e2822a69d",
+      "bytes": 618,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/integration-lint-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-integration-static-captured.json",
+      "sha256": "3942a6360ff7372e165b92805acca7740d9c7f8541806aba140dfda11cf5fea5",
+      "bytes": 631,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/integration-static-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-integration-unit-captured.json",
+      "sha256": "8da5cf734f79b2274c12734d694abf100e3419af174da7704cf47c04c14e21e9",
+      "bytes": 660,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/integration-unit-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-named-foundation-captured.json",
+      "sha256": "35639437972cad54815c78930a03e594d6eadd07cc00895771e9b6668c5131f2",
+      "bytes": 969,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/named-foundation"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-named-gateway-captured.json",
+      "sha256": "da8ed9020cce76e24a919cb804f4e65bb66b1fa1e320f876e2adf05cfc6ff254",
+      "bytes": 1017,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/named-gateway"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-named-reviewer-integration-captured.json",
+      "sha256": "21db67c7d715ed4e0fd5d999b809c3aa8bd69833fed67e8169187caead549914",
+      "bytes": 1429,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/named-reviewer-integration"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-named-ui-captured.json",
+      "sha256": "78514605b81b607cb1ff0a5d447c8de943614ced0c97969101e8797359f14b76",
+      "bytes": 1415,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/named-ui"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-named-ui-v2-captured.json",
+      "sha256": "62b83b6de299e65460f6a8fde1e44a813131255cca7cf957893e47eae908e152",
+      "bytes": 1421,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/named-ui-v2"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/check-patch-risk-postgres.json",
+      "sha256": "ef07e789d77be6c45b810f8a5bb298a5196da5ec83dcf59b012cc398cc57e519",
+      "bytes": 816,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/verification_checks/patch-risk-postgres"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/matrix-executable-integrated.json",
+      "sha256": "cfd587e799a56ca2149bab62ec0597de7127651637e458f0f93bec369b3e5c41",
+      "bytes": 39314,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/acceptance_matrices/1"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/matrix-ui-grep.json",
+      "sha256": "4e74ecee91b2e5050563739c60a18c3aba51bb0e6ed98b3c9e31c2ae75b03e9e",
+      "bytes": 39326,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/acceptance_matrices/2"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/inputs/acceptance-security-v3.json",
+      "sha256": "4996eeef53889b7f5231f2dbde6cd0ea5652558172de4d3a087c4fcc0913f38f",
+      "bytes": 28916,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json#/acceptance_matrices/1"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-foundation-contracts-all.json",
+      "sha256": "3b7c167dac686daf7161d91491f37c704d66abc83c5270a865d5ce1df51e4be5",
+      "bytes": 2244,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/foundation-contracts-all"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-foundation-contracts-ready.json",
+      "sha256": "a0206e3a564840a4ca28a0c0245844bda0cab08c80789a84550275afade17c29",
+      "bytes": 2093,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/foundation-contracts-ready"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-foundation-data-captured.json",
+      "sha256": "781f5a4ca9c0cce1b5e5b0db1e19379addf84c1148fb0b92e21ca988e7a35cbd",
+      "bytes": 2482,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/foundation-data-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-foundation-data-ready.json",
+      "sha256": "6130164f1b15a2fe95b8c1aaaac8a47465aab8327315d5349cb7641115814d1b",
+      "bytes": 2238,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/foundation-data-ready"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-foundation-generate.json",
+      "sha256": "b2465b88e4945daaf4934537cd8ece63761c1ba2cacfde84960e54c776f3596f",
+      "bytes": 1838,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/foundation-generate"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-foundation-shared-build.json",
+      "sha256": "663f63f3d26fa8ec1fa4c334a00608df49c6b657b9f76e4192d2ec9c78a91644",
+      "bytes": 1831,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/foundation-shared-build"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-browser-default.json",
+      "sha256": "a91e1701b1d0b1057d8a46cddfbd069e23cb4d7e121903e9f68a393cb7895c2b",
+      "bytes": 7278,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-browser-default"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-browser-regressions.json",
+      "sha256": "07c4c44c965a561e2eb15660ba2d7c1e59ea7a48cc6585b449e31329fd63b29f",
+      "bytes": 7563,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-browser-regressions"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-build.json",
+      "sha256": "050200a8c4631c10c812680b96711b6588a10df1fc4020ed4b0ad471bfac7e82",
+      "bytes": 7013,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-build"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-lint.json",
+      "sha256": "dd0fe9d73619bad682537297e0b5bf42eb9c4b48025ff187b7ca03fbf1332ea8",
+      "bytes": 7011,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-lint"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-patch-risk-order.json",
+      "sha256": "6810c67d0ade0f7535e686234197882083b780cf6015b481162de20b946c9010",
+      "bytes": 2477,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-patch-risk-order"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-postgres.json",
+      "sha256": "a294b09ce6181bc788d2454c8c8a81f5647160849ac6e6aa3369bebbcefe1f72",
+      "bytes": 7205,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-postgres"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-revocation-browser.json",
+      "sha256": "2b2520425a6c32653e600fe6043a8bb52a99212aa650888c1512b5db8461f32b",
+      "bytes": 7340,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-revocation-browser"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-types.json",
+      "sha256": "0e20f874215a5fe78a6584fce5b01b67a5cf15443f502ab15fbc49abb24fdb39",
+      "bytes": 7018,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-types"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-integration-units.json",
+      "sha256": "b61e7695f7f81879c78546ab5ce1302776b9a233ee80dc73d48aa8d5f7528566",
+      "bytes": 6999,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/integration-units"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-release-normal-all.json",
+      "sha256": "a5e19c071bae6a7c6a6e78d7f9dc324e2befe2fc348dc3d0529bed2ff6930a8e",
+      "bytes": 1425,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/release-normal-all"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-release-races-all.json",
+      "sha256": "5538de1f882adc486a061823ead76668509090fc3c3f9f8d73db3d5025963008",
+      "bytes": 1436,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/release-races-all"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-release-revocation-captured.json",
+      "sha256": "9ddab6893d8135554b64b34d0e2e5af52bd452167f4d4614d24fa05b5fce5340",
+      "bytes": 1625,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/release-revocation-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-reviewer-revocation-captured.json",
+      "sha256": "21e7d73058c3e65da32ce1ea79fd2ecc84e6b839bc9a66a5dfeed3bd14a41660",
+      "bytes": 1656,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/reviewer-revocation-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-revocation-races-captured.json",
+      "sha256": "76f152a3635fd92f2c3d57c5eeec3662835fedd95ba7a5adde0bcd04321f5cef",
+      "bytes": 1872,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/revocation-races-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-security-controls-captured.json",
+      "sha256": "1bac8ab20558daad7db1cd52f30a34e8224cdfd6d17bd7549b6ed3b8c71c2981",
+      "bytes": 1528,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/security-controls-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-security-races-captured.json",
+      "sha256": "350552a8ebe03d8b8c6946648fd59a08080cb43fdd70da5718c5fc8ff260ad5b",
+      "bytes": 1579,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/security-races-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-server-implementation-types.json",
+      "sha256": "742f2a4cf7a8e1dafc128f20e7cd8ed8521336c5166e4e354d222c2be94a1cc1",
+      "bytes": 975,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/server-implementation-types"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-ui-browser-syntax.json",
+      "sha256": "d3ec6ccb278f22de4e617e54d1bd22d2d851dc364bbfd920a4e3dbbe0e96f499",
+      "bytes": 1536,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/ui-browser-syntax"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-ui-client-types.json",
+      "sha256": "21bd09a65ddb8caa0e823cdd428f73ae87bc227ea2adb544c56d2c0c766a9cf1",
+      "bytes": 1047,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/ui-client-types"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/check-ui-reviewer-components.json",
+      "sha256": "8577d69d49824ac347570e127e65248b474dbe6ec7953ab709f7e40ade960343",
+      "bytes": 1073,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/verification_checks/ui-reviewer-components"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/matrix-feature-execution.json",
+      "sha256": "088d2baafaec5db9f9e5de7bcaf6149eede4552b9671b00c146f65220d40309a",
+      "bytes": 29655,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/acceptance_matrices/4"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/matrix-foundation-diagnostics.json",
+      "sha256": "cb96be24f2deb094bbbff069b577cffe368ff9c81a7e3a1a17ff1609ea8dd2dd",
+      "bytes": 29292,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/acceptance_matrices/2"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/matrix-foundation-execution.json",
+      "sha256": "cd0be5ae02f760810ad83b775f158ab02fb4e23123a8322d9ada1a33bc452119",
+      "bytes": 29286,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/acceptance_matrices/1"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/assignment-fixer.json",
+      "sha256": "18b67e3228f4ac726428c32c4cc1f6e5c02923054db78e8ed8c382120eeb0465",
+      "bytes": 2550,
+      "reason": "Consumed assignments input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/assignments/fixer"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-foundation-contracts-all.json",
+      "sha256": "3b7c167dac686daf7161d91491f37c704d66abc83c5270a865d5ce1df51e4be5",
+      "bytes": 2244,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/foundation-contracts-all"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-foundation-contracts-ready.json",
+      "sha256": "a0206e3a564840a4ca28a0c0245844bda0cab08c80789a84550275afade17c29",
+      "bytes": 2093,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/foundation-contracts-ready"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-foundation-data-captured.json",
+      "sha256": "781f5a4ca9c0cce1b5e5b0db1e19379addf84c1148fb0b92e21ca988e7a35cbd",
+      "bytes": 2482,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/foundation-data-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-foundation-data-ready.json",
+      "sha256": "6130164f1b15a2fe95b8c1aaaac8a47465aab8327315d5349cb7641115814d1b",
+      "bytes": 2238,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/foundation-data-ready"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-foundation-generate.json",
+      "sha256": "b2465b88e4945daaf4934537cd8ece63761c1ba2cacfde84960e54c776f3596f",
+      "bytes": 1838,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/foundation-generate"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-foundation-shared-build.json",
+      "sha256": "663f63f3d26fa8ec1fa4c334a00608df49c6b657b9f76e4192d2ec9c78a91644",
+      "bytes": 1831,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/foundation-shared-build"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-browser-default.json",
+      "sha256": "a91e1701b1d0b1057d8a46cddfbd069e23cb4d7e121903e9f68a393cb7895c2b",
+      "bytes": 7278,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-browser-default"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-browser-regressions.json",
+      "sha256": "07c4c44c965a561e2eb15660ba2d7c1e59ea7a48cc6585b449e31329fd63b29f",
+      "bytes": 7563,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-browser-regressions"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-build.json",
+      "sha256": "050200a8c4631c10c812680b96711b6588a10df1fc4020ed4b0ad471bfac7e82",
+      "bytes": 7013,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-build"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-lint.json",
+      "sha256": "dd0fe9d73619bad682537297e0b5bf42eb9c4b48025ff187b7ca03fbf1332ea8",
+      "bytes": 7011,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-lint"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-patch-risk-order.json",
+      "sha256": "6810c67d0ade0f7535e686234197882083b780cf6015b481162de20b946c9010",
+      "bytes": 2477,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-patch-risk-order"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-postgres.json",
+      "sha256": "a294b09ce6181bc788d2454c8c8a81f5647160849ac6e6aa3369bebbcefe1f72",
+      "bytes": 7205,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-postgres"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-revocation-browser.json",
+      "sha256": "2b2520425a6c32653e600fe6043a8bb52a99212aa650888c1512b5db8461f32b",
+      "bytes": 7340,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-revocation-browser"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-types.json",
+      "sha256": "0e20f874215a5fe78a6584fce5b01b67a5cf15443f502ab15fbc49abb24fdb39",
+      "bytes": 7018,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-types"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-integration-units.json",
+      "sha256": "b61e7695f7f81879c78546ab5ce1302776b9a233ee80dc73d48aa8d5f7528566",
+      "bytes": 6999,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/integration-units"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-release-normal-all.json",
+      "sha256": "a5e19c071bae6a7c6a6e78d7f9dc324e2befe2fc348dc3d0529bed2ff6930a8e",
+      "bytes": 1425,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/release-normal-all"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-release-races-all.json",
+      "sha256": "5538de1f882adc486a061823ead76668509090fc3c3f9f8d73db3d5025963008",
+      "bytes": 1436,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/release-races-all"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-release-revocation-captured.json",
+      "sha256": "9ddab6893d8135554b64b34d0e2e5af52bd452167f4d4614d24fa05b5fce5340",
+      "bytes": 1625,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/release-revocation-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-browser-default-native.json",
+      "sha256": "3e70268119208d8ab27598825242ff485d6a13e657e33a3df4f82fee1358fa5c",
+      "bytes": 5367,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-browser-default-native"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-browser-default.json",
+      "sha256": "3f75bd88d9911bc5405e1d5db6980fdf1d63b27e94a3e7b0a7f37a1f0559e04c",
+      "bytes": 5426,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-browser-default"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-browser-revoke.json",
+      "sha256": "afde839d9bd63051f195c42170918f5eeeef06f6ee17a17dfa0dc3d21b5de29d",
+      "bytes": 5379,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-browser-revoke"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-build.json",
+      "sha256": "274e7ef867c262dc3ac8d73b96c5c6656f5edbc6fceb5b7afd6dc46b180db8dd",
+      "bytes": 5015,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-build"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-lint.json",
+      "sha256": "702ab7f18db7c9d94328c425f8efd9205edfed8c52884e5ca6040e1ef476f2a7",
+      "bytes": 7006,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-lint"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-postgres.json",
+      "sha256": "43f1c46fe968de87a72f9baa194beb9de5fe3f1c794d81ea86aae35b450ba9f0",
+      "bytes": 6060,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-postgres"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-release-assertions.json",
+      "sha256": "bdaac6776cf0b68b90711206bc7415ea9f04e498e7b9476cc3d2230d03b5a4ed",
+      "bytes": 4779,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-release-assertions"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-types.json",
+      "sha256": "c9945e00d4953950862cc091a4d44433559725e21704cc18b64da5abe1eacd28",
+      "bytes": 6862,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-types"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-review-units.json",
+      "sha256": "b0cee543c3ae914cf4fda065f1c4c973468f75f4e3f321f96f7b28de1e93feb7",
+      "bytes": 6843,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/review-units"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-reviewer-revocation-captured.json",
+      "sha256": "21e7d73058c3e65da32ce1ea79fd2ecc84e6b839bc9a66a5dfeed3bd14a41660",
+      "bytes": 1656,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/reviewer-revocation-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-revocation-races-captured.json",
+      "sha256": "76f152a3635fd92f2c3d57c5eeec3662835fedd95ba7a5adde0bcd04321f5cef",
+      "bytes": 1872,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/revocation-races-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-security-controls-captured.json",
+      "sha256": "1bac8ab20558daad7db1cd52f30a34e8224cdfd6d17bd7549b6ed3b8c71c2981",
+      "bytes": 1528,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/security-controls-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-security-races-captured.json",
+      "sha256": "350552a8ebe03d8b8c6946648fd59a08080cb43fdd70da5718c5fc8ff260ad5b",
+      "bytes": 1579,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/security-races-captured"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-server-implementation-types.json",
+      "sha256": "742f2a4cf7a8e1dafc128f20e7cd8ed8521336c5166e4e354d222c2be94a1cc1",
+      "bytes": 975,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/server-implementation-types"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-ui-browser-syntax.json",
+      "sha256": "d3ec6ccb278f22de4e617e54d1bd22d2d851dc364bbfd920a4e3dbbe0e96f499",
+      "bytes": 1536,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/ui-browser-syntax"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-ui-client-types.json",
+      "sha256": "21bd09a65ddb8caa0e823cdd428f73ae87bc227ea2adb544c56d2c0c766a9cf1",
+      "bytes": 1047,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/ui-client-types"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/check-ui-reviewer-components.json",
+      "sha256": "8577d69d49824ac347570e127e65248b474dbe6ec7953ab709f7e40ade960343",
+      "bytes": 1073,
+      "reason": "Consumed verification_checks input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/verification_checks/ui-reviewer-components"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/matrix-final-executed-checks.json",
+      "sha256": "6ece62fcbbc4e8f46eb0116847c4609fd31a39725192621b07411724a59b50cc",
+      "bytes": 29189,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/acceptance_matrices/2"
+      ]
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/matrix-inherited-49.json",
+      "sha256": "2799f3475ba71a205aa48a6404de5b9ec09877ef2933c9a27308992a93d53194",
+      "bytes": 29305,
+      "reason": "Consumed acceptance_matrices input; every supplied field retained exactly in canonical state",
+      "retained": [
+        "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/acceptance_matrices/0"
+      ]
+    }
+  ],
+  "kept_input_reasons": {
+    "incoming reference": 69,
+    "no exact retained equivalent": 127,
+    "historical renderer differs": 34,
+    "separate test and diagnostic output captures retained": 5
+  },
+  "validation": {
+    "artifact_hashes_before": {
+      "snapshots": 261,
+      "handoffs": 61,
+      "captured_streams": 2
+    },
+    "protected_sha256": {
+      "logs/ngkhengyang/2026-10-26-reviewer-iteration3.md": "17270071c4744f5e6d9e845d6193c01314717e251de17a88628967ed4ef5db1f",
+      "logs/ngkhengyang/2026-10-26-reviewer-iteration4.md": "63195b2688fb98c41a9010da96809361b8f7f4ba6be72eef3c1a48ea8e591292",
+      "logs/ngkhengyang/2026-10-26-workflow-efficiency.md": "3f2eb94db641e673a39fe6a025caba08e5b30b28dbc67d6bb15c619a0b36d030",
+      "workflow/TRACEABILITY.md": "e1d88f1e4a013d20903cbdb4764ed864701f112466da7d0f3db39e1cf9204051",
+      "docs/UserGuide.md": "cde7c6838ce44f425e7d97e67bbd9382b578f85d8036c6ac1ccdcab30dbc7442",
+      "docs/DeveloperGuide.md": "c09aeef551bec61b87c52cca3fbd428d12cb332a338d62c10a0f99a38004c5e2"
+    },
+    "markdown_links_checked": 556,
+    "preexisting_unresolved_markdown_links": 0,
+    "retained_files_unchanged": 690,
+    "protected_files_unchanged": 6,
+    "new_broken_markdown_links": 0,
+    "all_retained_replacements_resolve": true,
+    "link_normalization": "Percent-decoded file targets, optional #fragments and supported :line[:column] suffixes resolved; external URLs excluded.",
+    "workflow_diagnostics": {
+      "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3": {
+        "unchanged": true,
+        "ok": false,
+        "errors": 75,
+        "full_result_sha256": "6dd768ef0636d6e11e7d32fa213325e5be62c7c874ca8286f7088a5689615f31"
+      },
+      "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation": {
+        "unchanged": true,
+        "ok": false,
+        "errors": 173,
+        "full_result_sha256": "c4d6deafacb83e5aeba033744b6afd808b370eb0cc04fce907a551902fd62c76"
+      },
+      "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4": {
+        "unchanged": true,
+        "ok": false,
+        "errors": 69,
+        "full_result_sha256": "33c3c9e06792dc894f177568e49053a1be5d2076a4b6d0eacc2f6c051a881294"
+      },
+      "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation": {
+        "unchanged": true,
+        "ok": false,
+        "errors": 171,
+        "full_result_sha256": "78df97c6587afae46df05ca42b990b2e104a7e8a1ab71a1f2b47396b6e3a12a6"
+      },
+      "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes": {
+        "unchanged": true,
+        "ok": false,
+        "errors": 69,
+        "full_result_sha256": "16bebc9b1b5daedf39ff2cd70771c885fa4d1041b7ca57770a045ad73fc58cee"
+      }
+    }
+  },
+  "before_summary": {
+    "files": 831,
+    "bytes": 9800609,
+    "inventory_sha256": "4422a2bff63fe22b016e26208681bf079c67f3c3f00efd867075893279f08820",
+    "expected_retained_inventory_sha256": "7de1d1c86cb4be14d07ae68d3045844ef5baf70aeb343df29932a014a19f52ab"
+  },
+  "per_scope": {
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3": {
+      "files_before": 80,
+      "files_removed": 10
+    },
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation": {
+      "files_before": 342,
+      "files_removed": 63
+    },
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4": {
+      "files_before": 53,
+      "files_removed": 1
+    },
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation": {
+      "files_before": 241,
+      "files_removed": 29
+    },
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes": {
+      "files_before": 115,
+      "files_removed": 38
+    }
+  },
+  "after_summary": {
+    "files": 690,
+    "bytes": 9226281,
+    "inventory_sha256": "7de1d1c86cb4be14d07ae68d3045844ef5baf70aeb343df29932a014a19f52ab"
+  }
+}
