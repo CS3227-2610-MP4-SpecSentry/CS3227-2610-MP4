@@ -15,7 +15,7 @@ Referenced repository files:
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/reports/integration\-plan.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-plan.md)
 - [src/shared/src/contracts/revocation.ts](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/shared/src/contracts/revocation.ts)
-- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/assignment\-ui.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/assignment-ui.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/assignment\-ui.json](../inputs-summary.json#/entries/assignment-ui.json)
 
 ## 3. Scope, permissions, and dependencies
 

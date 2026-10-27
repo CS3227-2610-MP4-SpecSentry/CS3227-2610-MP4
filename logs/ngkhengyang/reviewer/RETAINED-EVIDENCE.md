@@ -20,6 +20,7 @@ Retention updated 27 October 2026. The eight completed runs below use **compact 
 - `source_scopes` stores each distinct path list once. Verification-check and snapshot `scope_ref` values identify those lists. Verification definitions otherwise retain their original fields.
 - `acceptance_cases` holds the final cases. Each `acceptance_matrices` entry retains its date, reason, applicability and original case order/hash. Its `case_deltas_from_latest` records changed fields or removed fields relative to the final cases. These preserve earlier matrix contents without repeating all cases. Matrix history is a plan/evidence index, not proof that every case passed.
 - `retention.main_report` identifies the authoritative consolidated outcome. Where available, `historical_gate` records the original retained checker's verdict and error count, with its complete diagnostics referenced. It is not a fresh check.
+- Consumed JSON inputs are indexed in per-run `inputs-summary.json` files. Each entry retains the original input hash/size, equivalent evidence locator and any unique fields or decisions missing from that equivalent. Original payloads remain recoverable at each index's `source_commit`. These requests do not themselves prove execution. Links in retained handoffs/reports now target the corresponding summary entry; original registered artifact hashes describe the pre-migration documents, with current handoff hashes recorded separately.
 
 ## Recovery and verification limits
 

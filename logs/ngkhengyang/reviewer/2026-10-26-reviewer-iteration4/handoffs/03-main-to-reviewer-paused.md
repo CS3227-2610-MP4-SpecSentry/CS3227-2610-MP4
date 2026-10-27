@@ -11,9 +11,9 @@ Use final brief v3 and49\-case matrix; REV\-016 primary and REV\-004/005/006 plu
 Referenced repository files:
 
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/inputs/acceptance\-security\-v3\-final.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/inputs/acceptance-security-v3-final.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/inputs/acceptance\-security\-v3\-final.json](../inputs-summary.json#/entries/acceptance-security-v3-final.json)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/reports/security\-design.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/reports/security-design.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/inputs/assignment\-reviewer.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/inputs/assignment-reviewer.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/inputs/assignment\-reviewer.json](../inputs-summary.json#/entries/assignment-reviewer.json)
 
 ## 3. Scope, permissions, and dependencies
 

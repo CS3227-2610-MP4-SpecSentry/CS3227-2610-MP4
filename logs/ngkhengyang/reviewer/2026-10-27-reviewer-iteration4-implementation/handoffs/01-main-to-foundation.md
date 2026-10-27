@@ -12,8 +12,8 @@ Referenced repository files:
 
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/reports/security\-design.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/reports/security-design.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/matrix\-final\-design.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/matrix-final-design.json)
-- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/assignment\-foundation.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/assignment-foundation.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/matrix\-final\-design.json](../inputs-summary.json#/entries/matrix-final-design.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/assignment\-foundation.json](../inputs-summary.json#/entries/assignment-foundation.json)
 - [workflow/reviewer/agents/IMPLEMENTER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/reviewer/agents/IMPLEMENTER.md)
 
 ## 3. Scope, permissions, and dependencies

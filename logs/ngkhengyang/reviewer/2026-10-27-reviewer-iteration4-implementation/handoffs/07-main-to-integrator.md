@@ -17,7 +17,7 @@ Referenced repository files:
 - [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/handoffs/04\-reviewer\-complete.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/handoffs/04-reviewer-complete.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/handoffs/04\-release\-complete.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/handoffs/04-release-complete.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/handoffs/06\-ui\-complete.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/handoffs/06-ui-complete.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/matrix\-backend\-verified.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/inputs/matrix-backend-verified.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-implementation/inputs/matrix\-backend\-verified.json](../inputs-summary.json#/entries/matrix-backend-verified.json)
 - [workflow/reviewer/agents/INTEGRATOR.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/reviewer/agents/INTEGRATOR.md)
 
 ## 3. Scope, permissions, and dependencies

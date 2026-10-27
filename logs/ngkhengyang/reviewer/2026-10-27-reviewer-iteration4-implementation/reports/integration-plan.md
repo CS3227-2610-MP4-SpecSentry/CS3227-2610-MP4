@@ -2,7 +2,7 @@
 
 User requires an implementation status report immediately before integration. No integrator, integrate resource interval, combined-source inspection, integration wiring or assembled acceptance sweep is authorized in this turn. Scoped checks owned by implementers remain implementation evidence.
 
-The eventual integrator receives settled worker completions and exact changed-path hashes, the final shared contract exports, [49-case matrix](../inputs/matrix-final-design.json), [approved security design](../../2026-10-26-reviewer-iteration4/reports/security-design.md), actual scoped check IDs and database/browser state. Assign exact wiring files and a stop criterion after the user's next resumption. Main retains contract/ownership decisions and consumes one integrator result without mirroring it.
+The eventual integrator receives settled worker completions and exact changed-path hashes, the final shared contract exports, [49-case matrix](../inputs-summary.json#/entries/matrix-final-design.json), [approved security design](../../2026-10-26-reviewer-iteration4/reports/security-design.md), actual scoped check IDs and database/browser state. Assign exact wiring files and a stop criterion after the user's next resumption. Main retains contract/ownership decisions and consumes one integrator result without mirroring it.
 
 Integration responsibilities after resumption:
 

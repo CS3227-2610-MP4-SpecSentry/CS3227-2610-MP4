@@ -11,8 +11,8 @@ Fix credential screening and normalized token redaction without changing groundi
 Referenced repository files:
 
 - [workflow/reviewer/agents/IMPLEMENTER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/reviewer/agents/IMPLEMENTER.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/assignment\-gateway.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/assignment-gateway.json)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/review\-results.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/review-results.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/assignment\-gateway.json](../inputs-summary.json#/entries/assignment-gateway.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/review\-results.json](../inputs-summary.json#/entries/review-results.json)
 - [workflow/specs/AI\-SECURITY\-SPEC.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/AI-SECURITY-SPEC.md)
 - [workflow/specs/ROLE\-REVIEWER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/ROLE-REVIEWER.md)
 

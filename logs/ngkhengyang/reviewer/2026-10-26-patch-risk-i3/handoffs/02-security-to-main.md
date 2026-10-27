@@ -11,7 +11,7 @@ REQ\-REV\-003/012/013/014/015 plus normative AI contract and shared session/role
 Referenced repository files:
 
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/brief.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3/inputs/matrix.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/matrix.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3/inputs/matrix.json](../inputs-summary.json#/entries/matrix.json)
 - [workflow/specs/AI\-SECURITY\-SPEC.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/AI-SECURITY-SPEC.md)
 - [workflow/specs/ROLE\-REVIEWER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/ROLE-REVIEWER.md)
 - [workflow/specs/INTEGRATION\-SPEC.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/INTEGRATION-SPEC.md)

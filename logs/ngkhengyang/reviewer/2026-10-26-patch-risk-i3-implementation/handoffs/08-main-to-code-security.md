@@ -16,7 +16,7 @@ Referenced repository files:
 - [workflow/specs/SHARED\-REQUIREMENTS.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/SHARED-REQUIREMENTS.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/reports/source\-manifest.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/source-manifest.json)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/reports/pre\-review\-boundary.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/pre-review-boundary.json)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/matrix\-final\-postgres.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/matrix-final-postgres.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/matrix\-final\-postgres.json](../inputs-summary.json#/entries/matrix-final-postgres.json)
 
 ## 3. Scope, permissions, and dependencies
 

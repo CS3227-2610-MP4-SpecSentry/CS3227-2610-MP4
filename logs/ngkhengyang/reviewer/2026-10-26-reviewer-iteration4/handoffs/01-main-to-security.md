@@ -14,7 +14,7 @@ Referenced repository files:
 - [workflow/specs/ROLE\-MAINTAINER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/ROLE-MAINTAINER.md)
 - [workflow/specs/INTEGRATION\-SPEC.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/INTEGRATION-SPEC.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/inputs/acceptance\-security\-v3\-final.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/inputs/acceptance-security-v3-final.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/inputs/acceptance\-security\-v3\-final.json](../inputs-summary.json#/entries/acceptance-security-v3-final.json)
 
 ## 3. Scope, permissions, and dependencies
 

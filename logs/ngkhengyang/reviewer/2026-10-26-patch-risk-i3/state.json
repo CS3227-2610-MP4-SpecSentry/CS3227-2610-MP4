@@ -12,7 +12,9 @@
     "interpretation": "Historical observations only. No current source freshness, acceptance or formal closure is inferred. Full original state remains in the identified Git commit.",
     "omitted": "Embedded per-file snapshot manifests, repeated path arrays and repeated matrix cases. Snapshot revision/hash metadata and compact matrix history remain.",
     "main_report": "logs/ngkhengyang/2026-10-26-reviewer-iteration3.md",
-    "historical_gate_report": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/reports/pause-report.md"
+    "historical_gate_report": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/reports/pause-report.md",
+    "consumed_input_summary": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs-summary.json",
+    "input_reference_migration": "Input evidence links now target per-run summaries; original artifact hashes describe pre-migration content."
   },
   "run_id": "2026-10-26-patch-risk-i3",
   "prompter": "ngkhengyang",
@@ -67,7 +69,7 @@
   },
   "handoffs": {
     "01-main-to-security": {"artifact": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/handoffs/01-main-to-security.md", "artifact_sha256": "897c9919e000346caecc026df2a8497cdc9fb5e9c815d3f008621230e040d832", "snapshot_id": null, "references": ["logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/brief.md", "workflow/reviewer/agents/SECURITY-REVIEWER.md", "workflow/specs/AI-SECURITY-SPEC.md", "workflow/specs/ROLE-REVIEWER.md", "workflow/specs/INTEGRATION-SPEC.md", "workflow/specs/SHARED-REQUIREMENTS.md"], "resource_record": null, "created_at": "2026-10-26T08:22:13.968037+00:00", "input_sha256": "28315692956e5b48f25069eeff8e2a5229d6ffc08688f7359c1dfb07b76235ce"},
-    "02-security-to-main": {"artifact": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/handoffs/02-security-to-main.md", "artifact_sha256": "c4787ca98063dfbe2c930c035b2241d780832a92c771a88e11e13d432515a03d", "snapshot_id": null, "references": ["logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/brief.md", "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs/matrix.json", "workflow/specs/AI-SECURITY-SPEC.md", "workflow/specs/ROLE-REVIEWER.md", "workflow/specs/INTEGRATION-SPEC.md", "workflow/specs/SHARED-REQUIREMENTS.md"], "resource_record": "rec-9c9290c4b77c45ad", "created_at": "2026-10-26T08:33:57.562397+00:00", "input_sha256": "9219313b4f4a87d44db3f95ef7643b8e7fe1a993ef16a4a5a3334a347c10ae34"}
+    "02-security-to-main": {"artifact": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/handoffs/02-security-to-main.md", "artifact_sha256": "c4787ca98063dfbe2c930c035b2241d780832a92c771a88e11e13d432515a03d", "snapshot_id": null, "references": ["logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/brief.md", "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/inputs-summary.json#/entries/matrix.json", "workflow/specs/AI-SECURITY-SPEC.md", "workflow/specs/ROLE-REVIEWER.md", "workflow/specs/INTEGRATION-SPEC.md", "workflow/specs/SHARED-REQUIREMENTS.md"], "resource_record": "rec-9c9290c4b77c45ad", "created_at": "2026-10-26T08:33:57.562397+00:00", "input_sha256": "9219313b4f4a87d44db3f95ef7643b8e7fe1a993ef16a4a5a3334a347c10ae34", "artifact_sha256_after_input_link_migration": "ee949c5ae7d4bc440361e5ab083a4d6726ea1d62e7b6f6b45461d221391ed6de"}
   },
   "verification_runs": {
     "verify-e7063ca1f2e24b52": {"check": "runtime", "created_at": "2026-10-26T08:25:15.302356+00:00", "contract_sha256": "199c83bca7cca80587dfa0f48163b88ff09b6ff51b2e4f056f4b011091617471"}

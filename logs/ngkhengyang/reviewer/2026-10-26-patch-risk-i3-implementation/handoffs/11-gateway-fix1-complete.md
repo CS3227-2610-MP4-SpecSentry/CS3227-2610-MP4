@@ -11,7 +11,7 @@ REQ\-REV\-003, REQ\-REV\-012, REQ\-REV\-013, REQ\-REV\-014, REQ\-REV\-015
 Referenced repository files:
 
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/reports/fix1\-source\-manifest.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/fix1-source-manifest.json)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/fix1\-gateway\-handoff.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/fix1-gateway-handoff.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/fix1\-gateway\-handoff.json](../inputs-summary.json#/entries/fix1-gateway-handoff.json)
 
 ## 3. Scope, permissions, and dependencies
 

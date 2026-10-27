@@ -27,7 +27,7 @@ All five are open and assigned to `independent-review` for eventual independent
 closure, with the original logical implementation owners retained. Authoritative
 status lives in [state.json](../state.json), with
 [origin mapping](review-finding-index.json) and
-[detailed observations/probe controls](../inputs/review-results.json).
+[detailed observations/probe controls](../inputs-summary.json#/entries/review-results.json).
 
 ## Requirement assessment
 

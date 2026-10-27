@@ -14,7 +14,7 @@ Referenced repository files:
 - [workflow/specs/AI\-SECURITY\-SPEC.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/AI-SECURITY-SPEC.md)
 - [workflow/specs/ROLE\-REVIEWER.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/workflow/specs/ROLE-REVIEWER.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/brief.md)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/assignment\-foundation.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/assignment-foundation.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/assignment\-foundation.json](../inputs-summary.json#/entries/assignment-foundation.json)
 
 ## 3. Scope, permissions, and dependencies
 

@@ -18,7 +18,7 @@ Referenced repository files:
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/brief.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/brief.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-reviewer\-iteration4/reports/security\-design.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/reports/security-design.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/initial\-reviewed\-manifest.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/initial-reviewed-manifest.json)
-- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/inputs/matrix\-targeted\-checks.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/inputs/matrix-targeted-checks.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/inputs/matrix\-targeted\-checks.json](../inputs-summary.json#/entries/matrix-targeted-checks.json)
 - [logs/ngkhengyang/reviewer/2026\-10\-27\-reviewer\-iteration4\-review\-fixes/reports/replacement\-ownership\-plan.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/replacement-ownership-plan.json)
 
 ## 3. Scope, permissions, and dependencies

@@ -11,7 +11,7 @@ Independently revalidate original SEC\-CODE\-001..003 / canonical F\-001..003. R
 Referenced repository files:
 
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/reports/fix1\-source\-manifest.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/reports/fix1-source-manifest.json)
-- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/review\-results.json](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/inputs/review-results.json)
+- [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/inputs/review\-results.json](../inputs-summary.json#/entries/review-results.json)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/handoffs/11\-gateway\-fix1\-complete.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/handoffs/11-gateway-fix1-complete.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/handoffs/11\-ui\-fix1\-complete.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/handoffs/11-ui-fix1-complete.md)
 - [logs/ngkhengyang/reviewer/2026\-10\-26\-patch\-risk\-i3\-implementation/handoffs/11\-reviewer\-integration\-fix1\-complete.md](C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/handoffs/11-reviewer-integration-fix1-complete.md)
