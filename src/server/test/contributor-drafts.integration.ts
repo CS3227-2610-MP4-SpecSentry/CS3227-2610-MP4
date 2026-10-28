@@ -237,6 +237,233 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     }
   }, 15000);
 
+  const remove = (id: string, session = owner, body: object = { expectedVersion: 0, confirmed: true }) =>
+    session.agent.delete(`/api/proposals/${id}`).set('x-csrf-token', session.token).send(body);
+
+  it('deletes complete private content and activity with exactly one minimal permanent tombstone (AC-DEC-009)', async () => {
+    const full = { ...content, summary: 'Delete summary', diffText: 'Delete diff', criteria: [{ statement: 'Delete criterion', required: true }], evidence: [{ text: 'Delete evidence' }] };
+    const id = (await create(owner, full).expect(201)).body.proposalId as string;
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: full }).expect(200);
+    const before = Date.now();
+    const response = await remove(id, owner, { expectedVersion: 1, confirmed: true }).expect(204);
+    expect(response.text).toBe('');
+    expect(await database.client.changeProposal.findUnique({ where: { id } })).toBeNull();
+    expect(await database.client.workingRevision.count({ where: { proposalId: id } })).toBe(0);
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id } })).toBe(0);
+    const tombstone = await database.client.draftTombstone.findUniqueOrThrow({ where: { proposalId: id } });
+    expect(Object.keys(tombstone).sort()).toEqual(['action', 'actorId', 'proposalId', 'timestamp']);
+    expect(tombstone).toMatchObject({ proposalId: id, actorId: ids[0], action: 'DRAFT_DELETED' });
+    expect(tombstone.timestamp.getTime()).toBeGreaterThanOrEqual(before - 1000);
+    expect(JSON.stringify(tombstone)).not.toContain('Delete');
+    await owner.agent.get(`/api/proposals/${id}/draft`).expect(404);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 1, content }).expect(404);
+    await remove(id, owner, { expectedVersion: 1, confirmed: true }).expect(404);
+    expect((await owner.agent.get('/api/proposals').query({ limit: 100 }).expect(200)).body.items).not.toContainEqual(expect.objectContaining({ proposalId: id }));
+    expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(1);
+  });
+
+  it('enforces deletion authentication/ownership/CSRF/confirmation/strict version boundaries', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    await request(app.getHttpServer()).delete(`/api/proposals/${id}`).send({ expectedVersion: 0, confirmed: true }).expect(401);
+    for (const session of [other, reviewer, maintainer]) expect((await remove(id, session).expect(403)).text).not.toContain(content.title);
+    await owner.agent.delete(`/api/proposals/${id}`).send({ expectedVersion: 0, confirmed: true }).expect(403);
+    await owner.agent.delete(`/api/proposals/${id}`).set('x-csrf-token', 'f'.repeat(64)).send({ expectedVersion: 0, confirmed: true }).expect(403);
+    for (const body of [{ expectedVersion: 0 }, { expectedVersion: 0, confirmed: false }, { expectedVersion: 0, confirmed: 'true' },
+      ...[-1, 0.5, '0', null, 2147483648].map(expectedVersion => ({ expectedVersion, confirmed: true })),
+      ...['actorId', 'ownerId', 'reason', 'timestamp', 'content', 'state'].map(field => ({ expectedVersion: 0, confirmed: true, [field]: 'forged' }))]) await remove(id, owner, body).expect(422);
+    await remove(id, owner, { expectedVersion: 1, confirmed: true }).expect(409);
+    await remove(randomUUID()).expect(404);
+    expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(content);
+    expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(0);
+    await database.client.changeProposal.update({ where: { id }, data: { version: 2147483647 } });
+    await remove(id, owner, { expectedVersion: 2147483647, confirmed: true }).expect(204);
+  });
+
+  it('denies deletion in every other state, submission marker, actual cleared-pointer history and mixed activity', async () => {
+    for (const state of ['SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
+      const id = (await create().expect(201)).body.proposalId as string;
+      await database.client.changeProposal.update({ where: { id }, data: { state } });
+      await remove(id).expect(409);
+      expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(content);
+    }
+    for (const data of [{ firstSubmittedAt: new Date() }, { releaseAttachmentRef: 'synthetic-candidate' }]) {
+      const id = (await create().expect(201)).body.proposalId as string;
+      await database.client.changeProposal.update({ where: { id }, data }); await remove(id).expect(409);
+    }
+    const id = (await create().expect(201)).body.proposalId as string;
+    const snapshot = await database.client.proposalRevision.create({ data: { proposalId: id, number: 1, summary: 'Keep immutable', problem: 'Keep problem', constraints: '', expectedBehavior: 'Keep behavior', diffText: 'Keep diff' } });
+    await remove(id).expect(409);
+    await database.client.changeProposal.update({ where: { id }, data: { currentRevisionId: snapshot.id } });
+    await remove(id).expect(409);
+    expect(await database.client.proposalRevision.findUniqueOrThrow({ where: { id: snapshot.id } })).toEqual(snapshot);
+    const mixed = (await create().expect(201)).body.proposalId as string;
+    await activity.append(database.client, { proposalId: mixed, actorId: ids[0], action: 'WITHDRAWN', summary: 'Synthetic mixed event' });
+    await remove(mixed).expect(409);
+    expect(await database.client.proposalActivity.count({ where: { proposalId: mixed } })).toBe(2);
+  });
+
+  it('serializes edit/delete/duplicate and simulated submission with real root barriers', async () => {
+    const actor = await actorForOwner();
+    for (const operation of ['edit-first', 'submit-first', 'delete-first']) {
+      const id = (await create().expect(201)).body.proposalId as string;
+      const holder = await pool.connect();
+      try {
+        await holder.query('BEGIN');
+        const pid = (await holder.query<{ pid: number }>('SELECT pg_backend_pid() AS pid')).rows[0]!.pid;
+        await holder.query('SELECT id FROM "UserAccount" WHERE id=$1 FOR UPDATE', [ids[0]]);
+        await holder.query('SELECT id FROM "ChangeProposal" WHERE id=$1 FOR UPDATE', [id]);
+        const pending = (operation === 'delete-first' ? lifecycle.save(actor, id, { expectedVersion: 0, content }) : lifecycle.remove(actor, id, { expectedVersion: 0, confirmed: true }))
+          .then(value => ({ value, error: null }), error => ({ value: null, error }));
+        await waitForLock(pid);
+        if (operation === 'edit-first') {
+          await holder.query('UPDATE "ChangeProposal" SET version=1 WHERE id=$1', [id]);
+          await holder.query('UPDATE "WorkingRevision" SET content=$2::jsonb WHERE "proposalId"=$1', [id, JSON.stringify({ ...content, title: 'Winning edit' })]);
+        } else if (operation === 'submit-first') {
+          // Structural fixture only: Contributor submission endpoint is deliberately not implemented yet.
+          const revisionId = randomUUID();
+          await holder.query(`INSERT INTO "ProposalRevision" (id,"proposalId",number,summary,problem,constraints,"expectedBehavior","diffText") VALUES ($1,$2,1,'Fixture','Keep','','Keep','Keep')`, [revisionId, id]);
+          await holder.query(`UPDATE "ChangeProposal" SET state='SUBMITTED',version=1,"firstSubmittedAt"=CURRENT_TIMESTAMP,"currentRevisionId"=$2 WHERE id=$1`, [id, revisionId]);
+        } else {
+          await holder.query('INSERT INTO "DraftTombstone" ("proposalId","actorId") VALUES ($1,$2)', [id, ids[0]]);
+          await holder.query('DELETE FROM "ProposalActivity" WHERE "proposalId"=$1', [id]);
+          await holder.query('DELETE FROM "WorkingRevision" WHERE "proposalId"=$1', [id]);
+          await holder.query('DELETE FROM "ChangeProposal" WHERE id=$1', [id]);
+        }
+        await holder.query('COMMIT');
+        expect((await pending).error).toMatchObject({ status: operation === 'delete-first' ? 404 : 409 });
+        expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(operation === 'delete-first' ? 1 : 0);
+      } finally { await holder.query('ROLLBACK'); holder.release(); }
+    }
+    const id = (await create().expect(201)).body.proposalId as string;
+    const results = await Promise.all([remove(id), remove(id)]);
+    expect(results.map(r => r.status).sort()).toEqual([204, 404]);
+    expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(1);
+  }, 20000);
+
+  it('guards incomplete cleanup, bare deletion, wrong actors, timestamps, immutable history and deleted-ID reuse in SQL', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const client = await pool.connect();
+    async function denied(work: () => Promise<unknown>) {
+      await client.query('BEGIN');
+      try { await expect(work()).rejects.toMatchObject({ code: '23514' }); }
+      finally { await client.query('ROLLBACK'); }
+    }
+    try {
+      await denied(() => client.query('DELETE FROM "ChangeProposal" WHERE id=$1', [id]));
+      await denied(() => client.query('DELETE FROM "ProposalActivity" WHERE "proposalId"=$1', [id]));
+      await denied(() => client.query(`UPDATE "ProposalActivity" SET summary='forged' WHERE "proposalId"=$1`, [id]));
+      await denied(() => client.query('INSERT INTO "DraftTombstone" ("proposalId","actorId") VALUES ($1,$2)', [id, ids[1]]));
+      for (const purge of [false, true]) await denied(async () => {
+        await client.query('INSERT INTO "DraftTombstone" ("proposalId","actorId") VALUES ($1,$2)', [id, ids[0]]);
+        if (purge) await client.query('DELETE FROM "ProposalActivity" WHERE "proposalId"=$1', [id]);
+        return client.query('COMMIT');
+      });
+      expect(await database.client.proposalActivity.count({ where: { proposalId: id } })).toBe(1);
+      expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(0);
+      await client.query('BEGIN');
+      await client.query('INSERT INTO "DraftTombstone" ("proposalId","actorId","timestamp") VALUES ($1,$2,$3)', [id, ids[0], new Date(0)]);
+      expect((await client.query(`SELECT timestamp > (CURRENT_TIMESTAMP AT TIME ZONE 'UTC') - INTERVAL '10 seconds' AS recent FROM "DraftTombstone" WHERE "proposalId"=$1`, [id])).rows[0].recent).toBe(true);
+      await client.query('ROLLBACK');
+      await remove(id).expect(204);
+      await denied(() => client.query(`UPDATE "DraftTombstone" SET action='forged' WHERE "proposalId"=$1`, [id]));
+      await denied(() => client.query('DELETE FROM "DraftTombstone" WHERE "proposalId"=$1', [id]));
+      await denied(async () => { await client.query(`INSERT INTO "ChangeProposal" (id,"ownerId",title) VALUES ($1,$2,'Reuse')`, [id, ids[0]]); return client.query('COMMIT'); });
+      const historical = (await create().expect(201)).body.proposalId as string;
+      const revision = await database.client.proposalRevision.create({ data: { proposalId: historical, number: 1, summary: '', problem: 'Keep', constraints: '', expectedBehavior: 'Keep', diffText: 'Keep' } });
+      await denied(() => client.query('DELETE FROM "ProposalRevision" WHERE id=$1', [revision.id]));
+      await denied(() => client.query('INSERT INTO "DraftTombstone" ("proposalId","actorId") VALUES ($1,$2)', [historical, ids[0]]));
+    } finally { await client.query('ROLLBACK'); client.release(); }
+  });
+
+  it('rejects concurrent deleted-ID recreation and rolls back queued simulated submission after deletion', async () => {
+    for (const recreate of [true, false]) {
+      const id = (await create().expect(201)).body.proposalId as string;
+      const holder = await pool.connect();
+      const waiter = await pool.connect();
+      try {
+        await holder.query('BEGIN');
+        const pid = (await holder.query<{ pid: number }>('SELECT pg_backend_pid() AS pid')).rows[0]!.pid;
+        await holder.query('SELECT id FROM "ChangeProposal" WHERE id=$1 FOR UPDATE', [id]);
+        await holder.query('INSERT INTO "DraftTombstone" ("proposalId","actorId") VALUES ($1,$2)', [id, ids[0]]);
+        await holder.query('DELETE FROM "ProposalActivity" WHERE "proposalId"=$1', [id]);
+        await holder.query('DELETE FROM "WorkingRevision" WHERE "proposalId"=$1', [id]);
+        await holder.query('DELETE FROM "ChangeProposal" WHERE id=$1', [id]);
+        const pending = (async () => {
+          await waiter.query('BEGIN');
+          if (recreate) await waiter.query(`INSERT INTO "ChangeProposal" (id,"ownerId",title) VALUES ($1,$2,'Reuse')`, [id, ids[1]]);
+          else await waiter.query(`INSERT INTO "ProposalRevision" (id,"proposalId",number,summary,problem,constraints,"expectedBehavior","diffText") VALUES ($1,$2,1,'Fixture','Keep','','Keep','Keep')`, [randomUUID(), id]);
+          await waiter.query('COMMIT');
+        })().then(() => null, error => error as { code: string });
+        // This suite's pool has two clients, so observe the blocking connection through the holder.
+        const deadline = Date.now() + 4000;
+        while (!(await holder.query('SELECT 1 FROM pg_stat_activity WHERE $1=ANY(pg_blocking_pids(pid))', [pid])).rowCount) {
+          if (Date.now() >= deadline) throw new Error('Expected identity-reuse lock barrier');
+          await new Promise(resolve => setTimeout(resolve, 20));
+        }
+        await holder.query('COMMIT');
+        expect(await pending).toMatchObject({ code: recreate ? '23514' : '23503' });
+        expect(await database.client.changeProposal.findUnique({ where: { id } })).toBeNull();
+        expect(await database.client.proposalRevision.count({ where: { proposalId: id } })).toBe(0);
+      } finally { await holder.query('ROLLBACK'); await waiter.query('ROLLBACK'); holder.release(); waiter.release(); }
+    }
+  }, 15000);
+
+  it('rolls back deletion and tombstone on late database failure or transaction-end session expiry', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const actor = await actorForOwner();
+    const client = await pool.connect();
+    try {
+      await client.query(`CREATE FUNCTION synthetic_delete_failure() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'Synthetic delete fault' USING ERRCODE='23514'; END; $$`);
+      await client.query('CREATE TRIGGER synthetic_tombstone_failure BEFORE INSERT ON "DraftTombstone" FOR EACH ROW EXECUTE FUNCTION synthetic_delete_failure()');
+      await remove(id).expect(500);
+      await client.query('DROP TRIGGER synthetic_tombstone_failure ON "DraftTombstone"');
+      await client.query('CREATE TRIGGER synthetic_delete_failure BEFORE DELETE ON "ChangeProposal" FOR EACH ROW EXECUTE FUNCTION synthetic_delete_failure()');
+      await remove(id).expect(500);
+      await client.query('DROP TRIGGER synthetic_delete_failure ON "ChangeProposal"');
+      await client.query('DROP FUNCTION synthetic_delete_failure()');
+      expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(0);
+      expect(await database.client.proposalActivity.count({ where: { proposalId: id } })).toBe(1);
+      expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(content);
+      await client.query(`CREATE FUNCTION synthetic_delete_delay() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN PERFORM pg_sleep(0.7); RETURN OLD; END; $$`);
+      await client.query('CREATE TRIGGER synthetic_delete_delay BEFORE DELETE ON "ChangeProposal" FOR EACH ROW EXECUTE FUNCTION synthetic_delete_delay()');
+      await database.client.authSession.update({ where: { id: owner.digest }, data: { expiresAt: new Date(Date.now() + 400) } });
+      await expect(lifecycle.remove(actor, id, { expectedVersion: 0, confirmed: true })).rejects.toMatchObject({ status: 401 });
+      expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(0);
+      expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(content);
+    } finally {
+      await client.query('DROP TRIGGER IF EXISTS synthetic_tombstone_failure ON "DraftTombstone"');
+      await client.query('DROP TRIGGER IF EXISTS synthetic_delete_failure ON "ChangeProposal"'); await client.query('DROP FUNCTION IF EXISTS synthetic_delete_failure()');
+      await client.query('DROP TRIGGER IF EXISTS synthetic_delete_delay ON "ChangeProposal"'); await client.query('DROP FUNCTION IF EXISTS synthetic_delete_delay()');
+      await database.client.authSession.update({ where: { id: owner.digest }, data: { expiresAt: new Date(Date.now() + IDLE_MS) } });
+      client.release();
+    }
+  }, 15000);
+
+  it('rechecks deletion authorization after account disablement or logout wins a real lock barrier', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const actor = await actorForOwner();
+    const holder = await pool.connect();
+    try {
+      for (const logout of [false, true]) {
+        await holder.query('BEGIN');
+        const pid = (await holder.query<{ pid: number }>('SELECT pg_backend_pid() AS pid')).rows[0]!.pid;
+        await holder.query(logout ? 'SELECT id FROM "AuthSession" WHERE id=$1 FOR UPDATE' : 'SELECT id FROM "UserAccount" WHERE id=$1 FOR UPDATE', [logout ? actor.session!.digest : ids[0]]);
+        const deletion = lifecycle.remove(actor, id, { expectedVersion: 0, confirmed: true }).then(() => null, error => error as { status: number });
+        await waitForLock(pid);
+        await holder.query(logout ? 'DELETE FROM "AuthSession" WHERE id=$1' : 'UPDATE "UserAccount" SET enabled=false WHERE id=$1', [logout ? actor.session!.digest : ids[0]]);
+        await holder.query('COMMIT');
+        expect(await deletion).toMatchObject({ status: 401 });
+        await database.client.userAccount.update({ where: { id: ids[0] }, data: { enabled: true } });
+      }
+      expect(await database.client.draftTombstone.count({ where: { proposalId: id } })).toBe(0);
+      expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(content);
+      owner = await login(0);
+    } finally {
+      await holder.query('ROLLBACK'); holder.release();
+      await database.client.userAccount.update({ where: { id: ids[0] }, data: { enabled: true } });
+    }
+  }, 15000);
+
   it('denies anonymous/wrong-role creation/list/read, absent CSRF, forged fields and unavailable actions', async () => {
     await request(app.getHttpServer()).get('/api/proposals').expect(401);
     await request(app.getHttpServer()).get(`/api/proposals/${randomUUID()}/draft`).expect(401);
@@ -253,7 +480,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     const id = (await create().expect(201)).body.proposalId as string;
     for (const action of ['submit', 'withdraw', 'reopen']) await owner.agent.post(`/api/proposals/${id}/${action}`).set('x-csrf-token', owner.token).send({}).expect(404);
     await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({}).expect(422);
-    await owner.agent.delete(`/api/proposals/${id}`).set('x-csrf-token', owner.token).send({}).expect(404);
+    await owner.agent.delete(`/api/proposals/${id}`).set('x-csrf-token', owner.token).send({}).expect(422);
     await owner.agent.get(`/api/proposals/${randomUUID()}/draft`).expect(404);
   });
 

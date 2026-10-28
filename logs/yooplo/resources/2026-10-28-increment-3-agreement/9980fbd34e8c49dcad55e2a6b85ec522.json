@@ -1,0 +1,35 @@
+{
+  "id": "9980fbd34e8c49dcad55e2a6b85ec522",
+  "prompter": "yooplo",
+  "session": "2026-10-28-increment-3-agreement",
+  "agent": "acceptance",
+  "invocation": "docs-recheck-1",
+  "stage": "final-evidence-conformance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed dispatch; settings not exposed",
+  "started_at": "2026-10-28T14:05:35.494841+00:00",
+  "ended_at": "2026-10-28T14:07:30.440992+00:00",
+  "elapsed_seconds": 114.946151,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent final docs claims/hash recheck passed; INC3DOC001 corrected and independently verified; no runtime repeated",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable execution settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable execution settings/token/cache/tool/retry telemetry not exposed"
+}

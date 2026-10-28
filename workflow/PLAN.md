@@ -136,3 +136,21 @@ INC2-VER-001 (one unreproduced existing App test failure, not claimed fixed) bel
 [the Increment2 log](../logs/yooplo/2026-10-28-contributor-increment-2.md).
 No blocking finding in the tested slice; no deployed/teammate approval implied. Submission, deletion,
 submitted editing, criteria management, responses, lifecycle/AI and Increment3 excluded.
+
+### Contributor Increment 3 — local acceptance verified, 28 October 2026
+
+Own never-submitted draft deletion is now authorized on
+`feature/contributor-own-draft-deletion` from Increment2 head `1de749c`.
+Fresh dependency checks show PR10/11 open and unmerged; any later Increment3 PR
+targets Increment2's branch until its foundation merges. Yooplo explicitly reports
+both affected teammates agreed to the [deletion brief](../logs/yooplo/2026-10-28-contributor-increment-3-brief.md).
+This covers the narrow private cleanup/minimal tombstone design, not final patch approval.
+One implementer supplied persistence/API/UI/tests. Independent acceptance passed27server/
+55client unit,36PostgreSQL/four suites and7Chromium tests plus typecheck/lint/build;
+both clean-five-migration and foundation-upgrade paths were exercised with UTC.
+Final security probes/disposition and limitations belong in the
+[current run](../logs/yooplo/2026-10-28-contributor-increment-3-run.md).
+No deployment/teammate patch approval inferred. INC2-VER-001 cause remains unconfirmed.
+Submission, withdrawal, criteria, review responses, AI and Increment4 remain excluded.
+Subsequent review-preparation request authorizes Increment3 commit/push and a stacked
+PR against Increment2 while unmerged; merge and Increment4 remain excluded.

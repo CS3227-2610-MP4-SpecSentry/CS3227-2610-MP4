@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
-import { Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { createProposalRequestSchema, draftResponseSchema, ownDraftsResponseSchema, proposalLifecycleResponseSchema,
   type OwnDraftsResponse, type SessionResponse, type WorkingContent } from '@specsentry/shared';
 
@@ -40,6 +40,9 @@ async function failure(response: Response): Promise<string> {
 }
 
 function DraftList({ onSessionLost, onLoaded }: { onSessionLost(): void; onLoaded(): void }) {
+  const location = useLocation();
+  const notice = useRef<HTMLParagraphElement>(null);
+  useEffect(() => { if (location.state?.draftDeleted) notice.current?.focus(); }, [location.state]);
   const [page, setPage] = useState<OwnDraftsResponse | null>(null);
   const [cursor, setCursor] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
@@ -62,6 +65,7 @@ function DraftList({ onSessionLost, onLoaded }: { onSessionLost(): void; onLoade
   }, [cursor, attempt, onSessionLost, onLoaded]);
   return <>
     <h3>Your private drafts</h3>
+    {location.state?.draftDeleted && <p role="status" tabIndex={-1} ref={notice}>Private draft deleted.</p>}
     <p>Only you can read these working drafts.</p>
     <Link to="/contributor/new">Create a draft</Link>
     {error ? <><p role="alert">{error}</p><button onClick={() => setAttempt(value => value + 1)}>Retry loading drafts</button></>
@@ -130,34 +134,101 @@ function CreateDraft({ session, onSessionLost, uncertain, onUncertain, onCertain
   </>;
 }
 
-function DraftDetail({ onSessionLost }: { onSessionLost(): void }) {
+function DraftDetailRoute(props: Props) {
   const { id } = useParams();
+  return <DraftDetail key={id} id={id ?? ''} {...props} />;
+}
+
+function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
   const [detail, setDetail] = useState<ReturnType<typeof draftResponseSchema.parse> | null>(null);
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [pending, setPending] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
+  const active = useRef(true);
+  const appliedLoad = useRef(-1);
+  const deleteButton = useRef<HTMLButtonElement>(null);
+  const cancelButton = useRef<HTMLButtonElement>(null);
+  const restoreDeleteFocus = useRef(false);
+  const navigate = useNavigate();
+  useEffect(() => { active.current = true; return () => { active.current = false; }; }, []);
   useEffect(() => {
+    if (confirming) cancelButton.current?.focus();
+    else if (restoreDeleteFocus.current) { deleteButton.current?.focus(); restoreDeleteFocus.current = false; }
+  }, [confirming]);
+  useEffect(() => {
+    if (appliedLoad.current === attempt) return;
     const controller = new AbortController();
     async function load() {
-      setDetail(null); setError('');
+      setLoading(true); setError(''); setConfirming(false);
       try {
-        const response = await fetch(`/api/proposals/${encodeURIComponent(id ?? '')}/draft`, { credentials: 'same-origin', signal: controller.signal });
-        if (controller.signal.aborted) return;
+        const response = await fetch(`/api/proposals/${encodeURIComponent(id)}/draft`, { credentials: 'same-origin', signal: controller.signal });
         if (response.status === 401) { onSessionLost(); return; }
+        if (controller.signal.aborted) return;
+        if (response.status === 404 || response.status === 403) {
+          setDetail(null); setUnavailable(true); setBlocked(true);
+          setError(response.status === 404 ? 'This draft is no longer available.' : 'You do not have access to this draft.'); return;
+        }
         if (!response.ok) { setError(await failure(response)); return; }
         const result = draftResponseSchema.parse(await response.json());
-        if (!controller.signal.aborted) setDetail(result);
-      } catch { if (!controller.signal.aborted) setError('Unable to load this draft. Please try again.'); }
+        if (result.proposalId !== id) throw new Error();
+        if (!controller.signal.aborted) { setDetail(result); setBlocked(false); setUnavailable(false); }
+      } catch { if (!controller.signal.aborted) setError('Unable to check this draft. Please try again.'); }
+      finally { if (!controller.signal.aborted) { appliedLoad.current = attempt; setLoading(false); } }
     }
     void load(); return () => controller.abort();
   }, [id, attempt, onSessionLost]);
+
+  async function remove(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!detail || !confirming || pending || loading || blocked) return;
+    setPending(true); setError('');
+    try {
+      const response = await fetch(`/api/proposals/${encodeURIComponent(id)}`, { method: 'DELETE', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrfToken },
+        body: JSON.stringify({ expectedVersion: detail.version, confirmed: true }) });
+      if (response.status === 401) { onSessionLost(); return; }
+      if (!active.current) return;
+      if (response.status === 204) {
+        setDetail(null); navigate('/contributor', { replace: true, state: { draftDeleted: true } }); return;
+      }
+      setConfirming(false);
+      if (response.status === 403 || response.status === 404) {
+        setDetail(null); setUnavailable(true); setBlocked(true);
+        setError(response.status === 404 ? 'This draft is no longer available.' : 'You do not have access to this draft.'); return;
+      }
+      if (response.status === 409 || response.status >= 500 || response.ok) setBlocked(true);
+      const message = await failure(response);
+      if (active.current) setError(response.status === 409 ? `This draft changed or is no longer deletable. ${message}`
+        : response.status >= 500 || response.ok ? `The deletion result is uncertain. ${message}` : message);
+    } catch {
+      if (active.current) { setConfirming(false); setBlocked(true); setError('The deletion result is uncertain. Check the current draft before trying again.'); }
+    } finally { if (active.current) setPending(false); }
+  }
+  function cancel() { restoreDeleteFocus.current = true; setConfirming(false); }
   return <>
-    <h3>Private draft detail</h3><Link to="/contributor">Back to your drafts</Link>
-    {error ? <><p role="alert">{error}</p><button onClick={() => setAttempt(value => value + 1)}>Retry loading draft</button></>
-      : !detail || detail.proposalId !== id ? <p role="status">Loading draft…</p> : <>
-        <p>Private · {detail.state}</p>
-        {detail.state === 'DRAFT' && <Link to={`/contributor/drafts/${encodeURIComponent(detail.proposalId)}/edit`}>Edit private draft</Link>}
-        <dl>{fields.map(field => <div key={field.name}><dt>{field.label}</dt><dd>{detail.content[field.name] || 'None provided.'}</dd></div>)}</dl>
-      </>}
+    <h3>Private draft detail</h3>
+    {!pending && <Link to="/contributor">Back to your drafts</Link>}
+    {error && <p role="alert">{error}</p>}
+    {loading && <p role="status">Loading draft...</p>}
+    {detail && <>
+      <p>Private - {detail.state}</p>
+      {detail.state === 'DRAFT' && !pending && <Link to={`/contributor/drafts/${encodeURIComponent(id)}/edit`}>Edit private draft</Link>}
+      <dl>{fields.map(field => <div key={field.name}><dt>{field.label}</dt><dd>{detail.content[field.name] || 'None provided.'}</dd></div>)}</dl>
+      {detail.state === 'DRAFT' && <button ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || loading || blocked || confirming}>Delete private draft</button>}
+      {confirming && <form aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-description" onSubmit={event => void remove(event)}>
+        <h4 id="delete-confirm-title">Confirm permanent deletion</h4>
+        <p id="delete-confirm-description">Permanently delete "{detail.content.title}" and all its working content? This cannot be undone. Only never-submitted drafts can be deleted.</p>
+        <button type="button" ref={cancelButton} onClick={cancel} disabled={pending}>Cancel deletion</button>
+        <button type="submit" disabled={pending}>{pending ? 'Deleting...' : 'Permanently delete draft'}</button>
+      </form>}
+    </>}
+    {pending && <p role="status">Deleting private draft...</p>}
+    {blocked && !unavailable && <p role="status">Deletion is paused. Check the current draft and confirm again before another deletion request.</p>}
+    {!unavailable && (error || blocked) && <button onClick={() => setAttempt(value => value + 1)} disabled={pending || loading}>Check current draft</button>}
   </>;
 }
 
@@ -285,7 +356,7 @@ export function ContributorWorkspace(props: Props) {
       <Route index element={<DraftList onSessionLost={props.onSessionLost} onLoaded={loaded} />} />
       <Route path="new" element={<CreateDraft {...props} content={content} setContent={setContent} pending={pending} setPending={setPending}
         uncertain={uncertain} onUncertain={markUncertain} onCertain={markCertain} />} />
-      <Route path="drafts/:id" element={<DraftDetail onSessionLost={props.onSessionLost} />} />
+      <Route path="drafts/:id" element={<DraftDetailRoute {...props} />} />
       <Route path="drafts/:id/edit" element={<EditDraftRoute {...props} />} />
       <Route path="*" element={<><h3>Page not found</h3><Link to="/contributor">Your drafts</Link></>} />
     </Routes>

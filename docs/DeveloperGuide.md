@@ -5,8 +5,8 @@
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
 PostgreSQL sessions, CSRF, role guards and restricted security events. Contributor
-Increment 1 adds private draft create/list/detail and Increment 2 adds own never-submitted
-DRAFT editing; other domain workflows and AI
+Increment 1 adds private draft create/list/detail, Increment 2 adds own never-submitted
+DRAFT editing, and Increment 3 adds confirmed deletion of those drafts; other domain workflows and AI
 integration remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
@@ -52,11 +52,48 @@ until that foundation merges. Review commit/push/PR publication is now authorize
 Increment3 remain excluded. Foundation agreement does not provide final teammate patch approval.
 See [Increment2 evidence](../logs/yooplo/2026-10-28-contributor-increment-2.md) for actual checks/gaps.
 
+Increment3 now proceeds under a subsequent user instruction and reported agreement
+from both affected teammates, recorded in the [deletion run](../logs/yooplo/2026-10-28-contributor-increment-3-run.md).
+It is based on Increment2 head `1de749c`; PR10/11 remain open/unmerged at the latest
+dependency check. Final patch approval remains pending. No commit/push/merge or Increment4
+was authorized by the implementation run. A subsequent review-preparation request now
+authorizes Increment3 commit/push and a stacked PR against Increment2 while unmerged;
+merge and Increment4 remain excluded. Earlier exclusions above describe Increment2's scope.
+
+`DELETE /api/proposals/:id` uses strict `{expectedVersion,confirmed:true}` and returns204.
+It reuses Contributor role/session/CSRF checks and account/session/root transaction locks.
+Only the owner of a DRAFT with no submission, assignment, attachment or actual historical
+dependents can delete; other owner403, stale/ineligible409, absent404, invalid422.
+Matching maximum bounded version is valid because deletion does not increment a surviving root.
+The transaction removes allowed private draft activity, complete WorkingRevision JSON and
+the root, retaining only DraftTombstone's proposalId,actorId,DRAFT_DELETED action and DB timestamp.
+No reason/content/hash/correlation fields or root FK are retained in that permanent tombstone.
+Restricted operational read/rejection events remain separate under their retention policy.
+
+Apply the new `20261028000000_private_draft_deletion` migration after the four foundation
+migrations; do not edit old history. A dedicated activity trigger permits only guarded
+private-draft cleanup; submitted/review guards and their shared immutable function remain.
+Insertion/removal guards and deferred consistency checks require complete atomic deletion
+and prevent deleted identity reuse. Tombstones remain append-only. The exact implementation,
+rollback/race evidence and limitations are recorded in the run. Independent acceptance
+passed27server/55client unit tests,36PostgreSQL cases/four suites and7Chromium cases,
+plus typecheck/lint/build; all five migrations were applied to a second clean UTC database.
+The new fifth migration was also tested on the existing four-migration foundation.
+Final security probes are recorded separately; this description does not imply deployment
+or teammate patch approval. The inherited intermittent App test cause remains unresolved
+despite subsequent passes. Submission races use structural transaction fixtures because
+the actual Contributor submit endpoint remains unavailable.
+
+The detail-only confirmation retains safe errors, blocks duplicate requests and pauses on
+conflict or uncertainty until an explicit authorized recheck and fresh confirmation.
+It reuses authentication-generation isolation; no sensitive browser storage is introduced.
+
 Business transactions recheck enabled/versioned account, role and persisted session under
 account → session → root locking, including transaction-end expiry. Successful list/detail reads
 write content-free restricted SecurityEvent records in the same transaction; failures withhold
 content. Read evidence uses existing operational retention; business ProposalActivity remains
-append-only and separate. Apply all four migrations to a clean test database; do not edit reused
+append-only and separate, with the guarded never-submitted deletion exception described above.
+Apply all five migrations to a clean test database; do not edit reused
 migration history. JSON bodies are capped at 1 MiB; strings use normalized Unicode code-point limits.
 The React manual flow has no browser draft persistence and requires list inspection after an
 uncertain create response. Product AI remains absent.
@@ -294,7 +331,7 @@ code, text or assets here with source, license and affected files.
 Codex assisted with architecture/scaffolding and documentation as recorded above,
 Contributor workflow instructions, and reading/mapping the supplied MP4 PDF into
 repository specifications and checklists. It also coordinated Contributor foundation reuse,
-implemented Increment 1 and Increment 2 own-draft editing, and supplied separate
+implemented Increment 1, Increment 2 own-draft editing and Increment 3 draft deletion, and supplied separate
 design/security and acceptance review agents;
 actual results and unavailable evidence are linked in the run log. Same-repository reused source
 is attributed to the pinned Reviewer foundation above. AI-generated changes and summaries

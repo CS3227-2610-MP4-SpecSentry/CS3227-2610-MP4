@@ -1,0 +1,47 @@
+{
+  "base_revision": "1de749ca52ed6c15734a04d29bc266890da74fa2",
+  "algorithm": "SHA256 compact ASCII JSON sorted path/sha256 entries using raw file bytes",
+  "manifest_sha256": "c4aaba11335d058fd03cd1ede8dd21a1262cbefcdf7918343707fa556c8af4ed",
+  "files": [
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "sha256": "88437772a8d3ca0e76137f0626dc6fcb1d1d1665b3b5747916853e520ffd67f3"
+    },
+    {
+      "path": "src/client/src/features/contributor/DeleteDraft.test.tsx",
+      "sha256": "d59cf267905b72dd63e6f1550ae9491fb729a5b543f6b99f20cef06b9f08412d"
+    },
+    {
+      "path": "src/server/prisma/migrations/20261028000000_private_draft_deletion/migration.sql",
+      "sha256": "0841ceee12aafe7f96274dcc5c14c0c3dc3099622866921d5ff4289df420a010"
+    },
+    {
+      "path": "src/server/prisma/schema.prisma",
+      "sha256": "186fbc1df256d71e139ab5da9eee2b2420c836d9a3bab5c932d60375de16aeea"
+    },
+    {
+      "path": "src/server/src/proposals/contributor-proposals.controller.ts",
+      "sha256": "507bf5ebe75aa3a2daf9c6e4ed080ea459515b920f637332bedd3961256702fb"
+    },
+    {
+      "path": "src/server/src/proposals/proposal-lifecycle.service.ts",
+      "sha256": "f047530420bf0dd0797f4e11d3161b6531466f688574f7dc1433904e8b756376"
+    },
+    {
+      "path": "src/server/test/contributor-contracts.spec.ts",
+      "sha256": "6e17d8417ab149168d573c2141385b6583de0df049d7f467a72f5588b4c5aedb"
+    },
+    {
+      "path": "src/server/test/contributor-drafts.integration.ts",
+      "sha256": "737bec2ae73d7e48f140b3d93519e0ca08f1c175e51f0ed555491683a4c99ba3"
+    },
+    {
+      "path": "src/shared/src/contracts/contributor.ts",
+      "sha256": "655f3a06bf55252f8f539aa371e177934029b5c6979e7023804ac9875923303f"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-deletion.spec.ts",
+      "sha256": "8200aee57146da33330893d1b534b8941efd081bad3a249f63c52e15f822b1ad"
+    }
+  ]
+}

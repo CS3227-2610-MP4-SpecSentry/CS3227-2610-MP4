@@ -1,0 +1,35 @@
+{
+  "id": "c4eed5b8279a4e50a0de0d4dbe19ed64",
+  "prompter": "yooplo",
+  "session": "2026-10-28-contributor-increment-3-planning",
+  "agent": "security",
+  "invocation": "design-1",
+  "stage": "deletion-design-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed boundary; settings not exposed",
+  "started_at": "2026-10-28T13:20:17.194507+00:00",
+  "ended_at": "2026-10-28T13:24:49.287005+00:00",
+  "elapsed_seconds": 272.092498,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only security design completed; INC3-SEC-001 persistence gate; no product changes/tests",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable runtime settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable runtime settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable runtime settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable runtime settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable runtime settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable runtime settings/token/cache/tool/retry telemetry not exposed"
+}

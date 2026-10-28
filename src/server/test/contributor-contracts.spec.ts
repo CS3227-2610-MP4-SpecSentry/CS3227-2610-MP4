@@ -1,9 +1,16 @@
-import { createProposalRequestSchema, ownDraftsQuerySchema } from '@specsentry/shared';
+import { createProposalRequestSchema, deleteDraftRequestSchema, ownDraftsQuerySchema } from '@specsentry/shared';
 
 const content = { title: 'Title', problem: 'Problem', constraints: '', expectedBehavior: 'Expected',
   summary: '', diffText: '', criteria: [], evidence: [] };
 
 describe('Contributor draft contracts', () => {
+  it('requires literal deletion confirmation and bounded version without a reason or client identity', () => {
+    for (const expectedVersion of [0, 2147483647]) expect(deleteDraftRequestSchema.parse({ expectedVersion, confirmed: true })).toEqual({ expectedVersion, confirmed: true });
+    for (const body of [{ confirmed: true }, { expectedVersion: 0 }, { expectedVersion: 0, confirmed: false },
+      { expectedVersion: 0, confirmed: 'true' }, { expectedVersion: 2147483648, confirmed: true },
+      { expectedVersion: 0, confirmed: true, reason: 'Withdrawal is separate' }, { expectedVersion: 0, confirmed: true, actorId: 'forged' }])
+      expect(deleteDraftRequestSchema.safeParse(body).success).toBe(false);
+  });
   it('accepts empty later-increment fields and constraints but rejects injected ownership', () => {
     expect(createProposalRequestSchema.safeParse(content).success).toBe(true);
     for (const field of ['ownerId', 'actorId', 'state', 'createdAt'])

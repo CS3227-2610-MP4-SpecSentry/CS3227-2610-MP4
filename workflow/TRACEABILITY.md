@@ -108,6 +108,27 @@ INC2-VER-001 remains an unreproduced timing concern, not a claimed bug fix. Full
 performance and deployed verification unexecuted. Submitted editing, deletion, criteria management,
 submission, responses, lifecycle/AI and Increment3 remain deferred; no full REQ-CON-002 claim.
 
+### Increment 3: never-submitted DRAFT deletion — 28 October 2026
+
+Subsequent authorization and both-teammate agreement are recorded in the
+[deletion run](../logs/yooplo/2026-10-28-contributor-increment-3-run.md).
+The branch starts at Increment2 head `1de749c`; PR10/11 remain unmerged at the latest
+check and final patch approval is pending. The earlier Increment2 exclusions describe
+that slice, not a prohibition on this separately authorized work.
+
+| Requirement / portion | Implementation / validation status |
+| --- | --- |
+| AC-DEC-009 deletion portion; approved deletion policy | Strict DELETE DTO, owner service/controller, four-field DraftTombstone and guarded new migration; independent PG verifies full private-content removal, no submitted-history deletion, minimal tombstone and clean/upgrade migration evidence in run |
+| REQ-SHR-001/002/003/004/007, NFR-REL-001 | Contributor PG cases independently passed, covering auth/versions/actual submitted history, duplicate/edit/fixture-submit races, rollback/expiry/lock waits, timestamp/ID reuse and direct guard misuse. Full PG36cases/four suites passed |
+| REQ-SHR-005, NFR-A11Y-001, shared failure contract | [Delete RTL tests](../src/client/src/features/contributor/DeleteDraft.test.tsx) and [Chromium deletion flow](tests/browser/contributor-deletion.spec.ts) independently passed: confirmation/cancel focus/pending/conflict/uncertainty/lost committed response, fresh recheck and scoped late responses; full units27server/55client and7Chromium passed |
+
+This is local deletion acceptance, not withdrawn/submitted deletion, actual submit integration,
+deployed/manual full WCAG or whole-Contributor requirement completion. Final security
+probe results and finding disposition are recorded in the run. INC2-VER-001's cause
+remains unconfirmed despite passing reruns; no App assertions were changed.
+The [independent test design](../logs/yooplo/2026-10-28-contributor-increment-3-tests.md)
+distinguishes planned D01–D24 checks from executed evidence.
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
 | [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |
@@ -166,7 +187,7 @@ Add actual source/test paths, scenario/test names, commands/results, environment
 
 ## Decision acceptance cases
 
-All cases below are planned and currently unexecuted. They supplement rather than replace the original 48 requirement mappings. Detailed limits/schemas in the linked specs are the authority; these cases test their effect.
+Unless a row links executed evidence, cases below remain planned and unexecuted. They supplement rather than replace the original 48 requirement mappings. Detailed limits/schemas in the linked specs are the authority; these cases test their effect.
 
 | Scenario | Decision / requirements | Verification obligation | Evidence |
 | --- | --- | --- | --- |
@@ -178,4 +199,4 @@ All cases below are planned and currently unexecuted. They supplement rather tha
 | AC-DEC-006 | OPEN-006; REQ-SHR-004/007, REQ-REV-015 | Order equal-time events by ID, page by cursor, retain business events while pruning operational records after 90 days; views/rejections/read acknowledgments stay restricted and no prior-reviewer AI data leaks. | Pending |
 | AC-DEC-007 | OPEN-007; REQ-CON-004, REQ-REV-001/008/015 | Submit with summary, resubmit later, preserve original age and show latest age. Severity filter matches unresolved findings only. Withdrawn owner/Maintainer access works and former-reviewer notice cannot reopen content. | Pending |
 | AC-DEC-008 | OPEN-008; NFR-PERF-001/A11Y-001/OBS-001/RES-001 | Run fixed workload and applicable accessibility checks; dashboard computes failure denominator correctly, displays N/A for zero attempts, unknown for absent token/cache usage, and enforces aggregate/own-user privacy. | Pending |
-| AC-DEC-009 | OPEN-009; REQ-CON-006, REQ-SHR-004/007 | Confirm never-submitted draft deletion removes text but retains non-content tombstone; deletion after submission fails; draft withdrawal stays terminal and submitted revision/activity history survives withdrawal. | Pending |
+| AC-DEC-009 | OPEN-009; REQ-CON-006, REQ-SHR-004/007 | Confirm never-submitted draft deletion removes text but retains non-content tombstone; deletion after submission fails; draft withdrawal stays terminal and submitted revision/activity history survives withdrawal. | Increment3 deletion portion locally acceptance-verified above; withdrawal portion remains pending |

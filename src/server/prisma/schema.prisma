@@ -29,6 +29,7 @@ model UserAccount {
   findingEvents FindingEvent[]
   decisions ReviewDecision[]
   reviewIdempotency ReviewIdempotency[]
+  draftTombstones DraftTombstone[]
 }
 
 model AuthSession {
@@ -244,6 +245,15 @@ model WorkingRevision {
   proposalId String @unique
   content Json
   updatedAt DateTime @updatedAt
+}
+
+// Permanent non-content evidence; deliberately independent of the removed root.
+model DraftTombstone {
+  proposalId String @id
+  actorId String
+  action String @default("DRAFT_DELETED")
+  timestamp DateTime @default(now())
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
 }
 
 enum NotificationKind {

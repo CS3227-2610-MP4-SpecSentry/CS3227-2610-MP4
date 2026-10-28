@@ -1,6 +1,6 @@
 # SpecSentry User Guide
 
-Status: local authentication and Contributor private drafts/editing, 28 October 2026. No live application URL or
+Status: locally verified authentication and Contributor private drafts/editing/deletion, 28 October 2026. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
 the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
@@ -14,7 +14,7 @@ Open the app to sign in with an account provided by your administrator. Enter yo
 username and password; your account's Contributor, Reviewer, or Release Maintainer
 workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Contributors can create, list
-and open/edit their own never-submitted private drafts. Other role workflows and AI assistants remain pending.
+and open/edit/delete their own never-submitted private drafts. Other role workflows and AI assistants remain pending.
 
 ### Contributor private drafts
 
@@ -26,8 +26,24 @@ Select **Create a draft**, enter a title, problem and expected behavior, and opt
 enter constraints. Title is limited to 200 Unicode characters; each narrative field
 to 10,000. Select **Create private draft** to save and open its private detail.
 Select a title in the list to open an existing draft, or **Back to your drafts** to return.
-Only the owner can read this working content. Deletion, submission, criteria management,
+Only the owner can read this working content. Submission, criteria management,
 responses, lifecycle actions and the drafting assistant are not included yet.
+
+### Delete a never-submitted draft
+
+From saved private draft detail,
+select **Delete private draft**. The confirmation identifies the draft and explains that
+deletion cannot be undone. **Cancel deletion** keeps it; **Permanently delete draft**
+removes its saved working content. Only the owner of a never-submitted DRAFT can do this.
+An editable working copy of a submitted proposal does not permit deleting its history.
+No deletion reason is required. A minimal non-content audit tombstone is retained.
+
+While deletion is pending, repeat requests are disabled. Success returns to your draft
+list. If the draft changed or the outcome is uncertain, deletion pauses. Select
+**Check current draft** before trying again; a successful check loads the current saved
+version and requires a fresh confirmation. If it is no longer available, return to your
+draft list; that alone does not prove which request removed it. A failed check keeps
+deletion paused. Session expiry requires signing in again.
 
 ### Edit a never-submitted draft
 
