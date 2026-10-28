@@ -1,0 +1,35 @@
+{
+  "id": "5a6d18cf02a04e87b708390a10dc8885",
+  "prompter": "yooplo",
+  "session": "2026-10-28-stale-session-response",
+  "agent": "implementer",
+  "invocation": "fix-1",
+  "stage": "reproduce-and-fix",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-28T07:17:02.129161+00:00",
+  "ended_at": "2026-10-28T07:24:33.648486+00:00",
+  "elapsed_seconds": 451.519325,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Initial fix reproduced4failures then passed21client/type/lint/build; independent review found same-root focus200 replacement gap requiring follow-up",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent runtime counters not exposed",
+    "output_tokens": "Per-agent runtime counters not exposed",
+    "cache_read_tokens": "Per-agent runtime counters not exposed",
+    "tool_calls": "Per-agent runtime counters not exposed",
+    "retries": "Per-agent runtime counters not exposed"
+  },
+  "unavailable_reason": "Per-agent runtime counters not exposed"
+}

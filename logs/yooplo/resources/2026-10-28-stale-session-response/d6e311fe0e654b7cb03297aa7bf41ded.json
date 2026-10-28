@@ -1,0 +1,35 @@
+{
+  "id": "d6e311fe0e654b7cb03297aa7bf41ded",
+  "prompter": "yooplo",
+  "session": "2026-10-28-stale-session-response",
+  "agent": "security",
+  "invocation": "verify-fix-1",
+  "stage": "independent-security-recheck",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-28T07:22:21.327892+00:00",
+  "ended_at": "2026-10-28T07:24:33.893157+00:00",
+  "elapsed_seconds": 132.565265,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent source review confirms explicit relogin fix but SEC007 focus200 context-adoption gap remains blocking",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent runtime counters not exposed",
+    "output_tokens": "Per-agent runtime counters not exposed",
+    "cache_read_tokens": "Per-agent runtime counters not exposed",
+    "tool_calls": "Per-agent runtime counters not exposed",
+    "retries": "Per-agent runtime counters not exposed"
+  },
+  "unavailable_reason": "Per-agent runtime counters not exposed"
+}

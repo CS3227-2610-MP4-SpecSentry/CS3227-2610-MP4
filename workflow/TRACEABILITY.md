@@ -78,6 +78,15 @@ behavior, complete WCAG compliance or performance targets.
 | REQ-SHR-005 / NFR-A11Y-001 tested draft flow | [Contributor workspace](../src/client/src/features/contributor/ContributorWorkspace.tsx) | [RTL cases](../src/client/src/features/contributor/ContributorWorkspace.test.tsx) and [Chromium flow](tests/browser/contributor-drafts.spec.ts): labels/error focus, keyboard, axe form/list/detail, 200% text at 640px and session loss. Full manual WCAG audit unavailable |
 | Shared failure contract, DRAFT-SEC-005 | Workspace-level pending/uncertain creation state | RTL deferred Back→New request test: no duplicate POST, retained input and required reconciliation; independently rerun |
 
+28 October review follow-up: [App auth-generation fix](../src/client/src/App.tsx) and
+[App-level deferred-response tests](../src/client/src/App.test.tsx) cover obsolete-login401,
+same/different-account relogin, focus-adopted account/CSRF replacement, normal refresh,
+failed/obsolete logout and concurrent session-check invalidation. Independent acceptance
+reran28client tests, clienttypecheck and rootlint; DRAFT-SEC-007 / DRAFT-ACC-002 fixed.
+See [follow-up security/acceptance evidence and limitations](../logs/yooplo/2026-10-28-stale-session-response.md).
+The original27October manifest/results describe the pre-fix source; this delta has separate
+review hashes. No new server/database or deployed/browser verification is implied.
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
 | [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |

@@ -157,3 +157,14 @@ User now explicitly authorizes commit/push and opening a teammate-review PR; thi
 Publication check clarification: full staged `git diff --cached --check` reports trailing blank lines in `20261025070000_reviewer_intake/migration.sql`, `proposals/working-revisions.ts` and `contracts/reviewer.ts`. Earlier successful unstaged diff checks excluded those then-untracked files; preserve this distinction. Bytes are retained to match the agreed migration and independently tested source, with cosmetic warnings disclosed in the PR rather than claiming whole-patch whitespace cleanliness.
 
 Published product commit `8448a0025d9bf3e4909d17ebee4a5168047a095c` on feature/contributor-private-drafts and opened [PR10 against master](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/10). Exact55-file scope, Gitleaks no-leak scan, verified29-file source equivalence,13 completed prior resource intervals and177 existing documentation targets checked at packaging. Runtime suites not unnecessarily rerun on unchanged tested source; prior independent evidence retained. PR distinguishes foundation agreement from pending final human review, discloses UTC/other limitations and explicitly defers all later increments. Completed publication measurements are added in an evidence-only follow-up; no merge/deployment authorized or performed.
+
+## 28 October PR review follow-up
+
+PR review identified an additional obsolete-login401 race not covered by initial acceptance.
+[DRAFT-SEC-007 / DRAFT-ACC-002 follow-up](2026-10-28-stale-session-response.md) records failing
+baselines, bounded App-only generation fix, and fresh independent checks. Deferred old-login
+outcomes now cannot clear replacement authentication/input, including focus-adopted contexts;
+same-context refresh/current401/SEC005 recovery remain tested. Initial27October manifests
+remain historical evidence for their reviewed source; the two-file fix has its own hash/results.
+No server contract, foundation or Increment2 behavior changed. Final human patch approval
+and remote CI remain separate; no external review-thread reply or resolution assumed.

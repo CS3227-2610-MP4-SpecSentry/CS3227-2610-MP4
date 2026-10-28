@@ -40,6 +40,13 @@ migration history. JSON bodies are capped at 1 MiB; strings use normalized Unico
 The React manual flow has no browser draft persistence and requires list inspection after an
 uncertain create response. Product AI remains absent.
 
+Client session-loss callbacks are bound to the originating authentication generation.
+Delayed responses from an obsolete login cannot clear a replacement login or its new
+form input, including focus refreshes that adopt another account or rotated CSRF context.
+Ordinary same-context refreshes preserve pending draft recovery; current-session failures
+still clear protected content. The [review fix evidence](../logs/yooplo/2026-10-28-stale-session-response.md)
+covers these races without changing server authorization or wire contracts.
+
 The reused PostgreSQL migrations use `TIMESTAMP WITHOUT TIME ZONE` defaults and Prisma
 interprets those values as UTC. Configure the application database's default timezone to UTC
 before opening application connections (for an owner-managed database: `ALTER DATABASE <name> SET timezone TO 'UTC'`),

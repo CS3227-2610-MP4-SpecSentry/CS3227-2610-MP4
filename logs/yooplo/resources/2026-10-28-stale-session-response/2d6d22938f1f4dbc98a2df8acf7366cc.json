@@ -1,0 +1,19 @@
+{
+  "id": "2d6d22938f1f4dbc98a2df8acf7366cc",
+  "prompter": "yooplo",
+  "session": "2026-10-28-stale-session-response",
+  "agent": "main",
+  "invocation": "coordinator-1",
+  "stage": "assess-and-coordinate-fix",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-28T07:15:23.144248+00:00",
+  "ended_at": null,
+  "elapsed_seconds": null,
+  "status": "running",
+  "usage": null
+}
