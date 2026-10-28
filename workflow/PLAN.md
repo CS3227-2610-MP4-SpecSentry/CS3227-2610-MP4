@@ -115,4 +115,24 @@ including remaining evidence gaps, are recorded in the
 Independent acceptance revalidation passed 26 server/15 client unit, 22 PostgreSQL and
 five Chromium tests, typecheck/lint/build and UTC/append-only checks. Security disposition
 is recorded in the run log. No full role completion, deployed release or final teammate
-patch approval is claimed. Increment 2 remains unstarted.
+patch approval is claimed. Increment 2 status follows below.
+
+### Contributor Increment 2 — 28 October 2026
+
+Own never-submitted DRAFT editing is implemented and independently verified on local
+`feature/contributor-own-draft-editing`, based on unmerged Increment1 head
+`bb485ff8ea555f3505195b449d13d7a7a3a166f9`. Increment1's branch is intact and final
+teammate review remains pending. Future Increment2 PRs must target
+`feature/contributor-private-drafts` while that foundation is unmerged. The subsequent
+review-preparation request authorizes commit/push/PR publication, not merge or Increment3.
+
+Reuse existing save DTO/PATCH route, root/session transaction checks, bounded versions,
+working-content validation and atomic DRAFT_SAVED activity. Add accessible four-field
+editing with retained input and explicit conflict/uncertain recovery; no new shared
+schema/contracts introduced. Independent acceptance passed26server/43client unit,
+28PostgreSQL and6Chromium tests plus typecheck/lint/build. Separate security checks
+passed43client/17Contributor PostgreSQL and append-only/UTC assertions. Results and
+INC2-VER-001 (one unreproduced existing App test failure, not claimed fixed) belong in
+[the Increment2 log](../logs/yooplo/2026-10-28-contributor-increment-2.md).
+No blocking finding in the tested slice; no deployed/teammate approval implied. Submission, deletion,
+submitted editing, criteria management, responses, lifecycle/AI and Increment3 excluded.

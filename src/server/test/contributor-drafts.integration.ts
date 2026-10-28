@@ -12,6 +12,7 @@ import { DatabaseService } from '../src/database/database.service';
 import { configureHttp } from '../src/http';
 import { hashPassword } from '../src/identity/identity.service';
 import { ProposalLifecycleService } from '../src/proposals/proposal-lifecycle.service';
+import type { ProposalState } from '../src/generated/prisma/client';
 import type { BusinessActor } from '../src/identity/business-context';
 import { IDLE_MS, PostgresSessionStore } from '../src/identity/session.store';
 
@@ -52,6 +53,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     app = module.createNestApplication<NestExpressApplication>({ logger: false });
     configureHttp(app); await app.init();
     database = app.get(DatabaseService); lifecycle = app.get(ProposalLifecycleService); activity = app.get(ActivityService);
+    expect(await database.client.$queryRaw<{ TimeZone: string }[]>`SHOW timezone`).toEqual([{ TimeZone: 'UTC' }]);
     pool = new Pool({ connectionString: process.env.TEST_DATABASE_URL, max: 2 });
     const passwordHash = await hashPassword(password);
     for (const [index, role] of accounts.entries()) ids.push((await database.client.userAccount.create({ data: { username: `${prefix}-${index}`, role, passwordHash } })).id);
@@ -105,6 +107,136 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     expect(JSON.stringify(events)).not.toContain(content.problem);
   });
 
+  it('saves an own private draft with versioned full-content preservation and atomic activity', async () => {
+    const initial = { ...content, summary: 'Hidden summary', diffText: 'Hidden diff',
+      criteria: [{ statement: 'Hidden criterion', required: true }], evidence: [{ text: 'Hidden evidence' }] };
+    const created = await create(owner, initial).expect(201);
+    const id = created.body.proposalId as string;
+    const before = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    const edited = { ...before.content, title: 'Edited private title', problem: 'Edited problem', constraints: 'Edited constraints', expectedBehavior: 'Edited behavior' };
+    const result = await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: edited }).expect(200);
+    expect(result.body).toMatchObject({ proposalId: id, workingRevisionId: created.body.workingRevisionId, version: 1, state: 'DRAFT' });
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body.content).toEqual(edited);
+    expect(await database.client.changeProposal.findUniqueOrThrow({ where: { id } })).toMatchObject({ ownerId: ids[0], title: 'Private working draft', version: 1, state: 'DRAFT' });
+    const events = await database.client.proposalActivity.findMany({ where: { proposalId: id, action: 'DRAFT_SAVED' } });
+    expect(events).toEqual([expect.objectContaining({ actorId: ids[0], summary: 'Private working draft saved.', revisionId: null })]);
+    expect(JSON.stringify(events)).not.toContain(edited.title);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 1, content: { ...edited, title: 'Saved again' } }).expect(200);
+    expect((await owner.agent.get('/api/proposals').expect(200)).body.items).toContainEqual(expect.objectContaining({ proposalId: id, title: 'Saved again', version: 2 }));
+  });
+
+  it('enforces save ownership/roles/CSRF/strict fields and private-reference scope without mutation', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const save = (login: Login, body: object = { expectedVersion: 0, content }) => login.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', login.token).send(body);
+    await request(app.getHttpServer()).patch(`/api/proposals/${id}/draft`).send({ expectedVersion: 0, content }).expect(401);
+    for (const login of [other, reviewer, maintainer]) {
+      const denied = await save(login).expect(403);
+      expect(denied.text).not.toContain(content.title);
+    }
+    await owner.agent.patch(`/api/proposals/${id}/draft`).send({ expectedVersion: 0, content }).expect(403);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', 'f'.repeat(64)).send({ expectedVersion: 0, content }).expect(403);
+    for (const body of [{ expectedVersion: 0, content, ownerId: ids[1] }, { expectedVersion: 0, content: { ...content, state: 'APPROVED' } },
+      { expectedVersion: 0, content: { ...content, title: '😀'.repeat(201) } },
+      { expectedVersion: 0, content: { ...content, problem: '😀'.repeat(10001) } },
+      { expectedVersion: 0, content: { ...content, evidence: [{ id: randomUUID(), text: 'Foreign identity' }] } },
+      { expectedVersion: 0, content: { ...content, criteria: [{ stableKey: randomUUID(), statement: 'Foreign identity', required: true }] } }]) await save(owner, body).expect(422);
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toMatchObject({ version: 0, content });
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(0);
+    await owner.agent.patch(`/api/proposals/${randomUUID()}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(404);
+  });
+
+  it('rejects non-DRAFT states, submitted markers, attachments and version overflow without touching snapshots', async () => {
+    for (const state of ['SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
+      const id = (await create().expect(201)).body.proposalId as string;
+      await database.client.changeProposal.update({ where: { id }, data: { state } });
+      await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(409);
+      expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(content);
+      expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(0);
+    }
+    for (const data of [{ firstSubmittedAt: new Date() }, { releaseAttachmentRef: 'synthetic-candidate' }, { version: 2147483647 }]) {
+      const id = (await create().expect(201)).body.proposalId as string;
+      await database.client.changeProposal.update({ where: { id }, data });
+      await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 'version' in data ? data.version : 0, content }).expect(409);
+    }
+    const id = (await create().expect(201)).body.proposalId as string;
+    const snapshot = await database.client.proposalRevision.create({ data: { proposalId: id, number: 1, summary: 'Immutable', problem: 'Submitted problem', constraints: '', expectedBehavior: 'Submitted behavior', diffText: 'Submitted diff' } });
+    await database.client.changeProposal.update({ where: { id }, data: { currentRevisionId: snapshot.id } });
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(409);
+    expect(await database.client.proposalRevision.findUniqueOrThrow({ where: { id: snapshot.id } })).toEqual(snapshot);
+  });
+
+  it('allows exactly one concurrent save per expected version, preserving loser data and activity', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const results = await Promise.all(['Winner A', 'Winner B'].map(title => owner.agent.patch(`/api/proposals/${id}/draft`)
+      .set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: { ...content, title } })));
+    expect(results.map(result => result.status).sort()).toEqual([200, 409]);
+    const winner = results[0]!.status === 200 ? 'Winner A' : 'Winner B';
+    const latest = await owner.agent.get(`/api/proposals/${id}/draft`).expect(200);
+    expect(latest.body).toMatchObject({ version: 1, content: { ...content, title: winner } });
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(1);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(409);
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toEqual(latest.body);
+  });
+
+  it('rolls back saved content/version/activity when business audit fails or the transaction expires', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const changed = { ...content, title: 'Must roll back' };
+    const rejected = jest.spyOn(activity, 'append').mockRejectedValueOnce(new Error('Synthetic save audit failure'));
+    try {
+      const result = await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: changed }).expect(500);
+      expect(result.text).not.toContain(changed.title);
+    } finally { rejected.mockRestore(); }
+    const actor = await actorForOwner();
+    const expiry = new Date(Date.now() + 500);
+    await database.client.authSession.update({ where: { id: owner.digest }, data: { expiresAt: expiry } });
+    const append = activity.append.bind(activity);
+    const awaitedActivity: { append: (...args: Parameters<ActivityService['append']>) => Promise<unknown> } = activity;
+    const delayed = jest.spyOn(awaitedActivity, 'append').mockImplementationOnce(async (tx, event) => {
+      const result = await append(tx, event);
+      await new Promise(resolve => setTimeout(resolve, Math.max(0, expiry.getTime() - Date.now() + 30)));
+      return result;
+    });
+    try {
+      await expect(lifecycle.save(actor, id, { expectedVersion: 0, content: changed })).rejects.toMatchObject({ status: 401 });
+      expect(delayed).toHaveBeenCalledTimes(1);
+    } finally {
+      delayed.mockRestore();
+      await database.client.authSession.update({ where: { id: owner.digest }, data: { expiresAt: new Date(Date.now() + IDLE_MS) } });
+    }
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toMatchObject({ version: 0, content });
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(0);
+  });
+
+  it('rechecks save authorization after waiting for account disablement and session logout', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const actor = await actorForOwner();
+    const holder = await pool.connect();
+    try {
+      await holder.query('BEGIN');
+      const pid = (await holder.query<{ pid: number }>('SELECT pg_backend_pid() AS pid')).rows[0]!.pid;
+      await holder.query('SELECT id FROM "UserAccount" WHERE id=$1 FOR UPDATE', [ids[0]]);
+      const save = lifecycle.save(actor, id, { expectedVersion: 0, content }).then(value => ({ value, error: null }), error => ({ value: null, error }));
+      await waitForLock(pid);
+      await holder.query('UPDATE "UserAccount" SET enabled=false WHERE id=$1', [ids[0]]);
+      await holder.query('COMMIT');
+      expect((await save).error).toMatchObject({ status: 401 });
+      await database.client.userAccount.update({ where: { id: ids[0] }, data: { enabled: true } });
+      await holder.query('BEGIN');
+      await holder.query('SELECT id FROM "AuthSession" WHERE id=$1 FOR UPDATE', [actor.session!.digest]);
+      const afterLogout = lifecycle.save(actor, id, { expectedVersion: 0, content }).then(value => ({ value, error: null }), error => ({ value: null, error }));
+      await waitForLock(pid);
+      await holder.query('DELETE FROM "AuthSession" WHERE id=$1', [actor.session!.digest]);
+      await holder.query('COMMIT');
+      expect((await afterLogout).error).toMatchObject({ status: 401 });
+      expect((await database.client.changeProposal.findUniqueOrThrow({ where: { id } })).version).toBe(0);
+      expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(0);
+      owner = await login(0);
+    } finally {
+      await holder.query('ROLLBACK'); holder.release();
+      await database.client.userAccount.update({ where: { id: ids[0] }, data: { enabled: true } });
+    }
+  }, 15000);
+
   it('denies anonymous/wrong-role creation/list/read, absent CSRF, forged fields and unavailable actions', async () => {
     await request(app.getHttpServer()).get('/api/proposals').expect(401);
     await request(app.getHttpServer()).get(`/api/proposals/${randomUUID()}/draft`).expect(401);
@@ -120,7 +252,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     expect(await database.client.changeProposal.count({ where: { ownerId: ids[0] } })).toBe(before);
     const id = (await create().expect(201)).body.proposalId as string;
     for (const action of ['submit', 'withdraw', 'reopen']) await owner.agent.post(`/api/proposals/${id}/${action}`).set('x-csrf-token', owner.token).send({}).expect(404);
-    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({}).expect(404);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({}).expect(422);
     await owner.agent.delete(`/api/proposals/${id}`).set('x-csrf-token', owner.token).send({}).expect(404);
     await owner.agent.get(`/api/proposals/${randomUUID()}/draft`).expect(404);
   });

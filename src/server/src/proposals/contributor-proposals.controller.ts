@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, Post, Query, Req, UnprocessableEntityException } from '@nestjs/common';
-import { createProposalRequestSchema, ownDraftsQuerySchema, reviewerIdSchema } from '@specsentry/shared';
+import { Body, Controller, Get, Param, Patch, Post, Query, Req, UnprocessableEntityException } from '@nestjs/common';
+import { createProposalRequestSchema, ownDraftsQuerySchema, reviewerIdSchema, saveDraftRequestSchema } from '@specsentry/shared';
 import { DatabaseService } from '../database/database.service';
 import { Roles, type AuthRequest } from '../identity/access';
 import { businessActor } from '../identity/business-context';
@@ -38,5 +38,11 @@ export class ContributorProposalsController {
   async draft(@Req() request: AuthRequest, @Param('id') id: string) {
     const input = await this.parsed(request, 'DRAFT', () => validate(reviewerIdSchema, id));
     return this.lifecycle.draft(businessActor(request), input);
+  }
+
+  @Patch(':id/draft')
+  async save(@Req() request: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
+    const input = await this.parsed(request, 'SAVE', () => ({ id: validate(reviewerIdSchema, id), body: validate(saveDraftRequestSchema, body) }));
+    return this.lifecycle.save(businessActor(request), input.id, input.body);
   }
 }

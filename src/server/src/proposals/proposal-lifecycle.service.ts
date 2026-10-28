@@ -1,11 +1,11 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { draftResponseSchema, ownDraftsResponseSchema, proposalLifecycleResponseSchema, workingContentSchema,
-  type OwnDraftsQuery, type WorkingContent } from '@specsentry/shared';
+  type OwnDraftsQuery, type SaveDraftRequest, type WorkingContent } from '@specsentry/shared';
 import { ActivityService } from '../activity/activity.service';
 import { DatabaseService } from '../database/database.service';
 import type { Prisma } from '../generated/prisma/client';
 import { businessTransaction, type BusinessActor } from '../identity/business-context';
-import { decodeCursor, encodeCursor } from '../reviews/reviewer-context';
+import { decodeCursor, encodeCursor, nextVersion } from '../reviews/reviewer-context';
 import { ProposalsService } from './proposals.service';
 import { prepareWorkingContent } from './working-revisions';
 
@@ -36,6 +36,25 @@ export class ProposalLifecycleService {
         state: root.state, content: working.content });
       await this.readAudit(tx, actor, 'PROPOSAL_DRAFT_VIEWED', id);
       return result;
+    });
+  }
+
+  save(actor: BusinessActor, id: string, body: SaveDraftRequest) {
+    return businessTransaction(this.database, actor, 'CONTRIBUTOR', id, 'PROPOSAL_SAVE', async tx => {
+      const root = await this.proposals.lockRoot(tx, id);
+      if (root.ownerId !== actor.accountId) throw new ForbiddenException();
+      if (root.state !== 'DRAFT' || root.firstSubmittedAt !== null || root.currentRevisionId !== null ||
+          root.releaseAttachmentRef !== null || root.version !== body.expectedVersion) throw new ConflictException();
+      const working = await tx.workingRevision.findUnique({ where: { proposalId: id } });
+      if (!working) throw new NotFoundException();
+      const content = prepareWorkingContent(body.content, [workingContentSchema.parse(working.content)]);
+      const version = nextVersion(root.version);
+      await tx.workingRevision.update({ where: { proposalId: id }, data: { content: content as Prisma.InputJsonValue } });
+      await tx.changeProposal.update({ where: { id }, data: { version } });
+      await this.activity.append(tx, { proposalId: id, revisionId: null, actorId: actor.accountId,
+        action: 'DRAFT_SAVED', summary: 'Private working draft saved.' });
+      return proposalLifecycleResponseSchema.parse({ proposalId: id, revisionId: null, workingRevisionId: working.id,
+        assignmentId: null, assignmentVersion: null, state: root.state, version });
     });
   }
 

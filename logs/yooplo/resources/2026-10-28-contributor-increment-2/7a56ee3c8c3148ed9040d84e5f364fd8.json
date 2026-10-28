@@ -1,0 +1,35 @@
+{
+  "id": "7a56ee3c8c3148ed9040d84e5f364fd8",
+  "prompter": "yooplo",
+  "session": "2026-10-28-contributor-increment-2",
+  "agent": "verifier",
+  "invocation": "acceptance-1",
+  "stage": "independent-edit-acceptance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-28T08:50:19.344596+00:00",
+  "ended_at": "2026-10-28T08:58:06.935075+00:00",
+  "elapsed_seconds": 467.590479,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent acceptance26server43client28PG6Chromium/type/lint/build/UTC/diffcheck passed; sevenfiles stable, no product blocker; VER001 unreproduced notfixed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent runtime counters not exposed",
+    "output_tokens": "Per-agent runtime counters not exposed",
+    "cache_read_tokens": "Per-agent runtime counters not exposed",
+    "tool_calls": "Per-agent runtime counters not exposed",
+    "retries": "Per-agent runtime counters not exposed"
+  },
+  "unavailable_reason": "Per-agent runtime counters not exposed"
+}

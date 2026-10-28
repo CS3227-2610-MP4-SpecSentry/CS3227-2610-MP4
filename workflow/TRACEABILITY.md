@@ -87,10 +87,31 @@ See [follow-up security/acceptance evidence and limitations](../logs/yooplo/2026
 The original27October manifest/results describe the pre-fix source; this delta has separate
 review hashes. No new server/database or deployed/browser verification is implied.
 
+### Increment 2: never-submitted DRAFT editing — 28 October 2026
+
+Local slice on `feature/contributor-own-draft-editing` is stacked on unmerged Increment1
+commit `bb485ff`; final Increment1 teammate review remains pending. Existing PATCH/save DTO,
+version/root-lock/helper and DRAFT_SAVED rules reused, no new shared interfaces or migrations.
+See [Increment2 log and final review results](../logs/yooplo/2026-10-28-contributor-increment-2.md).
+
+| Requirement / portion | Implementation and evidence |
+| --- | --- |
+| REQ-CON-002, AC-CON-002 never-submitted edit/owner denial | Proposal lifecycle save/controller; [real PG cases](../src/server/test/contributor-drafts.integration.ts) verify own repeated saves, other roles/owners, every excluded state/submission marker/attachment, preserving snapshots/hidden content |
+| REQ-SHR-001/002/003, local NFR-SEC-001 | Same PG suite verifies session/CSRF, exact/stale/overflow version, one concurrent winner, access rechecks after lock wait and no denied mutation |
+| REQ-SHR-004/007 / NFR-REL-001 draft-save transaction | DRAFT_SAVED committed with content/version; forced activity/expiry failure rolls all three back; safe metadata no private content |
+| Shared failure contract / REQ-SHR-005 / NFR-A11Y-001 tested portion | [Editor RTL cases](../src/client/src/features/contributor/EditDraft.test.tsx) and [Chromium flow](tests/browser/contributor-editing.spec.ts): retained input, conflict/uncertain write lock, confirmed reload/reload failure, proposal/auth late-response isolation, current401, labels/keyboard/axe/reflow |
+
+Independent runtime acceptance executed26server/43client unit,28PostgreSQL and6Chromium tests;
+typecheck/lint/build and independent security checks also passed, as recorded in the log. One unchanged App500
+test failed once during implementation but isolated/full/independent reruns passed unchanged;
+INC2-VER-001 remains an unreproduced timing concern, not a claimed bug fix. Full manual WCAG,
+performance and deployed verification unexecuted. Submitted editing, deletion, criteria management,
+submission, responses, lifecycle/AI and Increment3 remain deferred; no full REQ-CON-002 claim.
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
 | [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |
-| [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local private-read denial portion verified above; editing/revisions/attachment rules pending |
+| [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local private-read and never-submitted DRAFT edit/ownership/version/state/attachment portions covered above; submitted editing/revision lifecycle pending |
 | [REQ-CON-003](specs/ROLE-CONTRIBUTOR.md#requirements) | AI specification draft | [AC-CON-003](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-005](specs/ROLE-CONTRIBUTOR.md#requirements) | Respond to changes | [AC-CON-005](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |

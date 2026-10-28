@@ -1,6 +1,6 @@
 # SpecSentry User Guide
 
-Status: local authentication and Contributor private drafts, 27 October 2026. No live application URL or
+Status: local authentication and Contributor private drafts/editing, 28 October 2026. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
 the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
@@ -14,7 +14,7 @@ Open the app to sign in with an account provided by your administrator. Enter yo
 username and password; your account's Contributor, Reviewer, or Release Maintainer
 workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Contributors can create, list
-and open their own private drafts. Other role workflows and AI assistants remain pending.
+and open/edit their own never-submitted private drafts. Other role workflows and AI assistants remain pending.
 
 ### Contributor private drafts
 
@@ -26,8 +26,28 @@ Select **Create a draft**, enter a title, problem and expected behavior, and opt
 enter constraints. Title is limited to 200 Unicode characters; each narrative field
 to 10,000. Select **Create private draft** to save and open its private detail.
 Select a title in the list to open an existing draft, or **Back to your drafts** to return.
-Only the owner can read this working content. Draft editing, deletion, submission,
-criteria, responses, lifecycle actions and the drafting assistant are not included yet.
+Only the owner can read this working content. Deletion, submission, criteria management,
+responses, lifecycle actions and the drafting assistant are not included yet.
+
+### Edit a never-submitted draft
+
+Open your private draft detail and select **Edit private draft**. Change title, problem,
+constraints or expected behavior, then select **Save private draft**. A successful save
+shows the new version; you can keep editing or select **Back to draft detail**. Hidden
+fields from the existing draft are preserved; this editor offers no criteria-management
+or submission controls. The server rejects editing if the draft is no longer eligible.
+
+Validation and failed saves retain your entered text. If the draft changed elsewhere,
+is no longer editable, or the save response is uncertain, saving pauses so an old form
+cannot overwrite newer work. Select **Reload latest draft and discard changes** only
+when ready to replace your unsaved input with the latest saved version. Confirm the
+discard prompt; cancel keeps your text. A failed reload also keeps your text and needs
+another explicit retry. Reapply any desired edits after reviewing the reloaded version.
+Returning to detail with unsaved changes also asks for confirmation.
+
+Unsaved editor input is held only in the signed-in page's memory. Refreshing, leaving
+the editor, signing out or losing the session can clear it; no browser storage is used.
+Only never-submitted DRAFT editing is available; submitted-revision editing is deferred.
 
 Validation messages identify fields to correct and preserve entered text. Network/server
 failures show a safe message and a reference identifier when available. If a create
