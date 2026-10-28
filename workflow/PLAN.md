@@ -152,5 +152,7 @@ Final security probes/disposition and limitations belong in the
 [current run](../logs/yooplo/2026-10-28-contributor-increment-3-run.md).
 No deployment/teammate patch approval inferred. INC2-VER-001 cause remains unconfirmed.
 Submission, withdrawal, criteria, review responses, AI and Increment4 remain excluded.
-Subsequent review-preparation request authorizes Increment3 commit/push and a stacked
-PR against Increment2 while unmerged; merge and Increment4 remain excluded.
+Subsequent review-preparation request authorized Increment3 commit/push; stacked
+[PR12](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/12)
+now targets Increment2's branch while unmerged. Final patch approval is pending;
+merge and Increment4 remain excluded.
