@@ -1,0 +1,47 @@
+{
+  "base_revision": "86dc8f22ad10d6a87dcb2253bdb711be48c33a5f",
+  "algorithm": "SHA256 compact ASCII JSON sorted path/sha256 entries using raw file bytes",
+  "manifest_sha256": "7d7b8c6b83a536398ecb7e5fbda2f81d529750da52f87146eda5c9237f6627fd",
+  "files": [
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "sha256": "f28f8083f085f4023a7480524eb992b9378924c81846e95ddfa1d40c699a17bf"
+    },
+    {
+      "path": "src/client/src/features/contributor/CriteriaDraft.test.tsx",
+      "sha256": "ff234897cdacc4327d548c47a86364620bf2ad5e3eaee1b9d1f34c4534e05082"
+    },
+    {
+      "path": "src/client/src/features/contributor/EditDraft.test.tsx",
+      "sha256": "367c46574bcfd8d5ccb25c939dbac5a4f3ac96ff8f4741c71bf131c0bbe5e556"
+    },
+    {
+      "path": "src/server/src/proposals/proposal-lifecycle.service.ts",
+      "sha256": "9b178916e60473c97c4decc740f5870bdc41ea8406d9dd6efd69b8eaebe925d6"
+    },
+    {
+      "path": "src/server/src/proposals/working-revisions.ts",
+      "sha256": "7c4515768d11af31ec311a1f8d8bb3ebd64097ff1752139f5f68fce14e6b5ce5"
+    },
+    {
+      "path": "src/server/test/contributor-contracts.spec.ts",
+      "sha256": "1ca81098ed776afe60c53eab29832ee16f718bd5cb1093045786b45fb34374f1"
+    },
+    {
+      "path": "src/server/test/contributor-drafts.integration.ts",
+      "sha256": "ac23fe52158d8b693710b5735a9adaf8df3b4a6287c2e1d4009968eb4f853f34"
+    },
+    {
+      "path": "src/server/test/working-revisions.spec.ts",
+      "sha256": "9a64b34a47f3d313af625d073e39dfa1325d3b5bd3a6c110ad667a5b4da6c5e9"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-criteria.spec.ts",
+      "sha256": "2b28fff54e5905330426205213870bbbe794554f49763d6597efa135187bf226"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-editing.spec.ts",
+      "sha256": "eaef4925aa8802f6505e0e977bf35cddbbad7adb2ee0317967886fd645715cac"
+    }
+  ]
+}

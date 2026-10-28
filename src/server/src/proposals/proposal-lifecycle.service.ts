@@ -44,7 +44,8 @@ export class ProposalLifecycleService {
       const root = await this.proposals.lockRoot(tx, id);
       if (root.ownerId !== actor.accountId) throw new ForbiddenException();
       if (root.state !== 'DRAFT' || root.firstSubmittedAt !== null || root.currentRevisionId !== null ||
-          root.releaseAttachmentRef !== null || root.version !== body.expectedVersion) throw new ConflictException();
+          root.currentAssignmentId !== null || root.releaseAttachmentRef !== null || root.version !== body.expectedVersion ||
+          await tx.proposalRevision.count({ where: { proposalId: id } }) > 0) throw new ConflictException();
       const working = await tx.workingRevision.findUnique({ where: { proposalId: id } });
       if (!working) throw new NotFoundException();
       const content = prepareWorkingContent(body.content, [workingContentSchema.parse(working.content)]);

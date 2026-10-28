@@ -1,0 +1,35 @@
+{
+  "id": "9e1afdf58d15450e84f36f421a079a52",
+  "prompter": "yooplo",
+  "session": "2026-10-28-contributor-increment-4",
+  "agent": "implementer",
+  "invocation": "fix-1",
+  "stage": "authoritative-key-recovery-fix",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed dispatch; settings not exposed",
+  "started_at": "2026-10-28T14:37:30.854979+00:00",
+  "ended_at": "2026-10-28T14:41:31.667862+00:00",
+  "elapsed_seconds": 240.812883,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "VER001 reproduced12pass1fail; local persistedcriterion/evidenceID guard;16criteria71client/type/lint/build passed;2clientfilesonly; freshindependentrevalidationpending",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+}

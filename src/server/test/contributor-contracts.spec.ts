@@ -4,6 +4,17 @@ const content = { title: 'Title', problem: 'Problem', constraints: '', expectedB
   summary: '', diffText: '', criteria: [], evidence: [] };
 
 describe('Contributor draft contracts', () => {
+  it('defaults criterion classification and permits incomplete collections with bounded nonempty entries', () => {
+    const criterion = { statement: 'Accept this' };
+    expect(createProposalRequestSchema.parse({ ...content, criteria: [criterion] }).criteria[0]!.required).toBe(true);
+    expect(createProposalRequestSchema.safeParse({ ...content, criteria: [{ ...criterion, required: false }] }).success).toBe(true);
+    expect(createProposalRequestSchema.safeParse({ ...content, criteria: [] }).success).toBe(true);
+    expect(createProposalRequestSchema.safeParse({ ...content, criteria: Array.from({ length: 50 }, () => criterion) }).success).toBe(true);
+    expect(createProposalRequestSchema.safeParse({ ...content, criteria: Array.from({ length: 51 }, () => criterion) }).success).toBe(false);
+    for (const statement of ['\u{1F600}'.repeat(2000), 'x\r\n'.repeat(1000)]) expect(createProposalRequestSchema.safeParse({ ...content, criteria: [{ statement }] }).success).toBe(true);
+    for (const statement of ['', ' \n ', '\u{1F600}'.repeat(2001)]) expect(createProposalRequestSchema.safeParse({ ...content, criteria: [{ statement }] }).success).toBe(false);
+  });
+
   it('requires literal deletion confirmation and bounded version without a reason or client identity', () => {
     for (const expectedVersion of [0, 2147483647]) expect(deleteDraftRequestSchema.parse({ expectedVersion, confirmed: true })).toEqual({ expectedVersion, confirmed: true });
     for (const body of [{ confirmed: true }, { expectedVersion: 0 }, { expectedVersion: 0, confirmed: false },

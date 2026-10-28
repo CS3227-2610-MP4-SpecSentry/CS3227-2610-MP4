@@ -40,7 +40,7 @@ test('owner edits via keyboard with version conflicts, confirmed reload, uncerta
   await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.type('Edited problem');
   await page.keyboard.press('Tab'); await page.keyboard.type('Edited constraints');
   await page.keyboard.press('Tab'); await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.type('Edited behavior');
-  await page.keyboard.press('Tab'); await page.keyboard.press('Enter');
+  await page.getByRole('button', { name: 'Save private draft' }).focus(); await page.keyboard.press('Enter');
   await expect(page.getByText('Draft saved. Version 1.')).toBeVisible();
   expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([]);
   await page.getByRole('button', { name: 'Back to draft detail' }).click();

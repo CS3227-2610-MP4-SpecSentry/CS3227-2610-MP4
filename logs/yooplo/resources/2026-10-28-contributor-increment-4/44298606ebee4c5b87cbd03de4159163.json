@@ -1,0 +1,35 @@
+{
+  "id": "44298606ebee4c5b87cbd03de4159163",
+  "prompter": "yooplo",
+  "session": "2026-10-28-contributor-increment-4",
+  "agent": "acceptance",
+  "invocation": "design-1",
+  "stage": "criteria-contract-conformance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed boundary; settings not exposed",
+  "started_at": "2026-10-28T14:19:06.849295+00:00",
+  "ended_at": "2026-10-28T14:22:56.882962+00:00",
+  "elapsed_seconds": 230.033667,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent acceptance criteria/test design; identity gate and blank-policy question recorded; no runtime checks or product edits",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+}

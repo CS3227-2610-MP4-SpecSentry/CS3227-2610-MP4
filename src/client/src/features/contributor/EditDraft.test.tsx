@@ -21,7 +21,9 @@ afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('Own draft editor', () => {
   it('saves repeatedly with exact versions and preserves every hidden field and child identity', async () => {
-    const fetch = vi.fn().mockResolvedValueOnce(reply(detail)).mockResolvedValueOnce(reply(saved(1))).mockResolvedValueOnce(reply(saved(2)));
+    const fetch = vi.fn().mockResolvedValueOnce(reply(detail)).mockResolvedValueOnce(reply(saved(1)))
+      .mockResolvedValueOnce(reply({ ...detail, version: 1, content: { ...content, title: 'Edited title' } }))
+      .mockResolvedValueOnce(reply(saved(2))).mockResolvedValueOnce(reply({ ...detail, version: 2, content: { ...content, title: 'Edited title', problem: 'Edited problem' } }));
     vi.stubGlobal('fetch', fetch); render(tree());
     fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'Edited title' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save private draft' }));
@@ -31,7 +33,7 @@ describe('Own draft editor', () => {
     fireEvent.change(screen.getByLabelText('Problem (required)'), { target: { value: 'Edited problem' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save private draft' }));
     await screen.findByText('Draft saved. Version 2.');
-    expect(JSON.parse(fetch.mock.calls[2]?.[1].body as string).expectedVersion).toBe(1);
+    expect(JSON.parse(fetch.mock.calls[3]?.[1].body as string).expectedVersion).toBe(1);
   });
   it('validates Unicode boundaries beside the field without losing input or sending a write', async () => {
     const fetch = vi.fn().mockResolvedValue(reply(detail)); vi.stubGlobal('fetch', fetch); render(tree());
@@ -47,7 +49,7 @@ describe('Own draft editor', () => {
     const fetch = vi.fn().mockResolvedValueOnce(reply(detail));
     if (status === 'network') fetch.mockRejectedValueOnce(new Error('offline'));
     else fetch.mockResolvedValueOnce(reply({ correlationId: '12345678-1234-4234-8234-123456789abc', message: 'private-stack' }, status as number));
-    fetch.mockResolvedValueOnce(reply({}, 500)).mockResolvedValueOnce(reply(latest)).mockResolvedValueOnce(reply(saved(4)));
+    fetch.mockResolvedValueOnce(reply({}, 500)).mockResolvedValueOnce(reply(latest)).mockResolvedValueOnce(reply(saved(4))).mockResolvedValueOnce(reply({ ...latest, version: 4 }));
     const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
     vi.stubGlobal('fetch', fetch); render(tree());
     fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'My unsaved text' } });

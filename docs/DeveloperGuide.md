@@ -6,7 +6,7 @@ The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
 PostgreSQL sessions, CSRF, role guards and restricted security events. Contributor
 Increment 1 adds private draft create/list/detail, Increment 2 adds own never-submitted
-DRAFT editing, and Increment 3 adds confirmed deletion of those drafts; other domain workflows and AI
+DRAFT editing, Increment 3 adds confirmed deletion and Increment 4 adds private draft criteria management; other domain workflows and AI
 integration remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
@@ -39,7 +39,7 @@ in the [run record](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
   requests return409 with no mutation; activity failure or session expiry rolls everything back.
 
 The four-field editor preserves the full loaded working-content DTO, including unexposed fields
-and child identities. It does not implement criteria management or submitted editing. On409 or
+and child identities. Increment4 adds criteria controls as described below; submitted editing remains deferred. On409 or
 uncertain outcome it retains text and the captured version, blocks blind saves, and requires
 confirmed authorized reload before replacing both content/version. Failed reload attempts do not
 automatically retry on ordinary callback refresh. Keyed proposal/auth contexts suppress late
@@ -59,6 +59,35 @@ dependency check. Final patch approval remains pending. No commit/push/merge or 
 was authorized by the implementation run. A subsequent review-preparation request now
 authorizes Increment3 commit/push and a stacked PR against Increment2 while unmerged;
 merge and Increment4 remain excluded. Earlier exclusions above describe Increment2's scope.
+
+Increment4 is separately authorized on `feature/contributor-draft-criteria` from unmerged
+Increment3 head `86dc8f2`; PR10/11/12 patch approvals remain pending. Yooplo relayed
+ngkhengyang's agreement to explicit stable-key semantics and chose to preserve existing
+nonempty-entry/max50/max2000/defaulttrue contracts. Zero/alloptional drafts remain valid.
+The subsequent review-preparation request authorizes Increment4 commit/push and a stacked
+PR against Increment3 while unmerged; merge and Increment5 remain excluded. See the
+[criteria brief/decisions/evidence](../logs/yooplo/2026-10-28-contributor-increment-4.md).
+
+The existing PATCH/full working DTO is reused, without endpoint/schema/migration changes.
+Retaining a scoped issued key declares unchanged meaning; omission requests a new identity.
+Unknown/removed/foreign/duplicate keys are rejected. Explicit human meaning choices replace
+the helper's previous exact-text rotation rule; there is no similarity/AI decision.
+Save checks actual submitted history/current assignment as well as existing state/markers/version
+under the root lock. Criterion changes still use atomic content-free DRAFT_SAVED, preserving
+the deletion migration's private activity allowlist and all submitted-history guards.
+
+After PATCH, the editor requires authorized GET content with the exact committed proposal,
+working identity and version, with every persisted criterion/evidence identity present,
+before adopting generated keys/content/version together. Failed,
+malformed or newer reconciliation preserves input and pauses writes for explicit recovery.
+Successful-save/read-failure is distinguished from an ambiguous PATCH outcome. Blank rows
+remain unsaved with validation; minimum-one/required-on-submission gates are not imposed on drafts.
+Independent final acceptance passed30server/71client units,38PostgreSQL cases/four suites,
+eightChromium cases, typecheck/lint/build on the final frozen source. Both initial defects
+(statement-error focus priority and incomplete authoritative identity reads) were corrected
+and independently revalidated. Security results and exact manifest belong in the run.
+No full REQ-CON-007/009, submitted classification/history/finding behavior or deployed
+claim follows; the inherited intermittent App test cause remains unresolved despite passes.
 
 `DELETE /api/proposals/:id` uses strict `{expectedVersion,confirmed:true}` and returns204.
 It reuses Contributor role/session/CSRF checks and account/session/root transaction locks.
@@ -331,7 +360,8 @@ code, text or assets here with source, license and affected files.
 Codex assisted with architecture/scaffolding and documentation as recorded above,
 Contributor workflow instructions, and reading/mapping the supplied MP4 PDF into
 repository specifications and checklists. It also coordinated Contributor foundation reuse,
-implemented Increment 1, Increment 2 own-draft editing and Increment 3 draft deletion, and supplied separate
+implemented Increment 1, Increment 2 own-draft editing, Increment 3 draft deletion and
+Increment 4 private criterion management, and supplied separate
 design/security and acceptance review agents;
 actual results and unavailable evidence are linked in the run log. Same-repository reused source
 is attributed to the pinned Reviewer foundation above. AI-generated changes and summaries

@@ -156,3 +156,23 @@ Subsequent review-preparation request authorized Increment3 commit/push; stacked
 [PR12](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/12)
 now targets Increment2's branch while unmerged. Final patch approval is pending;
 merge and Increment4 remain excluded.
+
+### Contributor Increment 4 — local acceptance verified, 28 October 2026
+
+Subsequent explicit request authorizes private draft criteria management only on
+`feature/contributor-draft-criteria`, based on unmerged Increment3 head `86dc8f2`.
+PR10/11/12 remain open with final teammate patch approval pending; original branches
+are preserved. Yooplo reports ngkhengyang agreed to explicit owner-asserted stable-key
+semantics and chose to preserve nonempty persisted entries/current limits; zero/alloptional
+draft saves remain valid. No new endpoint/schema/migration is planned.
+Security design and independent test design completed. Implemented the existing PATCH
+slice without DTO/schema/migration changes. Independent final acceptance passed30server/
+71client units,38PostgreSQL/four suites,eightChromium cases and typecheck/lint/build.
+Focus and incomplete-identity-read findings were fixed and independently revalidated.
+Final security results/limits and exact manifest are in the
+[brief, decisions and run](../logs/yooplo/2026-10-28-contributor-increment-4.md).
+Only never-submitted portions of REQ-CON-007/009 covered; submitted history/findings,
+deployment/full manual WCAG/performance deferred. INC2-VER-001 remains unresolved.
+Subsequent review-preparation request authorizes Increment4 commit/push and a stacked
+PR against Increment3 while unmerged; merge and Increment5 remain excluded.
+Earlier Increment3 exclusions describe that slice.
