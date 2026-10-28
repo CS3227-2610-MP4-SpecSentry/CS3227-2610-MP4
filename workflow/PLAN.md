@@ -122,8 +122,8 @@ patch approval is claimed. Increment 2 status follows below.
 Own never-submitted DRAFT editing is implemented and independently verified on local
 `feature/contributor-own-draft-editing`, based on unmerged Increment1 head
 `bb485ff8ea555f3505195b449d13d7a7a3a166f9`. Increment1's branch is intact and final
-teammate review remains pending. Future Increment2 PRs must target
-`feature/contributor-private-drafts` while that foundation is unmerged. The subsequent
+teammate review remains pending. [Increment2 PR11](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/11)
+targets `feature/contributor-private-drafts` while that foundation is unmerged. The subsequent
 review-preparation request authorizes commit/push/PR publication, not merge or Increment3.
 
 Reuse existing save DTO/PATCH route, root/session transaction checks, bounded versions,
