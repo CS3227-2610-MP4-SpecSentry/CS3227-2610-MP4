@@ -173,6 +173,8 @@ Final security results/limits and exact manifest are in the
 [brief, decisions and run](../logs/yooplo/2026-10-28-contributor-increment-4.md).
 Only never-submitted portions of REQ-CON-007/009 covered; submitted history/findings,
 deployment/full manual WCAG/performance deferred. INC2-VER-001 remains unresolved.
-Subsequent review-preparation request authorizes Increment4 commit/push and a stacked
-PR against Increment3 while unmerged; merge and Increment5 remain excluded.
+Subsequent review-preparation request authorized Increment4 commit/push; stacked
+[PR13](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/13)
+now targets Increment3's branch while unmerged. Final teammate approval remains pending;
+merge and Increment5 remain excluded.
 Earlier Increment3 exclusions describe that slice.
