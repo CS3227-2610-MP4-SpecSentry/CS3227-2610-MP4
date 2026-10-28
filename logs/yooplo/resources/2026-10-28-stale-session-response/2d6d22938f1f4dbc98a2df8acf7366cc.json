@@ -12,8 +12,24 @@
   "observed_effort": null,
   "settings_reason": "Exact execution settings not exposed",
   "started_at": "2026-10-28T07:15:23.144248+00:00",
-  "ended_at": null,
-  "elapsed_seconds": null,
-  "status": "running",
-  "usage": null
+  "ended_at": "2026-10-28T07:36:07.063759+00:00",
+  "elapsed_seconds": 1243.919511,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "SEC007 and ACC002 reproduced/fixed, fresh independent28client checks passed, scoped secret scan and docs checked, fix5971af4 pushed and PR10 evidence updated; no merge/later increment",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and attributable token cache tool retry metrics not exposed",
+    "output_tokens": "Exact execution settings and attributable token cache tool retry metrics not exposed",
+    "cache_read_tokens": "Exact execution settings and attributable token cache tool retry metrics not exposed",
+    "tool_calls": "Exact execution settings and attributable token cache tool retry metrics not exposed",
+    "retries": "Exact execution settings and attributable token cache tool retry metrics not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and attributable token cache tool retry metrics not exposed"
 }

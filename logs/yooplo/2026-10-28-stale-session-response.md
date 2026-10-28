@@ -1,5 +1,7 @@
 # Increment 1 review fix: obsolete session-loss response
 
+Status: DRAFT-SEC-007 / DRAFT-ACC-002 independently verified fixed and published to PR10. Earlier pending/partial checkpoints below are preserved as history; final human review and remote CI remain unverified.
+
 ## Request and brief
 
 - Prompter yooplo (explicit identity retained),28October2026 Asia/Singapore. User supplied screenshot of PR10 P2 review: a delayed draft-create401 from an obsolete login can unconditionally clear a replacement session and discard new draft input. Treat as a request to fix the existing Increment1 PR; no merge/Increment2 or external review replies authorized. Prior authorization to publish Increment1 updates persists; final human approval still pending.
@@ -38,3 +40,11 @@ Pending. Human summary verification, teammate patch approval and remote CI remai
 - All controls pass: local logout/server expiry × same/different replacement account; focus200 replacement including same-account rotated CSRF, no disabled stale draft carryover; same-context expiry refresh preserves pending/input and genuine401 clearing; failed logout preserves input/current401; obsolete logout204/500 cannot mutate replacement; concurrent401/500 checks prevent stale200 restoration; prior SEC005 Back→New/uncertain create recovery still passes.
 - Only product changes: `src/client/src/App.tsx` and `App.test.tsx`. DeveloperGuide, TRACEABILITY and prior run record link this new review delta separately from historical27October manifests. No server/schema/wire/persistence/AI/later-increment change. Prior broader integration results not presented as fresh runs on this delta.
 - Skipped proportionately: backend/PG/browser/deployment/performance reruns, no corresponding code/contract changes. No remoteCI or human patch/log approval claimed. No reviewer messages/thread replies/resolution or merge. Publication uses existing user authorization to update Increment1 feature branch/PR, no new broader permissions. All stage time boundaries coordinator-observed; settings/tokens/cache/tool totals unavailable. Publication outcome/resource report follows.
+
+## Publication and closure
+
+- Coordinator reconfirmed exact independent source hashes and scoped14-file delta (two product/test files, related docs/logs and eight resource records). Documentation targets exist, Git diff check passed and scoped Gitleaks8.30.1 scan found no leaks (~115244bytes). No unrelated files, credential/config/generated artifacts or package changes.
+- Committed/pushed `5971af463c982d409be0f5b629a7cab2a08a5a26` (`fix(contributor): ignore responses from obsolete logins`) to feature/contributor-private-drafts. Updated existing [PR10](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/10) description with follow-up evidence and distinguished original27October checks from this client-only delta. No external comment, thread resolution, merge, deployment or Increment2.
+- SEC007/ACC002 closed by fresh acceptance and security tests; no remaining blocking finding in this delta. Human patch approval/summary verification and remoteCI remain pending, not substituted by foundation agreement or agent review.
+- Completing this stage's measured resource report and publishing completed measurement evidence in a follow-up only. Final measurement rendering/evidence commit/push/verification/response outside the closed interval; no recursive new implementation stage implied. Original source manifests remain historical; new App/test hashes above define the verified patch.
+- [Completed resource report](resources/2026-10-28-stale-session-response/report.md): eight finished intervals, CLI report exit0; measured wall1243.919511seconds, summed elapsed in report includes overlap. Exact model/effort and attributable token/cache/tool/retry telemetry unavailable. Resource rendering/publication follows the recording exception; no fabricated retrospective timing or final human approval.
