@@ -125,6 +125,48 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     expect((await owner.agent.get('/api/proposals').expect(200)).body.items).toContainEqual(expect.objectContaining({ proposalId: id, title: 'Saved again', version: 2 }));
   });
 
+  it('persists criterion defaults/classification and explicit identity through add/correct/replace/remove/readd without submission gates', async () => {
+    const id = (await create(owner, { ...content, criteria: [{ statement: 'First meaning' }] }).expect(201)).body.proposalId as string;
+    let latest = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    const originalKey = latest.content.criteria[0].stableKey as string;
+    expect(latest.content.criteria[0].required).toBe(true);
+    const save = async (criteria: object[]) => {
+      await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: latest.version, content: { ...latest.content, criteria } }).expect(200);
+      latest = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    };
+    await save([{ stableKey: originalKey, statement: 'Same meaning corrected wording', required: false }]);
+    expect(latest.content.criteria[0]).toEqual({ stableKey: originalKey, statement: 'Same meaning corrected wording', required: false });
+    await save(latest.content.criteria); expect(latest.content.criteria[0].stableKey).toBe(originalKey);
+    await save([{ statement: 'Different meaning', required: false }, { statement: 'Different meaning' }]);
+    const replacement = latest.content.criteria[0].stableKey as string;
+    expect(replacement).not.toBe(originalKey); expect(latest.content.criteria[1].stableKey).not.toBe(replacement);
+    expect(latest.content.criteria[1].required).toBe(true);
+    await save([]); expect(latest.content.criteria).toEqual([]);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: latest.version, content: { ...latest.content, criteria: [{ stableKey: replacement, statement: 'Resurrect', required: true }] } }).expect(422);
+    await save([{ statement: 'Different meaning', required: false }]); expect(latest.content.criteria[0].stableKey).not.toBe(replacement);
+    expect(latest.content).toMatchObject({ summary: '', diffText: '' });
+    const events = await database.client.proposalActivity.findMany({ where: { proposalId: id, action: 'DRAFT_SAVED' } });
+    expect(events).toHaveLength(5); expect(JSON.stringify(events)).not.toContain('Different meaning');
+    const before = latest;
+    const fault = jest.spyOn(activity, 'append').mockRejectedValueOnce(new Error('Synthetic criterion audit failure'));
+    try { await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: latest.version, content: { ...latest.content, criteria: [] } }).expect(500); } finally { fault.mockRestore(); }
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toEqual(before);
+  });
+
+  it('bounds saved criteria and rejects blank/duplicate/foreign keys without truncation or partial saves', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const maximum = Array.from({ length: 50 }, () => ({ statement: '\u{1F600}'.repeat(2000), required: false }));
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: { ...content, criteria: maximum } }).expect(200);
+    const latest = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    expect(latest.content.criteria).toHaveLength(50); expect([...latest.content.criteria[0].statement]).toHaveLength(2000);
+    for (const criteria of [[...maximum, maximum[0]], [{ statement: '\u{1F600}'.repeat(2001) }], [{ statement: ' \r\n ' }],
+      [latest.content.criteria[0], latest.content.criteria[0]], [{ stableKey: randomUUID(), statement: 'Foreign identity' }]]) {
+      await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 1, content: { ...content, criteria } }).expect(422);
+    }
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toEqual(latest);
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(1);
+  });
+
   it('enforces save ownership/roles/CSRF/strict fields and private-reference scope without mutation', async () => {
     const id = (await create().expect(201)).body.proposalId as string;
     const save = (login: Login, body: object = { expectedVersion: 0, content }) => login.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', login.token).send(body);
@@ -160,6 +202,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     }
     const id = (await create().expect(201)).body.proposalId as string;
     const snapshot = await database.client.proposalRevision.create({ data: { proposalId: id, number: 1, summary: 'Immutable', problem: 'Submitted problem', constraints: '', expectedBehavior: 'Submitted behavior', diffText: 'Submitted diff' } });
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(409);
     await database.client.changeProposal.update({ where: { id }, data: { currentRevisionId: snapshot.id } });
     await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(409);
     expect(await database.client.proposalRevision.findUniqueOrThrow({ where: { id: snapshot.id } })).toEqual(snapshot);

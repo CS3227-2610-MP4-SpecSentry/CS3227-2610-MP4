@@ -1,6 +1,6 @@
 # SpecSentry User Guide
 
-Status: locally verified authentication and Contributor private drafts/editing/deletion, 28 October 2026. No live application URL or
+Status: locally verified authentication and Contributor private drafts/editing/deletion/criteria, 28 October 2026. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
 the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
@@ -26,7 +26,7 @@ Select **Create a draft**, enter a title, problem and expected behavior, and opt
 enter constraints. Title is limited to 200 Unicode characters; each narrative field
 to 10,000. Select **Create private draft** to save and open its private detail.
 Select a title in the list to open an existing draft, or **Back to your drafts** to return.
-Only the owner can read this working content. Submission, criteria management,
+Only the owner can read this working content. Submission,
 responses, lifecycle actions and the drafting assistant are not included yet.
 
 ### Delete a never-submitted draft
@@ -50,8 +50,28 @@ deletion paused. Session expiry requires signing in again.
 Open your private draft detail and select **Edit private draft**. Change title, problem,
 constraints or expected behavior, then select **Save private draft**. A successful save
 shows the new version; you can keep editing or select **Back to draft detail**. Hidden
-fields from the existing draft are preserved; this editor offers no criteria-management
-or submission controls. The server rejects editing if the draft is no longer eligible.
+fields from the existing draft are preserved. Criteria controls are described below;
+there are no submission controls. The server rejects editing if the draft is no longer eligible.
+
+### Manage draft acceptance criteria
+
+In the private editor,
+select **Add criterion**, enter its statement and set its **required** checkbox. New criteria
+default to required. You may save zero criteria or all-optional criteria; submission readiness
+is a separate, currently unavailable action. Each saved statement must be nonblank and at most
+2,000 Unicode characters; the collection limit is 50. A blank or invalid row keeps your input
+and shows an error rather than being silently removed. **Remove criterion** removes the row
+from your working draft when you save.
+
+When changing a saved statement, choose its **meaning**: **Same meaning / wording correction**
+retains its identity; **Materially changed meaning / replace criterion** gives it a new identity.
+The application uses your declaration; it does not infer meaning. Classification-only changes
+keep identity. Removed then re-added criteria receive new identities.
+
+After saving, the editor reads the committed draft to obtain its assigned identities. If this
+check fails or finds a different version, your entered text and choices remain and saving pauses.
+Follow the explicit reload/discard confirmation to recover; do not assume another save is safe.
+These controls apply only to never-submitted drafts, not submitted history or findings.
 
 Validation and failed saves retain your entered text. If the draft changed elsewhere,
 is no longer editable, or the save response is uncertain, saving pauses so an old form

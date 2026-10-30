@@ -13,6 +13,10 @@ const fields = [
 ] as const;
 type NarrativeField = typeof fields[number]['name'];
 
+function hasPersistedIdentities(content: WorkingContent) {
+  return content.criteria.every(criterion => !!criterion.stableKey) && content.evidence.every(item => !!item.id);
+}
+
 function DraftFields({ content, errors, disabled, onChange }: {
   content: Pick<WorkingContent, NarrativeField>; errors: Record<string, string>; disabled: boolean;
   onChange(field: NarrativeField, value: string): void;
@@ -243,6 +247,14 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [meaning, setMeaning] = useState<Record<string, 'same' | 'replace'>>({});
+  const criterionFocus = useRef<number | null>(null);
+  useEffect(() => {
+    if (criterionFocus.current !== null) {
+      (document.getElementById(`criterion-${criterionFocus.current}-statement`) ?? document.getElementById('add-criterion'))?.focus();
+      criterionFocus.current = null;
+    }
+  }, [content]);
   const [loading, setLoading] = useState(true);
   const [pending, setPending] = useState(false);
   const [blocked, setBlocked] = useState(false);
@@ -267,12 +279,12 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
           return;
         }
         const latest = draftResponseSchema.parse(await response.json());
-        if (latest.proposalId !== id) throw new Error();
+        if (latest.proposalId !== id || !hasPersistedIdentities(latest.content)) throw new Error();
         if (!controller.signal.aborted) {
           appliedLoad.current = attempt;
-          setBaseline(latest); setContent(latest.content); setErrors({}); setBlocked(false);
+          setBaseline(latest); setContent(latest.content); setMeaning({}); setErrors({}); setBlocked(false);
         }
-      } catch { if (!controller.signal.aborted) setError('Unable to load this draft. Your entered text has been kept.'); }
+      } catch { if (!controller.signal.aborted) { setBlocked(true); setError('Unable to load this draft. Your entered text has been kept.'); } }
       finally { if (!controller.signal.aborted) { appliedLoad.current = attempt; setLoading(false); } }
     }
     void load(); return () => controller.abort();
@@ -281,16 +293,28 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!baseline || !content || pending || loading || blocked || baseline.state !== 'DRAFT') return;
-    const parsed = createProposalRequestSchema.safeParse(content);
-    if (!parsed.success) {
-      const nextErrors: Record<string, string> = {};
-      for (const issue of parsed.error.issues) nextErrors[String(issue.path[0])] ??= issue.message;
+    const original = new Map(baseline.content.criteria.map(criterion => [criterion.stableKey, criterion.statement]));
+    const nextErrors: Record<string, string> = {};
+    const criteria = content.criteria.map((criterion, index) => {
+      if (!criterion.stableKey || original.get(criterion.stableKey) === criterion.statement.replace(/\r\n?/g, '\n')) return criterion;
+      if (!meaning[criterion.stableKey]) nextErrors[`criteria.${index}.meaning`] = 'Choose whether this changes the criterion meaning.';
+      if (meaning[criterion.stableKey] === 'replace') return { statement: criterion.statement, required: criterion.required };
+      return criterion;
+    });
+    const parsed = createProposalRequestSchema.safeParse({ ...content, criteria });
+    if (!parsed.success || Object.keys(nextErrors).length) {
+      if (!parsed.success) for (const issue of parsed.error.issues) nextErrors[issue.path.join('.')] ??= issue.message;
       setErrors(nextErrors); setError('Check the highlighted fields.');
       const first = fields.find(field => nextErrors[field.name]);
+      const criterionError = Object.keys(nextErrors).find(key => /^criteria\.\d+\.statement$/.test(key)) ?? Object.keys(nextErrors).find(key => key.startsWith('criteria.'));
       if (first) document.getElementById(`draft-${first.name}`)?.focus();
+      else if (criterionError) document.getElementById(`criterion-${criterionError.split('.')[1]}-${criterionError.endsWith('meaning') ? 'meaning' : 'statement'}`)?.focus();
+      else document.getElementById('add-criterion')?.focus();
       return;
     }
+    if (!parsed.success) return;
     setPending(true); setErrors({}); setError(''); setSuccess('');
+    let committed = false;
     try {
       const response = await fetch(`/api/proposals/${encodeURIComponent(id)}/draft`, { method: 'PATCH', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrfToken },
@@ -305,12 +329,19 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
       }
       const saved = proposalLifecycleResponseSchema.parse(await response.json());
       if (saved.proposalId !== id || saved.workingRevisionId !== baseline.workingRevisionId || saved.version !== baseline.version + 1 || saved.state !== 'DRAFT') throw new Error();
+      committed = true;
+      const read = await fetch(`/api/proposals/${encodeURIComponent(id)}/draft`, { credentials: 'same-origin' });
+      if (read.status === 401) { onSessionLost(); return; }
+      if (!active.current) return;
+      if (!read.ok) throw new Error();
+      const latest = draftResponseSchema.parse(await read.json());
+      if (latest.proposalId !== id || latest.workingRevisionId !== saved.workingRevisionId || latest.version !== saved.version || latest.state !== 'DRAFT' || !hasPersistedIdentities(latest.content)) throw new Error();
       if (active.current) {
-        setBaseline({ ...baseline, version: saved.version, content: parsed.data }); setContent(parsed.data);
+        setBaseline(latest); setContent(latest.content); setMeaning({});
         setSuccess(`Draft saved. Version ${saved.version}.`);
       }
     } catch {
-      if (active.current) { setBlocked(true); setError('The save result is uncertain. Your draft may have been saved. Your entered text has been kept.'); }
+      if (active.current) { setBlocked(true); setError(committed ? 'Draft saved, but its current identities could not be reconciled. Your entered text has been kept. Reload before saving again.' : 'The save result is uncertain. Your draft may have been saved. Your entered text has been kept.'); }
     } finally { if (active.current) setPending(false); }
   }
 
@@ -335,6 +366,49 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
       {blocked && <p role="status">Saving is paused. Reload and confirm discarding your edits to reconcile with the latest saved version before saving again.</p>}
       <form className="draft-form" noValidate onSubmit={event => void save(event)}>
         <DraftFields content={content} errors={errors} disabled={pending || loading} onChange={(field, value) => { setContent({ ...content, [field]: value }); setSuccess(''); }} />
+        <fieldset disabled={pending || loading}>
+          <legend>Acceptance criteria</legend>
+          <p>Up to 50 criteria, each at most 2,000 characters. New criteria are required by default. Empty and all-optional collections may be saved as drafts.</p>
+          {errors.criteria && <p role="alert">{errors.criteria}</p>}
+          {content.criteria.length === 0 && <p>No criteria yet. You can save this incomplete draft.</p>}
+          {content.criteria.map((criterion, index) => {
+            const changed = criterion.stableKey && baseline.content.criteria.find(item => item.stableKey === criterion.stableKey)?.statement !== criterion.statement.replace(/\r\n?/g, '\n');
+            const statementError = errors[`criteria.${index}.statement`];
+            const meaningError = errors[`criteria.${index}.meaning`];
+            return <div key={criterion.stableKey ?? `new-${index}`}>
+              <label htmlFor={`criterion-${index}-statement`}>Criterion {index + 1} statement</label>
+              <textarea id={`criterion-${index}-statement`} value={criterion.statement} rows={3} aria-invalid={!!statementError}
+                aria-describedby={statementError ? `criterion-${index}-error` : undefined}
+                onChange={event => {
+                  setContent({ ...content, criteria: content.criteria.map((item, i) => i === index ? { ...item, statement: event.target.value } : item) });
+                  if (criterion.stableKey) setMeaning(previous => { const next = { ...previous }; delete next[criterion.stableKey!]; return next; });
+                  setSuccess('');
+                }} />
+              {statementError && <p id={`criterion-${index}-error`}>{statementError}</p>}
+              <label><input type="checkbox" checked={criterion.required} onChange={event => {
+                setContent({ ...content, criteria: content.criteria.map((item, i) => i === index ? { ...item, required: event.target.checked } : item) }); setSuccess('');
+              }} />Criterion {index + 1} required</label>
+              {changed && <>
+                <label htmlFor={`criterion-${index}-meaning`}>Criterion {index + 1} meaning</label>
+                <p id={`criterion-${index}-meaning-hint`}>Declare whether your wording keeps the same meaning. A materially rewritten criterion receives a new identity.</p>
+                <select id={`criterion-${index}-meaning`} value={meaning[criterion.stableKey!] ?? ''} aria-invalid={!!meaningError}
+                  aria-describedby={`criterion-${index}-meaning-hint${meaningError ? ` criterion-${index}-meaning-error` : ''}`}
+                  onChange={event => { setMeaning({ ...meaning, [criterion.stableKey!]: event.target.value as 'same' | 'replace' }); setSuccess(''); }}>
+                  <option value="">Choose meaning</option><option value="same">Same meaning / wording correction</option><option value="replace">Materially changed meaning / replace criterion</option>
+                </select>
+                {meaningError && <p id={`criterion-${index}-meaning-error`}>{meaningError}</p>}
+              </>}
+              <button type="button" onClick={() => {
+                criterionFocus.current = index < content.criteria.length - 1 ? index : index - 1;
+                setContent({ ...content, criteria: content.criteria.filter((_, i) => i !== index) }); setErrors({}); setSuccess('');
+              }}>Remove criterion {index + 1}</button>
+            </div>;
+          })}
+          <button id="add-criterion" type="button" disabled={content.criteria.length >= 50} onClick={() => {
+            criterionFocus.current = content.criteria.length;
+            setContent({ ...content, criteria: [...content.criteria, { statement: '', required: true }] }); setErrors({}); setSuccess('');
+          }}>Add criterion</button>
+        </fieldset>
         <button type="submit" disabled={pending || loading || blocked || baseline.state !== 'DRAFT'}>{pending ? 'Saving…' : 'Save private draft'}</button>
       </form>
     </>}

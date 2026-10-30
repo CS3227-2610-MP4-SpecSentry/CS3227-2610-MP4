@@ -129,6 +129,26 @@ remains unconfirmed despite passing reruns; no App assertions were changed.
 The [independent test design](../logs/yooplo/2026-10-28-contributor-increment-3-tests.md)
 distinguishes planned D01–D24 checks from executed evidence.
 
+### Increment 4: private draft criteria — 28 October 2026
+
+Scope and ngkhengyang's reported identity-contract agreement are recorded in the
+[run](../logs/yooplo/2026-10-28-contributor-increment-4.md). Branch starts at unmerged
+Increment3 head `86dc8f2`; PR10/11/12 final patch approval remains pending.
+
+| Requirement / portion | Executed local evidence |
+| --- | --- |
+| REQ-CON-007 never-submitted classification | Existing PATCH/fullDTO defaults required, persists optional/classification with stable identity; zero/alloptional drafts valid, blank rows retained unsaved; contract/helper/PG/RTL/browser checks |
+| REQ-CON-009 never-submitted identity | Explicit same-meaning assertion retains issued key; new/material rewrite omits key for server UUID; removal/re-add/foreign/duplicate/removed-key denial/repeated saves verified. No similarity/AI |
+| REQ-CON-002, REQ-SHR-001/002/003/004/007, NFR-REL-001 | Owner/role/sessionCSRF/state/actual-history/version bounds and races; criteria and content-free DRAFT_SAVED atomic; audit/expiry rollback; existing deletion guards and create/edit/delete regression passed |
+| REQ-SHR-005, NFR-A11Y-001, shared failure contract | [Criteria RTL](../src/client/src/features/contributor/CriteriaDraft.test.tsx), [Chromium criteria](tests/browser/contributor-criteria.spec.ts): keyboard/labels/focus/axe/reflow, validation/retained input, explicit meaning, failed/newer/malformed identity read recovery and proposal/auth callbacks |
+
+Independent final30server/71client units,38PG cases/four suites,eightChromium cases,
+typecheck/lint/build passed on the final manifest. INC4-UI-001 and INC4-VER-001 fixes
+independently revalidated. No sharedDTO/schema/migration/App/auth edits. Separate final
+security report is attributed in the run. Submitted classification changes/immutable
+criterion history/finding resolution and complete AC-CON-007/009 remain deferred.
+No full manual WCAG/deployment/performance evidence; INC2-VER-001 remains unresolved.
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
 | [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |
@@ -137,9 +157,9 @@ distinguishes planned D01–D24 checks from executed evidence.
 | [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-005](specs/ROLE-CONTRIBUTOR.md#requirements) | Respond to changes | [AC-CON-005](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-006](specs/ROLE-CONTRIBUTOR.md#requirements) | Withdraw | [AC-CON-006](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Private-draft portion verified above; submitted-classification scenario pending |
 | [REQ-CON-008](specs/ROLE-CONTRIBUTOR.md#requirements) | Finding response | [AC-CON-008](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-009](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion identity | [AC-CON-009](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-009](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion identity | [AC-CON-009](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | [Increment4 private-draft portion](../logs/yooplo/2026-10-28-contributor-increment-4.md) verified; submitted history/finding scenario pending |
 | [REQ-REL-001](specs/ROLE-MAINTAINER.md#requirements) | Release candidate | [AC-REL-001](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-002](specs/ROLE-MAINTAINER.md#requirements) | Deterministic gates | [AC-REL-002](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-003](specs/ROLE-MAINTAINER.md#requirements) | AI readiness summary | [AC-REL-003](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
