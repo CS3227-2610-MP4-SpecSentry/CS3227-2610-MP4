@@ -1,0 +1,86 @@
+[
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "text": "",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "text": "SpecSentry\nSpecification workspace",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "text": "Contributor workspace",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "text": "Sign out",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "BODY",
+    "id": "",
+    "text": "Skip to main content\nSpecSentry\nSpecification workspace\n\nWORKSPACE\n\nContributor workspace\n",
+    "within": false,
+    "hasFocus": false
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "text": "",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "text": "SpecSentry\nSpecification workspace",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "text": "Contributor workspace",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "text": "Sign out",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "BODY",
+    "id": "",
+    "text": "Skip to main content\nSpecSentry\nSpecification workspace\n\nWORKSPACE\n\nContributor workspace\n",
+    "within": false,
+    "hasFocus": false
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "text": "",
+    "within": true,
+    "hasFocus": true
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "text": "SpecSentry\nSpecification workspace",
+    "within": true,
+    "hasFocus": true
+  }
+]

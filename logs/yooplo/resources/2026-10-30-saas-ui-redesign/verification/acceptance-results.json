@@ -1,0 +1,70 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "login keyboard, CSRF, sign out and scan",
+      "status": "passed"
+    },
+    {
+      "name": "empty list responsive 375px and axe",
+      "status": "passed"
+    },
+    {
+      "name": "empty list responsive 768px and axe",
+      "status": "passed"
+    },
+    {
+      "name": "empty list responsive 1024px and axe",
+      "status": "passed"
+    },
+    {
+      "name": "empty list responsive 1440px and axe",
+      "status": "passed"
+    },
+    {
+      "name": "populated page and empty cursor boundary",
+      "status": "passed"
+    },
+    {
+      "name": "create validation, draft detail and delete confirmation",
+      "status": "passed"
+    },
+    {
+      "name": "editor long text, navigation preserves input and responsive scan",
+      "status": "passed"
+    },
+    {
+      "name": "loading and retry error retain usable navigation",
+      "status": "passed"
+    },
+    {
+      "name": "Reviewer authorized landing only",
+      "status": "passed"
+    },
+    {
+      "name": "Release Maintainer authorized landing only",
+      "status": "passed"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "screenshots": [
+    "login-desktop.png",
+    "login-mobile.png",
+    "empty-375.png",
+    "empty-768.png",
+    "empty-1024.png",
+    "empty-1440.png",
+    "populated-mobile.png",
+    "delete-confirmation.png",
+    "editor-375.png",
+    "editor-768.png",
+    "editor-1024.png",
+    "editor-1440.png",
+    "detail-mobile.png",
+    "list-error.png"
+  ]
+}
