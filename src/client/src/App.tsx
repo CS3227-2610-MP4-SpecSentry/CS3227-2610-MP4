@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import { csrfResponseSchema, sessionResponseSchema, type AccountRole, type SessionResponse } from '@specsentry/shared';
 import { ContributorWorkspace } from './features/contributor/ContributorWorkspace';
+import { Icon } from './shared/Icon';
 
 const workspaces: Record<AccountRole, { path: string; label: string }> = {
   CONTRIBUTOR: { path: '/contributor', label: 'Contributor' },
@@ -36,7 +37,8 @@ function Login({ onLogin }: { onLogin: (session: SessionResponse) => void }) {
     } catch { setError('Sign-in is unavailable. Please try again.'); }
     finally { setPending(false); }
   }
-  return <>
+  return <div className="login-card">
+    <div className="login-icon"><Icon name="lock" /></div>
     <h2>Sign in</h2>
     <p>Use the account provided by your administrator.</p>
     <form onSubmit={(event) => void submit(event)}>
@@ -47,6 +49,59 @@ function Login({ onLogin }: { onLogin: (session: SessionResponse) => void }) {
       <button type="submit" disabled={pending}>{pending ? 'Signing in…' : 'Sign in'}</button>
       {error && <p role="alert">{error}</p>}
     </form>
+    <p className="login-footnote"><Icon name="shield" /> Your workspace starts with a secure sign-in.</p>
+  </div>;
+}
+
+type NavigationProps = {
+  workspace: { path: string; label: string }; username: string; loggingOut: boolean;
+  onLogout(): void; onNavigate?(): void;
+};
+
+function SidebarContent({ workspace, username, loggingOut, onLogout, onNavigate }: NavigationProps) {
+  return <>
+    <Link className="brand" to={workspace.path} aria-label="SpecSentry workspace" title="SpecSentry workspace" onClick={onNavigate}><span className="brand-mark"><Icon name="shield" /></span><span className="sidebar-label">SpecSentry<small>Specification workspace</small></span></Link>
+    <div className="sidebar-scroll">
+      <p className="nav-caption sidebar-label">WORKSPACE</p>
+      <nav aria-label="Account"><Link className="nav-link active" aria-current="page" aria-label={`${workspace.label} workspace`} title={`${workspace.label} workspace`} to={workspace.path} onClick={onNavigate}><Icon name="grid" /><span className="sidebar-label">{workspace.label} workspace</span></Link></nav>
+    </div>
+    <footer className="sidebar-footer">
+      <div className="sidebar-note"><Icon name="lock" /><p className="sidebar-label">Thoughtful specifications.<br />Confident reviews.</p></div>
+      <div className="sidebar-account" title={`${username} - ${workspace.label}`}><span className="avatar" aria-hidden="true">{username.slice(0, 1).toUpperCase()}</span><div className="sidebar-label"><strong>{username}</strong><small>{workspace.label}</small></div></div>
+      <button className="signout-button" aria-label="Sign out" title="Sign out" onClick={onLogout} disabled={loggingOut}><Icon name="logout" /><span className="sidebar-label">Sign out</span></button>
+    </footer>
+  </>;
+}
+
+function MobileNavigation(props: NavigationProps) {
+  const [open, setOpen] = useState(false);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const close = useCallback(() => {
+    setOpen(false);
+    const target = window.matchMedia?.('(min-width: 768px)').matches
+      ? document.querySelector<HTMLButtonElement>('.desktop-navigation-toggle') : trigger.current;
+    target?.focus();
+  }, []);
+  useEffect(() => {
+    const element = dialog.current;
+    if (open) element?.showModal();
+    else if (element?.open) element.close();
+  }, [open]);
+  useEffect(() => {
+    const desktop = window.matchMedia?.('(min-width: 768px)');
+    const onResize = () => { if (desktop?.matches) close(); };
+    desktop?.addEventListener('change', onResize);
+    return () => desktop?.removeEventListener('change', onResize);
+  }, [close]);
+  return <>
+    <button className="icon-button mobile-navigation-toggle" ref={trigger} aria-label="Open navigation" aria-haspopup="dialog" aria-controls="mobile-navigation" aria-expanded={open} onClick={() => setOpen(true)}><Icon name="menu" /></button>
+    <dialog id="mobile-navigation" className="navigation-drawer" aria-label="Workspace navigation" ref={dialog} onCancel={event => { event.preventDefault(); close(); }} onClose={close} onClick={event => { if (event.target === event.currentTarget) close(); }}>
+      <div className="sidebar">
+        <button className="drawer-close" autoFocus aria-label="Close navigation" onClick={close}><Icon name="close" /></button>
+        <SidebarContent {...props} onNavigate={close} />
+      </div>
+    </dialog>
   </>;
 }
 
@@ -55,6 +110,7 @@ export function App() {
   const [loading, setLoading] = useState(true);
   const [notice, setNotice] = useState('');
   const [loggingOut, setLoggingOut] = useState(false);
+  const [navigationOpen, setNavigationOpen] = useState(true);
   const generation = useRef(0);
   const adoptedSession = useRef<SessionResponse | null>(null);
   const authGeneration = session?.authGeneration;
@@ -113,14 +169,20 @@ export function App() {
   }
 
   const workspace = session ? workspaces[session.account.role] : null;
-  return <main id="main-content">
-    <p className="eyebrow">Specification and review workspace</p>
-    <h1>SpecSentry</h1>
-    {notice && <p role="status">{notice}</p>}
-    {loading ? <p role="status">Checking session…</p> : !session || !workspace ?
-      <Login onLogin={(current) => { generation.current++; adoptedSession.current = current; setSession({ ...current, authGeneration: generation.current }); setLoggingOut(false); setNotice(''); }} /> : <>
-        <nav aria-label="Account"><Link to={workspace.path}>{workspace.label} workspace</Link><button onClick={() => void logout()} disabled={loggingOut}>Sign out</button></nav>
-        <p>Signed in as {session.account.username}</p>
+  return <div className={session && workspace ? `app-shell${navigationOpen ? '' : ' navigation-collapsed'}` : 'login-shell'}>
+    <a className="skip-link" href="#main-content">Skip to main content</a>
+    {session && workspace && <aside className="sidebar desktop-sidebar" id="workspace-navigation">
+      <SidebarContent workspace={workspace} username={session.account.username} loggingOut={loggingOut} onLogout={() => void logout()} />
+    </aside>}
+    <div className="app-body">
+      {session && workspace ? <header className="topbar">
+        <div className="topbar-start"><button className="icon-button desktop-navigation-toggle" aria-label={navigationOpen ? 'Collapse navigation' : 'Expand navigation'} aria-controls="workspace-navigation" aria-expanded={navigationOpen} onClick={() => setNavigationOpen(open => !open)}><Icon name="menu" /></button><MobileNavigation workspace={workspace} username={session.account.username} loggingOut={loggingOut} onLogout={() => void logout()} /><div className="breadcrumb">Workspace <span aria-hidden="true">/</span> <h1>{workspace.label}</h1></div></div>
+        <span className="account-label">Signed in as {session.account.username}</span>
+      </header> : <header className="login-brand"><span className="brand-mark"><Icon name="shield" /></span><h1>SpecSentry</h1><p>Bring clarity to every change.</p></header>}
+      <main id="main-content" tabIndex={-1}>
+        {notice && <p className="notice" role="status">{notice}</p>}
+        {loading ? <div className="loading-panel"><span className="loading-dot" aria-hidden="true" /><p role="status">Checking session...</p></div> : !session || !workspace ?
+          <Login onLogin={(current) => { generation.current++; adoptedSession.current = current; setSession({ ...current, authGeneration: generation.current }); setLoggingOut(false); setNotice(''); }} /> : <>
         <Routes>
           <Route path="/" element={<Navigate to={workspace.path} replace />} />
           <Route path="/login" element={<Navigate to={workspace.path} replace />} />
@@ -133,5 +195,7 @@ export function App() {
           <Route path="*" element={<><h2>Page not found</h2><Link to={workspace.path}>Return to your workspace</Link></>} />
         </Routes>
       </>}
-  </main>;
+      </main>
+    </div>
+  </div>;
 }

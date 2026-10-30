@@ -34,8 +34,8 @@ describe('Contributor private drafts', () => {
       .mockResolvedValueOnce(reply(created, 201)).mockResolvedValueOnce(reply(detail))
       .mockResolvedValueOnce(reply({ items: [{ proposalId: id, workingRevisionId: workingId, title: content.title, state: 'DRAFT', version: 0, createdAt: new Date().toISOString() }], nextCursor: null }));
     vi.stubGlobal('fetch', fetch); setup();
-    expect(await screen.findByText(/No drafts here yet/)).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('link', { name: 'Create a draft' })); fill();
+    expect(await screen.findByText(/No drafts yet/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('link', { name: 'Create New Draft' })); fill();
     fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
     expect(await screen.findByText(content.title)).toBeInTheDocument();
     expect(document.querySelector('script')).toBeNull();
@@ -70,8 +70,8 @@ describe('Contributor private drafts', () => {
     expect(screen.getByRole('button', { name: 'Create private draft' })).toBeDisabled();
     fireEvent.click(screen.getByRole('button', { name: 'Create private draft' })); expect(fetch).toHaveBeenCalledTimes(1);
     fireEvent.click(screen.getByRole('link', { name: 'Back to your drafts' }));
-    await screen.findByText(/No drafts here yet/);
-    fireEvent.click(screen.getByRole('link', { name: 'Create a draft' }));
+    await screen.findByText(/No drafts yet/);
+    fireEvent.click(screen.getByRole('link', { name: 'Create New Draft' }));
     expect(screen.getByLabelText('Title (required)')).toHaveValue(content.title);
     expect(screen.getByRole('button', { name: 'Create private draft' })).toBeEnabled();
   });
@@ -83,16 +83,16 @@ describe('Contributor private drafts', () => {
     vi.stubGlobal('fetch', fetch); setup('/contributor/new'); fill();
     fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
     fireEvent.click(screen.getByRole('link', { name: 'Back to your drafts' }));
-    await screen.findByText(/No drafts here yet/);
-    fireEvent.click(screen.getByRole('link', { name: 'Create a draft' }));
+    await screen.findByText(/No drafts yet/);
+    fireEvent.click(screen.getByRole('link', { name: 'Create New Draft' }));
     expect(screen.getByRole('button', { name: 'Creating…' })).toBeDisabled();
     rejectCreate(new Error('response interrupted'));
     await waitFor(() => expect(screen.getByRole('button', { name: 'Create private draft' })).toBeDisabled());
     expect(screen.getByLabelText('Title (required)')).toHaveValue(content.title);
     expect(fetch.mock.calls.filter(call => call[1]?.method === 'POST')).toHaveLength(1);
     fireEvent.click(screen.getByRole('link', { name: 'Back to your drafts' }));
-    await screen.findByText(/No drafts here yet/);
-    fireEvent.click(screen.getByRole('link', { name: 'Create a draft' }));
+    await screen.findByText(/No drafts yet/);
+    fireEvent.click(screen.getByRole('link', { name: 'Create New Draft' }));
     expect(screen.getByRole('button', { name: 'Create private draft' })).toBeEnabled();
   });
   it('withholds inaccessible detail and signals session loss', async () => {
@@ -100,6 +100,18 @@ describe('Contributor private drafts', () => {
     const lost = setup(`/contributor/drafts/${id}`);
     await waitFor(() => expect(lost).toHaveBeenCalledOnce());
     expect(screen.queryByText(content.title)).not.toBeInTheDocument();
+  });
+  it('counts only the loaded page and distinguishes an empty later page', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(reply({ items: [{ proposalId: id, workingRevisionId: workingId, title: 'One draft', state: 'DRAFT', version: 0, createdAt: new Date().toISOString() }], nextCursor: 'next_cursor' }))
+      .mockResolvedValueOnce(reply({ items: [], nextCursor: null })));
+    setup();
+    await screen.findByRole('link', { name: 'One draft' });
+    expect(screen.getByTestId('draft-page-count')).toHaveTextContent('1');
+    fireEvent.click(screen.getByRole('button', { name: 'Next page' }));
+    await screen.findByText('No drafts on this page');
+    expect(screen.getByTestId('draft-page-count')).toHaveTextContent('0');
+    expect(screen.queryByText('No drafts yet')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'First page' })).toBeEnabled();
   });
   it('loads cursor pages only through the protected API', async () => {
     const fetch = vi.fn().mockResolvedValueOnce(reply({ items: [], nextCursor: 'safe_cursor' }))

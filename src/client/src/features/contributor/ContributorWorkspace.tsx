@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { Icon } from '../../shared/Icon';
 import { Link, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { createProposalRequestSchema, draftResponseSchema, ownDraftsResponseSchema, proposalLifecycleResponseSchema,
   type OwnDraftsResponse, type SessionResponse, type WorkingContent } from '@specsentry/shared';
@@ -73,19 +74,23 @@ function DraftList({ onSessionLost, onLoaded }: { onSessionLost(): void; onLoade
     return () => controller.abort();
   }, [cursor, attempt, onSessionLost, onLoaded]);
   return <>
-    <h3>Your private drafts</h3>
+    <div className="page-heading"><div><p className="eyebrow">YOUR WORKSPACE</p><h2>Contributor workspace</h2><p>Create, manage, and refine your specifications.</p></div><Link className="button" to="/contributor/new"><Icon name="plus" />Create New Draft</Link></div>
     {location.state?.draftDeleted && <p role="status" tabIndex={-1} ref={notice}>Private draft deleted.</p>}
-    <p>Only you can read these working drafts.</p>
-    <Link to="/contributor/new">Create a draft</Link>
-    {error ? <><p role="alert">{error}</p><button onClick={() => setAttempt(value => value + 1)}>Retry loading drafts</button></>
-      : !page ? <p role="status">Loading drafts…</p>
-      : <>
-        {page.items.length === 0 ? <p>No drafts here yet. Create a draft to get started.</p> : <ul className="draft-list">{page.items.map(item => <li key={item.proposalId}>
-          <Link to={`/contributor/drafts/${encodeURIComponent(item.proposalId)}`}>{item.title}</Link> <span>Private · DRAFT</span>
-        </li>)}</ul>}
-        {page.nextCursor && <button onClick={() => setCursor(page.nextCursor)}>Next page</button>}
-        {cursor && <button onClick={() => setCursor(null)}>First page</button>}
-      </>}
+    <div className="summary-grid">
+      <div className="summary-card"><span className="summary-icon"><Icon name="file" /></span><div><p>Drafts on this page</p><strong data-testid="draft-page-count">{error ? 'Unavailable' : page ? page.items.length : '...'}</strong><small>{cursor ? 'Current page of your drafts' : 'First page of your drafts'}</small></div></div>
+      <div className="summary-card privacy-card"><span className="summary-icon"><Icon name="lock" /></span><div><strong>Private by design</strong><p>Only you can read these working drafts.</p><small>Refine your ideas before sharing.</small></div></div>
+    </div>
+    <section className="draft-panel" aria-labelledby="private-drafts-title">
+      <div className="panel-heading"><div><h3 id="private-drafts-title">Your private drafts</h3><p>A space for your next specification.</p></div><span className="status-badge"><span className="status-dot" aria-hidden="true" /> DRAFT</span></div>
+      {error ? <div className="panel-state"><p role="alert">{error}</p><button onClick={() => setAttempt(value => value + 1)}>Retry loading drafts</button></div>
+        : !page ? <div className="panel-state"><span className="loading-dot" aria-hidden="true" /><p role="status">Loading drafts...</p></div>
+        : <>
+          {page.items.length === 0 ? <div className="empty-state"><span className="empty-icon"><Icon name="file" /></span><h4>{cursor ? 'No drafts on this page' : 'No drafts yet'}</h4><p>{cursor ? 'Return to the first page to see your available drafts.' : 'Start by creating your first specification draft.'}</p><Link className="button" to="/contributor/new"><Icon name="plus" />{cursor ? 'Create New Draft' : 'Create your first draft'}</Link><small>Your work stays private until you submit it.</small></div> : <ul className="draft-list">{page.items.map(item => <li key={item.proposalId}>
+            <span className="draft-row-icon"><Icon name="file" /></span><div className="draft-row-content"><Link to={`/contributor/drafts/${encodeURIComponent(item.proposalId)}`}>{item.title}</Link><span>Private working draft</span></div><span className="status-badge">DRAFT</span><Icon name="arrow" />
+          </li>)}</ul>}
+          {(page.nextCursor || cursor) && <div className="pagination">{cursor && <button className="secondary-button" onClick={() => setCursor(null)}>First page</button>}{page.nextCursor && <button className="secondary-button" onClick={() => setCursor(page.nextCursor)}>Next page</button>}</div>}
+        </>}
+    </section>
   </>;
 }
 
@@ -130,6 +135,7 @@ function CreateDraft({ session, onSessionLost, uncertain, onUncertain, onCertain
     } finally { setPending(false); }
   }
   return <>
+    <p className="eyebrow">NEW SPECIFICATION</p>
     <h3>Create a private draft</h3>
     <p>Title, problem and expected behavior are required. Constraints are optional. Text is saved privately.</p>
     <form className="draft-form" noValidate onSubmit={event => void submit(event)}>
@@ -219,6 +225,7 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
   }
   function cancel() { restoreDeleteFocus.current = true; setConfirming(false); }
   return <>
+    <p className="eyebrow">SPECIFICATION OVERVIEW</p>
     <h3>Private draft detail</h3>
     {!pending && <Link to="/contributor">Back to your drafts</Link>}
     {error && <p role="alert">{error}</p>}
@@ -230,12 +237,12 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
       <dl>{preparationFields.map(field => <div key={field.name}><dt>{field.label}</dt><dd>{detail.content[field.name] || 'None provided.'}</dd></div>)}
         <dt>Plain-text evidence</dt><dd>{detail.content.evidence.length ? <ol>{detail.content.evidence.map(item => <li key={item.id}>{item.text}</li>)}</ol> : 'None provided.'}</dd>
       </dl>
-      {detail.state === 'DRAFT' && <button ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || loading || blocked || confirming}>Delete private draft</button>}
-      {confirming && <form aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-description" onSubmit={event => void remove(event)}>
+      {detail.state === 'DRAFT' && <button className="danger-button" ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || loading || blocked || confirming}>Delete private draft</button>}
+      {confirming && <form className="delete-confirmation" aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-description" onSubmit={event => void remove(event)}>
         <h4 id="delete-confirm-title">Confirm permanent deletion</h4>
         <p id="delete-confirm-description">Permanently delete "{detail.content.title}" and all its working content? This cannot be undone. Only never-submitted drafts can be deleted.</p>
         <button type="button" ref={cancelButton} onClick={cancel} disabled={pending}>Cancel deletion</button>
-        <button type="submit" disabled={pending}>{pending ? 'Deleting...' : 'Permanently delete draft'}</button>
+        <button className="danger-button" type="submit" disabled={pending}>{pending ? 'Deleting...' : 'Permanently delete draft'}</button>
       </form>}
     </>}
     {pending && <p role="status">Deleting private draft...</p>}
@@ -373,6 +380,7 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
     navigate(`/contributor/drafts/${encodeURIComponent(id)}`);
   }
   return <>
+    <p className="eyebrow">SPECIFICATION EDITOR</p>
     <h3>Edit private draft</h3>
     <p>Changes stay private. Only a never-submitted DRAFT can be saved.</p>
     {error && <p role="alert">{error}</p>}
@@ -467,14 +475,15 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
 }
 
 export function ContributorWorkspace(props: Props) {
+  const location = useLocation();
   const [uncertain, setUncertain] = useState(false);
   const [pending, setPending] = useState(false);
   const [content, setContent] = useState(emptyContent);
   const loaded = useCallback(() => { if (!pending) setUncertain(false); }, [pending]);
   const markUncertain = useCallback(() => setUncertain(true), []);
   const markCertain = useCallback(() => setUncertain(false), []);
-  return <section aria-label="Contributor drafts">
-    <h2>Contributor workspace</h2>
+  return <section className={`contributor-workspace${location.pathname === '/contributor' || location.pathname === '/contributor/' ? ' is-draft-list' : ''}`} aria-label="Contributor drafts">
+    {location.pathname !== '/contributor' && location.pathname !== '/contributor/' && <h2 className="workspace-subpage-title">Contributor workspace</h2>}
     <Routes>
       <Route index element={<DraftList onSessionLost={props.onSessionLost} onLoaded={loaded} />} />
       <Route path="new" element={<CreateDraft {...props} content={content} setContent={setContent} pending={pending} setPending={setPending}
