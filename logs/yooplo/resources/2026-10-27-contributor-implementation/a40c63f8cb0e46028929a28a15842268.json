@@ -1,0 +1,35 @@
+{
+  "id": "a40c63f8cb0e46028929a28a15842268",
+  "prompter": "yooplo",
+  "session": "2026-10-27-contributor-implementation",
+  "agent": "verifier",
+  "invocation": "acceptance-revalidate-1",
+  "stage": "independently-revalidate-acceptance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-27T15:29:15.791129+00:00",
+  "ended_at": "2026-10-27T15:35:33.645962+00:00",
+  "elapsed_seconds": 377.854833,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent acceptance revalidation passed26server15client,22PG,5Chromium,typecheck/lint/build,UTC timestamps and append-only23514; ACC001/SEC005 independently verified fixed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent execution usage not exposed",
+    "output_tokens": "Per-agent execution usage not exposed",
+    "cache_read_tokens": "Per-agent execution usage not exposed",
+    "tool_calls": "Per-agent execution usage not exposed",
+    "retries": "Per-agent execution usage not exposed"
+  },
+  "unavailable_reason": "Per-agent execution usage not exposed"
+}

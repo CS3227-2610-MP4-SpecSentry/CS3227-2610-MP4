@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { App } from './App';
@@ -17,7 +17,7 @@ describe('base authentication', () => {
   });
   it('signs in with CSRF and signs out', async () => {
     const fetch = vi.fn().mockResolvedValueOnce(reply({}, 401)).mockResolvedValueOnce(reply({ csrfToken }))
-      .mockResolvedValueOnce(reply(session())).mockResolvedValueOnce(reply({}, 204));
+      .mockResolvedValueOnce(reply(session())).mockResolvedValueOnce(reply({ items: [], nextCursor: null })).mockResolvedValueOnce(reply({}, 204));
     vi.stubGlobal('fetch', fetch);
     render(<MemoryRouter><App /></MemoryRouter>);
     fireEvent.change(await screen.findByLabelText('Username'), { target: { value: 'alice' } });
@@ -57,5 +57,149 @@ describe('base authentication', () => {
     expect(await screen.findByText('Your session expired. Please sign in again.')).toBeInTheDocument();
     expect(screen.queryByText('Signed in as alice')).not.toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
+  });
+  it.each([
+    ['sign out', 'same account'], ['sign out', 'different account'],
+    ['server expiry', 'same account'], ['server expiry', 'different account'],
+  ])('ignores an old draft 401 after %s and replacement login with the %s', async (transition, identity) => {
+    let resolveCreate!: (response: ReturnType<typeof reply>) => void;
+    const pendingCreate = new Promise<ReturnType<typeof reply>>(resolve => { resolveCreate = resolve; });
+    let expired = false;
+    const replacement = { ...session(), csrfToken: 'b'.repeat(64), account: identity === 'same account'
+      ? session().account : { id: 'two', username: 'bob', role: 'CONTRIBUTOR' } };
+    vi.stubGlobal('fetch', vi.fn((url: string, options?: { method?: string }) => {
+      if (url === '/api/auth/session') return Promise.resolve(reply(expired ? {} : session(), expired ? 401 : 200));
+      if (url === '/api/auth/csrf') return Promise.resolve(reply({ csrfToken }));
+      if (url === '/api/auth/login') return Promise.resolve(reply(replacement));
+      if (url === '/api/auth/logout') return Promise.resolve(reply({}, 204));
+      if (url === '/api/proposals' && options?.method === 'POST') return pendingCreate;
+      return Promise.resolve(reply({ items: [], nextCursor: null }));
+    }));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'Old draft' } });
+    fireEvent.change(screen.getByLabelText('Problem (required)'), { target: { value: 'Old problem' } });
+    fireEvent.change(screen.getByLabelText('Expected behavior (required)'), { target: { value: 'Old behavior' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
+    if (transition === 'sign out') fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
+    else { expired = true; fireEvent(window, new Event('focus')); }
+    fireEvent.change(await screen.findByLabelText('Username'), { target: { value: replacement.account.username } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'replacement-password' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Sign in' }));
+    fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'New private input' } });
+    await act(async () => { resolveCreate(reply({}, 401)); });
+    expect(screen.getByText(`Signed in as ${replacement.account.username}`)).toBeInTheDocument();
+    expect(screen.getByLabelText('Title (required)')).toHaveValue('New private input');
+    expect(screen.queryByLabelText('Username')).not.toBeInTheDocument();
+  });
+  it('still clears protected input for a current-session draft 401', async () => {
+    vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(url === '/api/auth/session' ? reply(session()) : reply({}, 401))));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'Current private input' } });
+    fireEvent.change(screen.getByLabelText('Problem (required)'), { target: { value: 'Problem' } });
+    fireEvent.change(screen.getByLabelText('Expected behavior (required)'), { target: { value: 'Behavior' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
+    expect(await screen.findByLabelText('Username')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Title (required)')).not.toBeInTheDocument();
+  });
+  it('still invalidates the current session after a failed sign-out attempt', async () => {
+    vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(url === '/api/auth/session'
+      ? reply(session()) : reply({}, url === '/api/auth/logout' ? 500 : 401))));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'Current private input' } });
+    fireEvent.click(await screen.findByRole('button', { name: 'Sign out' }));
+    await screen.findByText('Unable to sign out. Please try again.');
+    expect(screen.getByLabelText('Title (required)')).toHaveValue('Current private input');
+    fireEvent.change(screen.getByLabelText('Problem (required)'), { target: { value: 'Problem' } });
+    fireEvent.change(screen.getByLabelText('Expected behavior (required)'), { target: { value: 'Behavior' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
+    expect(await screen.findByLabelText('Username')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Title (required)')).not.toBeInTheDocument();
+  });
+  it.each(['same account', 'different account'])('ignores an old draft 401 after focus adopts a replacement session for the %s', async (identity) => {
+    let resolveCreate!: (response: ReturnType<typeof reply>) => void;
+    const pendingCreate = new Promise<ReturnType<typeof reply>>(resolve => { resolveCreate = resolve; });
+    const original = session();
+    const replacement = { ...session(), csrfToken: 'b'.repeat(64), account: identity === 'same account'
+      ? original.account : { id: 'two', username: 'bob', role: 'CONTRIBUTOR' } };
+    let current = original;
+    vi.stubGlobal('fetch', vi.fn((url: string, options?: { method?: string }) => {
+      if (url === '/api/auth/session') return Promise.resolve(reply(current));
+      if (options?.method === 'POST') return pendingCreate;
+      return Promise.resolve(reply({ items: [], nextCursor: null }));
+    }));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'Old private draft' } });
+    fireEvent.change(screen.getByLabelText('Problem (required)'), { target: { value: 'Problem' } });
+    fireEvent.change(screen.getByLabelText('Expected behavior (required)'), { target: { value: 'Behavior' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
+    current = replacement;
+    await act(async () => { fireEvent(window, new Event('focus')); });
+    expect(screen.getByText(`Signed in as ${replacement.account.username}`)).toBeInTheDocument();
+    const title = screen.getByLabelText('Title (required)');
+    expect(title).toBeEnabled();
+    expect(title).toHaveValue('');
+    fireEvent.change(title, { target: { value: 'Replacement private input' } });
+    await act(async () => { resolveCreate(reply({}, 401)); });
+    expect(screen.getByText(`Signed in as ${replacement.account.username}`)).toBeInTheDocument();
+    expect(screen.getByLabelText('Title (required)')).toHaveValue('Replacement private input');
+  });
+  it('retains the pending request and genuine 401 invalidation after a same-context focus refresh', async () => {
+    let resolveCreate!: (response: ReturnType<typeof reply>) => void;
+    const pendingCreate = new Promise<ReturnType<typeof reply>>(resolve => { resolveCreate = resolve; });
+    const original = session();
+    let current = original;
+    vi.stubGlobal('fetch', vi.fn((url: string, options?: { method?: string }) => url === '/api/auth/session'
+      ? Promise.resolve(reply(current)) : options?.method === 'POST' ? pendingCreate : Promise.resolve(reply({ items: [], nextCursor: null }))));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'Current private draft' } });
+    fireEvent.change(screen.getByLabelText('Problem (required)'), { target: { value: 'Problem' } });
+    fireEvent.change(screen.getByLabelText('Expected behavior (required)'), { target: { value: 'Behavior' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
+    current = { ...original, expiresAt: original.expiresAt + 60000 };
+    await act(async () => { fireEvent(window, new Event('focus')); });
+    expect(screen.getByLabelText('Title (required)')).toBeDisabled();
+    expect(screen.getByLabelText('Title (required)')).toHaveValue('Current private draft');
+    await act(async () => { resolveCreate(reply({}, 401)); });
+    expect(screen.getByLabelText('Username')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Title (required)')).not.toBeInTheDocument();
+  });
+  it.each([204, 500])('ignores an obsolete logout %s after focus adopts a replacement session', async (status) => {
+    let resolveLogout!: (response: ReturnType<typeof reply>) => void;
+    const pendingLogout = new Promise<ReturnType<typeof reply>>(resolve => { resolveLogout = resolve; });
+    let current = session();
+    vi.stubGlobal('fetch', vi.fn((url: string) => url === '/api/auth/session' ? Promise.resolve(reply(current))
+      : url === '/api/auth/logout' ? pendingLogout : Promise.resolve(reply({ items: [], nextCursor: null }))));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    fireEvent.click(await screen.findByRole('button', { name: 'Sign out' }));
+    current = { ...session(), csrfToken: 'b'.repeat(64), account: { id: 'two', username: 'bob', role: 'CONTRIBUTOR' } };
+    await act(async () => { fireEvent(window, new Event('focus')); });
+    fireEvent.change(screen.getByLabelText('Title (required)'), { target: { value: 'Replacement private input' } });
+    await act(async () => { resolveLogout(reply({}, status)); });
+    expect(screen.getByText('Signed in as bob')).toBeInTheDocument();
+    expect(screen.getByLabelText('Title (required)')).toHaveValue('Replacement private input');
+    expect(screen.queryByText('Unable to sign out. Please try again.')).not.toBeInTheDocument();
+    expect(screen.queryByText('You have signed out.')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Sign out' })).toBeEnabled();
+  });
+  it.each([401, 500])('does not restore a stale session-check success after a newer check invalidates authentication with %s', async (status) => {
+    let resolveEarlier!: (response: ReturnType<typeof reply>) => void;
+    let resolveLater!: (response: ReturnType<typeof reply>) => void;
+    const earlier = new Promise<ReturnType<typeof reply>>(resolve => { resolveEarlier = resolve; });
+    const later = new Promise<ReturnType<typeof reply>>(resolve => { resolveLater = resolve; });
+    let checks = 0;
+    vi.stubGlobal('fetch', vi.fn((url: string) => {
+      if (url !== '/api/auth/session') return Promise.resolve(reply({ items: [], nextCursor: null }));
+      checks++;
+      return checks === 1 ? Promise.resolve(reply(session())) : checks === 2 ? earlier : later;
+    }));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    await screen.findByLabelText('Title (required)');
+    fireEvent(window, new Event('focus'));
+    fireEvent(window, new Event('focus'));
+    await act(async () => { resolveLater(reply({}, status)); });
+    expect(screen.getByLabelText('Username')).toBeInTheDocument();
+    await act(async () => { resolveEarlier(reply(session())); });
+    expect(screen.getByLabelText('Username')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Title (required)')).not.toBeInTheDocument();
   });
 });

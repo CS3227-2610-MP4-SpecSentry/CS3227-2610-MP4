@@ -1,0 +1,35 @@
+{
+  "id": "1ae5fd924f5d43088c907867f1d8fb72",
+  "prompter": "yooplo",
+  "session": "2026-10-28-stale-session-response",
+  "agent": "security",
+  "invocation": "design-1",
+  "stage": "session-generation-design",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-28T07:17:02.055378+00:00",
+  "ended_at": "2026-10-28T07:19:20.622197+00:00",
+  "elapsed_seconds": 138.566819,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Security design confirms root unconditional callback and generation-binding controls; implementation permitted, independent patch checks pending",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent runtime counters not exposed",
+    "output_tokens": "Per-agent runtime counters not exposed",
+    "cache_read_tokens": "Per-agent runtime counters not exposed",
+    "tool_calls": "Per-agent runtime counters not exposed",
+    "retries": "Per-agent runtime counters not exposed"
+  },
+  "unavailable_reason": "Per-agent runtime counters not exposed"
+}

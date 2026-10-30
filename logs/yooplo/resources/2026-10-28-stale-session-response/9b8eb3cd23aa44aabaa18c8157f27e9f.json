@@ -1,0 +1,35 @@
+{
+  "id": "9b8eb3cd23aa44aabaa18c8157f27e9f",
+  "prompter": "yooplo",
+  "session": "2026-10-28-stale-session-response",
+  "agent": "verifier",
+  "invocation": "verify-fix-2",
+  "stage": "final-independent-acceptance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-28T07:31:08.031519+00:00",
+  "ended_at": "2026-10-28T07:33:13.261144+00:00",
+  "elapsed_seconds": 125.229625,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Fresh independent acceptance passed28client/typecheck/rootlint/diffcheck; SEC007 and ACC002 verified fixed with replacement/refresh/logout/SEC005 controls",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent runtime counters not exposed",
+    "output_tokens": "Per-agent runtime counters not exposed",
+    "cache_read_tokens": "Per-agent runtime counters not exposed",
+    "tool_calls": "Per-agent runtime counters not exposed",
+    "retries": "Per-agent runtime counters not exposed"
+  },
+  "unavailable_reason": "Per-agent runtime counters not exposed"
+}

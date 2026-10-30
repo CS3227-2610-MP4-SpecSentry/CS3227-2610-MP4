@@ -14,3 +14,12 @@ button { cursor: pointer; background: #164d86; color: white; }
 button:disabled { cursor: wait; opacity: .7; }
 nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
 [role="alert"] { color: #8f1d1d; }
+textarea { font: inherit; padding: .65rem .8rem; border: 1px solid #60738a; border-radius: .3rem; min-width: 0; resize: vertical; }
+.draft-form { max-width: 100%; margin-bottom: 1.5rem; }
+.draft-field { display: grid; gap: .25rem; }
+.draft-field p { margin: 0; }
+.field-error { color: #8f1d1d; }
+.draft-list li { margin: .75rem 0; overflow-wrap: anywhere; }
+.draft-list span { display: block; }
+dt { font-weight: 700; margin-top: 1rem; }
+dd { margin-left: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
