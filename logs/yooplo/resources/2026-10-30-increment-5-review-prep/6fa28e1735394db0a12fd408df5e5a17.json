@@ -1,0 +1,19 @@
+{
+  "id": "6fa28e1735394db0a12fd408df5e5a17",
+  "prompter": "yooplo",
+  "session": "2026-10-30-increment-5-review-prep",
+  "agent": "main",
+  "invocation": "publish-1",
+  "stage": "final-inspect-publish-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T07:31:10.590491+00:00",
+  "ended_at": null,
+  "elapsed_seconds": null,
+  "status": "running",
+  "usage": null
+}

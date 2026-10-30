@@ -149,12 +149,33 @@ security report is attributed in the run. Submitted classification changes/immut
 criterion history/finding resolution and complete AC-CON-007/009 remain deferred.
 No full manual WCAG/deployment/performance evidence; INC2-VER-001 remains unresolved.
 
+### Increment 5: draft submission preparation — 30 October 2026
+
+PR10–13 merges verified; new branch starts at fetched origin/master `c384d39`.
+[Brief/run and actual evidence](../logs/yooplo/2026-10-30-contributor-increment-5.md)
+distinguish verified draft preparation from deferred submission and sanitization gates.
+
+| Requirement / portion | Independent local evidence |
+| --- | --- |
+| REQ-CON-004 preparation/UI only; REQ-CON-002 ownership | Editor summary/diff/optional evidence plus safe detail; existing PATCH/DTO/WorkingRevision and auth/state/history/version/audit reused. No actual submission, revision, assignment or notification created |
+| Integration input limits / strict references | Contract/PG cases verify500/501summary,100000/100001diff,50000/50001aggregate evidence, normalizedUnicode, blank evidence, exact1MiB/+1 and field-valid escaped JSON overflow; existing criterion/evidence ID preservation and scoped ID denial |
+| REQ-SHR-001/002/003/004/007, NFR-REL-001 | Preparation auth/CSRF/owner/role/state/history/stale/CAS denials and audit/expiry rollback passed; safe summaries contain no preparation text; create/edit/criteria/delete regressions passed |
+| REQ-SHR-005, NFR-A11Y-001, shared failure contract | [Preparation RTL](../src/client/src/features/contributor/PreparationDraft.test.tsx) and [Chromium](tests/browser/contributor-preparation.spec.ts): labels/focus, retained field/aggregate/413errors, conflict/read-failure recovery, keyboard/axe/reflow, inert escaped detail |
+
+Independent31server/84client units,43PG/four suites,nineChromium,typecheck/lint/build passed
+against final five-file manifest. Separate security report is attributed in the run.
+No backend/sharedDTO/schema/migration/App/auth changes. Sanitization here is existing
+LF normalization/strict bounded validation/escaped text, not a submission diff parser.
+Empty summary/diff/evidence and zero/alloptional criteria remain saveable drafts.
+Full AC-CON-004/immutable submitted summary/revisions/lifecycle/notifications/AI remain
+deferred. Deployment/performance/full manual WCAG unavailable; INC2-VER-001 unresolved.
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
 | [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |
 | [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local private-read and never-submitted DRAFT edit/ownership/version/state/attachment portions covered above; submitted editing/revision lifecycle pending |
 | [REQ-CON-003](specs/ROLE-CONTRIBUTOR.md#requirements) | AI specification draft | [AC-CON-003](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Increment5 draft-preparation portion locally verified above; actual submission/immutable revision/activity/notification gates pending |
 | [REQ-CON-005](specs/ROLE-CONTRIBUTOR.md#requirements) | Respond to changes | [AC-CON-005](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-006](specs/ROLE-CONTRIBUTOR.md#requirements) | Withdraw | [AC-CON-006](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Private-draft portion verified above; submitted-classification scenario pending |

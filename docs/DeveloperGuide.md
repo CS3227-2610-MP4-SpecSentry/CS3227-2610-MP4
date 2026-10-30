@@ -2,6 +2,14 @@
 
 ## Current state
 
+30 October checkpoint: PR10–13 are verified merged into master; yooplo reports their
+teammate reviews complete. Older stacked-branch/pending-review notes below describe
+historical increment checkpoints. Increment5 starts from fetched origin/master `c384d39`
+on `feature/contributor-submission-preparation`; its own final review is pending.
+The subsequent review-preparation request authorizes Increment5 commit/push and a PR
+against master; merge and Increment6 remain excluded. Final Increment5 teammate approval
+and human summary verification remain pending.
+
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
 PostgreSQL sessions, CSRF, role guards and restricted security events. Contributor
@@ -21,6 +29,24 @@ source or product AI was imported. Current local verification and remaining gaps
 in the [run record](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
 
 ### Private draft API and persistence
+
+Increment5 preparation controls reuse existing PATCH/full working DTO/storage and server
+checks. Summary≤500, diff≤100000 and optional evidence total≤50000 normalized Unicode
+codepoints; present evidence entries nonblank. Empty summary/diff/evidence and zero/alloptional
+criteria remain valid drafts. New evidence omits ID for server allocation; editing retains
+existing IDs, criterion keys/classification and other content. Existing exact committed
+GET/content/version/identity recovery applies. No new endpoint, schema, migration or DTO.
+The 1 MiB UTF-8 JSON body cap is independent of field character limits; safe413 keeps input
+and explains reducing text. Rendering uses escaped React text and existing wrapping styles.
+Current sanitization is LF normalization/strict validation/escaping; no diff parser or
+submission-ready nonempty/sanitized-patch gate is introduced. No patch/evidence execution,
+HTML/Markdown interpretation or URL fetching. Independent final acceptance passed31server/
+84client unit tests,43PostgreSQL cases/four suites,nineChromium cases,typecheck/lint/build.
+Exact1MiB/+1 and legal-field high-escape overflow were tested through real HTTP; normalization,
+roundtrip identities, safe rendering, audit rollback and create/edit/criteria/delete regressions
+passed on a fresh UTC database with all five unchanged migrations. Separate security results,
+final manifest and remaining limitations are recorded in the
+[Increment5 brief/run](../logs/yooplo/2026-10-30-contributor-increment-5.md).
 
 - `POST /api/proposals`: Contributor session and CSRF required. Existing strict working-content
   schema; UI sends title/problem/constraints/expectedBehavior with empty summary/diff/criteria/evidence.
@@ -361,7 +387,7 @@ Codex assisted with architecture/scaffolding and documentation as recorded above
 Contributor workflow instructions, and reading/mapping the supplied MP4 PDF into
 repository specifications and checklists. It also coordinated Contributor foundation reuse,
 implemented Increment 1, Increment 2 own-draft editing, Increment 3 draft deletion and
-Increment 4 private criterion management, and supplied separate
+Increment 4 private criterion management and Increment 5 draft submission preparation, and supplied separate
 design/security and acceptance review agents;
 actual results and unavailable evidence are linked in the run log. Same-repository reused source
 is attributed to the pinned Reviewer foundation above. AI-generated changes and summaries

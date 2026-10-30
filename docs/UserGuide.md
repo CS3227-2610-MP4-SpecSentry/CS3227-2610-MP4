@@ -1,6 +1,7 @@
 # SpecSentry User Guide
 
-Status: locally verified authentication and Contributor private drafts/editing/deletion/criteria, 28 October 2026. No live application URL or
+Status: authentication and Contributor private drafts/editing/deletion/criteria/submission-preparation
+locally verified, 30 October 2026. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
 the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
@@ -72,6 +73,25 @@ After saving, the editor reads the committed draft to obtain its assigned identi
 check fails or finds a different version, your entered text and choices remain and saving pauses.
 Follow the explicit reload/discard confirmation to recover; do not assume another save is safe.
 These controls apply only to never-submitted drafts, not submitted history or findings.
+
+### Prepare summary, diff and evidence
+
+In **Edit private draft**, the **Submission preparation**
+section offers **Contributor summary** (500 Unicode characters) and **Unified diff**
+(100,000). Both are optional while drafting; incomplete patch text may be saved.
+Select **Add evidence** for optional plain-text items. Each added item must contain text
+or be removed before saving, with 50,000 characters total across all evidence. Editing
+these fields preserves your other draft content and criterion identities.
+
+**Save private draft** saves preparation text with the rest of the draft. Line endings are
+normalized; text is not silently truncated. The whole JSON request also has a 1 MiB byte
+limit: if it is too large, reduce the text and save again. Errors retain your input;
+conflict or uncertain outcomes use the confirmed reload/recovery flow below. Saved text
+appears in private detail and can be reopened for editing.
+
+Summary, patch and evidence are displayed as plain text. HTML, Markdown, commands and
+patches are not executed or fetched. This prepares a private draft; it does not submit it,
+create immutable revisions, assign a reviewer or send notifications.
 
 Validation and failed saves retain your entered text. If the draft changed elsewhere,
 is no longer editable, or the save response is uncertain, saving pauses so an old form

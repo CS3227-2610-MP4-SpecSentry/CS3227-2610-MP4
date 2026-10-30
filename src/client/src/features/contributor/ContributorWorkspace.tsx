@@ -12,6 +12,10 @@ const fields = [
   { name: 'expectedBehavior', label: 'Expected behavior', limit: 10000, required: true },
 ] as const;
 type NarrativeField = typeof fields[number]['name'];
+const preparationFields = [
+  { name: 'summary', label: 'Contributor summary', limit: 500, rows: 3 },
+  { name: 'diffText', label: 'Unified diff', limit: 100000, rows: 10 },
+] as const;
 
 function hasPersistedIdentities(content: WorkingContent) {
   return content.criteria.every(criterion => !!criterion.stableKey) && content.evidence.every(item => !!item.id);
@@ -35,12 +39,13 @@ function DraftFields({ content, errors, disabled, onChange }: {
 }
 
 async function failure(response: Response): Promise<string> {
+  const message = response.status === 413 ? 'Request is too large. Reduce the draft text before saving again.' : 'Request could not be completed.';
   try {
     const body: unknown = await response.json();
     const id = body && typeof body === 'object' && 'correlationId' in body ? body.correlationId : null;
-    if (typeof id === 'string' && /^[a-f0-9-]{36}$/i.test(id)) return `Request could not be completed. Reference: ${id}`;
+    if (typeof id === 'string' && /^[a-f0-9-]{36}$/i.test(id)) return `${message} Reference: ${id}`;
   } catch { /* The safe fallback also covers non-JSON responses. */ }
-  return 'Request could not be completed. Please try again.';
+  return response.status === 413 ? message : 'Request could not be completed. Please try again.';
 }
 
 function DraftList({ onSessionLost, onLoaded }: { onSessionLost(): void; onLoaded(): void }) {
@@ -222,6 +227,9 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
       <p>Private - {detail.state}</p>
       {detail.state === 'DRAFT' && !pending && <Link to={`/contributor/drafts/${encodeURIComponent(id)}/edit`}>Edit private draft</Link>}
       <dl>{fields.map(field => <div key={field.name}><dt>{field.label}</dt><dd>{detail.content[field.name] || 'None provided.'}</dd></div>)}</dl>
+      <dl>{preparationFields.map(field => <div key={field.name}><dt>{field.label}</dt><dd>{detail.content[field.name] || 'None provided.'}</dd></div>)}
+        <dt>Plain-text evidence</dt><dd>{detail.content.evidence.length ? <ol>{detail.content.evidence.map(item => <li key={item.id}>{item.text}</li>)}</ol> : 'None provided.'}</dd>
+      </dl>
       {detail.state === 'DRAFT' && <button ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || loading || blocked || confirming}>Delete private draft</button>}
       {confirming && <form aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-description" onSubmit={event => void remove(event)}>
         <h4 id="delete-confirm-title">Confirm permanent deletion</h4>
@@ -249,10 +257,15 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
   const [success, setSuccess] = useState('');
   const [meaning, setMeaning] = useState<Record<string, 'same' | 'replace'>>({});
   const criterionFocus = useRef<number | null>(null);
+  const evidenceFocus = useRef<number | null>(null);
   useEffect(() => {
     if (criterionFocus.current !== null) {
       (document.getElementById(`criterion-${criterionFocus.current}-statement`) ?? document.getElementById('add-criterion'))?.focus();
       criterionFocus.current = null;
+    }
+    if (evidenceFocus.current !== null) {
+      (document.getElementById(`evidence-${evidenceFocus.current}-text`) ?? document.getElementById('add-evidence'))?.focus();
+      evidenceFocus.current = null;
     }
   }, [content]);
   const [loading, setLoading] = useState(true);
@@ -307,8 +320,13 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
       setErrors(nextErrors); setError('Check the highlighted fields.');
       const first = fields.find(field => nextErrors[field.name]);
       const criterionError = Object.keys(nextErrors).find(key => /^criteria\.\d+\.statement$/.test(key)) ?? Object.keys(nextErrors).find(key => key.startsWith('criteria.'));
+      const preparationError = preparationFields.find(field => nextErrors[field.name]);
+      const evidenceError = Object.keys(nextErrors).find(key => /^evidence\.\d+\.text$/.test(key));
       if (first) document.getElementById(`draft-${first.name}`)?.focus();
       else if (criterionError) document.getElementById(`criterion-${criterionError.split('.')[1]}-${criterionError.endsWith('meaning') ? 'meaning' : 'statement'}`)?.focus();
+      else if (preparationError) document.getElementById(`draft-${preparationError.name}`)?.focus();
+      else if (evidenceError) document.getElementById(`evidence-${evidenceError.split('.')[1]}-text`)?.focus();
+      else if (nextErrors.evidence) (document.getElementById('evidence-0-text') ?? document.getElementById('add-evidence'))?.focus();
       else document.getElementById('add-criterion')?.focus();
       return;
     }
@@ -408,6 +426,37 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
             criterionFocus.current = content.criteria.length;
             setContent({ ...content, criteria: [...content.criteria, { statement: '', required: true }] }); setErrors({}); setSuccess('');
           }}>Add criterion</button>
+        </fieldset>
+        <fieldset disabled={pending || loading}>
+          <legend>Submission preparation</legend>
+          <p>Optional while drafting. Text is stored privately; patches and evidence are never executed.</p>
+          {preparationFields.map(field => <div className="draft-field" key={field.name}>
+            <label htmlFor={`draft-${field.name}`}>{field.label} (optional)</label>
+            <p id={`draft-${field.name}-hint`}>Maximum {field.limit.toLocaleString('en')} characters. Incomplete draft text may be saved.</p>
+            <textarea id={`draft-${field.name}`} rows={field.rows} value={content[field.name]} aria-invalid={!!errors[field.name]}
+              aria-describedby={`draft-${field.name}-hint${errors[field.name] ? ` draft-${field.name}-error` : ''}`}
+              onChange={event => { setContent({ ...content, [field.name]: event.target.value }); setSuccess(''); }} />
+            {errors[field.name] && <p id={`draft-${field.name}-error`} className="field-error">{errors[field.name]}</p>}
+          </div>)}
+          <h4>Optional plain-text evidence</h4>
+          <p id="evidence-hint">Maximum 50,000 characters in total. Each added item must contain text, or remove the item before saving. No evidence is required.</p>
+          {errors.evidence && <p id="evidence-error" role="alert">{errors.evidence}</p>}
+          {content.evidence.length === 0 && <p>No evidence added.</p>}
+          {content.evidence.map((item, index) => <div className="draft-field" key={item.id ?? `new-evidence-${index}`}>
+            <label htmlFor={`evidence-${index}-text`}>Evidence {index + 1} text</label>
+            <textarea id={`evidence-${index}-text`} rows={4} value={item.text} aria-invalid={!!errors[`evidence.${index}.text`] || !!errors.evidence}
+              aria-describedby={`evidence-hint${errors.evidence ? ' evidence-error' : ''}${errors[`evidence.${index}.text`] ? ` evidence-${index}-error` : ''}`}
+              onChange={event => { setContent({ ...content, evidence: content.evidence.map((entry, i) => i === index ? { ...entry, text: event.target.value } : entry) }); setSuccess(''); }} />
+            {errors[`evidence.${index}.text`] && <p id={`evidence-${index}-error`} className="field-error">{errors[`evidence.${index}.text`]}</p>}
+            <button type="button" onClick={() => {
+              evidenceFocus.current = index < content.evidence.length - 1 ? index : index - 1;
+              setContent({ ...content, evidence: content.evidence.filter((_, i) => i !== index) }); setErrors({}); setSuccess('');
+            }}>Remove evidence {index + 1}</button>
+          </div>)}
+          <button id="add-evidence" type="button" disabled={content.evidence.length >= 50000} onClick={() => {
+            evidenceFocus.current = content.evidence.length;
+            setContent({ ...content, evidence: [...content.evidence, { text: '' }] }); setErrors({}); setSuccess('');
+          }}>Add evidence</button>
         </fieldset>
         <button type="submit" disabled={pending || loading || blocked || baseline.state !== 'DRAFT'}>{pending ? 'Saving…' : 'Save private draft'}</button>
       </form>

@@ -4,6 +4,20 @@ const content = { title: 'Title', problem: 'Problem', constraints: '', expectedB
   summary: '', diffText: '', criteria: [], evidence: [] };
 
 describe('Contributor draft contracts', () => {
+  it('bounds and normalizes preparation text without requiring a complete submission', () => {
+    expect(createProposalRequestSchema.parse(content)).toEqual(content);
+    for (const [field, limit] of [['summary', 500], ['diffText', 100000]] as const) {
+      expect(createProposalRequestSchema.parse({ ...content, [field]: '\u{1F600}'.repeat(limit) })[field]).toBe('\u{1F600}'.repeat(limit));
+      expect(createProposalRequestSchema.safeParse({ ...content, [field]: '\u{1F600}'.repeat(limit + 1) }).success).toBe(false);
+      expect(createProposalRequestSchema.parse({ ...content, [field]: 'x\r\ny\rz' })[field]).toBe('x\ny\nz');
+    }
+    const evidence = [{ text: '\u{1F600}'.repeat(25000) }, { text: 'x\r\n'.repeat(12500) }];
+    expect(createProposalRequestSchema.parse({ ...content, evidence }).evidence[1]!.text).toBe('x\n'.repeat(12500));
+    expect(createProposalRequestSchema.safeParse({ ...content, evidence: [{ text: 'x'.repeat(50000) }] }).success).toBe(true);
+    for (const entries of [[{ text: 'x'.repeat(50001) }], [{ text: 'x'.repeat(25000) }, { text: 'y'.repeat(25001) }], [{ text: '' }], [{ text: ' \n ' }]])
+      expect(createProposalRequestSchema.safeParse({ ...content, evidence: entries }).success).toBe(false);
+    expect(createProposalRequestSchema.parse({ ...content, diffText: 'incomplete patch', evidence: [] }).diffText).toBe('incomplete patch');
+  });
   it('defaults criterion classification and permits incomplete collections with bounded nonempty entries', () => {
     const criterion = { statement: 'Accept this' };
     expect(createProposalRequestSchema.parse({ ...content, criteria: [criterion] }).criteria[0]!.required).toBe(true);
