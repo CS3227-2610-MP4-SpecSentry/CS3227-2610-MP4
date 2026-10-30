@@ -11,3 +11,5 @@ export const ownDraftsResponseSchema = z.object({
 }).strict();
 export type OwnDraftsQuery = z.infer<typeof ownDraftsQuerySchema>;
 export type OwnDraftsResponse = z.infer<typeof ownDraftsResponseSchema>;
+export const deleteDraftRequestSchema = z.object({ expectedVersion: reviewerVersionSchema, confirmed: z.literal(true) }).strict();
+export type DeleteDraftRequest = z.infer<typeof deleteDraftRequestSchema>;

@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, Req, UnprocessableEntityException } from '@nestjs/common';
-import { createProposalRequestSchema, ownDraftsQuerySchema, reviewerIdSchema, saveDraftRequestSchema } from '@specsentry/shared';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query, Req, UnprocessableEntityException } from '@nestjs/common';
+import { createProposalRequestSchema, deleteDraftRequestSchema, ownDraftsQuerySchema, reviewerIdSchema, saveDraftRequestSchema } from '@specsentry/shared';
 import { DatabaseService } from '../database/database.service';
 import { Roles, type AuthRequest } from '../identity/access';
 import { businessActor } from '../identity/business-context';
@@ -44,5 +44,12 @@ export class ContributorProposalsController {
   async save(@Req() request: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
     const input = await this.parsed(request, 'SAVE', () => ({ id: validate(reviewerIdSchema, id), body: validate(saveDraftRequestSchema, body) }));
     return this.lifecycle.save(businessActor(request), input.id, input.body);
+  }
+
+  @Delete(':id')
+  @HttpCode(204)
+  async remove(@Req() request: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
+    const input = await this.parsed(request, 'DELETE', () => ({ id: validate(reviewerIdSchema, id), body: validate(deleteDraftRequestSchema, body) }));
+    await this.lifecycle.remove(businessActor(request), input.id, input.body);
   }
 }

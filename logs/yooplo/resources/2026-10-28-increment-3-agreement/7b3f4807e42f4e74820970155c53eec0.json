@@ -1,0 +1,35 @@
+{
+  "id": "7b3f4807e42f4e74820970155c53eec0",
+  "prompter": "yooplo",
+  "session": "2026-10-28-increment-3-agreement",
+  "agent": "security",
+  "invocation": "patch-1",
+  "stage": "deletion-patch-security",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed dispatch; settings not exposed",
+  "started_at": "2026-10-28T13:52:04.959688+00:00",
+  "ended_at": "2026-10-28T14:06:24.839861+00:00",
+  "elapsed_seconds": 859.880173,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent security12RTL25PG and rollback SQL23514 guards passed; first missing-fixture probe rolledback corrected; SEC001 verified addressed; no blocker",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable execution settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable execution settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable execution settings/token/cache/tool/retry telemetry not exposed"
+}

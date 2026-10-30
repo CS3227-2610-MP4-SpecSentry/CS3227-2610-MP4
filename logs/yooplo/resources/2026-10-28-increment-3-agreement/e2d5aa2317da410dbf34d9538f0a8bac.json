@@ -1,0 +1,35 @@
+{
+  "id": "e2d5aa2317da410dbf34d9538f0a8bac",
+  "prompter": "yooplo",
+  "session": "2026-10-28-increment-3-agreement",
+  "agent": "security",
+  "invocation": "reconcile-design-1",
+  "stage": "guard-design-refinement",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed boundary; settings not exposed",
+  "started_at": "2026-10-28T13:46:14.638779+00:00",
+  "ended_at": "2026-10-28T13:48:20.373916+00:00",
+  "elapsed_seconds": 125.735137,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only guard design refined; narrow dedicated activity trigger plus tombstone/root/deferred consistency controls; no patch certification; user clarified both owners agreed",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution telemetry not exposed",
+    "output_tokens": "Attributable execution telemetry not exposed",
+    "cache_read_tokens": "Attributable execution telemetry not exposed",
+    "tool_calls": "Attributable execution telemetry not exposed",
+    "retries": "Attributable execution telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable execution telemetry not exposed"
+}

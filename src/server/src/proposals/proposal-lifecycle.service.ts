@@ -1,6 +1,6 @@
 import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { draftResponseSchema, ownDraftsResponseSchema, proposalLifecycleResponseSchema, workingContentSchema,
-  type OwnDraftsQuery, type SaveDraftRequest, type WorkingContent } from '@specsentry/shared';
+  type DeleteDraftRequest, type OwnDraftsQuery, type SaveDraftRequest, type WorkingContent } from '@specsentry/shared';
 import { ActivityService } from '../activity/activity.service';
 import { DatabaseService } from '../database/database.service';
 import type { Prisma } from '../generated/prisma/client';
@@ -55,6 +55,21 @@ export class ProposalLifecycleService {
         action: 'DRAFT_SAVED', summary: 'Private working draft saved.' });
       return proposalLifecycleResponseSchema.parse({ proposalId: id, revisionId: null, workingRevisionId: working.id,
         assignmentId: null, assignmentVersion: null, state: root.state, version });
+    });
+  }
+
+  remove(actor: BusinessActor, id: string, body: DeleteDraftRequest) {
+    return businessTransaction(this.database, actor, 'CONTRIBUTOR', id, 'PROPOSAL_DELETE', async tx => {
+      const root = await this.proposals.lockRoot(tx, id);
+      if (root.ownerId !== actor.accountId) throw new ForbiddenException();
+      if (!body.confirmed || root.version !== body.expectedVersion) throw new ConflictException();
+      const eligible = await tx.$queryRaw<{ eligible: boolean }[]>`SELECT "deletable_private_draft"(${id}, ${actor.accountId}) AS eligible`;
+      if (!eligible[0]?.eligible) throw new ConflictException();
+      if (!await tx.workingRevision.findUnique({ where: { proposalId: id } })) throw new NotFoundException();
+      await tx.draftTombstone.create({ data: { proposalId: id, actorId: actor.accountId } });
+      await tx.proposalActivity.deleteMany({ where: { proposalId: id } });
+      await tx.workingRevision.delete({ where: { proposalId: id } });
+      await tx.changeProposal.delete({ where: { id } });
     });
   }
 
