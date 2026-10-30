@@ -383,6 +383,23 @@ code, text or assets here with source, license and affected files.
 
 ### AI-use declaration
 
+Codex assisted with the 31 October 2026 shell scrolling refinement, including a
+viewport-bounded shell, independent workspace/navigation scrolling, desktop icon
+rail, native mobile navigation dialog and independent browser verification.
+Platform references: [HTML dialog](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog)
+and [scrollbar gutters](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scrollbar-gutter).
+No external UI package or source was imported. Actual results, failed attempts and
+remaining limits are in the [refinement log](../logs/yooplo/2026-10-31-shell-scroll-refinement.md).
+Human verification remains pending.
+
+Codex also assisted with the 30 October 2026 existing-application UI redesign,
+including the presentation brief, implementation and independent acceptance checks.
+The user supplied the visual direction; official [React state preservation documentation](https://react.dev/learn/preserving-and-resetting-state)
+was consulted through Context7. No external UI kit, copied application design,
+generated image asset or new dependency was introduced. See the
+[UI redesign log](../logs/yooplo/2026-10-30-saas-ui-redesign.md) for actual results
+and unavailable checks; human review of the changes and summary remains pending.
+
 Codex assisted with architecture/scaffolding and documentation as recorded above,
 Contributor workflow instructions, and reading/mapping the supplied MP4 PDF into
 repository specifications and checklists. It also coordinated Contributor foundation reuse,

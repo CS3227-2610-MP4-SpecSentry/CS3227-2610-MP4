@@ -1,0 +1,35 @@
+{
+  "id": "aa49b93c2f6a4149b2a3cbde54ce8019",
+  "prompter": "yooplo",
+  "session": "2026-10-30-saas-ui-redesign",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "coordinate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T10:40:33.550531+00:00",
+  "ended_at": "2026-10-30T10:47:33.839491+00:00",
+  "elapsed_seconds": 420.28896,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "UI coordinated, implementation and independent browser acceptance complete; lint typechecks build pass, server native module limitations recorded",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage and exact model/effort not exposed",
+    "output_tokens": "Per-record runtime usage and exact model/effort not exposed",
+    "cache_read_tokens": "Per-record runtime usage and exact model/effort not exposed",
+    "tool_calls": "Per-record runtime usage and exact model/effort not exposed",
+    "retries": "Per-record runtime usage and exact model/effort not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage and exact model/effort not exposed"
+}

@@ -221,7 +221,26 @@ deferred. Deployment/performance/full manual WCAG unavailable; INC2-VER-001 unre
 | [NFR-PORT-001](specs/SHARED-REQUIREMENTS.md#nonfunctional-requirements) | Portability | [AC-NFR-PORT-001](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
 | [NFR-RES-001](specs/SHARED-REQUIREMENTS.md#nonfunctional-requirements) | Resource budget | [AC-NFR-RES-001](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
 
+## Existing application UI redesign — 30 October 2026
+
+Presentation coverage for REQ-CON-001/002/007/009 (implemented private-draft portions),
+REQ-SHR-005 and NFR-A11Y-001 is recorded in the
+[redesign run](../logs/yooplo/2026-10-30-saas-ui-redesign-run.md).
+The client adds a role-scoped collapsible navigation shell, responsive draft dashboard,
+consistent forms/status/confirmation styling and a shared decorative icon component.
+Existing business/API contracts remain intact. Independent synthetic-API Chrome
+checks and screenshots cover the implemented screens; they do not establish live
+backend authorization, submitted-revision behavior or full WCAG compliance.
+The run records exact checks, environment failures and remaining manual review.
+
 ## Evidence update rule
+
+Shell refinement, 31 October 2026: REQ-SHR-005 / NFR-A11Y-001 presentation checks
+now include independent workspace/navigation scroll containers, stationary desktop
+sidebar/topbar, accessible collapsed icon rail and native mobile navigation dialog.
+The [refinement run](../logs/yooplo/2026-10-31-shell-scroll-refinement.md) links the
+actual browser assertions, responsive screenshots, unit/build checks and remaining
+manual accessibility gaps. No domain-contract or authorization change is included.
 
 Add actual source/test paths, scenario/test names, commands/results, environment/version and independent review evidence for each implemented slice. Record failures and open decisions. Documentation or mock existence alone is not a pass. Expand multi-clause requirements into normal, boundary, failure and authorization cases. Update affected criteria, contracts, scenarios and guides with material behavior changes; tests verify intent rather than mirror implementation. OPEN-001 through OPEN-009 now record approved baseline policy; OPEN-002 live verification and actual implementation/evidence remain pending.
 

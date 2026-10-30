@@ -20,15 +20,29 @@ and open/edit/delete their own never-submitted private drafts. Other role workfl
 ### Contributor private drafts
 
 After signing in as a Contributor, your workspace lists your own never-submitted
-DRAFT proposals. An empty list offers **Create a draft**. Use **Next page** and
+DRAFT proposals. Select **Create New Draft**, or **Create your first draft** in the
+empty state. The summary counts drafts on the loaded page, not all account drafts.
+Use **Next page** and
 **First page** when the list spans pages.
 
-Select **Create a draft**, enter a title, problem and expected behavior, and optionally
+Select **Create New Draft**, enter a title, problem and expected behavior, and optionally
 enter constraints. Title is limited to 200 Unicode characters; each narrative field
 to 10,000. Select **Create private draft** to save and open its private detail.
 Select a title in the list to open an existing draft, or **Back to your drafts** to return.
 Only the owner can read this working content. Submission,
 responses, lifecycle actions and the drafting assistant are not included yet.
+
+The application sidebar shows your account's workspace and **Sign out**. Use
+**Collapse navigation** or **Expand navigation** in the top bar to switch between
+full navigation and a compact icon rail. Icon controls retain accessible names and
+hover titles. The desktop sidebar and top bar remain visible while the workspace
+scrolls; overflowing navigation scrolls separately from the workspace.
+On mobile, select **Open navigation** to open the drawer and **Close navigation**
+or press Escape to return to the workspace. Keyboard focus stays within the open
+drawer, and the background workspace stops scrolling. Toggling navigation keeps
+your current form open. A **Skip to main content** link is available when navigating
+by keyboard. Reviewer and Release Maintainer accounts retain their availability
+message until their workflows are implemented.
 
 ### Delete a never-submitted draft
 

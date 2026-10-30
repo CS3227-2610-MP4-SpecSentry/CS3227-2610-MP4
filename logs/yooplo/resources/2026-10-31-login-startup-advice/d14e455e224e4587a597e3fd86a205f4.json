@@ -1,0 +1,35 @@
+{
+  "id": "d14e455e224e4587a597e3fd86a205f4",
+  "prompter": "yooplo",
+  "session": "2026-10-31-login-startup-advice",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "diagnose",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings not exposed",
+  "started_at": "2026-10-30T16:05:21.125936+00:00",
+  "ended_at": "2026-10-30T16:05:35.758699+00:00",
+  "elapsed_seconds": 14.632763,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Verified frontend and backend readiness, configured-key presence only; provided demo login and restart instructions without database mutations",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry unavailable",
+    "output_tokens": "Per-record usage telemetry unavailable",
+    "cache_read_tokens": "Per-record usage telemetry unavailable",
+    "tool_calls": "Per-record usage telemetry unavailable",
+    "retries": "Per-record usage telemetry unavailable"
+  },
+  "unavailable_reason": "Per-record usage telemetry unavailable"
+}

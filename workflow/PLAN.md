@@ -4,6 +4,19 @@ As of 25 October 2026. Imported dates are targets, not completion evidence. Hist
 
 ## Team Allocation
 
+Shell refinement, 31 October 2026: bounded workspace/navigation scroll areas,
+stationary topbar/sidebar, desktop icon rail and native mobile navigation drawer
+extend the existing presentation update. Implementation and independent acceptance
+are recorded in the [refinement log](../logs/yooplo/2026-10-31-shell-scroll-refinement.md).
+No new domain workflow or deployment; teammate review remains pending.
+
+Presentation update, 30 October 2026: existing application shell and Contributor
+private-draft screens received a responsive SaaS redesign. No new role workflow,
+backend contract or deployment is included. Implementation and independent
+acceptance evidence are tracked in the
+[redesign run](../logs/yooplo/2026-10-30-saas-ui-redesign-run.md); teammate review
+remains pending.
+
 | **Member** | **Primary role focus** | **Shared area coordinated** | **Planned contribution** |
 | --- | --- | --- | --- |
 | yooplo | Contributor | Authentication, sessions, role routing, CSRF, and account access controls | Contributor spec, interface, service, tests, and User Guide flows |

@@ -1,0 +1,35 @@
+{
+  "id": "4a3e3ee133be46ae941511bc26387de6",
+  "prompter": "yooplo",
+  "session": "2026-10-31-ui-batch-commits",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "prepare-commits",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T16:20:53.134049+00:00",
+  "ended_at": "2026-10-30T16:22:51.759760+00:00",
+  "elapsed_seconds": 118.625711,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Created frontend and browser evidence commits; final documentation batch staged and checked for commit",
+  "unavailable_reasons": {
+    "input_tokens": "Exact settings and per-record runtime usage not exposed",
+    "output_tokens": "Exact settings and per-record runtime usage not exposed",
+    "cache_read_tokens": "Exact settings and per-record runtime usage not exposed",
+    "tool_calls": "Exact settings and per-record runtime usage not exposed",
+    "retries": "Exact settings and per-record runtime usage not exposed"
+  },
+  "unavailable_reason": "Exact settings and per-record runtime usage not exposed"
+}
