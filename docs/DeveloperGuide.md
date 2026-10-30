@@ -5,7 +5,8 @@
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
 PostgreSQL sessions, CSRF, role guards and restricted security events. Contributor
-Increment 1 adds private draft create/list/detail; other domain workflows and AI
+Increment 1 adds private draft create/list/detail and Increment 2 adds own never-submitted
+DRAFT editing; other domain workflows and AI
 integration remain pending. See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
@@ -14,8 +15,8 @@ by yooplo; exact scope/evidence limits are recorded in the
 [integration proposal](../logs/yooplo/2026-10-27-contributor-foundation-proposal.md).
 The implementation reuses the same-repository pre-AI foundation at `0becf938` by files
 and symbols, with its unchanged intake, manual-review and revision-cycle migrations.
-Review/notification tables are shared storage prerequisites; only Contributor create,
-owner list and private-detail routes are registered. No whole Reviewer branch, prior-MP
+Review/notification tables are shared storage prerequisites; Contributor create,
+owner list/private detail and the existing save-draft PATCH route are registered. No whole Reviewer branch, prior-MP
 source or product AI was imported. Current local verification and remaining gaps belong
 in the [run record](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
 
@@ -30,6 +31,26 @@ in the [run record](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
   come from bounded owner-authorized WorkingRevision lookups; public root title remains a placeholder.
 - `GET /api/proposals/:id/draft`: owner-only private content; another Contributor gets 403;
   missing root 404. Existing submitted-detail semantics are not repurposed.
+- `PATCH /api/proposals/:id/draft`: existing strict `{expectedVersion,content}` save contract
+  and lifecycle response reused without shared-contract/schema changes. Contributor owner only;
+  state must be DRAFT with no submission markers or release attachment. Under the same business
+  transaction/root lock, require exact version, preserve working identity and root placeholder,
+  update private content/version, and append content-free DRAFT_SAVED activity. Stale/ineligible
+  requests return409 with no mutation; activity failure or session expiry rolls everything back.
+
+The four-field editor preserves the full loaded working-content DTO, including unexposed fields
+and child identities. It does not implement criteria management or submitted editing. On409 or
+uncertain outcome it retains text and the captured version, blocks blind saves, and requires
+confirmed authorized reload before replacing both content/version. Failed reload attempts do not
+automatically retry on ordinary callback refresh. Keyed proposal/auth contexts suppress late
+responses targeting another editor; current-login401 still invalidates the session.
+
+Increment2 is stacked on Increment1 commit `bb485ff` on
+`feature/contributor-own-draft-editing`. PR10/foundation branch remains unmerged and final teammate
+patch review is pending. Any future Increment2 PR targets `feature/contributor-private-drafts`
+until that foundation merges. Review commit/push/PR publication is now authorized; merge and
+Increment3 remain excluded. Foundation agreement does not provide final teammate patch approval.
+See [Increment2 evidence](../logs/yooplo/2026-10-28-contributor-increment-2.md) for actual checks/gaps.
 
 Business transactions recheck enabled/versioned account, role and persisted session under
 account → session → root locking, including transaction-end expiry. Successful list/detail reads
@@ -273,7 +294,8 @@ code, text or assets here with source, license and affected files.
 Codex assisted with architecture/scaffolding and documentation as recorded above,
 Contributor workflow instructions, and reading/mapping the supplied MP4 PDF into
 repository specifications and checklists. It also coordinated Contributor foundation reuse,
-implemented Increment 1 and supplied separate design/security and acceptance review agents;
+implemented Increment 1 and Increment 2 own-draft editing, and supplied separate
+design/security and acceptance review agents;
 actual results and unavailable evidence are linked in the run log. Same-repository reused source
 is attributed to the pinned Reviewer foundation above. AI-generated changes and summaries
 require human review; the team remains responsible for the submitted content and

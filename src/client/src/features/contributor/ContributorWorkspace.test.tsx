@@ -24,6 +24,11 @@ function fill() {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('Contributor private drafts', () => {
+  it('offers editing from an own DRAFT detail', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply(detail)));
+    setup(`/contributor/drafts/${id}`);
+    expect(await screen.findByRole('link', { name: 'Edit private draft' })).toHaveAttribute('href', `/contributor/drafts/${id}/edit`);
+  });
   it('has an empty state and a usable create/detail/list flow, rendering text safely', async () => {
     const fetch = vi.fn().mockResolvedValueOnce(reply({ items: [], nextCursor: null }))
       .mockResolvedValueOnce(reply(created, 201)).mockResolvedValueOnce(reply(detail))
