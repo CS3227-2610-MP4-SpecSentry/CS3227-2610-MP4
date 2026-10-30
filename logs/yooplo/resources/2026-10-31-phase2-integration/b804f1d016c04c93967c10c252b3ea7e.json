@@ -1,0 +1,35 @@
+{
+  "id": "b804f1d016c04c93967c10c252b3ea7e",
+  "prompter": "yooplo",
+  "session": "2026-10-31-phase2-integration",
+  "agent": "reviewer",
+  "invocation": "reviewer-1",
+  "stage": "integration-integrity-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T17:54:02.499737+00:00",
+  "ended_at": "2026-10-30T17:57:39.596984+00:00",
+  "elapsed_seconds": 217.097247,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent read-only integration review verified all64 artifact paths equivalent with8 LFCRLF-only differences, all45 unaffected Phase1 files exact, all53 original Phase1 bytes backed up,57 backup files intact,64 safe rollback dry-run targets,unchanged index and HEAD,no unexpected pending paths",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "output_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "cache_read_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "tool_calls": "Exact execution settings and per-record runtime telemetry not exposed",
+    "retries": "Exact execution settings and per-record runtime telemetry not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and per-record runtime telemetry not exposed"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "7ce791b5270a49459e43666364359136",
+  "prompter": "yooplo",
+  "session": "2026-10-31-functional-ux",
+  "agent": "verifier",
+  "invocation": "verifier-4",
+  "stage": "final-revalidation",
+  "attempt": 4,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T16:45:46.547178+00:00",
+  "ended_at": "2026-10-30T16:47:36.238586+00:00",
+  "elapsed_seconds": 109.691408,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final independent Phase1 browser27/27; zero unexpected console errors; guards/history/native unload/auth clearance/criteria/sticky failure recovery and200%focus pass",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

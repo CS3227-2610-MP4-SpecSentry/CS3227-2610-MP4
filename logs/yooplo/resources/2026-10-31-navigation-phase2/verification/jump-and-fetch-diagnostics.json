@@ -1,0 +1,61 @@
+{
+  "geometry": {
+    "main": {
+      "x": 0,
+      "y": 61,
+      "width": 375,
+      "height": 939,
+      "top": 61,
+      "right": 375,
+      "bottom": 1000,
+      "left": 0
+    },
+    "mainPadding": "24px",
+    "bar": {
+      "x": 16,
+      "y": 85,
+      "width": 333,
+      "height": 118.984375,
+      "top": 85,
+      "right": 349,
+      "bottom": 203.984375,
+      "left": 16
+    },
+    "target": {
+      "x": 33,
+      "y": 195.734375,
+      "width": 299,
+      "height": 21.984375,
+      "top": 195.734375,
+      "right": 332,
+      "bottom": 217.71875,
+      "left": 33
+    },
+    "focused": "editor-overview"
+  },
+  "requests": [
+    {
+      "path": "/api/auth/session",
+      "method": "GET",
+      "csrf": null
+    },
+    {
+      "path": "/api/proposals/proposal-1/draft",
+      "method": "GET",
+      "csrf": null
+    },
+    {
+      "path": "/api/proposals/proposal-1/draft",
+      "method": "GET",
+      "csrf": null
+    }
+  ],
+  "failures": [
+    {
+      "url": "http://127.0.0.1:5186/api/proposals/proposal-1/draft",
+      "error": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
-import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { csrfResponseSchema, sessionResponseSchema, type AccountRole, type SessionResponse } from '@specsentry/shared';
 import { ContributorWorkspace } from './features/contributor/ContributorWorkspace';
 import { Icon } from './shared/Icon';
@@ -106,6 +106,7 @@ function MobileNavigation(props: NavigationProps) {
 }
 
 export function App() {
+  const location = useLocation();
   const [session, setSession] = useState<(SessionResponse & { authGeneration: number }) | null>(null);
   const [loading, setLoading] = useState(true);
   const [notice, setNotice] = useState('');
@@ -169,15 +170,19 @@ export function App() {
   }
 
   const workspace = session ? workspaces[session.account.role] : null;
+  const path = location.pathname.replace(/\/+$/, '');
+  const taskTitle = session?.account.role === 'CONTRIBUTOR' && path.startsWith('/contributor')
+    ? path.endsWith('/edit') ? 'Edit draft' : path === '/contributor/new' ? 'Create draft' : path.includes('/drafts/') ? 'Draft details' : 'Private drafts'
+    : workspace ? `${workspace.label} workspace` : 'SpecSentry';
   return <div className={session && workspace ? `app-shell${navigationOpen ? '' : ' navigation-collapsed'}` : 'login-shell'}>
-    <a className="skip-link" href="#main-content">Skip to main content</a>
+    <a className="skip-link" href="#main-content" onClick={event => { event.preventDefault(); document.getElementById('main-content')?.focus(); }}>Skip to main content</a>
     {session && workspace && <aside className="sidebar desktop-sidebar" id="workspace-navigation">
       <SidebarContent workspace={workspace} username={session.account.username} loggingOut={loggingOut} onLogout={() => void logout()} />
     </aside>}
     <div className="app-body">
       {session && workspace ? <header className="topbar">
-        <div className="topbar-start"><button className="icon-button desktop-navigation-toggle" aria-label={navigationOpen ? 'Collapse navigation' : 'Expand navigation'} aria-controls="workspace-navigation" aria-expanded={navigationOpen} onClick={() => setNavigationOpen(open => !open)}><Icon name="menu" /></button><MobileNavigation workspace={workspace} username={session.account.username} loggingOut={loggingOut} onLogout={() => void logout()} /><div className="breadcrumb">Workspace <span aria-hidden="true">/</span> <h1>{workspace.label}</h1></div></div>
-        <span className="account-label">Signed in as {session.account.username}</span>
+        <div className="topbar-start"><button className="icon-button desktop-navigation-toggle" aria-label={navigationOpen ? 'Collapse navigation' : 'Expand navigation'} aria-controls="workspace-navigation" aria-expanded={navigationOpen} onClick={() => setNavigationOpen(open => !open)}><Icon name="menu" /></button><MobileNavigation workspace={workspace} username={session.account.username} loggingOut={loggingOut} onLogout={() => void logout()} /><span className="topbar-task" title={taskTitle}>{taskTitle}</span></div>
+        <span className="account-label" title={`Signed in as ${session.account.username}`}>Signed in as {session.account.username}</span>
       </header> : <header className="login-brand"><span className="brand-mark"><Icon name="shield" /></span><h1>SpecSentry</h1><p>Bring clarity to every change.</p></header>}
       <main id="main-content" tabIndex={-1}>
         {notice && <p className="notice" role="status">{notice}</p>}
@@ -188,11 +193,11 @@ export function App() {
           <Route path="/login" element={<Navigate to={workspace.path} replace />} />
           <Route path="/contributor/*" element={session.account.role === 'CONTRIBUTOR'
             ? <ContributorWorkspace key={`${session.account.id}:${session.csrfToken}`} session={session} onSessionLost={sessionLost} />
-            : <><h2>Access denied</h2><p>This workspace requires a different account role.</p></>} />
-          {Object.entries(workspaces).filter(([role]) => role !== 'CONTRIBUTOR').map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? <>
-            <h2>{item.label} workspace</h2><p className="notice">Your account is ready. Workflow features will appear here as they become available.</p>
-          </> : <><h2>Access denied</h2><p>This workspace requires a different account role.</p></>} />)}
-          <Route path="*" element={<><h2>Page not found</h2><Link to={workspace.path}>Return to your workspace</Link></>} />
+            : <section className="workspace-placeholder"><h1>Access denied</h1><p>This workspace requires a different account role.</p></section>} />
+          {Object.entries(workspaces).filter(([role]) => role !== 'CONTRIBUTOR').map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? <section className="workspace-placeholder">
+            <h1>{item.label} workspace</h1><p className="notice">Your account is ready. Workflow features will appear here as they become available.</p>
+          </section> : <section className="workspace-placeholder"><h1>Access denied</h1><p>This workspace requires a different account role.</p></section>} />)}
+          <Route path="*" element={<section className="workspace-placeholder"><h1>Page not found</h1><Link to={workspace.path}>Return to your workspace</Link></section>} />
         </Routes>
       </>}
       </main>

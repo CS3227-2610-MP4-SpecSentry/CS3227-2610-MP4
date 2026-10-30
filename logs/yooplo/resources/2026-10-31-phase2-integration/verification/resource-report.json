@@ -1,0 +1,127 @@
+{
+  "records": [
+    {
+      "id": "8953e7deb0af49f89438cc36e5e75f31",
+      "prompter": "yooplo",
+      "session": "2026-10-31-phase2-integration",
+      "agent": "verifier",
+      "invocation": "verifier-1",
+      "stage": "integrated-browser-regressions",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Inherited execution settings not exposed",
+      "started_at": "2026-10-30T17:54:02.601694+00:00",
+      "ended_at": "2026-10-30T17:59:27.055029+00:00",
+      "elapsed_seconds": 324.453335,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Original-root integrated48/48+criterionfocus supplementpass;zeroerrors/warnings;all64artifacts byte-identical;onlytemporaryoutputdir changed;5187stopped",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record usage telemetry not exposed",
+        "output_tokens": "Per-record usage telemetry not exposed",
+        "cache_read_tokens": "Per-record usage telemetry not exposed",
+        "tool_calls": "Per-record usage telemetry not exposed",
+        "retries": "Per-record usage telemetry not exposed"
+      },
+      "unavailable_reason": "Per-record usage telemetry not exposed"
+    },
+    {
+      "id": "b804f1d016c04c93967c10c252b3ea7e",
+      "prompter": "yooplo",
+      "session": "2026-10-31-phase2-integration",
+      "agent": "reviewer",
+      "invocation": "reviewer-1",
+      "stage": "integration-integrity-review",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Inherited execution settings not exposed",
+      "started_at": "2026-10-30T17:54:02.499737+00:00",
+      "ended_at": "2026-10-30T17:57:39.596984+00:00",
+      "elapsed_seconds": 217.097247,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Independent read-only integration review verified all64 artifact paths equivalent with8 LFCRLF-only differences, all45 unaffected Phase1 files exact, all53 original Phase1 bytes backed up,57 backup files intact,64 safe rollback dry-run targets,unchanged index and HEAD,no unexpected pending paths",
+      "unavailable_reasons": {
+        "input_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+        "output_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+        "cache_read_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+        "tool_calls": "Exact execution settings and per-record runtime telemetry not exposed",
+        "retries": "Exact execution settings and per-record runtime telemetry not exposed"
+      },
+      "unavailable_reason": "Exact execution settings and per-record runtime telemetry not exposed"
+    },
+    {
+      "id": "eb7d95bc21454cbb8177a5a2821d5a01",
+      "prompter": "yooplo",
+      "session": "2026-10-31-phase2-integration",
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "integrate-and-validate",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact execution settings not exposed",
+      "started_at": "2026-10-30T17:52:03.127302+00:00",
+      "ended_at": "2026-10-30T17:59:54.642705+00:00",
+      "elapsed_seconds": 471.515403,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Applied64 artifact paths, preserved Phase1 and original index, reviewed rollback; client110pass on unchanged rerun after documented109pass1focusfailure, lint/alltypes/buildpass, browser48plus1pass; no commits or deployment",
+      "unavailable_reasons": {
+        "input_tokens": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+        "output_tokens": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+        "cache_read_tokens": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+        "tool_calls": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+        "retries": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only"
+      },
+      "unavailable_reason": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only"
+    }
+  ],
+  "issues": [],
+  "ok": true,
+  "measured_totals_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "coverage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "summed_interval_seconds": 1013.065985,
+  "limit": "Only explicitly registered intervals. Null telemetry is unavailable, not zero; overlapping intervals are not wall time."
+}

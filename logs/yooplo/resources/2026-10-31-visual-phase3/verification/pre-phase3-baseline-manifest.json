@@ -1,0 +1,1008 @@
+{
+  "head": "847e5237608c8f8eaa39ca5a7405f1cdd5f0830f",
+  "index_sha256": "e83c6747f09e12cc068debac46b7d975c5eb4a4cecb0ea9073d6fecbaa04e688",
+  "files": [
+    {
+      "status": " M",
+      "path": "docs/DeveloperGuide.md",
+      "classification": "documentation",
+      "bytes": 30335,
+      "sha256": "5800ca71c3c31054e562a37dbf6e68f43ba2f24968025881d8aac7684bd6b960"
+    },
+    {
+      "status": " M",
+      "path": "docs/UserGuide.md",
+      "classification": "documentation",
+      "bytes": 12931,
+      "sha256": "5c93c82e995e72fbca46f552df014b8e6c1899dfe215ca10bb6ded312d428f88"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/App.test.tsx",
+      "classification": "source",
+      "bytes": 18963,
+      "sha256": "7e03c1173d37b4391c939dc0d13955ada84ef445cdd875ad2a27a3faf3c9cd43"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/App.tsx",
+      "classification": "source",
+      "bytes": 13595,
+      "sha256": "a31f2ec1cf396f392950fa5fd2adef3d932c7de5ee30aa2a9e379c99286798b4"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/ContributorWorkspace.test.tsx",
+      "classification": "source",
+      "bytes": 9343,
+      "sha256": "fd74c639dbeaed913635ab5da856a56ca35abee180c08777319ee263d414e9fd"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "classification": "source",
+      "bytes": 41271,
+      "sha256": "84f0f495ceab4c3ab2702af7f4913cd95c58bbfc7b547bc597c275f0046e077a"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/CriteriaDraft.test.tsx",
+      "classification": "source",
+      "bytes": 13952,
+      "sha256": "87afaa6bc6fa1a2f64a26b23576b2a99ac418c95d90ac1d0fa9623c7136330b6"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/DeleteDraft.test.tsx",
+      "classification": "source",
+      "bytes": 8598,
+      "sha256": "26501a1d40f066066410ef2dd67eb49e0453935492e9546d7545aaba684ab636"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/main.tsx",
+      "classification": "source",
+      "bytes": 538,
+      "sha256": "9b3c18f9da633c37022510f67e2f1a559ba090e44a5acc425e13dbbe2b0f4dce"
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/styles.css",
+      "classification": "source",
+      "bytes": 22895,
+      "sha256": "98c3ffb2074abc88c419adcd4eafbd8a9f6622edc69c47cd0ddec8bf1812173a"
+    },
+    {
+      "status": " M",
+      "path": "workflow/PLAN.md",
+      "classification": "specifications",
+      "bytes": 20913,
+      "sha256": "58b717ff160a4169f8946c2f15ba89aab6df6409f39b187771eeb0a67370168c"
+    },
+    {
+      "status": " M",
+      "path": "workflow/TRACEABILITY.md",
+      "classification": "specifications",
+      "bytes": 34425,
+      "sha256": "7654c3815d9c256b158a09ea23b0848503492da7cdbefda185fb8c0051417924"
+    },
+    {
+      "status": " M",
+      "path": "workflow/specs/ROLE-CONTRIBUTOR.md",
+      "classification": "specifications",
+      "bytes": 15940,
+      "sha256": "c4f8f5534e39d2e8b09190194b4a0dc3af4ff81f8413a696689a275772cb404f"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/2026-10-31-functional-ux.md",
+      "classification": "evidence",
+      "bytes": 22189,
+      "sha256": "76cb66fbf8f0699698e360b5b3579c65e8c2881aae0aed21cbd67cfb8b703571"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/2026-10-31-navigation-phase2.md",
+      "classification": "evidence",
+      "bytes": 22055,
+      "sha256": "cbce257245412eff45278dc97e9ae2a452199e08be4b60dc49b15920c6425e6b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/2026-10-31-phase2-integration.md",
+      "classification": "evidence",
+      "bytes": 10500,
+      "sha256": "425129b97975ab69a42268a24bc346ade20335cd95b339d6f734537fd57826b8"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/262bf9dae3f24ff6b064025b8399ba70.json",
+      "classification": "evidence",
+      "bytes": 1364,
+      "sha256": "194f00fd0a53f4d04f9e3c5eb279e70c64662ac23a080df158c5790aaf81a7ff"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/34372853461244f7a06600698e0e0261.json",
+      "classification": "evidence",
+      "bytes": 1504,
+      "sha256": "6b5f79d548de01d1b295e59fbd2877aecae89878c23ac5c6558c1fff54d82265"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/468d3261bb9749bfa1740f03c8727ad2.json",
+      "classification": "evidence",
+      "bytes": 1363,
+      "sha256": "efed667c4e06368fa35f789d0b7bc44bb6bcd1fb54478bee2e480a796511cc8b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/46d5238f74824c46bd9455873f9109c1.json",
+      "classification": "evidence",
+      "bytes": 1310,
+      "sha256": "fd3f0a2d549d6a468e1325f655995d0b4ce48d25eadf6c8e480791ccb4eff6a7"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/57eaecae1b7c477ab3d7bd774cd842b9.json",
+      "classification": "evidence",
+      "bytes": 1346,
+      "sha256": "8bcd5a076babc6933d5530588501827b6bce2723c088ad9a8b6d544338d79ca7"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/5c41a06079f04a268798d4abe3c4b37e.json",
+      "classification": "evidence",
+      "bytes": 1480,
+      "sha256": "8f4903f01ade480f1dca6b03d68d203abf2921cba4fad11455e8fa5965ccb8fa"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/5e76af9fffdd416f816752328c94db6a.json",
+      "classification": "evidence",
+      "bytes": 1547,
+      "sha256": "184ec3f45059152186d72a11c253d7627b6f4520c7d797886f9215cba783ebf6"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/7ce791b5270a49459e43666364359136.json",
+      "classification": "evidence",
+      "bytes": 1356,
+      "sha256": "8f73ee964a40cc75f7afbc8580e551e5bd253818a776cc52edbd32d5e66b08fe"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/7ef61e8c817740f5a03d3f6398329741.json",
+      "classification": "evidence",
+      "bytes": 1357,
+      "sha256": "1535d99f5f01d452e5a8d9051f2c0f238647f301ddeeecb857c988e09fe8b9d7"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/88d9cdcb37c14e7586804954ae1c3f76.json",
+      "classification": "evidence",
+      "bytes": 1314,
+      "sha256": "34d4b69fedcc1e9dcba21e30fe52815c51f8ad3766c51988d5c552b63a5a3239"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/ec3e5fbd17fb40139fb4133fba819232.json",
+      "classification": "evidence",
+      "bytes": 1557,
+      "sha256": "e907e7f33834e39e275f702ad22b1baae618d8df5f38dda14005af073dff04d1"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/f86977a9340d4c0f9463ba0138dd1c67.json",
+      "classification": "evidence",
+      "bytes": 1553,
+      "sha256": "78fa9e16a1aada58454c5d27c91b009a807ebdee6b2f40be455eb7c12aa8a4da"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/fa84f70bf663400da7da97adf038792f.json",
+      "classification": "evidence",
+      "bytes": 1308,
+      "sha256": "cc9528c9dc04d8a323711590c3f997073405d516863c1ab385eed8e4b5effb1c"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/acceptance-report.md",
+      "classification": "evidence",
+      "bytes": 9551,
+      "sha256": "10cad8091932c2c113397d35980e7f84e87ef47cc6ae904d34e1d0c8472ce698"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/acceptance-results.json",
+      "classification": "evidence",
+      "bytes": 4468,
+      "sha256": "d7afb656312f227233500281549e41e45d5b761af2e05dc4d05fce1f7f4b9351"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/attempt-2-results.json",
+      "classification": "evidence",
+      "bytes": 4392,
+      "sha256": "9fd93badca451fe904f150e48bf946a5e6eafba78cb5d4be38ab6c03dabf7bfd"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/attempt-4-results.json",
+      "classification": "evidence",
+      "bytes": 4277,
+      "sha256": "697d061fd94a1c225153b34ea2c3faebf3dd36c64fecc42aae0b99cb58d32557"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline-results.json",
+      "classification": "evidence",
+      "bytes": 2329,
+      "sha256": "99fccf2981a81d0cd53ab872ee79352f1e1949385a7d0dc956444c018ce564d1"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline.mjs",
+      "classification": "evidence",
+      "bytes": 7351,
+      "sha256": "c5c3004bd4d28157a1b300bf4ad6ffa5113b8d0f8ef424cba307e6bef38eba1c"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-409.png",
+      "classification": "evidence",
+      "bytes": 63088,
+      "sha256": "8dbf44912ba256a18cb64f0b738f6ae0c9ffd9108d28719d62a6f3a85ca2794b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-500.png",
+      "classification": "evidence",
+      "bytes": 62025,
+      "sha256": "f3c47fc43457804ef6d0314ce8b80ed45f8be2deff65f8c7298718dc404c20e7"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-network.png",
+      "classification": "evidence",
+      "bytes": 63102,
+      "sha256": "57245efd06c9bd03659ad11055724bebb29d92ba2f4afc475aa447f6380aa370"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-reconcile.png",
+      "classification": "evidence",
+      "bytes": 63733,
+      "sha256": "50b549ceb773244517bf52c440ab65a065001e4abd7e914975b4bd7ddfdbd9e1"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-history-results.json",
+      "classification": "evidence",
+      "bytes": 3369,
+      "sha256": "6fa816dea3f0958d64915b43b987daa842dec758f16ffd50d97c0a3f9782e849"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-history.mjs",
+      "classification": "evidence",
+      "bytes": 10189,
+      "sha256": "8e907e90ad1ca2974780188f08e6e19c7bdbeda2a6b577d55961c41f2c53d45b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-previous-Back.png",
+      "classification": "evidence",
+      "bytes": 52821,
+      "sha256": "cf37500ffa67a357e65354dceaa226e55f72edcca3226373fb498dc9aea9ffbd"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-enlarged-validation.png",
+      "classification": "evidence",
+      "bytes": 37355,
+      "sha256": "40674c3e971e442c37ab767cce6d6daa147d347299638a4e43feb38eb7e36cd5"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-interactions.mjs",
+      "classification": "evidence",
+      "bytes": 7643,
+      "sha256": "f07722c2810a22f1d2755015f9c15e5100a1a72604e45359f6fa5efc6e1dacb7"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-pointer-save.png",
+      "classification": "evidence",
+      "bytes": 30371,
+      "sha256": "6071416aa3ad151f02f55d83dba21ed36ca642addf1f30f5c681ef2d78086209"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-raw-pointer.json",
+      "classification": "evidence",
+      "bytes": 346,
+      "sha256": "9fb01265147c996f9bb5518c124f70d09e7ad682557f5e49ef8b0580b79d0659"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-raw-pointer.mjs",
+      "classification": "evidence",
+      "bytes": 7705,
+      "sha256": "a6ff789fbf9e3d641b2a7bd7c5dbc65c4a2f3beb645cc1fc5014c2113e7bbb7c"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-scroll-debug.mjs",
+      "classification": "evidence",
+      "bytes": 7644,
+      "sha256": "4a7e3128d99c331421e3a745cd53d3dddd6aa71c6740726091c2d4c9a39ed8c4"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-scroll-debug.png",
+      "classification": "evidence",
+      "bytes": 35435,
+      "sha256": "e204746d8520b1bf1c141880912a3e3cfaafae30ba630c02e35c38f497c9f63d"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-scroll-timeline.json",
+      "classification": "evidence",
+      "bytes": 1261,
+      "sha256": "aae3165a7b45e44ff0563bb4feb65e75d5d2997af210cf7837beda9d6e4f4db9"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-user-interactions.json",
+      "classification": "evidence",
+      "bytes": 2521,
+      "sha256": "5dcb443cb8a1e5070f730b1d176a47f1cb8aab03daf50f847359732919d9b5e4"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/saved-criteria.png",
+      "classification": "evidence",
+      "bytes": 52809,
+      "sha256": "7b6e7b1fb58258baf802715ed885070584db9036ea4286e5db24b54d913936c6"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/skip-history-fixed.png",
+      "classification": "evidence",
+      "bytes": 52821,
+      "sha256": "cf37500ffa67a357e65354dceaa226e55f72edcca3226373fb498dc9aea9ffbd"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/sticky-save-1440.png",
+      "classification": "evidence",
+      "bytes": 55059,
+      "sha256": "395f0a07f3259705d1aaeb6747566a93d45842740bd8b6f777fc27e422572b53"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/sticky-save-375.png",
+      "classification": "evidence",
+      "bytes": 32128,
+      "sha256": "f52e5e4084230d8bf589127f2ac56c6d1cbe3fd69010a57fd03b04b16b54e22a"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/15fde4d5f1304a92bea8db747ad26a97.json",
+      "classification": "evidence",
+      "bytes": 1352,
+      "sha256": "ccd0a5bd8dfdd87c60be533b767f22c618c32cd6d884ec94c580341f4d545cfd"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/3fe406213a67466ebd9534d07909bfff.json",
+      "classification": "evidence",
+      "bytes": 1460,
+      "sha256": "c832d0ce18e7e1a641f199b27bd9bbe264040a1741af971a774dbb5461d0ac84"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/46e9a7268d934c539b3d41838e505040.json",
+      "classification": "evidence",
+      "bytes": 1664,
+      "sha256": "a4025b66ee3365c187b11b849e3b6d41a047818d26b2c7b447c5e12f08745a0c"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/5328023ec35e4cbfaada0f754271d6ca.json",
+      "classification": "evidence",
+      "bytes": 1373,
+      "sha256": "4e5a92bc8bd140c9e9e3e6ffb50af38117e0c507ab8fd71b0fac4d561d9a7bfd"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/543a24eac25d4fb7b7b122f54f97ae08.json",
+      "classification": "evidence",
+      "bytes": 1424,
+      "sha256": "0d17d7661ebf1c029d79cd095ff7d303a5dd6c4967223a71b1826275d5c6fab7"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/5f74ca3b30c94708a53c4a6b799a6ec5.json",
+      "classification": "evidence",
+      "bytes": 1413,
+      "sha256": "9b56c94fa5113fd92c15f2fdbf2b404c70b618658baec855a2a4706c5dc57f15"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/b3954ce5c352460cb3ff223a5363abc8.json",
+      "classification": "evidence",
+      "bytes": 1548,
+      "sha256": "d3264d59a620e2519b7c60e00b842c6ea5590f4d8f39c495987fb788652dc1ad"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/c075aa3ebf6544e5aae8a65e51b6232b.json",
+      "classification": "evidence",
+      "bytes": 1342,
+      "sha256": "1776171bd85522403ffb0995872919ffee01b682c7e05c63737f2b88ec57616a"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/db4b64785bfe476aa52f54a4d34be933.json",
+      "classification": "evidence",
+      "bytes": 1354,
+      "sha256": "f2b05dd22863e0f2d0ec4657e045ef66ff0b9249f3f1577f426f66a623b5a175"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/e0c4ee41f4b449b58a84ef45707b855f.json",
+      "classification": "evidence",
+      "bytes": 1632,
+      "sha256": "9c6afc626ba3a4023ceee7f74a9734c59dd08a6dc67ea16b963e18e2763be845"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/e2684197c17e4b29a4735be99d90c72a.json",
+      "classification": "evidence",
+      "bytes": 1351,
+      "sha256": "1b7792108c3a244d4bf45193addf93023a7c105b10135f6a155a050d568f527c"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/ed79f9f8ac774cc4ba71287964604cc4.json",
+      "classification": "evidence",
+      "bytes": 1338,
+      "sha256": "4b51206d6080743f7e426062eb1cdcbab3132adfbeeb3aec17d585b5a1a311cb"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/.gitignore",
+      "classification": "evidence",
+      "bytes": 13,
+      "sha256": "5f030958bea948752c4832697efdb46e01891fc1c1542a6d9cddfeb8f3a12dad"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/acceptance-report.md",
+      "classification": "evidence",
+      "bytes": 8762,
+      "sha256": "481da084ca82f608aaae74509ac2649896c28dd4cf8f07daf2ad48d0a5bfa3ee"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/acceptance-results.json",
+      "classification": "evidence",
+      "bytes": 7770,
+      "sha256": "0aa312434778911ce63484225926ce9380168454935b685d400de828434b5bc2"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/attempt-2-results.json",
+      "classification": "evidence",
+      "bytes": 13465,
+      "sha256": "7881aef8450b852283206fe8e8ac70ce4ae0a8a8f94576ea1f7f4a587d69325b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/attempt-4-results.json",
+      "classification": "evidence",
+      "bytes": 7310,
+      "sha256": "797b202fd3e40fa61b84e0d3f2372a1062ff1bad16c459b22845211f32849f0d"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/baseline-results.json",
+      "classification": "evidence",
+      "bytes": 3315,
+      "sha256": "7ff19082a8dfdbbc078b9c03aab518e5a99fd68289450e85ed809046d5ef2a63"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/baseline.mjs",
+      "classification": "evidence",
+      "bytes": 7241,
+      "sha256": "b9b88600b31c9269dca7ad46e64ed5e737922772618d48381813f2bd94e0a209"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-mobile-recovery.png",
+      "classification": "evidence",
+      "bytes": 51332,
+      "sha256": "9005326ad591fd50b35bb9e027b31be439aece2574288a7de3657d2f2093e9ab"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-debug.mjs",
+      "classification": "evidence",
+      "bytes": 7634,
+      "sha256": "fb08726f38e0d1e27b582088cdfd48e4fe93f67ab49d900d84fe65d058851490"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-diagnostics.json",
+      "classification": "evidence",
+      "bytes": 486,
+      "sha256": "4f77e1681d802b9cf04b662b2bb3c72563257d949762c3b8d616476fb13de281"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-fixed.png",
+      "classification": "evidence",
+      "bytes": 47657,
+      "sha256": "7f3a9f11ec6910138053f35811da2b95cc1763ad2e39ad8e755f39a89701458c"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-obscures-task.png",
+      "classification": "evidence",
+      "bytes": 40629,
+      "sha256": "c4b95acc832b7fece622a25accdeb86f58c6026d89cc66384b7664792949eb78"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-409.png",
+      "classification": "evidence",
+      "bytes": 56019,
+      "sha256": "9f7e4dc1b4d5ee5f26428ad39757a0ae8bbe494b5e02114cd969c440d0784a5a"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-500.png",
+      "classification": "evidence",
+      "bytes": 56286,
+      "sha256": "bdcc22088f25c9f95b2f4c24aa32cee9281aa9b20218bf562357f946dd051ff6"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-network.png",
+      "classification": "evidence",
+      "bytes": 56286,
+      "sha256": "bdcc22088f25c9f95b2f4c24aa32cee9281aa9b20218bf562357f946dd051ff6"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-reconcile.png",
+      "classification": "evidence",
+      "bytes": 56055,
+      "sha256": "2968add7bb3f42ea6a2883ec78029a766189af35d1870bb03eb94e408eb4c926"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/jump-and-fetch-diagnostics.json",
+      "classification": "evidence",
+      "bytes": 1171,
+      "sha256": "0151f2888bc0f6b552e12865836d8a21ef6a837f9723a6b03d445c463025a60f"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/jump-debug.mjs",
+      "classification": "evidence",
+      "bytes": 7850,
+      "sha256": "3bbb4b2e0747c143701589a1727a88404b0152636851849b0aaf1e4104642a16"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/jump-obscured-375.png",
+      "classification": "evidence",
+      "bytes": 36345,
+      "sha256": "8e87e0d66fd88ac43696cac840da7e18ae9e712a37cb5516a099a877ac9263fd"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/mobile-enlarged-validation.png",
+      "classification": "evidence",
+      "bytes": 40627,
+      "sha256": "f9856dc41c37013b8ed9f829989427fc3dd614717177b67f49c4faa9ffcafbc1"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/mobile-pointer-save.png",
+      "classification": "evidence",
+      "bytes": 28512,
+      "sha256": "de848076990ce436714600b18a8abcdac7d47261d4fb33a444a5fbfa1b9445b3"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-contributor.png",
+      "classification": "evidence",
+      "bytes": 54709,
+      "sha256": "53432b216d9360bf93f4faebd8ef5227cafb1172e22820e931fded527040bb7b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-edit.png",
+      "classification": "evidence",
+      "bytes": 60365,
+      "sha256": "933645f0165f68a8f4959ac44ccba4ea1aa082b614db3c6a5626bb877df66c3e"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-new.png",
+      "classification": "evidence",
+      "bytes": 56303,
+      "sha256": "9dc4a4bfa08ba5df7ba32fb5519624c0bf056e807aee2bf020d6b0a0b8aa6cfa"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-proposal-1.png",
+      "classification": "evidence",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/reflow-1440.png",
+      "classification": "evidence",
+      "bytes": 92256,
+      "sha256": "d5626a4689b40d5941f8e1be576918b20a96261ac0e50ecb83e6b6e21701dd9f"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/reflow-375.png",
+      "classification": "evidence",
+      "bytes": 41252,
+      "sha256": "57e54948ca9445ca4db6e69ca939471d36b7ea86f8a086c65d3208d3a0e89cc4"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/reflow-768.png",
+      "classification": "evidence",
+      "bytes": 66169,
+      "sha256": "f0283a46712075172916763ac82c0dbce53a0dd25b0ea8e68c9b54d4b14f347f"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/saved-criteria.png",
+      "classification": "evidence",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/section-evidence-1440.png",
+      "classification": "evidence",
+      "bytes": 54704,
+      "sha256": "945f83c1edfe04c3b82cc870abaf44f869c2fd049e15f5e48f4a5e7dd453c7ce"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/section-evidence-375.png",
+      "classification": "evidence",
+      "bytes": 31371,
+      "sha256": "9760a3b0af7dde87d659320fcec55fa4212153c34aa903b3357a23cb14279f77"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/section-evidence-768.png",
+      "classification": "evidence",
+      "bytes": 49935,
+      "sha256": "1cd7aa3cead6148504f2742aecbad22271ae1ba36f3ef35b316733697e8e371b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/skip-history-fixed.png",
+      "classification": "evidence",
+      "bytes": 52698,
+      "sha256": "f662b953f4272bc411d755965a5950d87d7b207215d74cfaec6d7557fb0dce97"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/sticky-save-1440.png",
+      "classification": "evidence",
+      "bytes": 52613,
+      "sha256": "b988fd189a882a917c92998c77bdc392c00aac735ecb5fff30c394e00eb79eea"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/sticky-save-375.png",
+      "classification": "evidence",
+      "bytes": 29960,
+      "sha256": "b131a01bc213df58c061b4f33d609f0f1de66d4b65eec20839a8b3d24f568808"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/vite-server.mjs",
+      "classification": "evidence",
+      "bytes": 656,
+      "sha256": "b0681b7dc42a05568e8c3851992ab7e17fbd5f053bc6e5859637a1ec10af8f74"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/8953e7deb0af49f89438cc36e5e75f31.json",
+      "classification": "evidence",
+      "bytes": 1360,
+      "sha256": "4cacd41e3e798f01e3ba2d7aaeedb5e47ceaf5245f9b20e08fff62eae7eda62b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/b804f1d016c04c93967c10c252b3ea7e.json",
+      "classification": "evidence",
+      "bytes": 1688,
+      "sha256": "1af27075f228fb8c44526ddcc1974520546a1acff23701c16552fb44a7df95aa"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/eb7d95bc21454cbb8177a5a2821d5a01.json",
+      "classification": "evidence",
+      "bytes": 1854,
+      "sha256": "a22ee93c6841724160aa2d8f5a034934e9ae270af89be451c948f920e4c0c84b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/acceptance-report.md",
+      "classification": "evidence",
+      "bytes": 3101,
+      "sha256": "5d5fe04b2a16b67f78c995dcf38ed3a1857e8160d4df2b88bf6fdb39104aec3b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/acceptance-results.json",
+      "classification": "evidence",
+      "bytes": 7539,
+      "sha256": "55e16cd8703d5a53c1b23ac3e31ff6f6d061e648009be9c0b8e6f5d3727692d1"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/automated-checks.json",
+      "classification": "evidence",
+      "bytes": 1051,
+      "sha256": "d7670dc0b3ef22898282ddc7e997c51285bf4daeb244f16c0b23c84ccbe79cd7"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/criterion-focus-results.json",
+      "classification": "evidence",
+      "bytes": 376,
+      "sha256": "f5fbf538d664e0cf7c8eb5764ba9ebd03517117ff754563b0c8ae5ac494edfe0"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/criterion-focus-supplement.png",
+      "classification": "evidence",
+      "bytes": 59528,
+      "sha256": "992a8484effd41601feeb3525c66acaa744574e203e3e5e14725849c448f2127"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/enlarged-mobile-recovery.png",
+      "classification": "evidence",
+      "bytes": 51382,
+      "sha256": "14e1288405bc9a5b7df6e391c267d262cc8b7581cd3371c138179450a0e456dd"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/enlarged-skip-fixed.png",
+      "classification": "evidence",
+      "bytes": 47657,
+      "sha256": "7f3a9f11ec6910138053f35811da2b95cc1763ad2e39ad8e755f39a89701458c"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-409.png",
+      "classification": "evidence",
+      "bytes": 56022,
+      "sha256": "e2e8ee6d23014a7c6ce610ee17491baacf3afbcb82721951428f6178902c0a2d"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-500.png",
+      "classification": "evidence",
+      "bytes": 56289,
+      "sha256": "cc648e1df7d4c108a13ad6ccf522eae26a661939dce2cf5c341c5e6fabede22e"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-network.png",
+      "classification": "evidence",
+      "bytes": 56278,
+      "sha256": "3a97abb25dfb30ae3c5495bf221fe3e0429f1d93f7c3c039c841aaf78c9fbd2a"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-reconcile.png",
+      "classification": "evidence",
+      "bytes": 56051,
+      "sha256": "466bee318bdc0e3acc2a152ae9ba30768b1465ecf22f5c694712e8a7486197d2"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/harness-and-integrity.json",
+      "classification": "evidence",
+      "bytes": 20131,
+      "sha256": "9b559a21f39bca183b513816d0be22ffa050959f9f530960be84d5b038bb1ded"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/mobile-enlarged-validation.png",
+      "classification": "evidence",
+      "bytes": 40628,
+      "sha256": "d8313c8363e3ec3d2173a2e3d86840bf2a4398a2860fbe5f3eab27345dbe9f4d"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/mobile-pointer-save.png",
+      "classification": "evidence",
+      "bytes": 28526,
+      "sha256": "36cb19db57bf14d6cca892ba9ce677c2a532de2acd302b0e338ec0053d0c6691"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-contributor.png",
+      "classification": "evidence",
+      "bytes": 54709,
+      "sha256": "53432b216d9360bf93f4faebd8ef5227cafb1172e22820e931fded527040bb7b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-edit.png",
+      "classification": "evidence",
+      "bytes": 60365,
+      "sha256": "933645f0165f68a8f4959ac44ccba4ea1aa082b614db3c6a5626bb877df66c3e"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-new.png",
+      "classification": "evidence",
+      "bytes": 56303,
+      "sha256": "9dc4a4bfa08ba5df7ba32fb5519624c0bf056e807aee2bf020d6b0a0b8aa6cfa"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-proposal-1.png",
+      "classification": "evidence",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-1440.png",
+      "classification": "evidence",
+      "bytes": 92256,
+      "sha256": "d5626a4689b40d5941f8e1be576918b20a96261ac0e50ecb83e6b6e21701dd9f"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-375.png",
+      "classification": "evidence",
+      "bytes": 41255,
+      "sha256": "d9223f3d721da88515cb03858c0b40afaee9ab660492b257e0b7903c95968f83"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-768.png",
+      "classification": "evidence",
+      "bytes": 66169,
+      "sha256": "f0283a46712075172916763ac82c0dbce53a0dd25b0ea8e68c9b54d4b14f347f"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/resource-report.json",
+      "classification": "evidence",
+      "bytes": 5855,
+      "sha256": "ab4f1557fa6117ece7f32f328d664878a8c1c56cf6d4302efb0cd6896b1e6040"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/resource-report.md",
+      "classification": "evidence",
+      "bytes": 777,
+      "sha256": "f0f85b7c86622eb19b78140edc72abb6588a5a5714d9f680170b8d16e0e8d644"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/saved-criteria.png",
+      "classification": "evidence",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-1440.png",
+      "classification": "evidence",
+      "bytes": 54704,
+      "sha256": "945f83c1edfe04c3b82cc870abaf44f869c2fd049e15f5e48f4a5e7dd453c7ce"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-375.png",
+      "classification": "evidence",
+      "bytes": 31371,
+      "sha256": "9760a3b0af7dde87d659320fcec55fa4212153c34aa903b3357a23cb14279f77"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-768.png",
+      "classification": "evidence",
+      "bytes": 49935,
+      "sha256": "1cd7aa3cead6148504f2742aecbad22271ae1ba36f3ef35b316733697e8e371b"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/skip-history-fixed.png",
+      "classification": "evidence",
+      "bytes": 52698,
+      "sha256": "f662b953f4272bc411d755965a5950d87d7b207215d74cfaec6d7557fb0dce97"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/sticky-save-1440.png",
+      "classification": "evidence",
+      "bytes": 52613,
+      "sha256": "b988fd189a882a917c92998c77bdc392c00aac735ecb5fff30c394e00eb79eea"
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/sticky-save-375.png",
+      "classification": "evidence",
+      "bytes": 29960,
+      "sha256": "b131a01bc213df58c061b4f33d609f0f1de66d4b65eec20839a8b3d24f568808"
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/features/contributor/FunctionalUx.test.tsx",
+      "classification": "source",
+      "bytes": 12799,
+      "sha256": "3687449467fec65f88594b30fdb4096f989c87e9507b74128bfdda34c06adfef"
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/features/contributor/NavigationPhase2.test.tsx",
+      "classification": "source",
+      "bytes": 9003,
+      "sha256": "cedbf22cdf5ab663a2c0862e29ade5b88beadd52bc8789aac6873080f54d151e"
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/features/contributor/PageHeader.tsx",
+      "classification": "source",
+      "bytes": 1029,
+      "sha256": "80228caeda7f282a6e1b3d746a738e3768a035b835ef0ee66c4fef854e98c9dd"
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/shared/NavigationGuardProvider.tsx",
+      "classification": "source",
+      "bytes": 952,
+      "sha256": "4558d188f0fc87f282ed469a1201787a6916f6fbdd8ca85d06854863e84fd658"
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/shared/navigationGuard.ts",
+      "classification": "source",
+      "bytes": 1394,
+      "sha256": "43a8e7aa245f63fd752d64204841a44a2d73dca20be78e9efdbca0b4661630fc"
+    },
+    {
+      "status": "??",
+      "path": "workflow/tests/browser/functional-ux.mjs",
+      "classification": "source",
+      "bytes": 28155,
+      "sha256": "573c5dfaf2151eeae296c61be7190110fb6f9134f1844d6a7345e86520d8250d"
+    },
+    {
+      "status": "??",
+      "path": "workflow/tests/browser/navigation-phase2.mjs",
+      "classification": "source",
+      "bytes": 46762,
+      "sha256": "c9f2045c2fbae6e0f49cf72ae431f37ecc5888a281c00aa956ffc12d9a54e228"
+    }
+  ],
+  "temporary_artifacts": "Ignored tmp/ contains previous worktrees, rollback copies, build/browser helpers and delivery manifests; retained without modifying existing temporary files."
+}

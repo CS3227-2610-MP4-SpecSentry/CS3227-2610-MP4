@@ -1,0 +1,6 @@
+{
+  "source": "workflow/tests/browser/visual-phase3.mjs",
+  "source_sha256": "2779f68e20f33dc1610c746e6006f3abb6beaf455819e92ca1394c80f6226b7c",
+  "copy_sha256": "20d685d433a806c0bad5c992e484008d1b5a0012bae57a8e974678170eea6a10",
+  "output_only_byte_equivalence": true
+}

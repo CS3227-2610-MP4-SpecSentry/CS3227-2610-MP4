@@ -1,8 +1,9 @@
 # SpecSentry
 
 Secure specification and review workspace for CS3227 MP4. This repository currently
-contains a runnable scaffold with base authentication and single-role accounts.
-Domain workflows and AI integration are subsequent work. No deployed application is claimed.
+contains base authentication, single-role accounts and the Contributor private-draft
+workspace. Reviewer/Release Maintainer landing pages show current availability;
+their full workflows and product AI are subsequent work. No deployed application is claimed.
 
 ## Directory map
 
@@ -48,11 +49,13 @@ Never put secrets in `VITE_*` variables or export server code through `src/share
 ## Architecture and submission artifacts
 
 The [architecture guide](docs/Architecture.md) describes module responsibilities and
-transaction seams. Identity implements base auth; other backend domain folders are empty registrations. Frontend
-role folders will be added with their features. Shared wire schemas live under
-`src/shared/src/contracts/`. No product workflow is implemented by these folders.
+transaction seams. See the User Guide and implemented UI/UX specification below
+for current Contributor behavior and the role-screen limitations. Shared wire
+schemas live under `src/shared/src/contracts/`; folder presence alone does not
+establish product completion.
 
 - [User Guide](docs/UserGuide.md): current behavior and testing limitations.
+- [Implemented UI/UX specification](workflow/specs/UI-UX-SPEC.md): shell, draft interactions, design tokens and verified responsive/accessibility scope.
 - [Developer Guide](docs/DeveloperGuide.md): setup, design, workflow and acknowledgements.
 - [Reflections](docs/Reflections.md): observations and pending experiments.
 - [Workflow index](workflow/README.md): process files, templates and tools.

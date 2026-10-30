@@ -1,0 +1,5 @@
+{
+  "scope": "Explicit candidate files only; pattern screening complements manual scope review, not a complete secret-detection guarantee. No raw matched values printed.",
+  "candidate_files": 306,
+  "findings": []
+}

@@ -1,0 +1,35 @@
+{
+  "id": "b3954ce5c352460cb3ff223a5363abc8",
+  "prompter": "yooplo",
+  "session": "2026-10-31-navigation-phase2",
+  "agent": "reviewer",
+  "invocation": "reviewer-2",
+  "stage": "patch-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T17:26:36.111743+00:00",
+  "ended_at": "2026-10-30T17:33:35.490277+00:00",
+  "elapsed_seconds": 419.378534,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent Phase2-only review verified P2-REC-001 and P2-JUMP-001 fixes but found blocking P2-MOB-001: 200 percent mobile HTTP500 sticky feedback exceeds workspace and masks fields/jump controls; creation redirect remains proposal-only",
+  "unavailable_reasons": {
+    "input_tokens": "Exact settings and per-record runtime telemetry not exposed",
+    "output_tokens": "Exact settings and per-record runtime telemetry not exposed",
+    "cache_read_tokens": "Exact settings and per-record runtime telemetry not exposed",
+    "tool_calls": "Exact settings and per-record runtime telemetry not exposed",
+    "retries": "Exact settings and per-record runtime telemetry not exposed"
+  },
+  "unavailable_reason": "Exact settings and per-record runtime telemetry not exposed"
+}

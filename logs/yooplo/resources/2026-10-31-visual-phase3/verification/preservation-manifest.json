@@ -1,0 +1,3398 @@
+{
+  "head": "847e5237608c8f8eaa39ca5a7405f1cdd5f0830f",
+  "branch": "feature/contributor-ui-polish",
+  "index_byte_identical": true,
+  "staged_files": [],
+  "preexisting_files": 143,
+  "unchanged_preexisting_files": 133,
+  "phase3_existing_changes": [
+    {
+      "path": "docs/DeveloperGuide.md",
+      "before_sha256": "5800ca71c3c31054e562a37dbf6e68f43ba2f24968025881d8aac7684bd6b960",
+      "after_sha256": "c24c087bf6aa46b70a5e015395e961356a7ea57d4159c90e005c4b24afbbe935"
+    },
+    {
+      "path": "docs/UserGuide.md",
+      "before_sha256": "5c93c82e995e72fbca46f552df014b8e6c1899dfe215ca10bb6ded312d428f88",
+      "after_sha256": "5116cf6f65971876d0dcf141149d8634bd7446422516e0d911027948056e9aef"
+    },
+    {
+      "path": "src/client/src/App.tsx",
+      "before_sha256": "a31f2ec1cf396f392950fa5fd2adef3d932c7de5ee30aa2a9e379c99286798b4",
+      "after_sha256": "b294cb9211d148cc53c9227260d45c86021d312257409b2a1b7259f65a411f13"
+    },
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.test.tsx",
+      "before_sha256": "fd74c639dbeaed913635ab5da856a56ca35abee180c08777319ee263d414e9fd",
+      "after_sha256": "286e61a32a83bc89e46ca0f56876019c69abf66b6e96065363e9ce959582b840"
+    },
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "before_sha256": "84f0f495ceab4c3ab2702af7f4913cd95c58bbfc7b547bc597c275f0046e077a",
+      "after_sha256": "8f230f74b406d90051c8f0699c487e641aedc736475e1cc1b3e86a180d82a4e6"
+    },
+    {
+      "path": "src/client/src/features/contributor/CriteriaDraft.test.tsx",
+      "before_sha256": "87afaa6bc6fa1a2f64a26b23576b2a99ac418c95d90ac1d0fa9623c7136330b6",
+      "after_sha256": "39d91b5a81620a832a0b2224357b206392cc90b43e6d0b53655c06460abb8cb4"
+    },
+    {
+      "path": "src/client/src/styles.css",
+      "before_sha256": "98c3ffb2074abc88c419adcd4eafbd8a9f6622edc69c47cd0ddec8bf1812173a",
+      "after_sha256": "c615584949932978f52f9e083034b2e12557ca5d0c6e247274b42dce7d6c4f1b"
+    },
+    {
+      "path": "workflow/PLAN.md",
+      "before_sha256": "58b717ff160a4169f8946c2f15ba89aab6df6409f39b187771eeb0a67370168c",
+      "after_sha256": "e35bd59835159bb90c51cfde3fac33221a705eec0c2dfbfb5b249d538b986cec"
+    },
+    {
+      "path": "workflow/TRACEABILITY.md",
+      "before_sha256": "7654c3815d9c256b158a09ea23b0848503492da7cdbefda185fb8c0051417924",
+      "after_sha256": "4a49e40fa5f57bb8717ef850ca9ff30114ffe33b9c838d1bdd1dcdbc43eceb5c"
+    },
+    {
+      "path": "workflow/specs/ROLE-CONTRIBUTOR.md",
+      "before_sha256": "c4f8f5534e39d2e8b09190194b4a0dc3af4ff81f8413a696689a275772cb404f",
+      "after_sha256": "f5c3c9c92e7f2d675ce077b758a550c7715400712effdbb13f493a2ca1a5d082"
+    }
+  ],
+  "phase3_new_files": [
+    "logs/yooplo/2026-10-31-visual-phase3.md",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/038faaa3f42144ab9fe434555657fa43.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/222812b3fcec4d03ab693ed124bfca3a.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/2a4121073eb547bea67158d05dc80660.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/485bc1f408ab466b97a5a0c06fa3d38b.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/8c0335e60e7f491094d9c385156c0e2e.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/9b08415984c14a359b23cc1b9d552e40.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/9e01eb59ef004a8d9b5c89ca5de819ff.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/a9f100f8dca54bcc8e37f9baffe2d995.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/ad71a3a94bc846f9bbe1f512ca0c5bcd.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/bcd564c54c784bb3bd83c73499e306d6.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/be356589dcf542b99373d7c159637f7f.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/cca9fb28b57146448302c68038baa93f.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/fb6855511dc14754bfbb7c871944a5be.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/acceptance-report.md",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/create-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/create-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/create-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/density-metrics.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/detail-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/detail-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/detail-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/drawer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/editor-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/editor-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/editor-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/empty-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/empty-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/empty-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/enlarged-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/error-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/error-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/error-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/loading-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/loading-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/loading-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-focus-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-focus-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/long-patch-200.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/long-patch-diagnostic.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/long-patch-diagnostic.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/not-found-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/not-found-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/not-found-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/patch-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/patch-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/patch-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/phase3-checks.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/populated-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/populated-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/populated-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/primary-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/primary-hover-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/primary-pressed-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/release-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/release-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/release-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/reviewer-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/reviewer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/reviewer-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/visual-results.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/create-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/create-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/create-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/detail-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/detail-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/detail-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/drawer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/editor-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/editor-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/editor-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/empty-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/empty-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/empty-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/enlarged-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/error-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/error-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/error-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/loading-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/loading-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/loading-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-focus-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-focus-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/not-found-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/not-found-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/not-found-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/patch-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/patch-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/patch-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/populated-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/populated-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/populated-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/primary-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/primary-hover-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/primary-pressed-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/release-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/release-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/release-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/reviewer-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/reviewer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/reviewer-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/visual-results.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2-focus/criterion-evidence-focus-supplement.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2-focus/criterion-focus-results.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/create-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/create-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/create-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/density-metrics.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/detail-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/detail-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/detail-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/drawer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/editor-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/editor-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/editor-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/empty-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/empty-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/empty-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/enlarged-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/error-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/error-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/error-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/loading-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/loading-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/loading-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-focus-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-focus-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/long-patch-diagnostic.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/long-patch-diagnostic.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/not-found-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/not-found-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/not-found-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/patch-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/patch-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/patch-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/phase3-checks.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/populated-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/populated-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/populated-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/primary-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/primary-hover-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/primary-pressed-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/release-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/release-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/release-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/reviewer-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/reviewer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/reviewer-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/visual-results.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/automated-checks.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline-preservation.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/baseline-integrity.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/baseline-report.md",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/create-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/create-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/create-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/detail-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/detail-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/detail-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/drawer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/editor-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/editor-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/editor-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/enlarged-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/error-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/error-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/error-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/loading-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/loading-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/loading-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-focus-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-focus-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/not-found-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/not-found-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/not-found-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/patch-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/patch-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/patch-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/populated-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/populated-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/populated-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/primary-focus-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/primary-hover-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/primary-pressed-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/release-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/release-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/release-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/reviewer-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/reviewer-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/reviewer-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/source-hashes-before.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/visual-results.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/comparison.html",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus-after.txt",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus-before.txt",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus/criterion-evidence-focus-supplement.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus/criterion-focus-results.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional-harness-proof.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/acceptance-results.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/enlarged-mobile-recovery.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/enlarged-skip-fixed.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-409.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-500.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-network.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-reconcile.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/mobile-enlarged-validation.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/mobile-pointer-save.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-contributor.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-edit.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-new.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-proposal-1.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/reflow-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/reflow-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/reflow-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/saved-criteria.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/section-evidence-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/section-evidence-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/section-evidence-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/skip-history-fixed.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/sticky-save-1440.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/sticky-save-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/resource-report.json",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/resource-report.md",
+    "workflow/tests/browser/visual-phase3.mjs"
+  ],
+  "tracked_modified": 13,
+  "untracked": 373,
+  "files": [
+    {
+      "status": " M",
+      "path": "docs/DeveloperGuide.md",
+      "bytes": 31914,
+      "sha256": "c24c087bf6aa46b70a5e015395e961356a7ea57d4159c90e005c4b24afbbe935",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "docs/UserGuide.md",
+      "bytes": 13928,
+      "sha256": "5116cf6f65971876d0dcf141149d8634bd7446422516e0d911027948056e9aef",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/App.test.tsx",
+      "bytes": 18963,
+      "sha256": "7e03c1173d37b4391c939dc0d13955ada84ef445cdd875ad2a27a3faf3c9cd43",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/App.tsx",
+      "bytes": 13787,
+      "sha256": "b294cb9211d148cc53c9227260d45c86021d312257409b2a1b7259f65a411f13",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/ContributorWorkspace.test.tsx",
+      "bytes": 10195,
+      "sha256": "286e61a32a83bc89e46ca0f56876019c69abf66b6e96065363e9ce959582b840",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "bytes": 40848,
+      "sha256": "8f230f74b406d90051c8f0699c487e641aedc736475e1cc1b3e86a180d82a4e6",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/CriteriaDraft.test.tsx",
+      "bytes": 14745,
+      "sha256": "39d91b5a81620a832a0b2224357b206392cc90b43e6d0b53655c06460abb8cb4",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/features/contributor/DeleteDraft.test.tsx",
+      "bytes": 8598,
+      "sha256": "26501a1d40f066066410ef2dd67eb49e0453935492e9546d7545aaba684ab636",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/main.tsx",
+      "bytes": 538,
+      "sha256": "9b3c18f9da633c37022510f67e2f1a559ba090e44a5acc425e13dbbe2b0f4dce",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": " M",
+      "path": "src/client/src/styles.css",
+      "bytes": 24336,
+      "sha256": "c615584949932978f52f9e083034b2e12557ca5d0c6e247274b42dce7d6c4f1b",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "workflow/PLAN.md",
+      "bytes": 21523,
+      "sha256": "e35bd59835159bb90c51cfde3fac33221a705eec0c2dfbfb5b249d538b986cec",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "workflow/TRACEABILITY.md",
+      "bytes": 35467,
+      "sha256": "4a49e40fa5f57bb8717ef850ca9ff30114ffe33b9c838d1bdd1dcdbc43eceb5c",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": " M",
+      "path": "workflow/specs/ROLE-CONTRIBUTOR.md",
+      "bytes": 17410,
+      "sha256": "f5c3c9c92e7f2d675ce077b758a550c7715400712effdbb13f493a2ca1a5d082",
+      "preexisting": true,
+      "phase3_existing_delta": true
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/2026-10-31-functional-ux.md",
+      "bytes": 22189,
+      "sha256": "76cb66fbf8f0699698e360b5b3579c65e8c2881aae0aed21cbd67cfb8b703571",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/2026-10-31-navigation-phase2.md",
+      "bytes": 22055,
+      "sha256": "cbce257245412eff45278dc97e9ae2a452199e08be4b60dc49b15920c6425e6b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/2026-10-31-phase2-integration.md",
+      "bytes": 10500,
+      "sha256": "425129b97975ab69a42268a24bc346ade20335cd95b339d6f734537fd57826b8",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/2026-10-31-visual-phase3.md",
+      "bytes": 21050,
+      "sha256": "00bccbe634af917477d4d85c7c8403822c5b0c9500070384d2aef7e4c0af6060",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/262bf9dae3f24ff6b064025b8399ba70.json",
+      "bytes": 1364,
+      "sha256": "194f00fd0a53f4d04f9e3c5eb279e70c64662ac23a080df158c5790aaf81a7ff",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/34372853461244f7a06600698e0e0261.json",
+      "bytes": 1504,
+      "sha256": "6b5f79d548de01d1b295e59fbd2877aecae89878c23ac5c6558c1fff54d82265",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/468d3261bb9749bfa1740f03c8727ad2.json",
+      "bytes": 1363,
+      "sha256": "efed667c4e06368fa35f789d0b7bc44bb6bcd1fb54478bee2e480a796511cc8b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/46d5238f74824c46bd9455873f9109c1.json",
+      "bytes": 1310,
+      "sha256": "fd3f0a2d549d6a468e1325f655995d0b4ce48d25eadf6c8e480791ccb4eff6a7",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/57eaecae1b7c477ab3d7bd774cd842b9.json",
+      "bytes": 1346,
+      "sha256": "8bcd5a076babc6933d5530588501827b6bce2723c088ad9a8b6d544338d79ca7",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/5c41a06079f04a268798d4abe3c4b37e.json",
+      "bytes": 1480,
+      "sha256": "8f4903f01ade480f1dca6b03d68d203abf2921cba4fad11455e8fa5965ccb8fa",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/5e76af9fffdd416f816752328c94db6a.json",
+      "bytes": 1547,
+      "sha256": "184ec3f45059152186d72a11c253d7627b6f4520c7d797886f9215cba783ebf6",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/7ce791b5270a49459e43666364359136.json",
+      "bytes": 1356,
+      "sha256": "8f73ee964a40cc75f7afbc8580e551e5bd253818a776cc52edbd32d5e66b08fe",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/7ef61e8c817740f5a03d3f6398329741.json",
+      "bytes": 1357,
+      "sha256": "1535d99f5f01d452e5a8d9051f2c0f238647f301ddeeecb857c988e09fe8b9d7",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/88d9cdcb37c14e7586804954ae1c3f76.json",
+      "bytes": 1314,
+      "sha256": "34d4b69fedcc1e9dcba21e30fe52815c51f8ad3766c51988d5c552b63a5a3239",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/ec3e5fbd17fb40139fb4133fba819232.json",
+      "bytes": 1557,
+      "sha256": "e907e7f33834e39e275f702ad22b1baae618d8df5f38dda14005af073dff04d1",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/f86977a9340d4c0f9463ba0138dd1c67.json",
+      "bytes": 1553,
+      "sha256": "78fa9e16a1aada58454c5d27c91b009a807ebdee6b2f40be455eb7c12aa8a4da",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/fa84f70bf663400da7da97adf038792f.json",
+      "bytes": 1308,
+      "sha256": "cc9528c9dc04d8a323711590c3f997073405d516863c1ab385eed8e4b5effb1c",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/acceptance-report.md",
+      "bytes": 9551,
+      "sha256": "10cad8091932c2c113397d35980e7f84e87ef47cc6ae904d34e1d0c8472ce698",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/acceptance-results.json",
+      "bytes": 4468,
+      "sha256": "d7afb656312f227233500281549e41e45d5b761af2e05dc4d05fce1f7f4b9351",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/attempt-2-results.json",
+      "bytes": 4392,
+      "sha256": "9fd93badca451fe904f150e48bf946a5e6eafba78cb5d4be38ab6c03dabf7bfd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/attempt-4-results.json",
+      "bytes": 4277,
+      "sha256": "697d061fd94a1c225153b34ea2c3faebf3dd36c64fecc42aae0b99cb58d32557",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline-results.json",
+      "bytes": 2329,
+      "sha256": "99fccf2981a81d0cd53ab872ee79352f1e1949385a7d0dc956444c018ce564d1",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline.mjs",
+      "bytes": 7351,
+      "sha256": "c5c3004bd4d28157a1b300bf4ad6ffa5113b8d0f8ef424cba307e6bef38eba1c",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-409.png",
+      "bytes": 63088,
+      "sha256": "8dbf44912ba256a18cb64f0b738f6ae0c9ffd9108d28719d62a6f3a85ca2794b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-500.png",
+      "bytes": 62025,
+      "sha256": "f3c47fc43457804ef6d0314ce8b80ed45f8be2deff65f8c7298718dc404c20e7",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-network.png",
+      "bytes": 63102,
+      "sha256": "57245efd06c9bd03659ad11055724bebb29d92ba2f4afc475aa447f6380aa370",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/failure-reconcile.png",
+      "bytes": 63733,
+      "sha256": "50b549ceb773244517bf52c440ab65a065001e4abd7e914975b4bd7ddfdbd9e1",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-history-results.json",
+      "bytes": 3369,
+      "sha256": "6fa816dea3f0958d64915b43b987daa842dec758f16ffd50d97c0a3f9782e849",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-history.mjs",
+      "bytes": 10189,
+      "sha256": "8e907e90ad1ca2974780188f08e6e19c7bdbeda2a6b577d55961c41f2c53d45b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-previous-Back.png",
+      "bytes": 52821,
+      "sha256": "cf37500ffa67a357e65354dceaa226e55f72edcca3226373fb498dc9aea9ffbd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-enlarged-validation.png",
+      "bytes": 37355,
+      "sha256": "40674c3e971e442c37ab767cce6d6daa147d347299638a4e43feb38eb7e36cd5",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-interactions.mjs",
+      "bytes": 7643,
+      "sha256": "f07722c2810a22f1d2755015f9c15e5100a1a72604e45359f6fa5efc6e1dacb7",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-pointer-save.png",
+      "bytes": 30371,
+      "sha256": "6071416aa3ad151f02f55d83dba21ed36ca642addf1f30f5c681ef2d78086209",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-raw-pointer.json",
+      "bytes": 346,
+      "sha256": "9fb01265147c996f9bb5518c124f70d09e7ad682557f5e49ef8b0580b79d0659",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-raw-pointer.mjs",
+      "bytes": 7705,
+      "sha256": "a6ff789fbf9e3d641b2a7bd7c5dbc65c4a2f3beb645cc1fc5014c2113e7bbb7c",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-scroll-debug.mjs",
+      "bytes": 7644,
+      "sha256": "4a7e3128d99c331421e3a745cd53d3dddd6aa71c6740726091c2d4c9a39ed8c4",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-scroll-debug.png",
+      "bytes": 35435,
+      "sha256": "e204746d8520b1bf1c141880912a3e3cfaafae30ba630c02e35c38f497c9f63d",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-scroll-timeline.json",
+      "bytes": 1261,
+      "sha256": "aae3165a7b45e44ff0563bb4feb65e75d5d2997af210cf7837beda9d6e4f4db9",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/mobile-user-interactions.json",
+      "bytes": 2521,
+      "sha256": "5dcb443cb8a1e5070f730b1d176a47f1cb8aab03daf50f847359732919d9b5e4",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/saved-criteria.png",
+      "bytes": 52809,
+      "sha256": "7b6e7b1fb58258baf802715ed885070584db9036ea4286e5db24b54d913936c6",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/skip-history-fixed.png",
+      "bytes": 52821,
+      "sha256": "cf37500ffa67a357e65354dceaa226e55f72edcca3226373fb498dc9aea9ffbd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/sticky-save-1440.png",
+      "bytes": 55059,
+      "sha256": "395f0a07f3259705d1aaeb6747566a93d45842740bd8b6f777fc27e422572b53",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-functional-ux/verification/sticky-save-375.png",
+      "bytes": 32128,
+      "sha256": "f52e5e4084230d8bf589127f2ac56c6d1cbe3fd69010a57fd03b04b16b54e22a",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/15fde4d5f1304a92bea8db747ad26a97.json",
+      "bytes": 1352,
+      "sha256": "ccd0a5bd8dfdd87c60be533b767f22c618c32cd6d884ec94c580341f4d545cfd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/3fe406213a67466ebd9534d07909bfff.json",
+      "bytes": 1460,
+      "sha256": "c832d0ce18e7e1a641f199b27bd9bbe264040a1741af971a774dbb5461d0ac84",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/46e9a7268d934c539b3d41838e505040.json",
+      "bytes": 1664,
+      "sha256": "a4025b66ee3365c187b11b849e3b6d41a047818d26b2c7b447c5e12f08745a0c",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/5328023ec35e4cbfaada0f754271d6ca.json",
+      "bytes": 1373,
+      "sha256": "4e5a92bc8bd140c9e9e3e6ffb50af38117e0c507ab8fd71b0fac4d561d9a7bfd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/543a24eac25d4fb7b7b122f54f97ae08.json",
+      "bytes": 1424,
+      "sha256": "0d17d7661ebf1c029d79cd095ff7d303a5dd6c4967223a71b1826275d5c6fab7",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/5f74ca3b30c94708a53c4a6b799a6ec5.json",
+      "bytes": 1413,
+      "sha256": "9b56c94fa5113fd92c15f2fdbf2b404c70b618658baec855a2a4706c5dc57f15",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/b3954ce5c352460cb3ff223a5363abc8.json",
+      "bytes": 1548,
+      "sha256": "d3264d59a620e2519b7c60e00b842c6ea5590f4d8f39c495987fb788652dc1ad",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/c075aa3ebf6544e5aae8a65e51b6232b.json",
+      "bytes": 1342,
+      "sha256": "1776171bd85522403ffb0995872919ffee01b682c7e05c63737f2b88ec57616a",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/db4b64785bfe476aa52f54a4d34be933.json",
+      "bytes": 1354,
+      "sha256": "f2b05dd22863e0f2d0ec4657e045ef66ff0b9249f3f1577f426f66a623b5a175",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/e0c4ee41f4b449b58a84ef45707b855f.json",
+      "bytes": 1632,
+      "sha256": "9c6afc626ba3a4023ceee7f74a9734c59dd08a6dc67ea16b963e18e2763be845",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/e2684197c17e4b29a4735be99d90c72a.json",
+      "bytes": 1351,
+      "sha256": "1b7792108c3a244d4bf45193addf93023a7c105b10135f6a155a050d568f527c",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/ed79f9f8ac774cc4ba71287964604cc4.json",
+      "bytes": 1338,
+      "sha256": "4b51206d6080743f7e426062eb1cdcbab3132adfbeeb3aec17d585b5a1a311cb",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/.gitignore",
+      "bytes": 13,
+      "sha256": "5f030958bea948752c4832697efdb46e01891fc1c1542a6d9cddfeb8f3a12dad",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/acceptance-report.md",
+      "bytes": 8762,
+      "sha256": "481da084ca82f608aaae74509ac2649896c28dd4cf8f07daf2ad48d0a5bfa3ee",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/acceptance-results.json",
+      "bytes": 7770,
+      "sha256": "0aa312434778911ce63484225926ce9380168454935b685d400de828434b5bc2",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/attempt-2-results.json",
+      "bytes": 13465,
+      "sha256": "7881aef8450b852283206fe8e8ac70ce4ae0a8a8f94576ea1f7f4a587d69325b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/attempt-4-results.json",
+      "bytes": 7310,
+      "sha256": "797b202fd3e40fa61b84e0d3f2372a1062ff1bad16c459b22845211f32849f0d",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/baseline-results.json",
+      "bytes": 3315,
+      "sha256": "7ff19082a8dfdbbc078b9c03aab518e5a99fd68289450e85ed809046d5ef2a63",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/baseline.mjs",
+      "bytes": 7241,
+      "sha256": "b9b88600b31c9269dca7ad46e64ed5e737922772618d48381813f2bd94e0a209",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-mobile-recovery.png",
+      "bytes": 51332,
+      "sha256": "9005326ad591fd50b35bb9e027b31be439aece2574288a7de3657d2f2093e9ab",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-debug.mjs",
+      "bytes": 7634,
+      "sha256": "fb08726f38e0d1e27b582088cdfd48e4fe93f67ab49d900d84fe65d058851490",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-diagnostics.json",
+      "bytes": 486,
+      "sha256": "4f77e1681d802b9cf04b662b2bb3c72563257d949762c3b8d616476fb13de281",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-fixed.png",
+      "bytes": 47657,
+      "sha256": "7f3a9f11ec6910138053f35811da2b95cc1763ad2e39ad8e755f39a89701458c",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/enlarged-skip-obscures-task.png",
+      "bytes": 40629,
+      "sha256": "c4b95acc832b7fece622a25accdeb86f58c6026d89cc66384b7664792949eb78",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-409.png",
+      "bytes": 56019,
+      "sha256": "9f7e4dc1b4d5ee5f26428ad39757a0ae8bbe494b5e02114cd969c440d0784a5a",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-500.png",
+      "bytes": 56286,
+      "sha256": "bdcc22088f25c9f95b2f4c24aa32cee9281aa9b20218bf562357f946dd051ff6",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-network.png",
+      "bytes": 56286,
+      "sha256": "bdcc22088f25c9f95b2f4c24aa32cee9281aa9b20218bf562357f946dd051ff6",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/failure-reconcile.png",
+      "bytes": 56055,
+      "sha256": "2968add7bb3f42ea6a2883ec78029a766189af35d1870bb03eb94e408eb4c926",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/jump-and-fetch-diagnostics.json",
+      "bytes": 1171,
+      "sha256": "0151f2888bc0f6b552e12865836d8a21ef6a837f9723a6b03d445c463025a60f",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/jump-debug.mjs",
+      "bytes": 7850,
+      "sha256": "3bbb4b2e0747c143701589a1727a88404b0152636851849b0aaf1e4104642a16",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/jump-obscured-375.png",
+      "bytes": 36345,
+      "sha256": "8e87e0d66fd88ac43696cac840da7e18ae9e712a37cb5516a099a877ac9263fd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/mobile-enlarged-validation.png",
+      "bytes": 40627,
+      "sha256": "f9856dc41c37013b8ed9f829989427fc3dd614717177b67f49c4faa9ffcafbc1",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/mobile-pointer-save.png",
+      "bytes": 28512,
+      "sha256": "de848076990ce436714600b18a8abcdac7d47261d4fb33a444a5fbfa1b9445b3",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-contributor.png",
+      "bytes": 54709,
+      "sha256": "53432b216d9360bf93f4faebd8ef5227cafb1172e22820e931fded527040bb7b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-edit.png",
+      "bytes": 60365,
+      "sha256": "933645f0165f68a8f4959ac44ccba4ea1aa082b614db3c6a5626bb877df66c3e",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-new.png",
+      "bytes": 56303,
+      "sha256": "9dc4a4bfa08ba5df7ba32fb5519624c0bf056e807aee2bf020d6b0a0b8aa6cfa",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/orientation-proposal-1.png",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/reflow-1440.png",
+      "bytes": 92256,
+      "sha256": "d5626a4689b40d5941f8e1be576918b20a96261ac0e50ecb83e6b6e21701dd9f",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/reflow-375.png",
+      "bytes": 41252,
+      "sha256": "57e54948ca9445ca4db6e69ca939471d36b7ea86f8a086c65d3208d3a0e89cc4",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/reflow-768.png",
+      "bytes": 66169,
+      "sha256": "f0283a46712075172916763ac82c0dbce53a0dd25b0ea8e68c9b54d4b14f347f",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/saved-criteria.png",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/section-evidence-1440.png",
+      "bytes": 54704,
+      "sha256": "945f83c1edfe04c3b82cc870abaf44f869c2fd049e15f5e48f4a5e7dd453c7ce",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/section-evidence-375.png",
+      "bytes": 31371,
+      "sha256": "9760a3b0af7dde87d659320fcec55fa4212153c34aa903b3357a23cb14279f77",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/section-evidence-768.png",
+      "bytes": 49935,
+      "sha256": "1cd7aa3cead6148504f2742aecbad22271ae1ba36f3ef35b316733697e8e371b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/skip-history-fixed.png",
+      "bytes": 52698,
+      "sha256": "f662b953f4272bc411d755965a5950d87d7b207215d74cfaec6d7557fb0dce97",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/sticky-save-1440.png",
+      "bytes": 52613,
+      "sha256": "b988fd189a882a917c92998c77bdc392c00aac735ecb5fff30c394e00eb79eea",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/sticky-save-375.png",
+      "bytes": 29960,
+      "sha256": "b131a01bc213df58c061b4f33d609f0f1de66d4b65eec20839a8b3d24f568808",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-navigation-phase2/verification/vite-server.mjs",
+      "bytes": 656,
+      "sha256": "b0681b7dc42a05568e8c3851992ab7e17fbd5f053bc6e5859637a1ec10af8f74",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/8953e7deb0af49f89438cc36e5e75f31.json",
+      "bytes": 1360,
+      "sha256": "4cacd41e3e798f01e3ba2d7aaeedb5e47ceaf5245f9b20e08fff62eae7eda62b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/b804f1d016c04c93967c10c252b3ea7e.json",
+      "bytes": 1688,
+      "sha256": "1af27075f228fb8c44526ddcc1974520546a1acff23701c16552fb44a7df95aa",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/eb7d95bc21454cbb8177a5a2821d5a01.json",
+      "bytes": 1854,
+      "sha256": "a22ee93c6841724160aa2d8f5a034934e9ae270af89be451c948f920e4c0c84b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/acceptance-report.md",
+      "bytes": 3101,
+      "sha256": "5d5fe04b2a16b67f78c995dcf38ed3a1857e8160d4df2b88bf6fdb39104aec3b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/acceptance-results.json",
+      "bytes": 7539,
+      "sha256": "55e16cd8703d5a53c1b23ac3e31ff6f6d061e648009be9c0b8e6f5d3727692d1",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/automated-checks.json",
+      "bytes": 1051,
+      "sha256": "d7670dc0b3ef22898282ddc7e997c51285bf4daeb244f16c0b23c84ccbe79cd7",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/criterion-focus-results.json",
+      "bytes": 376,
+      "sha256": "f5fbf538d664e0cf7c8eb5764ba9ebd03517117ff754563b0c8ae5ac494edfe0",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/criterion-focus-supplement.png",
+      "bytes": 59528,
+      "sha256": "992a8484effd41601feeb3525c66acaa744574e203e3e5e14725849c448f2127",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/enlarged-mobile-recovery.png",
+      "bytes": 51382,
+      "sha256": "14e1288405bc9a5b7df6e391c267d262cc8b7581cd3371c138179450a0e456dd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/enlarged-skip-fixed.png",
+      "bytes": 47657,
+      "sha256": "7f3a9f11ec6910138053f35811da2b95cc1763ad2e39ad8e755f39a89701458c",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-409.png",
+      "bytes": 56022,
+      "sha256": "e2e8ee6d23014a7c6ce610ee17491baacf3afbcb82721951428f6178902c0a2d",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-500.png",
+      "bytes": 56289,
+      "sha256": "cc648e1df7d4c108a13ad6ccf522eae26a661939dce2cf5c341c5e6fabede22e",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-network.png",
+      "bytes": 56278,
+      "sha256": "3a97abb25dfb30ae3c5495bf221fe3e0429f1d93f7c3c039c841aaf78c9fbd2a",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/failure-reconcile.png",
+      "bytes": 56051,
+      "sha256": "466bee318bdc0e3acc2a152ae9ba30768b1465ecf22f5c694712e8a7486197d2",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/harness-and-integrity.json",
+      "bytes": 20131,
+      "sha256": "9b559a21f39bca183b513816d0be22ffa050959f9f530960be84d5b038bb1ded",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/mobile-enlarged-validation.png",
+      "bytes": 40628,
+      "sha256": "d8313c8363e3ec3d2173a2e3d86840bf2a4398a2860fbe5f3eab27345dbe9f4d",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/mobile-pointer-save.png",
+      "bytes": 28526,
+      "sha256": "36cb19db57bf14d6cca892ba9ce677c2a532de2acd302b0e338ec0053d0c6691",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-contributor.png",
+      "bytes": 54709,
+      "sha256": "53432b216d9360bf93f4faebd8ef5227cafb1172e22820e931fded527040bb7b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-edit.png",
+      "bytes": 60365,
+      "sha256": "933645f0165f68a8f4959ac44ccba4ea1aa082b614db3c6a5626bb877df66c3e",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-new.png",
+      "bytes": 56303,
+      "sha256": "9dc4a4bfa08ba5df7ba32fb5519624c0bf056e807aee2bf020d6b0a0b8aa6cfa",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-proposal-1.png",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-1440.png",
+      "bytes": 92256,
+      "sha256": "d5626a4689b40d5941f8e1be576918b20a96261ac0e50ecb83e6b6e21701dd9f",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-375.png",
+      "bytes": 41255,
+      "sha256": "d9223f3d721da88515cb03858c0b40afaee9ab660492b257e0b7903c95968f83",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-768.png",
+      "bytes": 66169,
+      "sha256": "f0283a46712075172916763ac82c0dbce53a0dd25b0ea8e68c9b54d4b14f347f",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/resource-report.json",
+      "bytes": 5855,
+      "sha256": "ab4f1557fa6117ece7f32f328d664878a8c1c56cf6d4302efb0cd6896b1e6040",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/resource-report.md",
+      "bytes": 777,
+      "sha256": "f0f85b7c86622eb19b78140edc72abb6588a5a5714d9f680170b8d16e0e8d644",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/saved-criteria.png",
+      "bytes": 52686,
+      "sha256": "9e6c0c32186b847a3f90bbe25cb8815c9841fdc37c10b766374f9e60cdd05e6b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-1440.png",
+      "bytes": 54704,
+      "sha256": "945f83c1edfe04c3b82cc870abaf44f869c2fd049e15f5e48f4a5e7dd453c7ce",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-375.png",
+      "bytes": 31371,
+      "sha256": "9760a3b0af7dde87d659320fcec55fa4212153c34aa903b3357a23cb14279f77",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-768.png",
+      "bytes": 49935,
+      "sha256": "1cd7aa3cead6148504f2742aecbad22271ae1ba36f3ef35b316733697e8e371b",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/skip-history-fixed.png",
+      "bytes": 52698,
+      "sha256": "f662b953f4272bc411d755965a5950d87d7b207215d74cfaec6d7557fb0dce97",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/sticky-save-1440.png",
+      "bytes": 52613,
+      "sha256": "b988fd189a882a917c92998c77bdc392c00aac735ecb5fff30c394e00eb79eea",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-phase2-integration/verification/sticky-save-375.png",
+      "bytes": 29960,
+      "sha256": "b131a01bc213df58c061b4f33d609f0f1de66d4b65eec20839a8b3d24f568808",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/038faaa3f42144ab9fe434555657fa43.json",
+      "bytes": 1361,
+      "sha256": "dad5bff19d5c62ac80c7f6e429ce800165974b48936969c856e9bbc27a27f328",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/222812b3fcec4d03ab693ed124bfca3a.json",
+      "bytes": 1920,
+      "sha256": "7b3ff10b317c9cc19d00732f652b0db21b5e8fb8fac606ac3d4290f093c75942",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/2a4121073eb547bea67158d05dc80660.json",
+      "bytes": 1322,
+      "sha256": "821acf3aa623088ef5c2f1a4fd0cfe06db2878edca3d19ec5f8e18b4ad5ae16a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/485bc1f408ab466b97a5a0c06fa3d38b.json",
+      "bytes": 1463,
+      "sha256": "4e7f7ebdaea9cd4b40b956ba70a12e1593afad5bae2ed9b396628fcedc691d25",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/8c0335e60e7f491094d9c385156c0e2e.json",
+      "bytes": 1414,
+      "sha256": "37328ea766c189bd24ae97210c72cf6e0d51d287c24c83ea40ed050a06ef8364",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/9b08415984c14a359b23cc1b9d552e40.json",
+      "bytes": 1373,
+      "sha256": "5e7cd92b67b21f042bb16ea6b3405dedbf462ce5899caff8585ac9d9ed1fee1f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/9e01eb59ef004a8d9b5c89ca5de819ff.json",
+      "bytes": 1676,
+      "sha256": "8de82b3951e15662ff61f0c98e1d7328e7e5fca72e795cc9a0af79d616e758a7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/a9f100f8dca54bcc8e37f9baffe2d995.json",
+      "bytes": 1705,
+      "sha256": "32770d31e2675ba0cbb5b6d14ffccf543a2cd4511bd6b7333ab5c9fddcf6ba9a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/ad71a3a94bc846f9bbe1f512ca0c5bcd.json",
+      "bytes": 1318,
+      "sha256": "d9f8736ef1f91081d0354a34e2d1cc304837f39251045a11be18e8f083b5bae7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/bcd564c54c784bb3bd83c73499e306d6.json",
+      "bytes": 1645,
+      "sha256": "5a39b7cd3d323f1468a3f4c6ab351e6c38ccc28c92fb04f35d5bac937a0adb47",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/be356589dcf542b99373d7c159637f7f.json",
+      "bytes": 1352,
+      "sha256": "994844d5dea953468a578328d490a41fe27f986261c071efa61d384a18198b62",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/cca9fb28b57146448302c68038baa93f.json",
+      "bytes": 1369,
+      "sha256": "c6429a79e3f91d552e6d328167f985d8cfea28505beb0d139c6049983db0c684",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/fb6855511dc14754bfbb7c871944a5be.json",
+      "bytes": 1355,
+      "sha256": "e8bbf3736e89058001acbdfca801c348c8f84e1a3ff9d83b2a79779060678d1d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/acceptance-report.md",
+      "bytes": 5891,
+      "sha256": "c58f3519e81992474371a164f7bf58324dce49a898c0674021bb27e452a7d3a6",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/create-1440.png",
+      "bytes": 56985,
+      "sha256": "d92fff87c7ee0fcd1a0fb9ca908f9de7beffec9a5df377a28498bf3177475c8a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/create-375.png",
+      "bytes": 34533,
+      "sha256": "bde0fb0887084f4746f8520d77887ff99bb009674c54aa26456aea919d55843d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/create-768.png",
+      "bytes": 52364,
+      "sha256": "6c341a0c0bdb795dc83cd14abd4a872b94918d7d563c039999c9e2b810f2c33f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/density-metrics.json",
+      "bytes": 1424,
+      "sha256": "844b8996db48682e3cdf3fbdd42c77e62189528eb584f08050d5ddd0a74d5b1b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/detail-1440.png",
+      "bytes": 64217,
+      "sha256": "f37e001ffeb373b6f397adf51eecc3f0cd0e3280c14d3bfa01461078ad06d542",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/detail-375.png",
+      "bytes": 38744,
+      "sha256": "010abdb46a4ae09cdb8dd71230cddb6bd2f695eea22e2efa64d2915c6090ff49",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/detail-768.png",
+      "bytes": 58175,
+      "sha256": "18302cfbe85e90f4b27b5aef970d4db362f9e33b917ca44268a379b595a3de33",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/drawer-375.png",
+      "bytes": 17677,
+      "sha256": "2001457861cd5945046cc731790feb22c08aaaab6f7f4620cb8f967836b56154",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/editor-1440.png",
+      "bytes": 68670,
+      "sha256": "454f682c86ed373d86d0632d10eda80decc1ede9524f541117cf3a170ed8bfb7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/editor-375.png",
+      "bytes": 39148,
+      "sha256": "83fbd44c95b8e0c8d0619f413c6f84e0c3884c15af5301c59aba8e703d2a3dbf",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/editor-768.png",
+      "bytes": 64431,
+      "sha256": "e2ca532ea2e93ec28a6d7c64e5653bdb500b65a5e303341de9323b26da33b9a4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/empty-1440.png",
+      "bytes": 46422,
+      "sha256": "d9f94799364c62a6a447c9a1c44da9518f6f68cde4dc24a4285601fd05b32b21",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/empty-375.png",
+      "bytes": 26326,
+      "sha256": "b7d1540613a693b5ab88e1e0417ad2c1fe724ac4478e7b559362aa918f5ef288",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/empty-768.png",
+      "bytes": 41422,
+      "sha256": "7af0f07d6e599ecdefb37b8542de11e49b2e56f53852812eedfd6bf533546782",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/enlarged-375.png",
+      "bytes": 46453,
+      "sha256": "09c9ab7397bcda5f23b8b012e4ff89b2b899559ca4ed07fbfef903f8ffad3499",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/error-1440.png",
+      "bytes": 44598,
+      "sha256": "ef87db379cf7fbe282d63fd5dfca78e248c216b111c24b15d46146f57843c3d3",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/error-375.png",
+      "bytes": 24538,
+      "sha256": "0ae7057246fee9977f5b1a7e284cf71dc6af360fd1d2ec84f3e6f1909da84534",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/error-768.png",
+      "bytes": 39885,
+      "sha256": "4db9215f9a813dca0e96e04a6450bfb18d3c330f65a0e2aafa1c20086a98d9c8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/loading-1440.png",
+      "bytes": 40792,
+      "sha256": "42db66f1e0285d6a0887fe096a53476846298640b259b6e798d6f131d05f94a9",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/loading-375.png",
+      "bytes": 20497,
+      "sha256": "bcf6dc162e4d7eaf07073a5dcb8b99a2de67474604c2e490b63b89c9c05b66a2",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/loading-768.png",
+      "bytes": 35458,
+      "sha256": "723c522e0c322466fa801a3d4b7a48818f6d5b765148207aa1f7f801278cd4b6",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-1440.png",
+      "bytes": 190254,
+      "sha256": "d4c2573f10edb5922631a58e53c361a8e439193ee6dab9146ed8b1701e3a0e4c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-375.png",
+      "bytes": 47272,
+      "sha256": "d0500a46d1f12c0f35da118de67f71e91b920787432ef6e7e47ece8fd4a67852",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-768.png",
+      "bytes": 100015,
+      "sha256": "2bbcb4dee624a2c504c2aee4fe7924c881ea9ae08f901012837407e4b39f2d7d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-focus-1440.png",
+      "bytes": 191652,
+      "sha256": "dfa899e6a119a729c69e62bc5ee1541d0b1b5484c2fe5a6c18a0e6cfc4b8dba2",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-focus-375.png",
+      "bytes": 48272,
+      "sha256": "c94495102c43fd8cdf1631a6bcfe89fec0326d3fb38e80283c3af09b30b890a8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/login-focus-768.png",
+      "bytes": 101162,
+      "sha256": "d5982443c1eb343b142ea5211eccc7309006bf031a4f0ebb6a371628d3047f37",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/long-patch-200.png",
+      "bytes": 38423,
+      "sha256": "89b8f866c5e851e84978c9b98ad19ac2de50281ad5515bf38d5fa0a85344aeb3",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/long-patch-diagnostic.json",
+      "bytes": 607,
+      "sha256": "427389f8499d9a60fda724ba01ca3d63cd20bae7658cb980b7e45da070886286",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/long-patch-diagnostic.png",
+      "bytes": 39571,
+      "sha256": "1c62576ed0b536e6aa2f84e21e7ef022c34d0ed58c821d23dd73788cf9c031d3",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/not-found-1440.png",
+      "bytes": 30675,
+      "sha256": "8be59e3e6ef95d8a52e65af22ff501af1dcf31b197333899a50fab4575dd3856",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/not-found-375.png",
+      "bytes": 11194,
+      "sha256": "50b376ff87645c09ad80132131591744e2b9c69fe284bc3704924d0f984194af",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/not-found-768.png",
+      "bytes": 26462,
+      "sha256": "a694cebadd268384a1e3f56178c0152527c56e916be2aeb48ed156b8f22a6876",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/patch-1440.png",
+      "bytes": 64689,
+      "sha256": "838d62c09ef2124467966431de942d854b622e4930b062fa81c821db61c80973",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/patch-375.png",
+      "bytes": 33124,
+      "sha256": "ec285737a9f61863b3c7226d41bc12f1c6fd7fea66d90cfc95ecad0fb9efc80a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/patch-768.png",
+      "bytes": 54895,
+      "sha256": "3f14db647cb324fb807bee79e1343c93305483a9ff9123174d63df0adb91bb0b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/phase3-checks.json",
+      "bytes": 1403,
+      "sha256": "f7fe4e95f3743fe576cb03010cec9817649270193b8eb283a67055fefe593326",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/populated-1440.png",
+      "bytes": 46163,
+      "sha256": "e3221733a72ee264500257ba7657d277823db689f503a09ccb4919d6f9e204b4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/populated-375.png",
+      "bytes": 25482,
+      "sha256": "77cd39b18933a9a70b4e950d704f0c2bab71e231ae4cc75b2ebf4d71333624fd",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/populated-768.png",
+      "bytes": 41072,
+      "sha256": "6f00d2b81f06e92a61a594bd9a62628393978fbe60b0f42d0fce8f9a40a12960",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/primary-focus-375.png",
+      "bytes": 26273,
+      "sha256": "7458aa585db9ac4d166338b8eb6d3e691009e32c93e75fb75285178c7580177a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/primary-hover-375.png",
+      "bytes": 25487,
+      "sha256": "1a690e62cd790dd4ba3d5dfc73000d9e232f931c5303f2b125b12fa71a532f68",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/primary-pressed-375.png",
+      "bytes": 26534,
+      "sha256": "3cc9daa001db91cbb14203cd4d429dea4a20f15d84280ea6ee0d239c55dcd17c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/release-1440.png",
+      "bytes": 38332,
+      "sha256": "8791b57fea11d4337898efcf7415956c2c1e65f6631459b5f1d2f20f64681268",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/release-375.png",
+      "bytes": 17139,
+      "sha256": "964083a923fab2fb471cde68bf8e60a8e1e41b2e71500d21dab07ddc1ef55894",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/release-768.png",
+      "bytes": 33206,
+      "sha256": "5cfc85e75b471103cc63278412a43fb2f1e918896c29adee53d1ae23399fe80a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/reviewer-1440.png",
+      "bytes": 34655,
+      "sha256": "901c4b8fc8cb6c92c6bfd39d0a92e3812b1c1e109490fc5d47693e9f411c1249",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/reviewer-375.png",
+      "bytes": 15150,
+      "sha256": "a0c9183a121b287e9ee9e336b2d8a410c7d6ffb39c26bb15caf4a2d97b662eee",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/reviewer-768.png",
+      "bytes": 30779,
+      "sha256": "72c3cebe27c42004e3dafbc42ad1f57ee9173fbe7992e54cf97f20504b1c4dad",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/after/visual-results.json",
+      "bytes": 4204,
+      "sha256": "76bd670294178fa9de82399d48375e609c0999c8c748a632e4c5de44330a4e9b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/create-1440.png",
+      "bytes": 56985,
+      "sha256": "d92fff87c7ee0fcd1a0fb9ca908f9de7beffec9a5df377a28498bf3177475c8a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/create-375.png",
+      "bytes": 34533,
+      "sha256": "bde0fb0887084f4746f8520d77887ff99bb009674c54aa26456aea919d55843d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/create-768.png",
+      "bytes": 52364,
+      "sha256": "6c341a0c0bdb795dc83cd14abd4a872b94918d7d563c039999c9e2b810f2c33f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/detail-1440.png",
+      "bytes": 64217,
+      "sha256": "f37e001ffeb373b6f397adf51eecc3f0cd0e3280c14d3bfa01461078ad06d542",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/detail-375.png",
+      "bytes": 38744,
+      "sha256": "010abdb46a4ae09cdb8dd71230cddb6bd2f695eea22e2efa64d2915c6090ff49",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/detail-768.png",
+      "bytes": 58175,
+      "sha256": "18302cfbe85e90f4b27b5aef970d4db362f9e33b917ca44268a379b595a3de33",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/drawer-375.png",
+      "bytes": 17677,
+      "sha256": "2001457861cd5945046cc731790feb22c08aaaab6f7f4620cb8f967836b56154",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/editor-1440.png",
+      "bytes": 68670,
+      "sha256": "454f682c86ed373d86d0632d10eda80decc1ede9524f541117cf3a170ed8bfb7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/editor-375.png",
+      "bytes": 39148,
+      "sha256": "83fbd44c95b8e0c8d0619f413c6f84e0c3884c15af5301c59aba8e703d2a3dbf",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/editor-768.png",
+      "bytes": 64431,
+      "sha256": "e2ca532ea2e93ec28a6d7c64e5653bdb500b65a5e303341de9323b26da33b9a4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/empty-1440.png",
+      "bytes": 46442,
+      "sha256": "5373fed81d99d76b1f5938f8448ee4f15316b030c9885b64b1d72158581c2231",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/empty-375.png",
+      "bytes": 26334,
+      "sha256": "9cbaf1e069365f706485d8b0992ca9221d21b9dc4f932e88701fab400a80e3d3",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/empty-768.png",
+      "bytes": 41351,
+      "sha256": "22c7d88bf2793dbd695d482c67d00e56c36ab5ee3611587695b9ce1eed3d17fe",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/enlarged-375.png",
+      "bytes": 44393,
+      "sha256": "9f92692b9afefe24a2aa06416b4df3f036885343af3cafe28ce28545645f3a7f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/error-1440.png",
+      "bytes": 44642,
+      "sha256": "5958c64e5527990386582d6f0772156c87969d2583932a6f85cfac80d8d9c3e1",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/error-375.png",
+      "bytes": 24602,
+      "sha256": "c8aea66b32212717ed3d1fcdcfa2843b0e92121aff8ffe86f2f73ba39915ffe4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/error-768.png",
+      "bytes": 39850,
+      "sha256": "428c1809ccff86ed28a719c1af68bb23d6a2acf4fda8b9ac7833261b22d2ef26",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/loading-1440.png",
+      "bytes": 40786,
+      "sha256": "472ca78d173b5aeab0892db337eb6a39b5d139c06bc7b0b454378d33f11d8f8c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/loading-375.png",
+      "bytes": 20518,
+      "sha256": "87f18d9663031b3ac792689627ecc7640f7aa180268ed4bd1486be981ce21ec4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/loading-768.png",
+      "bytes": 35515,
+      "sha256": "a205fa2b16126c03ea9c6c34261c1f4c3f4cd20bd6fac605b21f3295264bedd7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-1440.png",
+      "bytes": 190254,
+      "sha256": "d4c2573f10edb5922631a58e53c361a8e439193ee6dab9146ed8b1701e3a0e4c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-375.png",
+      "bytes": 47272,
+      "sha256": "d0500a46d1f12c0f35da118de67f71e91b920787432ef6e7e47ece8fd4a67852",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-768.png",
+      "bytes": 100015,
+      "sha256": "2bbcb4dee624a2c504c2aee4fe7924c881ea9ae08f901012837407e4b39f2d7d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-focus-1440.png",
+      "bytes": 191654,
+      "sha256": "3c1efe866590c376003b7195218f2e4fff4045511de9794ccec8cebb9a2204d1",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-focus-375.png",
+      "bytes": 48271,
+      "sha256": "477d3188afaca09ae5fdef652f5c960f0566bc9a4862bb57cd4238072ee27b22",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/login-focus-768.png",
+      "bytes": 101164,
+      "sha256": "147be5250a6e88b7d4c5f4deff1cf90faf0667663792be91acddbc1c6faa9a68",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/not-found-1440.png",
+      "bytes": 30675,
+      "sha256": "8be59e3e6ef95d8a52e65af22ff501af1dcf31b197333899a50fab4575dd3856",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/not-found-375.png",
+      "bytes": 11194,
+      "sha256": "50b376ff87645c09ad80132131591744e2b9c69fe284bc3704924d0f984194af",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/not-found-768.png",
+      "bytes": 26462,
+      "sha256": "a694cebadd268384a1e3f56178c0152527c56e916be2aeb48ed156b8f22a6876",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/patch-1440.png",
+      "bytes": 65273,
+      "sha256": "6cb204bcd9ae21f06d4e3b002a69b65229efb739513e32d02f1db7f800182343",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/patch-375.png",
+      "bytes": 34115,
+      "sha256": "9f626662f07ee8e9a250aa4552ba23cc112b45f9a5562b573c8cc77de3c7ddce",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/patch-768.png",
+      "bytes": 56346,
+      "sha256": "066707ed063351cef07d3b93daaeb9f676c6ca7922e2328d967a7b09b2365b2f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/populated-1440.png",
+      "bytes": 46194,
+      "sha256": "cddd79efb37a0dc2b6054af5598f183bf0d6053e7d67dd2a504647c930b77e1f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/populated-375.png",
+      "bytes": 25489,
+      "sha256": "280d54328aab8717e203adb58f9a49a572a6f8b6d9ff476432fba9515eb21b5f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/populated-768.png",
+      "bytes": 41022,
+      "sha256": "86129c98a6ea3823c3bb00ee0a183a2010e7afb9533fa21e9b8e03b2aa5cb751",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/primary-focus-375.png",
+      "bytes": 26286,
+      "sha256": "8ac8217525235dc6199b17ccb501ba2c7686d65a1544a0b3da3e00d529cc9945",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/primary-hover-375.png",
+      "bytes": 25495,
+      "sha256": "e0c3ad81c80bb94568c37312ad39fc992493a6e7851bd6442f9a13dfd8d4773d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/primary-pressed-375.png",
+      "bytes": 26542,
+      "sha256": "3a24721b783f7c11988ee7876941da8db320af33aa672ea33208f7ade96535d7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/release-1440.png",
+      "bytes": 38332,
+      "sha256": "8791b57fea11d4337898efcf7415956c2c1e65f6631459b5f1d2f20f64681268",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/release-375.png",
+      "bytes": 17139,
+      "sha256": "964083a923fab2fb471cde68bf8e60a8e1e41b2e71500d21dab07ddc1ef55894",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/release-768.png",
+      "bytes": 33206,
+      "sha256": "5cfc85e75b471103cc63278412a43fb2f1e918896c29adee53d1ae23399fe80a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/reviewer-1440.png",
+      "bytes": 34655,
+      "sha256": "901c4b8fc8cb6c92c6bfd39d0a92e3812b1c1e109490fc5d47693e9f411c1249",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/reviewer-375.png",
+      "bytes": 15150,
+      "sha256": "a0c9183a121b287e9ee9e336b2d8a410c7d6ffb39c26bb15caf4a2d97b662eee",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/reviewer-768.png",
+      "bytes": 30779,
+      "sha256": "72c3cebe27c42004e3dafbc42ad1f57ee9173fbe7992e54cf97f20504b1c4dad",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-1/visual-results.json",
+      "bytes": 4204,
+      "sha256": "76bd670294178fa9de82399d48375e609c0999c8c748a632e4c5de44330a4e9b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2-focus/criterion-evidence-focus-supplement.png",
+      "bytes": 59726,
+      "sha256": "afef7529f749c3a7850b1872d70a2e6b492e0ca710085340ec4cc07180f959c8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2-focus/criterion-focus-results.json",
+      "bytes": 377,
+      "sha256": "ba0b7ee9d00e4d1a684c46f9592ae99f1d66339aa7650562faf6ac15ad4277a1",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/create-1440.png",
+      "bytes": 56985,
+      "sha256": "d92fff87c7ee0fcd1a0fb9ca908f9de7beffec9a5df377a28498bf3177475c8a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/create-375.png",
+      "bytes": 34533,
+      "sha256": "bde0fb0887084f4746f8520d77887ff99bb009674c54aa26456aea919d55843d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/create-768.png",
+      "bytes": 52364,
+      "sha256": "6c341a0c0bdb795dc83cd14abd4a872b94918d7d563c039999c9e2b810f2c33f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/density-metrics.json",
+      "bytes": 1424,
+      "sha256": "844b8996db48682e3cdf3fbdd42c77e62189528eb584f08050d5ddd0a74d5b1b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/detail-1440.png",
+      "bytes": 64217,
+      "sha256": "f37e001ffeb373b6f397adf51eecc3f0cd0e3280c14d3bfa01461078ad06d542",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/detail-375.png",
+      "bytes": 38744,
+      "sha256": "010abdb46a4ae09cdb8dd71230cddb6bd2f695eea22e2efa64d2915c6090ff49",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/detail-768.png",
+      "bytes": 58175,
+      "sha256": "18302cfbe85e90f4b27b5aef970d4db362f9e33b917ca44268a379b595a3de33",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/drawer-375.png",
+      "bytes": 17677,
+      "sha256": "2001457861cd5945046cc731790feb22c08aaaab6f7f4620cb8f967836b56154",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/editor-1440.png",
+      "bytes": 68670,
+      "sha256": "454f682c86ed373d86d0632d10eda80decc1ede9524f541117cf3a170ed8bfb7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/editor-375.png",
+      "bytes": 39148,
+      "sha256": "83fbd44c95b8e0c8d0619f413c6f84e0c3884c15af5301c59aba8e703d2a3dbf",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/editor-768.png",
+      "bytes": 64431,
+      "sha256": "e2ca532ea2e93ec28a6d7c64e5653bdb500b65a5e303341de9323b26da33b9a4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/empty-1440.png",
+      "bytes": 46422,
+      "sha256": "d9f94799364c62a6a447c9a1c44da9518f6f68cde4dc24a4285601fd05b32b21",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/empty-375.png",
+      "bytes": 26326,
+      "sha256": "b7d1540613a693b5ab88e1e0417ad2c1fe724ac4478e7b559362aa918f5ef288",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/empty-768.png",
+      "bytes": 41422,
+      "sha256": "7af0f07d6e599ecdefb37b8542de11e49b2e56f53852812eedfd6bf533546782",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/enlarged-375.png",
+      "bytes": 46453,
+      "sha256": "09c9ab7397bcda5f23b8b012e4ff89b2b899559ca4ed07fbfef903f8ffad3499",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/error-1440.png",
+      "bytes": 44598,
+      "sha256": "ef87db379cf7fbe282d63fd5dfca78e248c216b111c24b15d46146f57843c3d3",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/error-375.png",
+      "bytes": 24538,
+      "sha256": "0ae7057246fee9977f5b1a7e284cf71dc6af360fd1d2ec84f3e6f1909da84534",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/error-768.png",
+      "bytes": 39885,
+      "sha256": "4db9215f9a813dca0e96e04a6450bfb18d3c330f65a0e2aafa1c20086a98d9c8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/loading-1440.png",
+      "bytes": 40792,
+      "sha256": "42db66f1e0285d6a0887fe096a53476846298640b259b6e798d6f131d05f94a9",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/loading-375.png",
+      "bytes": 20497,
+      "sha256": "bcf6dc162e4d7eaf07073a5dcb8b99a2de67474604c2e490b63b89c9c05b66a2",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/loading-768.png",
+      "bytes": 35458,
+      "sha256": "723c522e0c322466fa801a3d4b7a48818f6d5b765148207aa1f7f801278cd4b6",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-1440.png",
+      "bytes": 190254,
+      "sha256": "d4c2573f10edb5922631a58e53c361a8e439193ee6dab9146ed8b1701e3a0e4c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-375.png",
+      "bytes": 47272,
+      "sha256": "d0500a46d1f12c0f35da118de67f71e91b920787432ef6e7e47ece8fd4a67852",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-768.png",
+      "bytes": 100015,
+      "sha256": "2bbcb4dee624a2c504c2aee4fe7924c881ea9ae08f901012837407e4b39f2d7d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-focus-1440.png",
+      "bytes": 191652,
+      "sha256": "dfa899e6a119a729c69e62bc5ee1541d0b1b5484c2fe5a6c18a0e6cfc4b8dba2",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-focus-375.png",
+      "bytes": 48272,
+      "sha256": "c94495102c43fd8cdf1631a6bcfe89fec0326d3fb38e80283c3af09b30b890a8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/login-focus-768.png",
+      "bytes": 101162,
+      "sha256": "0cd92a52d4e3e9ef9261ce63a60e3d3505794e7cc1e18c933ec8931a8f7cca0f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/long-patch-diagnostic.json",
+      "bytes": 607,
+      "sha256": "427389f8499d9a60fda724ba01ca3d63cd20bae7658cb980b7e45da070886286",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/long-patch-diagnostic.png",
+      "bytes": 39571,
+      "sha256": "1c62576ed0b536e6aa2f84e21e7ef022c34d0ed58c821d23dd73788cf9c031d3",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/not-found-1440.png",
+      "bytes": 30675,
+      "sha256": "8be59e3e6ef95d8a52e65af22ff501af1dcf31b197333899a50fab4575dd3856",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/not-found-375.png",
+      "bytes": 11194,
+      "sha256": "50b376ff87645c09ad80132131591744e2b9c69fe284bc3704924d0f984194af",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/not-found-768.png",
+      "bytes": 26462,
+      "sha256": "a694cebadd268384a1e3f56178c0152527c56e916be2aeb48ed156b8f22a6876",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/patch-1440.png",
+      "bytes": 65273,
+      "sha256": "6cb204bcd9ae21f06d4e3b002a69b65229efb739513e32d02f1db7f800182343",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/patch-375.png",
+      "bytes": 34115,
+      "sha256": "9f626662f07ee8e9a250aa4552ba23cc112b45f9a5562b573c8cc77de3c7ddce",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/patch-768.png",
+      "bytes": 56346,
+      "sha256": "066707ed063351cef07d3b93daaeb9f676c6ca7922e2328d967a7b09b2365b2f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/phase3-checks.json",
+      "bytes": 1957,
+      "sha256": "9d178856399b6c757e4d5b2c3e3778242c57a96fe3a2a21a3b9a043a1f553f5b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/populated-1440.png",
+      "bytes": 46163,
+      "sha256": "e3221733a72ee264500257ba7657d277823db689f503a09ccb4919d6f9e204b4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/populated-375.png",
+      "bytes": 25482,
+      "sha256": "77cd39b18933a9a70b4e950d704f0c2bab71e231ae4cc75b2ebf4d71333624fd",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/populated-768.png",
+      "bytes": 41072,
+      "sha256": "6f00d2b81f06e92a61a594bd9a62628393978fbe60b0f42d0fce8f9a40a12960",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/primary-focus-375.png",
+      "bytes": 26263,
+      "sha256": "4272dec9423a05c8202620ede3b4c44cae883aae69d972285f9f6d620f3db0d5",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/primary-hover-375.png",
+      "bytes": 25502,
+      "sha256": "288f1c28807b058bec2a052c6cb3b2bf41d9cd9f7d66daa279e3d4d5672316dc",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/primary-pressed-375.png",
+      "bytes": 26534,
+      "sha256": "3cc9daa001db91cbb14203cd4d429dea4a20f15d84280ea6ee0d239c55dcd17c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/release-1440.png",
+      "bytes": 38332,
+      "sha256": "8791b57fea11d4337898efcf7415956c2c1e65f6631459b5f1d2f20f64681268",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/release-375.png",
+      "bytes": 17139,
+      "sha256": "964083a923fab2fb471cde68bf8e60a8e1e41b2e71500d21dab07ddc1ef55894",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/release-768.png",
+      "bytes": 33206,
+      "sha256": "5cfc85e75b471103cc63278412a43fb2f1e918896c29adee53d1ae23399fe80a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/reviewer-1440.png",
+      "bytes": 34655,
+      "sha256": "901c4b8fc8cb6c92c6bfd39d0a92e3812b1c1e109490fc5d47693e9f411c1249",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/reviewer-375.png",
+      "bytes": 15150,
+      "sha256": "a0c9183a121b287e9ee9e336b2d8a410c7d6ffb39c26bb15caf4a2d97b662eee",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/reviewer-768.png",
+      "bytes": 30779,
+      "sha256": "72c3cebe27c42004e3dafbc42ad1f57ee9173fbe7992e54cf97f20504b1c4dad",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/visual-results.json",
+      "bytes": 4204,
+      "sha256": "76bd670294178fa9de82399d48375e609c0999c8c748a632e4c5de44330a4e9b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/automated-checks.json",
+      "bytes": 1524,
+      "sha256": "826fbf6c53e9c1a4ce7c1a7cca90472758fdc23d8b5a241083c269b81693ee1e",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline-preservation.json",
+      "bytes": 9054,
+      "sha256": "afaea8a47a4a0f9841a6cfc08a30cd714cc7e731592de3dea61a415b3a84f397",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/baseline-integrity.json",
+      "bytes": 2344,
+      "sha256": "e60401592964782bbb5e7fb0899c7bcc4c91fe5e04860dba97b226983aff9de2",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/baseline-report.md",
+      "bytes": 2397,
+      "sha256": "c245e3c0686265254a3dad5ab9d007cb922b7cbb2fab001bdf0967cb06ff17cf",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/create-1440.png",
+      "bytes": 56303,
+      "sha256": "9dc4a4bfa08ba5df7ba32fb5519624c0bf056e807aee2bf020d6b0a0b8aa6cfa",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/create-375.png",
+      "bytes": 34806,
+      "sha256": "3c052cdc3c94b89c690058096ffad42cb166e018ad06eb3d8387e3ea92d04e9b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/create-768.png",
+      "bytes": 51925,
+      "sha256": "c8f254a4123ff9a639ffb23c2954724ce65e7f87e58da867eabce4c50d9ab760",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/detail-1440.png",
+      "bytes": 62783,
+      "sha256": "c18731d13142d4187bc66d14b60d9f3150edcb4e5210ea51fc2e7015eaba7f2a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/detail-375.png",
+      "bytes": 37914,
+      "sha256": "21511988c85bfee6091baf2b9775b1fbc363be0c9fc90bb59536a19f1a80e206",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/detail-768.png",
+      "bytes": 56940,
+      "sha256": "933178828f7e8d02926c40ae36ef2a15d89188103a2ff291cd2da2580866f66c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/drawer-375.png",
+      "bytes": 18172,
+      "sha256": "f5d839f7dae444a756d0bfeab563150b3dd559445002cc7c7c0bdf04a4a631ff",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/editor-1440.png",
+      "bytes": 68072,
+      "sha256": "0e214831e1643fbb74e4ccb88dff021eda989eb144926675ebfa89dd2fa14e3c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/editor-375.png",
+      "bytes": 39217,
+      "sha256": "0fb4474dac7e38657f214182de31a1e2962386723e7b56753ce4e2408a099268",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/editor-768.png",
+      "bytes": 64391,
+      "sha256": "2b6afb47a37eaf1fa540afd1138b086345de3dcf9b277914ee73725994163b21",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-1440.png",
+      "bytes": 58493,
+      "sha256": "6f570036c2facc0853dc237dbac1e8dac150b4e6b86b37962e85bbc7ba4535bc",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-375.png",
+      "bytes": 36783,
+      "sha256": "d5188b326ec09e0cd63a307dd6da18d203e12d8c23309018ee698d9bd4c75b6f",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-768.png",
+      "bytes": 53106,
+      "sha256": "3790ce63eafe1b72c0b83f0be7812adafceffa8838cc982834f4821a1a613ac0",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/enlarged-375.png",
+      "bytes": 40477,
+      "sha256": "7d8757d248c61229bfb315e56c5710c9ed70453168de4e3e486a3428cd466678",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/error-1440.png",
+      "bytes": 54410,
+      "sha256": "135d64b93306076d3331e935dd7a60dcee99b6cf7337efd33523256182697174",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/error-375.png",
+      "bytes": 33609,
+      "sha256": "e5d6e68587d6eac6680fb4ee3d139e60fa2a033017c7d8b5dbb75fc899eaf4bc",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/error-768.png",
+      "bytes": 49889,
+      "sha256": "950d91773b8d9bac2790ccf88b87afb068dc6c035dda70a7698693f51e05ac93",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/loading-1440.png",
+      "bytes": 49016,
+      "sha256": "c2bf8244a291991a5cda979cc6006c227cea6d69044b956e2fb2117cf1dce736",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/loading-375.png",
+      "bytes": 28308,
+      "sha256": "e4ce7fe03ff0596af4bcf38ca6cf5635f3ccf2f9c1e98bb9fdbcdfe79cce2239",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/loading-768.png",
+      "bytes": 44372,
+      "sha256": "d19177475a5eb900fbf0346ba14ca706114eb5dff6673609dad35c54f6191aef",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-1440.png",
+      "bytes": 189974,
+      "sha256": "02d4e27a998cc62fbb2f5816eb134879fcb68f563720a3f1f0cb4538540e6ecb",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-375.png",
+      "bytes": 47842,
+      "sha256": "c092182c7818608f9cdd934e9b0c5ae7579fd20447e3e9cb5be013749a91593c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-768.png",
+      "bytes": 100183,
+      "sha256": "5f1c40e42603099b57194ee6cce2b6df41d89b1ba225e856da01a59da416aa86",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-focus-1440.png",
+      "bytes": 191300,
+      "sha256": "909ae0cb098cb4b072db030b1106bec231a19478e6bc33bd7c8a8773d8fa6ebe",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-focus-375.png",
+      "bytes": 48581,
+      "sha256": "e3a8e38e5f0b4edcdd12abb28d731bc0980bd7bf25b2f7b2d6d4dc40875af73d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/login-focus-768.png",
+      "bytes": 101106,
+      "sha256": "ee8e7725ae3d459dc1c93015a8e03952b99eee4fd6b71bf3eb31dbb8d1d0a7c6",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/not-found-1440.png",
+      "bytes": 29600,
+      "sha256": "2721d5bdde51b84549acf941a0098245f8cbfd3b95f7b7556968f56506d56e29",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/not-found-375.png",
+      "bytes": 10639,
+      "sha256": "a20d6dd7cdf6340add2984a9e776104e9943735152add37ecd68e66002d02b54",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/not-found-768.png",
+      "bytes": 25339,
+      "sha256": "c942029a07e78d85a6ab68521100dba28a417559e284ca2ef31fadb91d5cd80d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/patch-1440.png",
+      "bytes": 59501,
+      "sha256": "1ab4e115d219f0b4d58329020283c9d4280ca73e2e4a01e7bfacffc2f1aa58bd",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/patch-375.png",
+      "bytes": 30950,
+      "sha256": "7390cc44552ba331dab506fe734864e4982abc44b9675425c54226a43d1228f4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/patch-768.png",
+      "bytes": 49464,
+      "sha256": "4e190420f8efb58ee106536e312be4662dc1da21f773a50daf9b61e47e7dc2be",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/populated-1440.png",
+      "bytes": 54058,
+      "sha256": "d2cc1948ae32d922b189a9ac9bb87fbfd3c5ca88d2d742392c50e52655f15e5b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/populated-375.png",
+      "bytes": 32329,
+      "sha256": "dfbba57b6558eb8439570d55095dd9c1fd5074e27e6f4893359a5ad25162480a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/populated-768.png",
+      "bytes": 49186,
+      "sha256": "8308a78926ee0e9a5945e6b812f43a545d8c5930877e51efd5c232798a1794de",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/primary-focus-375.png",
+      "bytes": 32992,
+      "sha256": "a6d7dce73618ae05a8e85b0d8a0bb5606c4d83ba3e7d5e0b61baefae57d43aa3",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/primary-hover-375.png",
+      "bytes": 32339,
+      "sha256": "637d0eba3aeaefb2643c0444b9b453b0eed55ce90864f12212b753c6058f2f01",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/primary-pressed-375.png",
+      "bytes": 32967,
+      "sha256": "28f896e69a8844d7a87fb6734d625f35b4f74b8c628b1abb54ba8c99f52a145b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/release-1440.png",
+      "bytes": 36958,
+      "sha256": "d4508f3214daceb6da6e27b7cdef8963bc7955ad98de4792c420e262e6a27faa",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/release-375.png",
+      "bytes": 15791,
+      "sha256": "8c61526212977784183d8868957cfedc7dff9f59b41c3cff770c3ee771539c61",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/release-768.png",
+      "bytes": 31321,
+      "sha256": "3a713dcc171adb76fef0f0db95c6b7be7f1c936c60cef0ca84ce9494bdf8c6e1",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/reviewer-1440.png",
+      "bytes": 33782,
+      "sha256": "9497758eedf6e99dcd7eff7452f7578fd5c9fac7ba6f26469f891fb6714be007",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/reviewer-375.png",
+      "bytes": 14356,
+      "sha256": "eb18db1c3e594c4b3b83f47c5b8a7be1f0665aec356dc2535ff10f4dd3c4625d",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/reviewer-768.png",
+      "bytes": 29169,
+      "sha256": "cf19ed84b323eaf62c145c0b755a176c4beb0f2ab3c63cb42800dcc5c0561af8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/source-hashes-before.json",
+      "bytes": 2046,
+      "sha256": "968513324b333257baff0e80fddaa0ed13792e927673a0432a14bf2314de6dd0",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/visual-results.json",
+      "bytes": 4204,
+      "sha256": "76bd670294178fa9de82399d48375e609c0999c8c748a632e4c5de44330a4e9b",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/comparison.html",
+      "bytes": 18395,
+      "sha256": "434af055eba5478e17929d5a0d48615f631e8a4af3df5421621347d52804e0bc",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus-after.txt",
+      "bytes": 396,
+      "sha256": "833191f2651abcd5d73188e7f5c8f39f7c9354d19bf6fd3ec8002a907313fed7",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus-before.txt",
+      "bytes": 3036,
+      "sha256": "41ac3b27053d0c395bf1fefa81c2c68863ee8a033d4253991ff4ebddfa06c7fd",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus/criterion-evidence-focus-supplement.png",
+      "bytes": 59726,
+      "sha256": "afef7529f749c3a7850b1872d70a2e6b492e0ca710085340ec4cc07180f959c8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/focus/criterion-focus-results.json",
+      "bytes": 377,
+      "sha256": "ba0b7ee9d00e4d1a684c46f9592ae99f1d66339aa7650562faf6ac15ad4277a1",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional-harness-proof.json",
+      "bytes": 306,
+      "sha256": "0c0ba4b6bb311c68bbabc0b3358d36572d2f49c646da09a22f83d6eba25284b0",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/acceptance-results.json",
+      "bytes": 7539,
+      "sha256": "55e16cd8703d5a53c1b23ac3e31ff6f6d061e648009be9c0b8e6f5d3727692d1",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/enlarged-mobile-recovery.png",
+      "bytes": 49437,
+      "sha256": "828cb8791cab3a2f6213ba1d2dfee1c6f607dd2c808d508be2be0cec6cf922b8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/enlarged-skip-fixed.png",
+      "bytes": 47260,
+      "sha256": "5874d1d37495328385dd866f42b641436f9d86d37cafe502eb7e4fa247e8ae52",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-409.png",
+      "bytes": 58855,
+      "sha256": "59c16fd9e1d8422f0a935ea1adc952d8c341e04a575585ccd140f0f62921be32",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-500.png",
+      "bytes": 58832,
+      "sha256": "346cb038c9856a4f14399a81f26c430839224c2d540141bd732d931269bd36b5",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-network.png",
+      "bytes": 58819,
+      "sha256": "4707b419d03ea4935976b14d0e2d0018f14f03445b57b7e72d31e613d478f1cc",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/failure-reconcile.png",
+      "bytes": 58667,
+      "sha256": "ea26f257ac991b04f7bd4b3bc7e4705a776e1e0555f812517fc611350f8b4c47",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/mobile-enlarged-validation.png",
+      "bytes": 38024,
+      "sha256": "7dfb780266916c77707819ecd715f89b9e95024de6016dfbc52e287db14424f4",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/mobile-pointer-save.png",
+      "bytes": 27267,
+      "sha256": "5d8556696417692664444ddbe954e22a6c1bc0a3e36cedb9b247b82f5ab8e777",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-contributor.png",
+      "bytes": 46498,
+      "sha256": "7879e7c46d43183fb94b0cb165bad651b6d9e1e95074acb4cfe7601a006d8f52",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-edit.png",
+      "bytes": 61133,
+      "sha256": "0c3ff15e5f69957b7df2da88624ff24c841bb7f32dbac57ce077b37276cd8901",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-new.png",
+      "bytes": 56985,
+      "sha256": "d92fff87c7ee0fcd1a0fb9ca908f9de7beffec9a5df377a28498bf3177475c8a",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/orientation-proposal-1.png",
+      "bytes": 54171,
+      "sha256": "92fd7f71386fcacdfa9646580de5ca3ebb003a8aed7e7f70503a717993985759",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/reflow-1440.png",
+      "bytes": 93121,
+      "sha256": "978afda9b2e46ce46414aac78ba8df13ba4057bd406bb50344a600f289f3cbb8",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/reflow-375.png",
+      "bytes": 49272,
+      "sha256": "630afa24b84114b5044b3698f13ec5737ebe58c0e193fd377673aa8e90387e82",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/reflow-768.png",
+      "bytes": 58248,
+      "sha256": "cfe024abafd4f5b2cd3de1350da05dd7dd344db478f854cd0940dc1077823230",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/saved-criteria.png",
+      "bytes": 54171,
+      "sha256": "92fd7f71386fcacdfa9646580de5ca3ebb003a8aed7e7f70503a717993985759",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/section-evidence-1440.png",
+      "bytes": 57701,
+      "sha256": "5f2b414308e2fad5a45b824889ba87aa04417f4b4f69f3e4359234da18ab0c73",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/section-evidence-375.png",
+      "bytes": 32117,
+      "sha256": "f7f906709d373449bdf1966d8a626faa38c01302eae1665505886bb7951be7ed",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/section-evidence-768.png",
+      "bytes": 53293,
+      "sha256": "674d43c30ec305e2f6bc7e21229ad394ad9c5d72bfa73a5f8cec95ddb8e095bb",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/skip-history-fixed.png",
+      "bytes": 54186,
+      "sha256": "3c4408dd408a85666abdd01357c7e823224724147ecf4a48a6e5c146616be762",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/sticky-save-1440.png",
+      "bytes": 53599,
+      "sha256": "aeb4aa10c806e61b29eb1ae8a9796fc3c98db2b6b089fa151c73e430a7948aa1",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/sticky-save-375.png",
+      "bytes": 29892,
+      "sha256": "8510ea274d23c32002e7f352228ab290e83d85169e43d0af5bce29bdd3f8d7da",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/resource-report.json",
+      "bytes": 21643,
+      "sha256": "03a9a26753869b3d6eb97691e187cf34559d8471f5f50da9065b22dc38f44471",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "logs/yooplo/resources/2026-10-31-visual-phase3/verification/resource-report.md",
+      "bytes": 2742,
+      "sha256": "5d92e43101a3616154c9ed4ea1c4a1d3c838dd51c85429e4588b8236b8b96462",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/features/contributor/FunctionalUx.test.tsx",
+      "bytes": 12799,
+      "sha256": "3687449467fec65f88594b30fdb4096f989c87e9507b74128bfdda34c06adfef",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/features/contributor/NavigationPhase2.test.tsx",
+      "bytes": 9003,
+      "sha256": "cedbf22cdf5ab663a2c0862e29ade5b88beadd52bc8789aac6873080f54d151e",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/features/contributor/PageHeader.tsx",
+      "bytes": 1029,
+      "sha256": "80228caeda7f282a6e1b3d746a738e3768a035b835ef0ee66c4fef854e98c9dd",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/shared/NavigationGuardProvider.tsx",
+      "bytes": 952,
+      "sha256": "4558d188f0fc87f282ed469a1201787a6916f6fbdd8ca85d06854863e84fd658",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "src/client/src/shared/navigationGuard.ts",
+      "bytes": 1394,
+      "sha256": "43a8e7aa245f63fd752d64204841a44a2d73dca20be78e9efdbca0b4661630fc",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "workflow/tests/browser/functional-ux.mjs",
+      "bytes": 28155,
+      "sha256": "573c5dfaf2151eeae296c61be7190110fb6f9134f1844d6a7345e86520d8250d",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "workflow/tests/browser/navigation-phase2.mjs",
+      "bytes": 46762,
+      "sha256": "c9f2045c2fbae6e0f49cf72ae431f37ecc5888a281c00aa956ffc12d9a54e228",
+      "preexisting": true,
+      "phase3_existing_delta": false
+    },
+    {
+      "status": "??",
+      "path": "workflow/tests/browser/visual-phase3.mjs",
+      "bytes": 11038,
+      "sha256": "2779f68e20f33dc1610c746e6006f3abb6beaf455819e92ca1394c80f6226b7c",
+      "preexisting": false,
+      "phase3_existing_delta": false
+    }
+  ],
+  "publication_note": "Safe immutable completion snapshot imported from local tmp; source/backups are not copied. Hashes describe this historical completion state, not later specification-publication edits."
+}

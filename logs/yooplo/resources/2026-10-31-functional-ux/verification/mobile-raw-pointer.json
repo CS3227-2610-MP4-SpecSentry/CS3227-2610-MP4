@@ -1,0 +1,19 @@
+[
+  {
+    "method": "pointer",
+    "steps": [
+      {
+        "label": "edited evidence",
+        "scroll": 1983,
+        "bodyScroll": 0,
+        "focus": "evidence-0-text"
+      },
+      {
+        "label": "saved",
+        "scroll": 1983,
+        "bodyScroll": 0,
+        "focus": "\n    Skip to main contentSpecSentrySpeci"
+      }
+    ]
+  }
+]

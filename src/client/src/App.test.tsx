@@ -23,7 +23,7 @@ describe('base authentication', () => {
     fireEvent.change(await screen.findByLabelText('Username'), { target: { value: 'alice' } });
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'synthetic-password' } });
     fireEvent.click(screen.getByRole('button', { name: 'Sign in' }));
-    expect(await screen.findByRole('heading', { name: 'Contributor workspace' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Private drafts' })).toBeInTheDocument();
     expect(fetch.mock.calls[2]?.[1]).toMatchObject({ method: 'POST', headers: { 'x-csrf-token': csrfToken } });
     fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
     expect(await screen.findByText('You have signed out.')).toBeInTheDocument();

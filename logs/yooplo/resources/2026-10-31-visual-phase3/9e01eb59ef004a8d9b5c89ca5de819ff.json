@@ -1,0 +1,35 @@
+{
+  "id": "9e01eb59ef004a8d9b5c89ca5de819ff",
+  "prompter": "yooplo",
+  "session": "2026-10-31-visual-phase3",
+  "agent": "reviewer",
+  "invocation": "final-review-1",
+  "stage": "visual-and-focus-patch-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T18:11:15.029060+00:00",
+  "ended_at": "2026-10-30T18:13:20.952582+00:00",
+  "elapsed_seconds": 125.923522,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent Phase3 source/spec review: no blocker. Baseline preservation133/143 byte-identical; ten declared paths changed; index unchanged. Focused28/28 tests passed; two controlled before-fix focus failures inspected. Browser and matched after screenshots pending separate verification.",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "output_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "cache_read_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "tool_calls": "Exact execution settings and per-record runtime telemetry not exposed",
+    "retries": "Exact execution settings and per-record runtime telemetry not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and per-record runtime telemetry not exposed"
+}

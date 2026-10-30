@@ -1,0 +1,35 @@
+{
+  "id": "038faaa3f42144ab9fe434555657fa43",
+  "prompter": "yooplo",
+  "session": "2026-10-31-visual-phase3",
+  "agent": "verifier",
+  "invocation": "after-1",
+  "stage": "after-verification",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T18:13:33.687961+00:00",
+  "ended_at": "2026-10-30T18:20:01.417532+00:00",
+  "elapsed_seconds": 387.729571,
+  "status": "interrupted",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Afterattempt1 visual34/34+44PNG preserved; finalcountlabelcopy and dependencyrepair interrupt remainingregression; baselineimmutable;5188 stopped only oncoordinatorrequest",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

@@ -12,3 +12,29 @@ test-results/
 *.log
 node_modules
 tmp
+
+# One-off local UI diagnostics; reusable browser checks live under workflow/tests.
+/logs/yooplo/resources/2026-10-31-functional-ux/verification/*.mjs
+/logs/yooplo/resources/2026-10-31-navigation-phase2/verification/*.mjs
+# Repeated attempt captures stay local; retain results and the failed geometry image.
+/logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/**/*.png
+!/logs/yooplo/resources/2026-10-31-visual-phase3/verification/attempts/after-2/long-patch-diagnostic.png
+# Byte-identical integration captures use canonical Phase2 assets (publication map).
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/enlarged-skip-fixed.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-contributor.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-edit.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-new.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/orientation-proposal-1.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-1440.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/reflow-768.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/saved-criteria.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-1440.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-375.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/section-evidence-768.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/skip-history-fixed.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/sticky-save-1440.png
+/logs/yooplo/resources/2026-10-31-phase2-integration/verification/sticky-save-375.png
+# Terminal commit/push receipt is generated after the commit; keep it local.
+/logs/yooplo/resources/2026-10-31-ui-publication-receipt/
+# Fresh rerun captures stay local; publish results and the retained Phase3 gallery.
+/logs/yooplo/resources/2026-10-31-ui-spec-publication/verification/**/*.png

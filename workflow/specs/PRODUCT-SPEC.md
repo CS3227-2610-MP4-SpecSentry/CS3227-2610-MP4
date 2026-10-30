@@ -17,6 +17,7 @@ Each requirement ID has one authoritative definition. These linked documents for
 | [Reviewer](ROLE-REVIEWER.md) | REQ-REV requirements, review interface and failure cases |
 | [Maintainer](ROLE-MAINTAINER.md) | REQ-REL requirements, candidate lifecycle and publication |
 | [Shared requirements](SHARED-REQUIREMENTS.md) | REQ-SHR and NFR definitions, activity/privacy and quality |
+| [Implemented UI/UX](UI-UX-SPEC.md) | Current shell, navigation, draft states, design tokens, responsive/accessibility behavior and bounded verification; functional requirement IDs remain authoritative in role/shared specs |
 | [Technical](TECHNICAL-SPEC.md) | TypeScript stack, module boundaries and deployment constraints |
 | [Integration](INTEGRATION-SPEC.md) | Logical entities, operation semantics, concurrency and errors |
 | [AI security](AI-SECURITY-SPEC.md) | Context/output contracts, threats, budgets and evaluation |

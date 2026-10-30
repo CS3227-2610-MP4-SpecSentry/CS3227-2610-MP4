@@ -1,0 +1,30 @@
+{
+  "captured_at_utc": "2026-10-30T18:51:29.378460+00:00",
+  "scope": "Only redundant terminal CR/LF bytes removed; existing final newline style preserved, all other bytes unchanged; no staging.",
+  "files": [
+    {
+      "path": "src/client/src/features/contributor/FunctionalUx.test.tsx",
+      "before_sha256": "3687449467fec65f88594b30fdb4096f989c87e9507b74128bfdda34c06adfef",
+      "after_sha256": "98ce2a9fb2e699790b82c158f6a9a6d09a09a5ca585819303acb4f6f2ff54071",
+      "bytes_removed": 2,
+      "final_newline": "CRLF",
+      "body_bytes_identical": true
+    },
+    {
+      "path": "src/client/src/shared/navigationGuard.ts",
+      "before_sha256": "43a8e7aa245f63fd752d64204841a44a2d73dca20be78e9efdbca0b4661630fc",
+      "after_sha256": "d3feab6569ca70b54300ae00c5353584978fb6334b3a7f28581075a0c31750a0",
+      "bytes_removed": 2,
+      "final_newline": "CRLF",
+      "body_bytes_identical": true
+    },
+    {
+      "path": "workflow/tests/browser/functional-ux.mjs",
+      "before_sha256": "573c5dfaf2151eeae296c61be7190110fb6f9134f1844d6a7345e86520d8250d",
+      "after_sha256": "826dc807135a1509a1879aca092937f7a7ebad233a68228af86389dfdd2984f6",
+      "bytes_removed": 2,
+      "final_newline": "CRLF",
+      "body_bytes_identical": true
+    }
+  ]
+}
