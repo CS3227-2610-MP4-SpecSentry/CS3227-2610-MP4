@@ -26,8 +26,8 @@ test('private create/list/detail supports keyboard, validation, escaped text and
   await page.getByLabel('Username').fill(prefix);
   await page.getByLabel('Password').fill(password);
   await page.getByLabel('Password').press('Enter');
-  await expect(page.getByText('No drafts here yet. Create a draft to get started.')).toBeVisible();
-  await page.getByRole('link', { name: 'Create a draft' }).focus();
+  await expect(page.getByText('No drafts yet')).toBeVisible();
+  await page.getByRole('link', { name: 'Create New Draft' }).focus();
   await page.keyboard.press('Enter');
   await page.getByRole('button', { name: 'Create private draft' }).click();
   await expect(page.getByLabel('Title (required)')).toBeFocused();

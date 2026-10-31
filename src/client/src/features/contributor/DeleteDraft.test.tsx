@@ -35,7 +35,7 @@ describe('Own never-submitted draft deletion', () => {
     expect(fetch).toHaveBeenCalledTimes(1);
     await confirm();
     expect(await screen.findByText('Private draft deleted.')).toHaveFocus();
-    await screen.findByText('No drafts here yet. Create a draft to get started.');
+    await screen.findByText('No drafts yet');
     expect(fetch.mock.calls[1]).toEqual([`/api/proposals/${id}`, expect.objectContaining({ method: 'DELETE', credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrfToken }, body: JSON.stringify({ expectedVersion: 3, confirmed: true }) })]);
   });

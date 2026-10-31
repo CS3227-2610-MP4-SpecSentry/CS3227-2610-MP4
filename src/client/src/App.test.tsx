@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { App } from './App';
@@ -34,6 +34,57 @@ describe('base authentication', () => {
     render(<MemoryRouter><App /></MemoryRouter>);
     expect(await screen.findByText('Signed in as alice')).toBeInTheDocument();
     expect(screen.queryByLabelText('Password')).not.toBeInTheDocument();
+  });
+  it('toggles navigation without discarding unsaved draft input or exposing other role links', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply(session())));
+    render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+    const title = await screen.findByLabelText('Title (required)');
+    fireEvent.change(title, { target: { value: 'Keep my work' } });
+    const toggle = screen.getByRole('button', { name: 'Collapse navigation' });
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    fireEvent.click(toggle);
+    expect(screen.getByRole('navigation', { name: 'Account' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Contributor workspace' })).toHaveAttribute('title', 'Contributor workspace');
+    expect(document.querySelector('.app-shell')).toHaveClass('navigation-collapsed');
+    expect(title).toHaveValue('Keep my work');
+    expect(toggle).toHaveAccessibleName('Expand navigation');
+    fireEvent.click(toggle);
+    expect(screen.getByRole('link', { name: 'Contributor workspace' })).toBeVisible();
+    expect(screen.queryByRole('link', { name: 'Reviewer workspace' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Sign out' })).toBeVisible();
+    expect(title).toHaveValue('Keep my work');
+  });
+  it('uses a modal mobile drawer and returns focus on Escape without losing draft input', async () => {
+    // jsdom lacks the dialog platform methods; browser acceptance checks the native trap/inert behavior.
+    const showModal = vi.fn(function (this: HTMLDialogElement) { this.setAttribute('open', ''); });
+    const closeDialog = vi.fn(function (this: HTMLDialogElement) { this.removeAttribute('open'); this.dispatchEvent(new Event('close')); });
+    Object.defineProperties(HTMLDialogElement.prototype, {
+      showModal: { configurable: true, value: showModal }, close: { configurable: true, value: closeDialog },
+    });
+    try {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply(session())));
+      render(<MemoryRouter initialEntries={['/contributor/new']}><App /></MemoryRouter>);
+      const title = await screen.findByLabelText('Title (required)');
+      fireEvent.change(title, { target: { value: 'Keep mobile work' } });
+      const trigger = screen.getByRole('button', { name: 'Open navigation' });
+      trigger.focus(); fireEvent.click(trigger);
+      const drawer = screen.getByRole('dialog', { name: 'Workspace navigation' });
+      expect(showModal).toHaveBeenCalledOnce();
+      expect(trigger).toHaveAttribute('aria-expanded', 'true');
+      expect(within(drawer).getByRole('button', { name: 'Sign out' })).toBeEnabled();
+      fireEvent(drawer, new Event('cancel', { bubbles: true, cancelable: true }));
+      expect(closeDialog).toHaveBeenCalledOnce();
+      expect(trigger).toHaveFocus();
+      expect(trigger).toHaveAttribute('aria-expanded', 'false');
+      expect(title).toHaveValue('Keep mobile work');
+      fireEvent.click(trigger);
+      fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Close navigation' }));
+      expect(trigger).toHaveFocus();
+      expect(title).toHaveValue('Keep mobile work');
+    } finally {
+      Reflect.deleteProperty(HTMLDialogElement.prototype, 'showModal');
+      Reflect.deleteProperty(HTMLDialogElement.prototype, 'close');
+    }
   });
   it('denies another role workspace', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply(session())));

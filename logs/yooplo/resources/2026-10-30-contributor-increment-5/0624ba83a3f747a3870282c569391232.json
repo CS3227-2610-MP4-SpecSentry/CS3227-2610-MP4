@@ -1,0 +1,35 @@
+{
+  "id": "0624ba83a3f747a3870282c569391232",
+  "prompter": "yooplo",
+  "session": "2026-10-30-contributor-increment-5",
+  "agent": "acceptance",
+  "invocation": "verify-1",
+  "stage": "independent-preparation-acceptance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed dispatch; settings not exposed",
+  "started_at": "2026-10-30T07:11:36.102674+00:00",
+  "ended_at": "2026-10-30T07:25:22.391496+00:00",
+  "elapsed_seconds": 826.288822,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent5hashesUTC5migrations31server84client43PG9Chromium/static/build allpassed; prepbytebounds/identities/denials/rollback/recovery/regressions; no blocker",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+}

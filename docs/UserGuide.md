@@ -83,7 +83,7 @@ the unassigned awaiting-revision queue so the owner can resubmit or withdraw.
 Manual review remains usable without AI. Verification boundaries and current
 evidence are in the [iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md).
 
-Status: locally implemented Reviewer workflows and Contributor private drafts/editing/deletion/criteria,
+Status: locally implemented Reviewer workflows and Contributor private drafts/editing/deletion/criteria/submission-preparation,
 combined 31 October 2026. Per-increment verification is linked below; combined merge verification
 is recorded separately. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
@@ -111,15 +111,30 @@ drafts and manage acceptance criteria as described below.
 ### Contributor private drafts
 
 After signing in as a Contributor, your workspace lists your own never-submitted
-DRAFT proposals. An empty list offers **Create a draft**. Use **Next page** and
+DRAFT proposals. Select **Create New Draft**, or **Create your first draft** in the
+empty state. The summary counts drafts on the loaded page, not all account drafts.
+Use **Next page** and
 **First page** when the list spans pages.
 
-Select **Create a draft**, enter a title, problem and expected behavior, and optionally
+Select **Create New Draft**, enter a title, problem and expected behavior, and optionally
 enter constraints. Title is limited to 200 Unicode characters; each narrative field
 to 10,000. Select **Create private draft** to save and open its private detail.
 Select a title in the list to open an existing draft, or **Back to your drafts** to return.
 Only the owner can read this working content. Submission, responses and lifecycle actions are not exposed in this private-draft
 workspace; the drafting assistant remains pending.
+
+The application sidebar shows your account's workspace and **Sign out**. Use
+**Collapse navigation** or **Expand navigation** in the top bar to switch between
+full navigation and a compact icon rail. Icon controls retain accessible names and
+hover titles. The desktop sidebar and top bar remain visible while the workspace
+scrolls; overflowing navigation scrolls separately from the workspace.
+On mobile, select **Open navigation** to open the drawer and **Close navigation**
+or press Escape to return to the workspace. Keyboard focus stays within the open
+drawer, and the background workspace stops scrolling. Toggling navigation keeps
+your current form open. A **Skip to main content** link is available when navigating
+by keyboard. Reviewer accounts open their implemented review workspace; Release
+Maintainer accounts retain an availability message while their broader workspace
+remains pending.
 
 ### Delete a never-submitted draft
 
@@ -164,6 +179,25 @@ After saving, the editor reads the committed draft to obtain its assigned identi
 check fails or finds a different version, your entered text and choices remain and saving pauses.
 Follow the explicit reload/discard confirmation to recover; do not assume another save is safe.
 These controls apply only to never-submitted drafts, not submitted history or findings.
+
+### Prepare summary, diff and evidence
+
+In **Edit private draft**, the **Submission preparation**
+section offers **Contributor summary** (500 Unicode characters) and **Unified diff**
+(100,000). Both are optional while drafting; incomplete patch text may be saved.
+Select **Add evidence** for optional plain-text items. Each added item must contain text
+or be removed before saving, with 50,000 characters total across all evidence. Editing
+these fields preserves your other draft content and criterion identities.
+
+**Save private draft** saves preparation text with the rest of the draft. Line endings are
+normalized; text is not silently truncated. The whole JSON request also has a 1 MiB byte
+limit: if it is too large, reduce the text and save again. Errors retain your input;
+conflict or uncertain outcomes use the confirmed reload/recovery flow below. Saved text
+appears in private detail and can be reopened for editing.
+
+Summary, patch and evidence are displayed as plain text. HTML, Markdown, commands and
+patches are not executed or fetched. This prepares a private draft; it does not submit it,
+create immutable revisions, assign a reviewer or send notifications.
 
 Validation and failed saves retain your entered text. If the draft changed elsewhere,
 is no longer editable, or the save response is uncertain, saving pauses so an old form

@@ -4,6 +4,19 @@ As of 25 October 2026. Imported dates are targets, not completion evidence. Hist
 
 ## Team Allocation
 
+Shell refinement, 31 October 2026: bounded workspace/navigation scroll areas,
+stationary topbar/sidebar, desktop icon rail and native mobile navigation drawer
+extend the existing presentation update. Implementation and independent acceptance
+are recorded in the [refinement log](../logs/yooplo/2026-10-31-shell-scroll-refinement.md).
+No new domain workflow or deployment; teammate review remains pending.
+
+Presentation update, 30 October 2026: existing application shell and Contributor
+private-draft screens received a responsive SaaS redesign. No new role workflow,
+backend contract or deployment is included. Implementation and independent
+acceptance evidence are tracked in the
+[redesign run](../logs/yooplo/2026-10-30-saas-ui-redesign-run.md); teammate review
+remains pending.
+
 | **Member** | **Primary role focus** | **Shared area coordinated** | **Planned contribution** |
 | --- | --- | --- | --- |
 | yooplo | Contributor | Authentication, sessions, role routing, CSRF, and account access controls | Contributor spec, interface, service, tests, and User Guide flows |
@@ -178,3 +191,19 @@ Subsequent review-preparation request authorized Increment4 commit/push; stacked
 now targets Increment3's branch while unmerged. Final teammate approval remains pending;
 merge and Increment5 remain excluded.
 Earlier Increment3 exclusions describe that slice.
+
+### Contributor Increment 5 — local acceptance verified, 30 October 2026
+
+Verified PR10–13 merged into master; teammate review completion is reported by yooplo.
+Fetched origin and created `feature/contributor-submission-preparation` from current
+origin/master `c384d39`, preserving earlier branches and the initially clean tree.
+Scope is draft-only Contributor summary, unified diff and optional plain-text evidence,
+using existing PATCH/DTO/validation/persistence/audit/recovery. Security design and
+independent test design found no blocker. Implemented editor/detail and four test files;
+independent final acceptance passed31server/84client units,43PG/four suites,nineChromium,
+typecheck/lint/build on final five-file manifest. Separate security disposition is in the run.
+No actual submission/revisions/lifecycle/notifications/AI or new endpoint/schema/migration.
+Subsequent review-preparation request authorized commit/push; [PR15](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/15)
+now targets master. Final Increment5 teammate approval remains pending; merge and Increment6
+remain excluded. Inherited INC2-VER-001 remains unresolved.
+[Current brief and evidence](../logs/yooplo/2026-10-30-contributor-increment-5.md).

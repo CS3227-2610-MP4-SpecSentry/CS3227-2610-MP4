@@ -1,0 +1,27 @@
+{
+  "base_revision": "c384d39748c4cd5ee49633da56baa9614988ee60",
+  "algorithm": "SHA256 compact ASCII JSON sorted path/sha256 entries using raw file bytes",
+  "manifest_sha256": "dced6e23c7057195a52254d48a43dbd76b0ea40cf3298f12d91e130f33102632",
+  "files": [
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "sha256": "3c8c035c7147904c04384683150c706d051d49d0d874657411b773488a0bf9ec"
+    },
+    {
+      "path": "src/client/src/features/contributor/PreparationDraft.test.tsx",
+      "sha256": "c2e43b1a2ee1d328ccc1145f61ef6f102007f52f2a9a109513c92c2918f76a67"
+    },
+    {
+      "path": "src/server/test/contributor-contracts.spec.ts",
+      "sha256": "086687aacf24e660fe0e7d4e4f4c8893f6d8cc4df44398b974e949b41b3362a7"
+    },
+    {
+      "path": "src/server/test/contributor-drafts.integration.ts",
+      "sha256": "a62eeee2cc7e902e9d5e4d70221bb8f87e499c1822415a1cc041f93fe7e0497f"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-preparation.spec.ts",
+      "sha256": "83fb6e17e6e45f176dec224082fed8a166c5a7a4f3c0c7452802644839a3b6de"
+    }
+  ]
+}
