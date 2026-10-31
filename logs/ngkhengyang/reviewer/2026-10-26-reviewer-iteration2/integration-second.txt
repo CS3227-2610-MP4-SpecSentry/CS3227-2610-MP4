@@ -1,0 +1,26 @@
+(node:31160) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:31160) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+FAIL src/server/test/proposal-lifecycle.integration.ts (19.098 s)
+  ● PostgreSQL owner revision lifecycle (REQ-CON-001/002/004/005/006/007/009, REQ-REV-006/008) › invalidates the exact immutable approval on reopen, rejects replay and requires resubmission
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: ArrayContaining [{"code": "AWAITING_REVISION"}]
+    Received: [{"code": "STATE"}]
+
+      273 |     await a.agent.post(`/api/proposals/${root.proposalId}/decision`).set('x-csrf-token', a.token).set('Idempotency-Key', key).send(body).expect(409);
+      274 |     const review = await a.agent.get(`/api/proposals/${root.proposalId}/review`).expect(200);
+    > 275 |     expect(review.body.approvalBlockers).toEqual(expect.arrayContaining([{ code: 'AWAITING_REVISION' }]));
+          |                                          ^
+      276 |     await post(owner, `/${root.proposalId}/reopen`, { expectedVersion: reopened.version }).expect(409);
+      277 |     const revised = proposalLifecycleResponseSchema.parse((await submit(await saved(reopened)).expect(200)).body);
+      278 |     expect(revised.revisionId).not.toBe(root.revisionId); expect(revised.state).toBe('IN_REVIEW');
+
+      at Object.<anonymous> (test/proposal-lifecycle.integration.ts:275:42)
+
+Test Suites: 1 failed, 2 passed, 3 total
+Tests:       1 failed, 25 passed, 26 total
+Snapshots:   0 total
+Time:        36.5 s
+Ran all test suites within paths "src/server/test/business-context.integration.ts", "src/server/test/notifications.integration.ts", "src/server/test/proposal-lifecycle.integration.ts".

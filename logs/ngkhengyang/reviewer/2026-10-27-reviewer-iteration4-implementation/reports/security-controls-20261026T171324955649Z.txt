@@ -1,0 +1,27 @@
+
+(node:49032) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL src/server/test/release-revocation.integration.ts (8.508 s)
+  ● PostgreSQL release candidate and revocation integration › revoke-candidate-privacy projects only own member scope
+
+    expect(received).rejects.toMatchObject()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"blockers": [{"code": "SMOKE"}], "contentVersion": 1, "createdById": "release-5ae68745-500d-465f-87ac-d620d2849eed-maintainer", "dependencyNotes": "", "id": "b98adad1-e2a2-4ad7-b8c5-7fc6783402b5", "members": [{"approvalId": "5f452013-613c-4897-95fa-29480b979b79", "assignmentId": "c8599f92-4001-4570-a832-9394f1d6ddb4", "attachedAt": "2026-10-26T17:13:24.167Z", "id": "f6a7d6b9-e154-46b9-809b-c3b087ce0372", "proposalId": "d6f817c6-e7b4-4bce-a894-ce94a7371045", "removedAt": null, "revisionId": "a39980bf-67c0-440d-b344-9c584f82e8c8", "status": "ATTACHED"}], "projectKey": "specsentry", "publishedAt": null, "rollbackNote": "Restore previous deployment", "smokeTests": [], "status": "OPEN", "version": 1, "versionLabel": "1.0.219002"}
+
+      216 |   it('revoke-candidate-privacy projects only own member scope', async () => {
+      217 |     const c = await attached(); const other = await persistedTestActor(db, ids.otherReviewer);
+    > 218 |     await expect(releases.detail(other, c.created.candidateId)).rejects.toMatchObject({ status: 403 });
+          |           ^
+      219 |     const visible = await releases.detail(reviewer, c.created.candidateId);
+      220 |     expect(visible).toEqual({ candidateId: c.created.candidateId, candidateVersion: c.added.version,
+      221 |       ownInvalidApprovalBlocker: false });
+
+      at expect (../../node_modules/expect/build/index.js:2116:15)
+      at Object.<anonymous> (test/release-revocation.integration.ts:218:11)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 7 skipped, 2 passed, 10 total
+Snapshots:   0 total
+Time:        8.981 s, estimated 9 s
+Ran all test suites within paths "src/server/test/release-revocation.integration.ts".

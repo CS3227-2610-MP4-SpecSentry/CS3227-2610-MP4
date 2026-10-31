@@ -4,6 +4,12 @@ import { accountRoleSchema, usernameSchema } from '@specsentry/shared';
 import { readConfig } from '../config';
 import { DatabaseService } from '../database/database.service';
 import { hashPassword } from './identity.service';
+import { AccountAdministrationService } from './account-administration.service';
+import { ReviewsService } from '../reviews/reviews.service';
+import { ApprovalRevocationService } from '../reviews/approval-revocation.service';
+import { ProposalsService } from '../proposals/proposals.service';
+import { ActivityService } from '../activity/activity.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 async function main(): Promise<void> {
   loadEnvironment({ path: resolve(__dirname, '../../../../.env'), quiet: true });
@@ -22,10 +28,12 @@ async function main(): Promise<void> {
       });
     } else if (action === 'disable') {
       const username = usernameSchema.parse(process.env.ACCOUNT_USERNAME);
-      await database.client.$transaction(async (tx) => {
-        const account = await tx.userAccount.update({ where: { username }, data: { enabled: false, version: { increment: 1 } } });
-        await tx.securityEvent.create({ data: { action: 'ACCOUNT_DISABLED', target: account.id, outcome: 'success' } });
-      });
+      const proposals = new ProposalsService();
+      const activity = new ActivityService();
+      const notifications = new NotificationsService(database, proposals, activity);
+      const revocation = new ApprovalRevocationService(database, proposals, activity, notifications);
+      await new AccountAdministrationService(database,
+        new ReviewsService(database, proposals, activity, revocation)).disable(username);
     } else if (action === 'prune') {
       const now = new Date();
       await database.client.$transaction([

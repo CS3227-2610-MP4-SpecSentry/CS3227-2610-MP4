@@ -1,0 +1,35 @@
+{
+  "id": "8c54c125a4b0458e9654f82b7df886b6",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-26-manual-review-consolidation",
+  "agent": "main",
+  "invocation": "consolidation-1",
+  "stage": "document",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Consolidate verified multi-agent execution, findings, token corrections and timing evidence without changing application source",
+  "started_at": "2026-10-25T18:07:29.222812+00:00",
+  "ended_at": "2026-10-25T18:18:36.438507+00:00",
+  "elapsed_seconds": 667.215695,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Consolidated manual-review narrative with agent work/findings,19 process intervals,tokens,timing,concurrency and comparison. Validated16sections36links5token rows and26unchanged source hashes. Oversized shell/invalid patch failures preserved in narrative.",
+  "unavailable_reasons": {
+    "input_tokens": "No stage-aligned token baseline/end captured for this documentation follow-up; historical run tokens separately verified and not duplicated into audit interval",
+    "output_tokens": "No stage-aligned token baseline/end captured for this documentation follow-up; historical run tokens separately verified and not duplicated into audit interval",
+    "cache_read_tokens": "No stage-aligned token baseline/end captured for this documentation follow-up; historical run tokens separately verified and not duplicated into audit interval",
+    "tool_calls": "No stage-aligned token baseline/end captured for this documentation follow-up; historical run tokens separately verified and not duplicated into audit interval",
+    "retries": "No stage-aligned token baseline/end captured for this documentation follow-up; historical run tokens separately verified and not duplicated into audit interval"
+  },
+  "unavailable_reason": "No stage-aligned token baseline/end captured for this documentation follow-up; historical run tokens separately verified and not duplicated into audit interval"
+}

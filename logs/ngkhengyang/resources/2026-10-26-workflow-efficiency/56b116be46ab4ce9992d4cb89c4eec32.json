@@ -1,0 +1,35 @@
+{
+  "id": "56b116be46ab4ce9992d4cb89c4eec32",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-26-workflow-efficiency",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "validate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact model and effort metadata not exposed",
+  "started_at": "2026-10-26T15:11:30.617204+00:00",
+  "ended_at": "2026-10-26T15:14:53.487915+00:00",
+  "elapsed_seconds": 202.870711,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "85 harness tests OK (3 OS symlink skips), identical cached/uncached diagnostics, unchanged historical state, guide links and whitespace/CLI checks passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage token and execution settings telemetry not exposed",
+    "output_tokens": "Per-stage token and execution settings telemetry not exposed",
+    "cache_read_tokens": "Per-stage token and execution settings telemetry not exposed",
+    "tool_calls": "Per-stage token and execution settings telemetry not exposed",
+    "retries": "Per-stage token and execution settings telemetry not exposed"
+  },
+  "unavailable_reason": "Per-stage token and execution settings telemetry not exposed"
+}

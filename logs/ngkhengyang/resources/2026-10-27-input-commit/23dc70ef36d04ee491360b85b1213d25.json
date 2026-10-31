@@ -1,0 +1,35 @@
+{
+  "id": "23dc70ef36d04ee491360b85b1213d25",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-27-input-commit",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "commit-input-cleanup",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "GPT-6 family exposed; exact execution alias and effort unavailable",
+  "started_at": "2026-10-27T12:22:12.606295+00:00",
+  "ended_at": "2026-10-27T12:23:16.758303+00:00",
+  "elapsed_seconds": 64.152008,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Committed consumed-input cleanup after repository-configured staged diff check passed; an unnecessary autocrlf override produced false whitespace diagnostics on first check and was removed",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution alias/effort and attributable usage counters unavailable",
+    "output_tokens": "Exact execution alias/effort and attributable usage counters unavailable",
+    "cache_read_tokens": "Exact execution alias/effort and attributable usage counters unavailable",
+    "tool_calls": "Exact execution alias/effort and attributable usage counters unavailable",
+    "retries": "Exact execution alias/effort and attributable usage counters unavailable"
+  },
+  "unavailable_reason": "Exact execution alias/effort and attributable usage counters unavailable"
+}

@@ -1,0 +1,16 @@
+{
+  "execution_excluding_later_consolidation": {
+    "calendar_seconds": 4379.074021,
+    "summed_agent_elapsed_seconds": 9729.484382999999,
+    "merged_interval_seconds": 4377.251323
+  },
+  "execution_including_consolidation": {
+    "calendar_seconds": 4528.203586,
+    "summed_agent_elapsed_seconds": 9877.402673,
+    "merged_interval_seconds": 4525.169613
+  },
+  "records": 10,
+  "actual_execution_agents": 5,
+  "unresolved_pause_gap": "included in three interrupted intervals; precise stop checkpoint unavailable",
+  "record_aligned_usage": "unavailable; no misaligned imports"
+}

@@ -1,0 +1,149 @@
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 47.57 KB
+CJS ⚡️ Build success in 64ms
+ESM dist\index.mjs 36.53 KB
+ESM ⚡️ Build success in 65ms
+DTS Build start
+DTS ⚡️ Build success in 3228ms
+DTS dist\index.d.ts  82.33 KB
+DTS dist\index.d.mts 82.33 KB
+
+npm notice run specsentry@0.1.0 test:integration
+npm notice run npm run build -w @specsentry/shared && npm run test:integration -w @specsentry/server
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/server@0.1.0 test:integration
+npm notice run jest --runInBand --config jest.integration.config.cjs
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL test/patch-risk.integration.ts (66.382 s)
+  ● PostgreSQL Patch Risk integration › ai-save-new-revision-event-first
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 21
+    + Received  + 21
+
+    @@ -2,63 +2,63 @@
+        Object {
+          "constraints": "Entire constraints",
+          "createdAt": 2026-10-26T20:30:13.010Z,
+          "criteria": Array [
+            Object {
+    -         "id": "dc32a72c-6037-41c8-892a-2b3314f165ec",
+    +         "id": "57a0ede8-68b1-4f4f-9e25-34810c68d986",
+              "required": true,
+              "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+    -         "stableKey": "11666a06-ec63-475b-bce6-e18ade16795b",
+    -         "statement": "Criterion 3",
+    +         "stableKey": "faa44506-0961-4db9-b3ed-7488cd3f12ca",
+    +         "statement": "Criterion 0",
+            },
+            Object {
+    -         "id": "8e262f27-6d9e-4f92-9cd0-b61c60e25e80",
+    +         "id": "6902400c-becf-43eb-b202-73375b9efd89",
+              "required": true,
+              "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+    -         "stableKey": "20d150a1-0900-46ad-8150-eaa76dc06647",
+    -         "statement": "Criterion 2",
+    +         "stableKey": "d029d96e-5d1d-4222-a6a7-805cf10075e5",
+    +         "statement": "Criterion 1",
+            },
+            Object {
+    -         "id": "d3d41742-b056-4381-a39d-af9c001199fa",
+    +         "id": "8e262f27-6d9e-4f92-9cd0-b61c60e25e80",
+              "required": true,
+              "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+    -         "stableKey": "6e86f579-3166-4185-888c-82c35a18f25b",
+    -         "statement": "Criterion 4",
+    +         "stableKey": "20d150a1-0900-46ad-8150-eaa76dc06647",
+    +         "statement": "Criterion 2",
+            },
+            Object {
+    -         "id": "6902400c-becf-43eb-b202-73375b9efd89",
+    +         "id": "dc32a72c-6037-41c8-892a-2b3314f165ec",
+              "required": true,
+              "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+    -         "stableKey": "d029d96e-5d1d-4222-a6a7-805cf10075e5",
+    -         "statement": "Criterion 1",
+    +         "stableKey": "11666a06-ec63-475b-bce6-e18ade16795b",
+    +         "statement": "Criterion 3",
+            },
+            Object {
+    -         "id": "57a0ede8-68b1-4f4f-9e25-34810c68d986",
+    +         "id": "d3d41742-b056-4381-a39d-af9c001199fa",
+              "required": true,
+              "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+    -         "stableKey": "faa44506-0961-4db9-b3ed-7488cd3f12ca",
+    -         "statement": "Criterion 0",
+    +         "stableKey": "6e86f579-3166-4185-888c-82c35a18f25b",
+    +         "statement": "Criterion 4",
+            },
+          ],
+          "diffText": "--- a/file
+      +++ b/file
+      @@ -1 +1 @@
+      -old
+      +new
+      ",
+          "evidence": Array [
+    -       Object {
+    -         "evidenceHash": "d8448690efeb19ad609525536037a5289465a337bdbb04d11525eddb3be71d16",
+    -         "id": "1fa34131-da2d-45af-9ba7-9ebf5e78213b",
+    -         "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+    -         "text": "Entire evidence two",
+    -       },
+            Object {
+              "evidenceHash": "8e2a9fcdee4f937161f217166cc57e7781fd3e3d50b091c3a1d3eaae67ffdc6f",
+              "id": "4ddef84e-688a-4505-a265-0efecedaf04d",
+              "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+              "text": "Entire evidence one",
+    +       },
+    +       Object {
+    +         "evidenceHash": "d8448690efeb19ad609525536037a5289465a337bdbb04d11525eddb3be71d16",
+    +         "id": "1fa34131-da2d-45af-9ba7-9ebf5e78213b",
+    +         "revisionId": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+    +         "text": "Entire evidence two",
+            },
+          ],
+          "expectedBehavior": "Entire expected behavior",
+          "id": "3275e2e5-9b33-4a37-bd2d-10b14596551d",
+          "number": 1,
+
+      339 |       expect(semantics(after)).toEqual(expected);
+      340 |       expect(after.root!.version).toBe(original.expectedVersion + (order === 'event-first' && kind === 'drop-reclaim' ? 2 : 1));
+    > 341 |       expect(after.revisions.slice(0,before.revisions.length)).toEqual(before.revisions);
+          |                                                                ^
+      342 |       expect(after.coverage).toEqual(before.coverage); expect(after.invalidations).toEqual(before.invalidations);
+      343 |       const activities = after.activity.filter(x => !before.activity.some(previous => previous.id === x.id));
+      344 |       if (order === 'save-first') {
+
+      at Object.<anonymous> (test/patch-risk.integration.ts:341:64)
+
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:25264) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+
+Test Suites: 1 failed, 14 passed, 15 total
+Tests:       1 failed, 170 passed, 171 total
+Snapshots:   0 total
+Time:        215.397 s, estimated 274 s
+Ran all test suites.
+npm error Lifecycle script `test:integration` failed with error:
+npm error code 1
+npm error path C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error workspace @specsentry/server@0.1.0
+npm error location C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c jest --runInBand --config jest.integration.config.cjs

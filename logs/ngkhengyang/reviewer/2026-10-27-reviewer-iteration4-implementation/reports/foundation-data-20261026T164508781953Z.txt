@@ -1,0 +1,59 @@
+
+FAIL src/server/test/release-foundation.integration.ts
+  ● release and approval revocation foundation › revoke-foundation-provenance preserves owner reopening and constrains exact revocation scope
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.userAccount.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-foundation.integration.ts:37:51
+
+      34   SESSION_SECRET: 'release-foundation-test-secret-at-least-32' }));
+      35 await clean();
+      36 for (const role of ['CONTRIBUTOR', 'REVIEWER', 'RELEASE_MAINTAINER'] as const) {
+    → 37   const account = await db.client.userAccount.create(
+    Database error. Code: `23514`. Message: `new row for relation "UserAccount" violates check constraint "UserAccount_username_normalized"`
+
+      35 |     await clean();
+      36 |     for (const role of ['CONTRIBUTOR', 'REVIEWER', 'RELEASE_MAINTAINER'] as const) {
+    > 37 |       const account = await db.client.userAccount.create({ data: { username: `${prefix}-${role}`, role,
+         |                       ^
+      38 |         passwordHash: 'synthetic-hash' } });
+      39 |       ids.push(account.id);
+      40 |       if (role === 'CONTRIBUTOR') ownerId = account.id;
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/release-foundation.integration.ts:37:23)
+
+  ● release and approval revocation foundation › revoke-foundation-fixture keeps synthetic markers separate and cleans new foreign keys
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.userAccount.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-foundation.integration.ts:37:51
+
+      34   SESSION_SECRET: 'release-foundation-test-secret-at-least-32' }));
+      35 await clean();
+      36 for (const role of ['CONTRIBUTOR', 'REVIEWER', 'RELEASE_MAINTAINER'] as const) {
+    → 37   const account = await db.client.userAccount.create(
+    Database error. Code: `23514`. Message: `new row for relation "UserAccount" violates check constraint "UserAccount_username_normalized"`
+
+      35 |     await clean();
+      36 |     for (const role of ['CONTRIBUTOR', 'REVIEWER', 'RELEASE_MAINTAINER'] as const) {
+    > 37 |       const account = await db.client.userAccount.create({ data: { username: `${prefix}-${role}`, role,
+         |                       ^
+      38 |         passwordHash: 'synthetic-hash' } });
+      39 |       ids.push(account.id);
+      40 |       if (role === 'CONTRIBUTOR') ownerId = account.id;
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/release-foundation.integration.ts:37:23)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 2 total
+Snapshots:   0 total
+Time:        4.97 s, estimated 6 s
+Ran all test suites within paths "src/server/test/release-foundation.integration.ts".

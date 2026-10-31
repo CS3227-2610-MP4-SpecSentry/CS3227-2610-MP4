@@ -1,0 +1,24 @@
+{
+  "baseline_head": "9556b72b5cce9da8df0b40887c8ba816cccdaaf8",
+  "kind": "pre-implementation design, planned assignments and selectors; no product implementation",
+  "paths": {
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\brief.md": "2031c9ca6e3a4a23fcd9573ed99361aaccb8d5706e38abc6df4478e81f7c42f0",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\acceptance-security-v3-final.json": "f7b29c9d054a1e0ecb05e1c4c631c40806e20da3a09966dda9138a65432d16ff",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\assignment-foundation.json": "1b5fd19237237859757f14e93af4b4335abf6c5ba99fe8d4f825286baf8f7f03",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\assignment-release.json": "437e83f64fe32c63b8f51fa1a91d1955400d669d30b629384f9f723be1d48199",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\assignment-reviewer.json": "c4a30ebe10625801dd5160ccb6a9016d23c105094385cfab05cf4ececd116485",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\assignment-ui.json": "0823da57dcd5ce1688114aca9f9470da5f69352469001829c75e7026d941e2f9",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-baseline-fixture.json": "e3d1ec2c7c1e87ed7e0fae1e89b7018c52d26eb6b92a077140860c905a2dc4b1",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-browser-runtime.json": "6cd5a652d80a5df1a16ddb117c1f534129b4645bd2e4ff710a76403c420a0f0c",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-database-preflight.json": "dfe6576f2ecd9f748d42d15d5b4604fb6dee3ae67084771866e3bae4ccafcb71",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-foundation-contracts.json": "ce2647c52455e9ef49bae355b89063c81af42c956e8d6e04bdfc41851cbe07ae",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-foundation-data.json": "e56f4c88fe301dc54f82f9e77945b33b8a1627f353fc408f3fa59b95f83fda0d",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-release-revocation.json": "16512d7361a41d9661e4a82daaae068c55e52b5054a78b22c3a7d450922baf96",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-reviewer-revocation.json": "e5cdf1464a1549e863211cd74b766663918441ee318b021422803f5ef2c316be",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-revocation-browser.json": "18380996e3025b5cf2dc149387c7173f34a35ef3c7f797d5a747b2cfbd1e52f8",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-revocation-races.json": "075345bbe4afac5d090bbddbf1f8ce3293865b3cb77d61886f0a903414cd4bb4",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-runtime.json": "828f83281205011b14b1826d57494eed052cc09ff338182c62e392dded26f26b",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-security-controls.json": "44018cbf93b96968e06952b671b74718df5f07a05b57647fe92fb7313de091e7",
+    "logs\\ngkhengyang\\reviewer\\2026-10-26-reviewer-iteration4\\inputs\\check-security-races.json": "b1e2cc76453b5c847d91d53b468d1d314fa84734bce24f9bccc35015a73f01b9"
+  }
+}

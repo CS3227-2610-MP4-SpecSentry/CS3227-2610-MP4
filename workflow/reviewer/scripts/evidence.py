@@ -64,7 +64,9 @@ def _excluded(run, relative):
     parts = Path(relative).parts
     lower = [part.lower() for part in parts]
     name = lower[-1] if lower else ""
-    if any(part in {".git", "logs", "secrets", ".secrets", ".aws", ".ssh"} for part in lower):
+    if any(part in {".git", "logs", "secrets", ".secrets", ".aws", ".ssh",
+                   "node_modules", "__pycache__", ".venv", ".next", ".pytest_cache",
+                   "playwright-report", "test-results"} for part in lower):
         return True
     if name == ".env" or name.startswith(".env.") or name.endswith((".pem", ".key", ".p12", ".pfx", ".keystore")):
         return True
@@ -158,8 +160,13 @@ def snapshot_matches(run, snapshot_id):
         if not record:
             return False
         artifact = core.repo_file(run.repo, record["artifact"])
-        return (_file_hash(artifact) == record["artifact_sha256"] and
-                _snapshot(run, record["paths"], record["base"]) == record["snapshot"])
+        from validation import View
+        digest = run.file_hash(artifact) if isinstance(run, View) else _file_hash(artifact)
+        if digest != record["artifact_sha256"]:
+            return False
+        current = (run.snapshot(record["paths"], record["base"]) if isinstance(run, View)
+                   else _snapshot(run, record["paths"], record["base"]))
+        return current == record["snapshot"]
     except (core.Error, OSError, KeyError, ValueError):
         return False
 
@@ -222,6 +229,14 @@ def _execute(repo, argv, timeout, save_output):
         except subprocess.TimeoutExpired:
             proc.kill()
             proc.wait()
+    except BaseException:
+        proc.terminate()
+        try:
+            proc.wait(timeout=1)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            proc.wait()
+        raise
     deadline = time.monotonic() + 1
     for thread in threads:
         thread.join(max(0, deadline - time.monotonic()))
@@ -251,11 +266,18 @@ def command(args):
         if not snapshot_matches(run, snapshot_id):
             raise core.Error("Command requires a current snapshot")
         started = core.now()
-        result, captures = _execute(run.repo, argv, args.timeout, args.save_output)
-        result.update({"snapshot_id": snapshot_id, "started_at": started, "ended_at": core.now(),
+        reservation = {"status": "running", "passed": False, "snapshot_id": snapshot_id,
+                       "started_at": started, "exit_code": None}
+        state["commands"][key] = reservation
+    # Long checks must not hold the run writer lock. A crash leaves visible unfinished evidence.
+    result, captures = _execute(run.repo, argv, args.timeout, args.save_output)
+    result.update({"status": "finished", "snapshot_id": snapshot_id, "started_at": started, "ended_at": core.now(),
             "executable": Path(argv[0].replace("\\", "/")).name,
             "argv_sha256": _hash(_json(argv).encode()), "timeout_seconds": args.timeout,
             "stale": not snapshot_matches(run, snapshot_id), "output_artifacts": {}})
+    with run.edit(wait_seconds=5) as state:
+        if state["commands"].get(key) != reservation:
+            raise core.Error("Command reservation changed; refusing stale completion")
         for name, data in captures.items():
             # JSON strings preserve arbitrary bytes without emitting terminal controls.
             path = run.artifact("commands/" + key + "-" + name + ".json", _json({"base64": __import__("base64").b64encode(data).decode("ascii")}))
@@ -296,22 +318,31 @@ def handoff(args):
             raise core.Error("Handoff ID already exists")
         if resource is not None and resource not in state["records"]:
             raise core.Error("Handoff resource record is missing")
-        output = "# Agent handoff\n\n"
-        for name, title in SECTIONS:
-            output += "## " + title + "\n\n" + core.literal(value[name]) + "\n\n"
-            if name == "requirements" and files:
-                output += "Referenced repository files:\n\n"
-                for path in files:
-                    rel = path.relative_to(run.repo).as_posix()
-                    output += "- [" + core.literal(rel) + "](" + quote(path.as_posix(), safe="/:") + ")\n"
-                output += "\n"
-        path = run.artifact("handoffs/" + key + ".md", output)
-        state["handoffs"][key] = {"artifact": path.relative_to(run.repo).as_posix(),
-            "artifact_sha256": _hash(output.encode()), "input_sha256": _file_hash(source),
-            "snapshot_id": snapshot_id, "references": [p.relative_to(run.repo).as_posix() for p in files],
-            "resource_record": resource, "created_at": core.now()}
-    print(_json({"handoff": key, "artifact": path.relative_to(run.repo).as_posix()}), end="")
+        stored = store_handoff(run, state, key, value, files, snapshot_id, resource)
+        stored["input_sha256"] = _file_hash(source)
+    print(_json({"handoff": key, "artifact": stored["artifact"]}), end="")
     return 0
+
+
+def store_handoff(run, state, key, value, files, snapshot_id, resource):
+    """Render a derivative from canonical data while the caller owns the state transaction."""
+    if key in state["handoffs"]:
+        raise core.Error("Handoff ID already exists")
+    output = "# Agent handoff\n\n"
+    for name, title in SECTIONS:
+        output += "## " + title + "\n\n" + core.literal(value[name]) + "\n\n"
+        if name == "requirements" and files:
+            output += "Referenced repository files:\n\n"
+            for path in files:
+                rel = path.relative_to(run.repo).as_posix()
+                output += "- [" + core.literal(rel) + "](" + quote(path.as_posix(), safe="/:") + ")\n"
+            output += "\n"
+    path = run.artifact("handoffs/" + key + ".md", output)
+    stored = {"artifact": path.relative_to(run.repo).as_posix(), "artifact_sha256": _hash(output.encode()),
+        "snapshot_id": snapshot_id, "references": [p.relative_to(run.repo).as_posix() for p in files],
+        "resource_record": resource, "created_at": core.now()}
+    state["handoffs"][key] = stored
+    return stored
 
 
 def validate_handoff(run, key):
@@ -321,7 +352,9 @@ def validate_handoff(run, key):
     if not record:
         raise core.Error("Handoff ID does not exist")
     artifact = core.repo_file(run.repo, record["artifact"])
-    if _file_hash(artifact) != record["artifact_sha256"]:
+    from validation import View
+    digest = run.file_hash(artifact) if isinstance(run, View) else _file_hash(artifact)
+    if digest != record["artifact_sha256"]:
         raise core.Error("Handoff artifact changed")
     for reference in record["references"]:
         if not core.repo_file(run.repo, reference).is_file():

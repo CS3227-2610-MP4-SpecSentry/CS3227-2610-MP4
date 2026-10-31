@@ -1,0 +1,69 @@
+{
+  "records": 19,
+  "finished": 19,
+  "running": [],
+  "calendar_span_seconds": 31174.060719,
+  "merged_coverage_seconds": 30719.912516,
+  "raw_summed_agent_seconds": 34139.98006,
+  "deduplicated_summed_agent_seconds": 34040.988549999995,
+  "measured_tokens_only": {
+    "input_tokens": 48922585,
+    "output_tokens": 189892,
+    "cache_read_tokens": 47687424
+  },
+  "token_coverage_records": {
+    "input_tokens": 18,
+    "output_tokens": 18,
+    "cache_read_tokens": 18
+  },
+  "per_agent": {
+    "lifecycle": {
+      "records": 3,
+      "raw_elapsed_seconds": 1132.353837,
+      "deduplicated_elapsed_seconds": 1132.353837,
+      "input_tokens": 3777297,
+      "output_tokens": 37778,
+      "cached_input_included": 3461376
+    },
+    "main": {
+      "records": 10,
+      "raw_elapsed_seconds": 30817.851468,
+      "deduplicated_elapsed_seconds": 30718.859957999997,
+      "input_tokens": 36620953,
+      "output_tokens": 106968,
+      "cached_input_included": 36097792
+    },
+    "notifications": {
+      "records": 1,
+      "raw_elapsed_seconds": 514.812976,
+      "deduplicated_elapsed_seconds": 514.812976,
+      "input_tokens": 1663502,
+      "output_tokens": 15794,
+      "cached_input_included": 1626880
+    },
+    "security-reviewer": {
+      "records": 4,
+      "raw_elapsed_seconds": 1136.879838,
+      "deduplicated_elapsed_seconds": 1136.879838,
+      "input_tokens": 4318594,
+      "output_tokens": 15626,
+      "cached_input_included": 4056832
+    },
+    "ui": {
+      "records": 1,
+      "raw_elapsed_seconds": 538.081941,
+      "deduplicated_elapsed_seconds": 538.081941,
+      "input_tokens": 2542239,
+      "output_tokens": 13726,
+      "cached_input_included": 2444544
+    }
+  },
+  "limitations": [
+    "Elapsed includes tools, waiting and unknown idle; active computation unavailable.",
+    "The interrupted main-5 integration interval includes a prolonged runtime/tool delay; do not label it active work.",
+    "Merge same-agent intervals to remove nested dispatch timing; its tokens are unavailable and already included in main foundation delta.",
+    "Cache is within input; reasoning is within output. Missing counters are unavailable, never measured zero.",
+    "Local sampled counters may lag flushes; exact sources/cutoffs remain in state and external MP4 sessions JSON.",
+    "Final report/response rendering and separate consolidation are outside implementation-run timing."
+  ]
+}

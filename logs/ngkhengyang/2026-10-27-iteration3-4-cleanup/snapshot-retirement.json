@@ -1,0 +1,1626 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T09:45:31.996436+00:00",
+  "status": "completed",
+  "scope": [
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3",
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4",
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation",
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes"
+  ],
+  "policy": "Human-readable historical traceability plus unchanged original state; retire duplicate snapshot artifacts and direct CLI artifact verification, preserve full payloads and hashes. No source or harness changes.",
+  "before": {
+    "files": 690,
+    "bytes": 9226281,
+    "inventory_sha256": "7de1d1c86cb4be14d07ae68d3045844ef5baf70aeb343df29932a014a19f52ab"
+  },
+  "state_sha256": {
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json": "d6bd3a357371d41bb4bb37b70a79da8c7d7540729a38685b2f58f1a27b67f61c",
+    "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json": "7288e0b935870bfb0caad16dec3a5639065ee23a023cf50e731c24b10a90f5d4",
+    "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json": "6924860b71446943aff72f4e23273e697c76c6f0044e83c70417472d13a2b11a",
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json": "e7a67573b7a0aa2f1751a77c797222692bc56c9616e4964b3302b9f3f8e05dfb",
+    "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json": "553c16a3de8ea509794948999ab132da0b076bbe5d8619ed545869e770cf238d"
+  },
+  "removed": [
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/snapshots/verify-e7063ca1f2e24b52.json",
+      "sha256": "1a3cb80b3015137164208dbaef0df7b6dd4f592d4650df4997060fd072454d94",
+      "bytes": 1718,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/snapshots/verify-e7063ca1f2e24b52/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/snapshots/baseline-source.json",
+      "sha256": "d0899c75cb784f3866ef81b515dd13bc4a8f7a26d4ce567226344566bea87d2d",
+      "bytes": 12224,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json#/snapshots/baseline-source/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c4996aaa0d024ef7.json",
+      "sha256": "1a3cb80b3015137164208dbaef0df7b6dd4f592d4650df4997060fd072454d94",
+      "bytes": 1718,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c4996aaa0d024ef7/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-3ea32f39fe3746a9.json",
+      "sha256": "ad128e0acdb89f184822df5ce4ede786fd5c5b74e422a14da6f6f0aa60bb147c",
+      "bytes": 3063,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-3ea32f39fe3746a9/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-2106ddf17b4b47ba.json",
+      "sha256": "911c81ac7400ec666987d5ee9d46aae18b34571c2ffcdb5e0ad0222f14539a6c",
+      "bytes": 1886,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-2106ddf17b4b47ba/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c88f7271544343bc.json",
+      "sha256": "ac559ffb789328316b1f7ad52f74c3d5924545cd6fb2f16b3647baffba7d6125",
+      "bytes": 4060,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c88f7271544343bc/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-fa1e2f1765e541d8.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-fa1e2f1765e541d8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-eb80a535670c4a3a.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-eb80a535670c4a3a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-e0d19f02ccab45b6.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-e0d19f02ccab45b6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-045aa249cfa747b5.json",
+      "sha256": "f16fcbc707dc92c3db22468cbd624d9210492f0714a66d94525a74e39c7496f7",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-045aa249cfa747b5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-115ee233565e4a56.json",
+      "sha256": "8fc2c7c3c79f7218caf1ce81a7971b5fed8fd8f99fdd82e662339a7c84ae4eba",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-115ee233565e4a56/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c224d4c8876a43e7.json",
+      "sha256": "8fc2c7c3c79f7218caf1ce81a7971b5fed8fd8f99fdd82e662339a7c84ae4eba",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c224d4c8876a43e7/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b1605a4bd5a646d5.json",
+      "sha256": "0bab653bb24bd99dcf4c7576300465dbd5586bba72993e3e9b7985555b2fc7a5",
+      "bytes": 4970,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b1605a4bd5a646d5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-cbe1fafa32714a31.json",
+      "sha256": "f824f8dddaed78ddc06915eb07d3d10e5e2543bcc16c3ff3f6505f0e69e46b64",
+      "bytes": 5159,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-cbe1fafa32714a31/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/foundation-settled.json",
+      "sha256": "500317682fc0f8d46ed7e581133b4beddda9938d734a70bbef68ddb56926fe91",
+      "bytes": 1835,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/foundation-settled/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-34427399f05645f1.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-34427399f05645f1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-eefac527ef6d466b.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-eefac527ef6d466b/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-7c99e011dc7f4be6.json",
+      "sha256": "f16fcbc707dc92c3db22468cbd624d9210492f0714a66d94525a74e39c7496f7",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-7c99e011dc7f4be6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0496ca87f21a4afd.json",
+      "sha256": "8fc2c7c3c79f7218caf1ce81a7971b5fed8fd8f99fdd82e662339a7c84ae4eba",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0496ca87f21a4afd/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-5fc6f0c59f9e4a2a.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-5fc6f0c59f9e4a2a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-3c330b993ab44074.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-3c330b993ab44074/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-2777c176b9a34004.json",
+      "sha256": "f16fcbc707dc92c3db22468cbd624d9210492f0714a66d94525a74e39c7496f7",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-2777c176b9a34004/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-faa3b6c79f4545a8.json",
+      "sha256": "8fc2c7c3c79f7218caf1ce81a7971b5fed8fd8f99fdd82e662339a7c84ae4eba",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-faa3b6c79f4545a8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-fa48b4ba01c14370.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-fa48b4ba01c14370/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-fd9d180f6d4b4eb5.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-fd9d180f6d4b4eb5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-5e5d7448e044473e.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-5e5d7448e044473e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-1dbe203d0efa4e17.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-1dbe203d0efa4e17/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-6e6c09332a50480f.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-6e6c09332a50480f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-78391b0d7e35489c.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-78391b0d7e35489c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-872065165afa4325.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-872065165afa4325/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-a8d0799a75a445d9.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-a8d0799a75a445d9/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-351801e063ea43cb.json",
+      "sha256": "6d722b782fe9f571ff282705c9b1a13a3dd6d5950b75d5a9971bff914d16ddfb",
+      "bytes": 19395,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-351801e063ea43cb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-ad59ee7d6edb4c43.json",
+      "sha256": "6d722b782fe9f571ff282705c9b1a13a3dd6d5950b75d5a9971bff914d16ddfb",
+      "bytes": 19395,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-ad59ee7d6edb4c43/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-334d1c1f4c694e4d.json",
+      "sha256": "de3574f5682433023b92fac2b1fef9bc95ccd4a985c24f7e2aee2715a2ca438d",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-334d1c1f4c694e4d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b2f5c6a179db4972.json",
+      "sha256": "de3574f5682433023b92fac2b1fef9bc95ccd4a985c24f7e2aee2715a2ca438d",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b2f5c6a179db4972/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-bc2e8574cd6d4e37.json",
+      "sha256": "de3574f5682433023b92fac2b1fef9bc95ccd4a985c24f7e2aee2715a2ca438d",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-bc2e8574cd6d4e37/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b41d6133adb94d3e.json",
+      "sha256": "2be9cbd11c841debb49304dc343ba44f88141b3aadea6916e99a0392140af58a",
+      "bytes": 22663,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b41d6133adb94d3e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-93794bf9b4264d24.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-93794bf9b4264d24/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-8cf3ba984d9a44a3.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-8cf3ba984d9a44a3/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-23b567279e294cba.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-23b567279e294cba/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-5aecfe400e874cff.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-5aecfe400e874cff/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-718fa9b1f5ed4690.json",
+      "sha256": "82f746a83c59fca31d8d775445183122ecd3d9bcdfb5d1840ae639b74544fbb8",
+      "bytes": 20181,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-718fa9b1f5ed4690/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-a8f567e617844e36.json",
+      "sha256": "2c973ae603debb9753f405dcc5991d6fad4675a2672a564bc1a09d660ed08b22",
+      "bytes": 20641,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-a8f567e617844e36/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-7e481896d9b7413a.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-7e481896d9b7413a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-3db1b84b3b924c31.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-3db1b84b3b924c31/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-59bcbe0ee26a40fd.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-59bcbe0ee26a40fd/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0d1cb9b513df4475.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0d1cb9b513df4475/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b86fe79b536d44e1.json",
+      "sha256": "e566673dcc5b24180362ae22f1421a46716a42ec2cc8d7b834aafaf05de61033",
+      "bytes": 20641,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b86fe79b536d44e1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-3dabfd00fac846b0.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-3dabfd00fac846b0/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-356486e97e394239.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-356486e97e394239/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-ace76b590fe94b7e.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-ace76b590fe94b7e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-04102b24ca234cc3.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-04102b24ca234cc3/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-d2d698ec2b074c3b.json",
+      "sha256": "204a23171d6d7f64e932988b49e675028f87907451ee73a3cb329ee7a3df5f84",
+      "bytes": 20641,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-d2d698ec2b074c3b/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-f74fdaefd3524c8a.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-f74fdaefd3524c8a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c915d7220f814cdc.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c915d7220f814cdc/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-cee3bdcd17ca4553.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-cee3bdcd17ca4553/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b7f5c07bcabf4ea9.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b7f5c07bcabf4ea9/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-1cb63ae8420a4232.json",
+      "sha256": "6642336d2859e659006b2f1dfc1bb30eaa9c832af211b53dc70a4439a7db0a64",
+      "bytes": 12098,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-1cb63ae8420a4232/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-5bc62a7ad1194c06.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-5bc62a7ad1194c06/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-69ea5b94e7804b05.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-69ea5b94e7804b05/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-2819f02fef154064.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-2819f02fef154064/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b3612536a5d246e6.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b3612536a5d246e6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-6dd12273ed884bf2.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-6dd12273ed884bf2/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-f7c9c9bc23574308.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-f7c9c9bc23574308/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-025545a4672e4cdb.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-025545a4672e4cdb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0079da5a4aad4deb.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0079da5a4aad4deb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-953b8ff6026b42a4.json",
+      "sha256": "c8496deff1b4df8e4856c284b84f131aa1a0dce423d64e84439a9554e8fedf64",
+      "bytes": 19395,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-953b8ff6026b42a4/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-ad366c46d1f84e06.json",
+      "sha256": "b8a8f6225c7167ae25048302ff114055fdde13aaedbf0b2932837c672d62f65e",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-ad366c46d1f84e06/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b50e6e99dfdd4cc3.json",
+      "sha256": "b8a8f6225c7167ae25048302ff114055fdde13aaedbf0b2932837c672d62f65e",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b50e6e99dfdd4cc3/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0eb0ec5168364bf4.json",
+      "sha256": "065cc6012c972174ea4dd36d36dc09876060697f5033fc0ddf1356d6d0929934",
+      "bytes": 22663,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0eb0ec5168364bf4/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-144d322783a04fbb.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-144d322783a04fbb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-61c552d32ad14441.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-61c552d32ad14441/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-f41ff37a8c014caa.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-f41ff37a8c014caa/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-3c964a6e97cc4f3d.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-3c964a6e97cc4f3d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-cac8758a936448e6.json",
+      "sha256": "459f6e048234ef92cc7da1faf809d6584c7f09c77be7033c54c014fc216fbf8e",
+      "bytes": 19395,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-cac8758a936448e6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-e816e0e5ceda43f1.json",
+      "sha256": "98cbcccf9ec3a18a24587230a3dd3d419cd0614c2e507d695ba6216c81748f0e",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-e816e0e5ceda43f1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0ea3190241b7462f.json",
+      "sha256": "98cbcccf9ec3a18a24587230a3dd3d419cd0614c2e507d695ba6216c81748f0e",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0ea3190241b7462f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-bbec24df4c3b4402.json",
+      "sha256": "9a2f8f5da5a6bf42bd7d4579afc9305c5946da503cddec2f50974b64dd105372",
+      "bytes": 22663,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-bbec24df4c3b4402/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-eaba76c87295473c.json",
+      "sha256": "0adbc82788d9957d610852e1016dfad901b64667c4c161060b7c792c5ff02f6b",
+      "bytes": 5665,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-eaba76c87295473c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-5da3bd3ccdb240e8.json",
+      "sha256": "dbf4782820fae82efbf62be85b570ca2840a4e0503f11ca2761072ea98f5f327",
+      "bytes": 6471,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-5da3bd3ccdb240e8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/foundation-lint-settled.json",
+      "sha256": "ec38132f2504289bc0053803f95f1c5cc2903a276e30b809b356476e61b9f79a",
+      "bytes": 458,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/foundation-lint-settled/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-1afadd04e41b41c0.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-1afadd04e41b41c0/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c67645ba4a80461a.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c67645ba4a80461a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-bd5ffb4a30b1447f.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-bd5ffb4a30b1447f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-47d01a3079a94f06.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-47d01a3079a94f06/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-16e133f248464a4d.json",
+      "sha256": "d3e808006777cef4e206733496041e49f12359c4d2321299e6febdcfd54b7389",
+      "bytes": 20641,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-16e133f248464a4d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-2f87e7edbe814507.json",
+      "sha256": "32c6f54f7c07c9d04f617c5c1b6a8c878331b9ccc2b13a265d1aee895672d9a1",
+      "bytes": 12098,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-2f87e7edbe814507/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-de6431c2afea4c23.json",
+      "sha256": "9d8706cb30bee88adf7a1c0e2875758e8a71a0ead37bfafb0b83649f3e8c7718",
+      "bytes": 20181,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-de6431c2afea4c23/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-9581599cfd88488c.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-9581599cfd88488c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-4daf776cb900488f.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-4daf776cb900488f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b5c33056a9744aba.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b5c33056a9744aba/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-f1127003ccbb45c4.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-f1127003ccbb45c4/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-7ce5693d35974f94.json",
+      "sha256": "14d376ddfcbf8ced5cc62db5780d20575a775befc8423ffd0951aabf8e62037b",
+      "bytes": 19395,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-7ce5693d35974f94/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-9804295e14494860.json",
+      "sha256": "f73cbfc4b7b117dc13e29ca49bf245bf7b85fa02161ac1780b6a5c97b83f3fe5",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-9804295e14494860/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-22632ceb488142f8.json",
+      "sha256": "f73cbfc4b7b117dc13e29ca49bf245bf7b85fa02161ac1780b6a5c97b83f3fe5",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-22632ceb488142f8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-377b639e18d74cd2.json",
+      "sha256": "30d780b3fd959542167985ded8e47d2033e5cf2082853c9bcb02e0fe85c09088",
+      "bytes": 22663,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-377b639e18d74cd2/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c2149121fd8c4c07.json",
+      "sha256": "9c24c83785aafe6bf1b78a44eb2b313a76bce51fdd64812ca83cdd7909fcac36",
+      "bytes": 20641,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c2149121fd8c4c07/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-239ea34910ca4c2c.json",
+      "sha256": "b1ed5e3c18046463b9dbc5b5c2999bba3b4c961a5c09f1b623bb94e46947914c",
+      "bytes": 12098,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-239ea34910ca4c2c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/integrated-before-review.json",
+      "sha256": "a773ace56e2716e41414a74eed819d7b645176426fe12d05c6555b0357f26b30",
+      "bytes": 7555,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/integrated-before-review/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-503a08c313dc4b1b.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-503a08c313dc4b1b/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-cf6d0a3337714e4c.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-cf6d0a3337714e4c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0f980730541d4e08.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0f980730541d4e08/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-fa2bc9b16ccd4768.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-fa2bc9b16ccd4768/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-33aa436bc9ba41b0.json",
+      "sha256": "0adbc82788d9957d610852e1016dfad901b64667c4c161060b7c792c5ff02f6b",
+      "bytes": 5665,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-33aa436bc9ba41b0/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-09be3491cd7d49f3.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-09be3491cd7d49f3/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-e28b9f8f004e40f5.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-e28b9f8f004e40f5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-e8da3c1e3b944dac.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-e8da3c1e3b944dac/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0b0a370c68454540.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0b0a370c68454540/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-ce5874e89c7047d7.json",
+      "sha256": "20fc3c3965aa59f5301683ababb9466927a5102c138b81e6538bbd72eb6cd0f6",
+      "bytes": 22664,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-ce5874e89c7047d7/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-2dfc3b4e91c9445d.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-2dfc3b4e91c9445d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-53f20ca3cb2f4fb9.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-53f20ca3cb2f4fb9/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c8e66f4d563a46f9.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c8e66f4d563a46f9/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-d3e3ab73147d44f6.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-d3e3ab73147d44f6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-d677600fb4884517.json",
+      "sha256": "13e579d1a5345866fcecc164aebcd002bb385d629e639674c17b2d0b83c7114e",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-d677600fb4884517/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/findings-fix-1-source.json",
+      "sha256": "afaaca39b27f0b53f8045767e57b3ece73c6c158f8160ce8e398d4a82b521766",
+      "bytes": 7556,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/findings-fix-1-source/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-60e8882d51c6448f.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-60e8882d51c6448f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-6a3585d7a0a1429e.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-6a3585d7a0a1429e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-955f0fa9f10844a4.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-955f0fa9f10844a4/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-dbf707677f7147e3.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-dbf707677f7147e3/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-8f775d2ee2144dc9.json",
+      "sha256": "13e579d1a5345866fcecc164aebcd002bb385d629e639674c17b2d0b83c7114e",
+      "bytes": 22475,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-8f775d2ee2144dc9/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c5ef09d8fb5f4378.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c5ef09d8fb5f4378/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-ef837f4251ce4eca.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-ef837f4251ce4eca/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-b2576a87301a457e.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-b2576a87301a457e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-d31e1eb8a0a64f19.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-d31e1eb8a0a64f19/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-30e5e9f9933547ba.json",
+      "sha256": "aa8e8ec0ee074726f2d04d98ff43e39520016f4368bf92fded2b208639b30585",
+      "bytes": 19395,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-30e5e9f9933547ba/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-a0e5502495464c4f.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-a0e5502495464c4f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-0a415e37555247ba.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-0a415e37555247ba/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-3f230918d7954282.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-3f230918d7954282/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-dd2bcaa146fc4888.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-dd2bcaa146fc4888/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-cc124e71bcd24949.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-cc124e71bcd24949/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-e82ad7073f5244fa.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-e82ad7073f5244fa/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-2c8c871b84e74399.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-2c8c871b84e74399/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-5356bf16ee1844fb.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-5356bf16ee1844fb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-f844c87c574f43f6.json",
+      "sha256": "8238fb2f1645256407328fd16e82f1f8bff35fe0baf452d0f7fc0a8c4cc168a8",
+      "bytes": 20181,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-f844c87c574f43f6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-9628c8cda06e4741.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-9628c8cda06e4741/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-6f9b0291f549412a.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-6f9b0291f549412a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-4882d8ceab134d69.json",
+      "sha256": "e025a02cd6c3fcad60cff92d5f0ff8764c6b283b3c992afe00d4968600d7d6b4",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-4882d8ceab134d69/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-169db2f1af73421e.json",
+      "sha256": "bda0c88863fb63c9b5c732f2ce9ef2b0f31cbeba9ca620e622135815c2402b4e",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-169db2f1af73421e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-c5389e0fd677463c.json",
+      "sha256": "f14d661a271fb6a6cc950e25c1da388b4f7cb14021758ba286158ee7638f67b6",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-c5389e0fd677463c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-79c988658dba48f4.json",
+      "sha256": "70fc7fb326a41e7c80fc5feccb46209ed895812b91f23273a968dbbaadd77778",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-79c988658dba48f4/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-1ba0fb0f270f4b93.json",
+      "sha256": "aea7f88ac3cf64f298ae8215c1059587e520012f6134b74b22cc7f218b3e71ff",
+      "bytes": 20641,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-1ba0fb0f270f4b93/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-2f44561f13bf446f.json",
+      "sha256": "6e2547643a609f7305e65958ad14cd3a7d68ed756b1fecb9a7f0f61062209600",
+      "bytes": 6472,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-2f44561f13bf446f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/verify-4978923260f5417f.json",
+      "sha256": "7ea69f6473f5389b9e22107a50b9e6ba97a589b37a9e11c2738ecfd6052aab18",
+      "bytes": 12098,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/verify-4978923260f5417f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/findings-fixed-reviewed-code.json",
+      "sha256": "06777deba6fb334b2c1b08a2e273c44a7cd966fadd1279527beb36295209bf74",
+      "bytes": 6876,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/findings-fixed-reviewed-code/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/final-reviewed-application.json",
+      "sha256": "e6cbb11e441c8e0b693b99d506b8cb328839e7668cd5d7658155b08ccc69dc93",
+      "bytes": 6698,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/final-reviewed-application/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/final-reviewed-closure.json",
+      "sha256": "e6cbb11e441c8e0b693b99d506b8cb328839e7668cd5d7658155b08ccc69dc93",
+      "bytes": 6698,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/final-reviewed-closure/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/snapshots/final-guides.json",
+      "sha256": "dd093f59fcf55ddf39e3706d561f030188d4011c3e7fcce0bf2c74fa0d719913",
+      "bytes": 1113,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json#/snapshots/final-guides/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/snapshots/verify-1a2cede6543f4165.json",
+      "sha256": "f6d416b952a5c3da83d6f21a7837a5ddd652541eed24b3356afb94c8f2a51c0a",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json#/snapshots/verify-1a2cede6543f4165/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/snapshots/verify-68691d34490c491a.json",
+      "sha256": "34f4efa51436ed6cbaa40e02fbf3e9659b1a7f3a923cb2c005fd4c58a2de99f5",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json#/snapshots/verify-68691d34490c491a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/snapshots/verify-0daca09cca2a4206.json",
+      "sha256": "c39090419c81d0ff4cfb08b4f7f3b9e56dac607187c3b2b2a783bf6a220db8d8",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json#/snapshots/verify-0daca09cca2a4206/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/snapshots/verify-d8bb57a1cb33401a.json",
+      "sha256": "e52a97b5c520079b4a370011b51d130a0d17535fec35b7da8ee9eb364a5c7b46",
+      "bytes": 4401,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json#/snapshots/verify-d8bb57a1cb33401a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-5f7f0517627d4a33.json",
+      "sha256": "f6d416b952a5c3da83d6f21a7837a5ddd652541eed24b3356afb94c8f2a51c0a",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-5f7f0517627d4a33/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-b9aabcb010d3483d.json",
+      "sha256": "34f4efa51436ed6cbaa40e02fbf3e9659b1a7f3a923cb2c005fd4c58a2de99f5",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-b9aabcb010d3483d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-5c5b9ae12cc546eb.json",
+      "sha256": "f6d416b952a5c3da83d6f21a7837a5ddd652541eed24b3356afb94c8f2a51c0a",
+      "bytes": 1869,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-5c5b9ae12cc546eb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-37b8330328f64c35.json",
+      "sha256": "34f4efa51436ed6cbaa40e02fbf3e9659b1a7f3a923cb2c005fd4c58a2de99f5",
+      "bytes": 3404,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-37b8330328f64c35/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-37cfffe287504705.json",
+      "sha256": "c39090419c81d0ff4cfb08b4f7f3b9e56dac607187c3b2b2a783bf6a220db8d8",
+      "bytes": 2037,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-37cfffe287504705/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-4174667eb4014af0.json",
+      "sha256": "6c912b6507ccde45ab3e0e3784a7f2e66a8b9e9f131b9e83d468a030b6a3eb53",
+      "bytes": 4431,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-4174667eb4014af0/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-d2391f1745aa4fc8.json",
+      "sha256": "c77e8b47cf781aa0a699b40638c19d84724a684fa4b160337413b6387cb2a952",
+      "bytes": 2184,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-d2391f1745aa4fc8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-9fd712811ada4ef5.json",
+      "sha256": "edb91198a5f5d9a1dc844bd3189d28bfd3120da2dc0cfc980493f263f2e66d68",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-9fd712811ada4ef5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-2d467e71a9ab45ea.json",
+      "sha256": "3d9a6b9e214fe31b32005ee23a5c64d5f1242673dd9e0a66ed5658c12077488c",
+      "bytes": 2184,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-2d467e71a9ab45ea/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-5db63fee7f66491c.json",
+      "sha256": "f39470362e4c7b8ad97651cc8bd96c2b29881fc54626b5216be7cf94b66d28ce",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-5db63fee7f66491c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-efa77382d25f43de.json",
+      "sha256": "9a248a7ef3e8400f04579e116e5e25e8ccb5426892917573951dff7bc119049c",
+      "bytes": 2352,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-efa77382d25f43de/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-8941e221a5724996.json",
+      "sha256": "37cdf4007842f7360fd238df96d49d545ddbd39f5e0b684b735c74068b3b4ded",
+      "bytes": 4945,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-8941e221a5724996/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-9d64b619e6634c0a.json",
+      "sha256": "e76dbcf2ef9098eff96e145c5e9e768f537dda000eb7f2af408cad6251942970",
+      "bytes": 8497,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-9d64b619e6634c0a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-b3d53d2900ec4e32.json",
+      "sha256": "e76dbcf2ef9098eff96e145c5e9e768f537dda000eb7f2af408cad6251942970",
+      "bytes": 8497,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-b3d53d2900ec4e32/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a1d5ca190fd7498e.json",
+      "sha256": "6c8005a50a9e4e4bf63af78960509d5cae86b26ba2b47d343dd857f8e57248f2",
+      "bytes": 8881,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a1d5ca190fd7498e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-c61bce53b8344a82.json",
+      "sha256": "6c8005a50a9e4e4bf63af78960509d5cae86b26ba2b47d343dd857f8e57248f2",
+      "bytes": 8881,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-c61bce53b8344a82/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-43ffd9d53dc84cd8.json",
+      "sha256": "6c8005a50a9e4e4bf63af78960509d5cae86b26ba2b47d343dd857f8e57248f2",
+      "bytes": 8881,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-43ffd9d53dc84cd8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-7ddd2b9c3dfa49fc.json",
+      "sha256": "3a5a637afe27cee9ff70c32e0b9525f06ec523f8558a8f1fe50fb8d7b0c2d465",
+      "bytes": 8497,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-7ddd2b9c3dfa49fc/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-ff0b45d8da4e4371.json",
+      "sha256": "3a5a637afe27cee9ff70c32e0b9525f06ec523f8558a8f1fe50fb8d7b0c2d465",
+      "bytes": 8497,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-ff0b45d8da4e4371/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-5b3d2c0b65e2434b.json",
+      "sha256": "6ffec196f3499733721da5f9f483b7b8b363af7f8cd4a2a0331ba8508564d1a5",
+      "bytes": 8881,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-5b3d2c0b65e2434b/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-305c4f696fdd4acf.json",
+      "sha256": "bf8a6741af73776a767606e1f7292eb97ce3e904b3f292bb0838c6ad0efef8bf",
+      "bytes": 8497,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-305c4f696fdd4acf/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-629251bc47ab4191.json",
+      "sha256": "bf8a6741af73776a767606e1f7292eb97ce3e904b3f292bb0838c6ad0efef8bf",
+      "bytes": 8497,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-629251bc47ab4191/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-f1c3938859164c10.json",
+      "sha256": "2b580963684e1ed656bc8a600a4b0e9697f6c7a43401285a164c197aa11c6407",
+      "bytes": 8881,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-f1c3938859164c10/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-9665884e16544e88.json",
+      "sha256": "2b580963684e1ed656bc8a600a4b0e9697f6c7a43401285a164c197aa11c6407",
+      "bytes": 8881,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-9665884e16544e88/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/foundation-settled-1.json",
+      "sha256": "ab1bdfe86e3b53626f7a1466ac48f84bcc5e5d1fc34d5b7c99d57a42881f4625",
+      "bytes": 5434,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/foundation-settled-1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-8c2f19a46b6d457a.json",
+      "sha256": "3d9a6b9e214fe31b32005ee23a5c64d5f1242673dd9e0a66ed5658c12077488c",
+      "bytes": 2184,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-8c2f19a46b6d457a/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-f11aa17e37134262.json",
+      "sha256": "f39470362e4c7b8ad97651cc8bd96c2b29881fc54626b5216be7cf94b66d28ce",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-f11aa17e37134262/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-1ab94773fe0e4b45.json",
+      "sha256": "9a248a7ef3e8400f04579e116e5e25e8ccb5426892917573951dff7bc119049c",
+      "bytes": 2352,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-1ab94773fe0e4b45/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-2bf3ace2413946d5.json",
+      "sha256": "37cdf4007842f7360fd238df96d49d545ddbd39f5e0b684b735c74068b3b4ded",
+      "bytes": 4945,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-2bf3ace2413946d5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-5ead5dfa31494421.json",
+      "sha256": "0bb2236fc949b1c5b78f40c9e600c8adec40ca63d567850d73b17a89a17fd4c5",
+      "bytes": 14320,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-5ead5dfa31494421/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-428df2a792f64c97.json",
+      "sha256": "87bfe1d395b9caa35d47913941554148380d578e74342818904ecd789993aab9",
+      "bytes": 14320,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-428df2a792f64c97/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-9d3faeae1e17459b.json",
+      "sha256": "23ce4d023ad372bb73c38d60f8a23f2ae815a59d2db69c70bfdd81ff4096a533",
+      "bytes": 14320,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-9d3faeae1e17459b/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-ddb58387c4b948ec.json",
+      "sha256": "e0e0f459b3cd2caa60783ed8200f91e98a8b1e6d84d12ba7450078706330d5f5",
+      "bytes": 14318,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-ddb58387c4b948ec/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-8fd37b14be45406b.json",
+      "sha256": "266ee01c70e463acc8703562b6b5a4992170e2bcce28f6ef8a2fcc9a64e5002c",
+      "bytes": 14318,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-8fd37b14be45406b/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-b25c3be07f994465.json",
+      "sha256": "721c8aeba9a13a476c48adf120a075246ee9a8e465e4b1c7e7559ff0af0871f1",
+      "bytes": 14320,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-b25c3be07f994465/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a8a5826a0f66448e.json",
+      "sha256": "ef04180c520859b1672c13dd5d28872d6684f370bd0ed345279a0fd43e747a85",
+      "bytes": 25072,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a8a5826a0f66448e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-2c7a1e42548045d1.json",
+      "sha256": "3fe81c48d7e4f3761f68e433512f21bd161f5fb3a2305d4f5963dc95b64f1cf4",
+      "bytes": 14318,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-2c7a1e42548045d1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-8015ab7229334bef.json",
+      "sha256": "a46876059701b0115d831d654ea2c8fd2c9d0dded42ba964ac3acbce47a494e7",
+      "bytes": 14332,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-8015ab7229334bef/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a125ef12630d49cc.json",
+      "sha256": "bedfdbebe9844450d001cbe91c1c7a6aeada369b53fc7824b0a03bb86d582d4c",
+      "bytes": 25072,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a125ef12630d49cc/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-1c47a293b2234391.json",
+      "sha256": "ccc0238da5200aef3da9662f5dd023e354b2127a7351f19754e98a2cf5d6ce15",
+      "bytes": 14332,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-1c47a293b2234391/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/reviewer-settled-1.json",
+      "sha256": "734438991df18bad12c742f99a506264b455fee8c987eb7fb8924ae2ba467b3d",
+      "bytes": 1785,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/reviewer-settled-1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/release-settled-1.json",
+      "sha256": "4d4b5f08901fb202b2657a4c89127c40b8194d9e7b7e51e01029ce8513b85478",
+      "bytes": 2083,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/release-settled-1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-2490b4e25dc04765.json",
+      "sha256": "1e5cc1c9844727cebb3578f0c553c6eb26d013817109f0fd82dab84a73ced642",
+      "bytes": 11486,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-2490b4e25dc04765/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-e7f212822aee415d.json",
+      "sha256": "1e5cc1c9844727cebb3578f0c553c6eb26d013817109f0fd82dab84a73ced642",
+      "bytes": 11486,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-e7f212822aee415d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-96d6238f037643e6.json",
+      "sha256": "1e5cc1c9844727cebb3578f0c553c6eb26d013817109f0fd82dab84a73ced642",
+      "bytes": 11486,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-96d6238f037643e6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/ui-settled-1.json",
+      "sha256": "72aac08b200f1e4866f7dbf04423698868cfb23645669c72c9212845c35fc92b",
+      "bytes": 2697,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/ui-settled-1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-c85ad1e3d4c04dd9.json",
+      "sha256": "3d9a6b9e214fe31b32005ee23a5c64d5f1242673dd9e0a66ed5658c12077488c",
+      "bytes": 2184,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-c85ad1e3d4c04dd9/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-c8a7318e6c94458d.json",
+      "sha256": "f39470362e4c7b8ad97651cc8bd96c2b29881fc54626b5216be7cf94b66d28ce",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-c8a7318e6c94458d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-014d1d31783d4c17.json",
+      "sha256": "f39470362e4c7b8ad97651cc8bd96c2b29881fc54626b5216be7cf94b66d28ce",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-014d1d31783d4c17/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a66061800fec4b45.json",
+      "sha256": "3a9d5913b8d47e0776c5720496f99cab18dddec6f41442c4ff2f6b2ef3c4796e",
+      "bytes": 2353,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a66061800fec4b45/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-84da8ef98dd841a8.json",
+      "sha256": "fc8810c11c15a8876625b3241402f88b2d1b9749f662a40571a0b4ab8c081338",
+      "bytes": 4946,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-84da8ef98dd841a8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-f045f09094424b27.json",
+      "sha256": "3050486984139a90b810705f5c809bd7b11c5dd6cb4278d44e8776bc2488d878",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-f045f09094424b27/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-aab100753aa542c7.json",
+      "sha256": "3050486984139a90b810705f5c809bd7b11c5dd6cb4278d44e8776bc2488d878",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-aab100753aa542c7/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-da6151ff999c4998.json",
+      "sha256": "2b041797fa8bd5b447b3cd58b9085213941f3186d62fd98861ba271c6536e5f7",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-da6151ff999c4998/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-02c2fb1ddfeb40df.json",
+      "sha256": "2b041797fa8bd5b447b3cd58b9085213941f3186d62fd98861ba271c6536e5f7",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-02c2fb1ddfeb40df/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a2ff25ffd97a4226.json",
+      "sha256": "2b041797fa8bd5b447b3cd58b9085213941f3186d62fd98861ba271c6536e5f7",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a2ff25ffd97a4226/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-ac9ae78192d74651.json",
+      "sha256": "2b041797fa8bd5b447b3cd58b9085213941f3186d62fd98861ba271c6536e5f7",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-ac9ae78192d74651/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a3f32302bee64a81.json",
+      "sha256": "2b041797fa8bd5b447b3cd58b9085213941f3186d62fd98861ba271c6536e5f7",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a3f32302bee64a81/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-4822414f98ee4612.json",
+      "sha256": "2b041797fa8bd5b447b3cd58b9085213941f3186d62fd98861ba271c6536e5f7",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-4822414f98ee4612/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-c974c79a62934edb.json",
+      "sha256": "2b041797fa8bd5b447b3cd58b9085213941f3186d62fd98861ba271c6536e5f7",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-c974c79a62934edb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-4645d336fb5b4689.json",
+      "sha256": "083fe3e714e267777c5ef38bf16d6da44021eaf55aa94833af3f40018bc4bbdf",
+      "bytes": 28691,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-4645d336fb5b4689/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-3e7d80c207194461.json",
+      "sha256": "093da1551fb14a1f7495ddc9219105c3722c3871d7311677d596ab711889a310",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-3e7d80c207194461/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-3437b88b222d4fa0.json",
+      "sha256": "093da1551fb14a1f7495ddc9219105c3722c3871d7311677d596ab711889a310",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-3437b88b222d4fa0/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-0e71e72156f2486e.json",
+      "sha256": "5cbc8d5f393c490aedea753bfb3bce770503058cc63a6cdd7b5900c1fc75657f",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-0e71e72156f2486e/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-87957dde026d4987.json",
+      "sha256": "cc853d62011ac8c3294f2d08d4c2a73c90e69426be22915a8819eb19fbe4d63b",
+      "bytes": 22326,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-87957dde026d4987/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/foundation-order-fix-source.json",
+      "sha256": "ccebc39cb96ad9908c277d8e6fd18be9c23f5166c01cbc0ba7fb1005999d7951",
+      "bytes": 467,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/foundation-order-fix-source/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-b86c3e46fa354147.json",
+      "sha256": "3d9a6b9e214fe31b32005ee23a5c64d5f1242673dd9e0a66ed5658c12077488c",
+      "bytes": 2184,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-b86c3e46fa354147/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-eabce479231f47f2.json",
+      "sha256": "f39470362e4c7b8ad97651cc8bd96c2b29881fc54626b5216be7cf94b66d28ce",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-eabce479231f47f2/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a74d807e21e64d18.json",
+      "sha256": "3a9d5913b8d47e0776c5720496f99cab18dddec6f41442c4ff2f6b2ef3c4796e",
+      "bytes": 2353,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a74d807e21e64d18/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-30f9fcdaad52461d.json",
+      "sha256": "fc8810c11c15a8876625b3241402f88b2d1b9749f662a40571a0b4ab8c081338",
+      "bytes": 4946,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-30f9fcdaad52461d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-ea4025b7daa34523.json",
+      "sha256": "093da1551fb14a1f7495ddc9219105c3722c3871d7311677d596ab711889a310",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-ea4025b7daa34523/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a640f8e17bcb4a81.json",
+      "sha256": "093da1551fb14a1f7495ddc9219105c3722c3871d7311677d596ab711889a310",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a640f8e17bcb4a81/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-566312eeb095481b.json",
+      "sha256": "f900bb87acf1536b300f6f62b2ff41a5f0513787992a51107d2fc1e8e712eeae",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-566312eeb095481b/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-7c32aa0e3d014be6.json",
+      "sha256": "f900bb87acf1536b300f6f62b2ff41a5f0513787992a51107d2fc1e8e712eeae",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-7c32aa0e3d014be6/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-0fff06cce4b043f7.json",
+      "sha256": "f900bb87acf1536b300f6f62b2ff41a5f0513787992a51107d2fc1e8e712eeae",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-0fff06cce4b043f7/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-38da33136cdd4c87.json",
+      "sha256": "f900bb87acf1536b300f6f62b2ff41a5f0513787992a51107d2fc1e8e712eeae",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-38da33136cdd4c87/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-7b05839ce8eb4e49.json",
+      "sha256": "f900bb87acf1536b300f6f62b2ff41a5f0513787992a51107d2fc1e8e712eeae",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-7b05839ce8eb4e49/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-f411f9aab2f54ceb.json",
+      "sha256": "a9f6b8f08538b1d1d88f15d7365e75a6e3c746761f354ef04b25007d8b91919e",
+      "bytes": 28691,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-f411f9aab2f54ceb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-76bb760447fa4071.json",
+      "sha256": "aea3f99ae6348b46746de13918366e403064ece5dd34cebf805af062ef810a85",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-76bb760447fa4071/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-cf5a5c73fd574797.json",
+      "sha256": "a657d57681866b16e31ea58c5110c7ccf315ae8b50a6a8695b83ebb90e683384",
+      "bytes": 28691,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-cf5a5c73fd574797/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-2a48ea6fbf8b492d.json",
+      "sha256": "3d9a6b9e214fe31b32005ee23a5c64d5f1242673dd9e0a66ed5658c12077488c",
+      "bytes": 2184,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-2a48ea6fbf8b492d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-4dda8e24059f4de8.json",
+      "sha256": "f39470362e4c7b8ad97651cc8bd96c2b29881fc54626b5216be7cf94b66d28ce",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-4dda8e24059f4de8/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-0f2965b7acef4cdd.json",
+      "sha256": "3a9d5913b8d47e0776c5720496f99cab18dddec6f41442c4ff2f6b2ef3c4796e",
+      "bytes": 2353,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-0f2965b7acef4cdd/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-5e1e50ccea0346dd.json",
+      "sha256": "fc8810c11c15a8876625b3241402f88b2d1b9749f662a40571a0b4ab8c081338",
+      "bytes": 4946,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-5e1e50ccea0346dd/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-a8243df3ecbd42f0.json",
+      "sha256": "093da1551fb14a1f7495ddc9219105c3722c3871d7311677d596ab711889a310",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-a8243df3ecbd42f0/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-319cd30d9a774245.json",
+      "sha256": "093da1551fb14a1f7495ddc9219105c3722c3871d7311677d596ab711889a310",
+      "bytes": 8498,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-319cd30d9a774245/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-b0e002a9bfa2414d.json",
+      "sha256": "aea3f99ae6348b46746de13918366e403064ece5dd34cebf805af062ef810a85",
+      "bytes": 27821,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-b0e002a9bfa2414d/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/verify-bf956a056ee14c36.json",
+      "sha256": "a657d57681866b16e31ea58c5110c7ccf315ae8b50a6a8695b83ebb90e683384",
+      "bytes": 28691,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/verify-bf956a056ee14c36/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/snapshots/release-lint-fixed-final.json",
+      "sha256": "5b6d0cbf02da8d426c5f3adb489ca0abdb7382d16496791ef8cf8d9b31cf252e",
+      "bytes": 483,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json#/snapshots/release-lint-fixed-final/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/integrated-application-review1.json",
+      "sha256": "67b3d18d1a4c6518a072e0f223126eaab9f1edbbccbac0e06d93d133efcd2974",
+      "bytes": 28351,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/integrated-application-review1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/integrated-docs-review1.json",
+      "sha256": "0f110dc0d9ee918310c7f4866c7435c8d95a9b1664f56ae848396e1c4526fb7c",
+      "bytes": 940,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/integrated-docs-review1/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-df378ade666f445c.json",
+      "sha256": "3d9a6b9e214fe31b32005ee23a5c64d5f1242673dd9e0a66ed5658c12077488c",
+      "bytes": 2184,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-df378ade666f445c/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-22ac39e9cfd34ea5.json",
+      "sha256": "f39470362e4c7b8ad97651cc8bd96c2b29881fc54626b5216be7cf94b66d28ce",
+      "bytes": 3918,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-22ac39e9cfd34ea5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-c4e381d0e7bf4dc5.json",
+      "sha256": "3a9d5913b8d47e0776c5720496f99cab18dddec6f41442c4ff2f6b2ef3c4796e",
+      "bytes": 2353,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-c4e381d0e7bf4dc5/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-8a86bc4851da438f.json",
+      "sha256": "fc8810c11c15a8876625b3241402f88b2d1b9749f662a40571a0b4ab8c081338",
+      "bytes": 4946,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-8a86bc4851da438f/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-b1ba4f26af3942a4.json",
+      "sha256": "2e5b20cf8f2ac012f1b2bea4724ab052249750150b2bbbcb6a40e7664a884162",
+      "bytes": 19887,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-b1ba4f26af3942a4/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-325a563918484a75.json",
+      "sha256": "2e5b20cf8f2ac012f1b2bea4724ab052249750150b2bbbcb6a40e7664a884162",
+      "bytes": 19887,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-325a563918484a75/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/locator-fixed.json",
+      "sha256": "cf68476e0f0ea213ae205a1e4175e3fa8b45096da39a321ea8e5cbb7464ce06f",
+      "bytes": 484,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/locator-fixed/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-9f5597b8b3404907.json",
+      "sha256": "33cdf06962869bd26de80d76dc7b263333fd4567a368b02dfb8aa5105f3d4554",
+      "bytes": 19887,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-9f5597b8b3404907/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-946dc718a15f4798.json",
+      "sha256": "f5d155cdd01e7b8f4292872a7d9e4f779da25bf13432e56a091dd948124b403f",
+      "bytes": 19887,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-946dc718a15f4798/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-749131c206c746bd.json",
+      "sha256": "86d4fa96363c53a41aab2fe7b1c09c1166e7a151febb605ca3edaf38c254ce91",
+      "bytes": 17043,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-749131c206c746bd/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-4aa1bce837f14278.json",
+      "sha256": "979bcf4fef2b0c0e653124e0cf52fe5b3741542b21d224f4d0c859da951ab1e9",
+      "bytes": 17043,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-4aa1bce837f14278/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-7b4df6d5c9df41fb.json",
+      "sha256": "1104a541764d17c2d240b93b642e21cbd247795481e8c3ec75ed541e49248d7c",
+      "bytes": 17043,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-7b4df6d5c9df41fb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-07f79964a86b4447.json",
+      "sha256": "88c170ec99445e5fec62b8a050432189c7c76a5b5a526d7343f259a67ed07359",
+      "bytes": 21282,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-07f79964a86b4447/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/assertions-fixed.json",
+      "sha256": "b202e1a8459b86f308d541046b31d087db2840786c76415c6451949c807d2553",
+      "bytes": 712,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/assertions-fixed/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/final-integrated-application.json",
+      "sha256": "953c1e4e342c88f7cf55121202c32987f2bb89548c22e4d3196aadfc584a5d3a",
+      "bytes": 28351,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/final-integrated-application/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/final-integrated-docs.json",
+      "sha256": "d21ff95143e098085b12182f56e96e0f2ca1b839903710c7c0dc0fec0250426c",
+      "bytes": 940,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/final-integrated-docs/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/verify-606dc371254e43cb.json",
+      "sha256": "7b926a4b92f5d11b2b29e6140739ac90440057b55b95400d0f3dd1f4155046e0",
+      "bytes": 17043,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/verify-606dc371254e43cb/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/conflict-assertion-final.json",
+      "sha256": "78bbcb459abc769e7075b3bc91ef54f02bef0026ae3802f65110d4d8cb5ff7f2",
+      "bytes": 483,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/conflict-assertion-final/snapshot"
+    },
+    {
+      "path": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/snapshots/final-application-tightened.json",
+      "sha256": "9ee54e64cc5319186610f30bd23c080e926f2ffe922f9e244655cd088f2c6d1a",
+      "bytes": 28351,
+      "retained": "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json#/snapshots/final-application-tightened/snapshot"
+    }
+  ],
+  "validation": {
+    "matching_file_payloads": 261,
+    "matching_artifact_hashes": 261,
+    "byte_exact_reconstructions": 261,
+    "markdown_file_links_screened_for_removed_targets": 1087,
+    "markdown_links_targeting_removed_snapshots": 0,
+    "retained_files_unchanged": 429,
+    "states_unchanged": 5,
+    "all_retained_json_pointers_resolve": true
+  },
+  "after": {
+    "files": 429,
+    "bytes": 6819677,
+    "inventory_sha256": "55403203dcf775e69ebf584109edab99e53925c0b44d4b5371f79676b8d37723"
+  },
+  "state_compaction_update": {
+    "date": "2026-10-27",
+    "supersedes_current_payload_retention_claims": true,
+    "interpretation": "Original removal, exact-equivalence and reconstruction checks describe the earlier checkpoint. Current retained state pointers locate compact historical summaries and metadata, not all original payload fields.",
+    "full_original_state_commit": "62a807d7082410d10192f55196e718018ad08d8a",
+    "original_state_files": [
+      "logs/ngkhengyang/reviewer/2026-10-25-manual-review/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration2/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-26-reviewer-iteration4/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/state.json",
+      "logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/state.json"
+    ],
+    "current_policy": "logs/ngkhengyang/reviewer/RETAINED-EVIDENCE.md",
+    "change_log": "logs/ngkhengyang/2026-10-27-state-summary.md"
+  }
+}

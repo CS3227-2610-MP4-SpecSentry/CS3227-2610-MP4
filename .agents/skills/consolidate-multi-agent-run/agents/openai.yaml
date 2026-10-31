@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consolidate Multi-Agent Run"
+  short_description: "Report agent work, resources, findings, and improvements"
+  default_prompt: "Use $consolidate-multi-agent-run to consolidate this run into one evidence-backed report covering each agent's work, resources, findings, validation, workflow problems, and improvements."

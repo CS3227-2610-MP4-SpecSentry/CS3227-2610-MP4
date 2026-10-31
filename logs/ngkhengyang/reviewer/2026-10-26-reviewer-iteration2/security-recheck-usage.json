@@ -1,0 +1,17 @@
+{
+  "observed_effort": "high",
+  "scope": "record",
+  "retries": null,
+  "cache_read_tokens": 151296,
+  "output_tokens": 1059,
+  "source": "MP4 sessions/local-resource-tracking/reviewer-iteration2-20261026-security-initial-cumulative.json -> security-recheck-end.json; child-only delta, cutoff 2026-10-25T18:58:31.903Z; main counters excluded",
+  "record_id": "rec-a8b6aac119654bfe",
+  "observed_model": "gpt-6.1-sol",
+  "unavailable_reasons": {
+    "tool_calls": "Reviewer reports one functions.exec call; full runtime aggregate not exposed",
+    "retries": "Runtime retry aggregate not exposed"
+  },
+  "import_id": "security-recheck-usage-1",
+  "input_tokens": 161616,
+  "tool_calls": null
+}

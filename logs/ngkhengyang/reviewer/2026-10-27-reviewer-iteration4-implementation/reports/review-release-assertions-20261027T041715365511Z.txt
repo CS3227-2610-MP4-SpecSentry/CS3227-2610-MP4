@@ -1,0 +1,36 @@
+
+(node:13172) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL src/server/test/release-revocation.integration.ts (18.462 s)
+  ● PostgreSQL release candidate and revocation integration › release-gates isolate REVISION from an otherwise ready candidate
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.changeProposal.update()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-revocation.integration.ts:252:38
+
+      249 ['REVISION', async (c: Awaited<ReturnType<typeof attached>>) => {
+      250   const other = await db.client.proposalRevision.create({ data: { proposalId: c.item.proposal.id, number: 2,
+      251     summary: 'Later submitted revision', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+later' } });
+    → 252   await db.client.changeProposal.update(
+    Database error. Code: `23514`. Message: `Current assignment pointer is required for an active assignment`
+
+      250 |       const other = await db.client.proposalRevision.create({ data: { proposalId: c.item.proposal.id, number: 2,
+      251 |         summary: 'Later submitted revision', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+later' } });
+    > 252 |       await db.client.changeProposal.update({ where: { id: c.item.proposal.id }, data: {
+          |       ^
+      253 |         currentRevisionId: other.id, currentAssignmentId: null } });
+      254 |     }],
+      255 |   ] as const)('release-gates isolate %s from an otherwise ready candidate', async (code, mutate) => {
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/release-revocation.integration.ts:252:7
+      at test/release-revocation.integration.ts:256:67
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 17 passed, 18 total
+Snapshots:   0 total
+Time:        18.818 s, estimated 20 s
+Ran all test suites within paths "src/server/test/release-revocation.integration.ts".

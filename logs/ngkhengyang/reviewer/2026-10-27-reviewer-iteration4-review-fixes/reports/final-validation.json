@@ -1,0 +1,43 @@
+{
+  "current_executions": [
+    {
+      "id": "verify-606dc371254e43cb",
+      "scope": "Expanded release PG file",
+      "result": "18/18 PASS including exact409 duplicate-version rejection"
+    },
+    {
+      "id": "verify-946dc718a15f4798",
+      "scope": "Focused real revocation browser spec",
+      "result": "3/3 PASS"
+    },
+    {
+      "id": "verify-07f79964a86b4447",
+      "scope": "Unfiltered default browser all specs",
+      "result": "14/14 PASS"
+    }
+  ],
+  "reused_historical": [
+    {
+      "scope": "Unit/components",
+      "result": "155 PASS",
+      "command": "verify-38da33136cdd4c87"
+    },
+    {
+      "scope": "Full PostgreSQL",
+      "result": "171 PASS before expanded release tests",
+      "command": "verify-7b05839ce8eb4e49"
+    },
+    {
+      "scope": "Build/types/lint",
+      "result": "PASS in integration before final test-only changes",
+      "commands": [
+        "verify-b0e002a9bfa2414d",
+        "verify-7c32aa0e3d014be6",
+        "verify-0fff06cce4b043f7"
+      ]
+    }
+  ],
+  "reuse_basis": "Production/shared/schema/config sources byteidentical to initial integrated state; unchanged test files retained. Two expanded test files executed currently. Independent reviewer decides adequacy; counts overlap and are not summed.",
+  "no_new_full_unit_or_postgres_execution_claimed": true,
+  "source_manifest": "reports/final-reviewed-manifest.json"
+}

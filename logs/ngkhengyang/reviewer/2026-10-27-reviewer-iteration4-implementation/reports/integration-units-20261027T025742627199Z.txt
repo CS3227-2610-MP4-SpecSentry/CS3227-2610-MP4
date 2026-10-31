@@ -1,0 +1,39 @@
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 47.57 KB
+CJS ⚡️ Build success in 69ms
+ESM dist\index.mjs 36.53 KB
+ESM ⚡️ Build success in 69ms
+DTS Build start
+DTS ⚡️ Build success in 3037ms
+DTS dist\index.d.ts  82.33 KB
+DTS dist\index.d.mts 82.33 KB
+
+ RUN  v5.0.5 C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/client
+
+
+ Test Files  6 passed (6)
+      Tests  75 passed (75)
+   Start at  10:57:07
+   Duration  34.64s (environment 78%, setup 17%, tests 3%, import 1%, transform 1%)
+
+
+npm notice run specsentry@0.1.0 test
+npm notice run npm run build -w @specsentry/shared && npm run test -w @specsentry/server && npm run test -w @specsentry/client
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+npm notice run @specsentry/server@0.1.0 test
+npm notice run jest --runInBand --config jest.config.cjs
+
+Test Suites: 11 passed, 11 total
+Tests:       80 passed, 80 total
+Snapshots:   0 total
+Time:        14.774 s, estimated 28 s
+Ran all test suites.
+npm notice run @specsentry/client@0.1.0 test
+npm notice run vitest run

@@ -1,0 +1,2 @@
+Browser source syntax checked without executing fixture or acceptance
+

@@ -1,0 +1,340 @@
+{
+  "format": "retrospective-token-comparison-v1",
+  "generated_at": "2026-10-25T17:42:59.445252+00:00",
+  "collector_source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\codex_usage.py",
+  "method": "Inspect metadata and token counters only; select latest cumulative counter per distinct descendant thread at cutoff; validate nonnegative accounting and monotonicity; never sum cumulative events.",
+  "runs": [
+    {
+      "run": "reviewer-intake",
+      "root_thread_id": "01a171c7-c8a5-7eb0-8751-1fe14043748a",
+      "requested_end": "2026-10-25T12:28:18.095895+00:00",
+      "scope": "Thread inception through latest valid counter at or before recorded workflow closure; excludes later retrospectives, not stage-aligned; closure trailing work after last counter omitted.",
+      "skipped_session_headers": 0,
+      "coverage": "6/6",
+      "rows": [
+        {
+          "thread_id": "01a171c7-c8a5-7eb0-8751-1fe14043748a",
+          "parent_thread_id": null,
+          "agent": "main",
+          "created_at": "2026-10-25T06:39:26.890Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T14-38-01-01a171c7-c8a5-7eb0-8751-1fe14043748a.jsonl",
+          "requested_end": "2026-10-25T12:28:18.095895+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T12:27:45.885Z",
+            "usage": {
+              "input_tokens": 42911962,
+              "cached_input_tokens": 42274816,
+              "output_tokens": 121039,
+              "reasoning_output_tokens": 40110,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 43033001
+            }
+          },
+          "counter_events": 203,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a171cf-de24-7a63-a026-c9c88af7efe2",
+          "parent_thread_id": "01a171c7-c8a5-7eb0-8751-1fe14043748a",
+          "agent": "/root/security",
+          "created_at": "2026-10-25T06:46:51.164Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T14-46-50-01a171cf-de24-7a63-a026-c9c88af7efe2.jsonl",
+          "requested_end": "2026-10-25T12:28:18.095895+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T08:13:49.949Z",
+            "usage": {
+              "input_tokens": 2455276,
+              "cached_input_tokens": 2198016,
+              "output_tokens": 9911,
+              "reasoning_output_tokens": 1629,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 2465187
+            }
+          },
+          "counter_events": 28,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a171eb-9182-7761-abcd-7a41cd158dc3",
+          "parent_thread_id": "01a171c7-c8a5-7eb0-8751-1fe14043748a",
+          "agent": "/root/foundation",
+          "created_at": "2026-10-25T07:17:06.552Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T15-17-06-01a171eb-9182-7761-abcd-7a41cd158dc3.jsonl",
+          "requested_end": "2026-10-25T12:28:18.095895+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T07:25:37.397Z",
+            "usage": {
+              "input_tokens": 1579541,
+              "cached_input_tokens": 1517440,
+              "output_tokens": 20314,
+              "reasoning_output_tokens": 2845,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 1599855
+            }
+          },
+          "counter_events": 25,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a171f4-6b63-78c0-bf9f-a4f97408bb59",
+          "parent_thread_id": "01a171c7-c8a5-7eb0-8751-1fe14043748a",
+          "agent": "/root/backend",
+          "created_at": "2026-10-25T07:26:46.627Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T15-26-46-01a171f4-6b63-78c0-bf9f-a4f97408bb59.jsonl",
+          "requested_end": "2026-10-25T12:28:18.095895+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T08:07:46.265Z",
+            "usage": {
+              "input_tokens": 3557105,
+              "cached_input_tokens": 3353472,
+              "output_tokens": 33390,
+              "reasoning_output_tokens": 4326,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 3590495
+            }
+          },
+          "counter_events": 39,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a171f4-b66b-7e90-9f71-d5fb904eb401",
+          "parent_thread_id": "01a171c7-c8a5-7eb0-8751-1fe14043748a",
+          "agent": "/root/frontend",
+          "created_at": "2026-10-25T07:27:05.805Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T15-27-05-01a171f4-b66b-7e90-9f71-d5fb904eb401.jsonl",
+          "requested_end": "2026-10-25T12:28:18.095895+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T08:08:07.697Z",
+            "usage": {
+              "input_tokens": 4601986,
+              "cached_input_tokens": 4358272,
+              "output_tokens": 27230,
+              "reasoning_output_tokens": 3901,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 4629216
+            }
+          },
+          "counter_events": 51,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a1720d-6232-74f1-b516-8a471f005f04",
+          "parent_thread_id": "01a171c7-c8a5-7eb0-8751-1fe14043748a",
+          "agent": "/root/implementation_reviewer",
+          "created_at": "2026-10-25T07:54:02.630Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T15-54-02-01a1720d-6232-74f1-b516-8a471f005f04.jsonl",
+          "requested_end": "2026-10-25T12:28:18.095895+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T08:14:35.432Z",
+            "usage": {
+              "input_tokens": 2199417,
+              "cached_input_tokens": 2069120,
+              "output_tokens": 9175,
+              "reasoning_output_tokens": 1332,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 2208592
+            }
+          },
+          "counter_events": 25,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        }
+      ],
+      "totals": {
+        "input_tokens": 57305287,
+        "cached_input_tokens": 55771136,
+        "output_tokens": 221059,
+        "reasoning_output_tokens": 54143,
+        "cache_write_input_tokens": 0,
+        "total_tokens": 57526346
+      },
+      "uncached_input_tokens": 1534151,
+      "cached_share_percent": 97.3228456215567
+    },
+    {
+      "run": "manual-review",
+      "root_thread_id": "01a173a5-a846-7b83-a7eb-e3cc0b4ac71d",
+      "requested_end": "2026-10-25T16:37:18.182729+00:00",
+      "scope": "Thread inception through latest valid counter at or before recorded workflow closure; excludes later retrospectives, not stage-aligned; closure trailing work after last counter omitted.",
+      "skipped_session_headers": 0,
+      "coverage": "5/5",
+      "rows": [
+        {
+          "thread_id": "01a173a5-a846-7b83-a7eb-e3cc0b4ac71d",
+          "parent_thread_id": null,
+          "agent": "main",
+          "created_at": "2026-10-25T15:20:00.972Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T23-19-58-01a173a5-a846-7b83-a7eb-e3cc0b4ac71d.jsonl",
+          "requested_end": "2026-10-25T16:37:18.182729+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T16:36:54.169Z",
+            "usage": {
+              "input_tokens": 17700317,
+              "cached_input_tokens": 17336448,
+              "output_tokens": 32826,
+              "reasoning_output_tokens": 6385,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 17733143
+            }
+          },
+          "counter_events": 124,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a173a8-1684-79a3-b530-02d5138a9ad9",
+          "parent_thread_id": "01a173a5-a846-7b83-a7eb-e3cc0b4ac71d",
+          "agent": "/root/security",
+          "created_at": "2026-10-25T15:22:38.568Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T23-22-38-01a173a8-1684-79a3-b530-02d5138a9ad9.jsonl",
+          "requested_end": "2026-10-25T16:37:18.182729+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T16:15:06.199Z",
+            "usage": {
+              "input_tokens": 2246153,
+              "cached_input_tokens": 1967360,
+              "output_tokens": 8198,
+              "reasoning_output_tokens": 1939,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 2254351
+            }
+          },
+          "counter_events": 24,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a173ab-5d4c-7180-a3df-421f53d09099",
+          "parent_thread_id": "01a173a5-a846-7b83-a7eb-e3cc0b4ac71d",
+          "agent": "/root/server",
+          "created_at": "2026-10-25T15:26:13.307Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T23-26-13-01a173ab-5d4c-7180-a3df-421f53d09099.jsonl",
+          "requested_end": "2026-10-25T16:37:18.182729+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T15:41:15.416Z",
+            "usage": {
+              "input_tokens": 3852282,
+              "cached_input_tokens": 3804800,
+              "output_tokens": 22135,
+              "reasoning_output_tokens": 3012,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 3874417
+            }
+          },
+          "counter_events": 55,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a173ab-e6b2-7961-b341-f323b4ab8dc2",
+          "parent_thread_id": "01a173a5-a846-7b83-a7eb-e3cc0b4ac71d",
+          "agent": "/root/tests",
+          "created_at": "2026-10-25T15:26:48.483Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T23-26-48-01a173ab-e6b2-7961-b341-f323b4ab8dc2.jsonl",
+          "requested_end": "2026-10-25T16:37:18.182729+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T16:36:45.358Z",
+            "usage": {
+              "input_tokens": 6810268,
+              "cached_input_tokens": 6604928,
+              "output_tokens": 26419,
+              "reasoning_output_tokens": 3704,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 6836687
+            }
+          },
+          "counter_events": 69,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        },
+        {
+          "thread_id": "01a173ac-9e2a-72c1-ac6a-4970d8524f98",
+          "parent_thread_id": "01a173a5-a846-7b83-a7eb-e3cc0b4ac71d",
+          "agent": "/root/ui",
+          "created_at": "2026-10-25T15:27:35.455Z",
+          "source_file": "C:\\Users\\User\\.codex\\sessions\\2026\\10\\25\\rollout-2026-10-25T23-27-35-01a173ac-9e2a-72c1-ac6a-4970d8524f98.jsonl",
+          "requested_end": "2026-10-25T16:37:18.182729+00:00",
+          "latest_counter": {
+            "cutoff": "2026-10-25T16:36:43.242Z",
+            "usage": {
+              "input_tokens": 2916301,
+              "cached_input_tokens": 2739072,
+              "output_tokens": 17383,
+              "reasoning_output_tokens": 1389,
+              "cache_write_input_tokens": 0,
+              "total_tokens": 2933684
+            }
+          },
+          "counter_events": 41,
+          "resets": 0,
+          "invalid_counters": 0,
+          "verified": true
+        }
+      ],
+      "totals": {
+        "input_tokens": 33525321,
+        "cached_input_tokens": 32452608,
+        "output_tokens": 106961,
+        "reasoning_output_tokens": 16429,
+        "cache_write_input_tokens": 0,
+        "total_tokens": 33632282
+      },
+      "uncached_input_tokens": 1072713,
+      "cached_share_percent": 96.80029014487287
+    }
+  ],
+  "comparison": {
+    "input_tokens": {
+      "first": 57305287,
+      "second": 33525321,
+      "change_percent": -41.49698438819441
+    },
+    "cached_input_tokens": {
+      "first": 55771136,
+      "second": 32452608,
+      "change_percent": -41.81110458284372
+    },
+    "output_tokens": {
+      "first": 221059,
+      "second": 106961,
+      "change_percent": -51.61427492207963
+    },
+    "reasoning_output_tokens": {
+      "first": 54143,
+      "second": 16429,
+      "change_percent": -69.65628059028867
+    },
+    "cache_write_input_tokens": {
+      "first": 0,
+      "second": 0,
+      "change_percent": null
+    },
+    "total_tokens": {
+      "first": 57526346,
+      "second": 33632282,
+      "change_percent": -41.53586254200814
+    }
+  },
+  "limitations": [
+    "No per-stage baseline; do not import totals into multiple stage records.",
+    "Cached input is included in input; reasoning output included in output.",
+    "Runtime telemetry is not billing; no monetary savings claim.",
+    "First run new foundation/cold setup and user pauses; second reused foundation/test environment and implemented different features.",
+    "Timing includes wait and idle; two second-run recovery records overlap one actual validation."
+  ]
+}

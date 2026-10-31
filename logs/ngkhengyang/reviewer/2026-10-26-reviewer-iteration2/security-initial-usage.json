@@ -1,0 +1,15 @@
+{
+  "unavailable_reasons": {
+    "retries": "Runtime retry aggregate not exposed",
+    "tool_calls": "Reviewer reports 6 functions.exec calls, not a full attributable runtime-tool aggregate"
+  },
+  "source": "MP4 sessions/local-resource-tracking/reviewer-iteration2-20261026-security-initial-cumulative.json, new child absent from main-security-start baseline; child-only final counter cutoff 2026-10-25T18:55:19.394Z; main counters excluded",
+  "tool_calls": null,
+  "record_id": "rec-741a77f20f4d4907",
+  "retries": null,
+  "output_tokens": 6211,
+  "import_id": "security-initial-usage-1",
+  "input_tokens": 704254,
+  "scope": "record",
+  "cache_read_tokens": 628096
+}

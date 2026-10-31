@@ -228,7 +228,7 @@ button.drawer-close { position: absolute; top: .75rem; right: .75rem; padding: v
   .save-feedback [role] { font-size: var(--text-xs); }
 }
 
-.topbar-task { font-size: var(--text-sm); font-weight: 550; color: var(--text-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-task { margin: 0; font-size: var(--text-sm); font-weight: 550; color: var(--text-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .topbar .account-label { min-width: 0; max-width: 35ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .task-heading { min-width: 0; margin-bottom: var(--space-4); }
 .task-heading nav { margin-bottom: .8rem; }
@@ -268,3 +268,13 @@ section.narrative-section { display: grid; gap: 1.25rem; }
 .save-recovery { margin-top: var(--space-4); max-width: 76ch; }
 .save-recovery > p { font-size: var(--text-sm); }
 .save-recovery:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+/* Retain the merged Reviewer workspace controls and submitted-content presentation. */
+section[aria-label="Reviewer workspace"] form { max-width: 24rem; }
+nav[aria-label="Review queues"] { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.proposal-list { padding: 0; list-style: none; }
+.proposal-list > li, article { margin: 1rem 0; padding: 1.25rem; border: 1px solid #bac6d5; border-radius: .5rem; background: white; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 30rem; overflow: auto; padding: 1rem; background: #eef2f7; }
+.plain-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+button[aria-pressed="false"] { color: #164d86; background: white; }
+article p, li { overflow-wrap: anywhere; }

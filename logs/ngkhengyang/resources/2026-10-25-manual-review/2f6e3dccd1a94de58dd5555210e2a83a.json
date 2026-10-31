@@ -1,0 +1,35 @@
+{
+  "id": "2f6e3dccd1a94de58dd5555210e2a83a",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-25-manual-review",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "compile",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Selected main model; design requires transaction and concurrency analysis",
+  "started_at": "2026-10-25T15:21:23.596921+00:00",
+  "ended_at": "2026-10-25T15:25:44.470182+00:00",
+  "elapsed_seconds": 260.873261,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Bootstrap and compile recorded; overlaps Reviewer compile and excluded from aggregate",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage runtime usage not exposed",
+    "output_tokens": "Per-stage runtime usage not exposed",
+    "cache_read_tokens": "Per-stage runtime usage not exposed",
+    "tool_calls": "Per-stage runtime usage not exposed",
+    "retries": "Per-stage runtime usage not exposed"
+  },
+  "unavailable_reason": "Per-stage runtime usage not exposed"
+}

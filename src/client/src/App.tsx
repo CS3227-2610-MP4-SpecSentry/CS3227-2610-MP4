@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { csrfResponseSchema, sessionResponseSchema, type AccountRole, type SessionResponse } from '@specsentry/shared';
+import { ReviewerWorkspace } from './features/reviewer/ReviewerWorkspace';
 import { ContributorWorkspace } from './features/contributor/ContributorWorkspace';
 import { Icon } from './shared/Icon';
 
@@ -46,7 +47,7 @@ function Login({ onLogin }: { onLogin: (session: SessionResponse) => void }) {
       <input id="username" name="username" autoComplete="username" maxLength={80} required disabled={pending} />
       <label htmlFor="password">Password</label>
       <input id="password" name="password" type="password" autoComplete="current-password" maxLength={256} required disabled={pending} />
-      <button type="submit" disabled={pending}>{pending ? 'Signing in…' : 'Sign in'}</button>
+      <button type="submit" disabled={pending}>{pending ? 'Signing inâ€¦' : 'Sign in'}</button>
       {error && <p role="alert">{error}</p>}
     </form>
     <p className="login-footnote"><Icon name="shield" /> Your workspace starts with a secure sign-in.</p>
@@ -113,7 +114,9 @@ export function App() {
   const [loggingOut, setLoggingOut] = useState(false);
   const [navigationOpen, setNavigationOpen] = useState(true);
   const generation = useRef(0);
+  const [authorization] = useState(() => ({ current: () => generation.current, invalidate: () => { generation.current++; } }));
   const adoptedSession = useRef<SessionResponse | null>(null);
+  const invalidate = useCallback((message: string) => { generation.current++; adoptedSession.current = null; setSession(null); setNotice(message); setLoading(false); }, []);
   const authGeneration = session?.authGeneration;
   const sessionLost = useCallback(() => {
     if (authGeneration === undefined || generation.current !== authGeneration) return;
@@ -125,12 +128,12 @@ export function App() {
     try {
       const response = await fetch('/api/auth/session', { signal, credentials: 'same-origin' });
       if (signal?.aborted || generation.current !== currentGeneration) return;
-      if (response.status === 401) { generation.current++; adoptedSession.current = null; setSession(null); return; }
+      if (response.status === 401) { invalidate('Your session ended. Please sign in again.'); return; }
       if (!response.ok) throw new Error();
       const current = sessionResponseSchema.parse(await response.json());
       if (!signal?.aborted && generation.current === currentGeneration) {
         const previous = adoptedSession.current;
-        if (previous && (previous.account.id !== current.account.id || previous.account.role !== current.account.role || previous.csrfToken !== current.csrfToken)) {
+        if (previous && (JSON.stringify(previous.account) !== JSON.stringify(current.account) || previous.csrfToken !== current.csrfToken)) {
           generation.current++; setLoggingOut(false);
         }
         adoptedSession.current = current;
@@ -139,7 +142,7 @@ export function App() {
     } catch {
       if (!signal?.aborted && generation.current === currentGeneration) { generation.current++; adoptedSession.current = null; setSession(null); setNotice('Unable to verify your session. Please sign in again.'); }
     } finally { if (!signal?.aborted) setLoading(false); }
-  }, []);
+  }, [invalidate]);
   useEffect(() => {
     const controller = new AbortController();
     void Promise.resolve().then(() => checkSession(controller.signal));
@@ -156,7 +159,10 @@ export function App() {
   async function logout() {
     if (!session) return;
     const logoutGeneration = ++generation.current;
-    setSession({ ...session, authGeneration: logoutGeneration });
+    // Reviewer requests must lose protected content immediately; Contributor input
+    // remains recoverable if logout fails, with callbacks bound to this generation.
+    if (session.account.role === 'REVIEWER') { adoptedSession.current = null; setSession(null); }
+    else setSession({ ...session, authGeneration: logoutGeneration });
     setLoggingOut(true);
     try {
       const response = await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin', headers: { 'x-csrf-token': session.csrfToken } });
@@ -181,7 +187,7 @@ export function App() {
     </aside>}
     <div className="app-body">
       {session && workspace ? <header className="topbar">
-        <div className="topbar-start"><button className="icon-button desktop-navigation-toggle" aria-label={navigationOpen ? 'Collapse navigation' : 'Expand navigation'} aria-controls="workspace-navigation" aria-expanded={navigationOpen} onClick={() => setNavigationOpen(open => !open)}><Icon name="menu" /></button><MobileNavigation workspace={workspace} username={session.account.username} loggingOut={loggingOut} onLogout={() => void logout()} /><span className="topbar-task" title={taskTitle}>{taskTitle}</span></div>
+        <div className="topbar-start"><button className="icon-button desktop-navigation-toggle" aria-label={navigationOpen ? 'Collapse navigation' : 'Expand navigation'} aria-controls="workspace-navigation" aria-expanded={navigationOpen} onClick={() => setNavigationOpen(open => !open)}><Icon name="menu" /></button><MobileNavigation workspace={workspace} username={session.account.username} loggingOut={loggingOut} onLogout={() => void logout()} />{session.account.role === 'REVIEWER' && path === workspace.path ? <h1 className="topbar-task">{workspace.label}</h1> : <span className="topbar-task" title={taskTitle}>{taskTitle}</span>}</div>
         <span className="account-label" title={`Signed in as ${session.account.username}`}>Signed in as {session.account.username}</span>
       </header> : <header className="login-brand"><span className="brand-mark"><Icon name="shield" /></span><h1>SpecSentry</h1><p>Bring clarity to every change.</p></header>}
       <main id="main-content" tabIndex={-1}>
@@ -194,7 +200,7 @@ export function App() {
           <Route path="/contributor/*" element={session.account.role === 'CONTRIBUTOR'
             ? <ContributorWorkspace key={`${session.account.id}:${session.csrfToken}`} session={session} onSessionLost={sessionLost} />
             : <section className="workspace-placeholder"><h1>Access denied</h1><p>This workspace requires a different account role.</p></section>} />
-          {Object.entries(workspaces).filter(([role]) => role !== 'CONTRIBUTOR').map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? <section className="workspace-placeholder">
+          {Object.entries(workspaces).filter(([role]) => role !== 'CONTRIBUTOR').map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? role === 'REVIEWER' ? <ReviewerWorkspace key={`${JSON.stringify(session.account)}:${session.csrfToken}`} session={session} authorization={authorization} onUnauthorized={() => invalidate('Your session ended. Please sign in again.')} /> : <section className="workspace-placeholder">
             <h1>{item.label} workspace</h1><p className="notice">Your account is ready. Workflow features will appear here as they become available.</p>
           </section> : <section className="workspace-placeholder"><h1>Access denied</h1><p>This workspace requires a different account role.</p></section>} />)}
           <Route path="*" element={<section className="workspace-placeholder"><h1>Page not found</h1><Link to={workspace.path}>Return to your workspace</Link></section>} />

@@ -1,0 +1,16 @@
+{
+  "record_id": "40d419a3990c443c92a04628d37b3bbf",
+  "scope": "record",
+  "source": "MP4 sessions/local-resource-tracking/i2-consolidation-start.json -> i2-consolidation-end.json; main ONLY; sampled cutoff 2026-10-26T03:41:37.324Z; descendants excluded; final report/response rendering after cutoff excluded",
+  "input_tokens": 1783541,
+  "output_tokens": 11272,
+  "cache_read_tokens": 1779584,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": "gpt-6.1-sol",
+  "observed_effort": "high",
+  "unavailable_reasons": {
+    "tool_calls": "Attributable aggregate not exposed",
+    "retries": "Runtime retry aggregate not exposed"
+  }
+}

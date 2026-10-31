@@ -1,0 +1,16 @@
+{
+  "reviewer": "/root/review_i4_final",
+  "record_id": "rec-f293a9a375cc468d",
+  "manifest": "reports/final-reviewed-manifest.json",
+  "assessment": "No confirmed security bypass or new material exposure within scoped unchanged production source.",
+  "controls": [
+    "Role/assignment/candidate deterministic authorization before reads/replay",
+    "Persisted enabled account/session and CSRF checks",
+    "Sorted account/session/candidate/proposal locking and under-lock version revalidation",
+    "Own-member Reviewer candidate projection",
+    "Immutable approval/submission/publication evidence",
+    "Atomic invalidation/activity/notice and publication/snapshot/member writes"
+  ],
+  "basis": "Final production/controller/contracts/schema hashes match initial independently traced code; assertion-only fixes strengthen evidence and do not change trust boundaries.",
+  "limits": "Not blanket certification; no deployment/liveAI/production probes or human teammate approval."
+}

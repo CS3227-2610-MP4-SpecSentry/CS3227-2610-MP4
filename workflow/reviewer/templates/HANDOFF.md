@@ -1,5 +1,7 @@
 # Agent handoff
 
+Keep the task, ownership, constraints and completion checks self-contained. Link authoritative background; subsequent handoffs describe changed state and evidence. Preserve these seven headings, using concise fields and references rather than copying the whole run. Record one model-selection rationale under section 7; routine updates reuse this packet.
+
 ## 1. Identity and goal
 
 - Run/task ID, handoff ID/type, timestamp/timezone:
@@ -45,6 +47,7 @@
 ## 7. Resource record
 
 - Model/effort selected and observed where available:
+- Task-complexity rationale under the [selection policy](../RESOURCES.md#dispatch-policy); required Astra exception justification if applicable:
 - Start/end with timezone; elapsed; tokens input/output; cache; tool calls/retries:
 - Telemetry source or unavailable reason; link to existing resource row:
 - Remaining budget if explicitly known; verification limitations:

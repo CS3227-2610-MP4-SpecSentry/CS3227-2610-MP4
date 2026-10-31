@@ -1,0 +1,22 @@
+{
+  "records": 13,
+  "finished": 13,
+  "expected": 14,
+  "measured_totals_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "measured_record_coverage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "summed_agent_elapsed_seconds": 30654.675328999998,
+  "observed_record_span_seconds": 8318.417137,
+  "note": "Span covers recorded boundaries only, not unrecorded full-run time. Missing usage is not zero. Cache reads are included in input; reasoning is not added again."
+}

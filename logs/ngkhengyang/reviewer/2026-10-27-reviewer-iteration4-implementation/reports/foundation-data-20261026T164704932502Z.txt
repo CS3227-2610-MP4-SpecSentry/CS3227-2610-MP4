@@ -1,0 +1,61 @@
+
+FAIL src/server/test/release-foundation.integration.ts (6.461 s)
+  ● release and approval revocation foundation › revoke-foundation-provenance preserves owner reopening and constrains exact revocation scope
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.reviewAssignment.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-foundation.integration.ts:23:57
+
+      20 await db.client.changeProposal.create({ data: { id: proposalId, ownerId, title: 'Synthetic approval', state: 'APPROVED', version: 2 } });
+      21 await db.client.proposalRevision.create({ data: { id: revisionId, proposalId, number: 1, summary: 'Synthetic summary',
+      22   problem: 'Synthetic problem', constraints: '', expectedBehavior: 'Synthetic result', diffText: '' } });
+    → 23 const assignment = await db.client.reviewAssignment.create(
+    Database error. Code: `23514`. Message: `Current assignment pointer is required for an active assignment`
+
+      21 |     await db.client.proposalRevision.create({ data: { id: revisionId, proposalId, number: 1, summary: 'Synthetic summary',
+      22 |       problem: 'Synthetic problem', constraints: '', expectedBehavior: 'Synthetic result', diffText: '' } });
+    > 23 |     const assignment = await db.client.reviewAssignment.create({ data: { proposalId, revisionId, reviewerId } });
+         |                        ^
+      24 |     await db.client.changeProposal.update({ where: { id: proposalId }, data: { currentRevisionId: revisionId,
+      25 |       currentAssignmentId: assignment.id } });
+      26 |     const approval = await db.client.reviewDecision.create({ data: { proposalId, revisionId, assignmentId: assignment.id,
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at approved (test/release-foundation.integration.ts:23:24)
+      at Object.<anonymous> (test/release-foundation.integration.ts:53:22)
+
+  ● release and approval revocation foundation › revoke-foundation-fixture keeps synthetic markers separate and cleans new foreign keys
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.reviewAssignment.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-foundation.integration.ts:23:57
+
+      20 await db.client.changeProposal.create({ data: { id: proposalId, ownerId, title: 'Synthetic approval', state: 'APPROVED', version: 2 } });
+      21 await db.client.proposalRevision.create({ data: { id: revisionId, proposalId, number: 1, summary: 'Synthetic summary',
+      22   problem: 'Synthetic problem', constraints: '', expectedBehavior: 'Synthetic result', diffText: '' } });
+    → 23 const assignment = await db.client.reviewAssignment.create(
+    Database error. Code: `23514`. Message: `Current assignment pointer is required for an active assignment`
+
+      21 |     await db.client.proposalRevision.create({ data: { id: revisionId, proposalId, number: 1, summary: 'Synthetic summary',
+      22 |       problem: 'Synthetic problem', constraints: '', expectedBehavior: 'Synthetic result', diffText: '' } });
+    > 23 |     const assignment = await db.client.reviewAssignment.create({ data: { proposalId, revisionId, reviewerId } });
+         |                        ^
+      24 |     await db.client.changeProposal.update({ where: { id: proposalId }, data: { currentRevisionId: revisionId,
+      25 |       currentAssignmentId: assignment.id } });
+      26 |     const approval = await db.client.reviewDecision.create({ data: { proposalId, revisionId, assignmentId: assignment.id,
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at approved (test/release-foundation.integration.ts:23:24)
+      at Object.<anonymous> (test/release-foundation.integration.ts:78:19)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 2 total
+Snapshots:   0 total
+Time:        6.875 s
+Ran all test suites within paths "src/server/test/release-foundation.integration.ts".

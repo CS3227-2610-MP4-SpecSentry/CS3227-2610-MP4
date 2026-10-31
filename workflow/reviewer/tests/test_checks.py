@@ -58,6 +58,44 @@ class ChecksTests(unittest.TestCase):
         args.update(values)
         return checks.finding_update(self.args(**args))
 
+    def test_batch_closure_is_atomic_and_idempotent(self):
+        self.finding()
+        self.finding(description="Second finding")
+        self.record("review", "reviewer")
+        self.snapshot()
+        value = {"reviewer": "reviewer", "record_id": "reviewer-review-1", "snapshot_id": "current",
+                 "findings": [{"id": "F-001", "evidence": ["proof.txt"]},
+                              {"id": "F-002", "evidence": []}]}
+        before = (self.run.path / "state.json").read_bytes()
+        with self.assertRaisesRegex(core.Error, "existing evidence"):
+            checks.finding_close_batch(self.args(input=self.data(value)))
+        self.assertEqual(before, (self.run.path / "state.json").read_bytes())
+        value["findings"][1]["evidence"] = ["proof.txt"]
+        checks.finding_close_batch(self.args(input=self.data(value)))
+        closed = self.run.state()
+        self.assertEqual([f["status"] for f in closed["findings"].values()], ["closed", "closed"])
+        checks.finding_close_batch(self.args(input=self.data(value)))
+        self.assertEqual(closed, self.run.state())
+        self.transition("open")
+        # Original review predates reopening: a batch must retain the timing guard.
+        with self.assertRaisesRegex(core.Error, "must start after"):
+            checks.finding_close_batch(self.args(input=self.data(value)))
+        self.assertEqual(self.run.state()["findings"]["F-001"]["status"], "open")
+
+    def test_batch_closure_rejects_duplicate_ids_and_nonindependent_reviewer(self):
+        self.finding()
+        self.record("review", "reviewer")
+        self.snapshot()
+        entry = {"id": "F-001", "evidence": ["proof.txt"]}
+        value = {"reviewer": "reviewer", "record_id": "reviewer-review-1", "snapshot_id": "current",
+                 "findings": [entry, entry]}
+        with self.assertRaisesRegex(core.Error, "Duplicate"):
+            checks.finding_close_batch(self.args(input=self.data(value)))
+        value.update(reviewer="worker", findings=[entry])
+        with self.assertRaisesRegex(core.Error, "independent reviewer"):
+            checks.finding_close_batch(self.args(input=self.data(value)))
+        self.assertEqual(self.run.state()["findings"]["F-001"]["status"], "open")
+
     def record(self, stage, agent="main", attempt=1, status="succeeded", unavailable=False):
         rid = f"{agent}-{stage}-{attempt}"
         stamp = core.now()
@@ -97,6 +135,30 @@ class ChecksTests(unittest.TestCase):
         self.assign(paths=["src/new", "tests/new.py"])
         self.assertEqual(0, checks.ownership(self.args(assignment="A", path=["src/new/deeper/file.py", "tests/new.py"])))
         self.assertEqual(1, checks.ownership(self.args(assignment="A", path=["src/newer/file.py"])))
+
+    def test_integrator_cannot_independently_review_its_wiring(self):
+        self.complete()
+        rid = self.record("integrate", "reviewer")
+        with self.run.edit() as state:
+            state["records"][rid]["changes_code"] = True
+        self.assertIn("independent review: no successful reviewer distinct from implementation/fix agents",
+                      checks.check_run(self.run)["errors"])
+        self.finding(owner="worker")
+        self.record("review", "reviewer", attempt=2)
+        self.snapshot()
+        with self.assertRaisesRegex(core.Error, "independent reviewer"):
+            self.transition("closed", evidence=["proof.txt"], record="reviewer-review-2")
+
+    def test_later_owner_wiring_invalidates_finding_closure(self):
+        self.finding()
+        self.record("review", "reviewer")
+        self.snapshot()
+        self.transition("closed", evidence=["proof.txt"])
+        rid = self.record("integrate", "worker")
+        with self.run.edit() as state:
+            state["records"][rid]["changes_code"] = True
+        errors = checks.check_run(self.run)["errors"]
+        self.assertTrue(any("finding F-001: invalid closure" in error for error in errors))
 
     def test_assignment_refuses_traversal_absolute_git_globs_and_windows_aliases(self):
         for value in ("../other", "/absolute", "C:\\outside", "src/../../out", "src/*", ".GIT/config", "src/./a", "src./a", "src /a", "src//a"):

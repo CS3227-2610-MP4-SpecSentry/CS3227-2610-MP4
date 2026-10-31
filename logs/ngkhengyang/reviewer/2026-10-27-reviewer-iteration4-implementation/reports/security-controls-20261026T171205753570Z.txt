@@ -1,0 +1,91 @@
+
+FAIL src/server/test/release-revocation.integration.ts (8.994 s)
+  ● PostgreSQL release candidate and revocation integration › revoke-notice-ack and revoke-notice-get require explicit acknowledgement without clearing blockers
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.reviewAssignment.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-revocation.integration.ts:32:57
+
+      29   state: approved ? 'APPROVED' : 'IN_REVIEW', version: 3 } });
+      30 const revision = await db.client.proposalRevision.create({ data: { proposalId: proposal.id, number: 1,
+      31   summary: 'Summary', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+safe' } });
+    → 32 const assignment = await db.client.reviewAssignment.create(
+    Database error. Code: `23514`. Message: `Current assignment pointer is required for an active assignment`
+
+      30 |     const revision = await db.client.proposalRevision.create({ data: { proposalId: proposal.id, number: 1,
+      31 |       summary: 'Summary', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+safe' } });
+    > 32 |     const assignment = await db.client.reviewAssignment.create({ data: { proposalId: proposal.id,
+         |                        ^
+      33 |       revisionId: revision.id, reviewerId: ids.reviewer, version: 0 } });
+      34 |     await db.client.changeProposal.update({ where: { id: proposal.id }, data: { currentRevisionId: revision.id,
+      35 |       currentAssignmentId: assignment.id } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at seed (test/release-revocation.integration.ts:32:24)
+      at attached (test/release-revocation.integration.ts:51:18)
+      at Object.<anonymous> (test/release-revocation.integration.ts:128:15)
+
+  ● PostgreSQL release candidate and revocation integration › revoke-notice-scope and revoke-notice-csrf enforce creator recipient and session
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.reviewAssignment.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-revocation.integration.ts:32:57
+
+      29   state: approved ? 'APPROVED' : 'IN_REVIEW', version: 3 } });
+      30 const revision = await db.client.proposalRevision.create({ data: { proposalId: proposal.id, number: 1,
+      31   summary: 'Summary', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+safe' } });
+    → 32 const assignment = await db.client.reviewAssignment.create(
+    Database error. Code: `23514`. Message: `Current assignment pointer is required for an active assignment`
+
+      30 |     const revision = await db.client.proposalRevision.create({ data: { proposalId: proposal.id, number: 1,
+      31 |       summary: 'Summary', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+safe' } });
+    > 32 |     const assignment = await db.client.reviewAssignment.create({ data: { proposalId: proposal.id,
+         |                        ^
+      33 |       revisionId: revision.id, reviewerId: ids.reviewer, version: 0 } });
+      34 |     await db.client.changeProposal.update({ where: { id: proposal.id }, data: { currentRevisionId: revision.id,
+      35 |       currentAssignmentId: assignment.id } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at seed (test/release-revocation.integration.ts:32:24)
+      at attached (test/release-revocation.integration.ts:51:18)
+      at Object.<anonymous> (test/release-revocation.integration.ts:141:15)
+
+  ● PostgreSQL release candidate and revocation integration › revoke-candidate-privacy projects only own member scope
+
+    PrismaClientKnownRequestError: 
+    Invalid `db.client.reviewAssignment.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\release-revocation.integration.ts:32:57
+
+      29   state: approved ? 'APPROVED' : 'IN_REVIEW', version: 3 } });
+      30 const revision = await db.client.proposalRevision.create({ data: { proposalId: proposal.id, number: 1,
+      31   summary: 'Summary', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+safe' } });
+    → 32 const assignment = await db.client.reviewAssignment.create(
+    Database error. Code: `23514`. Message: `Current assignment pointer is required for an active assignment`
+
+      30 |     const revision = await db.client.proposalRevision.create({ data: { proposalId: proposal.id, number: 1,
+      31 |       summary: 'Summary', problem: 'Problem', constraints: '', expectedBehavior: 'Works', diffText: '+safe' } });
+    > 32 |     const assignment = await db.client.reviewAssignment.create({ data: { proposalId: proposal.id,
+         |                        ^
+      33 |       revisionId: revision.id, reviewerId: ids.reviewer, version: 0 } });
+      34 |     await db.client.changeProposal.update({ where: { id: proposal.id }, data: { currentRevisionId: revision.id,
+      35 |       currentAssignmentId: assignment.id } });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at seed (test/release-revocation.integration.ts:32:24)
+      at attached (test/release-revocation.integration.ts:51:18)
+      at Object.<anonymous> (test/release-revocation.integration.ts:215:15)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 7 skipped, 10 total
+Snapshots:   0 total
+Time:        9.431 s
+Ran all test suites within paths "src/server/test/release-revocation.integration.ts".

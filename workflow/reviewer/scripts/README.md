@@ -1,5 +1,7 @@
 # Reviewer workflow automation
 
+New runs use [version 3](V3.md): matrix dispatch gates, verification with resource leases, canonical completion and derived reports. Follow that procedure for new work. The reference below covers lower-level commands and version 2 compatibility; legacy examples explicitly select version 2.
+
 Python 3.11+ standard library only. Run from the repository root; use `python -B` to avoid bytecode artifacts. All scripts, tests, and this execution policy are Reviewer-specific. They neither start agents nor impose this workflow on other functionalities.
 
 ```powershell
@@ -14,7 +16,7 @@ Exit codes: `0` success, `1` a failed check or incomplete run, `2` invalid input
 ## 1. Initialize and record every agent/stage/attempt
 
 ```powershell
-python -B workflow/reviewer/scripts/workflow.py init --scope reviewer --prompter ngkhengyang --run-id coverage-validation --requirement REQ-REV-002
+python -B workflow/reviewer/scripts/workflow.py init --scope reviewer --workflow-version 2 --prompter ngkhengyang --run-id coverage-validation --requirement REQ-REV-002
 python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/coverage-validation expect --agent main --invocation main-1 --stage compile
 python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/coverage-validation start --agent main --invocation main-1 --stage compile --model unavailable --effort unavailable
 ```
@@ -118,9 +120,11 @@ python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/
 
 Closure requires the assigned independent reviewer, a successful registered review/revalidation record after the finding and relevant owner fixes, a fresh snapshot after those fixes, and actual evidence references. The same links are rechecked at completion. Both security and implementation review must have successful agents distinct from implementation/fix agents. Findings retain transition history; closed findings can reopen. Deferring a blocker does not satisfy completion. Before another cycle after two failed cycles, supply `--reassessment` with the cause/approach decision; the script does not decide the new approach.
 
+Use [`finding close-batch`](V3.md#6-refresh-evidence-and-close-findings) to preflight a reviewer's closures and commit all transitions atomically. Exact retries add no history. The individual transition command and all independence, timing and freshness checks remain available.
+
 ## 6. Supersede stale evidence and check completeness
 
-After fixes, create fresh snapshots/checks/handoffs. Preserve failed earlier evidence and explicitly link its replacement:
+After fixes, create fresh snapshots/checks/handoffs for affected state. Reuse still-valid evidence for unaffected selected scopes; preserve failed earlier evidence and explicitly link its replacement:
 
 ```powershell
 python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/coverage-validation supersede --kind commands --id tests-1 --by tests-2 --reason 'Fix integrated and checked against a new snapshot'
@@ -130,3 +134,35 @@ python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/
 The same command supports `--kind handoffs`. Completion examines current terminal evidence and validates supersession chains; failures disappear from neither history nor recorded totals. Record earlier failed attempts as failed and later successful stage attempts separately.
 
 The completeness report checks the declared invocation/stage registry, timing, usage reasons, required stages, independent review identity, findings, cycles, handoffs, and current snapshot/check evidence. Explicit unavailable telemetry produces coverage warnings rather than invented measurements. The coordinator must declare every actual agent/stage/attempt; undeclared activity cannot be discovered. Semantic acceptance-criterion coverage, security sufficiency, and any human approvals still require agent/human assessment.
+
+`report --format bundle` returns JSON consistency and Markdown from one operation-local validated view; use it when both are required. Validation shares repeated scope/check reads, then rechecks content, artifacts and state before returning. Nothing is reused across operations. [`completion-refresh`](V3.md#6-refresh-evidence-and-close-findings) appends check evidence for identical current selected content without a new code-fix timestamp; it cannot refresh changed source or bypass a newer implementation attempt.
+
+## 7. Evidence efficiency and retention
+
+### Current operations
+
+- Select actual source/configuration/tests and relevant documentation explicitly, including necessary untracked files. Exclude dependencies, build outputs, caches and credentials; include generated sources only when their content is required evidence. Inspect the selected file set before relying on a snapshot. The current CLI can traverse ignored files under a selected directory, so broad directory selection is not a safe exclusion mechanism.
+- Create snapshots for material verification boundaries: an initial baseline when needed, settled integration and changed fixes/final review. A foundation contract change can justify its own scoped snapshot. A progress update, handoff, command rerun or resumption with fresh unchanged evidence does not by itself justify a copy. Different source-only and documentation scopes are legitimate when they preserve valid test evidence; explain the distinction.
+- Use existing registration, command, handoff and supersession operations in dependency order. Independent reads/checks may run together where safe; state mutations and dependent evidence operations remain ordered. Keep one canonical record and reference it from summaries. Retain required current CLI inputs/artifacts and active state; it presently embeds snapshot data and requires separate handoff input/generated files.
+- Reuse valid check results by selected source scope and dependency impact. Reviewers run discriminating checks independently; this does not require repeating an unchanged complete suite. Store bounded, safe output when useful for verification or diagnosis, especially final checks and failures; ordinary successful intermediate commands can retain result/hash metadata without another output copy.
+
+### Closure and compaction
+
+The retained evidence must trace request → approved requirements/contracts → assigned changes → checks → independent finding closure → final reviewed state. Keep measured attempts, including failures/interruptions, with timing/settings provenance and explicit missing telemetry. One index and final resource summary should point to canonical structured records rather than repeat them. Preserve meaningful decisions and acceptance gaps.
+
+Run completeness against valid active state before compaction. Preserve the exact original result and its state association as historical evidence. Retain final file hashes and required test/review evidence; obsolete manifests, draft inputs, duplicate handoffs and repetitive outputs may be consolidated only after references/outcomes have been preserved and retention is authorized. Keep finding transitions and failed/interrupted outcomes even when their verbose artifacts are consolidated. Never delete evidence merely to make a gate pass.
+
+The current CLI has **no archive/compaction command** and cannot resume or validate a separately compacted archive as active state. Preserve active CLI format and its referenced artifacts by default. An explicitly authorized manual archive must declare its different format, validate retained links/hashes/measurement totals, preserve the historical completeness result and state that it is not resumable by this CLI. Later work starts a new run. Do not overwrite source hashes or relabel an old review as approval of later changes.
+
+### Remaining automation work
+
+Version 3 implements canonical completion/generated views, grouped telemetry reasons, scoped snapshot reuse, cache exclusions, matrix gates and verification leases with executable tests. The following capabilities still need separate implementation and validation:
+
+| Capability | Required checks |
+| --- | --- |
+| Cross-check manifest deduplication | Share identical manifests across distinct checks without losing provenance; the runner currently reuses evidence per check |
+| Repository-wide generated-artifact normalization | Handoffs use explicit LF bytes; extend and verify normalization for other generated artifact types without changing raw source-file hash semantics |
+| Observed lifecycle event capture | Close on actual completion/pause/failure when observable; record unknown gaps on recovery; distinguish elapsed/wait states without inventing inference/CPU time |
+| Validated closed-run archive | Preserve finding history, failed attempts, review independence and final check/hash provenance; check links and totals; keep schema/version compatibility and historical results explicit |
+
+Use the implemented operations and documented limits. Runtime lifecycle/usage capture and closed-run archive validation remain unavailable; agent/coordinator invocation is still required.
