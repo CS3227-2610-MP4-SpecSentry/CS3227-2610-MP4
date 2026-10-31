@@ -46,8 +46,9 @@ test('private create/list/detail supports keyboard, validation, escaped text and
   expect(formAxe.violations).toEqual([]);
   await page.keyboard.press('Tab');
   await page.keyboard.press('Enter');
-  await expect(page.getByRole('heading', { name: 'Private draft detail' })).toBeVisible();
-  await expect(page.getByText('<script>private browser draft</script>', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Private draft detail', exact: true })).toBeVisible();
+  await expect(page.getByRole('definition').filter({ hasText: '<script>private browser draft</script>' })).toBeVisible();
+  await expect(page.getByRole('definition').filter({ hasText: '<script>private browser draft</script>' })).toHaveText('<script>private browser draft</script>');
   expect(await page.locator('script').filter({ hasText: 'private browser draft' }).count()).toBe(0);
   await page.getByRole('link', { name: 'Back to your drafts' }).click();
   await expect(page.getByRole('link', { name: '<script>private browser draft</script>' })).toBeVisible();

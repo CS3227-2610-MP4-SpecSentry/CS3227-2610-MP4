@@ -1,0 +1,197 @@
+{
+  "records": [
+    {
+      "id": "3d4ecb0676064a45b9654e91bd699e6a",
+      "prompter": "yooplo",
+      "session": "2026-10-31-pr16-ci-fix",
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "diagnose-coordinate-validate",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Inherited exact model and effort unavailable",
+      "started_at": "2026-10-31T02:30:36.668557+00:00",
+      "ended_at": "2026-10-31T02:38:38.482974+00:00",
+      "elapsed_seconds": 481.814417,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Diagnosed6CIselectorfailures, sixspecs alignedwithapprovedUI assertionspreserved; realPostgreSQL9/9twice113unitslintalltypesbuildreviewpass; readyfollowupcommitpushandUbuntuCIobservationseparate terminalreceipt",
+      "unavailable_reasons": {
+        "input_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+        "output_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+        "cache_read_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+        "tool_calls": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+        "retries": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only"
+      },
+      "unavailable_reason": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only"
+    },
+    {
+      "id": "76cea71f664243809e2113f0bb643179",
+      "prompter": "yooplo",
+      "session": "2026-10-31-pr16-ci-fix",
+      "agent": "verifier",
+      "invocation": "live-verify-1",
+      "stage": "postgres-e2e",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact execution settings not exposed",
+      "started_at": "2026-10-31T02:32:37.696686+00:00",
+      "ended_at": "2026-10-31T02:35:28.054389+00:00",
+      "elapsed_seconds": 170.357703,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Fresh disposable PostgreSQL migrated; exact real nine-test Playwright e2e suite passed9/9 with real API/session/database on5190. Initial pg_ctl sandbox token failure recovered by authorized escalation.",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime usage telemetry not exposed",
+        "output_tokens": "Per-record runtime usage telemetry not exposed",
+        "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+        "tool_calls": "Per-record runtime usage telemetry not exposed",
+        "retries": "Per-record runtime usage telemetry not exposed"
+      },
+      "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+    },
+    {
+      "id": "bd5f3c236c7447d7a6fd33458ed3d1e8",
+      "prompter": "yooplo",
+      "session": "2026-10-31-pr16-ci-fix",
+      "agent": "reviewer",
+      "invocation": "ci-selector-review-1",
+      "stage": "legacy-browser-selector-review",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact execution settings not exposed",
+      "started_at": "2026-10-31T02:31:46.196496+00:00",
+      "ended_at": "2026-10-31T02:33:40.514547+00:00",
+      "elapsed_seconds": 114.318051,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Independent six-file browser selector review passed after CI-SEL001 closure preserving saved-title visibility plus exact text. All business/security/version/key/evidence/session/keyboard/accessibility assertions preserved; named status/recovery selectors strengthen current UI coverage. No sleeps/skips/first/timeout changes or product edits. Diff check passed. Real PostgreSQL nine-case execution pending verifier.",
+      "unavailable_reasons": {
+        "input_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+        "output_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+        "cache_read_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+        "tool_calls": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+        "retries": "Exact execution settings and attributable token/cache/tool telemetry not exposed"
+      },
+      "unavailable_reason": "Exact execution settings and attributable token/cache/tool telemetry not exposed"
+    },
+    {
+      "id": "bdbe4d7c29364858b41bd75295ac09e3",
+      "prompter": "yooplo",
+      "session": "2026-10-31-pr16-ci-fix",
+      "agent": "verifier",
+      "invocation": "live-verify-2",
+      "stage": "postgres-e2e-repeat",
+      "attempt": 2,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact execution settings not exposed",
+      "started_at": "2026-10-31T02:35:28.191041+00:00",
+      "ended_at": "2026-10-31T02:37:54.877630+00:00",
+      "elapsed_seconds": 146.686589,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Exact9 real PostgreSQL/API e2e tests repeat9/9pass exit0 in31.005s, no flaky/skipped/failures; first run final9/9exit0 after owned Windows teardown intervention. Published sanitized cases, stopped own API and fresh PostgreSQL cluster.",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime usage telemetry not exposed",
+        "output_tokens": "Per-record runtime usage telemetry not exposed",
+        "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+        "tool_calls": "Per-record runtime usage telemetry not exposed",
+        "retries": "Per-record runtime usage telemetry not exposed"
+      },
+      "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+    },
+    {
+      "id": "def4d3fb6d6e4f59a6bd964eb8ec57f3",
+      "prompter": "yooplo",
+      "session": "2026-10-31-pr16-ci-fix",
+      "agent": "implementer",
+      "invocation": "fix-1",
+      "stage": "browser-selector-fix",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact inherited execution settings not exposed",
+      "started_at": "2026-10-31T02:32:07.428442+00:00",
+      "ended_at": "2026-10-31T02:33:26.936612+00:00",
+      "elapsed_seconds": 79.50817,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Updated six browser specs for current semantic page headings, definition-scoped escaped titles, named save feedback and operable recovery; eslint and whitespace checks passed. Default npx Playwright collection blocked by Electron argon2 ABI mismatch; independent verifier owns standalone Node real database suite.",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record usage telemetry not exposed",
+        "output_tokens": "Per-record usage telemetry not exposed",
+        "cache_read_tokens": "Per-record usage telemetry not exposed",
+        "tool_calls": "Per-record usage telemetry not exposed",
+        "retries": "Per-record usage telemetry not exposed"
+      },
+      "unavailable_reason": "Per-record usage telemetry not exposed"
+    }
+  ],
+  "issues": [],
+  "ok": true,
+  "measured_totals_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "coverage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "summed_interval_seconds": 992.68493,
+  "limit": "Only explicitly registered intervals. Null telemetry is unavailable, not zero; overlapping intervals are not wall time."
+}

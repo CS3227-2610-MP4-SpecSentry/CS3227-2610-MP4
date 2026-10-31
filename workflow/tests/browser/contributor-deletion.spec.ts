@@ -24,7 +24,7 @@ test('owner confirms deletion by keyboard with conflict/uncertainty recovery and
   await page.setExtraHTTPHeaders({ 'X-Forwarded-Proto': 'https' });
   await page.goto('/contributor');
   await page.getByLabel('Username').fill(username); await page.getByLabel('Password').fill(password); await page.getByLabel('Password').press('Enter');
-  await expect(page.getByRole('heading', { name: 'Contributor workspace' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Private drafts', exact: true })).toBeVisible();
   const auth = await (await page.request.get('/api/auth/session')).json();
   const initial = { title: '<script>Delete title</script>', problem: 'Delete problem', constraints: '', expectedBehavior: 'Delete expected',
     summary: 'Delete summary', diffText: 'Delete diff', criteria: [{ statement: 'Delete criterion', required: true }], evidence: [{ text: 'Delete evidence' }] };

@@ -1,0 +1,35 @@
+{
+  "id": "bd5f3c236c7447d7a6fd33458ed3d1e8",
+  "prompter": "yooplo",
+  "session": "2026-10-31-pr16-ci-fix",
+  "agent": "reviewer",
+  "invocation": "ci-selector-review-1",
+  "stage": "legacy-browser-selector-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-31T02:31:46.196496+00:00",
+  "ended_at": "2026-10-31T02:33:40.514547+00:00",
+  "elapsed_seconds": 114.318051,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent six-file browser selector review passed after CI-SEL001 closure preserving saved-title visibility plus exact text. All business/security/version/key/evidence/session/keyboard/accessibility assertions preserved; named status/recovery selectors strengthen current UI coverage. No sleeps/skips/first/timeout changes or product edits. Diff check passed. Real PostgreSQL nine-case execution pending verifier.",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "output_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "cache_read_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "tool_calls": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "retries": "Exact execution settings and attributable token/cache/tool telemetry not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and attributable token/cache/tool telemetry not exposed"
+}

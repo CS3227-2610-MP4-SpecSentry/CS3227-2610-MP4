@@ -1,0 +1,35 @@
+{
+  "id": "3d4ecb0676064a45b9654e91bd699e6a",
+  "prompter": "yooplo",
+  "session": "2026-10-31-pr16-ci-fix",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "diagnose-coordinate-validate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited exact model and effort unavailable",
+  "started_at": "2026-10-31T02:30:36.668557+00:00",
+  "ended_at": "2026-10-31T02:38:38.482974+00:00",
+  "elapsed_seconds": 481.814417,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Diagnosed6CIselectorfailures, sixspecs alignedwithapprovedUI assertionspreserved; realPostgreSQL9/9twice113unitslintalltypesbuildreviewpass; readyfollowupcommitpushandUbuntuCIobservationseparate terminalreceipt",
+  "unavailable_reasons": {
+    "input_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+    "output_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+    "cache_read_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+    "tool_calls": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only",
+    "retries": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only"
+  },
+  "unavailable_reason": "Exact model/effort and attributable token/cache/tool/retry telemetry unavailable; measured elapsed only"
+}

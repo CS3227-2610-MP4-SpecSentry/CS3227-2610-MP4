@@ -235,6 +235,16 @@ The run records exact checks, environment failures and remaining manual review.
 
 ## Consolidated implemented UI/UX publication — 31 October 2026
 
+PR16 CI follow-up: the production-server/PostgreSQL `npm run test:e2e` suite is
+distinct from the supplemental synthetic48/34/8 browser harnesses. Its legacy
+Contributor heading, duplicated-title and recovery locators now follow approved
+REQ-CON-010–017 presentation while retaining all security/version/identity,
+keyboard/axe and retained-input checks. The original CI run had6fail/3pass;
+fresh disposable-database execution and runner results are recorded in the
+[CI fix run](../logs/yooplo/2026-10-31-pr16-ci-fix.md). No product requirement or
+application behavior changes in this follow-up; full shared accessibility and
+other-browser/cross-role completion remain unclaimed.
+
 [UI-UX-SPEC](specs/UI-UX-SPEC.md) consolidates the implemented shell, screen states,
 actual design tokens and verification boundaries. Definitions remain in
 ROLE-CONTRIBUTOR and SHARED-REQUIREMENTS; no duplicate IDs or future features added.

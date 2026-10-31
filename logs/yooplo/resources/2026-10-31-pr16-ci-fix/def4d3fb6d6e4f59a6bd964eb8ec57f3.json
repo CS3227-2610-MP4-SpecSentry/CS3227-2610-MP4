@@ -1,0 +1,35 @@
+{
+  "id": "def4d3fb6d6e4f59a6bd964eb8ec57f3",
+  "prompter": "yooplo",
+  "session": "2026-10-31-pr16-ci-fix",
+  "agent": "implementer",
+  "invocation": "fix-1",
+  "stage": "browser-selector-fix",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact inherited execution settings not exposed",
+  "started_at": "2026-10-31T02:32:07.428442+00:00",
+  "ended_at": "2026-10-31T02:33:26.936612+00:00",
+  "elapsed_seconds": 79.50817,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Updated six browser specs for current semantic page headings, definition-scoped escaped titles, named save feedback and operable recovery; eslint and whitespace checks passed. Default npx Playwright collection blocked by Electron argon2 ABI mismatch; independent verifier owns standalone Node real database suite.",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

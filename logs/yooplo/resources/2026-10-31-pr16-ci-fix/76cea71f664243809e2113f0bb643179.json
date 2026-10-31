@@ -1,0 +1,35 @@
+{
+  "id": "76cea71f664243809e2113f0bb643179",
+  "prompter": "yooplo",
+  "session": "2026-10-31-pr16-ci-fix",
+  "agent": "verifier",
+  "invocation": "live-verify-1",
+  "stage": "postgres-e2e",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-31T02:32:37.696686+00:00",
+  "ended_at": "2026-10-31T02:35:28.054389+00:00",
+  "elapsed_seconds": 170.357703,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Fresh disposable PostgreSQL migrated; exact real nine-test Playwright e2e suite passed9/9 with real API/session/database on5190. Initial pg_ctl sandbox token failure recovered by authorized escalation.",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry not exposed",
+    "output_tokens": "Per-record runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+    "tool_calls": "Per-record runtime usage telemetry not exposed",
+    "retries": "Per-record runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+}
