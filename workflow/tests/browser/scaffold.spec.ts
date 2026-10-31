@@ -35,7 +35,7 @@ test('login page withholds workspace content and passes automated accessibility 
 
 for (const [role, label] of [['CONTRIBUTOR', 'Contributor'], ['REVIEWER', 'Reviewer'], ['RELEASE_MAINTAINER', 'Release Maintainer']]) {
   test(`${label} can sign in, restore the session, and sign out`, async ({ page }) => {
-    const workspaceHeading = role === 'CONTRIBUTOR' ? 'Private drafts' : `${label} workspace`;
+    const workspaceHeading = role === 'CONTRIBUTOR' ? 'Private drafts' : role === 'REVIEWER' ? label : `${label} workspace`;
     // Simulate the controlled TLS-terminating proxy used by the production server.
     await page.setExtraHTTPHeaders({ 'X-Forwarded-Proto': 'https' });
     await page.goto('/');
@@ -43,12 +43,15 @@ for (const [role, label] of [['CONTRIBUTOR', 'Contributor'], ['REVIEWER', 'Revie
     await page.getByLabel('Password').fill(password);
     await page.getByLabel('Password').press('Enter');
     await expect(page.getByRole('heading', { level: 1, name: workspaceHeading, exact: true })).toBeVisible();
+    if (role === 'REVIEWER') await expect(page.getByRole('heading', { level: 2, name: 'Reviewer workspace', exact: true })).toBeVisible();
     const cookies = await page.context().cookies();
     expect(cookies.find((cookie) => cookie.name === 'specsentry.sid')).toMatchObject({ secure: true, httpOnly: true, sameSite: 'Lax' });
     await page.reload();
     await expect(page.getByRole('heading', { level: 1, name: workspaceHeading, exact: true })).toBeVisible();
+    if (role === 'REVIEWER') await expect(page.getByRole('heading', { level: 2, name: 'Reviewer workspace', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Sign out' }).click();
     await expect(page.getByRole('heading', { name: 'Sign in', exact: true })).toBeVisible();
     await expect(page.getByRole('heading', { level: 1, name: workspaceHeading, exact: true })).toHaveCount(0);
+    if (role === 'REVIEWER') await expect(page.getByRole('heading', { level: 2, name: 'Reviewer workspace', exact: true })).toHaveCount(0);
   });
 }
