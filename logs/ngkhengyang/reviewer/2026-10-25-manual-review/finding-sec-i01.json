@@ -1,0 +1,11 @@
+{
+  "reviewer": "security",
+  "requirement": "REQ-SHR-007 / INTEGRATION-SPEC event boundaries",
+  "description": "SEC-I01: transactional activity lacked affected finding/criterion IDs and human reasons or decision note. Owner fixed safe summaries/reason projection; independent closure pending.",
+  "owner": "server",
+  "blocks": true,
+  "evidence": [
+    "src/server/src/reviews/manual-review.ts"
+  ],
+  "severity": "MEDIUM"
+}

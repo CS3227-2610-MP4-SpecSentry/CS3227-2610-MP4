@@ -18,6 +18,12 @@ def parser():
     import checks
     evidence.register(commands)
     checks.register(commands)
+    import planning
+    import verification
+    import completion
+    planning.register(commands)
+    verification.register(commands)
+    completion.register(commands)
     return result
 
 

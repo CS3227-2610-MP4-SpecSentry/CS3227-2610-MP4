@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+  x  1 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history (3.9s)
+
+
+  1) [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history 
+
+    Error: locator.selectOption: Error: strict mode violation: getByRole('form', { name: 'Review decision' }).getByLabel('Decision') resolved to 2 elements:
+        1) <select name="decision">…</select> aka getByLabel('DecisionRequest changesApprove')
+        2) <textarea name="note"></textarea> aka getByRole('textbox', { name: 'Decision note' })
+
+    Call log:
+      - waiting for getByRole('form', { name: 'Review decision' }).getByLabel('Decision')
+
+
+      25 |     await expect(page.getByText('No approval blockers.', { exact: true })).toBeVisible();
+      26 |     const decision = page.getByRole('form', { name: 'Review decision' });
+    > 27 |     await decision.getByLabel('Decision').selectOption('APPROVE');
+         |                                           ^
+      28 |     await decision.getByRole('button', { name: 'Submit decision' }).click();
+      29 |     await expect(page.getByText(/State: APPROVED/)).toBeVisible();
+      30 |     const approved = await (await page.request.get(`/api/proposals/${created.proposalId}`)).json();
+        at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\workflow\tests\browser\reviewer-revocation.spec.ts:27:43
+
+    Error Context: test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history 
+
+[WebServer] (node:15084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:28924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15084) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.

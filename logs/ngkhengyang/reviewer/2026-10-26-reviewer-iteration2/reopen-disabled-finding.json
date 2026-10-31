@@ -1,0 +1,13 @@
+{
+  "owner": "lifecycle",
+  "evidence": [
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "src/server/src/identity/session.store.ts",
+    "logs/ngkhengyang/2026-10-26-reviewer-iteration2.md"
+  ],
+  "severity": "HIGH",
+  "blocks": true,
+  "requirement": "REQ-REV-006/011; REQ-CON-002/005/006",
+  "description": "Independent review F-002: disabling a Reviewer on completed APPROVED leaves ACTIVE assignment intentionally. Owner reopen originally retained that disabled assignee into CHANGES_REQUESTED, after which retained() rejects submit/withdraw forever. Reopen must lock both account IDs before session/root, recheck pointers and atomically release now-unfinished unavailable assignment with preserved history and correct queue.",
+  "reviewer": "security-reviewer"
+}

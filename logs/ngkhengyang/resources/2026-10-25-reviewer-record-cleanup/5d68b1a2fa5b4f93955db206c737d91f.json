@@ -1,0 +1,35 @@
+{
+  "id": "5d68b1a2fa5b4f93955db206c737d91f",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-25-reviewer-record-cleanup",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "document",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Main model/effort explicitly confirmed by user",
+  "started_at": "2026-10-25T13:10:11.159619+00:00",
+  "ended_at": "2026-10-25T13:17:04.469014+00:00",
+  "elapsed_seconds": 413.309395,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "User-authorized closed-run cleanup: 148 to 12 files, 13,477 to 914 state lines, about 90.8 percent storage reduction; all 30 stage attempts, six finding histories, 19 command outcomes and historical snapshot hashes retained; links and source preservation checked",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable token/cache/provider counters and independently observed execution settings not exposed; selected main settings confirmed by user",
+    "output_tokens": "Attributable token/cache/provider counters and independently observed execution settings not exposed; selected main settings confirmed by user",
+    "cache_read_tokens": "Attributable token/cache/provider counters and independently observed execution settings not exposed; selected main settings confirmed by user",
+    "tool_calls": "Attributable token/cache/provider counters and independently observed execution settings not exposed; selected main settings confirmed by user",
+    "retries": "Attributable token/cache/provider counters and independently observed execution settings not exposed; selected main settings confirmed by user"
+  },
+  "unavailable_reason": "Attributable token/cache/provider counters and independently observed execution settings not exposed; selected main settings confirmed by user"
+}

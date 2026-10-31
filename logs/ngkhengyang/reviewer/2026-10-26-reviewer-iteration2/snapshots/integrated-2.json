@@ -1,0 +1,515 @@
+{
+  "base": "HEAD",
+  "base_commit": "a58fd52e5262911600b671aae44a5a1fb0a87ad2",
+  "diff_sha256": "2ae13d2d94888490d8a007b38875c657a018e04454f6d37bd8dc50426be743a9",
+  "files": {
+    "eslint.config.mjs": {
+      "bytes": 1331,
+      "sha256": "e8a1d61855a82ab830723d004719c721eba4e7f06406e0aef25550a659d88d52"
+    },
+    "package-lock.json": {
+      "bytes": 509922,
+      "sha256": "a7acd7dee2f944ee19c6fd2956bdff291502d7193c92a6365495f51113259aab"
+    },
+    "package.json": {
+      "bytes": 2233,
+      "sha256": "7a7c7af28c050bfd6d98c93ac1d698801492e87902ed49a00ea47a6976a0710b"
+    },
+    "playwright.config.ts": {
+      "bytes": 744,
+      "sha256": "946a2c7790257de4b7b9568ea195c3db82ddb6af8dcf17ebd8cfe9283f64ee96"
+    },
+    "src/client/index.html": {
+      "bytes": 398,
+      "sha256": "51edd562fdc2f6e27ad6d81de43ab11198113199d8ea11b075dc057aab15b6bf"
+    },
+    "src/client/package.json": {
+      "bytes": 701,
+      "sha256": "c09b3ff23a6567e1cf8fe0a08369c9a9c7751a0d317c110b5a8e1c97ed05af62"
+    },
+    "src/client/src/App.test.tsx": {
+      "bytes": 9567,
+      "sha256": "37977c5fe5d4f508e711a73c097d3ee6f1d04fa94352064cf83ea5276ffb196d"
+    },
+    "src/client/src/App.tsx": {
+      "bytes": 7278,
+      "sha256": "11185116d41cec4eaef1bbcce4b8352b59877cc5b2f579f862fc84de0697bfec"
+    },
+    "src/client/src/features/reviewer/ManualReview.test.tsx": {
+      "bytes": 15130,
+      "sha256": "11dab815b4e413cbc55e9697d2a553ec341c284e345084a5ca2e8f438017237b"
+    },
+    "src/client/src/features/reviewer/ManualReview.tsx": {
+      "bytes": 18349,
+      "sha256": "8e70c5311eeaaff27e7fc00b100f1bc9bd63fa829841f7e6419db921643f51fc"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+      "bytes": 17334,
+      "sha256": "9d9d5c606245dc47584e1d59680631b56c3304e3f845fdee826dd1f2693e6209"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+      "bytes": 19320,
+      "sha256": "ed8e7faef56a176f60801a7bcc67ad82ee7ddf1aaebf11d071501ee59044c2de"
+    },
+    "src/client/src/features/reviewer/RevisionCycle.test.tsx": {
+      "bytes": 6277,
+      "sha256": "25857f208853ad3a58d0cb29aff2ff83a43969f3a03f64ce11b101e864d8bc89"
+    },
+    "src/client/src/features/reviewer/RevisionNotices.tsx": {
+      "bytes": 5011,
+      "sha256": "cb17661ad8ed786f3b7d3600587c50fdce2e34518d39f20dbd05f22b32632d0f"
+    },
+    "src/client/src/main.tsx": {
+      "bytes": 318,
+      "sha256": "bc6b8ea34939811e21e38fc64df298352c5f08096cbd96ea55c5195392d74481"
+    },
+    "src/client/src/shared/authorization.ts": {
+      "bytes": 100,
+      "sha256": "74d1fc278c14f37be585fd3407d086d461d3ba5be6a0eaedf86880fb0d3566b8"
+    },
+    "src/client/src/styles.css": {
+      "bytes": 1471,
+      "sha256": "11b332e2ee600536c73d6b56e4de45e32a4c2440cc3fe68489da43ff37c15751"
+    },
+    "src/client/src/test/setup.ts": {
+      "bytes": 155,
+      "sha256": "e6fb71ea5185b022ef77fdf9b081851a9bf989a63cf6041b4d31ad2fe799bffa"
+    },
+    "src/client/tsconfig.json": {
+      "bytes": 349,
+      "sha256": "4b3c637c63c838177a8d2adf4e8d8ede989b3a2ff5bb4a7a059045643e4ba61b"
+    },
+    "src/client/vite.config.ts": {
+      "bytes": 351,
+      "sha256": "67f45113fb8ac0ab4cfe850d199d972ac29ecfcd7867908028e9b10c2a958210"
+    },
+    "src/server/jest.config.cjs": {
+      "bytes": 205,
+      "sha256": "a1b9dde024f09c920674973bdc82a5180b2f8a11dcd10543b368de2a896ea155"
+    },
+    "src/server/jest.integration.config.cjs": {
+      "bytes": 114,
+      "sha256": "ec79e70d1fac63599681360fdadbc3ff9d4bae11824ae717de56f6cc177b36f9"
+    },
+    "src/server/package.json": {
+      "bytes": 1606,
+      "sha256": "5785316cc9910a09cb43813e0fec028b46d1627a0b419914f3b7828b3d45faa9"
+    },
+    "src/server/prisma.config.ts": {
+      "bytes": 570,
+      "sha256": "86f6bbae956b8074cee8c7585e30803e76c07048ee5f7a898bfc2a64a8a88983"
+    },
+    "src/server/prisma/migrations/20261025060000_identity/migration.sql": {
+      "bytes": 1473,
+      "sha256": "ad4ce9e0ce0c3b489ce8f61e21f20d63f27a4677159a6005ffec7cdfbf0a7fe2"
+    },
+    "src/server/prisma/migrations/20261025070000_reviewer_intake/migration.sql": {
+      "bytes": 13630,
+      "sha256": "1cd93e9700d81ceb8bd365b88de331d305bf3dddfa442901dd14dc5e2ad2094f"
+    },
+    "src/server/prisma/migrations/20261025170000_manual_review/migration.sql": {
+      "bytes": 12585,
+      "sha256": "921f428d1789f43af9d48c01b33a784d549dcf57219a992d59ad36f850f1d575"
+    },
+    "src/server/prisma/migrations/20261026030000_revision_cycle/migration.sql": {
+      "bytes": 3958,
+      "sha256": "1fdf056150fdc71435135dd8dbf5f202314f0adf459dfb6a7899c7aa722bab72"
+    },
+    "src/server/prisma/migrations/migration_lock.toml": {
+      "bytes": 25,
+      "sha256": "e0f301404b533bea819cafbc56ca2a9d9bcc2cf97d6350473e3a008f0637cc12"
+    },
+    "src/server/prisma/schema.prisma": {
+      "bytes": 13610,
+      "sha256": "7f6c65adf87da9b53607ac70553f784bcc4bddee59065598c99bf3ee7f88e517"
+    },
+    "src/server/src/activity/activity.module.ts": {
+      "bytes": 286,
+      "sha256": "65246a98dc21bf6d7619f5c8d233a685d89080449e8d18f322201324d0c13716"
+    },
+    "src/server/src/activity/activity.service.ts": {
+      "bytes": 1695,
+      "sha256": "d2fc8dc6b6f2902bf07a90228f8e5fdb3651b2433e0ba439ed8d3f6704870999"
+    },
+    "src/server/src/ai/ai.module.ts": {
+      "bytes": 160,
+      "sha256": "f71a6759fb7f3d7401fc3575d7cb3e5e50eee2aedc492818eef1fd8266c6003d"
+    },
+    "src/server/src/app.module.ts": {
+      "bytes": 1173,
+      "sha256": "76442c94b188b9c53a673fe70ae4b36db960d8320ab7fb4eb2f11b308b8ff5bf"
+    },
+    "src/server/src/config.ts": {
+      "bytes": 1049,
+      "sha256": "be4d4b854e43ce3d30a0c7e4c84926cc04783d88d61353b399d76ee04be29283"
+    },
+    "src/server/src/database/database.module.ts": {
+      "bytes": 463,
+      "sha256": "42ad8022ffb9f6d7d1e4fff7e8ca8c743bf015a56d732bd5d49efd03ac1f0044"
+    },
+    "src/server/src/database/database.service.ts": {
+      "bytes": 876,
+      "sha256": "a4c6e397a9ce8c65969666a65a4615570cc377aa460b51e278fde460c0de02f5"
+    },
+    "src/server/src/health/health.controller.ts": {
+      "bytes": 736,
+      "sha256": "9ccdab47110f34ed9af857c9ee0d35fe405dac8180bf048c4bb646b96aea0102"
+    },
+    "src/server/src/http.ts": {
+      "bytes": 2160,
+      "sha256": "f8aa5a304fc09fb7e30b91593fdbab75fab5b3002b6b28fab86abe8f643bcc06"
+    },
+    "src/server/src/identity/access.ts": {
+      "bytes": 605,
+      "sha256": "fc2c3728e1f2ae6cab9b916939d718b2d77851f1368f2c94493723d0364c1588"
+    },
+    "src/server/src/identity/account-administration.service.ts": {
+      "bytes": 1257,
+      "sha256": "76fc1912c80b7e63e995161c15bea5fad2b2abec44b52320180e59dc5c1d9deb"
+    },
+    "src/server/src/identity/business-context.ts": {
+      "bytes": 4015,
+      "sha256": "7eef2ca4f05fb6245c82d9c246f10dddd1c31079676592c6cad0ec4e6feeed26"
+    },
+    "src/server/src/identity/identity.controller.ts": {
+      "bytes": 3173,
+      "sha256": "6bfddf79deddd87045d987c4b51a92999600ba1e152bb768d8441ab579a2c3da"
+    },
+    "src/server/src/identity/identity.guard.ts": {
+      "bytes": 2642,
+      "sha256": "02a16aa844c95cc4b5536790d9819ddffcab4fbd29d6d8b3cfbfc2e1db9f22f2"
+    },
+    "src/server/src/identity/identity.module.ts": {
+      "bytes": 1549,
+      "sha256": "86114240bff54157c5aef5314e8e9bca9d84747bde7e86ca363dd357f5af7496"
+    },
+    "src/server/src/identity/identity.service.ts": {
+      "bytes": 3185,
+      "sha256": "c94aa8c35cc53bce3c1b62a8061a528578310c74ad54e0785088dbfd9bb8cc67"
+    },
+    "src/server/src/identity/manage-account.ts": {
+      "bytes": 2729,
+      "sha256": "f00d7af9cc732edbad7a54c1a7df50992e8c288ecb5510850ac71c37a2a880d6"
+    },
+    "src/server/src/identity/seed-demo.ts": {
+      "bytes": 2302,
+      "sha256": "b166967b13102bff2228f0c1af16311143f9628c2ade318a3e2d03529796e29c"
+    },
+    "src/server/src/identity/session.store.ts": {
+      "bytes": 2323,
+      "sha256": "88abbdee0b038d79b41748aae387f4cdf344d53baee4af565ea730488016aba9"
+    },
+    "src/server/src/main.ts": {
+      "bytes": 1329,
+      "sha256": "eff03a862e14a3e72a2d693cad70b97ea7a2ef7c2e48f9210af7038ebaa7da31"
+    },
+    "src/server/src/notifications/notifications.controller.ts": {
+      "bytes": 2063,
+      "sha256": "80c1821728cecbd79a3ff38e9da61fbc9eee9f6e87ad72122a6f2d32b9986acc"
+    },
+    "src/server/src/notifications/notifications.module.ts": {
+      "bytes": 812,
+      "sha256": "9d61006b8b2473ae3b1797273b63873698e69f4714006b02131c39c8b835de8c"
+    },
+    "src/server/src/notifications/notifications.service.ts": {
+      "bytes": 8813,
+      "sha256": "6d4f5deb93f32048b09656dc52c4f4e3f7524335876bb34713cf01c70aa44f7a"
+    },
+    "src/server/src/proposals/contributor-proposals.controller.ts": {
+      "bytes": 3490,
+      "sha256": "2f53326613912eedc5308305a40346b21bdf6eca4c57c61270c04826456a65f8"
+    },
+    "src/server/src/proposals/proposal-lifecycle.service.ts": {
+      "bytes": 13052,
+      "sha256": "406cae29f40fe66377e1c6fd87ca34394a6a85f8daac57b6e9c6deffda4e940b"
+    },
+    "src/server/src/proposals/proposals-core.module.ts": {
+      "bytes": 295,
+      "sha256": "b59691dbea91550420ba81a733b306dadc124a22ea31346ad299f74ec785daac"
+    },
+    "src/server/src/proposals/proposals.module.ts": {
+      "bytes": 948,
+      "sha256": "2bd9ec590e0c33bc25d4b9846bc68a109dc42ce4c2542cc04dba7c32d0499bd0"
+    },
+    "src/server/src/proposals/proposals.service.ts": {
+      "bytes": 5925,
+      "sha256": "01f01a4e1c8578f7d4e47b89e84b6e6edd1d41e0658feacf192f341b325e4ed8"
+    },
+    "src/server/src/proposals/working-revisions.ts": {
+      "bytes": 3540,
+      "sha256": "29d3a3aba9c8a32ebc6b1d35de521ddccbdbc9da0ff50f4dade49445706d6eea"
+    },
+    "src/server/src/releases/releases.module.ts": {
+      "bytes": 167,
+      "sha256": "d715488049dad6cb9649458f0eccf43a7e5e66a1c92c38f29477e7a5c8f1a066"
+    },
+    "src/server/src/reviews/manual-review.ts": {
+      "bytes": 19546,
+      "sha256": "93e1f95d29f3d4e58ef8d1709ae2a391736d94f322d35d028284b9095cbd382a"
+    },
+    "src/server/src/reviews/reviewer-context.ts": {
+      "bytes": 2102,
+      "sha256": "bf263841697e886bb78f18174c8f5d3af48e2e7c2243852e9fdee293d03f8a7b"
+    },
+    "src/server/src/reviews/reviews.controller.ts": {
+      "bytes": 9310,
+      "sha256": "b90d53bbb85d710f9ca06bd0b8b2bc0d362122eecbb00b7a1ac4eb7f8f3dcefc"
+    },
+    "src/server/src/reviews/reviews.module.ts": {
+      "bytes": 824,
+      "sha256": "36d1df235102ef799f858ce79c46295d3445af9885d8dfd2a6ad2c61b60387f0"
+    },
+    "src/server/src/reviews/reviews.service.ts": {
+      "bytes": 13347,
+      "sha256": "d3f5b061408bfcfb0119baeca25286bfdf9b32c08ff84ce547df573a60ab35ef"
+    },
+    "src/server/src/reviews/seed-reviewer.ts": {
+      "bytes": 6710,
+      "sha256": "f1a00a39a7c48d147a7c35101d99eb8512e8fa975a6e12d4914e7430d5cbf060"
+    },
+    "src/server/test/business-context.integration.ts": {
+      "bytes": 6369,
+      "sha256": "88807c0a5626d335fe1124597f5bb53dbbc776a87153151760d0c0788ecd95f2"
+    },
+    "src/server/test/business-fixtures.ts": {
+      "bytes": 1000,
+      "sha256": "ec2682d2c75cc6011cdda08a311d23e5bc8eb0b8ad4197dc974d1524ba1f96f7"
+    },
+    "src/server/test/database.integration.ts": {
+      "bytes": 741,
+      "sha256": "c8fa48f8c0e96018b592c664311c788e55084edcb9187bca8751d00713a35b35"
+    },
+    "src/server/test/demo-seed.integration.ts": {
+      "bytes": 3372,
+      "sha256": "dc9fcda4f5ef95d1a43870e07b15d871b52196e7316597edabaa39d1982b15ba"
+    },
+    "src/server/test/http.spec.ts": {
+      "bytes": 3480,
+      "sha256": "2f5103ea1a990609b8c0e46c283e49812632d46dfaed3be3a06565ffa9a06a7a"
+    },
+    "src/server/test/identity.integration.ts": {
+      "bytes": 8037,
+      "sha256": "e0594cf32d28b5f8ef1ca17720fb37b1b5f81074d11c7d775fbff43bba8ca972"
+    },
+    "src/server/test/identity.spec.ts": {
+      "bytes": 8378,
+      "sha256": "96b9147f3a03ee572f272822975900a74177704f81ac4a3b308a0b9a57d5ea9b"
+    },
+    "src/server/test/manual-review-contracts.spec.ts": {
+      "bytes": 4351,
+      "sha256": "899442f96787a69af5dd07dc74798ac69052b7c6fe449e03520a6948d3b90051"
+    },
+    "src/server/test/manual-review.integration.ts": {
+      "bytes": 40731,
+      "sha256": "7f09da9f1eda557dc2411654c5d8d2f58485f451503c45353ed99410dea3a96f"
+    },
+    "src/server/test/notifications-contracts.spec.ts": {
+      "bytes": 3380,
+      "sha256": "eb97505c701aa7635d6d6b043f029daa10697ea5aaeff254cf8ffee7db947d65"
+    },
+    "src/server/test/notifications.integration.ts": {
+      "bytes": 17760,
+      "sha256": "04a9464f699f4a56d4786bd6e5042924a7ad7c3f9e53e00ac91fcdf0dcc51a08"
+    },
+    "src/server/test/proposal-lifecycle-contracts.spec.ts": {
+      "bytes": 4558,
+      "sha256": "fac235057e0e37d93b7c938f342b3988aa0c1fda3c758d2f01aaddbfa8bbd3ba"
+    },
+    "src/server/test/proposal-lifecycle.integration.ts": {
+      "bytes": 31995,
+      "sha256": "0a41d252a2405e552d70f27270a5a8e0eec76e6702de497ffe5bb524939056d4"
+    },
+    "src/server/test/reviewer-contracts.spec.ts": {
+      "bytes": 4583,
+      "sha256": "ae79040c968b1ff6f7efa9ffa09e5afa91b17561cd1db84bf121038c5e696ecc"
+    },
+    "src/server/test/reviewer-seed.integration.ts": {
+      "bytes": 4044,
+      "sha256": "088c7ab9a828464e0b200b9c352fdb2504d558d183d3f94de60716e780269f98"
+    },
+    "src/server/test/reviews.integration.ts": {
+      "bytes": 30861,
+      "sha256": "d709f51caf50ee0959f855e2881e9f0f4bc8caf863413f7df2015843b1a78b98"
+    },
+    "src/server/test/reviews.spec.ts": {
+      "bytes": 8880,
+      "sha256": "4d9662019985650c7cc3b6298e2f9c285f7168c9aa3f80fced09c7c27eb9c611"
+    },
+    "src/server/test/submitted-access.integration.ts": {
+      "bytes": 6023,
+      "sha256": "2e9be1e38361278e31d1e8299c0297fd40164d5601c19a5a514d87df942ce313"
+    },
+    "src/server/tsconfig.build.json": {
+      "bytes": 180,
+      "sha256": "c6064cad7abeb8f98da54de6b72cf2c2da6cb184178fa8f61044ee83c0abfab9"
+    },
+    "src/server/tsconfig.json": {
+      "bytes": 331,
+      "sha256": "fe486ff471a5610388056212f13f810e2473b21cf608919d7ffb253563691993"
+    },
+    "src/shared/package.json": {
+      "bytes": 561,
+      "sha256": "2fb9f30cb96a5b2f5e95b9e2f7be9c222860599790eb9f1477eedf913b6d8399"
+    },
+    "src/shared/src/contracts/health.ts": {
+      "bytes": 390,
+      "sha256": "dab9233f63d584be75a60a341995973cad4720a9f5b1e15973be601b46a07856"
+    },
+    "src/shared/src/contracts/identity.ts": {
+      "bytes": 913,
+      "sha256": "98531cd3f409c2ad49daddfcdcfa454c0aff1c283989c6cfbb67d0ff99259a6d"
+    },
+    "src/shared/src/contracts/reviewer.ts": {
+      "bytes": 20467,
+      "sha256": "5f5fcfd9b327db3d3a5534db621e3ea2de82c0a1c9eecd233d8ee982067ae26f"
+    },
+    "src/shared/src/contracts/revision-cycle.ts": {
+      "bytes": 4429,
+      "sha256": "5829a7e06d017ddd56a6518384a3acff5aefd22b2c7781ec32683a6e7ed84fb6"
+    },
+    "src/shared/src/index.ts": {
+      "bytes": 353,
+      "sha256": "65a5372104e31030f10d485048e64bef2d03b8a0a5e2c2758323650aff8d127e"
+    },
+    "src/shared/tsconfig.json": {
+      "bytes": 155,
+      "sha256": "99cab6b1b1638d7ffea19eb8b5c8b6fddb650cea5035cfab5c64b244c9b46ac7"
+    },
+    "src/website/index.html": {
+      "bytes": 4058,
+      "sha256": "06776ec98555826db5dc16a5906637cacb4eca98a038dc965e37f7fcacd08d33"
+    },
+    "tsconfig.base.json": {
+      "bytes": 255,
+      "sha256": "d4c6f2301e4692a5ef03b8780283e207a899af34ccff826f08a9fc6f853985d6"
+    },
+    "workflow/tests/browser/fixtures/reviewer-intake.ts": {
+      "bytes": 3875,
+      "sha256": "6cc4a90bfa476ea1ccbe7f2a49ef51acba4bb8877402d5a219c24da0183c08e2"
+    },
+    "workflow/tests/browser/fixtures/reviewer-revision-cycle.ts": {
+      "bytes": 2385,
+      "sha256": "94fa0439b8a15e2d9a1254b3ee66b7e1cdbd269461cdfd7f1cc9ae5324a23f4b"
+    },
+    "workflow/tests/browser/reviewer-intake.spec.ts": {
+      "bytes": 3351,
+      "sha256": "cd0621f9f623c52c0723707633422db5b0179f1f43d13cdf17195428a78dd262"
+    },
+    "workflow/tests/browser/reviewer-manual.spec.ts": {
+      "bytes": 5037,
+      "sha256": "a81ed54d0b6d8028d3bacb0d335a57201250f6a45e9e7e0a9e73c376f171178a"
+    },
+    "workflow/tests/browser/reviewer-revision-cycle.spec.ts": {
+      "bytes": 5924,
+      "sha256": "563991e2c3c81b50a19d729cef9ee244b377d88a3c4ddeb024186fc9326fdbf6"
+    },
+    "workflow/tests/browser/scaffold.spec.ts": {
+      "bytes": 3165,
+      "sha256": "913efed1c58d9a3a82381bed522956d968aca75361843e4394efad443b59993b"
+    }
+  },
+  "head": "a58fd52e5262911600b671aae44a5a1fb0a87ad2",
+  "paths": [
+    "eslint.config.mjs",
+    "package-lock.json",
+    "package.json",
+    "playwright.config.ts",
+    "src/client/index.html",
+    "src/client/package.json",
+    "src/client/src/App.test.tsx",
+    "src/client/src/App.tsx",
+    "src/client/src/features/reviewer/ManualReview.test.tsx",
+    "src/client/src/features/reviewer/ManualReview.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/RevisionCycle.test.tsx",
+    "src/client/src/features/reviewer/RevisionNotices.tsx",
+    "src/client/src/main.tsx",
+    "src/client/src/shared/authorization.ts",
+    "src/client/src/styles.css",
+    "src/client/src/test/setup.ts",
+    "src/client/tsconfig.json",
+    "src/client/vite.config.ts",
+    "src/server/jest.config.cjs",
+    "src/server/jest.integration.config.cjs",
+    "src/server/package.json",
+    "src/server/prisma.config.ts",
+    "src/server/prisma/migrations/20261025060000_identity/migration.sql",
+    "src/server/prisma/migrations/20261025070000_reviewer_intake/migration.sql",
+    "src/server/prisma/migrations/20261025170000_manual_review/migration.sql",
+    "src/server/prisma/migrations/20261026030000_revision_cycle/migration.sql",
+    "src/server/prisma/migrations/migration_lock.toml",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/activity/activity.module.ts",
+    "src/server/src/activity/activity.service.ts",
+    "src/server/src/ai/ai.module.ts",
+    "src/server/src/app.module.ts",
+    "src/server/src/config.ts",
+    "src/server/src/database/database.module.ts",
+    "src/server/src/database/database.service.ts",
+    "src/server/src/health/health.controller.ts",
+    "src/server/src/http.ts",
+    "src/server/src/identity/access.ts",
+    "src/server/src/identity/account-administration.service.ts",
+    "src/server/src/identity/business-context.ts",
+    "src/server/src/identity/identity.controller.ts",
+    "src/server/src/identity/identity.guard.ts",
+    "src/server/src/identity/identity.module.ts",
+    "src/server/src/identity/identity.service.ts",
+    "src/server/src/identity/manage-account.ts",
+    "src/server/src/identity/seed-demo.ts",
+    "src/server/src/identity/session.store.ts",
+    "src/server/src/main.ts",
+    "src/server/src/notifications/notifications.controller.ts",
+    "src/server/src/notifications/notifications.module.ts",
+    "src/server/src/notifications/notifications.service.ts",
+    "src/server/src/proposals/contributor-proposals.controller.ts",
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "src/server/src/proposals/proposals-core.module.ts",
+    "src/server/src/proposals/proposals.module.ts",
+    "src/server/src/proposals/proposals.service.ts",
+    "src/server/src/proposals/working-revisions.ts",
+    "src/server/src/releases/releases.module.ts",
+    "src/server/src/reviews/manual-review.ts",
+    "src/server/src/reviews/reviewer-context.ts",
+    "src/server/src/reviews/reviews.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/server/src/reviews/reviews.service.ts",
+    "src/server/src/reviews/seed-reviewer.ts",
+    "src/server/test/business-context.integration.ts",
+    "src/server/test/business-fixtures.ts",
+    "src/server/test/database.integration.ts",
+    "src/server/test/demo-seed.integration.ts",
+    "src/server/test/http.spec.ts",
+    "src/server/test/identity.integration.ts",
+    "src/server/test/identity.spec.ts",
+    "src/server/test/manual-review-contracts.spec.ts",
+    "src/server/test/manual-review.integration.ts",
+    "src/server/test/notifications-contracts.spec.ts",
+    "src/server/test/notifications.integration.ts",
+    "src/server/test/proposal-lifecycle-contracts.spec.ts",
+    "src/server/test/proposal-lifecycle.integration.ts",
+    "src/server/test/reviewer-contracts.spec.ts",
+    "src/server/test/reviewer-seed.integration.ts",
+    "src/server/test/reviews.integration.ts",
+    "src/server/test/reviews.spec.ts",
+    "src/server/test/submitted-access.integration.ts",
+    "src/server/tsconfig.build.json",
+    "src/server/tsconfig.json",
+    "src/shared/package.json",
+    "src/shared/src/contracts/health.ts",
+    "src/shared/src/contracts/identity.ts",
+    "src/shared/src/contracts/reviewer.ts",
+    "src/shared/src/contracts/revision-cycle.ts",
+    "src/shared/src/index.ts",
+    "src/shared/tsconfig.json",
+    "src/website/index.html",
+    "tsconfig.base.json",
+    "workflow/tests/browser/fixtures/reviewer-intake.ts",
+    "workflow/tests/browser/fixtures/reviewer-revision-cycle.ts",
+    "workflow/tests/browser/reviewer-intake.spec.ts",
+    "workflow/tests/browser/reviewer-manual.spec.ts",
+    "workflow/tests/browser/reviewer-revision-cycle.spec.ts",
+    "workflow/tests/browser/scaffold.spec.ts"
+  ]
+}

@@ -254,3 +254,60 @@ describe('base authentication', () => {
     expect(screen.queryByLabelText('Title (required)')).not.toBeInTheDocument();
   });
 });
+
+function deferred<T>() { let resolve!: (value: T) => void; let reject!: (reason?: unknown) => void; const promise = new Promise<T>((yes, no) => { resolve = yes; reject = no; }); return { promise, resolve, reject }; }
+
+describe('authorization generation', () => {
+  it.each(['401', 'error'])('discards an old session 200 after a newer %s', async (failure) => {
+    const old = deferred<ReturnType<typeof reply>>(); const newer = deferred<ReturnType<typeof reply>>();
+    const fetch = vi.fn().mockResolvedValueOnce(reply(session())).mockReturnValueOnce(old.promise).mockReturnValueOnce(newer.promise);
+    vi.stubGlobal('fetch', fetch);
+    render(<MemoryRouter><App /></MemoryRouter>);
+    await screen.findByText('Signed in as alice');
+    fireEvent(window, new Event('focus')); fireEvent(window, new Event('focus'));
+    if (failure === '401') newer.resolve(reply({}, 401)); else newer.reject(new Error('offline'));
+    await screen.findByLabelText('Username');
+    old.resolve(reply(session()));
+    await new Promise(resolve => setTimeout(resolve, 10));
+    expect(screen.queryByText('Signed in as alice')).not.toBeInTheDocument();
+  });
+  it('checks generation after session body parsing', async () => {
+    const body = deferred<ReturnType<typeof session>>();
+    const fetch = vi.fn().mockResolvedValueOnce(reply(session())).mockResolvedValueOnce({ ok: true, status: 200, json: () => body.promise }).mockResolvedValueOnce(reply({}, 401));
+    vi.stubGlobal('fetch', fetch); render(<MemoryRouter><App /></MemoryRouter>);
+    await screen.findByText('Signed in as alice'); fireEvent(window, new Event('focus'));
+    await new Promise(resolve => setTimeout(resolve, 0)); fireEvent(window, new Event('focus'));
+    await screen.findByLabelText('Username'); body.resolve(session());
+    await new Promise(resolve => setTimeout(resolve, 10)); expect(screen.queryByText('Signed in as alice')).not.toBeInTheDocument();
+  });
+});
+
+  it.each(['expiry', 'account switch', 'logout'].flatMap(transition => ['detail', 'history', 'activity'].map(kind => [transition, kind])))('discards protected %s response: %s', async (transition, kind) => {
+    if (transition === 'expiry') vi.useFakeTimers({ shouldAdvanceTime: true });
+    const body = deferred<unknown>();
+    const parsing = deferred<void>();
+    const heldResponse = { ok: true, status: 200, json: () => { parsing.resolve(); return body.promise; } };
+    const stamp = '2026-10-01T00:00:00.000Z';
+    const metadata = { id: 'p', version: 1, title: 'Protected proposal', author: { id: 'a', username: 'author' }, summary: 'Summary', firstSubmittedAt: stamp, latestSubmittedAt: stamp, awaitingRevision: false, state: 'IN_REVIEW', assignmentId: 'assignment', revisionId: 'revision', assignmentVersion: 1 };
+    const restored = { ...session('REVIEWER'), expiresAt: Date.now() + 100000 };
+    const { summary, awaitingRevision, assignmentId, assignmentVersion, revisionId, ...root } = metadata;
+    void awaitingRevision; void assignmentVersion;
+    const detail = { ...root, assignment: { id: assignmentId, revisionId, version: 1, reviewer: { id: 'one', username: 'alice' } }, revision: { id: revisionId, number: 1, summary, problem: 'STALE PRIVATE BODY', constraints: '', expectedBehavior: 'Expected', diffText: '', submittedAt: stamp, criteria: [{ id: 'c', stableKey: 'c', statement: 'Criterion', required: true }], evidence: [], criterionEvidenceLinks: [] } };
+    let sessions = 0;
+    const fetch = vi.fn().mockImplementation(async (url: string) => {
+      if (url === '/api/auth/session') return reply(sessions++ === 0 ? restored : session('CONTRIBUTOR'));
+      if (url.includes('review-pool')) return reply({ items: [], nextCursor: null });
+      if (url.includes('assignments')) return reply({ items: [metadata], nextCursor: null });
+      if (url === '/api/proposals/p') return kind === 'detail' ? heldResponse : reply(detail);
+      if (url.endsWith('/revisions') || url.endsWith('/activity')) return (kind === 'history' && url.endsWith('/revisions')) || (kind === 'activity' && url.endsWith('/activity')) ? heldResponse : reply({ items: [], nextCursor: null });
+      return reply({}, 204);
+    });
+    vi.stubGlobal('fetch', fetch); render(<MemoryRouter initialEntries={['/reviewer']}><App /></MemoryRouter>);
+    fireEvent.click(await screen.findByRole('button', { name: 'My assignments' })); fireEvent.click(await screen.findByRole('button', { name: 'Open Protected proposal' }));
+    await act(async () => { await parsing.promise; });
+    if (transition === 'account switch') { fireEvent(window, new Event('focus')); await screen.findByRole('heading', { name: 'Access denied' }); }
+    else if (transition === 'logout') { fireEvent.click(screen.getByRole('button', { name: 'Sign out' })); await screen.findByLabelText('Username'); }
+    else { await act(async () => { await vi.advanceTimersByTimeAsync(100001); }); await screen.findByLabelText('Username'); }
+    await act(async () => { body.resolve(kind === 'detail' ? detail : kind === 'history' ? { items: [{ id: 'old', number: 1, summary: 'STALE PRIVATE BODY', submittedAt: stamp }], nextCursor: null } : { items: [{ id: 'event', actor: null, timestamp: stamp, action: 'SUBMITTED', proposalId: 'p', revisionId: 'revision', assignmentId: null, outcome: 'SUCCESS', summary: 'STALE PRIVATE BODY', reason: null }], nextCursor: null }); });
+    expect(screen.queryByText('STALE PRIVATE BODY')).not.toBeInTheDocument();
+  });

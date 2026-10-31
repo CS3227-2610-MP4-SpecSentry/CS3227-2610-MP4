@@ -1,0 +1,25 @@
+# Reviewed non-credential findings from historical Reviewer commits.
+# Exceptions bind commit + path + rule + line; no path/rule/global exclusions.
+# Evidence and validation: logs/ngkhengyang/2026-10-31-secret-scan.md
+
+# Synthetic test-only SESSION_SECRET configuration
+0becf9381c893bee8db3f50d6a7d61777f843898:src/server/test/notifications.integration.ts:generic-api-key:39
+81019188d443fcb377f6b1237cf802871a437a36:src/server/test/approval-revocation.integration.ts:generic-api-key:77
+
+# Generated criterion stableKey UUIDs in retained test failure output
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:43
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:45
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:53
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:55
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:63
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:65
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:73
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:75
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:83
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integration-postgres-20261026T203302328262Z.txt:generic-api-key:85
+
+# SHA-256 source-integrity hashes in retained evidence manifests
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/integrator-result.json:generic-api-key:36
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/preintegration-source-manifest.json:generic-api-key:33
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/final-reviewed-manifest.json:generic-api-key:38
+81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/initial-reviewed-manifest.json:generic-api-key:38

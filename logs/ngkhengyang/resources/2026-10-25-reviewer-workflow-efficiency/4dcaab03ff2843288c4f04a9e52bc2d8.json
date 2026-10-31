@@ -1,0 +1,35 @@
+{
+  "id": "4dcaab03ff2843288c4f04a9e52bc2d8",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-25-reviewer-workflow-efficiency",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "document",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Main model and effort confirmed by user; specification-only edit",
+  "started_at": "2026-10-25T13:54:22.376225+00:00",
+  "ended_at": "2026-10-25T14:00:42.164100+00:00",
+  "elapsed_seconds": 379.787875,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Updated seven Reviewer workflow specification/template documents with efficiency procedures, Astra-by-exception policy and linked final changelog; documented current CLI limits;48links/anchors, scope and whitespace checks passed; no executable/product changes or Astra use",
+  "unavailable_reasons": {
+    "input_tokens": "Runtime exposes no attributable stage token/cache/provider tool/retry counters or independently observed execution settings; selected main settings confirmed by user",
+    "output_tokens": "Runtime exposes no attributable stage token/cache/provider tool/retry counters or independently observed execution settings; selected main settings confirmed by user",
+    "cache_read_tokens": "Runtime exposes no attributable stage token/cache/provider tool/retry counters or independently observed execution settings; selected main settings confirmed by user",
+    "tool_calls": "Runtime exposes no attributable stage token/cache/provider tool/retry counters or independently observed execution settings; selected main settings confirmed by user",
+    "retries": "Runtime exposes no attributable stage token/cache/provider tool/retry counters or independently observed execution settings; selected main settings confirmed by user"
+  },
+  "unavailable_reason": "Runtime exposes no attributable stage token/cache/provider tool/retry counters or independently observed execution settings; selected main settings confirmed by user"
+}

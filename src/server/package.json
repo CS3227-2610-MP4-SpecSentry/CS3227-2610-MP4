@@ -14,7 +14,8 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "account": "node -r ts-node/register src/identity/manage-account.ts",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "db:seed:reviewer": "node -r ts-node/register src/reviews/seed-reviewer.ts"
   },
   "dependencies": {
     "@nestjs/common": "11.2.8",

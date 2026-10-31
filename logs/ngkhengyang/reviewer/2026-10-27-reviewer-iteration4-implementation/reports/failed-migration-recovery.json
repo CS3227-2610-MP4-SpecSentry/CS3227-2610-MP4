@@ -1,0 +1,16 @@
+{
+  "migration": "20261026160000_approval_revocation",
+  "target": "specsentry_reviewer_intake_test",
+  "preconditions": {
+    "newReleaseTableCounts": {
+      "ReleaseCandidate": 0,
+      "ReleaseCandidateMember": 0,
+      "ReleaseSmokeTest": 0,
+      "ReleasePublicationSnapshot": 0
+    },
+    "failedMigrationCount": 1
+  },
+  "strategy": "metadata-only resolve followed by guarded forward repair; partial DDL preserved",
+  "database_reset": false,
+  "resolve_exit_code": 0
+}

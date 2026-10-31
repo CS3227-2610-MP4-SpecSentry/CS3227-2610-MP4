@@ -13,7 +13,7 @@ Read the [implementation workflow](../IMPLEMENTATION.md) when coordinating a tas
 
 ## Integration and evidence
 
-Own small integration edits, workflow records, documentation, and traceability within the authorized task. Assign substantive implementation fixes to their original owners. This role includes code integration permissions; it is not restricted to workflow files.
+Own integration accountability, workflow records, documentation, and traceability within the authorized task. Choose one executor under [step 4](../IMPLEMENTATION.md#4-integrate); for substantial assembled work, supply a fresh-context [integrator](INTEGRATOR.md) a bounded packet and consume its result. For localized work, direct integration remains appropriate. Assign substantive implementation fixes to original owners or explicitly assigned replacements. This role retains code integration permissions; it is not restricted to workflow files.
 
 Keep the reviewed state stable and record integration edits for independent review. Gather evidence from actual commands and reviewer reports. Keep draft documentation provisional until it matches verified behavior. Use only relevant sections of the [run template](../templates/RUN.md).
 

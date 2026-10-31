@@ -1,0 +1,35 @@
+{
+  "id": "ae8ef82366f743edbeac72ddfef54e62",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-31-merge-master",
+  "agent": "merge_server_review",
+  "invocation": "review-3",
+  "stage": "revalidate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings not exposed",
+  "started_at": "2026-10-31T13:26:36.375472+00:00",
+  "ended_at": "2026-10-31T13:26:48.764178+00:00",
+  "elapsed_seconds": 12.388706,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only browser regression review: optional requestSubmit valid for access-clearing semantics; no new finding; no execution",
+  "unavailable_reasons": {
+    "input_tokens": "Collector delta cutoff excludes final tool and reply; exact model/tool/retry metrics unavailable",
+    "output_tokens": "Collector delta cutoff excludes final tool and reply; exact model/tool/retry metrics unavailable",
+    "cache_read_tokens": "Collector delta cutoff excludes final tool and reply; exact model/tool/retry metrics unavailable",
+    "tool_calls": "Collector delta cutoff excludes final tool and reply; exact model/tool/retry metrics unavailable",
+    "retries": "Collector delta cutoff excludes final tool and reply; exact model/tool/retry metrics unavailable"
+  },
+  "unavailable_reason": "Collector delta cutoff excludes final tool and reply; exact model/tool/retry metrics unavailable"
+}

@@ -1,0 +1,6 @@
+
+Test Suites: 1 passed, 1 total
+Tests:       5 skipped, 2 passed, 7 total
+Snapshots:   0 total
+Time:        3.195 s
+Ran all test suites within paths "src/server/test/ai-foundation.spec.ts".

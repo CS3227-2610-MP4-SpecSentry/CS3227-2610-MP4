@@ -61,6 +61,12 @@ class RecordingTests(unittest.TestCase):
         expected = self.run.state()["expected"]["reviewer|one|review|1"]
         self.assertIsNone(expected["record_id"])
 
+    def test_integration_code_changes_are_explicit_without_relabeling_implementation(self):
+        record_id = self.begin(stage="integrate", changes_code=True)
+        self.assertTrue(self.run.state()["records"][record_id]["changes_code"])
+        with self.assertRaisesRegex(core.Error, "for integration"):
+            self.begin(stage="review", changes_code=True)
+
     def test_finish_preserves_missing_telemetry_and_measured_time(self):
         record_id = self.begin()
         self.finish(record_id)

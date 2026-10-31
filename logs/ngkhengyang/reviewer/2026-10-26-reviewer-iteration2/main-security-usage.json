@@ -1,0 +1,17 @@
+{
+  "scope": "record",
+  "observed_model": "gpt-6.1-sol",
+  "input_tokens": 3662507,
+  "tool_calls": null,
+  "unavailable_reasons": {
+    "tool_calls": "Attributable aggregate not exposed",
+    "retries": "Runtime retry aggregate not exposed"
+  },
+  "import_id": "main-security-usage-1",
+  "retries": null,
+  "output_tokens": 20590,
+  "cache_read_tokens": 3622144,
+  "observed_effort": "high",
+  "source": "MP4 sessions/local-resource-tracking/reviewer-iteration2-20261026-main-security-start.json -> main-security-end.json, main row only, sampled cutoff 2026-10-25T19:00:18.340Z. Child counters excluded; boundary bookkeeping and post-cutoff rendering outside sample. Settings from observed-settings.json.",
+  "record_id": "rec-2f73da0298f34512"
+}

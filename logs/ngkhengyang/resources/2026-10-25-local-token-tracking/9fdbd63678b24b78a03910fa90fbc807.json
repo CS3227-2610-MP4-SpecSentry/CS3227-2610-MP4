@@ -1,0 +1,35 @@
+{
+  "id": "9fdbd63678b24b78a03910fa90fbc807",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-25-local-token-tracking",
+  "agent": "main",
+  "invocation": "local-token-tracking",
+  "stage": "implement",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Codex runtime does not expose attributable token counters; implementing local prompt accounting",
+  "started_at": "2026-10-25T07:09:27.190285+00:00",
+  "ended_at": "2026-10-25T07:11:19.362295+00:00",
+  "elapsed_seconds": 112.17201,
+  "status": "interrupted",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Implementation attempt stopped after user clarification; no repository source changes retained",
+  "unavailable_reasons": {
+    "input_tokens": "Codex runtime does not expose attributable token counters",
+    "output_tokens": "Codex runtime does not expose attributable token counters",
+    "cache_read_tokens": "Codex runtime does not expose attributable token counters",
+    "tool_calls": "Codex runtime does not expose attributable token counters",
+    "retries": "Codex runtime does not expose attributable token counters"
+  },
+  "unavailable_reason": "Codex runtime does not expose attributable token counters"
+}

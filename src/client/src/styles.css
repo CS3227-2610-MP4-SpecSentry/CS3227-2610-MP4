@@ -216,3 +216,13 @@ button.mobile-navigation-toggle { display: none; }
 button.drawer-close { position: absolute; top: .75rem; right: .75rem; padding: .5rem; display: inline-flex; align-items: center; justify-content: center; background: #ffffff12; color: white; border-color: #ffffff30; }
 .app-shell:has(.navigation-drawer[open]) main { overflow-y: hidden; }
 @media (max-width: 767px) { button.mobile-navigation-toggle { display: inline-flex; } }
+
+/* Retain the merged Reviewer workspace controls and submitted-content presentation. */
+section[aria-label="Reviewer workspace"] form { max-width: 24rem; }
+nav[aria-label="Review queues"] { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.proposal-list { padding: 0; list-style: none; }
+.proposal-list > li, article { margin: 1rem 0; padding: 1.25rem; border: 1px solid #bac6d5; border-radius: .5rem; background: white; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 30rem; overflow: auto; padding: 1rem; background: #eef2f7; }
+.plain-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+button[aria-pressed="false"] { color: #164d86; background: white; }
+article p, li { overflow-wrap: anywhere; }

@@ -1,0 +1,26 @@
+{
+  "reviewer": "/root/review_i4_final",
+  "record_id": "rec-5bbcfe79f3b84438",
+  "snapshot_id": "final-application-tightened",
+  "manifest": "reports/final-reviewed-manifest.json",
+  "summary": "Independent implementation revalidation supports closing F-001 through F-004. All43 manifest file hashes match. Current releasePG18/18, focusedbrowser3/3 and defaultbrowser14/14 pass; unchanged-source priorunit/fullPG evidence adequately reused. No unresolved implementation blocker within reviewed scope.",
+  "findings": {
+    "F-001": "CLOSE: form-scoped Decision combobox locator works in real browser; focused3/default14 passed.",
+    "F-002": "CLOSE: noncreator add, isolated COVERAGE/REVISION/HIGH/CRITICAL blockers, empty/no smoke, real contentVersion stale smoke, duplicate version exact409 all asserted. Empty rollback plan rejected by DB CHECK; invalid persisted row is unreachable, so constraint assertion appropriate. Current release18 pass.",
+    "F-003": "CLOSE: second-member RELEASE_PUBLISHED activity failure after first member writes/snapshot attempt causes complete publicationState equality across candidate, both members/proposals, snapshots, activities, decisions, invalidations and notices. Trigger/function finally cleanup inspected.",
+    "F-004": "CLOSE: real attached hostile-text browser, unattached keyboard/focus/history and logout401 protected reason clearing; existing component uncertain-retry original key/body and conflict retention. Focused3/default14 pass."
+  },
+  "coverage": {
+    "contract_unit_cases": 3,
+    "postgres_cases": 43,
+    "ui_cases": 3,
+    "total": 49,
+    "assessment": "All named cases accounted by substantive checked assertions; not a guarantee of every possible application behavior."
+  },
+  "reuse": "Production/shared/schema/config hashes byte-identical to initial integrated source. Earlier155unit/171fullPG/build/type/lint not reexecuted; current release18 and defaultbrowser14 execute changed tests. No broader rerun needed solely to green cross-run stale metadata. No concrete new lint/style defect identified.",
+  "docs": "Three small Architecture/UserGuide/TRACEABILITY deltas actually reviewed; DeveloperGuide unchanged since initial review. Status links appropriate after closure.",
+  "limitations": [
+    "CLI cannot import oldrun executions as fresh follow-on matrix evidence; structural gap must be disclosed separately.",
+    "Deployment/liveAI/production probing and human teammate approval excluded."
+  ]
+}
