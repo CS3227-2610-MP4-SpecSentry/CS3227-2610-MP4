@@ -1,0 +1,25 @@
+
+Running 14 tests using 1 worker
+
+  ok  1 [chromium] › workflow\tests\browser\reviewer-intake.spec.ts:14:5 › two Reviewers claim, inspect immutable history, drop and take over with keyboard and access checks (3.7s)
+  ok  2 [chromium] › workflow\tests\browser\reviewer-manual.spec.ts:23:5 › manual review validates rationale, preserves takeover provenance, resolves blockers and freezes approval (5.1s)
+  ok  3 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:16:5 › ai-human-save (2.1s)
+  ok  4 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:31:5 › ai-transient-page (1.9s)
+  ok  5 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:43:5 › ai-ui-fallback (1.7s)
+  ok  6 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:52:5 › ai-ui-selection-stale (2.0s)
+  ok  7 [chromium] › workflow\tests\browser\reviewer-revision-cycle.spec.ts:8:5 › real owner resubmission preserves findings, resets coverage, and reconciles stale forms before withdrawal (3.3s)
+  ok  8 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:28:5 › revoke-ui API-backed current approval, candidate blocker, and safe history (3.0s)
+  ok  9 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:82:5 › revoke-ui-unattached supports keyboard submission and preserves original approval history (2.7s)
+  ok 10 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:105:5 › revoke-ui-access-loss clears a drafted reason after external session invalidation (2.4s)
+  ok 11 [chromium] › workflow\tests\browser\scaffold.spec.ts:27:5 › login page withholds workspace content and passes automated accessibility checks (992ms)
+  ok 12 [chromium] › workflow\tests\browser\scaffold.spec.ts:37:7 › Contributor can sign in, restore the session, and sign out (709ms)
+  ok 13 [chromium] › workflow\tests\browser\scaffold.spec.ts:37:7 › Reviewer can sign in, restore the session, and sign out (672ms)
+  ok 14 [chromium] › workflow\tests\browser\scaffold.spec.ts:37:7 › Release Maintainer can sign in, restore the session, and sign out (675ms)
+
+  14 passed (38.6s)
+
+[WebServer] (node:28888) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:44604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28888) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.

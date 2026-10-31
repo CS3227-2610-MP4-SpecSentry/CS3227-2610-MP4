@@ -1,0 +1,122 @@
+{
+  "base": "HEAD",
+  "base_commit": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+  "diff_sha256": "1be6f8d1bf530959e9d23729932f9d5d08e9c79db4249a35718266fefa3644c1",
+  "files": {
+    "playwright.config.ts": {
+      "bytes": 744,
+      "sha256": "946a2c7790257de4b7b9568ea195c3db82ddb6af8dcf17ebd8cfe9283f64ee96"
+    },
+    "src/client/src/features/reviewer/ManualReview.test.tsx": {
+      "bytes": 14936,
+      "sha256": "49eaa4023c280fe2c34cfd2e5de515752ae13c44571edb535ed8693745116201"
+    },
+    "src/client/src/features/reviewer/ManualReview.tsx": {
+      "bytes": 18349,
+      "sha256": "8e70c5311eeaaff27e7fc00b100f1bc9bd63fa829841f7e6419db921643f51fc"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+      "bytes": 17168,
+      "sha256": "692688d7bebcd5e39b05fff784b7785428283d01b820e04f88ff6548c1762221"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+      "bytes": 16112,
+      "sha256": "e9a01c4ddd73ca629a557b39d492b05c455ed85def59213a7c090b15476e53d2"
+    },
+    "src/server/prisma/migrations/20261025170000_manual_review/migration.sql": {
+      "bytes": 12585,
+      "sha256": "921f428d1789f43af9d48c01b33a784d549dcf57219a992d59ad36f850f1d575"
+    },
+    "src/server/prisma/schema.prisma": {
+      "bytes": 12587,
+      "sha256": "4463832690ee07088600b565ceb735c98b68b7655db334376f86ce2a31e2b62d"
+    },
+    "src/server/src/reviews/manual-review.ts": {
+      "bytes": 19183,
+      "sha256": "261bc41d1fe529c6d72193277240187b4756b2cec90f8a659d3f31130b68ec23"
+    },
+    "src/server/src/reviews/reviewer-context.ts": {
+      "bytes": 2643,
+      "sha256": "8677c442f8dd170a49d45f6896d25e9812274a86b2249aa060fa9c57bc82fb14"
+    },
+    "src/server/src/reviews/reviews.controller.ts": {
+      "bytes": 8967,
+      "sha256": "ac8e73d48f5f590b6662be0358cfeeaa6895f7b7cf388279db6640ed79ccd023"
+    },
+    "src/server/src/reviews/reviews.module.ts": {
+      "bytes": 811,
+      "sha256": "9cd75784552f847d71eb8c0df38889b405a8338bd3cb5ffba180d178249e560e"
+    },
+    "src/server/src/reviews/reviews.service.ts": {
+      "bytes": 13004,
+      "sha256": "7441a1ad8820b20f37a146585aec836fb9b2504370e3ba4bc7a0f519b9ee44de"
+    },
+    "src/server/src/reviews/seed-reviewer.ts": {
+      "bytes": 6710,
+      "sha256": "f1a00a39a7c48d147a7c35101d99eb8512e8fa975a6e12d4914e7430d5cbf060"
+    },
+    "src/server/test/database.integration.ts": {
+      "bytes": 741,
+      "sha256": "c8fa48f8c0e96018b592c664311c788e55084edcb9187bca8751d00713a35b35"
+    },
+    "src/server/test/demo-seed.integration.ts": {
+      "bytes": 3372,
+      "sha256": "dc9fcda4f5ef95d1a43870e07b15d871b52196e7316597edabaa39d1982b15ba"
+    },
+    "src/server/test/http.spec.ts": {
+      "bytes": 3480,
+      "sha256": "2f5103ea1a990609b8c0e46c283e49812632d46dfaed3be3a06565ffa9a06a7a"
+    },
+    "src/server/test/identity.integration.ts": {
+      "bytes": 8037,
+      "sha256": "e0594cf32d28b5f8ef1ca17720fb37b1b5f81074d11c7d775fbff43bba8ca972"
+    },
+    "src/server/test/identity.spec.ts": {
+      "bytes": 8378,
+      "sha256": "96b9147f3a03ee572f272822975900a74177704f81ac4a3b308a0b9a57d5ea9b"
+    },
+    "src/server/test/manual-review-contracts.spec.ts": {
+      "bytes": 4351,
+      "sha256": "899442f96787a69af5dd07dc74798ac69052b7c6fe449e03520a6948d3b90051"
+    },
+    "src/server/test/manual-review.integration.ts": {
+      "bytes": 40188,
+      "sha256": "a5fb10e502f5c73d41ab0db437c5fd4aff6589d03c1a1fdcbfccabef7eeca3c2"
+    },
+    "src/server/test/reviewer-contracts.spec.ts": {
+      "bytes": 4583,
+      "sha256": "ae79040c968b1ff6f7efa9ffa09e5afa91b17561cd1db84bf121038c5e696ecc"
+    },
+    "src/server/test/reviewer-seed.integration.ts": {
+      "bytes": 3926,
+      "sha256": "63b53abb45ee1beec6de97da9545794716b25669145e13a5518844e73d5c2694"
+    },
+    "src/server/test/reviews.integration.ts": {
+      "bytes": 30769,
+      "sha256": "6c3765047ab64ec03d85ccedbec8821a9a8e0f527c9a10232194505beeb104ab"
+    },
+    "src/server/test/reviews.spec.ts": {
+      "bytes": 8455,
+      "sha256": "12ebc85d41afd1278d4c76f5d1d8f3330405fb10d91e19d1d376a91924da68fd"
+    },
+    "src/shared/src/contracts/reviewer.ts": {
+      "bytes": 19756,
+      "sha256": "9bf13c5035d1fb94de836f7258cc3b4f21c3bfa2012928dfc1efe27214af00ff"
+    },
+    "workflow/tests/browser/reviewer-manual.spec.ts": {
+      "bytes": 5037,
+      "sha256": "a81ed54d0b6d8028d3bacb0d335a57201250f6a45e9e7e0a9e73c376f171178a"
+    }
+  },
+  "head": "8397100b4d6497c0e2b584b4fb9c0b60172dc131",
+  "paths": [
+    "playwright.config.ts",
+    "src/client/src/features/reviewer",
+    "src/server/prisma/migrations/20261025170000_manual_review",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/reviews",
+    "src/server/test",
+    "src/shared/src/contracts/reviewer.ts",
+    "workflow/tests/browser/reviewer-manual.spec.ts"
+  ]
+}

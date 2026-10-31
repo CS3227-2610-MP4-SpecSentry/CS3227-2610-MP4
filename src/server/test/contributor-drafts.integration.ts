@@ -187,8 +187,8 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     await owner.agent.patch(`/api/proposals/${randomUUID()}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(404);
   });
 
-  it('rejects non-DRAFT states, submitted markers, attachments and version overflow without touching snapshots', async () => {
-    for (const state of ['SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
+  it('rejects frozen/terminal states, malformed draft markers, attachments and version overflow without touching snapshots', async () => {
+    for (const state of ['APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
       const id = (await create().expect(201)).body.proposalId as string;
       await database.client.changeProposal.update({ where: { id }, data: { state } });
       await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content }).expect(409);
@@ -323,7 +323,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
   });
 
   it('denies deletion in every other state, submission marker, actual cleared-pointer history and mixed activity', async () => {
-    for (const state of ['SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
+    for (const state of ['APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
       const id = (await create().expect(201)).body.proposalId as string;
       await database.client.changeProposal.update({ where: { id }, data: { state } });
       await remove(id).expect(409);
@@ -507,7 +507,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     }
   }, 15000);
 
-  it('denies anonymous/wrong-role creation/list/read, absent CSRF, forged fields and unavailable actions', async () => {
+  it('denies anonymous/wrong-role creation/list/read, absent CSRF, forged fields and malformed lifecycle actions', async () => {
     await request(app.getHttpServer()).get('/api/proposals').expect(401);
     await request(app.getHttpServer()).get(`/api/proposals/${randomUUID()}/draft`).expect(401);
     await request(app.getHttpServer()).post('/api/proposals').send(content).expect(401);
@@ -521,7 +521,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     for (const field of ['ownerId', 'state', 'actorId', 'createdAt']) await create(owner, { ...content, [field]: ids[1] }).expect(422);
     expect(await database.client.changeProposal.count({ where: { ownerId: ids[0] } })).toBe(before);
     const id = (await create().expect(201)).body.proposalId as string;
-    for (const action of ['submit', 'withdraw', 'reopen']) await owner.agent.post(`/api/proposals/${id}/${action}`).set('x-csrf-token', owner.token).send({}).expect(404);
+    for (const action of ['submit', 'withdraw', 'reopen']) await owner.agent.post(`/api/proposals/${id}/${action}`).set('x-csrf-token', owner.token).send({}).expect(422);
     await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({}).expect(422);
     await owner.agent.delete(`/api/proposals/${id}`).set('x-csrf-token', owner.token).send({}).expect(422);
     await owner.agent.get(`/api/proposals/${randomUUID()}/draft`).expect(404);

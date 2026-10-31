@@ -14,6 +14,13 @@ button { cursor: pointer; background: #164d86; color: white; }
 button:disabled { cursor: wait; opacity: .7; }
 nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
 [role="alert"] { color: #8f1d1d; }
+select { font: inherit; padding: .65rem .8rem; border: 1px solid #60738a; border-radius: .3rem; }
+.proposal-list { padding: 0; list-style: none; }
+.proposal-list > li, article { margin: 1rem 0; padding: 1.25rem; border: 1px solid #bac6d5; border-radius: .5rem; background: white; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 30rem; overflow: auto; padding: 1rem; background: #eef2f7; }
+.plain-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+button[aria-pressed="false"] { color: #164d86; background: white; }
+article p, li { overflow-wrap: anywhere; }
 textarea { font: inherit; padding: .65rem .8rem; border: 1px solid #60738a; border-radius: .3rem; min-width: 0; resize: vertical; }
 .draft-form { max-width: 100%; margin-bottom: 1.5rem; }
 .draft-field { display: grid; gap: .25rem; }

@@ -10,10 +10,12 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import core
 import evidence
+import validation
 
 
 class EvidenceTests(unittest.TestCase):
@@ -73,6 +75,68 @@ class EvidenceTests(unittest.TestCase):
         record = self.run.state()["snapshots"]["deletion"]
         self.assertEqual({"deleted": True}, record["snapshot"]["files"]["src/code.txt"])
         self.assertTrue(evidence.snapshot_matches(self.run, "deletion"))
+
+    def test_validation_reuses_scopes_but_rechecks_artifacts_and_return_boundary(self):
+        self.snapshot("one")
+        self.snapshot("two")
+        with patch.object(evidence, "_snapshot", wraps=evidence._snapshot) as rebuilt:
+            with validation.operation(self.run) as view:
+                for _ in range(4):
+                    self.assertTrue(evidence.snapshot_matches(view, "one"))
+                    self.assertTrue(evidence.snapshot_matches(view, "two"))
+                self.assertEqual(rebuilt.call_count, 1)
+            self.assertEqual(rebuilt.call_count, 2)  # One initial pass + one return-boundary pass.
+        (self.repo / "src/code.txt").write_text("later edit", encoding="utf-8")
+        with validation.operation(self.run) as view:
+            self.assertFalse(evidence.snapshot_matches(view, "one"))
+
+    def test_validation_detects_source_and_state_changes_during_operation(self):
+        self.snapshot()
+        for change in ("edit", "untracked", "delete", "state", "artifact", "head", "index"):
+            with self.subTest(change=change):
+                self.snapshot("s-" + change)
+                with self.assertRaises(core.Error), validation.operation(self.run) as view:
+                    self.assertTrue(evidence.snapshot_matches(view, "s-" + change))
+                    if change == "edit":
+                        target = self.repo / "src/code.txt"
+                        stat = target.stat()
+                        original = target.read_bytes()
+                        target.write_bytes(bytes((b ^ 1) for b in original))
+                        # Same size and restored mtime must not evade content checks.
+                        __import__("os").utime(target, ns=(stat.st_atime_ns, stat.st_mtime_ns))
+                    elif change == "untracked":
+                        (self.repo / "src/new.txt").write_text("new", encoding="utf-8")
+                    elif change == "delete":
+                        (self.repo / "src/code.txt").unlink()
+                    elif change == "state":
+                        with self.run.edit() as state:
+                            state["extra"] = True
+                    elif change == "artifact":
+                        artifact = self.repo / view.state()["snapshots"]["s-" + change]["artifact"]
+                        artifact.write_text("tampered", encoding="utf-8")
+                    elif change == "head":
+                        self.git("commit", "--allow-empty", "--quiet", "-m", "head moved")
+                    else:
+                        self.git("rm", "--cached", "--quiet", "src/code.txt")
+                self.git("reset", "--hard", "--quiet", "HEAD")
+                (self.repo / "src/new.txt").unlink(missing_ok=True)
+
+    def test_validation_rejects_redirection_even_on_cached_artifact(self):
+        self.snapshot()
+        outside = self.repo / "outside.json"
+        artifact = self.repo / self.run.state()["snapshots"]["source"]["artifact"]
+        outside.write_bytes(artifact.read_bytes())
+        try:
+            probe = self.repo / "probe-link"
+            probe.symlink_to(outside)
+            probe.unlink()
+        except OSError:
+            self.skipTest("Symlink creation unavailable on this host")
+        with self.assertRaises(core.Error), validation.operation(self.run) as view:
+            self.assertTrue(evidence.snapshot_matches(view, "source"))
+            artifact.unlink()
+            artifact.symlink_to(outside)
+            self.assertFalse(evidence.snapshot_matches(view, "source"))
         (self.repo / "src" / "code.txt").write_text("restored", encoding="utf-8")
         self.assertFalse(evidence.snapshot_matches(self.run, "deletion"))
 

@@ -1,0 +1,35 @@
+{
+  "id": "d68a5ff3662e466aa117d3537bfd2cc3",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-31-merge-master",
+  "agent": "merge_client_docs",
+  "invocation": "merge-client-1",
+  "stage": "integrate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings not exposed",
+  "started_at": "2026-10-31T13:13:13.351469+00:00",
+  "ended_at": "2026-10-31T13:15:18.592696+00:00",
+  "elapsed_seconds": 125.241227,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Six assigned conflict files resolved, marker and whitespace checks pass; centralized parent runtime checks pending",
+  "unavailable_reasons": {
+    "input_tokens": "Stage-aligned token baseline had no telemetry; collector delta retained outside repository; tool/retry counters unavailable",
+    "output_tokens": "Stage-aligned token baseline had no telemetry; collector delta retained outside repository; tool/retry counters unavailable",
+    "cache_read_tokens": "Stage-aligned token baseline had no telemetry; collector delta retained outside repository; tool/retry counters unavailable",
+    "tool_calls": "Stage-aligned token baseline had no telemetry; collector delta retained outside repository; tool/retry counters unavailable",
+    "retries": "Stage-aligned token baseline had no telemetry; collector delta retained outside repository; tool/retry counters unavailable"
+  },
+  "unavailable_reason": "Stage-aligned token baseline had no telemetry; collector delta retained outside repository; tool/retry counters unavailable"
+}

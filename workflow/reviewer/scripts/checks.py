@@ -183,6 +183,51 @@ def cycle(args):
     return 0
 
 
+def finding_close_batch(args):
+    """Preflight every closure before committing any transition; retries are idempotent."""
+    from validation import operation
+    run = open_run(args)
+    value = _input(run, args.input)
+    if set(value) != {"reviewer", "record_id", "snapshot_id", "findings"}:
+        raise Error("Batch closure requires reviewer, record_id, snapshot_id and findings")
+    reviewer, record_id, snapshot_id = (identifier(value[k]) for k in ("reviewer", "record_id", "snapshot_id"))
+    items = _list(value["findings"], "findings")
+    if not items:
+        raise Error("Batch closure requires at least one finding")
+    prepared, unchanged, seen = [], [], set()
+    with run.edit() as state:
+        with operation(run) as view:
+            for item in items:
+                if not isinstance(item, dict) or set(item) - {"id", "evidence", "reason"}:
+                    raise Error("Invalid batch finding fields")
+                fid = identifier(item.get("id"))
+                if fid in seen:
+                    raise Error("Duplicate finding in batch")
+                seen.add(fid)
+                finding = state["findings"].get(fid)
+                if not finding:
+                    raise Error("Unknown finding in batch")
+                event = {"status": "closed", "reviewer": reviewer, "record_id": record_id,
+                         "snapshot_id": snapshot_id, "evidence": _evidence(view, item.get("evidence")), "at": now()}
+                if "reason" in item:
+                    event["reason"] = _string(item["reason"], "reason")
+                if finding["status"] == "closed":
+                    previous = finding["history"][-1]
+                    if {k: v for k, v in previous.items() if k != "at"} != {k: v for k, v in event.items() if k != "at"}:
+                        raise Error("Closed finding differs from batch; reopen explicitly for new review")
+                    validate_closure(view, state, finding, previous)
+                    unchanged.append(fid)
+                else:
+                    validate_closure(view, state, finding, event)
+                    prepared.append((finding, event))
+        for finding, event in prepared:
+            finding["history"].append(event)
+            finding["status"] = "closed"
+            finding["evidence"] = list(dict.fromkeys(finding["evidence"] + event["evidence"]))
+    _emit({"closed": [finding["id"] for finding, _ in prepared], "unchanged": unchanged})
+    return 0
+
+
 def _number(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value >= 0
 
@@ -201,12 +246,17 @@ def _identity(record):
     return "|".join(str(record.get(key, "")) for key in ("agent", "invocation", "stage", "attempt"))
 
 
+def code_change(record):
+    """Integration wiring has the same review-independence boundary as other code."""
+    return record.get("stage") in ("implement", "fix") or (
+        record.get("stage") == "integrate" and record.get("changes_code") is True)
+
+
 def validate_closure(run, state, finding, closure):
     """Require fresh independent revalidation, including when rechecking a closed finding."""
     from evidence import snapshot_matches
     reviewer = finding.get("reviewer")
-    implementers = {r.get("agent") for r in state["records"].values()
-                    if r.get("stage") in ("implement", "fix")}
+    implementers = {r.get("agent") for r in state["records"].values() if code_change(r)}
     if (closure.get("status") != "closed" or closure.get("reviewer") != reviewer
             or reviewer == finding.get("owner") or reviewer in implementers):
         raise Error("closure requires the assigned independent reviewer")
@@ -234,7 +284,7 @@ def validate_closure(run, state, finding, closure):
             boundaries.append(reopened)
     completed_changes = []
     for row in state["records"].values():
-        if row.get("agent") == finding.get("owner") and row.get("stage") in ("implement", "fix"):
+        if row.get("agent") == finding.get("owner") and code_change(row):
             if row.get("status") in ("succeeded", "failed", "interrupted"):
                 change_end = _date(row.get("end"))
                 if change_end is None:
@@ -254,6 +304,12 @@ def validate_closure(run, state, finding, closure):
 
 def check_run(run):
     """Return machine-readable consistency violations and telemetry coverage."""
+    from validation import operation
+    with operation(run) as view:
+        return _check_run(view)
+
+
+def _check_run(run):
     state = run.state()
     errors, warnings = [], []
     records = state.get("records", {})
@@ -333,7 +389,7 @@ def check_run(run):
     for stage in state.get("required_stages", REQUIRED_STAGES):
         if stage not in stages:
             errors.append(f"required stage {stage}: no successful resource record")
-    implementers = {r.get("agent") for r in records.values() if r.get("stage") in ("implement", "fix")}
+    implementers = {r.get("agent") for r in records.values() if code_change(r)}
     reviewers = {r.get("agent") for r in successful if r.get("stage") in ("review", "revalidate")}
     security_reviewers = {r.get("agent") for r in successful if r.get("stage") == "security"}
     if not reviewers - implementers:
@@ -398,6 +454,9 @@ def check_run(run):
             errors.append(f"{kind}: no current evidence recorded")
     if implementation_handoffs == 0:
         errors.append("handoffs: no current snapshot-bound implementation handoff recorded")
+    if state.get("workflow_version", 2) >= 3:
+        from planning import readiness_errors
+        errors.extend(readiness_errors(run, state, closing=True))
     return {"ok": not errors, "errors": errors, "warnings": warnings,
             "coverage": {"expected_records": len(expected), "resource_records": len(records),
                          "unavailable_token_metrics": unavailable},
@@ -432,6 +491,9 @@ def register(subparsers):
     update.add_argument("--snapshot", help="current post-fix snapshot; required for closure")
     update.add_argument("--reason")
     update.set_defaults(func=finding_update)
+    batch = commands.add_parser("close-batch", help="validate all finding closures before one atomic state update")
+    batch.add_argument("--input", required=True)
+    batch.set_defaults(func=finding_close_batch)
     parser = subparsers.add_parser("cycle", help="record fix/review outcomes with a reassessment guard")
     parser.add_argument("--reviewer", required=True)
     parser.add_argument("--outcome", choices=("passed", "failed"), required=True)

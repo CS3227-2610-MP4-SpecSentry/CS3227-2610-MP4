@@ -20,7 +20,8 @@ def identity(args):
 def initialize(args):
     if args.scope != "reviewer":
         raise Error("Only Reviewer workflow runs are supported")
-    run = create_run(args.repo, args.prompter, args.run_id, args.requirement)
+    run = create_run(args.repo, args.prompter, args.run_id, args.requirement,
+                     getattr(args, "workflow_version", 3))
     emit({"run": str(run.path), "scope": "reviewer"})
     return 0
 
@@ -41,6 +42,18 @@ def start(args):
     key = record_key(args.agent, args.invocation, args.stage, args.attempt)
     record_id = "rec-" + uuid.uuid4().hex[:16]
     with run.edit() as data:
+        assignment_id = getattr(args, "assignment", None)
+        changes_code = getattr(args, "changes_code", False)
+        if changes_code and args.stage != "integrate":
+            raise Error("--changes-code is for integration; implementation/fix already implies code changes")
+        if data.get("workflow_version", 2) >= 3 and args.stage in ("implement", "fix"):
+            from planning import readiness_errors
+            owner = data["assignments"].get(assignment_id)
+            if not owner or owner["agent"] != args.agent:
+                raise Error("Version 3 implementation/fix starts require --assignment owned by this agent")
+            errors = readiness_errors(run, data, assignment_id)
+            if errors:
+                raise Error("Dispatch prerequisites: " + "; ".join(errors))
         expected = data["expected"].setdefault(key, {**identity(args), "record_id": None})
         if expected.get("record_id"):
             raise Error("This agent/stage/attempt already has a record")
@@ -52,7 +65,10 @@ def start(args):
             "observed_effort": None, "usage": {k: None for k in METRICS[:3]},
             "tool_calls": None, "retries": None, "usage_source": None,
             "unavailable_reasons": {}, "usage_import_id": None,
+            "assignment": assignment_id,
         }
+        if changes_code:
+            data["records"][record_id]["changes_code"] = True
     emit({"record_id": record_id, "key": key})
     return 0
 
@@ -60,26 +76,34 @@ def start(args):
 def finish(args):
     run = open_run(args)
     with run.edit() as data:
-        record = data["records"].get(args.id)
-        if not record or record["status"] != "running":
-            raise Error("Only a running record can be finished")
-        end = now()
-        elapsed = (dt.datetime.fromisoformat(end) - dt.datetime.fromisoformat(record["start"])).total_seconds()
-        if elapsed < 0:
-            raise Error("System clock moved backwards; inspect timing before completing")
-        record.update(status=args.status, end=end, elapsed_seconds=elapsed, outcome=text(args.outcome))
-        reason = text(args.unavailable_reason)
-        if not record.get("usage_source"):
-            record["unavailable_reasons"]["usage_source"] = reason
-        for metric in METRICS:
-            value = record["usage"].get(metric) if metric in record["usage"] else record.get(metric)
-            if value is None:
-                record["unavailable_reasons"][metric] = reason
-        for setting in ("observed_model", "observed_effort"):
-            if not record[setting]:
-                record["unavailable_reasons"][setting] = reason
+        elapsed = finish_record(data, args.id, args.status, args.outcome, args.unavailable_reason)
     emit({"record_id": args.id, "status": args.status, "elapsed_seconds": elapsed})
     return 0
+
+
+def finish_record(data, record_id, status, outcome, unavailable_reason):
+    """Mutate a caller-owned transaction; completion uses the same recording rules."""
+    record = data["records"].get(record_id)
+    if not record or record["status"] != "running":
+        raise Error("Only a running record can be finished")
+    if status not in ("succeeded", "failed", "interrupted"):
+        raise Error("Invalid completion status")
+    end = now()
+    elapsed = (dt.datetime.fromisoformat(end) - dt.datetime.fromisoformat(record["start"])).total_seconds()
+    if elapsed < 0:
+        raise Error("System clock moved backwards; inspect timing before completing")
+    record.update(status=status, end=end, elapsed_seconds=elapsed, outcome=text(outcome))
+    reason = text(unavailable_reason)
+    if not record.get("usage_source"):
+        record["unavailable_reasons"]["usage_source"] = reason
+    for metric in METRICS:
+        value = record["usage"].get(metric) if metric in record["usage"] else record.get(metric)
+        if value is None:
+            record["unavailable_reasons"][metric] = reason
+    for setting in ("observed_model", "observed_effort"):
+        if not record[setting]:
+            record["unavailable_reasons"][setting] = reason
+    return elapsed
 
 
 def usage(args):
@@ -132,9 +156,9 @@ def usage(args):
     return 0
 
 
-def summarize(args):
-    run = open_run(args)
-    data = run.state()
+def summarize(args, data=None):
+    if data is None:
+        data = open_run(args).state()
     records = list(data["records"].values())
     ended = [r for r in records if r.get("end")]
     intervals = [(dt.datetime.fromisoformat(r["start"]), dt.datetime.fromisoformat(r["end"])) for r in ended]
@@ -171,6 +195,7 @@ def register(subparsers):
     parser.add_argument("--prompter", required=True)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--requirement", action="append", required=True)
+    parser.add_argument("--workflow-version", type=int, choices=(2, 3), default=3)
     parser.set_defaults(func=initialize)
     for name, handler in (("expect", expect), ("start", start)):
         parser = subparsers.add_parser(name)
@@ -178,6 +203,9 @@ def register(subparsers):
         if name == "start":
             parser.add_argument("--model", required=True)
             parser.add_argument("--effort", required=True)
+            parser.add_argument("--assignment", help="required for version 3 implementation/fix dispatch")
+            parser.add_argument("--changes-code", action="store_true",
+                                help="mark integration wiring edits for independent review and closure timing")
         parser.set_defaults(func=handler)
     parser = subparsers.add_parser("finish")
     parser.add_argument("--id", required=True)

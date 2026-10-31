@@ -1,0 +1,35 @@
+{
+  "id": "44b8aafac4b647c39ffc7bc57ca750ed",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-31-merge-master",
+  "agent": "merge_server_review",
+  "invocation": "review-2",
+  "stage": "revalidate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings not exposed",
+  "started_at": "2026-10-31T13:23:34.772492+00:00",
+  "ended_at": "2026-10-31T13:24:03.002102+00:00",
+  "elapsed_seconds": 28.22961,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent source revalidation of S01-S04 fixes and client session merge; no additional security blockers; parent owns executable verification",
+  "unavailable_reasons": {
+    "input_tokens": "Aligned collector delta retained externally; counters cutoff precedes final reporting; model/tool/retry telemetry not exposed",
+    "output_tokens": "Aligned collector delta retained externally; counters cutoff precedes final reporting; model/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Aligned collector delta retained externally; counters cutoff precedes final reporting; model/tool/retry telemetry not exposed",
+    "tool_calls": "Aligned collector delta retained externally; counters cutoff precedes final reporting; model/tool/retry telemetry not exposed",
+    "retries": "Aligned collector delta retained externally; counters cutoff precedes final reporting; model/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Aligned collector delta retained externally; counters cutoff precedes final reporting; model/tool/retry telemetry not exposed"
+}

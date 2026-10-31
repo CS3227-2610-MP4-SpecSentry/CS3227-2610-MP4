@@ -1,0 +1,15 @@
+
+Running 4 tests using 1 worker
+
+  ok 1 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:16:5 › ai-human-save (3.1s)
+  ok 2 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:31:5 › ai-transient-page (2.0s)
+  ok 3 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:43:5 › ai-ui-fallback (1.7s)
+  ok 4 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:52:5 › ai-ui-selection-stale (2.1s)
+
+  4 passed (13.7s)
+
+[WebServer] (node:39640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:31084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39640) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.

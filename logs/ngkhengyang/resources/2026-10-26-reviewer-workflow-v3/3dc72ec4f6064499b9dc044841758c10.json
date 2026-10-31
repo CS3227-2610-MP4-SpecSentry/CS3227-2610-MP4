@@ -1,0 +1,35 @@
+{
+  "id": "3dc72ec4f6064499b9dc044841758c10",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-26-reviewer-workflow-v3",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "fix",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Selected settings supplied by caller; observed metadata may be unavailable",
+  "started_at": "2026-10-26T07:13:18.707317+00:00",
+  "ended_at": "2026-10-26T07:16:52.790865+00:00",
+  "elapsed_seconds": 214.083548,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Direct database verification now requires fixture validation; all 13 affected version 3 harness tests passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "output_tokens": "Per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "cache_read_tokens": "Per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "tool_calls": "Per-stage token, cache, tool-call and retry telemetry is not exposed",
+    "retries": "Per-stage token, cache, tool-call and retry telemetry is not exposed"
+  },
+  "unavailable_reason": "Per-stage token, cache, tool-call and retry telemetry is not exposed"
+}

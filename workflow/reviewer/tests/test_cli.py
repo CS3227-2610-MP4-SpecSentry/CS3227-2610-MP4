@@ -32,7 +32,7 @@ class CLITests(unittest.TestCase):
             source.write_text("fixture\n", encoding="utf-8")
             git("add", "feature.txt")
             git("commit", "-m", "fixture")
-            result = cli("init", "--scope", "reviewer", "--prompter", "tester",
+            result = cli("init", "--scope", "reviewer", "--workflow-version", "2", "--prompter", "tester",
                          "--run-id", "integration", "--requirement", "REQ-REV-002")
             run = result["run"]
 

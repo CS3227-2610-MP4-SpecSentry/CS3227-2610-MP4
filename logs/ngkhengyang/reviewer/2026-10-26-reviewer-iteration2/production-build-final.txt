@@ -1,0 +1,33 @@
+npm notice run specsentry@0.1.0 build
+npm notice run npm run build -w @specsentry/shared && npm run build -w @specsentry/server && npm run build -w @specsentry/client
+npm notice run @specsentry/shared@0.1.0 build
+npm notice run tsup src/index.ts --format cjs,esm --dts --clean
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+ESM dist\index.mjs 22.68 KB
+ESM ⚡️ Build success in 66ms
+CJS dist\index.js 30.34 KB
+CJS ⚡️ Build success in 67ms
+DTS Build start
+DTS ⚡️ Build success in 3484ms
+DTS dist\index.d.ts  52.47 KB
+DTS dist\index.d.mts 52.47 KB
+npm notice run @specsentry/server@0.1.0 build
+npm notice run tsc -p tsconfig.build.json
+npm notice run @specsentry/client@0.1.0 build
+npm notice run tsc --noEmit && vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 122 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.49 kB │ gzip:   0.30 kB
+dist/assets/index-CqbdtgUU.css    1.22 kB │ gzip:   0.60 kB
+dist/assets/index-9r4pjuYj.js   389.61 kB │ gzip: 117.99 kB
+
+✓ built in 352ms

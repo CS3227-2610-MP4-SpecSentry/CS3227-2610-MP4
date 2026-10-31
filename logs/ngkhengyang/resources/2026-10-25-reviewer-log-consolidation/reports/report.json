@@ -1,0 +1,57 @@
+{
+  "records": [
+    {
+      "id": "c9bb834a44bb49629119926c19fe0349",
+      "prompter": "ngkhengyang",
+      "session": "2026-10-25-reviewer-log-consolidation",
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "document",
+      "attempt": 1,
+      "selected_model": "gpt-6.1-sol",
+      "selected_effort": "high",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Human-confirmed main settings; consolidation of existing workflow records",
+      "started_at": "2026-10-25T14:07:34.628804+00:00",
+      "ended_at": "2026-10-25T14:12:05.588729+00:00",
+      "elapsed_seconds": 270.959925,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "One consolidated canonical log now covers run execution, tasks, findings, resources, workflow issues, implemented specification changes and pending automation; former log redirects, index/changelog updated;49links and evidence consistency checks passed; no product/executable changes",
+      "unavailable_reasons": {
+        "input_tokens": "No attributable runtime token/cache/provider tool/retry counters or independently observed execution settings; selected main settings human-confirmed",
+        "output_tokens": "No attributable runtime token/cache/provider tool/retry counters or independently observed execution settings; selected main settings human-confirmed",
+        "cache_read_tokens": "No attributable runtime token/cache/provider tool/retry counters or independently observed execution settings; selected main settings human-confirmed",
+        "tool_calls": "No attributable runtime token/cache/provider tool/retry counters or independently observed execution settings; selected main settings human-confirmed",
+        "retries": "No attributable runtime token/cache/provider tool/retry counters or independently observed execution settings; selected main settings human-confirmed"
+      },
+      "unavailable_reason": "No attributable runtime token/cache/provider tool/retry counters or independently observed execution settings; selected main settings human-confirmed"
+    }
+  ],
+  "issues": [],
+  "ok": true,
+  "measured_totals_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "coverage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "summed_interval_seconds": 270.959925,
+  "limit": "Only explicitly registered intervals. Null telemetry is unavailable, not zero; overlapping intervals are not wall time."
+}

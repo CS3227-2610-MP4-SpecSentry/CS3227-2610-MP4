@@ -1,0 +1,54 @@
+(node:36560) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL src/server/test/proposal-lifecycle.integration.ts (17925.995 s)
+  ● PostgreSQL owner revision lifecycle (REQ-CON-001/002/004/005/006/007/009, REQ-REV-006/008) › rolls back create/save on every root, working-content and activity write failure
+
+    thrown: "Exceeded timeout of 5000 ms for a hook.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      at _getError (../../node_modules/jest-circus/build/jestAdapterInit.js:1985:12)
+          at Array.map (<anonymous>)
+
+    Cause:
+        thrown: "Exceeded timeout of 5000 ms for a hook.
+        Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+          55 |       role: name === 'owner' || name === 'earlyOwner' || name === 'other' ? 'CONTRIBUTOR' as const : name === 'maintainer' ? 'RELEASE_MAINTAINER' as const : 'REVIEWER' as const })) });
+          56 |   });
+        > 57 |   beforeEach(async () => {
+             |   ^
+          58 |     await clean();
+          59 |     await database.client.userAccount.updateMany({ where: { id: { in: Object.values(ids) } }, data: { enabled: true, version: 1 } });
+          60 |     owner = await login('owner'); other = await login('other'); a = await login('a'); b = await login('b'); maintainer = await login('maintainer');
+
+          at test/proposal-lifecycle.integration.ts:57:3
+          at Object.<anonymous> (test/proposal-lifecycle.integration.ts:24:1)
+
+  ● PostgreSQL owner revision lifecycle (REQ-CON-001/002/004/005/006/007/009, REQ-REV-006/008) › rolls back withdrawal and approval invalidation with their assignment/root/activity/notification writes
+
+    thrown: "Exceeded timeout of 5000 ms for a hook.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      at _getError (../../node_modules/jest-circus/build/jestAdapterInit.js:1985:12)
+          at Array.map (<anonymous>)
+
+    Cause:
+        thrown: "Exceeded timeout of 5000 ms for a hook.
+        Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+          55 |       role: name === 'owner' || name === 'earlyOwner' || name === 'other' ? 'CONTRIBUTOR' as const : name === 'maintainer' ? 'RELEASE_MAINTAINER' as const : 'REVIEWER' as const })) });
+          56 |   });
+        > 57 |   beforeEach(async () => {
+             |   ^
+          58 |     await clean();
+          59 |     await database.client.userAccount.updateMany({ where: { id: { in: Object.values(ids) } }, data: { enabled: true, version: 1 } });
+          60 |     owner = await login('owner'); other = await login('other'); a = await login('a'); b = await login('b'); maintainer = await login('maintainer');
+
+          at test/proposal-lifecycle.integration.ts:57:3
+          at Object.<anonymous> (test/proposal-lifecycle.integration.ts:24:1)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 20 passed, 22 total
+Snapshots:   0 total
+Time:        17926.351 s
+Ran all test suites within paths "src/server/test/proposal-lifecycle.integration.ts".

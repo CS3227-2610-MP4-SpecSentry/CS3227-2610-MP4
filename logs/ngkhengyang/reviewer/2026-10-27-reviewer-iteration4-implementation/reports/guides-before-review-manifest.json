@@ -1,0 +1,10 @@
+{
+  "scope": "Documentation only, independent review pending",
+  "files": {
+    "docs/UserGuide.md": "71795dfcdeda29087212ab60fa5175f6a210a62b0e540e666db5ced3c417292a",
+    "docs/DeveloperGuide.md": "c09aeef551bec61b87c52cca3fbd428d12cb332a338d62c10a0f99a38004c5e2",
+    "docs/Architecture.md": "c66b5905f8115c1ac7a9d68245356031442b7a99d93d9a2b6d6a8692dab3a86f",
+    "workflow/TRACEABILITY.md": "987dbe02916fa31988c0e892a31db65e9b1430d327c11ceba6753f8056bf1ee8"
+  },
+  "links": "passed"
+}

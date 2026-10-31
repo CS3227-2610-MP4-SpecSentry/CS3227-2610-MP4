@@ -1,0 +1,35 @@
+{
+  "id": "3d5b77934fa54ec5b5f33bdc7145bbc1",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-26-consolidate-multi-agent-skill",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "author-and-validate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact selected execution model and effort not exposed in this session",
+  "started_at": "2026-10-25T18:35:59.299926+00:00",
+  "ended_at": "2026-10-25T18:38:56.238680+00:00",
+  "elapsed_seconds": 176.938754,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Created general multi-agent consolidation skill and outline; local links and YAML metadata validated with existing tooling; bundled Python validator unavailable due to missing PyYAML",
+  "unavailable_reasons": {
+    "input_tokens": "Stage-attributable token, cache, tool, retry, and observed execution telemetry not exposed",
+    "output_tokens": "Stage-attributable token, cache, tool, retry, and observed execution telemetry not exposed",
+    "cache_read_tokens": "Stage-attributable token, cache, tool, retry, and observed execution telemetry not exposed",
+    "tool_calls": "Stage-attributable token, cache, tool, retry, and observed execution telemetry not exposed",
+    "retries": "Stage-attributable token, cache, tool, retry, and observed execution telemetry not exposed"
+  },
+  "unavailable_reason": "Stage-attributable token, cache, tool, retry, and observed execution telemetry not exposed"
+}

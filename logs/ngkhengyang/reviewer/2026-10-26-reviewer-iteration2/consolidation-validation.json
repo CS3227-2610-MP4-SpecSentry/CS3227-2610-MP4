@@ -1,0 +1,39 @@
+{
+  "validated_at": "2026-10-26T03:41:36.977622+00:00",
+  "markdown_files_checked": 18,
+  "local_links_checked": 147,
+  "broken_links": [],
+  "reviewed_source_and_doc_files": 104,
+  "source_doc_mismatches": [],
+  "resource_records": 19,
+  "expected_records": 19,
+  "unfinished_records": [],
+  "participants": [
+    "lifecycle",
+    "main",
+    "notifications",
+    "security-reviewer",
+    "ui"
+  ],
+  "closed_findings": [
+    "F-001",
+    "F-002",
+    "F-003"
+  ],
+  "totals_match": true,
+  "full_workflow_completeness": true,
+  "final_checks_pass": true,
+  "request_outcomes": "implementation complete; preparation pause fulfilled; explicit Sol/high resumption honored; consolidation report drafted and validated",
+  "application_tests_rerun_for_consolidation": false,
+  "final_validated_at": "2026-10-26T03:44:34.227826+00:00",
+  "consolidation_status": "succeeded",
+  "consolidation_elapsed_seconds": 1142.381085,
+  "consolidation_usage": {
+    "input_tokens": 1783541,
+    "output_tokens": 11272,
+    "cache_read_tokens": 1779584,
+    "tool_calls": null,
+    "retries": null
+  },
+  "report_rendering_recovery": "Misplaced usage input preserved outside interval directory; final reporter succeeded; original measurement unchanged"
+}

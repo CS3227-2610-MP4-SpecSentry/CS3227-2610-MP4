@@ -1,0 +1,32 @@
+{
+  "id": "b63fc8c490b84827bdfab3b0c41d2491",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-31-merge-master",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "resolve",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings not exposed",
+  "started_at": "2026-10-31T13:12:43.768035+00:00",
+  "ended_at": "2026-10-31T13:27:52.955534+00:00",
+  "elapsed_seconds": 909.187499,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": 12293005,
+    "output_tokens": 15508,
+    "cache_read_tokens": 12187008,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": "MP4 sessions 2026-10-31-merge-master-start.json/end.json; main thread only; cutoff 2026-10-31T13:27:02.663Z; explicit sampled interval excludes unflushed/final reporting work",
+  "outcome": "Conflicts resolved and independently reviewed; scoped executable checks pass; merge uncommitted",
+  "unavailable_reasons": {
+    "tool_calls": "No attributable collector counters",
+    "retries": "No attributable collector counters"
+  },
+  "unavailable_reason": "Execution settings/tool/retry counters unavailable; sampled usage excludes final bookkeeping"
+}

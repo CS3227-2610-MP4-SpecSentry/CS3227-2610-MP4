@@ -1,0 +1,32 @@
+{
+  "id": "4ebd30d5bfb94d6eb1cf7f53e583f21a",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-31-secret-scan",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "diagnose-fix-verify",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings not exposed",
+  "started_at": "2026-10-31T13:33:41.289657+00:00",
+  "ended_at": "2026-10-31T13:38:13.042995+00:00",
+  "elapsed_seconds": 271.753338,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": 3400004,
+    "output_tokens": 5581,
+    "cache_read_tokens": 3382656,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": "MP4 sessions 2026-10-31-secret-scan-start.json/end.json; main only; cutoff 2026-10-31T13:37:10.236Z",
+  "outcome": "Historical16 false positives classified; exact fingerprints ignored; full history and detection regressions validated",
+  "unavailable_reasons": {
+    "tool_calls": "not measured",
+    "retries": "not measured"
+  },
+  "unavailable_reason": "Model/effort/tool/retry metadata unavailable; counters exclude reporting after cutoff"
+}

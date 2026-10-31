@@ -5,11 +5,22 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import express, { type Request, type Response, type NextFunction } from 'express';
 import helmet from 'helmet';
 import { SERVER_CONFIG, type ServerConfig } from './config';
+import { SafeAiError } from './ai/gateway';
 
 @Catch()
 class SafeExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost): void {
     const response = host.switchToHttp().getResponse<Response>();
+    if (exception instanceof SafeAiError) {
+      const status = ['RATE_LIMIT', 'QUEUE_FULL'].includes(exception.errorClass) ? 429 :
+        ['INPUT_LIMIT', 'SECRET_DETECTED', 'UNSUPPORTED_INPUT'].includes(exception.errorClass) ? 422 :
+        exception.errorClass === 'ACCESS_LOST' ? 403 : exception.errorClass === 'SCOPE_CHANGED' ? 409 : 503;
+      if (exception.retryAfterSeconds !== undefined && Number.isFinite(exception.retryAfterSeconds))
+        response.setHeader('Retry-After', String(Math.min(86400, Math.max(1, Math.ceil(exception.retryAfterSeconds)))));
+      response.status(status).json({ code: 'AI_UNAVAILABLE', reason: exception.errorClass,
+        message: 'AI analysis is unavailable. Manual review remains available.', correlationId: response.getHeader('x-request-id') });
+      return;
+    }
     const oversizedBody = exception && typeof exception === 'object' && 'type' in exception && exception.type === 'entity.too.large';
     const status = exception instanceof HttpException ? exception.getStatus() : oversizedBody ? 413 : 500;
     const codes: Record<number, string> = {

@@ -1,0 +1,21 @@
+{
+  "baseline": "0becf9381c893bee8db3f50d6a7d61777f843898",
+  "head": "0becf9381c893bee8db3f50d6a7d61777f843898",
+  "scope": "Changed Reviewer workflow sources, documentation and tests; log/resource evidence excluded",
+  "files": {
+    "workflow/reviewer/IMPLEMENTATION.md": "2fa7c34ce15a5bdb2e33e9f47f4f060cdbefa8705cf617ce1e4bce4e2a63a860",
+    "workflow/reviewer/README.md": "a251653c7b1048e5001a9e130ee3090db3af38c1352ad355ed124c6734645982",
+    "workflow/reviewer/scripts/README.md": "36ac6a6379749b7ef7b8b44770281ea7ac2f91e71b66e1eb2b93218f53a2b7ca",
+    "workflow/reviewer/scripts/V3.md": "90e6f167bc56b08065663bee408d39f15cd8c388e86d3ca6defded1e0106dc07",
+    "workflow/reviewer/scripts/checks.py": "94fe8547b81bbff340393d621594c9a636e3fce66466c05aa5b91cb2092867f2",
+    "workflow/reviewer/scripts/completion.py": "903486ebfe4bfd7bd09054a947cd56e3bf609ad779f9726a4f51ca4eba564675",
+    "workflow/reviewer/scripts/core.py": "92f940913e504d3dd138abe6f506f6a71e73d2b53c42e67c42d2a46e06e746ff",
+    "workflow/reviewer/scripts/evidence.py": "58abcc4b51d05d5bcf6f6e60bb63f364d8daa66da145044d4068812b75232783",
+    "workflow/reviewer/scripts/planning.py": "8d55d0e87e4fe3fcf843d003ac64d7e74ef15473fac1f4e15c81f530d9621f44",
+    "workflow/reviewer/scripts/recording.py": "bbe1ff6991ee70e5f2a57fe33dd004513ed38c604a77224f36a45b04444a8288",
+    "workflow/reviewer/scripts/verification.py": "b17c5e9fc19ff1a9d8d3a6932d136c56014b02f61472569b8fcc922d3ce676d8",
+    "workflow/reviewer/scripts/workflow.py": "3f8c78eb51fe23d09cb876c71cd5d83d522e2e69206142cf2ef25ac4de8a28c5",
+    "workflow/reviewer/tests/test_cli.py": "7feb64e3b7643f27aba3e867d26c8e4dcaf72a6f48fffe42889e008343fc0bb1",
+    "workflow/reviewer/tests/test_v3.py": "32b301bcb24b86fd9e88df5a319b7c264a9a78d72ec881955217ce35dd166bcb"
+  }
+}

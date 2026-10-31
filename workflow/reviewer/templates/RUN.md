@@ -12,6 +12,7 @@ Copy relevant sections to `logs/<name>/<log_name.md>` (use the prompting person'
 ## Run and implementation brief
 
 - Run ID, goal, main agent, start time/timezone, status:
+- Applicable [workflow revision](../IMPLEMENTATION.md#changelog), task classification and decomposition rationale (parallel benefit versus coordination cost):
 - Source requirement IDs and spec commit/document state:
 - Acceptance criteria, edge/failure cases, exclusions:
 - Current architecture and components to change:
@@ -20,6 +21,7 @@ Copy relevant sections to `logs/<name>/<log_name.md>` (use the prompting person'
 - Material ambiguities, recommendation, prompter decision/source:
 - Context supplied and significant additional retrievals with purpose:
 - Expected checks and environment prerequisites:
+- Preflight ready/missing status; cold setup costs and any explicitly supplied resource budget:
 
 ## Security disposition
 
@@ -31,7 +33,7 @@ Copy relevant sections to `logs/<name>/<log_name.md>` (use the prompting person'
 ## Assignment
 
 - Worker/invocation, goal, requirement IDs, source pointers:
-- Model/effort and selection rationale:
+- Model/effort and task-complexity rationale under [resource policy](../RESOURCES.md#dispatch-policy); Astra exception evidence if applicable:
 - Context pack, contracts, dependencies:
 - Allowed files/directories, exclusions, shared-file owner:
 - Expected behavior, tests, completion evidence:
@@ -73,6 +75,7 @@ Use CRITICAL/HIGH/MEDIUM/LOW with a concrete impact explanation. State blocking 
 
 - End-to-end wall time:
 - Summed agent elapsed time (overlaps included):
+- Parallel-merged elapsed; measured waits/pauses/setup where exposed; unknown idle and computation-time limits:
 - Measurement coverage, unavailable values, aggregation limits:
 
 ## Final evidence and continuation

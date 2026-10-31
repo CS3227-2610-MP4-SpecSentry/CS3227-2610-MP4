@@ -1,0 +1,6 @@
+
+Test Suites: 2 passed, 2 total
+Tests:       13 passed, 13 total
+Snapshots:   0 total
+Time:        14.981 s
+Ran all test suites within paths "src/server/test/business-context.integration.ts", "src/server/test/identity.integration.ts".

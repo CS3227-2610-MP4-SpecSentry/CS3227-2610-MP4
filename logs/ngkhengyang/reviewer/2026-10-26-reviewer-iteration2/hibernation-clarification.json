@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-10-26T06:17:17.322737+00:00",
+  "source": "Direct user clarification in the current conversation,26October2026",
+  "affected_record_id": "rec-c1dee73208e444c8",
+  "original_recorded_elapsed_seconds": 27606.337084,
+  "user_reported_cause": "Device idle/hibernation",
+  "computation_during_dormant_period": false,
+  "implementation_during_dormant_period": false,
+  "exact_suspend_resume_timestamps": null,
+  "timing_limitation": "Original interval envelope is preserved; dormant gap is not active work or a workflow inefficiency. Exact adjusted active time cannot be derived without suspend/resume timestamps.",
+  "original_resource_records_modified": false,
+  "planning_context": {
+    "referenced_thread": "01a17391-375a-7e91-ac79-add926835e61",
+    "read_before_use": true,
+    "purpose": "Intentional substantial vertical-slice iterations and suggested lifecycle/notification/UI ownership"
+  },
+  "follow_up_scope": "Clarification and advisory prioritization only; no workflow or product implementation"
+}

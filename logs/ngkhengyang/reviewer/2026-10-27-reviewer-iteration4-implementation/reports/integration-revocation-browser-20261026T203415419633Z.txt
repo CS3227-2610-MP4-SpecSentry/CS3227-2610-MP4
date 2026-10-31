@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+  x  1 [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history (2.0s)
+
+
+  1) [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history 
+
+    Error: /api/proposals/ea90f393-8a98-4574-8793-29452f9dd49f/submit returned 422
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+       at fixtures\reviewer-revocation.ts:37
+
+      35 |   return { token: session.csrfToken, async post(path: string, data: unknown) {
+      36 |     const response = await request.post(path, { headers: { 'x-csrf-token': session.csrfToken, 'Idempotency-Key': randomUUID() }, data });
+    > 37 |     expect(response.ok(), `${path} returned ${response.status()}`).toBe(true);
+         |                                                                    ^
+      38 |     return response.json();
+      39 |   } };
+      40 | }
+        at Object.post (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\workflow\tests\browser\fixtures\reviewer-revocation.ts:37:68)
+        at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\workflow\tests\browser\reviewer-revocation.spec.ts:15:5
+
+    Error Context: test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\reviewer-revocation-revoke-03b3b-te-blocker-and-safe-history-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › workflow\tests\browser\reviewer-revocation.spec.ts:4:5 › revoke-ui API-backed current approval, candidate blocker, and safe history 
+
+[WebServer] (node:2096) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:27252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2096) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.

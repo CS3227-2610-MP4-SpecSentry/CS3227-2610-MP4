@@ -6,6 +6,8 @@ import type { DatabaseService } from '../database/database.service';
 import type { AuthRequest } from './access';
 import { ABSOLUTE_MS } from './session.store';
 
+export interface BusinessDeadline { remainingMs(): number; assertRemaining(): void }
+
 export interface BusinessActor {
   accountId: string; accountVersion: number; correlationId?: string;
   role?: string;
@@ -48,17 +50,29 @@ export async function lockBusinessContext(tx: Prisma.TransactionClient, actor: B
 
 export async function businessTransaction<T>(database: DatabaseService, actor: BusinessActor, role: string,
   target: string, operation: string, work: (tx: Prisma.TransactionClient, accounts: { id: string; enabled: boolean; role: string; version: number }[]) => Promise<T>,
-  additionalAccountIds: string[] = []) {
+  additionalAccountIds: string[] = [], options?: { deadline: BusinessDeadline }) {
   try {
+    options?.deadline.assertRemaining();
+    const remaining = options ? Math.max(1, Math.floor(options.deadline.remainingMs())) : undefined;
     return await database.client.$transaction(async tx => {
+      if (options) {
+        options.deadline.assertRemaining();
+        const milliseconds = String(Math.max(1, Math.floor(options.deadline.remainingMs())));
+        await tx.$queryRaw`SELECT set_config('statement_timeout', ${milliseconds}, true), set_config('lock_timeout', ${milliseconds}, true)`;
+      }
       const context = await lockBusinessContext(tx, actor, role, additionalAccountIds);
       const result = await work(tx, context.accounts);
       context.checkExpiry();
+      options?.deadline.assertRemaining();
       return result;
-    }, { maxWait: 5000, timeout: 10000 });
+    }, { maxWait: remaining ?? 5000, timeout: remaining ?? 10000 });
   } catch (error) {
-    await database.client.securityEvent.create({ data: { actorId: actor.accountId, action: `${operation}_REJECTED`,
+    // AI failures are recorded by its bounded accounting path. An independent
+    // rejection write here could extend the authenticated request deadline.
+    if (!options) await database.client.securityEvent.create({ data: { actorId: actor.accountId, action: `${operation}_REJECTED`,
       target, outcome: 'rejected', correlationId: actor.correlationId } });
+    options?.deadline.assertRemaining();
+    if (options) throw error;
     if (error instanceof HttpException) throw error;
     const code = error && typeof error === 'object' && 'code' in error ? String(error.code) : '';
     if (['P2002','P2034','P2028'].includes(code)) throw new ConflictException();

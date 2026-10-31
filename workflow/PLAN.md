@@ -93,8 +93,8 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | --- | --- | --- | --- | --- |
 | TASK-001 | Resolve validation, identity, API and AI blocking decisions | None | Relevant role owners | Policy baseline approved 25 October; actual live provider verification remains pending |
 | TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Partial: base server/client/shared workspaces, connectivity, local Compose, Docker/CI templates and setup docs initialized 25 October; source/build/browser/PostgreSQL checks recorded in base-source log. Sessions, CSRF, domain migrations and audit remain pending; Docker/remote CI unexecuted locally |
-| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Increment 1 private create/list/detail locally implemented and independently acceptance-verified 27 October; [run evidence](../logs/yooplo/2026-10-27-contributor-increment-1-run.md). Editing/submission/revisions and deployed verification remain pending |
-| TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Planned; normal/denial/race tests |
+| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Private create/list/detail, editing, deletion and criteria increments 1–4 have local independent evidence; see [Contributor evidence](../logs/yooplo/2026-10-28-contributor-increment-4.md). Reviewer iteration 2 supplies shared submission/revision APIs; full Contributor submission UI and combined/deployed acceptance remain pending. |
+| TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Reviewer iterations 1–4 implement manual review, revision cycles, bounded AI integration and approval revocation; see [traceability](TRACEABILITY.md). Live provider, deployment and broader acceptance gates remain separate. |
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
 | TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Planned; publication/revocation race evidence |
 | TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Planned; requirement-linked results |
@@ -102,7 +102,7 @@ Statuses below distinguish implemented infrastructure from pending product behav
 
 Record actual commands, failures and outcomes rather than marking elapsed dates complete. Produce detailed task breakdown for each approved slice.
 
-### Contributor Increment 1 dependency checkpoint — 27 October 2026
+### Contributor Increment 1 dependency checkpoint â€” 27 October 2026
 
 The initial foundation gate was resolved by two teammate agreements relayed by yooplo
 to the [concrete proposal](../logs/yooplo/2026-10-27-contributor-foundation-proposal.md).
@@ -117,7 +117,7 @@ five Chromium tests, typecheck/lint/build and UTC/append-only checks. Security d
 is recorded in the run log. No full role completion, deployed release or final teammate
 patch approval is claimed. Increment 2 status follows below.
 
-### Contributor Increment 2 — 28 October 2026
+### Contributor Increment 2 â€” 28 October 2026
 
 Own never-submitted DRAFT editing is implemented and independently verified on local
 `feature/contributor-own-draft-editing`, based on unmerged Increment1 head
@@ -137,7 +137,7 @@ INC2-VER-001 (one unreproduced existing App test failure, not claimed fixed) bel
 No blocking finding in the tested slice; no deployed/teammate approval implied. Submission, deletion,
 submitted editing, criteria management, responses, lifecycle/AI and Increment3 excluded.
 
-### Contributor Increment 3 — local acceptance verified, 28 October 2026
+### Contributor Increment 3 â€” local acceptance verified, 28 October 2026
 
 Own never-submitted draft deletion is now authorized on
 `feature/contributor-own-draft-deletion` from Increment2 head `1de749c`.
@@ -157,7 +157,7 @@ Subsequent review-preparation request authorized Increment3 commit/push; stacked
 now targets Increment2's branch while unmerged. Final patch approval is pending;
 merge and Increment4 remain excluded.
 
-### Contributor Increment 4 — local acceptance verified, 28 October 2026
+### Contributor Increment 4 â€” local acceptance verified, 28 October 2026
 
 Subsequent explicit request authorizes private draft criteria management only on
 `feature/contributor-draft-criteria`, based on unmerged Increment3 head `86dc8f2`.

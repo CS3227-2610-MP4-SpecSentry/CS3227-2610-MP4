@@ -1,0 +1,18 @@
+{
+  "preparation_excluding_consolidation": {
+    "calendar_seconds": 1111.975732,
+    "summed_agent_elapsed_seconds": 1929.806325,
+    "merged_interval_seconds": 1112.735164
+  },
+  "all_recorded_including_consolidation": {
+    "calendar_seconds": 1453.771651,
+    "summed_agent_elapsed_seconds": 2269.761695,
+    "merged_interval_seconds": 1452.6905339999998
+  },
+  "record_count": 5,
+  "actual_agents": 3,
+  "failed_attempts": 1,
+  "running_records": 0,
+  "exact_token_imports": 0,
+  "reason": "Collector cutoffs lag recorder boundaries; only sampled per-thread windows are available. No cumulative parent-plus-child attribution."
+}
