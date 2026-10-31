@@ -170,7 +170,7 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     await owner.agent.patch(`/api/proposals/${id}/draft`).send({ expectedVersion: 0, content: prepared }).expect(403);
     await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', 'f'.repeat(64)).send({ expectedVersion: 0, content: prepared }).expect(403);
     await patch(owner).expect(200); await patch(owner).expect(409);
-    for (const state of ['SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
+    for (const state of ['APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
       await database.client.changeProposal.update({ where: { id }, data: { state } }); await patch(owner, 1).expect(409);
     }
     await database.client.changeProposal.update({ where: { id }, data: { state: 'DRAFT' } });
@@ -178,6 +178,51 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     await patch(owner, 1).expect(409); expect(await database.client.proposalRevision.findUniqueOrThrow({ where: { id: snapshot.id } })).toEqual(snapshot);
     expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toMatchObject(prepared);
     expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(1);
+  });
+
+  it('keeps submitted preparation immutable while the owner saves a private working copy through the shared API', async () => {
+    const initial = { ...content, summary: 'Frozen submitted summary',
+      diffText: '--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n',
+      criteria: [{ statement: 'Preserve submitted criterion', required: true }], evidence: [{ text: 'Frozen submitted evidence' }] };
+    const created = (await create(owner, initial).expect(201)).body;
+    const id = created.proposalId as string;
+    const submitted = (await owner.agent.post(`/api/proposals/${id}/submit`).set('x-csrf-token', owner.token)
+      .set('Idempotency-Key', randomUUID()).send({ expectedVersion: created.version, workingRevisionId: created.workingRevisionId }).expect(200)).body;
+    expect(submitted).toMatchObject({ state: 'SUBMITTED', version: 1 });
+    const snapshot = await database.client.proposalRevision.findUniqueOrThrow({ where: { id: submitted.revisionId },
+      include: { criteria: true, evidence: true } });
+    const draft = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    const prepared = { ...draft.content, summary: 'Private replacement summary', diffText: 'Incomplete private replacement diff',
+      evidence: [{ ...draft.content.evidence[0], text: 'Private replacement evidence' }, { text: 'Additional private evidence' }] };
+    const result = await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token)
+      .send({ expectedVersion: submitted.version, content: prepared }).expect(200);
+    expect(result.body).toMatchObject({ proposalId: id, workingRevisionId: created.workingRevisionId,
+      revisionId: submitted.revisionId, state: 'SUBMITTED', version: 2 });
+    const latest = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    expect(latest).toMatchObject({ version: 2, state: 'SUBMITTED', content: { summary: prepared.summary, diffText: prepared.diffText } });
+    expect(latest.content.criteria).toEqual(draft.content.criteria);
+    expect(latest.content.evidence).toEqual([
+      { id: draft.content.evidence[0].id, text: prepared.evidence[0].text },
+      { id: expect.any(String), text: prepared.evidence[1].text },
+    ]);
+    expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(latest.content);
+    expect(await database.client.changeProposal.findUniqueOrThrow({ where: { id } })).toMatchObject({ state: 'SUBMITTED', version: 2,
+      currentRevisionId: submitted.revisionId, title: initial.title });
+    for (const session of [other, reviewer, maintainer]) {
+      const denied = await session.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', session.token)
+        .send({ expectedVersion: latest.version, content: prepared }).expect(403);
+      expect(denied.text).not.toContain(prepared.summary);
+      await session.agent.get(`/api/proposals/${id}/draft`).expect(403);
+    }
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token)
+      .send({ expectedVersion: submitted.version, content: prepared }).expect(409);
+    expect(await database.client.proposalRevision.count({ where: { proposalId: id } })).toBe(1);
+    expect(await database.client.proposalRevision.findUniqueOrThrow({ where: { id: submitted.revisionId },
+      include: { criteria: true, evidence: true } })).toEqual(snapshot);
+    const events = await database.client.proposalActivity.findMany({ where: { proposalId: id, action: 'DRAFT_SAVED' } });
+    expect(events).toEqual([expect.objectContaining({ actorId: ids[0], revisionId: submitted.revisionId, summary: 'Private working draft saved.' })]);
+    expect(JSON.stringify(events)).not.toContain(prepared.summary);
+    expect(JSON.stringify(events)).not.toContain(prepared.evidence[0].text);
   });
 
   it('rolls preparation content, version and audit back on audit failure and transaction-end expiry', async () => {
