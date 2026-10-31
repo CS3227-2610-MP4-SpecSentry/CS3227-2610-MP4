@@ -1,0 +1,35 @@
+{
+  "id": "ecc514905d784f6f979537ee4aaec36e",
+  "prompter": "yooplo",
+  "session": "2026-10-28-contributor-increment-4",
+  "agent": "acceptance",
+  "invocation": "verify-1",
+  "stage": "independent-criteria-acceptance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed dispatch; settings not exposed",
+  "started_at": "2026-10-28T14:29:13.680840+00:00",
+  "ended_at": "2026-10-28T14:37:30.761811+00:00",
+  "elapsed_seconds": 497.080971,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent firstreview UTC5migrations30server67client/type/lint passed; identified INC4VER001 missing authoritativekey recovery gap; released beforePG/browser forfix",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+}

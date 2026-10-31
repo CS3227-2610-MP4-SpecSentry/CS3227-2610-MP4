@@ -1,0 +1,14 @@
+{
+  "record_id": "b63fc8c490b84827bdfab3b0c41d2491",
+  "scope": "record",
+  "source": "MP4 sessions 2026-10-31-merge-master-start.json/end.json; main thread only; cutoff 2026-10-31T13:27:02.663Z; explicit sampled interval excludes unflushed/final reporting work",
+  "input_tokens": 12293005,
+  "output_tokens": 15508,
+  "cache_read_tokens": 12187008,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "No attributable collector counters",
+    "retries": "No attributable collector counters"
+  }
+}

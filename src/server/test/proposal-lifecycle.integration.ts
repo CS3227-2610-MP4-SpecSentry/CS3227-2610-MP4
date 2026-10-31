@@ -170,7 +170,7 @@ describe('PostgreSQL owner revision lifecycle (REQ-CON-001/002/004/005/006/007/0
       .send({ ...scope(command), decision: 'REQUEST_CHANGES' }).expect(200); root = { ...root, ...decision.body } as ProposalLifecycleResponse;
     const draft = draftResponseSchema.parse((await owner.agent.get(`/api/proposals/${root.proposalId}/draft`).expect(200)).body);
     const next = await saved(root, { ...draft.content, title: 'Unpublished replacement title', summary: 'New summary',
-      criteria: [{ ...draft.content.criteria[0]!, statement: 'Materially rewritten result' }] });
+      criteria: [{ required: draft.content.criteria[0]!.required, statement: 'Materially rewritten result' }] });
     expect((await a.agent.get(`/api/proposals/${root.proposalId}`).expect(200)).body.title).toBe(content.title);
     root = proposalLifecycleResponseSchema.parse((await submit(next).expect(200)).body);
     expect(root).toMatchObject({ state: 'IN_REVIEW', assignmentVersion: 0 }); expect(root.assignmentId).not.toBe(command.assignmentId);
@@ -188,6 +188,17 @@ describe('PostgreSQL owner revision lifecycle (REQ-CON-001/002/004/005/006/007/0
     await a.agent.put(`/api/proposals/${root.proposalId}/coverage/${original.criteria[0]!.id}`).set('x-csrf-token', a.token)
       .send({ ...scope(command), operation: 'ASSESS', status: 'COVERED' }).expect(409);
     await expect(database.client.proposalRevision.update({ where: { id: original.id }, data: { summary: 'Rewrite' } })).rejects.toThrow();
+  });
+  it('does not resurrect a removed submitted criterion key into the saved working revision', async () => {
+    let root = await create(); root = (await submit(root).expect(200)).body as ProposalLifecycleResponse;
+    const draft = draftResponseSchema.parse((await owner.agent.get(`/api/proposals/${root.proposalId}/draft`).expect(200)).body);
+    await owner.agent.patch(`/api/proposals/${root.proposalId}/draft`).set('x-csrf-token', owner.token)
+      .send({ expectedVersion: root.version, content: { ...draft.content, criteria: [] } }).expect(200);
+    await owner.agent.patch(`/api/proposals/${root.proposalId}/draft`).set('x-csrf-token', owner.token)
+      .send({ expectedVersion: root.version + 1, content: draft.content }).expect(422);
+    const saved = draftResponseSchema.parse((await owner.agent.get(`/api/proposals/${root.proposalId}/draft`).expect(200)).body);
+    expect(saved.content.criteria).toEqual([]); expect(saved.version).toBe(root.version + 1);
+    expect(await database.client.acceptanceCriterion.count({ where: { revisionId: root.revisionId! } })).toBeGreaterThan(0);
   });
   it('serializes identical submission keys, binds body, expires at 24h and never duplicates after expiry', async () => {
     const root = await create(); const key = randomUUID();

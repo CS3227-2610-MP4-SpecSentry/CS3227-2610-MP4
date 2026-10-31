@@ -64,8 +64,8 @@ criterion coverage. Earlier assessments and decisions remain in history.
 Findings preserve original authorship and transitions; unresolved HIGH/CRITICAL
 findings still block approval, and resolved findings do not reopen automatically.
 A request for changes cannot be reversed without Contributor resubmission. The
-Contributor API supports this cycle; the full Contributor drafting screen remains
-future work. Original submission age does not reset on resubmission.
+Contributor API supports this cycle; the private drafting screen is implemented,
+while its submission and submitted-editing controls remain future work. Original submission age does not reset on resubmission.
 
 If another revision arrives or the assignment changes, the server rejects an old
 form. The workspace freezes those forms and retains entered text while access
@@ -83,7 +83,9 @@ the unassigned awaiting-revision queue so the owner can resubmit or withdraw.
 Manual review remains usable without AI. Verification boundaries and current
 evidence are in the [iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md).
 
-Status: authentication, manual review and revision cycles, 26 October 2026. No live application URL or
+Status: locally implemented Reviewer workflows and Contributor private drafts/editing/deletion/criteria,
+combined 31 October 2026. Per-increment verification is linked below; combined merge verification
+is recorded separately. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
 the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
@@ -99,10 +101,88 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-The full Contributor editing UI, broader release workspace and Contributor/Maintainer AI assistants
-remain pending. Approval revocation and the supporting release API are described above.
+Full Contributor submitted-editing/submission UI, broader release workspace and
+Contributor/Maintainer AI assistants remain pending. Approval revocation and the supporting release API are described above.
 Reviewer AI has a bounded implementation with live operation
 disabled pending provider verification.
+Contributors can create, list and open/edit/delete their own never-submitted private
+drafts and manage acceptance criteria as described below.
+
+### Contributor private drafts
+
+After signing in as a Contributor, your workspace lists your own never-submitted
+DRAFT proposals. An empty list offers **Create a draft**. Use **Next page** and
+**First page** when the list spans pages.
+
+Select **Create a draft**, enter a title, problem and expected behavior, and optionally
+enter constraints. Title is limited to 200 Unicode characters; each narrative field
+to 10,000. Select **Create private draft** to save and open its private detail.
+Select a title in the list to open an existing draft, or **Back to your drafts** to return.
+Only the owner can read this working content. Submission, responses and lifecycle actions are not exposed in this private-draft
+workspace; the drafting assistant remains pending.
+
+### Delete a never-submitted draft
+
+From saved private draft detail,
+select **Delete private draft**. The confirmation identifies the draft and explains that
+deletion cannot be undone. **Cancel deletion** keeps it; **Permanently delete draft**
+removes its saved working content. Only the owner of a never-submitted DRAFT can do this.
+An editable working copy of a submitted proposal does not permit deleting its history.
+No deletion reason is required. A minimal non-content audit tombstone is retained.
+
+While deletion is pending, repeat requests are disabled. Success returns to your draft
+list. If the draft changed or the outcome is uncertain, deletion pauses. Select
+**Check current draft** before trying again; a successful check loads the current saved
+version and requires a fresh confirmation. If it is no longer available, return to your
+draft list; that alone does not prove which request removed it. A failed check keeps
+deletion paused. Session expiry requires signing in again.
+
+### Edit a never-submitted draft
+
+Open your private draft detail and select **Edit private draft**. Change title, problem,
+constraints or expected behavior, then select **Save private draft**. A successful save
+shows the new version; you can keep editing or select **Back to draft detail**. Hidden
+fields from the existing draft are preserved. Criteria controls are described below;
+there are no submission controls. The server rejects editing if the draft is no longer eligible.
+
+### Manage draft acceptance criteria
+
+In the private editor,
+select **Add criterion**, enter its statement and set its **required** checkbox. New criteria
+default to required. You may save zero criteria or all-optional criteria; submission readiness
+is a separate, currently unavailable action. Each saved statement must be nonblank and at most
+2,000 Unicode characters; the collection limit is 50. A blank or invalid row keeps your input
+and shows an error rather than being silently removed. **Remove criterion** removes the row
+from your working draft when you save.
+
+When changing a saved statement, choose its **meaning**: **Same meaning / wording correction**
+retains its identity; **Materially changed meaning / replace criterion** gives it a new identity.
+The application uses your declaration; it does not infer meaning. Classification-only changes
+keep identity. Removed then re-added criteria receive new identities.
+
+After saving, the editor reads the committed draft to obtain its assigned identities. If this
+check fails or finds a different version, your entered text and choices remain and saving pauses.
+Follow the explicit reload/discard confirmation to recover; do not assume another save is safe.
+These controls apply only to never-submitted drafts, not submitted history or findings.
+
+Validation and failed saves retain your entered text. If the draft changed elsewhere,
+is no longer editable, or the save response is uncertain, saving pauses so an old form
+cannot overwrite newer work. Select **Reload latest draft and discard changes** only
+when ready to replace your unsaved input with the latest saved version. Confirm the
+discard prompt; cancel keeps your text. A failed reload also keeps your text and needs
+another explicit retry. Reapply any desired edits after reviewing the reloaded version.
+Returning to detail with unsaved changes also asks for confirmation.
+
+Unsaved editor input is held only in the signed-in page's memory. Refreshing, leaving
+the editor, signing out or losing the session can clear it; no browser storage is used.
+Only never-submitted DRAFT editing is available; submitted-revision editing is deferred.
+
+Validation messages identify fields to correct and preserve entered text. Network/server
+failures show a safe message and a reference identifier when available. If a create
+response is interrupted, the draft may already exist: return to the draft list and
+check before creating again. The create button remains disabled until the list loads
+successfully. Unsaved text stays only in the current signed-in workspace memory;
+refreshing, signing out or session expiry clears it. It is not saved in browser storage.
 
 Use **Sign out** to end your session. Sessions expire after 30 minutes idle or
 eight hours total; sign in again when prompted. Your browser does not retain
@@ -188,6 +268,7 @@ Include the action, observed result and safe correlation identifier when present
 - Safe test-account distribution and sign-in instructions for each role: pending.
 - Local Reviewer intake walkthrough: verified in Chromium; deployed peer testing
   and full Contributor/Reviewer/Maintainer workflows remain pending.
+- Deployed Contributor walkthroughs and broader Maintainer workspace: pending.
 - AI success, limits, failure recovery and manual fallback walkthroughs: pending.
 - Known release-specific limitations and supported browser evidence: pending.
 

@@ -115,7 +115,9 @@ test('revoke-ui-access-loss clears a drafted reason after external session inval
     const csrfToken = (await session.json()).csrfToken as string;
     const logout = await page.request.post('/api/auth/logout', { headers: { 'x-csrf-token': csrfToken } });
     expect(logout.status()).toBe(204);
-    await form.getByRole('button', { name: 'Revoke approval' }).click();
+    // Focus revalidation may already have removed the protected form. Submit it
+    // if still present without waiting for a control that correctly disappeared.
+    await page.evaluate(() => document.querySelector<HTMLFormElement>('form[aria-label="Revoke approval"]')?.requestSubmit());
     await expect(page.getByLabel('Username')).toBeVisible();
     await expect(page.getByText(reason, { exact: true })).toHaveCount(0);
     await expect(page.getByRole('form', { name: 'Revoke approval' })).toHaveCount(0);

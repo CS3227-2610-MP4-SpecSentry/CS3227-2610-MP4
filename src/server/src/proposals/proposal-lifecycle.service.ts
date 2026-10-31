@@ -1,13 +1,13 @@
 import { ConflictException, ForbiddenException, Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { createHash } from 'node:crypto';
-import { draftResponseSchema, proposalLifecycleResponseSchema, workingContentSchema, type WorkingContent,
+import { ownDraftsResponseSchema, type DeleteDraftRequest, type OwnDraftsQuery, draftResponseSchema, proposalLifecycleResponseSchema, workingContentSchema, type WorkingContent,
   type SaveDraftRequest, type SubmitProposalRequest, type WithdrawProposalRequest, type ReopenProposalRequest } from '@specsentry/shared';
 import { ActivityService } from '../activity/activity.service';
 import { DatabaseService } from '../database/database.service';
 import type { Prisma } from '../generated/prisma/client';
 import { businessTransaction, type BusinessActor } from '../identity/business-context';
 import { NotificationsService } from '../notifications/notifications.service';
-import { nextVersion } from '../reviews/reviewer-context';
+import { decodeCursor, encodeCursor, nextVersion } from '../reviews/reviewer-context';
 import { ProposalsService } from './proposals.service';
 import { prepareWorkingContent, submittedDiff } from './working-revisions';
 
@@ -52,7 +52,9 @@ export class ProposalLifecycleService {
     const saved = await tx.workingRevision.findUnique({ where: { proposalId: root.id } });
     const current = root.currentRevisionId ? await tx.proposalRevision.findFirst({ where: { id: root.currentRevisionId, proposalId: root.id },
       select: { criteria: { select: { stableKey: true, statement: true } }, evidence: { select: { id: true, text: true } } } }) : null;
-    return [ ...(current ? [current] : []), ...(saved ? [workingContentSchema.parse(saved.content)] : []) ];
+    // Once saved, the working revision is the identity authority: removed keys
+    // cannot be resurrected from an older submitted snapshot.
+    return saved ? [workingContentSchema.parse(saved.content)] : current ? [current] : [];
   }
   create(actor: BusinessActor, input: WorkingContent) {
     return businessTransaction(this.database, actor, 'CONTRIBUTOR', 'proposal-create', 'PROPOSAL_CREATE', async tx => {
@@ -71,14 +73,19 @@ export class ProposalLifecycleService {
       this.owner(root, actor);
       const working = await tx.workingRevision.findUnique({ where: { proposalId: id } });
       if (!working) throw new NotFoundException();
-      return draftResponseSchema.parse({ proposalId: id, workingRevisionId: working.id, version: root.version,
+      const result = draftResponseSchema.parse({ proposalId: id, workingRevisionId: working.id, version: root.version,
         state: root.state, content: working.content });
+      await this.readAudit(tx, actor, 'PROPOSAL_DRAFT_VIEWED', id);
+      return result;
     });
   }
   save(actor: BusinessActor, id: string, body: SaveDraftRequest) {
     return businessTransaction(this.database, actor, 'CONTRIBUTOR', id, 'PROPOSAL_SAVE', async tx => {
       const root = await this.proposals.lockRoot(tx, id);
       this.editable(root, actor, body.expectedVersion);
+      if (root.state === 'DRAFT' && (root.firstSubmittedAt !== null || root.currentRevisionId !== null ||
+        root.currentAssignmentId !== null || await tx.proposalRevision.count({ where: { proposalId: id } }) > 0))
+        throw new ConflictException();
       const content = prepareWorkingContent(body.content, await this.sources(tx, root));
       const working = await tx.workingRevision.upsert({ where: { proposalId: id },
         create: { proposalId: id, content: content as Prisma.InputJsonValue }, update: { content: content as Prisma.InputJsonValue } });
@@ -183,5 +190,52 @@ export class ProposalLifecycleService {
         assignmentId: releaseAssignment ? null : root.currentAssignment.id,
         assignmentVersion: releaseAssignment ? null : root.currentAssignment.version });
     }, reviewer ? [reviewer] : []);
+  }
+  remove(actor: BusinessActor, id: string, body: DeleteDraftRequest) {
+    return businessTransaction(this.database, actor, 'CONTRIBUTOR', id, 'PROPOSAL_DELETE', async tx => {
+      const root = await this.proposals.lockRoot(tx, id);
+      if (root.ownerId !== actor.accountId) throw new ForbiddenException();
+      if (!body.confirmed || root.version !== body.expectedVersion) throw new ConflictException();
+      const eligible = await tx.$queryRaw<{ eligible: boolean }[]>`SELECT "deletable_private_draft"(${id}, ${actor.accountId}) AS eligible`;
+      if (!eligible[0]?.eligible) throw new ConflictException();
+      if (!await tx.workingRevision.findUnique({ where: { proposalId: id } })) throw new NotFoundException();
+      await tx.draftTombstone.create({ data: { proposalId: id, actorId: actor.accountId } });
+      await tx.proposalActivity.deleteMany({ where: { proposalId: id } });
+      await tx.workingRevision.delete({ where: { proposalId: id } });
+      await tx.changeProposal.delete({ where: { id } });
+    });
+  }
+
+  list(actor: BusinessActor, query: OwnDraftsQuery) {
+    return businessTransaction(this.database, actor, 'CONTRIBUTOR', 'own-drafts', 'PROPOSAL_DRAFT_LIST', async tx => {
+      const scope = JSON.stringify(['owner-drafts', actor.accountId]);
+      const cursor = decodeCursor(query.cursor, scope, 'timestamp');
+      const rows = await tx.changeProposal.findMany({ where: { ownerId: actor.accountId, state: 'DRAFT',
+        currentRevisionId: null, firstSubmittedAt: null, ...(cursor ? { OR: [
+          { createdAt: { lt: new Date(cursor.timestamp!) } },
+          { createdAt: new Date(cursor.timestamp!), id: { gt: cursor.id } },
+        ] } : {}) }, orderBy: [{ createdAt: 'desc' }, { id: 'asc' }], take: query.limit + 1,
+        select: { id: true, state: true, version: true, createdAt: true } });
+      const page = rows.slice(0, query.limit);
+      const working = await tx.workingRevision.findMany({ where: { proposalId: { in: page.map(row => row.id) } },
+        select: { id: true, proposalId: true, content: true } });
+      const byProposal = new Map(working.map(row => [row.proposalId, row]));
+      const last = page.at(-1);
+      const result = ownDraftsResponseSchema.parse({ items: page.map(row => {
+        const draft = byProposal.get(row.id);
+        if (!draft) throw new Error('Working content unavailable');
+        const content = workingContentSchema.parse(draft.content);
+        return { proposalId: row.id, workingRevisionId: draft.id, title: content.title,
+          state: row.state, version: row.version, createdAt: row.createdAt.toISOString() };
+      }), nextCursor: rows.length > query.limit && last
+        ? encodeCursor(scope, { id: last.id, timestamp: last.createdAt.toISOString() }) : null });
+      await this.readAudit(tx, actor, 'PROPOSAL_DRAFT_LISTED', 'own-drafts');
+      return result;
+    });
+  }
+
+  private readAudit(tx: Prisma.TransactionClient, actor: BusinessActor, action: string, target: string) {
+    return tx.securityEvent.create({ data: { actorId: actor.accountId, action, target,
+      outcome: 'success', correlationId: actor.correlationId } });
   }
 }

@@ -37,7 +37,7 @@ that boundary only where linked in the run log. Live AI under OPEN-002, deployme
 human teammate approval, broader Maintainer UI/AI, full performance and full WCAG
 acceptance remain separate gates.
 
-## Reviewer Patch Risk increment — 26 October 2026
+## Reviewer Patch Risk increment â€” 26 October 2026
 
 Implementation and integration are recorded in the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)
 and its [historical evidence summary](../logs/ngkhengyang/reviewer/2026-10-26-patch-risk-i3-implementation/state.json).
@@ -51,7 +51,7 @@ checks, not for provider or release acceptance.
 
 | Requirements / cases | Implementation and executable evidence | Boundary |
 | --- | --- | --- |
-| REV-003; ai-selected-batch, ai-boundary-batch/scope, ai-context-isolation | shared/contracts/ai.ts; reviews/patch-risk.service/controller.ts; ai-foundation.spec.ts and patch-risk.integration.ts | Current assigned latest revision; complete submitted summary/spec/diff/evidence; selected 1–5 exact IDs; no manual coverage writes |
+| REV-003; ai-selected-batch, ai-boundary-batch/scope, ai-context-isolation | shared/contracts/ai.ts; reviews/patch-risk.service/controller.ts; ai-foundation.spec.ts and patch-risk.integration.ts | Current assigned latest revision; complete submitted summary/spec/diff/evidence; selected 1â€“5 exact IDs; no manual coverage writes |
 | REV-003/014; ai-output-rejection, ai-secret-injection, ai-budget-retry, ai-live-disabled | ai/gateway strict-json.ts, transport.ts, accounting.ts and index.ts; ai-gateway.spec.ts; versioned workflow/tests/ai/reviewer/v1.json | Strict duplicate-key/envelope/grounding validation, secret controls, timeout/retry/quota/queue limits, unknown usage and safe disabled fallback; deterministic synthetic provider only |
 | REV-012; ai-access-recheck, ai-response-*, ai-save-*, ai-generation-lineage, ai-session-final-wait, ai-whole-deadline | patch-risk.service.ts; business-context.ts; retained generation in proposal-lifecycle.service.ts; immutable migration; patch-risk.integration.ts | Fresh account/session/access and assignment-generation checks; delayed provider versus real lifecycle operations; original-scope human save; bounded DB waits |
 | REV-013; ai-human-save, ai-transient-page, ai-failed-call-isolation, ai-save-rollback | PatchRiskAssistant.tsx/component tests; reviewer-patch-risk browser spec/fixture; existing deterministic manual finding transaction; PostgreSQL failure/rollback cases | Editable explicit human save/cancel, page-session-only suggestions/prefilled forms, escaped rendering, atomic finding/activity and no AI business mutations |
@@ -74,7 +74,7 @@ client unit tests, 130 PostgreSQL tests, 11 Chromium scenarios, typechecks, lint
 and build. Actual BFCache navigation and scheduled physical 90-day pruning remain
 unverified; these results do not establish the live-provider or release gates.
 
-## Reviewer revision-cycle increment — 26 October 2026
+## Reviewer revision-cycle increment â€” 26 October 2026
 
 This section supersedes earlier pending markers only for the bounded behavior
 listed here. The [iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md)
@@ -96,7 +96,7 @@ checks, not inferred from automated acceptance counts.
 
 Baseline review: 25 October 2026. Every existing requirement ID has one definition and a planned acceptance scenario. Product acceptance and deployed evidence remain **pending** until verified; existing workflow-tool tests do not satisfy product acceptance. The infrastructure evidence below covers only the initialized scaffold.
 
-## Base infrastructure evidence — 25 October 2026
+## Base infrastructure evidence â€” 25 October 2026
 
 | Scope / related requirement | Implementation | Verification / boundary |
 | --- | --- | --- |
@@ -108,7 +108,7 @@ Baseline review: 25 October 2026. Every existing requirement ID has one definiti
 Command outcomes, corrections, independent review and resource limitations are in
 [the base-source session log](../logs/ngkhengyang/2026-10-25-base-source-initialization.md).
 
-## Architecture and submission initialization — 25 October 2026
+## Architecture and submission initialization â€” 25 October 2026
 
 `src/server/src/app.module.ts` registers seven empty business modules and imports
 the configured `DatabaseModule`. Health/readiness remain the only public APIs.
@@ -121,7 +121,7 @@ see [Submission readiness](SUBMISSION.md). Presence does not satisfy role, AI,
 deployment or experiment acceptance. Validation and limitations for this change are
 recorded in [the session log](../logs/ngkhengyang/2026-10-25-architecture-initialization.md).
 
-## Base authentication evidence — 25 October 2026
+## Base authentication evidence â€” 25 October 2026
 
 The earlier infrastructure tables describe historical scaffold evidence. Current
 base auth is implemented in `src/server/src/identity`, the account/session migration,
@@ -141,11 +141,11 @@ HTTP tests, eight client tests, eight PostgreSQL integration tests, four Chromiu
 tests, and production dependency audit (zero vulnerabilities) passed. The login
 page axe scan reported zero violations; full product accessibility is unverified.
 
-## Reviewer intake increment — 25 October 2026
+## Reviewer intake increment â€” 25 October 2026
 
 This increment supplies development/test submissions and implements Reviewer
 intake. It does not complete the full Reviewer role. Effective acceptance scope
-INT-01–INT-11 and exclusions are in the [session brief](../logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v1.md)
+INT-01â€“INT-11 and exclusions are in the [session brief](../logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v1.md)
 and its [security refinements](../logs/ngkhengyang/reviewer/2026-10-25-reviewer-intake/brief-v2.md).
 
 | Requirement / delivered boundary | Source and verification evidence | Remaining scope |
@@ -170,20 +170,119 @@ omitted revision/entity/outcome context in the activity UI. Original owners fixe
 each with regression coverage; the session records independent revalidation.
 Independent review status and any subsequent fixes are recorded there; these
 command results alone are not a release or full product acceptance claim.
+## Assignment and development-process evidence
+
+[ASSIGNMENT-SPEC](specs/ASSIGNMENT-SPEC.md) defines MP4-001 through MP4-015. Its evidence-home column and [SUBMISSION](SUBMISSION.md) map the assignment to deliverables; documentation presence is not completion. The assignment capture/session checks are recorded in [the 26 October log](../logs/yooplo/2026-10-26-mp4-assignment.md). Role, live AI, deployment, experiment, contribution and human-verification evidence remain governed by their existing records.
+
+| Obligation | Planned verification | Current evidence / gap |
+| --- | --- | --- |
+| MP4-004: development-process security | [AC-DEVSEC-001 through AC-DEVSEC-004](specs/AI-SECURITY-SPEC.md#development-agent-security-and-evidence) | Planned; no new adversarial workflow run executed by the assignment-capture task |
+| MP4-006 / MP4-013: context/resource evidence and reflections | [Team experiment protocol](DEVELOPMENT.md#required-experiments-for-reflections), Reflections and linked evaluations | Capture preserves required analysis topics; experiments/results remain pending |
+| MP4-014 / MP4-015: interaction summaries and declaration | Prompter logs, human accuracy/completeness review, Developer Guide acknowledgements | Current task logged and AI assistance declared; complete historical coverage and human sign-off not inferred |
 
 ## Product acceptance plan
 
+Contributor Increment 1 local acceptance (27 October 2026): the initial foundation
+gate was resolved by the two agreements relayed by yooplo, scoped in the
+[integration proposal](../logs/yooplo/2026-10-27-contributor-foundation-proposal.md).
+Independent acceptance revalidation executed 26 server/15 client unit tests, 22 PostgreSQL
+tests and five Chromium cases, plus typecheck/lint/build. See
+[run evidence, findings and security disposition](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
+This verifies local create/list/detail, not editing, the full Contributor role, deployed
+behavior, complete WCAG compliance or performance targets.
+
+| Requirement / tested portion | Implementation | Executed evidence |
+| --- | --- | --- |
+| REQ-CON-001 / AC-CON-001 | [proposal create/list/detail service](../src/server/src/proposals/proposal-lifecycle.service.ts), strict contracts, private WorkingRevision and root/activity transaction | [PostgreSQL HTTP acceptance](../src/server/test/contributor-drafts.integration.ts): session-owned DRAFT, persistence, creation/activity rollback |
+| REQ-CON-002 / AC-CON-002 private read only | Owner-scoped list and detail; private title remains outside shared root projection | Same PG suite: other-owner/role denial, cursor isolation and bounded equal-timestamp pages. Editing/attached-state/revision behavior unimplemented in this slice |
+| REQ-SHR-001/002, NFR-SEC-001 local domain checks | Guard plus [business transaction context](../src/server/src/identity/business-context.ts), session-touch locking | Same PG suite: CSRF/role/unknown fields/account/session denials; pg_blocking_pids barriers for disable/logout/expiry, transaction-end expiry and touch wait |
+| REQ-SHR-004/007 draft audit portion | Atomic DRAFT_CREATED activity; restricted content-free successful read audit | PG rollback/fail-closed assertions; independent rollback-only activity UPDATE rejected SQLSTATE 23514. UTC session/default-timestamp checked; remaining lifecycle activity not implemented |
+| Authoritative limits / safe failures | [contracts](../src/server/test/contributor-contracts.spec.ts), 1 MiB [HTTP parser/filter](../src/server/src/http.ts) | Normalized Unicode max/max+1, >100 KiB valid payload, safe >1 MiB 413, strict injected-field rejection |
+| REQ-SHR-005 / NFR-A11Y-001 tested draft flow | [Contributor workspace](../src/client/src/features/contributor/ContributorWorkspace.tsx) | [RTL cases](../src/client/src/features/contributor/ContributorWorkspace.test.tsx) and [Chromium flow](tests/browser/contributor-drafts.spec.ts): labels/error focus, keyboard, axe form/list/detail, 200% text at 640px and session loss. Full manual WCAG audit unavailable |
+| Shared failure contract, DRAFT-SEC-005 | Workspace-level pending/uncertain creation state | RTL deferred Backâ†’New request test: no duplicate POST, retained input and required reconciliation; independently rerun |
+
+28 October review follow-up: [App auth-generation fix](../src/client/src/App.tsx) and
+[App-level deferred-response tests](../src/client/src/App.test.tsx) cover obsolete-login401,
+same/different-account relogin, focus-adopted account/CSRF replacement, normal refresh,
+failed/obsolete logout and concurrent session-check invalidation. Independent acceptance
+reran28client tests, clienttypecheck and rootlint; DRAFT-SEC-007 / DRAFT-ACC-002 fixed.
+See [follow-up security/acceptance evidence and limitations](../logs/yooplo/2026-10-28-stale-session-response.md).
+The original27October manifest/results describe the pre-fix source; this delta has separate
+review hashes. No new server/database or deployed/browser verification is implied.
+
+### Increment 2: never-submitted DRAFT editing â€” 28 October 2026
+
+Local slice on `feature/contributor-own-draft-editing` is stacked on unmerged Increment1
+commit `bb485ff`; final Increment1 teammate review remains pending. Existing PATCH/save DTO,
+version/root-lock/helper and DRAFT_SAVED rules reused, no new shared interfaces or migrations.
+See [Increment2 log and final review results](../logs/yooplo/2026-10-28-contributor-increment-2.md).
+
+| Requirement / portion | Implementation and evidence |
+| --- | --- |
+| REQ-CON-002, AC-CON-002 never-submitted edit/owner denial | Proposal lifecycle save/controller; [real PG cases](../src/server/test/contributor-drafts.integration.ts) verify own repeated saves, other roles/owners, every excluded state/submission marker/attachment, preserving snapshots/hidden content |
+| REQ-SHR-001/002/003, local NFR-SEC-001 | Same PG suite verifies session/CSRF, exact/stale/overflow version, one concurrent winner, access rechecks after lock wait and no denied mutation |
+| REQ-SHR-004/007 / NFR-REL-001 draft-save transaction | DRAFT_SAVED committed with content/version; forced activity/expiry failure rolls all three back; safe metadata no private content |
+| Shared failure contract / REQ-SHR-005 / NFR-A11Y-001 tested portion | [Editor RTL cases](../src/client/src/features/contributor/EditDraft.test.tsx) and [Chromium flow](tests/browser/contributor-editing.spec.ts): retained input, conflict/uncertain write lock, confirmed reload/reload failure, proposal/auth late-response isolation, current401, labels/keyboard/axe/reflow |
+
+Independent runtime acceptance executed26server/43client unit,28PostgreSQL and6Chromium tests;
+typecheck/lint/build and independent security checks also passed, as recorded in the log. One unchanged App500
+test failed once during implementation but isolated/full/independent reruns passed unchanged;
+INC2-VER-001 remains an unreproduced timing concern, not a claimed bug fix. Full manual WCAG,
+performance and deployed verification unexecuted. Submitted editing, deletion, criteria management,
+submission, responses, lifecycle/AI and Increment3 remain deferred; no full REQ-CON-002 claim.
+
+### Increment 3: never-submitted DRAFT deletion â€” 28 October 2026
+
+Subsequent authorization and both-teammate agreement are recorded in the
+[deletion run](../logs/yooplo/2026-10-28-contributor-increment-3-run.md).
+The branch starts at Increment2 head `1de749c`; PR10/11 remain unmerged at the latest
+check and final patch approval is pending. The earlier Increment2 exclusions describe
+that slice, not a prohibition on this separately authorized work.
+
+| Requirement / portion | Implementation / validation status |
+| --- | --- |
+| AC-DEC-009 deletion portion; approved deletion policy | Strict DELETE DTO, owner service/controller, four-field DraftTombstone and guarded new migration; independent PG verifies full private-content removal, no submitted-history deletion, minimal tombstone and clean/upgrade migration evidence in run |
+| REQ-SHR-001/002/003/004/007, NFR-REL-001 | Contributor PG cases independently passed, covering auth/versions/actual submitted history, duplicate/edit/fixture-submit races, rollback/expiry/lock waits, timestamp/ID reuse and direct guard misuse. Full PG36cases/four suites passed |
+| REQ-SHR-005, NFR-A11Y-001, shared failure contract | [Delete RTL tests](../src/client/src/features/contributor/DeleteDraft.test.tsx) and [Chromium deletion flow](tests/browser/contributor-deletion.spec.ts) independently passed: confirmation/cancel focus/pending/conflict/uncertainty/lost committed response, fresh recheck and scoped late responses; full units27server/55client and7Chromium passed |
+
+This is local deletion acceptance, not withdrawn/submitted deletion, actual submit integration,
+deployed/manual full WCAG or whole-Contributor requirement completion. Final security
+probe results and finding disposition are recorded in the run. INC2-VER-001's cause
+remains unconfirmed despite passing reruns; no App assertions were changed.
+The [independent test design](../logs/yooplo/2026-10-28-contributor-increment-3-tests.md)
+distinguishes planned D01â€“D24 checks from executed evidence.
+
+### Increment 4: private draft criteria â€” 28 October 2026
+
+Scope and ngkhengyang's reported identity-contract agreement are recorded in the
+[run](../logs/yooplo/2026-10-28-contributor-increment-4.md). Branch starts at unmerged
+Increment3 head `86dc8f2`; PR10/11/12 final patch approval remains pending.
+
+| Requirement / portion | Executed local evidence |
+| --- | --- |
+| REQ-CON-007 never-submitted classification | Existing PATCH/fullDTO defaults required, persists optional/classification with stable identity; zero/alloptional drafts valid, blank rows retained unsaved; contract/helper/PG/RTL/browser checks |
+| REQ-CON-009 never-submitted identity | Explicit same-meaning assertion retains issued key; new/material rewrite omits key for server UUID; removal/re-add/foreign/duplicate/removed-key denial/repeated saves verified. No similarity/AI |
+| REQ-CON-002, REQ-SHR-001/002/003/004/007, NFR-REL-001 | Owner/role/sessionCSRF/state/actual-history/version bounds and races; criteria and content-free DRAFT_SAVED atomic; audit/expiry rollback; existing deletion guards and create/edit/delete regression passed |
+| REQ-SHR-005, NFR-A11Y-001, shared failure contract | [Criteria RTL](../src/client/src/features/contributor/CriteriaDraft.test.tsx), [Chromium criteria](tests/browser/contributor-criteria.spec.ts): keyboard/labels/focus/axe/reflow, validation/retained input, explicit meaning, failed/newer/malformed identity read recovery and proposal/auth callbacks |
+
+Independent final30server/71client units,38PG cases/four suites,eightChromium cases,
+typecheck/lint/build passed on the final manifest. INC4-UI-001 and INC4-VER-001 fixes
+independently revalidated. No sharedDTO/schema/migration/App/auth edits. Separate final
+security report is attributed in the run. Submitted classification changes/immutable
+criterion history/finding resolution and complete AC-CON-007/009 remain deferred.
+No full manual WCAG/deployment/performance evidence; INC2-VER-001 remains unresolved.
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
-| [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |
+| [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local private-read and never-submitted DRAFT edit/ownership/version/state/attachment portions covered above; submitted editing/revision lifecycle pending |
 | [REQ-CON-003](specs/ROLE-CONTRIBUTOR.md#requirements) | AI specification draft | [AC-CON-003](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-005](specs/ROLE-CONTRIBUTOR.md#requirements) | Respond to changes | [AC-CON-005](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-006](specs/ROLE-CONTRIBUTOR.md#requirements) | Withdraw | [AC-CON-006](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Private-draft portion verified above; submitted-classification scenario pending |
 | [REQ-CON-008](specs/ROLE-CONTRIBUTOR.md#requirements) | Finding response | [AC-CON-008](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-009](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion identity | [AC-CON-009](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-009](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion identity | [AC-CON-009](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | [Increment4 private-draft portion](../logs/yooplo/2026-10-28-contributor-increment-4.md) verified; submitted history/finding scenario pending |
 | [REQ-REL-001](specs/ROLE-MAINTAINER.md#requirements) | Release candidate | [AC-REL-001](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-002](specs/ROLE-MAINTAINER.md#requirements) | Deterministic gates | [AC-REL-002](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-003](specs/ROLE-MAINTAINER.md#requirements) | AI readiness summary | [AC-REL-003](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
@@ -231,7 +330,7 @@ Add actual source/test paths, scenario/test names, commands/results, environment
 
 ## Decision acceptance cases
 
-All cases below are planned and currently unexecuted. They supplement rather than replace the original 48 requirement mappings. Detailed limits/schemas in the linked specs are the authority; these cases test their effect.
+Unless a row links executed evidence, cases below remain planned and unexecuted. They supplement rather than replace the original 48 requirement mappings. Detailed limits/schemas in the linked specs are the authority; these cases test their effect.
 
 | Scenario | Decision / requirements | Verification obligation | Evidence |
 | --- | --- | --- | --- |
@@ -243,6 +342,6 @@ All cases below are planned and currently unexecuted. They supplement rather tha
 | AC-DEC-006 | OPEN-006; REQ-SHR-004/007, REQ-REV-015 | Order equal-time events by ID, page by cursor, retain business events while pruning operational records after 90 days; views/rejections/read acknowledgments stay restricted and no prior-reviewer AI data leaks. | Pending |
 | AC-DEC-007 | OPEN-007; REQ-CON-004, REQ-REV-001/008/015 | Submit with summary, resubmit later, preserve original age and show latest age. Severity filter matches unresolved findings only. Withdrawn owner/Maintainer access works and former-reviewer notice cannot reopen content. | Pending |
 | AC-DEC-008 | OPEN-008; NFR-PERF-001/A11Y-001/OBS-001/RES-001 | Run fixed workload and applicable accessibility checks; dashboard computes failure denominator correctly, displays N/A for zero attempts, unknown for absent token/cache usage, and enforces aggregate/own-user privacy. | Pending |
-| AC-DEC-009 | OPEN-009; REQ-CON-006, REQ-SHR-004/007 | Confirm never-submitted draft deletion removes text but retains non-content tombstone; deletion after submission fails; draft withdrawal stays terminal and submitted revision/activity history survives withdrawal. | Pending |
+| AC-DEC-009 | OPEN-009; REQ-CON-006, REQ-SHR-004/007 | Confirm never-submitted draft deletion removes text but retains non-content tombstone; deletion after submission fails; draft withdrawal stays terminal and submitted revision/activity history survives withdrawal. | Contributor increment 3 verifies deletion; Reviewer iteration 2 records withdrawal/history evidence. Combined merge verification is separate; consult the linked increment boundaries. |
 
 

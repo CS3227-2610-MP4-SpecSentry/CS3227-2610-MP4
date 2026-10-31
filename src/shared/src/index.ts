@@ -11,3 +11,5 @@ export * from './contracts/revision-cycle';
 export * from './contracts/ai';
 export * from './contracts/revocation';
 export * from './contracts/release';
+
+export * from './contracts/contributor';

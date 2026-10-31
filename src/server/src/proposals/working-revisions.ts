@@ -5,7 +5,7 @@ import { workingContentSchema, type WorkingContent } from '@specsentry/shared';
 type IdSource = { criteria: { stableKey?: string; statement: string }[]; evidence: { id?: string; text: string }[] };
 
 // IDs from an editable draft are references, never a client-controlled namespace.
-// Equality is deliberately conservative: even a small statement edit rotates its key.
+// Retaining an issued key is the owner's explicit unchanged-meaning assertion.
 export function prepareWorkingContent(input: WorkingContent, sources: IdSource[] = []): WorkingContent {
   const content = workingContentSchema.parse(input);
   const criteria = new Map(sources.flatMap(source => source.criteria.flatMap(c => c.stableKey ? [[c.stableKey, c.statement] as const] : [])));
@@ -13,7 +13,7 @@ export function prepareWorkingContent(input: WorkingContent, sources: IdSource[]
   return { ...content,
     criteria: content.criteria.map(c => {
       if (c.stableKey && !criteria.has(c.stableKey)) throw new UnprocessableEntityException();
-      return { ...c, stableKey: c.stableKey && criteria.get(c.stableKey) === c.statement ? c.stableKey : randomUUID() };
+      return { ...c, stableKey: c.stableKey ?? randomUUID() };
     }),
     evidence: content.evidence.map(e => {
       if (e.id && !evidence.has(e.id)) throw new UnprocessableEntityException();

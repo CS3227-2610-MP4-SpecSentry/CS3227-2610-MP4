@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 
-// Registration only; append-only audit storage and authorized projections follow.
+// Append-only business activity; callers supply the mutation transaction.
 @Module({ providers: [ActivityService], exports: [ActivityService] })
 export class ActivityModule {}

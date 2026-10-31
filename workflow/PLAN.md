@@ -10,7 +10,7 @@ As of 25 October 2026. Imported dates are targets, not completion evidence. Hist
 | ngkhengyang | Reviewer | AI Gateway, typed output, rate limits, evaluation harness, and AI observability | Reviewer spec, interface, service, tests, and AI evaluation |
 | yu-sutong | Release Maintainer | PostgreSQL migrations, audit model, CI/CD, deployment, and release evidence | Maintainer spec, interface, service, tests, and release operations |
 
-These focuses organize work and do not create exclusive ownership. The contributor to a feature owns its interface, service behavior, persistence integration, authorization tests, documentation, traceability, session summary, and reflection evidence. At least one teammate reviews every non-trivial change. Each member must also complete a substantial share of team-level work.
+These focuses organize work and do not create exclusive ownership. The contributor to a feature owns its interface, service behavior, persistence integration, authorization tests, documentation, traceability, session summary, and reflection evidence. At least one teammate reviews every non-trivial change. Each member must complete the full feature set for their role and substantial team-level work; the assignment estimates individual workload at 1.5 times MP1. Record actual contributions rather than treating allocation as evidence. Team/role counts and assessment logistics are captured in [ASSIGNMENT-SPEC](specs/ASSIGNMENT-SPEC.md).
 
 ## Delivery Schedule
 
@@ -34,7 +34,7 @@ These focuses organize work and do not create exclusive ownership. The contribut
 | --- | --- |
 | src | All production source code and resources |
 | workflow/specs | Living product, role, technical, integration, and AI security specifications |
-| workflow/agents | Specialized agent definitions, permissions, inputs, outputs, and stop rules |
+| workflow/contributor/agents and workflow/reviewer/agents | Scoped agent definitions, permissions, inputs, outputs, and stop rules; generic responsibilities in DEVELOPMENT.md |
 | workflow/evaluations | AI evaluation cases, rubrics, scripts, results, and resource measurements |
 | workflow/decisions | Architecture, security, context, and model-choice decision records |
 | workflow/PLAN.md | Dependencies, ownership, status, estimates, and actual outcomes |
@@ -74,13 +74,14 @@ These focuses organize work and do not create exclusive ownership. The contribut
 
 | **Source** | **Use** |
 | --- | --- |
-| MP4 assignment brief supplied on 22 October and pasted again on 24 October 2026 | Product constraints, team size, role and AI requirements, security, SDD, Multi-Agent SE, environment separation, resource use, repository structure, deadlines, grading focus, simple UI, and prohibition on AI build-and-host environments; no Java-specific stack requirement |
+| MP4 brief previously supplied as text; five-page PDF checked 26 October 2026 | [ASSIGNMENT-SPEC](specs/ASSIGNMENT-SPEC.md) captures page-referenced constraints, academic integrity, restrictions, deliverables, deadlines, tentative grading and presentation/evaluation logistics; no prescribed Java stack |
 | SoC LLM start guide | The implementation team must confirm current authentication, model, rate, token, and data-handling rules before the live integration is accepted |
 | Existing team repository metadata | GitHub usernames ngkhengyang, yooplo, and yu-sutong; used only for planning ownership and organization invitations |
 
 - The team must confirm the SoC LLM's current rate limits and approved model before replacing the initial configurable budgets.
 - The team must review role ownership, Render as the deployment platform, and the proposed schedule before treating this plan as approved.
 - The GitHub organization name must be submitted through Canvas by 23 October 2026 at 2:00 PM SGT even if the same team worked together previously.
+- Confirm historical organization registration, Canvas ZIP-upload expectations, presentation sign-up/slot, and later peer-evaluation details; do not infer them from the PDF availability window. See [submission readiness](SUBMISSION.md).
 
 **Product decision.** Build SpecSentry as a new, narrowly scoped software engineering web application in the GitHub organization CS3227-2610-MP4-SpecSentry. Keep every AI capability advisory, typed, rate limited, reviewable, and separate from state-changing endpoints. Prioritize three complete role workflows, explicit security evidence, measurable context and resource experiments, and a reproducible two-environment release over optional integrations.
 
@@ -92,11 +93,88 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | --- | --- | --- | --- | --- |
 | TASK-001 | Resolve validation, identity, API and AI blocking decisions | None | Relevant role owners | Policy baseline approved 25 October; actual live provider verification remains pending |
 | TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Partial: base server/client/shared workspaces, connectivity, local Compose, Docker/CI templates and setup docs initialized 25 October; source/build/browser/PostgreSQL checks recorded in base-source log. Sessions, CSRF, domain migrations and audit remain pending; Docker/remote CI unexecuted locally |
-| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Planned; REQ-CON evidence |
-| TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Manual-review iteration implemented against submitted fixtures; verification and independent review recorded in [session evidence](../logs/ngkhengyang/2026-10-25-manual-review.md). Contributor resubmission/notifications, product AI and approval revocation remain separate dependencies. |
+| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Private create/list/detail, editing, deletion and criteria increments 1–4 have local independent evidence; see [Contributor evidence](../logs/yooplo/2026-10-28-contributor-increment-4.md). Reviewer iteration 2 supplies shared submission/revision APIs; full Contributor submission UI and combined/deployed acceptance remain pending. |
+| TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Reviewer iterations 1–4 implement manual review, revision cycles, bounded AI integration and approval revocation; see [traceability](TRACEABILITY.md). Live provider, deployment and broader acceptance gates remain separate. |
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
 | TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Planned; publication/revocation race evidence |
 | TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Planned; requirement-linked results |
 | TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Planned; verified dev/prod release |
 
 Record actual commands, failures and outcomes rather than marking elapsed dates complete. Produce detailed task breakdown for each approved slice.
+
+### Contributor Increment 1 dependency checkpoint â€” 27 October 2026
+
+The initial foundation gate was resolved by two teammate agreements relayed by yooplo
+to the [concrete proposal](../logs/yooplo/2026-10-27-contributor-foundation-proposal.md).
+Increment 1 on `feature/contributor-private-drafts` reuses the pinned `0becf938` schema/
+migration/service foundation and adds owner list, restricted successful-read audit and
+create/list/detail UI. Review/notification storage is prerequisite support only; no later
+Contributor/Reviewer/AI routes are imported. Independent security and acceptance results,
+including remaining evidence gaps, are recorded in the
+[run record](../logs/yooplo/2026-10-27-contributor-increment-1-run.md).
+Independent acceptance revalidation passed 26 server/15 client unit, 22 PostgreSQL and
+five Chromium tests, typecheck/lint/build and UTC/append-only checks. Security disposition
+is recorded in the run log. No full role completion, deployed release or final teammate
+patch approval is claimed. Increment 2 status follows below.
+
+### Contributor Increment 2 â€” 28 October 2026
+
+Own never-submitted DRAFT editing is implemented and independently verified on local
+`feature/contributor-own-draft-editing`, based on unmerged Increment1 head
+`bb485ff8ea555f3505195b449d13d7a7a3a166f9`. Increment1's branch is intact and final
+teammate review remains pending. [Increment2 PR11](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/11)
+targets `feature/contributor-private-drafts` while that foundation is unmerged. The subsequent
+review-preparation request authorizes commit/push/PR publication, not merge or Increment3.
+
+Reuse existing save DTO/PATCH route, root/session transaction checks, bounded versions,
+working-content validation and atomic DRAFT_SAVED activity. Add accessible four-field
+editing with retained input and explicit conflict/uncertain recovery; no new shared
+schema/contracts introduced. Independent acceptance passed26server/43client unit,
+28PostgreSQL and6Chromium tests plus typecheck/lint/build. Separate security checks
+passed43client/17Contributor PostgreSQL and append-only/UTC assertions. Results and
+INC2-VER-001 (one unreproduced existing App test failure, not claimed fixed) belong in
+[the Increment2 log](../logs/yooplo/2026-10-28-contributor-increment-2.md).
+No blocking finding in the tested slice; no deployed/teammate approval implied. Submission, deletion,
+submitted editing, criteria management, responses, lifecycle/AI and Increment3 excluded.
+
+### Contributor Increment 3 â€” local acceptance verified, 28 October 2026
+
+Own never-submitted draft deletion is now authorized on
+`feature/contributor-own-draft-deletion` from Increment2 head `1de749c`.
+Fresh dependency checks show PR10/11 open and unmerged; any later Increment3 PR
+targets Increment2's branch until its foundation merges. Yooplo explicitly reports
+both affected teammates agreed to the [deletion brief](../logs/yooplo/2026-10-28-contributor-increment-3-brief.md).
+This covers the narrow private cleanup/minimal tombstone design, not final patch approval.
+One implementer supplied persistence/API/UI/tests. Independent acceptance passed27server/
+55client unit,36PostgreSQL/four suites and7Chromium tests plus typecheck/lint/build;
+both clean-five-migration and foundation-upgrade paths were exercised with UTC.
+Final security probes/disposition and limitations belong in the
+[current run](../logs/yooplo/2026-10-28-contributor-increment-3-run.md).
+No deployment/teammate patch approval inferred. INC2-VER-001 cause remains unconfirmed.
+Submission, withdrawal, criteria, review responses, AI and Increment4 remain excluded.
+Subsequent review-preparation request authorized Increment3 commit/push; stacked
+[PR12](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/12)
+now targets Increment2's branch while unmerged. Final patch approval is pending;
+merge and Increment4 remain excluded.
+
+### Contributor Increment 4 â€” local acceptance verified, 28 October 2026
+
+Subsequent explicit request authorizes private draft criteria management only on
+`feature/contributor-draft-criteria`, based on unmerged Increment3 head `86dc8f2`.
+PR10/11/12 remain open with final teammate patch approval pending; original branches
+are preserved. Yooplo reports ngkhengyang agreed to explicit owner-asserted stable-key
+semantics and chose to preserve nonempty persisted entries/current limits; zero/alloptional
+draft saves remain valid. No new endpoint/schema/migration is planned.
+Security design and independent test design completed. Implemented the existing PATCH
+slice without DTO/schema/migration changes. Independent final acceptance passed30server/
+71client units,38PostgreSQL/four suites,eightChromium cases and typecheck/lint/build.
+Focus and incomplete-identity-read findings were fixed and independently revalidated.
+Final security results/limits and exact manifest are in the
+[brief, decisions and run](../logs/yooplo/2026-10-28-contributor-increment-4.md).
+Only never-submitted portions of REQ-CON-007/009 covered; submitted history/findings,
+deployment/full manual WCAG/performance deferred. INC2-VER-001 remains unresolved.
+Subsequent review-preparation request authorized Increment4 commit/push; stacked
+[PR13](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/13)
+now targets Increment3's branch while unmerged. Final teammate approval remains pending;
+merge and Increment5 remain excluded.
+Earlier Increment3 exclusions describe that slice.

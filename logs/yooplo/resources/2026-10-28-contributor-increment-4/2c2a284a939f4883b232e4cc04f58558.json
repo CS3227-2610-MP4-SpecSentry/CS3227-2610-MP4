@@ -1,0 +1,35 @@
+{
+  "id": "2c2a284a939f4883b232e4cc04f58558",
+  "prompter": "yooplo",
+  "session": "2026-10-28-contributor-increment-4",
+  "agent": "implementer",
+  "invocation": "implement-1",
+  "stage": "criteria-vertical-slice",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed dispatch; settings not exposed",
+  "started_at": "2026-10-28T14:24:22.492233+00:00",
+  "ended_at": "2026-10-28T14:35:18.988929+00:00",
+  "elapsed_seconds": 656.496696,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Ten-file criteria slice;30server67client38PG8Chromium/static/build passed; early fixture/focus/lint failures corrected; runtime released independentnext",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+}

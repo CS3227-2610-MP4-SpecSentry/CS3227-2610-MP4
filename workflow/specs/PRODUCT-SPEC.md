@@ -12,6 +12,7 @@ Each requirement ID has one authoritative definition. These linked documents for
 
 | Document | Responsibility |
 | --- | --- |
+| [MP4 assignment](ASSIGNMENT-SPEC.md) | Page-referenced course constraints, deliverables, academic integrity, reflection guidance and submission/assessment logistics; team product choices remain below |
 | [Contributor](ROLE-CONTRIBUTOR.md) | REQ-CON requirements, UI flows and acceptance scenarios |
 | [Reviewer](ROLE-REVIEWER.md) | REQ-REV requirements, review interface and failure cases |
 | [Maintainer](ROLE-MAINTAINER.md) | REQ-REL requirements, candidate lifecycle and publication |

@@ -22,11 +22,11 @@ describe('Contributor working revision contracts (REQ-CON-001/002/004/007/009)',
     expect(withdrawProposalRequestSchema.safeParse({ expectedVersion: 0, confirmed: true, reason: '  ' }).success).toBe(false);
     expect(reopenProposalRequestSchema.safeParse({ expectedVersion: 0, approved: true }).success).toBe(false);
   });
-  it('issues identifiers, preserves only unchanged scoped criterion keys and rotates changed statements', () => {
+  it('issues identifiers, preserves declared same-meaning keys and rotates explicit replacements', () => {
     const saved = prepareWorkingContent({ ...content, evidence: [{ text: 'Evidence' }] });
     expect(saved.criteria[0]!.stableKey).toEqual(expect.any(String)); expect(saved.evidence[0]!.id).toEqual(expect.any(String));
     expect(prepareWorkingContent(saved, [saved]).criteria[0]!.stableKey).toBe(saved.criteria[0]!.stableKey);
-    const changed = prepareWorkingContent({ ...saved, criteria: [{ ...saved.criteria[0]!, statement: 'Materially different result', required: false }] }, [saved]);
+    const changed = prepareWorkingContent({ ...saved, criteria: [{ statement: 'Materially different result', required: false }] }, [saved]);
     expect(changed.criteria[0]!.stableKey).not.toBe(saved.criteria[0]!.stableKey);
     const classification = prepareWorkingContent({ ...saved, criteria: [{ ...saved.criteria[0]!, required: false }] }, [saved]);
     expect(classification.criteria[0]!.stableKey).toBe(saved.criteria[0]!.stableKey);

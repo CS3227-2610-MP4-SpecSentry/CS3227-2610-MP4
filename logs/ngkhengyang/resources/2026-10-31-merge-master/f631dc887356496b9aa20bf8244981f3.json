@@ -1,0 +1,35 @@
+{
+  "id": "f631dc887356496b9aa20bf8244981f3",
+  "prompter": "ngkhengyang",
+  "session": "2026-10-31-merge-master",
+  "agent": "merge_server_review",
+  "invocation": "review-1",
+  "stage": "review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings not exposed",
+  "started_at": "2026-10-31T13:14:09.820370+00:00",
+  "ended_at": "2026-10-31T13:15:36.652248+00:00",
+  "elapsed_seconds": 86.831878,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only server/shared merge review; findings returned to main; no database/build checks by agreement",
+  "unavailable_reasons": {
+    "input_tokens": "Collector baseline had no flushed token counter; stage attribution unavailable, end telemetry retained separately",
+    "output_tokens": "Collector baseline had no flushed token counter; stage attribution unavailable, end telemetry retained separately",
+    "cache_read_tokens": "Collector baseline had no flushed token counter; stage attribution unavailable, end telemetry retained separately",
+    "tool_calls": "Collector baseline had no flushed token counter; stage attribution unavailable, end telemetry retained separately",
+    "retries": "Collector baseline had no flushed token counter; stage attribution unavailable, end telemetry retained separately"
+  },
+  "unavailable_reason": "Collector baseline had no flushed token counter; stage attribution unavailable, end telemetry retained separately"
+}

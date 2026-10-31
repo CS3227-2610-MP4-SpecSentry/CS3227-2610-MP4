@@ -1,5 +1,5 @@
-import { Body, Controller, Get, HttpCode, Param, Patch, Post, Req, UnprocessableEntityException } from '@nestjs/common';
-import { createProposalRequestSchema, reviewerIdSchema, saveDraftRequestSchema, submitProposalRequestSchema,
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query, Req, UnprocessableEntityException } from '@nestjs/common';
+import { deleteDraftRequestSchema, ownDraftsQuerySchema, createProposalRequestSchema, reviewerIdSchema, saveDraftRequestSchema, submitProposalRequestSchema,
   submissionIdempotencyKeySchema, withdrawProposalRequestSchema, reopenProposalRequestSchema } from '@specsentry/shared';
 import { DatabaseService } from '../database/database.service';
 import { Roles, type AuthRequest } from '../identity/access';
@@ -27,6 +27,12 @@ export class ContributorProposalsController {
     const input = await this.parsed(request, 'CREATE', () => validate(createProposalRequestSchema, body));
     return this.lifecycle.create(businessActor(request), input);
   }
+  @Get()
+  async list(@Req() request: AuthRequest, @Query() query: unknown) {
+    const input = await this.parsed(request, 'LIST', () => validate(ownDraftsQuerySchema, query));
+    return this.lifecycle.list(businessActor(request), input);
+  }
+
   @Get(':id/draft')
   async draft(@Req() request: AuthRequest, @Param('id') id: string) {
     const input = await this.parsed(request, 'DRAFT', () => validate(reviewerIdSchema, id));
@@ -55,5 +61,11 @@ export class ContributorProposalsController {
   async reopen(@Req() request: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
     const input = await this.parsed(request, 'REOPEN', () => ({ id: validate(reviewerIdSchema, id), body: validate(reopenProposalRequestSchema, body) }));
     return this.lifecycle.reopen(businessActor(request), input.id, input.body);
+  }
+  @Delete(':id')
+  @HttpCode(204)
+  async remove(@Req() request: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
+    const input = await this.parsed(request, 'DELETE', () => ({ id: validate(reviewerIdSchema, id), body: validate(deleteDraftRequestSchema, body) }));
+    await this.lifecycle.remove(businessActor(request), input.id, input.body);
   }
 }

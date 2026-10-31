@@ -1,0 +1,35 @@
+{
+  "base_revision": "bb485ff8ea555f3505195b449d13d7a7a3a166f9",
+  "manifest_sha256": "b47c3b5d86ac294fc66399d29be71faeb86f3ad5a4053b8a0f07cde44f2a349e",
+  "algorithm": "SHA256 compact ASCII JSON sorted path/sha256 entries using raw file bytes",
+  "files": [
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.test.tsx",
+      "sha256": "849f26ec2a4388da61a3536071fed6ce4eaf129f5a75f1d6777e4d4ebf08730e"
+    },
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "sha256": "087908221142cc1459be51d09155e0a8fe37fe1164522a4fc5853ac979f2eedc"
+    },
+    {
+      "path": "src/client/src/features/contributor/EditDraft.test.tsx",
+      "sha256": "4ba860dcc2b5e622c9a87379a00204de1f275f3440a1ddee27d1649c202dcefa"
+    },
+    {
+      "path": "src/server/src/proposals/contributor-proposals.controller.ts",
+      "sha256": "6a2204d9f2c1c8301156a976e7a0369732cb182ebc95df493c9993fa2df8f584"
+    },
+    {
+      "path": "src/server/src/proposals/proposal-lifecycle.service.ts",
+      "sha256": "020e0374ba4a01c223fd61caa2c4e964e5842b3185f6574142714beed2991b86"
+    },
+    {
+      "path": "src/server/test/contributor-drafts.integration.ts",
+      "sha256": "51cf07056434d4a60c57d6e7e315ddd399b80a93ee002fe1970228739c708cbd"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-editing.spec.ts",
+      "sha256": "14e7b4e4b123a935da0f5c5b0b1d6effa81097b56f4de08be59613edf54eb714"
+    }
+  ]
+}
