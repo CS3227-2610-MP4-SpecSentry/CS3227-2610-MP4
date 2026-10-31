@@ -1,0 +1,35 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "UX-NAV-003 detail native hash then editor dirty Back must guard",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Dirty Back to a hash history entry must prompt\n\n0 !== 1\n\n    at file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-history.mjs:90:179\n    at async check (file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-history.mjs:68:9)\n    at async file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/logs/yooplo/resources/2026-10-31-functional-ux/verification/hash-history.mjs:87:1"
+    },
+    {
+      "name": "editor native hash Back once keeps text; second Back guards stay and leave",
+      "status": "passed"
+    },
+    {
+      "name": "editor native hash brand cancel/leave and browser Forward guard",
+      "status": "passed"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [],
+  "screenshots": [
+    "hash-previous-Back.png"
+  ],
+  "warnings": [
+    "You are trying to use a blocker on a POP navigation to a location that was not created by @remix-run/router. This will fail silently in production. This can happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL.",
+    "You are trying to use a blocker on a POP navigation to a location that was not created by @remix-run/router. This will fail silently in production. This can happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL.",
+    "You are trying to use a blocker on a POP navigation to a location that was not created by @remix-run/router. This will fail silently in production. This can happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL.",
+    "You are trying to use a blocker on a POP navigation to a location that was not created by @remix-run/router. This will fail silently in production. This can happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL.",
+    "You are trying to use a blocker on a POP navigation to a location that was not created by @remix-run/router. This will fail silently in production. This can happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL."
+  ],
+  "hashPrevious": {
+    "url": "http://127.0.0.1:5185/contributor/drafts/proposal-1#main-content",
+    "prompts": [],
+    "dirtyEditorVisible": 0
+  }
+}

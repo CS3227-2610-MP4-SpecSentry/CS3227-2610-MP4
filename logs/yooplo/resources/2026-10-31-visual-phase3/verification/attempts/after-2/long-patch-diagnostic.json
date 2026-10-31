@@ -1,0 +1,37 @@
+{
+  "field": {
+    "x": 65,
+    "y": 506.640625,
+    "width": 235,
+    "height": 494.75,
+    "top": 506.640625,
+    "right": 300,
+    "bottom": 1001.390625,
+    "left": 65
+  },
+  "bar": {
+    "x": 32,
+    "y": 125,
+    "width": 301,
+    "height": 232.75,
+    "top": 125,
+    "right": 333,
+    "bottom": 357.75,
+    "left": 32
+  },
+  "main": {
+    "x": 0,
+    "y": 77,
+    "width": 375,
+    "height": 923,
+    "top": 77,
+    "right": 375,
+    "bottom": 1000,
+    "left": 0
+  },
+  "active": "draft-diffText",
+  "mainScroll": 6834,
+  "textareaScroll": 80202,
+  "textareaContent": 80724,
+  "documentScroll": 0
+}

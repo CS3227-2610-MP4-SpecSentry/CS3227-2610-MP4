@@ -1,0 +1,35 @@
+{
+  "id": "bdbe4d7c29364858b41bd75295ac09e3",
+  "prompter": "yooplo",
+  "session": "2026-10-31-pr16-ci-fix",
+  "agent": "verifier",
+  "invocation": "live-verify-2",
+  "stage": "postgres-e2e-repeat",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-31T02:35:28.191041+00:00",
+  "ended_at": "2026-10-31T02:37:54.877630+00:00",
+  "elapsed_seconds": 146.686589,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Exact9 real PostgreSQL/API e2e tests repeat9/9pass exit0 in31.005s, no flaky/skipped/failures; first run final9/9exit0 after owned Windows teardown intervention. Published sanitized cases, stopped own API and fresh PostgreSQL cluster.",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry not exposed",
+    "output_tokens": "Per-record runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+    "tool_calls": "Per-record runtime usage telemetry not exposed",
+    "retries": "Per-record runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+}

@@ -1,0 +1,24 @@
+{
+  "skip": {
+    "x": 32,
+    "y": -100,
+    "width": 343,
+    "height": 147.1875,
+    "top": -100,
+    "right": 375,
+    "bottom": 47.1875,
+    "left": 32
+  },
+  "task": {
+    "x": 95.1875,
+    "y": 16.921875,
+    "width": 115.25,
+    "height": 42.15625,
+    "top": 16.921875,
+    "right": 210.4375,
+    "bottom": 59.078125,
+    "left": 95.1875
+  },
+  "skipFocused": false,
+  "taskHit": "<a class=\"skip-link\" href=\"#main-content\">Skip to main content</a>"
+}

@@ -1,0 +1,231 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "AC-CON-UX-001 dirty sidebar stay and leave exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 dirty brand stay and leave exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 dirty breadcrumb stay and leave exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 dirty Back stay and leave exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 browser POP stay preserves history and leave proceeds once",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 clean and reconciled saves navigate without prompt",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 criterion/evidence changes protect exit and exact reversion becomes clean",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 reload latest cancel retains text and confirm reconciles clean",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 hash-only skip link preserves dirty editor without prompt",
+      "status": "passed"
+    },
+    {
+      "name": "UX-NAV-003 skip focuses main without unindexed history; dirty Back stays or leaves once",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 mobile drawer navigation cancel retains private text",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 create dirty guard and successful create clears it",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 native beforeunload reload cancel and confirm",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-002 saved ordered escaped criteria and classification",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-002 empty saved criteria explains absence",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 sticky save/status 1440px scroll, focus, pending duplicates and success",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 sticky save/status 375px scroll, focus, pending duplicates and success",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 mobile raw pointer save preserves deep editing position",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 mobile enlarged text keeps validation focus clear of measured toolbar",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 truthful 409 failure retains dirty text and adjacent recovery",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 truthful 500 failure retains dirty text and adjacent recovery",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 truthful network failure retains dirty text and adjacent recovery",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 truthful reconcile failure retains dirty text and adjacent recovery",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-003 validation focuses field and message remains adjacent",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 pending navigation warns truthfully and late save does not redirect",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 forced auth 401 bypasses guard and erases old private input",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 forced auth timer bypasses guard and erases old private input",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-001 forced auth replacement bypasses guard and erases old private input",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-004 single task h1 and semantic breadcrumbs /contributor",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-004 single task h1 and semantic breadcrumbs /contributor/new",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-004 single task h1 and semantic breadcrumbs /contributor/drafts/proposal-1",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-004 single task h1 and semantic breadcrumbs /contributor/drafts/proposal-1/edit",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-004 loaded title breadcrumb uses dirty guard and keyboard stay/leave",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-005 whole row real link covers primary region, keyboard and normal pointer",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-005 browser Control modified row opens detail in new tab",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-005 browser middle modified row opens detail in new tab",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-005 mobile touch row primary region navigates normally",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-006 four editor jumps focus clear of save and preserve history 375px",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-006 four editor jumps focus clear of save and preserve history 768px",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-006 four editor jumps focus clear of save and preserve history 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-006 narrative width is bounded while patch stays wider on desktop",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-007 task hints, exact limits and error description associations",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-007 compact topbar long title, drawer and 200% text 375px",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-007 compact topbar long title, drawer and 200% text 768px",
+      "status": "passed"
+    },
+    {
+      "name": "AC-CON-UX-007 compact topbar long title, drawer and 200% text 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "PROP-CON-001 remains inactive: successful creation still opens saved detail",
+      "status": "passed"
+    },
+    {
+      "name": "P2-A11Y-002 enlarged unfocused skip link leaves task unobscured and focus restores it",
+      "status": "passed"
+    },
+    {
+      "name": "P2-MOB-001 enlarged mobile uncertainty keeps Save, fields and section navigation usable",
+      "status": "passed"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [
+    "Failed to load resource: the server responded with a status of 409 (Conflict)",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "warnings": [],
+  "screenshots": [
+    "skip-history-fixed.png",
+    "saved-criteria.png",
+    "sticky-save-1440.png",
+    "sticky-save-375.png",
+    "mobile-pointer-save.png",
+    "mobile-enlarged-validation.png",
+    "failure-409.png",
+    "failure-500.png",
+    "failure-network.png",
+    "failure-reconcile.png",
+    "orientation-contributor.png",
+    "orientation-new.png",
+    "orientation-proposal-1.png",
+    "orientation-edit.png",
+    "section-evidence-375.png",
+    "section-evidence-768.png",
+    "section-evidence-1440.png",
+    "reflow-375.png",
+    "reflow-768.png",
+    "reflow-1440.png",
+    "enlarged-skip-fixed.png",
+    "enlarged-mobile-recovery.png"
+  ]
+}

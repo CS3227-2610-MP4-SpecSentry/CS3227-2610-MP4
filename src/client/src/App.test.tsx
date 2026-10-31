@@ -23,7 +23,7 @@ describe('base authentication', () => {
     fireEvent.change(await screen.findByLabelText('Username'), { target: { value: 'alice' } });
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'synthetic-password' } });
     fireEvent.click(screen.getByRole('button', { name: 'Sign in' }));
-    expect(await screen.findByRole('heading', { name: 'Contributor workspace' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Private drafts' })).toBeInTheDocument();
     expect(fetch.mock.calls[2]?.[1]).toMatchObject({ method: 'POST', headers: { 'x-csrf-token': csrfToken } });
     fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
     expect(await screen.findByText('You have signed out.')).toBeInTheDocument();
@@ -34,6 +34,20 @@ describe('base authentication', () => {
     render(<MemoryRouter><App /></MemoryRouter>);
     expect(await screen.findByText('Signed in as alice')).toBeInTheDocument();
     expect(screen.queryByLabelText('Password')).not.toBeInTheDocument();
+  });
+  it('retains the Reviewer page heading above its existing workspace and queue headings', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url: string) => reply(url === '/api/auth/session' ? session('REVIEWER') : { items: [], nextCursor: null })));
+    render(<MemoryRouter initialEntries={['/reviewer']}><App /></MemoryRouter>);
+    expect(await screen.findByRole('heading', { level: 2, name: 'Reviewer workspace' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Reviewer' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Available proposals' })).toBeInTheDocument();
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+  });
+  it('keeps the Contributor task as the only page heading', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url: string) => reply(url === '/api/auth/session' ? session() : { items: [], nextCursor: null })));
+    render(<MemoryRouter initialEntries={['/contributor']}><App /></MemoryRouter>);
+    expect(await screen.findByRole('heading', { level: 1, name: 'Private drafts' })).toBeInTheDocument();
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
   });
   it('toggles navigation without discarding unsaved draft input or exposing other role links', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply(session())));

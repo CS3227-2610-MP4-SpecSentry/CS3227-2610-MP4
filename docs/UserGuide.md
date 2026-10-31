@@ -119,7 +119,8 @@ Use **Next page** and
 Select **Create New Draft**, enter a title, problem and expected behavior, and optionally
 enter constraints. Title is limited to 200 Unicode characters; each narrative field
 to 10,000. Select **Create private draft** to save and open its private detail.
-Select a title in the list to open an existing draft, or **Back to your drafts** to return.
+Select a draft row to open its saved detail, or **Back to your drafts** to return.
+The row is a normal link and supports opening in another tab.
 Only the owner can read this working content. Submission, responses and lifecycle actions are not exposed in this private-draft
 workspace; the drafting assistant remains pending.
 
@@ -135,6 +136,13 @@ your current form open. A **Skip to main content** link is available when naviga
 by keyboard. Reviewer accounts open their implemented review workspace; Release
 Maintainer accounts retain an availability message while their broader workspace
 remains pending.
+
+Contributor pages show the current task as the primary heading, with breadcrumbs
+back to the workspace/draft list and the saved draft where applicable. Long draft
+titles remain available on the breadcrumb link even when the displayed text is
+shortened. Breadcrumb exits use the same unsaved-change confirmation as sidebar
+navigation. On narrow screens the top bar keeps the task visible; full account
+information remains available in navigation.
 
 ### Delete a never-submitted draft
 
@@ -160,6 +168,31 @@ shows the new version; you can keep editing or select **Back to draft detail**. 
 fields from the existing draft are preserved. Criteria controls are described below;
 there are no submission controls. The server rejects editing if the draft is no longer eligible.
 
+The editor keeps **Save private draft** and its textual save status together in a
+compact action area while you scroll. Saving disables repeat submissions. A saved
+confirmation appears only after the current committed version has been read back;
+failed, conflicting or uncertain results keep your input and explain recovery.
+When recovery is needed, the compact Save area provides **Recovery details** to
+focus the full explanation and next steps in the workspace. Opening those details
+does not discard edits, create a browser-history entry or enable a paused save.
+
+Use **Draft sections** to move between **Overview**, **Acceptance criteria**,
+**Patch** and **Evidence**. These links focus the relevant section inside the
+workspace without discarding edits or adding browser-history entries. Narrative
+fields use a narrower reading width; patch content retains more room. Labels,
+field descriptions and character limits stay with their controls.
+
+Leaving entered draft content through workspace navigation, branding, the workspace
+breadcrumb, Back or browser history asks for confirmation when changes need
+protection. Cancel keeps the current form; confirming leaves it. Clean content,
+exactly reverted edits and successfully reconciled saves do not prompt during
+normal operation; paused conflict/uncertain results remain protected. A pending-request
+warning explains that leaving does not cancel a save already sent. Refresh, closing
+and external navigation use the browser's own warning where browser policy permits;
+its wording is controlled by the browser. Session expiry clears protected content
+and requires sign-in without a discard decision. Unsaved content is never stored
+in localStorage or sessionStorage.
+
 ### Manage draft acceptance criteria
 
 In the private editor,
@@ -180,12 +213,17 @@ check fails or finds a different version, your entered text and choices remain a
 Follow the explicit reload/discard confirmation to recover; do not assume another save is safe.
 These controls apply only to never-submitted drafts, not submitted history or findings.
 
+Private detail includes **Saved acceptance criteria** in their stored order, each
+marked **Required** or **Optional**, or an empty-state message when none are saved.
+Statements are displayed as plain text. This is saved private working content,
+not an immutable submitted snapshot or reviewer coverage assessment.
+
 ### Prepare summary, diff and evidence
 
-In **Edit private draft**, the **Submission preparation**
+In **Edit private draft**, the **Patch**
 section offers **Contributor summary** (500 Unicode characters) and **Unified diff**
 (100,000). Both are optional while drafting; incomplete patch text may be saved.
-Select **Add evidence** for optional plain-text items. Each added item must contain text
+In **Evidence**, select **Add evidence** for optional plain-text items. Each added item must contain text
 or be removed before saving, with 50,000 characters total across all evidence. Editing
 these fields preserves your other draft content and criterion identities.
 
@@ -308,3 +346,23 @@ Include the action, observed result and safe correlation identifier when present
 
 Update this guide from observed release behavior before inviting peer testers.
 Never publish real credentials, raw prompts or sensitive sample patches here.
+
+## Visual refinement and existing safeguards
+
+See the [implemented UI/UX specification](../workflow/specs/UI-UX-SPEC.md) for
+current screen behavior and the precise boundary between verified browser checks
+and unimplemented product workflows.
+
+The Contributor list presents its loaded-page count beside the draft list, with a
+concise privacy explanation. The count describes this page, not all your drafts;
+loading or an unavailable result is distinct from zero. The empty state offers the
+existing Create action. Reviewer and Release Maintainer landings continue to show
+their current availability message; visual refinement does not add workflow features.
+
+Long editors retain section navigation, independent workspace scrolling, sticky
+Save/status, field validation and explicit protection before discarding unsaved
+edits. Required/optional acceptance criteria remain visible in saved detail.
+Control feedback respects reduced-motion preferences. Before/after screenshots,
+tested viewport sizes and verification limits are recorded in the
+[Phase3 run](../logs/yooplo/2026-10-31-visual-phase3.md); production access and full
+manual accessibility certification remain pending.

@@ -1,0 +1,16 @@
+{
+  "run_id": 41159925050,
+  "job_id": 124415002242,
+  "url": "https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/41159925050/job/124415002242",
+  "suite": "npm run test:e2e (9 PostgreSQL/production-server Playwright tests)",
+  "result": {"failed": 6, "passed": 3},
+  "failures": [
+    {"file": "contributor-criteria.spec.ts", "line": 27, "cause": "Obsolete Contributor workspace heading; implemented primary heading is Private drafts."},
+    {"file": "contributor-deletion.spec.ts", "line": 27, "cause": "Obsolete Contributor workspace heading."},
+    {"file": "contributor-editing.spec.ts", "line": 29, "cause": "Obsolete Contributor workspace heading."},
+    {"file": "contributor-preparation.spec.ts", "line": 26, "cause": "Obsolete Contributor workspace heading."},
+    {"file": "scaffold.spec.ts", "line": 44, "cause": "Contributor branch of role-parameterized session test expects obsolete heading."},
+    {"file": "contributor-drafts.spec.ts", "line": 50, "cause": "Unscoped exact title matches both breadcrumb span and saved detail definition; strict-mode ambiguity."}
+  ],
+  "scope": "Relevant sanitized failure summary verified from GitHub job logs. No full environment/service logs or credentials retained."
+}

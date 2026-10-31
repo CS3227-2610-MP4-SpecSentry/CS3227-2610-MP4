@@ -1,0 +1,35 @@
+{
+  "id": "5c41a06079f04a268798d4abe3c4b37e",
+  "prompter": "yooplo",
+  "session": "2026-10-31-functional-ux",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "resume-validation-and-close",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T17:09:07.572171+00:00",
+  "ended_at": "2026-10-30T17:11:21.323724+00:00",
+  "elapsed_seconds": 133.751553,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Recovered completed28case independent verification;production build passed;guides traceability and final scope report reconciled;no product edits or commits on resume",
+  "unavailable_reasons": {
+    "input_tokens": "Exact model/effort and per-record runtime usage not exposed",
+    "output_tokens": "Exact model/effort and per-record runtime usage not exposed",
+    "cache_read_tokens": "Exact model/effort and per-record runtime usage not exposed",
+    "tool_calls": "Exact model/effort and per-record runtime usage not exposed",
+    "retries": "Exact model/effort and per-record runtime usage not exposed"
+  },
+  "unavailable_reason": "Exact model/effort and per-record runtime usage not exposed"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "eb7d95bc21454cbb8177a5a2821d5a01",
+  "prompter": "yooplo",
+  "session": "2026-10-31-phase2-integration",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "integrate-and-validate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T17:52:03.127302+00:00",
+  "ended_at": "2026-10-30T17:59:54.642705+00:00",
+  "elapsed_seconds": 471.515403,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Applied64 artifact paths, preserved Phase1 and original index, reviewed rollback; client110pass on unchanged rerun after documented109pass1focusfailure, lint/alltypes/buildpass, browser48plus1pass; no commits or deployment",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+    "output_tokens": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+    "cache_read_tokens": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+    "tool_calls": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only",
+    "retries": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only"
+  },
+  "unavailable_reason": "Attributable token/cache/tool/retry and exact model/effort telemetry not exposed; measured elapsed interval only"
+}

@@ -1,0 +1,134 @@
+{
+  "suite": "Actual PostgreSQL/API Playwright nine-test suite",
+  "attempt": 2,
+  "command": "npm.cmd run test:e2e -- --config tmp/pr16-live-e2e-20261031/playwright-repeat.config.ts",
+  "exit_code": 0,
+  "stats": {
+    "startTime": "2026-10-31T02:36:45.472Z",
+    "duration": 31005.22,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "errors": [],
+  "cases": [
+    {
+      "file": "contributor-criteria.spec.ts",
+      "title": "owner manages criterion classification and explicit identity with authoritative reconciliation and keyboard recovery",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 22540,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "contributor-deletion.spec.ts",
+      "title": "owner confirms deletion by keyboard with conflict/uncertainty recovery and minimal retained evidence",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 14274,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "contributor-drafts.spec.ts",
+      "title": "private create/list/detail supports keyboard, validation, escaped text and session loss",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 23984,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "contributor-editing.spec.ts",
+      "title": "owner edits via keyboard with version conflicts, confirmed reload, uncertain-save recovery and accessible forms",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 21744,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "contributor-preparation.spec.ts",
+      "title": "owner prepares summary, inert diff and plain-text evidence with identity preservation and keyboard recovery",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 22007,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "scaffold.spec.ts",
+      "title": "login page withholds workspace content and passes automated accessibility checks",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 6148,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "scaffold.spec.ts",
+      "title": "Contributor can sign in, restore the session, and sign out",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 1573,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "scaffold.spec.ts",
+      "title": "Reviewer can sign in, restore the session, and sign out",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 1149,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "scaffold.spec.ts",
+      "title": "Release Maintainer can sign in, restore the session, and sign out",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration_ms": 1030,
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    }
+  ]
+}

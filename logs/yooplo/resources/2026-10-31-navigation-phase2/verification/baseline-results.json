@@ -1,0 +1,19 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "Phase2 baseline task primary heading",
+      "status": "failed",
+      "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'Create a private draft', level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'Create a private draft', level: 1 }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'Create a private draft', level: 1 })\n\n    at captureRawStack (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright-core\\lib\\coreBundle.js:9282:17)\n    at callMatcherAsStep (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright\\lib\\matchers\\expect.js:13316:57)\n    at Object.toBeVisible (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright\\lib\\matchers\\expect.js:13308:23)\n    at C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\tmp\\phase2-navigation-20261031\\logs\\yooplo\\resources\\2026-10-31-navigation-phase2\\verification\\baseline.mjs:84:302\n    at async check (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\tmp\\phase2-navigation-20261031\\logs\\yooplo\\resources\\2026-10-31-navigation-phase2\\verification\\baseline.mjs:68:9)\n    at async file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/tmp/phase2-navigation-20261031/logs/yooplo/resources/2026-10-31-navigation-phase2/verification/baseline.mjs:84:1"
+    },
+    {
+      "name": "Phase2 baseline row primary region is direct semantic link",
+      "status": "failed",
+      "error": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('.draft-list li > a')\nExpected: 1\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('.draft-list li > a') with timeout 5000ms\n  - waiting for locator('.draft-list li > a')\n    14 × locator resolved to 0 elements\n       - unexpected value \"0\"\n\n    at captureRawStack (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright-core\\lib\\coreBundle.js:9282:17)\n    at callMatcherAsStep (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright\\lib\\matchers\\expect.js:13316:57)\n    at Object.toHaveCount (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright\\lib\\matchers\\expect.js:13308:23)\n    at C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\tmp\\phase2-navigation-20261031\\logs\\yooplo\\resources\\2026-10-31-navigation-phase2\\verification\\baseline.mjs:85:308\n    at async check (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\tmp\\phase2-navigation-20261031\\logs\\yooplo\\resources\\2026-10-31-navigation-phase2\\verification\\baseline.mjs:68:9)\n    at async file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/tmp/phase2-navigation-20261031/logs/yooplo/resources/2026-10-31-navigation-phase2/verification/baseline.mjs:85:1"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [],
+  "warnings": [],
+  "screenshots": []
+}

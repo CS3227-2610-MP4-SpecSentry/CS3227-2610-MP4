@@ -1,0 +1,35 @@
+{
+  "id": "081d28e8cacb4748a26a1edf608ffd3a",
+  "prompter": "yooplo",
+  "session": "2026-10-31-ui-spec-publication",
+  "agent": "implementer",
+  "invocation": "inventory-1",
+  "stage": "hygiene-inventory",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact inherited execution settings not exposed",
+  "started_at": "2026-10-30T18:38:12.227276+00:00",
+  "ended_at": "2026-10-30T18:42:00.677986+00:00",
+  "elapsed_seconds": 228.45071,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only publication inventory396 pending files; per-file recommendations284 include/112 local-only, no unknown blockers, ignored sizes and59 duplicate PNG groups recorded; report links need canonical/local-only annotation before exclusion; no Git/source/ignore/deletion mutations",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}
