@@ -1,0 +1,35 @@
+{
+  "id": "1bb85674e42c4e999a748ecd0db42ca4",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "security",
+  "invocation": "ui-security-1",
+  "stage": "stacked-auth-integration-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings not exposed",
+  "started_at": "2026-10-31T17:54:48.105484+00:00",
+  "ended_at": "2026-10-31T18:00:20.945887+00:00",
+  "elapsed_seconds": 332.840403,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independentstackedauth/NavGuard/securitysourcegate no blockers;PR-MERGE-001 obsolete test policy confirmed;headingfixrequiresboundedrecheck",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed timing;child usage not exposed",
+    "output_tokens": "Coordinator-observed timing;child usage not exposed",
+    "cache_read_tokens": "Coordinator-observed timing;child usage not exposed",
+    "tool_calls": "Coordinator-observed timing;child usage not exposed",
+    "retries": "Coordinator-observed timing;child usage not exposed"
+  },
+  "unavailable_reason": "Coordinator-observed timing;child usage not exposed"
+}

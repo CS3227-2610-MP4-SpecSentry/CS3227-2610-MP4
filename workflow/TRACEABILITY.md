@@ -1,5 +1,23 @@
 # Requirement traceability
 
+## PR15/16 merge reconciliation — 1 November 2026
+
+[Integration run/evidence](../logs/yooplo/2026-11-01-pr-conflicts.md) preserves master's
+Reviewer implementation together with Contributor preparation and latest UI.
+
+| Requirement / finding | Actual integrated evidence |
+| --- | --- |
+| REQ-CON-002 / PR-MERGE-001 | Shared PATCH already permits owner working-copy saves in SUBMITTED/IN_REVIEW/CHANGES_REQUESTED. Test denial list aligned with existing policy; positive preparation save after real submission checks immutable revision/criteria/evidence, preserved identities, version/audit, stale and non-owner/role denials. Independently33ContributorPG cases passed; final full213PG passed. No service/contract changes |
+| REQ-SHR-001/002/003 / role privacy and sessions | Independent App/Reviewer/Contributor63tests, final182client tests,88server units and cross-role Chromium; security review verified unchanged generation/logout/CSRF/request/navigation guards |
+| REQ-SHR-005 / PR-MERGE-002/003 | Reviewer h1 restored above existingh2/h3 without duplicate Contributor/unknown-route headings. Controlled failing-before/passing-after tests; fresh4role-width Chromium keyboard/focus/reflow checks and4live scaffold login/reload/logout cases passed. Heading assertions corrected for real Reviewer UI, cookie/security assertions retained |
+
+The final UI browser run passed17, failed one outdated heading assertion and skipped
+one under fail-fast; the corrected scaffold file then passed4/4 independently.
+This is not a claim of a single fully green final19case run. The pre-existing desktop
+brand label-content-name mismatch (WCAG2.1A2.5.3) and inherited INC2-VER-001 remain
+unresolved; filtered axe scans are not full accessibility conformance. No deployment,
+live SoC verification or teammate approval is inferred from integration checks.
+
 Historical retention note, 27 October 2026: linked `state.json` files are now
 compact evidence summaries. Source fingerprints, original results and matrix
 history remain; full original state is recoverable from Git. See the

@@ -241,3 +241,21 @@ Subsequent review-preparation request authorized commit/push; [PR15](https://git
 now targets master. Final Increment5 teammate approval remains pending; merge and Increment6
 remain excluded. Inherited INC2-VER-001 remains unresolved.
 [Current brief and evidence](../logs/yooplo/2026-10-30-contributor-increment-5.md).
+
+### PR15/16 integration reconciliation — 1 November 2026
+
+Merged fetched master646eefd into the preparation branch, then propagated it into
+the stacked UI branch; both existing PR branches updated without force rewriting.
+PR15 still targets master; PR16 still targets the preparation branch. Neither PR
+merged into its target; teammate approval remains separate. Preserved both roles'
+styles/guides, Reviewer authorization and Contributor navigation/recovery. Corrected
+an obsolete submitted-working-copy test under existing REQ-CON-002 and restored
+Reviewer's heading hierarchy, including role-login browser assertions. No new
+server/shared API/schema/permission or feature increment.
+Final local evidence:88server units,213PostgreSQL cases,182UI client tests passed;
+typecheck/lint/build passed. PR15 live Chromium19/19 passed; final UI17cases passed
+before one obsolete Reviewer heading assertion failed, then all4affected scaffold
+cases independently passed after its correction (overlap; not one final19greenrun).
+Both PRs report mergeable; CI was still running at publication. Existing brand
+label-name mismatch and INC2-VER-001 remain unresolved.
+[Resolution decisions, independent checks and failures](../logs/yooplo/2026-11-01-pr-conflicts.md).
