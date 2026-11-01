@@ -23,6 +23,25 @@ async function testServer() {
   if (!process.env.TEST_DATABASE_URL || !new URL(process.env.TEST_DATABASE_URL).pathname.endsWith('_test'))
     throw new Error('Explicit disposable test database required');
   const transport: AiTransport = { async complete(request: AiTransportRequest) {
+    if (request.messages[0]?.content.startsWith('Template contributor-draft-v1.')) {
+      // Contributor modes exist only in this synthetic DI transport, never the production gateway.
+      const raw = request.messages[1]!.content.match(/\n(.*)\n<\/draft_context>/s)?.[1];
+      const draft = JSON.parse(raw ?? '{}') as { problem: string };
+      if (draft.problem.includes('[test-ai-unavailable]')) throw new SafeAiError('PROVIDER_AUTH');
+      if (draft.problem.includes('[test-ai-delayed]')) {
+        const pool = new Pool({ connectionString: process.env.TEST_DATABASE_URL, statement_timeout: 15000 });
+        const client = await pool.connect();
+        try {
+          await client.query('SELECT pg_advisory_lock(hashtext($1))', ['contributor-ai-browser-' + draft.problem]);
+          await client.query('SELECT pg_advisory_unlock(hashtext($1))', ['contributor-ai-browser-' + draft.problem]);
+        } finally { client.release(); await pool.end(); }
+      }
+      const result = { objective: '<script>Suggested objective remains text</script>', acceptanceCriteria: ['Suggested required behavior'],
+        edgeCases: ['Check empty input'], ambiguities: ['Clarify the boundary'], testIdeas: ['Exercise the boundary'],
+        ...(draft.problem.includes('[test-ai-invalid]') ? { submit: true } : {}) };
+      return { status: 200, retryAfter: null, body: JSON.stringify({ choices: [{ finish_reason: 'stop', message: { role: 'assistant', content: JSON.stringify(result) } }],
+        usage: { prompt_tokens: 100, completion_tokens: 80, total_tokens: 180, prompt_tokens_details: { cached_tokens: 0 } } }) };
+    }
     const data = request.messages[1]!.content.match(/\n(.*)\n<\/submitted_context>/s)?.[1];
     const context = JSON.parse(data ?? '{}') as {selectedCriterionIds:string[];summary:string;scope:{proposalId:string}};
     if (context.summary.includes('[test-unavailable]')) throw new SafeAiError('PROVIDER_AUTH');

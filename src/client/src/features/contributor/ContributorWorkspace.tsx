@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type MouseEvent } from 'react';
 import { Icon } from '../../shared/Icon';
 import { PageHeader } from './PageHeader';
+import { OwnProposals, ProposalActions, SubmittedProposal } from './SubmittedProposal';
+import { SpecDraftAssistant } from './SpecDraftAssistant';
 import { useNavigationGuard } from '../../shared/navigationGuard';
 import { Link, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { createProposalRequestSchema, draftResponseSchema, ownDraftsResponseSchema, proposalLifecycleResponseSchema,
   type OwnDraftsResponse, type SessionResponse, type WorkingContent } from '@specsentry/shared';
 
 type Props = { session: SessionResponse; onSessionLost(): void };
+const editableProposalStates = ['DRAFT', 'SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED'];
 const emptyContent = { title: '', problem: '', constraints: '', expectedBehavior: '', summary: '', diffText: '', criteria: [], evidence: [] };
 const fields = [
   { name: 'title', label: 'Title', guidance: 'Name the change you want to make.', limit: 200, required: true },
@@ -90,6 +93,7 @@ function DraftList({ onSessionLost, onLoaded }: { onSessionLost(): void; onLoade
   }, [cursor, attempt, onSessionLost, onLoaded]);
   return <>
     <div className="page-heading"><div><PageHeader title="Private drafts" list /><p>Create, manage, and refine your specifications.</p></div><Link className="button" to="/contributor/new"><Icon name="plus" />Create New Draft</Link></div>
+    <p><Link className="button" to="/contributor/proposals">All your proposals</Link> · Find your submitted, approved, withdrawn and released proposals.</p>
     {location.state?.draftDeleted && <p role="status" tabIndex={-1} ref={notice}>Private draft deleted.</p>}
     <section className="draft-panel" aria-labelledby="private-drafts-title">
       <div className="panel-heading"><div><h2 id="private-drafts-title">Your private drafts</h2><p className="privacy-note"><Icon name="lock" />Only you can read these working drafts.</p></div><p className="draft-count"><span>Drafts on this page</span><strong data-testid="draft-page-count">{error ? 'Unavailable' : page ? page.items.length : '...'}</strong></p></div>
@@ -173,6 +177,7 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
   const [attempt, setAttempt] = useState(0);
   const [loading, setLoading] = useState(true);
   const [pending, setPending] = useState(false);
+  const [actionPending, setActionPending] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const [blocked, setBlocked] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
@@ -212,7 +217,7 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
 
   async function remove(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!detail || !confirming || pending || loading || blocked) return;
+    if (!detail || !confirming || pending || actionPending || loading || blocked) return;
     setPending(true); setError('');
     try {
       const response = await fetch(`/api/proposals/${encodeURIComponent(id)}`, { method: 'DELETE', credentials: 'same-origin',
@@ -244,7 +249,8 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
     {loading && <p role="status">Loading draft...</p>}
     {detail && <>
       <p>Private - {detail.state}</p>
-      {detail.state === 'DRAFT' && !pending && <Link to={`/contributor/drafts/${encodeURIComponent(id)}/edit`}>Edit private draft</Link>}
+      {editableProposalStates.includes(detail.state) && !pending && !actionPending && <Link to={`/contributor/drafts/${encodeURIComponent(id)}/edit`}>Edit private draft</Link>}
+      {detail.state !== 'DRAFT' && detail.state !== 'WITHDRAWN' && <p><Link to={`/contributor/proposals/${encodeURIComponent(id)}`}>View submitted history</Link></p>}
       <dl>{fields.map(field => <div key={field.name}><dt>{field.label}</dt><dd>{detail.content[field.name] || 'None provided.'}</dd></div>)}</dl>
       <section className="saved-criteria" aria-labelledby="saved-criteria-title">
         <h2 id="saved-criteria-title">Saved acceptance criteria</h2>
@@ -254,7 +260,14 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
       <dl>{preparationFields.map(field => <div key={field.name}><dt>{field.label}</dt><dd>{detail.content[field.name] || 'None provided.'}</dd></div>)}
         <dt>Plain-text evidence</dt><dd>{detail.content.evidence.length ? <ol>{detail.content.evidence.map(item => <li key={item.id}>{item.text}</li>)}</ol> : 'None provided.'}</dd>
       </dl>
-      {detail.state === 'DRAFT' && <button className="danger-button" ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || loading || blocked || confirming}>Delete private draft</button>}
+      {!loading && !pending && !confirming && <ProposalActions key={`${detail.version}-${detail.state}`} proposalId={id} version={detail.version} state={detail.state}
+        workingRevisionId={detail.workingRevisionId} session={session} onSessionLost={onSessionLost} onLockChange={setActionPending}
+        onCommitted={(result, operation) => {
+          if (operation === 'submit') navigate(`/contributor/proposals/${encodeURIComponent(id)}`);
+          else if (result.revisionId) navigate(`/contributor/proposals/${encodeURIComponent(id)}`);
+          else setAttempt(value => value + 1);
+        }} />}
+      {detail.state === 'DRAFT' && <button className="danger-button" ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || actionPending || loading || blocked || confirming}>Delete private draft</button>}
       {confirming && <form className="delete-confirmation" aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-description" onSubmit={event => void remove(event)}>
         <h2 id="delete-confirm-title">Confirm permanent deletion</h2>
         <p id="delete-confirm-description">Permanently delete "{detail.content.title}" and all its working content? This cannot be undone. Only never-submitted drafts can be deleted.</p>
@@ -264,7 +277,7 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
     </>}
     {pending && <p role="status">Deleting private draft...</p>}
     {blocked && !unavailable && <p role="status">Deletion is paused. Check the current draft and confirm again before another deletion request.</p>}
-    {!unavailable && (error || blocked) && <button onClick={() => setAttempt(value => value + 1)} disabled={pending || loading}>Check current draft</button>}
+    {!unavailable && (error || blocked) && <button onClick={() => setAttempt(value => value + 1)} disabled={pending || actionPending || loading}>Check current draft</button>}
   </>;
 }
 
@@ -348,7 +361,7 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!baseline || !content || pending || loading || blocked || baseline.state !== 'DRAFT') return;
+    if (!baseline || !content || pending || loading || blocked || !editableProposalStates.includes(baseline.state)) return;
     const original = new Map(baseline.content.criteria.map(criterion => [criterion.stableKey, criterion.statement]));
     const nextErrors: Record<string, string> = {};
     const criteria = content.criteria.map((criterion, index) => {
@@ -392,14 +405,14 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
         return;
       }
       const saved = proposalLifecycleResponseSchema.parse(await response.json());
-      if (saved.proposalId !== id || saved.workingRevisionId !== baseline.workingRevisionId || saved.version !== baseline.version + 1 || saved.state !== 'DRAFT') throw new Error();
+      if (saved.proposalId !== id || saved.workingRevisionId !== baseline.workingRevisionId || saved.version !== baseline.version + 1 || saved.state !== baseline.state) throw new Error();
       committed = true;
       const read = await fetch(`/api/proposals/${encodeURIComponent(id)}/draft`, { credentials: 'same-origin' });
       if (read.status === 401) { onSessionLost(); return; }
       if (!active.current) return;
       if (!read.ok) throw new Error();
       const latest = draftResponseSchema.parse(await read.json());
-      if (latest.proposalId !== id || latest.workingRevisionId !== saved.workingRevisionId || latest.version !== saved.version || latest.state !== 'DRAFT' || !hasPersistedIdentities(latest.content)) throw new Error();
+      if (latest.proposalId !== id || latest.workingRevisionId !== saved.workingRevisionId || latest.version !== saved.version || latest.state !== saved.state || !hasPersistedIdentities(latest.content)) throw new Error();
       if (active.current) {
         setBaseline(latest); setContent(latest.content); setMeaning({});
         setSuccess(`Draft saved. Version ${saved.version}.`);
@@ -420,14 +433,14 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
   }
   return <>
     <PageHeader title="Edit private draft" draftId={id} draftTitle={baseline?.content.title} editing />
-    <p>Changes stay private. Only a never-submitted DRAFT can be saved.</p>
+    <p>Changes stay private until submission. Working copies can be saved in DRAFT, SUBMITTED, IN_REVIEW or CHANGES_REQUESTED. Release-candidate attachments block editing.</p>
     {(!baseline || !content) && error && <p role="alert">{error}</p>}
     {loading && <p role="status">Loading latest draft…</p>}
     {baseline && content && <>
       <p>Editing version {baseline.version} · {baseline.state}</p>
-      {baseline.state !== 'DRAFT' && <p role="alert">This proposal is no longer an editable draft.</p>}
+      {!editableProposalStates.includes(baseline.state) && <p role="alert">This proposal is no longer an editable draft.</p>}
       <div className="save-actions" ref={saveActionsRef} role="region" aria-label="Save draft and status">
-        <button type="submit" form="edit-draft-form" disabled={pending || loading || blocked || baseline.state !== 'DRAFT'}>{pending ? 'Saving...' : 'Save private draft'}</button>
+        <button type="submit" form="edit-draft-form" disabled={pending || loading || blocked || !editableProposalStates.includes(baseline.state)}>{pending ? 'Saving...' : 'Save private draft'}</button>
         <div className="save-feedback">
           <p role="status">{pending ? 'Saving your private draft.' : blocked ? saveOutcome === 'conflict' ? 'Draft changed. Saving is paused.' : saveOutcome === 'verification' ? 'Saved; verification incomplete.' : saveOutcome === 'uncertain' ? 'Save result uncertain. Saving is paused.' : 'Saving is paused.' : error ? 'Save needs attention.' : success || (dirty ? 'Unsaved changes.' : 'No unsaved changes.')}</p>
           {(error || blocked) && <a href="#save-recovery" onClick={event => jumpToSection(event, 'save-recovery')}>Recovery details</a>}
@@ -521,6 +534,9 @@ function EditDraft({ id, session, onSessionLost }: Props & { id: string }) {
           }}>Add evidence</button>
         </fieldset>
       </form>
+      <SpecDraftAssistant proposalId={id} workingRevisionId={baseline.workingRevisionId} version={baseline.version} content={content}
+        disabled={dirty || pending || loading || blocked || !editableProposalStates.includes(baseline.state)} session={session} onSessionLost={onSessionLost}
+        onApply={next => { setContent(next); setSuccess(''); setErrors({}); }} />
     </>}
     <button onClick={reload} disabled={pending || loading}>{content ? 'Reload latest draft and discard changes' : 'Retry loading draft'}</button>
     <button onClick={back} disabled={pending}>Back to draft detail</button>
@@ -542,6 +558,8 @@ export function ContributorWorkspace(props: Props) {
         uncertain={uncertain} onUncertain={markUncertain} onCertain={markCertain} />} />
       <Route path="drafts/:id" element={<DraftDetailRoute {...props} />} />
       <Route path="drafts/:id/edit" element={<EditDraftRoute {...props} />} />
+      <Route path="proposals/:id" element={<SubmittedProposal {...props} />} />
+      <Route path="proposals" element={<OwnProposals {...props} />} />
       <Route path="*" element={<><h1>Page not found</h1><Link to="/contributor">Your drafts</Link></>} />
     </Routes>
   </section>;

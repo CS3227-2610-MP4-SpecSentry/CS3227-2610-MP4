@@ -105,7 +105,7 @@ for (const destination of ['sidebar', 'brand', 'breadcrumb', 'Back']) {
     try {
       await edit(f); await f.page.getByLabel('Problem (required)').fill('Unsaved guarded text');
       const target = destination === 'sidebar' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'Contributor workspace', exact: true })
-        : destination === 'brand' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'SpecSentry workspace' })
+        : destination === 'brand' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'SpecSentry Specification workspace' })
           : destination === 'breadcrumb' ? f.page.getByRole('navigation', { name: 'Breadcrumb', exact: true }).getByRole('link').first() : f.page.getByRole('button', { name: 'Back to draft detail' });
       await leaveAttempt(f, () => target.click(), false); await expect(f.page).toHaveURL(baseURL + editorPath);
       await expect(f.page.getByLabel('Problem (required)')).toHaveValue('Unsaved guarded text');
