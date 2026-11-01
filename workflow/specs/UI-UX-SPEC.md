@@ -21,14 +21,27 @@ Maintainer. All roles can sign in, restore a session, navigate their authorized
 workspace shell and sign out. Contributor UI implements owned never-submitted
 DRAFT listing, creation, saved detail, editing, criteria/evidence preparation and
 confirmed draft deletion. Saved detail is working data, not a submitted snapshot.
-The current editor only saves eligible DRAFTs; broader lifecycle capabilities in
-the product specification are planned and must not be inferred from this UI.
+The 1 November2026 local extension also permits working-copy saves in eligible
+SUBMITTED, IN_REVIEW and CHANGES_REQUESTED states, using existing server checks
+and save reconciliation. Submitted detail at `/contributor/proposals/:id` is
+distinct from private working detail and displays immutable revision content,
+findings, revision-numbered decisions and chronological activity. Explicit
+submission, confirmed reasoned withdrawal and approval reopening consume existing
+server commands. See the [current run](../../logs/yooplo/2026-11-01-contributor-completion.md)
+for actual verification and limits.
 
-Reviewer/Maintainer landing pages truthfully report that workflow features will
-appear when available. No fake queues, statistics, assistant results or disabled
-feature previews are supplied. Submission/review/release/AI operations and the
-proposed create-to-editor shortcut PROP-CON-001 are outside this implementation.
-Successful creation continues to open saved detail, not the editor.
+The integrated Reviewer workspace supplies its existing manual review and bounded
+Patch Risk controls; the broader Maintainer workspace remains pending. No fake
+queues, statistics or assistant results are supplied. Contributor all-state
+discovery uses an additive owner list while preserving private drafts. Explicit
+latest-content cloning explains replacement of saved private edits; attributed
+finding responses retain history and never resolve findings. The Spec Draft
+Assistant presents typed suggestions with initially empty selection, applies only
+to the unsaved editor and retains manual operation on failure. Live AI stays
+disabled pending provider verification. Final local checks and open findings are
+reported in the current run; this description alone is not acceptance. The proposed
+create-to-editor shortcut PROP-CON-001 stays inactive. Successful creation
+continues to open saved detail, not the editor.
 
 ## B. Application layout
 

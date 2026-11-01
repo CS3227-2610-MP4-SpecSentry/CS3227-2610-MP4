@@ -1,0 +1,333 @@
+{
+  "capturedAtUtc": "2026-11-01T05:20:23.737794+00:00",
+  "baseHead": "03cbea9f94c28011142c3a2a453ce7692df06053",
+  "uncommitted": true,
+  "securityReviewedFilesUnchanged": [
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/src/ai/gateway/accounting.ts",
+    "src/server/src/ai/contracts.ts",
+    "src/server/src/ai/ai.module.ts",
+    "src/server/src/ai/deadline.ts",
+    "src/server/src/proposals/contributor-assistant.service.ts",
+    "src/server/src/proposals/contributor-assistant.controller.ts",
+    "src/server/src/proposals/finding-responses.service.ts",
+    "src/server/src/proposals/finding-responses.controller.ts",
+    "src/server/src/proposals/proposal-lifecycle.service.ts",
+    "src/server/src/proposals/contributor-proposals.controller.ts",
+    "src/server/src/proposals/proposals.module.ts",
+    "src/server/src/reviews/patch-risk.service.ts",
+    "src/server/prisma/schema.prisma",
+    "src/server/prisma/migrations/20261101050000_contributor_responses/migration.sql",
+    "src/server/prisma/migrations/20261101060000_contributor_ai/migration.sql",
+    "src/shared/src/contracts/ai.ts",
+    "src/shared/src/contracts/contributor.ts",
+    "src/shared/src/contracts/reviewer.ts",
+    "src/client/src/features/contributor/SpecDraftAssistant.tsx",
+    "src/client/src/features/contributor/SubmittedProposal.tsx",
+    "src/client/src/features/contributor/ContributorWorkspace.tsx",
+    "src/client/src/App.tsx"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "kind": "documentation",
+      "sha256": "a3541291988d94d9f11b2a2ce3e7551aabd1c64f204532bb53cfe7a86beb08e3"
+    },
+    {
+      "path": "docs/AI-Integration.md",
+      "kind": "documentation",
+      "sha256": "d5854aaf8d4eae2064a9e498ad9dae152e2696867d19fc0fa5e465d9c5e2660a"
+    },
+    {
+      "path": "docs/DeveloperGuide.md",
+      "kind": "documentation",
+      "sha256": "1ce4874adf444f66bd5cfd38dce1eafe23f970ed484e9e5ebb7bec233022ef0a"
+    },
+    {
+      "path": "docs/UserGuide.md",
+      "kind": "documentation",
+      "sha256": "71394ab6303c0b99cb3c636be1a5c372cccd05590987b8c759afb098331579bc"
+    },
+    {
+      "path": "src/client/src/App.tsx",
+      "kind": "production",
+      "sha256": "cfdd9feee427fa6323c6897170514a45d17117baa69635b22db7f8f35969fcc5"
+    },
+    {
+      "path": "src/client/src/features/contributor/ContributorLifecycle.test.tsx",
+      "kind": "verification",
+      "sha256": "a9b2b8a4e5d81e315af6f2666ed448c7f5ab2e2dc2c4a856c0d651e24fdb7240"
+    },
+    {
+      "path": "src/client/src/features/contributor/ContributorWorkspace.tsx",
+      "kind": "production",
+      "sha256": "27b0e87a4ef82c762ab732d0d6dd12a860b284e50e81866285431860e27a86d8"
+    },
+    {
+      "path": "src/client/src/features/contributor/FunctionalUx.test.tsx",
+      "kind": "verification",
+      "sha256": "15f6b640a3b3447516b5de6bcd98d059eb56c80f61ea65cb2de3bb05e7258a57"
+    },
+    {
+      "path": "src/client/src/features/contributor/SpecDraftAssistant.test.tsx",
+      "kind": "verification",
+      "sha256": "efe448e3b7a8958a4e12c24383f37f9bcedb86c40352f06e7c7cb4ff6e0ef62f"
+    },
+    {
+      "path": "src/client/src/features/contributor/SpecDraftAssistant.tsx",
+      "kind": "production",
+      "sha256": "7ae12497a5cf3559b5fb381c8db526ca803445a750d3c96d92209dd43b072141"
+    },
+    {
+      "path": "src/client/src/features/contributor/SubmittedProposal.tsx",
+      "kind": "production",
+      "sha256": "8823e362fe1367034b89269edcf289a433c202be4c1ed66d29f8164faf287632"
+    },
+    {
+      "path": "src/server/prisma/migrations/20261101050000_contributor_responses/migration.sql",
+      "kind": "schema-or-migration",
+      "sha256": "b263c4fc7fe3369f907042393ef50ee347fc3d14ff503ff4bea1636b851046cd"
+    },
+    {
+      "path": "src/server/prisma/migrations/20261101060000_contributor_ai/migration.sql",
+      "kind": "schema-or-migration",
+      "sha256": "bfec16cd2710eba89942ca260af116579b6bc7e1a00fc081380810b6c1c47dff"
+    },
+    {
+      "path": "src/server/prisma/schema.prisma",
+      "kind": "schema-or-migration",
+      "sha256": "c4a266c0cbc9bdf6c36c3b5afb6baf62ec20fff07bf917326b1783f190bf84fc"
+    },
+    {
+      "path": "src/server/src/ai/ai.module.ts",
+      "kind": "production",
+      "sha256": "ccd35725179e54478584e704cb035ec16e239ab289a9582e1566343fd12976f9"
+    },
+    {
+      "path": "src/server/src/ai/contracts.ts",
+      "kind": "production",
+      "sha256": "d6b5ed2e54ab67418564a400571a00894a9196d2e3a4183e679ac8fae43ce592"
+    },
+    {
+      "path": "src/server/src/ai/deadline.ts",
+      "kind": "production",
+      "sha256": "6fbc340fda456af78d496f0a5e008931443adb2fdf80e0f4b1c24d2b9f9659a7"
+    },
+    {
+      "path": "src/server/src/ai/gateway/accounting.ts",
+      "kind": "production",
+      "sha256": "156b67e680db9d176e7cd1bc2edda96a881e879b8958e87253436332778b6a29"
+    },
+    {
+      "path": "src/server/src/ai/gateway/index.ts",
+      "kind": "production",
+      "sha256": "a3402061bf4833ef1a667dfe5f29889ca584cc4df744439930733abd81b9fe1b"
+    },
+    {
+      "path": "src/server/src/proposals/contributor-assistant.controller.ts",
+      "kind": "production",
+      "sha256": "f00b05966905ebd7ff52e7d50a8c0f83ed94b5e7ad521f5f91161a7ec77003a6"
+    },
+    {
+      "path": "src/server/src/proposals/contributor-assistant.service.ts",
+      "kind": "production",
+      "sha256": "ba32a249cde2c43c807c5f1bd9ccb97dc25b8020c73e97370063b270ba0d9eae"
+    },
+    {
+      "path": "src/server/src/proposals/contributor-proposals.controller.ts",
+      "kind": "production",
+      "sha256": "a9e4d17be1e5dc288297fc4a2d434a70b74991fa78a9d40064557d6561b59ad5"
+    },
+    {
+      "path": "src/server/src/proposals/finding-responses.controller.ts",
+      "kind": "production",
+      "sha256": "979a62336c47b9174c2069c5ee5dce6d2ac581256186996e0f043937bcde931e"
+    },
+    {
+      "path": "src/server/src/proposals/finding-responses.service.ts",
+      "kind": "production",
+      "sha256": "363ae0baae42295ecc2d7d5523b5d33e096a5e41059ff4eaf2f0fafb606ba1c6"
+    },
+    {
+      "path": "src/server/src/proposals/proposal-lifecycle.service.ts",
+      "kind": "production",
+      "sha256": "e7b80bba6f0b0cc39a22456b13af2279cd23031fb3863293f90cd31661ca96ce"
+    },
+    {
+      "path": "src/server/src/proposals/proposals.module.ts",
+      "kind": "production",
+      "sha256": "ec26e12750ebbaf03a02ceab768c203ce3bedef6ece2536110c4fee0b9a03f9b"
+    },
+    {
+      "path": "src/server/src/reviews/patch-risk.service.ts",
+      "kind": "production",
+      "sha256": "bae9ec4a09056b8962c965559decbb9a3d67df9e51b10a8818986dfb60a68a4a"
+    },
+    {
+      "path": "src/server/test/ai-gateway.spec.ts",
+      "kind": "verification",
+      "sha256": "3888353741a89fbb4649014ffbd52b9a17280e73c826bf6fbf8b61924e5a10dd"
+    },
+    {
+      "path": "src/server/test/approval-revocation-races.integration.ts",
+      "kind": "verification",
+      "sha256": "271ad5a9c1ca98e4bf61e69301ddee4e9bb7ddeadd8ad91d9760617cd919f979"
+    },
+    {
+      "path": "src/server/test/approval-revocation.integration.ts",
+      "kind": "verification",
+      "sha256": "59d5fd66253c4b8f5387e4a67635f139d90242a3cd26dbbe4286763b1d456b81"
+    },
+    {
+      "path": "src/server/test/contributor-acceptance.integration.ts",
+      "kind": "verification",
+      "sha256": "2aea91018ad8914d1d9a0415d100364876cc95214421701adc7aa4e8033dd634"
+    },
+    {
+      "path": "src/server/test/contributor-ai-gateway.spec.ts",
+      "kind": "verification",
+      "sha256": "157de83d24b6343750170df1ea939ae3afb593fde28e2262167a4fb9307004ef"
+    },
+    {
+      "path": "src/server/test/contributor-ai.integration.ts",
+      "kind": "verification",
+      "sha256": "00ae1aff420902a7692c3a67063c65ea32b0f7d397a0b8b603f5db6693002831"
+    },
+    {
+      "path": "src/server/test/contributor-lifecycle-contracts.spec.ts",
+      "kind": "verification",
+      "sha256": "9f0d294447c2e18493e6ed7c41382ca24da3c9584987dfd75730457a4d49fa3c"
+    },
+    {
+      "path": "src/server/test/contributor-lifecycle.integration.ts",
+      "kind": "verification",
+      "sha256": "445abd69e47f85a0dad2664bb8c840416622e72519258cda02c2c2f9009f289c"
+    },
+    {
+      "path": "src/server/test/manual-review.integration.ts",
+      "kind": "verification",
+      "sha256": "03e936432db5f20e639d1e84ff8cabf16510109059a7db4d1ccf6114571e63d5"
+    },
+    {
+      "path": "src/server/test/notifications.integration.ts",
+      "kind": "verification",
+      "sha256": "ac0f4e15a67cee0287b6df662fad813c6a46407dfa4d52549084c3b61e5b0aa0"
+    },
+    {
+      "path": "src/server/test/patch-risk.integration.ts",
+      "kind": "verification",
+      "sha256": "7620699afb02ed885c28948d165d4ecde0c5428f3fafdd209a9753b6a3914f1f"
+    },
+    {
+      "path": "src/server/test/proposal-lifecycle.integration.ts",
+      "kind": "verification",
+      "sha256": "7dc897d9dad86f2cb2897035f4e0fbf0811aa55007a4d16b950f7f6f4942a2e0"
+    },
+    {
+      "path": "src/server/test/release-foundation.integration.ts",
+      "kind": "verification",
+      "sha256": "5d27227fad39dfdb6306dfddb94aab8f105ea02692573295789e1d43b19ea474"
+    },
+    {
+      "path": "src/server/test/release-revocation.integration.ts",
+      "kind": "verification",
+      "sha256": "5818377d3799b79ebdf8312552e004fdfa3c6281a982053bd65b377058c9a2ea"
+    },
+    {
+      "path": "src/server/test/reviewer-seed.integration.ts",
+      "kind": "verification",
+      "sha256": "728ba5b31574d7f7780092084401f9ce43d0bba8534feb74812f6756c1bee3bc"
+    },
+    {
+      "path": "src/server/test/reviews.integration.ts",
+      "kind": "verification",
+      "sha256": "a221e711dd4bdf47db2bb328dbcf6c68f08650675dee6251076e5282ed385e81"
+    },
+    {
+      "path": "src/server/test/submitted-access.integration.ts",
+      "kind": "verification",
+      "sha256": "446815f94651c28cd014916f9b8cb4e32628899a48091586637ca2b13ecc8e9b"
+    },
+    {
+      "path": "src/shared/src/contracts/ai.ts",
+      "kind": "production",
+      "sha256": "b13c4c6cc7fed1c17eded76d5845f8ae6f922a93bb43156109e54ff40678538b"
+    },
+    {
+      "path": "src/shared/src/contracts/contributor.ts",
+      "kind": "production",
+      "sha256": "725e8e177a4ff86807f35bf433022c25ef4bb185a91726282029c200a413aa52"
+    },
+    {
+      "path": "src/shared/src/contracts/reviewer.ts",
+      "kind": "production",
+      "sha256": "890a64c6abe735fa2d2f1337b9b516d38546b41d6bd2718584d9157caf37d7c2"
+    },
+    {
+      "path": "workflow/PLAN.md",
+      "kind": "documentation",
+      "sha256": "e678cc75dc57eff737e20da40289e6c8be84449bf3986f3e0e359eb16e3f3de5"
+    },
+    {
+      "path": "workflow/TRACEABILITY.md",
+      "kind": "documentation",
+      "sha256": "72328ffd586fe9e1f7e0fb1aa6fbec1ddbb89792740a7db9748b0db7ffa73564"
+    },
+    {
+      "path": "workflow/specs/INTEGRATION-SPEC.md",
+      "kind": "documentation",
+      "sha256": "d8ac5f22c5d18eb2948297bd131bd01334f7a4d5a85a7c10f4ceac841a0361c1"
+    },
+    {
+      "path": "workflow/specs/UI-UX-SPEC.md",
+      "kind": "documentation",
+      "sha256": "bbcace63ca5cfe660ec27b7cdc960bce6234ee56e997786a9bb9532c3140301a"
+    },
+    {
+      "path": "workflow/tests/ai/contributor/v1.json",
+      "kind": "verification",
+      "sha256": "2c6b58b9abd975e8b8bcc2cc2db33d8b241772ea44f04d87ad54419280d199fa"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-acceptance.spec.ts",
+      "kind": "verification",
+      "sha256": "98029cc185dc105243c5ca13ae265a568310e38ee08eebf4b95096ea71ed90cf"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-ai.spec.ts",
+      "kind": "verification",
+      "sha256": "c101d343bf11d370261a38a8a76a92ae3874a1b9fe5bf9ac87af69d7ba5a3181"
+    },
+    {
+      "path": "workflow/tests/browser/contributor-lifecycle.spec.ts",
+      "kind": "verification",
+      "sha256": "ea7658a9b311291735e77aa5d821b8ef1ea13a135f2346f21cb837dd37e78117"
+    },
+    {
+      "path": "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+      "kind": "verification",
+      "sha256": "11f127a91d3675b9a9eb9bfb6a6ea2a9e287c3c9a0c3604789173126f3fa0436"
+    },
+    {
+      "path": "workflow/tests/browser/functional-ux.mjs",
+      "kind": "verification",
+      "sha256": "8951119c3fda3be03bb4d87a3f17e470719784e6a1a71f1b5dee05e807d8bb11"
+    },
+    {
+      "path": "workflow/tests/browser/navigation-phase2.mjs",
+      "kind": "verification",
+      "sha256": "b4571cc0acc267563f5017d561ab27e85ab7a036e2c595dec6a598607fdb6560"
+    },
+    {
+      "path": "workflow/tests/performance/README.md",
+      "kind": "verification",
+      "sha256": "f57af16e59afb3eceb07a3692ee8299e3b902eff174df08440e8fb1e1678d69e"
+    },
+    {
+      "path": "workflow/tests/performance/contributor-workload.mjs",
+      "kind": "verification",
+      "sha256": "721e29f87586a66f713034444a2627e457d265a1ebd98ab4db603134090847ac"
+    }
+  ],
+  "scope": "Changed delivery files; prompt/resource/evidence artifacts are linked separately in the run log."
+}

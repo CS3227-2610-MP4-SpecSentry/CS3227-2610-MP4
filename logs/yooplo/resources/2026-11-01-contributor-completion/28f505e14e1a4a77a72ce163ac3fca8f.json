@@ -1,0 +1,35 @@
+{
+  "id": "28f505e14e1a4a77a72ce163ac3fca8f",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "backend-implementer",
+  "invocation": "backend-3",
+  "stage": "resume-ai-validation",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:23:18.900660+00:00",
+  "ended_at": "2026-11-01T04:24:23.718242+00:00",
+  "elapsed_seconds": 64.817582,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Recovered original AI integration8pass1invalidquota fixture; fixture corrected; lint found unused test parameter before rerun",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

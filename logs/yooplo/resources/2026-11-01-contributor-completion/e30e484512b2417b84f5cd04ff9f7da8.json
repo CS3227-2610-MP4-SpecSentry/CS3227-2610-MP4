@@ -1,0 +1,35 @@
+{
+  "id": "e30e484512b2417b84f5cd04ff9f7da8",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "backend-implementer",
+  "invocation": "backend-2",
+  "stage": "contributor-ai",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:12:56.459513+00:00",
+  "ended_at": "2026-11-01T04:23:18.641317+00:00",
+  "elapsed_seconds": 622.181804,
+  "status": "interrupted",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Backend assistant work interrupted by agent usage limit during targeted PostgreSQL tests; prior31gateway units passed; outcome must be recovered",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

@@ -1,4 +1,43 @@
-# Reviewer Patch Risk integration
+# Advisory AI integration
+
+## Contributor Spec Draft Assistant
+
+The Contributor editor requests suggestions from its eligible saved working copy
+through `POST /api/proposals/:id/ai/draft`, with strict `expectedVersion` and
+`workingRevisionId`. The server selects title, summary, problem, constraints,
+expected behavior and criterion statements/classification. It excludes patch,
+evidence, criterion identities, actor/session and proposal/working identifiers
+from outbound messages. Context is bounded to 6,000 Unicode code points before and
+after normalization and 4,000 conservative framed input-budget units, with 800 output tokens.
+Oversized input and detected high-confidence secrets are rejected without truncation.
+
+Owner/session/account, lifecycle, attachment, version and working identity are
+checked before protected retrieval, before every outbound attempt and before
+returning typed output. Changed scope returns safe failure; no business state is
+written by AI. The Contributor adapter uses the existing transport, strict JSON/
+envelope parser, queue, quota coordinator, deadline, retry and safe accounting.
+Feature-aware metadata checks distinguish Contributor working scope from Reviewer
+submitted assignment scope without fabricated IDs. Existing Reviewer audit reads
+filter their feature explicitly.
+
+The UI requires explicit item selection and application into the unsaved editor.
+It preserves unrelated content and validates the whole proposed form before
+applying; criteria get fresh identities through ordinary save rules. Manual edits
+invalidate late results and manual operation remains available on AI failure.
+`GET /api/contributor/ai/usage` returns independently authorized own SGT-day
+aggregates, separates requests/attempts/retries/preflight rejections, and reports
+missing usage as unknown. Provider UTC spend windows and disabled application
+caching are labeled separately.
+
+Live configuration remains disabled under OPEN-002. Current synthetic tests and
+remaining live/deployment steps are tracked in the
+[Contributor completion run](../logs/yooplo/2026-11-01-contributor-completion.md).
+The current gateway deliberately exposes disabled/test options and rejects the
+native transport in test mode. After credentialed provider verification, a
+separately reviewed change must wire the approved live key/model/input-budget method
+and configuration; supplying environment credentials alone cannot enable it.
+
+## Reviewer Patch Risk integration
 
 The Reviewer assistant analyzes a selected batch of one to five criteria from the
 latest assigned submitted revision. It produces advisory coverage, ranked risks,
@@ -11,14 +50,15 @@ closed. Current evidence belongs to the
 ## Configuration and operation
 
 Live SoCLaaS calls remain disabled under OPEN-002. A nonempty API key/model or an
-environment flag cannot assert verified model/tokenizer, parameter, quota and
+environment flag cannot assert evaluated model/budget-method, parameter, quota and
 retention compatibility. `readConfig` rejects `AI_LIVE_ENABLED=true`. The approved
 base is `https://soclaas-api.comp.nus.edu.sg/v1`. Do not replace it with a browser
 value or infer that deterministic synthetic tests establish live compatibility,
-usefulness or latency. Contributor and Maintainer assistants are not exposed.
+usefulness or latency. Contributor controls use the same disabled live default;
+the Maintainer assistant remains pending.
 
 Manual review remains available when AI is disabled or fails. Application tests
-inject transport, verified-counter and clock providers in a test bootstrap; those
+inject transport, input-budget counter and clock providers in a test bootstrap; those
 providers cannot be selected by an HTTP request. The browser test bootstrap is
 test infrastructure rather than a production feature switch.
 
@@ -73,13 +113,31 @@ unknown, rather than reported as zero. Each retry has its own usage record.
 
 ## Resource controls
 
-The full input budget is 10,000 verified tokens, including templates, identifiers
+The Reviewer input budget is 10,000 conservative units, including templates, identifiers
 and framing; complete diff limit is 20,000 code points. Output is at most 800
 tokens, response transport at most 64 KiB. Reject excess without truncating or
 omitting evidence. The UI explains an input-limit rejection and preserves manual
 review entries. Rejected transport responses are aborted and cancelled without
 waiting indefinitely for stream cleanup. A single 20-second monotonic deadline includes authorization,
 database waits, queueing, provider work, permitted retry and final disclosure.
+
+The server-owned `utf8-bytes-framing-v1` admission method uses 512 units plus
+64 per message and the UTF-8 byte lengths of every prepared message's role and
+content. It counts complete escaped/framed prompts, not just the user's draft.
+These units are a cautious estimate, not exact tokens or a proven upper bound
+for an undocumented tokenizer. The context check adds the 800-token output
+allowance and 128 reserve to these units; it is also a heuristic. Non-ASCII or
+heavily escaped inputs can be rejected earlier than with exact token counting.
+No estimate is saved into token/cache usage fields: those remain provider-reported
+or unknown. Contributor/Reviewer caps stay 4,000/10,000 units; the planned Maintainer
+cap stays 6,000. No model tokenizer dependency is added.
+
+Exact tokenizer documentation is no longer required by the approved policy.
+Live activation still needs actual production-prompt and near-cap multilingual/
+escaped-input evaluation against the selected alias, verified advertised context,
+key limits, data-handling review and live configuration wiring. Compare units
+with returned usage as evaluation evidence, never as proof of a universal bound.
+The current implementation continues to reject live enablement.
 
 Durable short PostgreSQL transactions serialize attempt/queue reservations across
 application instances: 10 outbound attempts per user per rolling ten minutes,

@@ -1,0 +1,35 @@
+{
+  "id": "30c56664d86743499d7de3fbc1439601",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "backend",
+  "invocation": "backend-ai-retry-2",
+  "stage": "ai-fixture-lint-fix-validation",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:24:23.886961+00:00",
+  "ended_at": "2026-11-01T04:25:53.407051+00:00",
+  "elapsed_seconds": 89.52009,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Corrected bounded quota fixture;9AI PostgreSQL tests pass26.02seconds;full lint and server typecheck pass",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

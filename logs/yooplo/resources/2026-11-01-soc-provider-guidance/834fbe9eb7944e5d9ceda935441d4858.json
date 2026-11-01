@@ -1,0 +1,35 @@
+{
+  "id": "834fbe9eb7944e5d9ceda935441d4858",
+  "prompter": "yooplo",
+  "session": "2026-11-01-soc-provider-guidance",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "local-provider-documents",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact model variant and effort unavailable",
+  "started_at": "2026-11-01T14:30:17.903075+00:00",
+  "ended_at": "2026-11-01T14:31:55.939169+00:00",
+  "elapsed_seconds": 98.036094,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read five supplied provider PDFs; documented confirmed API behavior and missing tokenizer/key-limit/retention details; preserved product code",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution usage not exposed",
+    "output_tokens": "Attributable execution usage not exposed",
+    "cache_read_tokens": "Attributable execution usage not exposed",
+    "tool_calls": "Attributable execution usage not exposed",
+    "retries": "Attributable execution usage not exposed"
+  },
+  "unavailable_reason": "Attributable execution usage not exposed"
+}
