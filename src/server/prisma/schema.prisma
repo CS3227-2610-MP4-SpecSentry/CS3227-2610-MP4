@@ -27,6 +27,7 @@ model UserAccount {
   coverage CoverageAssessment[]
   findings ReviewFinding[]
   findingEvents FindingEvent[]
+  findingResponses FindingResponse[]
   decisions ReviewDecision[]
   reviewIdempotency ReviewIdempotency[]
   draftTombstones DraftTombstone[]
@@ -89,6 +90,8 @@ enum AssignmentEndReason {
 enum ProposalActivityAction {
   DRAFT_CREATED
   DRAFT_SAVED
+  DRAFT_CLONED
+  FINDING_RESPONDED
   WITHDRAWN
   REOPENED
   NOTIFICATION_CREATED
@@ -157,6 +160,7 @@ model ProposalRevision {
   evidence         TestEvidence[]
   assignments      ReviewAssignment[]
   activities       ProposalActivity[]
+  findingResponses FindingResponse[]
   releaseMembers ReleaseCandidateMember[]
 
   @@unique([proposalId, id])
@@ -477,9 +481,25 @@ model ReviewFinding {
   criterion AcceptanceCriterion? @relation(fields: [revisionId, criterionId], references: [revisionId, id], onDelete: Restrict)
   actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
   events FindingEvent[]
+  responses FindingResponse[]
   @@unique([proposalId, id])
   @@unique([proposalId, mutationVersion])
   @@index([proposalId, mutationVersion, id])
+}
+model FindingResponse {
+  id String @id @default(uuid())
+  findingId String
+  proposalId String
+  revisionId String
+  actorId String
+  text String
+  mutationVersion Int
+  createdAt DateTime @default(now())
+  finding ReviewFinding @relation(fields: [proposalId, findingId], references: [proposalId, id], onDelete: Restrict)
+  revision ProposalRevision @relation(fields: [proposalId, revisionId], references: [proposalId, id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  @@unique([proposalId, mutationVersion])
+  @@index([proposalId, createdAt, id])
 }
 model FindingEvent {
   id String @id @default(uuid())
@@ -567,15 +587,17 @@ enum AiErrorClass {
 }
 model AiRequest {
   id String @id @default(uuid())
+  feature String @default("REVIEWER")
   correlationId String
   actorId String
   proposalId String
-  revisionId String
-  assignmentId String
-  accessGenerationId String
+  revisionId String?
+  assignmentId String?
+  accessGenerationId String?
+  workingRevisionId String?
   expectedVersion Int
-  expectedAssignmentVersion Int
-  selectedCriterionCount Int
+  expectedAssignmentVersion Int?
+  selectedCriterionCount Int?
   templateVersion String
   contextHash String?
   requestedAt DateTime @default(now())

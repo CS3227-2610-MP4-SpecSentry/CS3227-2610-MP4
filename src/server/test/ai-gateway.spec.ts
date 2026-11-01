@@ -198,7 +198,7 @@ describe('Reviewer gateway v1 synthetic evaluations', () => {
     await expect(slow.call()).rejects.toMatchObject({errorClass:'DEADLINE'});
     const rate=harness();rate.attempt.count.mockResolvedValue(10);await expect(rate.call()).rejects.toMatchObject({errorClass:'RATE_LIMIT'});expect(rate.transport.complete).not.toHaveBeenCalled();
     const queue=harness();queue.queue.count.mockResolvedValue(10);await expect(queue.call()).rejects.toMatchObject({errorClass:'QUEUE_FULL'});
-    const daily=harness();const a=new PrismaAiAccounting(daily.prisma,daily.clock);await a.reserveAttempt({requestId:'r',actorId:'actor',ordinal:1,deadline:daily.deadline});
+    const daily=harness();const a=new PrismaAiAccounting(daily.prisma,daily.clock);await a.reserveAttempt({requestId:'r',actorId:'actor',ordinal:1,deadline:daily.deadline,authorize:async()=>undefined});
     expect(daily.attempt.count.mock.calls[1]![0]).toMatchObject({where:{dispatchedAt:{gte:new Date('2026-10-25T16:00:00Z')}}});
   });
 

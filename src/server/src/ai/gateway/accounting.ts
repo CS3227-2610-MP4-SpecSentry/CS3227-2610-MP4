@@ -32,6 +32,9 @@ export class PrismaAiAccounting {
       }, { maxWait: timeout, timeout });
     } catch (error) {
       if (error instanceof SafeAiError) throw error;
+      const code = error && typeof error === 'object' && 'code' in error ? String(error.code) : '';
+      const meta = error && typeof error === 'object' && 'meta' in error ? error.meta as { code?: string } : undefined;
+      if (code === 'P2028' || code === 'P2024' || meta?.code === '55P03' || meta?.code === '57014') throw new SafeAiError('DEADLINE');
       if (deadline.remainingMs() <= 0 || deadline.signal.aborted) throw new SafeAiError('DEADLINE');
       throw new SafeAiError('INTERNAL');
     }
@@ -63,7 +66,8 @@ export class PrismaAiAccounting {
     else await this.prisma.aiQueueLease.deleteMany({ where: { requestId } });
   }
 
-  async reserveAttempt(input: { requestId: string; actorId: string; ordinal: number; deadline: AiDeadline }): Promise<{ attemptId: string }> {
+  async reserveAttempt(input: { requestId: string; actorId: string; ordinal: number; deadline: AiDeadline;
+    authorize(tx: Prisma.TransactionClient): Promise<void> }): Promise<{ attemptId: string }> {
     return this.locked(input.deadline, async (tx, now) => {
       const tenMinutes = new Date(now.getTime() - 600_000);
       const minute = new Date(now.getTime() - 60_000);
@@ -81,10 +85,13 @@ export class PrismaAiAccounting {
           : (oldest?.dispatchedAt.getTime() ?? now.getTime()) + (userTen >= 10 ? 600_000 : 60_000) - now.getTime();
         throw new SafeAiError('RATE_LIMIT', seconds(wait), input.requestId);
       }
-      const attempt = await tx.aiOutboundAttempt.create({ data: {
-        requestId: input.requestId, actorId: input.actorId, ordinal: input.ordinal, dispatchedAt: now,
-      }, select: { id: true } });
       await tx.aiQueueLease.deleteMany({ where: { requestId: input.requestId } });
+      // Reauthorize after admission waits, on this connection, before counting a dispatch.
+      await input.authorize(tx);
+      input.deadline.assertRemaining();
+      const attempt = await tx.aiOutboundAttempt.create({ data: {
+        requestId: input.requestId, actorId: input.actorId, ordinal: input.ordinal, dispatchedAt: this.clock.now(),
+      }, select: { id: true } });
       return { attemptId: attempt.id };
     });
   }

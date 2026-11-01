@@ -3,29 +3,12 @@ import { AI_LIMITS, aiAuditResponseSchema, patchRiskResponseSchema, type PatchRi
 import { AI_CLOCK, PATCH_RISK_GATEWAY, type AiClock, type AiDeadline, type PatchRiskContext, type PatchRiskGateway, type PatchRiskScope } from '../ai/contracts';
 import { SafeAiError } from '../ai/gateway';
 import { DatabaseService } from '../database/database.service';
-import { businessTransaction } from '../identity/business-context';
+import { businessTransaction, lockBusinessContext } from '../identity/business-context';
 import { ProposalsService } from '../proposals/proposals.service';
 import type { ReviewerActor, ReviewTransaction } from './reviewer-context';
 
-// Created at authenticated handler admission, before validation or any DB work.
-export class PatchRiskDeadline implements AiDeadline {
-  private readonly controller = new AbortController();
-  private readonly end: number;
-  private readonly timer: ReturnType<typeof setTimeout>;
-  constructor(private readonly clock: AiClock, milliseconds: number = AI_LIMITS.deadlineMs) {
-    this.end = clock.monotonicMs() + milliseconds;
-    this.timer = setTimeout(() => this.controller.abort(), milliseconds);
-    this.timer.unref?.();
-  }
-  get signal() { return this.controller.signal; }
-  remainingMs() { return Math.max(0, this.end - this.clock.monotonicMs()); }
-  assertRemaining() {
-    if (this.signal.aborted || this.remainingMs() <= 0) {
-      this.controller.abort(); throw new SafeAiError('DEADLINE');
-    }
-  }
-  close() { clearTimeout(this.timer); this.controller.abort(); }
-}
+import { AiRequestDeadline as PatchRiskDeadline } from '../ai/deadline';
+export { AiRequestDeadline as PatchRiskDeadline } from '../ai/deadline';
 
 @Injectable()
 export class PatchRiskService {
@@ -83,7 +66,7 @@ export class PatchRiskService {
   }
 
   async analyze(actor: ReviewerActor, id: string, input: PatchRiskRequest, deadline: AiDeadline): Promise<PatchRiskResponse> {
-    let requestId: string | undefined;
+    let requestId: string | undefined; let attemptDenial: unknown;
     try {
     const context = await this.authorized(actor, id, deadline, async tx => {
       const root = await this.current(tx, actor, id);
@@ -103,12 +86,18 @@ export class PatchRiskService {
           expectedVersion: input.expectedVersion, expectedAssignmentVersion: input.expectedAssignmentVersion,
           accessGenerationId: root.currentAssignment!.accessGenerationId } } satisfies PatchRiskContext;
     });
-    const generated = await this.gateway.analyze(context, { actorId: actor.accountId, deadline, beforeAttempt: async () => {
-      await this.authorized(actor, id, deadline, async tx => {
+    const generated = await this.gateway.analyze(context, { actorId: actor.accountId, deadline, beforeAttempt: async tx => {
+      try {
+        const authorization = await lockBusinessContext(tx, actor, 'REVIEWER');
         const root = await this.current(tx, actor, id);
         if (root.currentAssignment!.accessGenerationId !== context.scope.accessGenerationId) throw new ForbiddenException();
         this.exact(root, context.scope);
-      });
+        authorization.checkExpiry(); deadline.assertRemaining();
+      } catch (error) {
+        if (!(error instanceof HttpException) && !(error instanceof SafeAiError)) throw error;
+        attemptDenial = error;
+        throw error instanceof SafeAiError ? error : new SafeAiError(error.getStatus() === 409 ? 'SCOPE_CHANGED' : 'ACCESS_LOST');
+      }
     } });
     requestId = generated.metadata.requestId;
     return await this.authorized(actor, id, deadline, async tx => {
@@ -127,15 +116,17 @@ export class PatchRiskService {
       return response;
     });
     } catch (error) {
-      await this.rejected(actor, id, deadline, error, requestId);
-      throw error;
+      const denial = attemptDenial ?? error;
+      requestId ??= error instanceof SafeAiError ? error.requestId : undefined;
+      await this.rejected(actor, id, deadline, denial, requestId);
+      throw denial;
     }
   }
 
   audit(actor: ReviewerActor, id: string) {
     return businessTransaction(this.database, actor, 'REVIEWER', id, 'AI_AUDIT', async tx => {
       await this.proposals.assignedRoot(tx, id, actor.accountId);
-      const rows = await tx.aiRequest.findMany({ where: { actorId: actor.accountId, proposalId: id, retainedUntil: { gt: new Date() } },
+      const rows = await tx.aiRequest.findMany({ where: { feature: 'REVIEWER', actorId: actor.accountId, proposalId: id, retainedUntil: { gt: new Date() } },
         orderBy: [{ requestedAt: 'desc' }, { id: 'desc' }], take: AI_LIMITS.auditPage,
         select: { id: true, proposalId: true, revisionId: true, assignmentId: true, expectedVersion: true, expectedAssignmentVersion: true,
           requestedAt: true, completedAt: true, templateVersion: true, contextHash: true, selectedCriterionCount: true,

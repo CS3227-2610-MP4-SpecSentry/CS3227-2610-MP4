@@ -3,6 +3,7 @@ import { reviewerIdSchema, reviewerTimestampSchema, reviewerVersionSchema } from
 
 // Browser-safe data only. No provider settings, prompts, session or access-generation IDs.
 export const AI_LIMITS = {
+  contributorInputTokens: 4_000, contributorInputCodePoints: 6_000,
   reviewerCriteria: 5, reviewerInputTokens: 10_000, reviewerDiffCodePoints: 20_000,
   outputTokens: 800, responseBytes: 65_536, deadlineMs: 20_000, auditPage: 50,
 } as const;
@@ -67,6 +68,12 @@ export const contributorDraftResultSchema = z.object({
   objective: plainText(200), acceptanceCriteria: z.array(plainText(160)).min(1).max(5),
   edgeCases: z.array(plainText(120)).max(3), ambiguities: z.array(plainText(120)).max(3), testIdeas: z.array(plainText(120)).max(3),
 }).strict();
+export const contributorDraftRequestSchema = z.object({ expectedVersion: reviewerVersionSchema,
+  workingRevisionId: reviewerIdSchema }).strict();
+export const contributorDraftScopeSchema = contributorDraftRequestSchema.extend({ proposalId: reviewerIdSchema }).strict();
+export const contributorDraftResponseSchema = z.object({ analyzedScope: contributorDraftScopeSchema,
+  result: contributorDraftResultSchema }).strict();
+export type ContributorDraftRequest = z.infer<typeof contributorDraftRequestSchema>;
 export const maintainerGateResultSchema = z.object({
   blockers: z.array(z.object({ itemIds: uniqueIds(0, 50), description: plainText(160) }).strict()).max(3),
   dependencies: z.array(plainText(120)).max(3), releaseNotes: z.array(plainText(120)).max(3),
@@ -86,6 +93,14 @@ export const aiErrorClassSchema = z.enum([
 ]);
 const usageCount = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER).nullable();
 export const aiTokenUsageSchema = z.object({ promptTokens: usageCount, completionTokens: usageCount, totalTokens: usageCount, cachedTokens: usageCount }).strict();
+export const contributorAiUsageResponseSchema = z.object({
+  window: z.literal('SGT_DAY'), startedAt: reviewerTimestampSchema, resetsAt: reviewerTimestampSchema,
+  requests: z.number().int().nonnegative(), attempts: z.number().int().nonnegative(), retries: z.number().int().nonnegative(),
+  completedAttempts: z.number().int().nonnegative(), failedAttempts: z.number().int().nonnegative(),
+  preflightRejections: z.number().int().nonnegative(), failureRate: z.number().min(0).max(1).nullable(),
+  usage: aiTokenUsageSchema, usageReportedAttempts: z.number().int().nonnegative(),
+  applicationCache: z.literal('DISABLED'), providerSpendWindow: z.literal('UTC; separate from application quota'),
+}).strict();
 export const aiAuditEntrySchema = z.object({
   requestId: reviewerIdSchema, analyzedScope: patchRiskScopeSchema,
   requestedAt: reviewerTimestampSchema, completedAt: reviewerTimestampSchema.nullable(),

@@ -17,7 +17,7 @@ import { ReviewsService } from '../src/reviews/reviews.service';
 import type { Prisma } from '../src/generated/prisma/client';
 import { persistedTestActor } from './business-fixtures';
 
-const tables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const prefix = `release-race-${randomUUID()}`;
 const ids = { owner: `${prefix}-owner`, reviewer: `${prefix}-reviewer`, maintainer: `${prefix}-maintainer` };
 type Actor = Awaited<ReturnType<typeof persistedTestActor>>;

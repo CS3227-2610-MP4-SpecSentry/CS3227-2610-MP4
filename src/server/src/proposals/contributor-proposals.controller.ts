@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query, Req, UnprocessableEntityException } from '@nestjs/common';
 import { deleteDraftRequestSchema, ownDraftsQuerySchema, createProposalRequestSchema, reviewerIdSchema, saveDraftRequestSchema, submitProposalRequestSchema,
-  submissionIdempotencyKeySchema, withdrawProposalRequestSchema, reopenProposalRequestSchema } from '@specsentry/shared';
+  submissionIdempotencyKeySchema, withdrawProposalRequestSchema, reopenProposalRequestSchema,
+  ownProposalsQuerySchema, cloneLatestRequestSchema } from '@specsentry/shared';
 import { DatabaseService } from '../database/database.service';
 import { Roles, type AuthRequest } from '../identity/access';
 import { businessActor } from '../identity/business-context';
@@ -31,6 +32,19 @@ export class ContributorProposalsController {
   async list(@Req() request: AuthRequest, @Query() query: unknown) {
     const input = await this.parsed(request, 'LIST', () => validate(ownDraftsQuerySchema, query));
     return this.lifecycle.list(businessActor(request), input);
+  }
+
+  @Get('owned')
+  async owned(@Req() request: AuthRequest, @Query() query: unknown) {
+    const input = await this.parsed(request, 'OWNED', () => validate(ownProposalsQuerySchema, query));
+    return this.lifecycle.owned(businessActor(request), input);
+  }
+
+  @Post(':id/clone-latest')
+  @HttpCode(200)
+  async cloneLatest(@Req() request: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
+    const input = await this.parsed(request, 'CLONE', () => ({ id: validate(reviewerIdSchema, id), body: validate(cloneLatestRequestSchema, body) }));
+    return this.lifecycle.cloneLatest(businessActor(request), input.id, input.body);
   }
 
   @Get(':id/draft')
