@@ -18,7 +18,7 @@ async function testServer() {
   const { AppModule } = serverRequire(resolve('src/server/src/app.module')) as typeof import('../../../../src/server/src/app.module');
   const { readConfig } = serverRequire(resolve('src/server/src/config')) as typeof import('../../../../src/server/src/config');
   const { configureHttp } = serverRequire(resolve('src/server/src/http')) as typeof import('../../../../src/server/src/http');
-  const { AI_GATEWAY_OPTIONS, AI_TRANSPORT, VERIFIED_TOKEN_COUNTER } = serverRequire(resolve('src/server/src/ai/contracts')) as typeof import('../../../../src/server/src/ai/contracts');
+  const { AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER } = serverRequire(resolve('src/server/src/ai/contracts')) as typeof import('../../../../src/server/src/ai/contracts');
   const { SafeAiError } = serverRequire(resolve('src/server/src/ai/gateway')) as typeof import('../../../../src/server/src/ai/gateway');
   if (!process.env.TEST_DATABASE_URL || !new URL(process.env.TEST_DATABASE_URL).pathname.endsWith('_test'))
     throw new Error('Explicit disposable test database required');
@@ -61,9 +61,9 @@ async function testServer() {
   } };
   const config=readConfig({...process.env,NODE_ENV:'production',DATABASE_URL:process.env.TEST_DATABASE_URL});
   const module=await Test.createTestingModule({imports:[AppModule.register(config)]})
-    .overrideProvider(AI_GATEWAY_OPTIONS).useValue({mode:'test',model:'synthetic-reviewer-model',contextWindow:16384,tokenCounterVerificationId:'synthetic-counter-v1'})
+    .overrideProvider(AI_GATEWAY_OPTIONS).useValue({mode:'test',model:'synthetic-reviewer-model',contextWindow:16384,inputBudgetMethodId:'synthetic-counter-v1'})
     .overrideProvider(AI_TRANSPORT).useValue(transport)
-    .overrideProvider(VERIFIED_TOKEN_COUNTER).useValue({model:'synthetic-reviewer-model',verificationId:'synthetic-counter-v1',countInput:()=>100}).compile();
+    .overrideProvider(INPUT_BUDGET_COUNTER).useValue({model:'synthetic-reviewer-model',methodId:'synthetic-counter-v1',countUnits:()=>100}).compile();
   const app=module.createNestApplication<NestExpressApplication>({logger:false});
   configureHttp(app,resolve('src/client/dist'));app.enableShutdownHooks();await app.listen(3000,'127.0.0.1');
 }

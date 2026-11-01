@@ -65,7 +65,7 @@ routes and imports transaction-aware Proposals, Activity and configured AI
 services. The bounded Contributor lifecycle API, manual findings/coverage/decisions
 and Notifications are implemented. Releases remain an empty registration.
 `AiModule.register(config)` supplies a gateway through injectable transport,
-verified token-counting and clock contracts; its default options disable live AI.
+conservative input-budget and clock contracts; its default options disable live AI.
 `DatabaseModule.register(config)` owns connectivity configuration and
 exports `DatabaseService` for the existing health controller without global state. `IdentityModule.register(config)` imports the same configured
 database module and registers the default-protected authentication/CSRF/role guard.

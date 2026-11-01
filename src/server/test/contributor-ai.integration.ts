@@ -6,7 +6,7 @@ import request from 'supertest';
 import { Pool } from 'pg';
 import { contributorAiUsageResponseSchema, contributorDraftResponseSchema, type WorkingContent } from '@specsentry/shared';
 import { AppModule } from '../src/app.module';
-import { AI_GATEWAY_OPTIONS, AI_TRANSPORT, VERIFIED_TOKEN_COUNTER, type AiTransport } from '../src/ai/contracts';
+import { AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER, type AiTransport } from '../src/ai/contracts';
 import { PrismaAiAccounting, SystemAiClock } from '../src/ai/gateway';
 import { AiRequestDeadline } from '../src/ai/deadline';
 import { readConfig } from '../src/config';
@@ -36,7 +36,7 @@ describe('PostgreSQL Contributor Spec Draft Assistant security and resource inte
   let owner: Session; let other: Session; let reviewer: Session; let maintainer: Session;
   const transport: AiTransport = { complete: jest.fn(async () => ({ status: 200, body: envelope(), retryAfter: null })) };
   const options = { ...aiTestOptions };
-  const counter = { model: aiTestOptions.mode === 'test' ? aiTestOptions.model : '', verificationId: 'synthetic-counter-v1', countInput: jest.fn(() => 100) };
+  const counter = { model: aiTestOptions.mode === 'test' ? aiTestOptions.model : '', methodId: 'synthetic-counter-v1', countUnits: jest.fn(() => 100) };
   async function login(name: typeof names[number]): Promise<Session> {
     const agent = request.agent(app.getHttpServer()); const csrf = await agent.get('/api/auth/csrf').expect(200);
     const response = await agent.post('/api/auth/login').set('x-csrf-token', csrf.body.csrfToken).send({ username: `${prefix}-${name}`, password }).expect(200);
@@ -61,7 +61,7 @@ describe('PostgreSQL Contributor Spec Draft Assistant security and resource inte
     const module = await Test.createTestingModule({ imports: [AppModule.register(readConfig({ NODE_ENV: 'test',
       DATABASE_URL: process.env.TEST_DATABASE_URL, SESSION_SECRET: 'synthetic-contributor-ai-session-secret' }))] })
       .overrideProvider(AI_GATEWAY_OPTIONS).useValue(options).overrideProvider(AI_TRANSPORT).useValue(transport)
-      .overrideProvider(VERIFIED_TOKEN_COUNTER).useValue(counter).compile();
+      .overrideProvider(INPUT_BUDGET_COUNTER).useValue(counter).compile();
     app = module.createNestApplication<NestExpressApplication>({ logger: false }); configureHttp(app); await app.init();
     database = app.get(DatabaseService); lifecycle = app.get(ProposalLifecycleService);
     pool = new Pool({ connectionString: process.env.TEST_DATABASE_URL, max: 3 });
@@ -72,7 +72,7 @@ describe('PostgreSQL Contributor Spec Draft Assistant security and resource inte
   beforeEach(async () => {
     await database.client.$executeRawUnsafe(`TRUNCATE ${tables}`);
     await database.client.userAccount.updateMany({ where: { id: { startsWith: prefix } }, data: { enabled: true, version: 1 } });
-    Object.assign(options, aiTestOptions); counter.countInput.mockReturnValue(100);
+    Object.assign(options, aiTestOptions); counter.countUnits.mockReturnValue(100);
     jest.mocked(transport.complete).mockReset().mockResolvedValue({ status: 200, body: envelope(), retryAfter: null });
     [owner, other, reviewer, maintainer] = await Promise.all([login('owner'), login('other'), login('reviewer'), login('maintainer')]);
   });
@@ -125,7 +125,7 @@ describe('PostgreSQL Contributor Spec Draft Assistant security and resource inte
     const root = await create(); const before = await businessSnapshot(root.proposalId);
     Object.assign(options, { mode: 'disabled' }); const disabled = await generate(root).expect(503);
     expect(disabled.body.reason).toBe('DISABLED'); Object.assign(options, aiTestOptions);
-    counter.countInput.mockReturnValue(4001); await generate(root).expect(422); counter.countInput.mockReturnValue(100);
+    counter.countUnits.mockReturnValue(4001); await generate(root).expect(422); counter.countUnits.mockReturnValue(100);
     jest.mocked(transport.complete).mockResolvedValue({ status: 200, body: envelope({ ...result, lifecycle: 'APPROVED' }), retryAfter: null });
     await generate(root).expect(503); expect(await businessSnapshot(root.proposalId)).toEqual(before);
     const secret = await create({ ...content, problem: 'Authorization: Bearer synthetic-only-secret' });

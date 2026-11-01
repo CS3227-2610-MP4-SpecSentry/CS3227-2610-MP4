@@ -5,7 +5,7 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import request from 'supertest';
 import { type PatchRiskRequest, type ReviewCommandResponse, type WorkingContent } from '@specsentry/shared';
 import { AppModule } from '../src/app.module';
-import { AI_GATEWAY_OPTIONS, AI_TRANSPORT, VERIFIED_TOKEN_COUNTER, type AiTransportRequest } from '../src/ai/contracts';
+import { AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER, type AiTransportRequest } from '../src/ai/contracts';
 import { PrismaAiAccounting, SystemAiClock, SafeAiError } from '../src/ai/gateway';
 import { readConfig } from '../src/config';
 import { DatabaseService } from '../src/database/database.service';
@@ -53,7 +53,7 @@ describe('PostgreSQL Patch Risk integration', () => {
     const module = await Test.createTestingModule({ imports: [AppModule.register(readConfig({ NODE_ENV: 'test', DATABASE_URL: process.env.TEST_DATABASE_URL,
       SESSION_SECRET: 'patch-risk-synthetic-secret-at-least-32-characters' }))] })
       .overrideProvider(AI_GATEWAY_OPTIONS).useValue(aiTestOptions).overrideProvider(AI_TRANSPORT).useValue(transport)
-      .overrideProvider(VERIFIED_TOKEN_COUNTER).useValue({ model: 'synthetic-reviewer-model', verificationId: 'synthetic-counter-v1', countInput: () => 100 }).compile();
+      .overrideProvider(INPUT_BUDGET_COUNTER).useValue({ model: 'synthetic-reviewer-model', methodId: 'synthetic-counter-v1', countUnits: () => 100 }).compile();
     app = module.createNestApplication<NestExpressApplication>({ logger: false }); configureHttp(app); await app.init();
     database = app.get(DatabaseService); risks = app.get(PatchRiskService); reviews = app.get(ReviewsService); proposals = app.get(ProposalsService);
     administration = new AccountAdministrationService(database, reviews);

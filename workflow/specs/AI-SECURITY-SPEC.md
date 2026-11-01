@@ -70,7 +70,7 @@ Persist case/source revision, controls actually enabled, safe input references, 
 | Usefulness | Human rating against feature rubric | At least 80 percent of normal cases rated useful without a material unsafe correction |
 | Grounding | IDs, criteria, findings, and gates | All referenced identifiers exist in the supplied context or the response is rejected |
 | Latency | Development environment | Median under 8 seconds and 95th percentile under 18 seconds for the evaluation set |
-| Resource use | Per successful request | Recorded input and output tokens remain within the configured feature budget |
+| Resource use | Per successful request | Preflight input units remain within the configured feature cap; provider-reported output tokens do not exceed 800. Compare reported input tokens with units during model-specific margin evaluation, keeping missing usage unknown and estimates separate |
 
 ## Typed output schemas
 
@@ -90,13 +90,17 @@ REQ-REV-012 through REQ-REV-015 govern Reviewer retention and access. Their stri
 
 ## Approved feature budgets and accounting
 
-| Feature | Total input token cap, including system template, identifiers and all submitted context | Additional character cap |
+| Feature | Conservative input-budget unit cap, including system template, identifiers and all submitted context | Additional character cap |
 | --- | --- | --- |
 | Contributor | 4,000 | Existing 6,000-character feature input cap |
 | Reviewer | 10,000 | Complete diff at most 20,000 characters; other text also counts toward total input |
 | Maintainer | 6,000 | All supplied summaries/notes must fit input cap; no silent dropping of candidate items or gate data |
 
-Every feature reserves at most 800 generated tokens and enforces the selected model's usable context (input plus output plus provider framing). Use a verified tokenizer/counting method for the selected alias; unsupported model/token accounting disables that live AI configuration until verified. Application submission limits are deliberately larger than AI limits. Reject oversized AI context before outbound calls; do not truncate or silently omit evidence. Model-specific lower limits override application maxima; raising budgets requires evaluation evidence and updated configuration/specification.
+Every feature reserves at most 800 generated tokens. On 1 November 2026 the user approved replacing the exact-tokenizer prerequisite with a conservative preflight admission policy. Method `utf8-bytes-framing-v1` computes 512 units plus, for each complete prepared outbound message, 64 units and the UTF-8 byte lengths of its role and content. Count after normalization, JSON/delimiter escaping and template construction; do not omit system messages, identifiers or context. The fixed framing reserve is application policy, not measured provider overhead. The result is budget units, not exact tokens or a mathematically guaranteed upper bound for an undocumented tokenizer.
+
+Admission requires a finite nonnegative safe-integer unit count within the feature cap, a matching server-owned method/model configuration and a valid advertised model context limit. Apply the additional heuristic check `inputUnits + 800 + 128 <= contextWindow`, avoiding numeric overflow. This compares conservative units with the advertised token window as an admission margin; it does not prove exact context fit. Application submission limits remain deliberately larger than AI limits. Reject oversized AI context before outbound calls; do not truncate or silently omit evidence. Model-specific lower limits override application maxima; raising budgets or changing the method requires evaluation evidence and updated configuration/specification. Non-ASCII and heavily escaped content may reach the unit cap earlier than an exact tokenizer would.
+
+Before live activation, evaluate the complete production prompts and representative ASCII, multilingual, delimiter-heavy and near-cap inputs against the chosen public model alias, comparing preflight units with provider-reported input tokens when available. Record differences and rejection behavior without treating sample agreement as a universal upper-bound proof. Exact tokenizer documentation is no longer a mandatory prerequisite under this policy; unexplained margin failures or missing model-context evidence keep that configuration disabled. Provider context rejection remains a safe manual fallback; never truncate, automatically relax caps or retry a rejected input to force it through.
 
 Keep the application limits of 10 outbound attempts per user per rolling 10 minutes, 60 per user per SGT calendar day, 30 globally per rolling minute, queue cap 10, and a 20-second total request deadline including queue/retry. Preflight local rejections are not outbound attempts. Each retry reserves/counts an attempt against local/global/provider-facing budgets before dispatch; requests unable to obtain budget return safe retry/fallback. One bounded retry for transient transport/5xx or rate-limit 429 is permitted only within deadline and Retry-After. A budget-exhaustion 429 is not blindly retried; ambiguous 429 falls back safely. Never retry 400/401/403, refusal or schema validation errors automatically.
 
@@ -116,7 +120,7 @@ Bound response bodies to 64 KiB and cancel transport on the overall 20-second de
 
 ## Provider evidence and live verification gate
 
-Provider documentation confirms Bearer API keys, the chat-completions endpoint, key-scoped model catalog, rate-or-budget 429 responses and UTC spend windows. The available reference snapshots do not establish the current key's allowed models, quantitative quotas, tokenizer, actual parameter support or provider retention policy. Obtain these during the credentialed integration spike; they remain verification dependencies under OPEN-002. All three role schema evaluations must pass before accepting live behavior.
+Provider documentation confirms Bearer API keys, the chat-completions endpoint, key-scoped model catalog, rate-or-budget 429 responses and UTC spend windows. User-reported probes for qwen3.6:35b establish a chat catalog entry advertising 262144 context tokens and one schema-valid synthetic completion with the requested parameters; this is not production-prompt evaluation. Quantitative key limits and provider retention/data-use policy remain unverified. OPEN-002 requires model-specific evaluation of the conservative admission method, approved live wiring, key limits and data handling; exact tokenizer/framing verification has been replaced by the policy above. All three role schema evaluations must pass before accepting live behavior. No live enablement follows from this specification change, and human shared-owner/teammate review remains pending.
 
 Primary provider references: [API](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/api), [quick start](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/quickstart), [access](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/access). Local documentation snapshots were inspected; the web pages were not available through the browsing tool. Example model aliases in those documents are examples, not the selected live configuration.
 

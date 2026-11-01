@@ -3,12 +3,12 @@ import { AI_LIMITS, contributorDraftResultSchema, selectedCriterionIdsSchema, va
   type AiErrorClass, type AiOutcome, type AiTokenUsage } from '@specsentry/shared';
 import type { Prisma, PrismaClient } from '../../generated/prisma/client';
 import type { AiClock, AiGatewayOptions, AiMessage, AiTransport, PatchRiskContext, PatchRiskGateway,
-  PatchRiskGatewayResult, VerifiedTokenCounter, AiDeadline, AiSafeMetadata, ContributorDraftContext, ContributorDraftGateway } from '../contracts';
+  PatchRiskGatewayResult, InputBudgetCounter, AiDeadline, AiSafeMetadata, ContributorDraftContext, ContributorDraftGateway } from '../contracts';
 import { PrismaAiAccounting, SafeAiError } from './accounting';
 import { parseStrictJson } from './strict-json';
-import { DisabledTokenCounter, SocLlmHttpsTransport, SystemAiClock } from './transport';
+import { ConservativeInputBudgetCounter, SocLlmHttpsTransport, SystemAiClock } from './transport';
 
-export { PrismaAiAccounting, SafeAiError, DisabledTokenCounter, SocLlmHttpsTransport, SystemAiClock, parseStrictJson };
+export { PrismaAiAccounting, SafeAiError, ConservativeInputBudgetCounter, SocLlmHttpsTransport, SystemAiClock, parseStrictJson };
 export type ReviewerPatchRiskGateway = PatchRiskGateway;
 const TEMPLATE_VERSION = 'reviewer-risk-v1';
 const BASE_URL = 'https://soclaas-api.comp.nus.edu.sg/v1';
@@ -129,9 +129,9 @@ function classify(status: number, body: string): { error: SafeAiError; retry: bo
 }
 
 type GatewayDependencies = { prisma: PrismaClient; options: AiGatewayOptions;
-  transport?: AiTransport; counter?: VerifiedTokenCounter; clock?: AiClock };
+  transport?: AiTransport; counter?: InputBudgetCounter; clock?: AiClock };
 type GatewayAdapter<Context, Result> = {
-  templateVersion: string; inputTokenCap: number;
+  templateVersion: string; inputUnitCap: number;
   scope(context: Context): Pick<Prisma.AiRequestUncheckedCreateInput, 'feature' | 'proposalId' | 'revisionId' | 'assignmentId'
     | 'accessGenerationId' | 'expectedVersion' | 'expectedAssignmentVersion' | 'selectedCriterionCount' | 'workingRevisionId'>;
   prepare(context: Context): { messages: readonly AiMessage[]; validate(output: unknown): Result };
@@ -140,7 +140,7 @@ function createAdvisoryGateway<Context, Result>(deps: GatewayDependencies, adapt
   const clock = deps.clock ?? new SystemAiClock();
   const transport = deps.transport ?? new SocLlmHttpsTransport();
   const nativeTransport = transport instanceof SocLlmHttpsTransport;
-  const counter = deps.counter ?? new DisabledTokenCounter();
+  const counter = deps.counter ?? new ConservativeInputBudgetCounter();
   const accounting = new PrismaAiAccounting(deps.prisma, clock);
   return { async analyze(rawContext: Context, call: { actorId: string; deadline: AiDeadline;
     beforeAttempt(tx: Prisma.TransactionClient): Promise<void> }): Promise<{ result: Result; metadata: AiSafeMetadata }> {
@@ -163,14 +163,14 @@ function createAdvisoryGateway<Context, Result>(deps: GatewayDependencies, adapt
       } }); });
       requestCreated = true;
       if (deps.options.mode !== 'test' || nativeTransport) throw new SafeAiError('DISABLED');
-      if (counter.model !== deps.options.model || counter.verificationId !== deps.options.tokenCounterVerificationId
+      if (counter.model !== deps.options.model || counter.methodId !== deps.options.inputBudgetMethodId
         || !Number.isSafeInteger(deps.options.contextWindow) || deps.options.contextWindow < 1) throw new SafeAiError('CONFIGURATION');
       const { messages, validate } = adapter.prepare(rawContext);
       contextHash = createHash('sha256').update(JSON.stringify(messages), 'utf8').digest('hex');
-      const inputTokens = counter.countInput(messages);
-      // Reserve 800 output tokens and a conservative provider framing allowance.
-      if (!Number.isSafeInteger(inputTokens) || inputTokens < 0 || inputTokens > adapter.inputTokenCap
-        || inputTokens + 800 + 128 > deps.options.contextWindow) throw new SafeAiError('INPUT_LIMIT');
+      const inputUnits = counter.countUnits(messages);
+      // Heuristic context admission: units are not exact tokens; reserve output and additional headroom.
+      if (!Number.isSafeInteger(inputUnits) || inputUnits < 0 || inputUnits > adapter.inputUnitCap
+        || inputUnits > deps.options.contextWindow - 800 - 128) throw new SafeAiError('INPUT_LIMIT');
       await accounting.bounded(call.deadline, tx => tx.aiRequest.update({ where: { id: requestId }, data: { contextHash } }));
       await accounting.enqueue({ requestId, actorId: call.actorId, deadline: call.deadline });
       for (let ordinal = 1; ordinal <= 2; ordinal++) {
@@ -250,7 +250,7 @@ function createAdvisoryGateway<Context, Result>(deps: GatewayDependencies, adapt
 
 export function createPatchRiskGateway(deps: GatewayDependencies): ReviewerPatchRiskGateway {
   return createAdvisoryGateway<PatchRiskContext, PatchRiskGatewayResult['result']>(deps, {
-    templateVersion: TEMPLATE_VERSION, inputTokenCap: AI_LIMITS.reviewerInputTokens,
+    templateVersion: TEMPLATE_VERSION, inputUnitCap: AI_LIMITS.reviewerInputUnits,
     scope: context => ({ feature: 'REVIEWER', ...context.scope, selectedCriterionCount: context.selectedCriterionIds.length }),
     prepare: rawContext => {
       const context = sanitize(rawContext);
@@ -266,7 +266,7 @@ export function createPatchRiskGateway(deps: GatewayDependencies): ReviewerPatch
 export function createContributorDraftGateway(deps: GatewayDependencies): ContributorDraftGateway {
   const templateVersion = 'contributor-draft-v1';
   return createAdvisoryGateway<ContributorDraftContext, ReturnType<typeof contributorDraftResultSchema.parse>>(deps, {
-    templateVersion, inputTokenCap: AI_LIMITS.contributorInputTokens,
+    templateVersion, inputUnitCap: AI_LIMITS.contributorInputUnits,
     scope: context => ({ feature: 'CONTRIBUTOR', ...context.scope }),
     prepare: context => {
       const raw = context.draft;

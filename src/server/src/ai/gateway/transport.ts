@@ -1,4 +1,4 @@
-import type { AiClock, AiTransport, AiTransportRequest, AiTransportResponse, VerifiedTokenCounter } from '../contracts';
+import type { AiClock, AiMessage, AiTransport, AiTransportRequest, AiTransportResponse, InputBudgetCounter } from '../contracts';
 import { SafeAiError } from './accounting';
 
 export class SystemAiClock implements AiClock {
@@ -14,10 +14,14 @@ export class SystemAiClock implements AiClock {
   }
 }
 
-export class DisabledTokenCounter implements VerifiedTokenCounter {
-  readonly model = '';
-  readonly verificationId = '';
-  countInput(): number { throw new SafeAiError('CONFIGURATION'); }
+export class ConservativeInputBudgetCounter implements InputBudgetCounter {
+  readonly methodId = 'utf8-bytes-framing-v1';
+  constructor(readonly model = '') {}
+  countUnits(messages: readonly AiMessage[]): number {
+    // shortcut: byte units plus framing are not a proven token bound; validate margins for each live alias before enabling it.
+    return messages.reduce((units, message) => units + 64
+      + Buffer.byteLength(message.role, 'utf8') + Buffer.byteLength(message.content, 'utf8'), 512);
+  }
 }
 
 export class SocLlmHttpsTransport implements AiTransport {

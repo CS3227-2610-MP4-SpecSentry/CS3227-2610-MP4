@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { contributorDraftRequestSchema, type ContributorDraftResult } from '@specsentry/shared';
 import type { PrismaClient } from '../src/generated/prisma/client';
-import { createContributorDraftGateway, SafeAiError } from '../src/ai/gateway';
+import { ConservativeInputBudgetCounter, createContributorDraftGateway, SafeAiError } from '../src/ai/gateway';
 import type { AiClock, AiDeadline, AiTransport, ContributorDraftContext } from '../src/ai/contracts';
 import { aiTestOptions } from './ai-fixtures';
 
@@ -30,7 +30,7 @@ function harness() {
     $queryRaw: jest.fn(async () => []), $queryRawUnsafe: jest.fn(async () => [{ id: 'reviewer-patch-risk' }]) };
   const prisma = { ...tx, $transaction: async <T>(action: (value: typeof tx) => Promise<T>) => action(tx) } as unknown as PrismaClient;
   const transport: AiTransport = { complete: jest.fn(async () => ({ status: 200, body: envelope(), retryAfter: null })) };
-  const counter = { model: aiTestOptions.mode === 'test' ? aiTestOptions.model : '', verificationId: 'synthetic-counter-v1', countInput: jest.fn(() => 100) };
+  const counter = { model: aiTestOptions.mode === 'test' ? aiTestOptions.model : '', methodId: 'synthetic-counter-v1', countUnits: jest.fn(() => 100) };
   const gateway = createContributorDraftGateway({ prisma, options: aiTestOptions, transport, counter, clock });
   const beforeAttempt = jest.fn(async () => undefined);
   return { prisma, request, attempt, queue, transport, counter, beforeAttempt, clock, deadline, admission: tx.$queryRawUnsafe,
@@ -39,6 +39,25 @@ function harness() {
 }
 
 describe('Contributor draft v1 synthetic gateway evaluations', () => {
+  it('applies the real conservative method to complete prepared messages without inventing provider usage', async () => {
+    for (const problem of ['Validate the value.', 'x'.repeat(3500)]) {
+      const h = harness(); const counter = new ConservativeInputBudgetCounter(h.counter.model);
+      const count = jest.spyOn(counter, 'countUnits');
+      const gateway = createContributorDraftGateway({ prisma: h.prisma, options: { mode: 'test', model: counter.model,
+        contextWindow: 16_384, inputBudgetMethodId: counter.methodId }, counter, transport: h.transport, clock: h.clock });
+      const call = gateway.analyze(fixture(problem), { actorId: 'owner', deadline: h.deadline, beforeAttempt: h.beforeAttempt });
+      if (problem.length < 3500) {
+        expect((await call).metadata.usage).toEqual({ promptTokens: null, completionTokens: null, totalTokens: null, cachedTokens: null });
+        expect(count).toHaveBeenCalledWith(jest.mocked(h.transport.complete).mock.calls[0]![0].messages);
+      } else {
+        await expect(call).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
+        expect(h.transport.complete).not.toHaveBeenCalled(); expect(h.attempt.create).not.toHaveBeenCalled();
+      }
+      expect(count.mock.calls[0]![0][0]!.role).toBe('system');
+      expect(count.mock.calls[0]![0][1]!.content).toContain(problem);
+    }
+  });
+
   it('accepts typed advisory output, excludes scope identifiers and persists only safe feature-aware metadata', async () => {
     const h = harness(); expect((await h.call()).result).toEqual(corpus.normal);
     const request = jest.mocked(h.transport.complete).mock.calls[0]![0];
@@ -72,14 +91,17 @@ describe('Contributor draft v1 synthetic gateway evaluations', () => {
     expect(h.transport.complete).not.toHaveBeenCalled();
   });
 
-  it('enforces raw and normalized character caps, total framed tokens and model context without truncation', async () => {
+  it('enforces raw and normalized character caps and complete framed input units without truncation', async () => {
     for (const problem of ['x'.repeat(6001), 'ﬀ'.repeat(3000)]) {
       const h = harness(); await expect(h.call(fixture(problem))).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
       expect(h.transport.complete).not.toHaveBeenCalled();
     }
-    const h = harness(); h.counter.countInput.mockReturnValue(4001);
-    await expect(h.call()).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' }); expect(h.transport.complete).not.toHaveBeenCalled();
-    const fit = harness(); fit.counter.countInput.mockReturnValue(4000); await fit.call();
+    for (const units of [4001, Number.NaN, -1, Infinity, 1.5, Number.MAX_SAFE_INTEGER]) {
+      const h = harness(); h.counter.countUnits.mockReturnValue(units);
+      await expect(h.call()).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
+      expect(h.transport.complete).not.toHaveBeenCalled(); expect(h.attempt.create).not.toHaveBeenCalled();
+    }
+    const fit = harness(); fit.counter.countUnits.mockReturnValue(4000); await fit.call();
   });
 
   it('rejects malformed/duplicate JSON, unknown output fields, refusal, truncation and invalid provider usage without repair', async () => {

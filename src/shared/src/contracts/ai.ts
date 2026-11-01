@@ -3,8 +3,8 @@ import { reviewerIdSchema, reviewerTimestampSchema, reviewerVersionSchema } from
 
 // Browser-safe data only. No provider settings, prompts, session or access-generation IDs.
 export const AI_LIMITS = {
-  contributorInputTokens: 4_000, contributorInputCodePoints: 6_000,
-  reviewerCriteria: 5, reviewerInputTokens: 10_000, reviewerDiffCodePoints: 20_000,
+  contributorInputUnits: 4_000, contributorInputCodePoints: 6_000,
+  reviewerCriteria: 5, reviewerInputUnits: 10_000, reviewerDiffCodePoints: 20_000,
   outputTokens: 800, responseBytes: 65_536, deadlineMs: 20_000, auditPage: 50,
 } as const;
 

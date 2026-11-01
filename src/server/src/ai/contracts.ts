@@ -5,7 +5,7 @@ import type { Prisma } from '../generated/prisma/client';
 export const PATCH_RISK_GATEWAY = Symbol('PATCH_RISK_GATEWAY');
 export const CONTRIBUTOR_DRAFT_GATEWAY = Symbol('CONTRIBUTOR_DRAFT_GATEWAY');
 export const AI_TRANSPORT = Symbol('AI_TRANSPORT');
-export const VERIFIED_TOKEN_COUNTER = Symbol('VERIFIED_TOKEN_COUNTER');
+export const INPUT_BUDGET_COUNTER = Symbol('INPUT_BUDGET_COUNTER');
 export const AI_CLOCK = Symbol('AI_CLOCK');
 export const AI_GATEWAY_OPTIONS = Symbol('AI_GATEWAY_OPTIONS');
 
@@ -16,7 +16,7 @@ export type AiGatewayOptions = Readonly<{ mode: 'disabled' }> | Readonly<{
   mode: 'test';
   model: string;
   contextWindow: number;
-  tokenCounterVerificationId: string;
+  inputBudgetMethodId: string;
 }>;
 
 export interface AiDeadline {
@@ -89,11 +89,11 @@ export interface AiTransportResponse {
   readonly retryAfter: string | null;
 }
 export interface AiTransport { complete(request: AiTransportRequest): Promise<AiTransportResponse> }
-export interface VerifiedTokenCounter {
-  // Exact alias and verification evidence must match the enabled live configuration.
+export interface InputBudgetCounter {
+  // Admission units are a policy heuristic, never provider-reported token usage.
   readonly model: string;
-  readonly verificationId: string;
-  countInput(messages: readonly AiMessage[]): number;
+  readonly methodId: string;
+  countUnits(messages: readonly AiMessage[]): number;
 }
 export interface AiSafeFailure {
   readonly requestId: string;

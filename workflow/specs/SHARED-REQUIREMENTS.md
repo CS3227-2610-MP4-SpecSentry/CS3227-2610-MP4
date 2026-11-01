@@ -33,7 +33,7 @@ Baseline: 25 October 2026. Normative design; implementation evidence is tracked 
 | NFR-A11Y-001 | Accessibility | Critical flows meet WCAG 2.2 AA checks used by the team and pass keyboard-only smoke tests. |
 | NFR-OBS-001 | Observability | Structured events include correlation ID, actor pseudonymous ID, template version, model status, token counts, latency, and safe error class. |
 | NFR-PORT-001 | Portability | A documented Docker image starts from environment variables and a clean PostgreSQL database without local-machine assumptions. |
-| NFR-RES-001 | Resource budget | Each AI feature has a configured input and output token cap. The dashboard reports daily calls, failure rate, cache use, and token consumption. |
+| NFR-RES-001 | Resource budget | Each AI feature has a configured conservative input-budget unit cap and output-token cap under AI-SECURITY-SPEC. Preflight units are admission estimates, never reported token usage. The dashboard reports daily calls, failure rate, cache use, and provider-reported token consumption; missing usage remains unknown. |
 
 Approved measurement, session and dashboard defaults appear below; targets are not evidence of deployed behavior.
 
