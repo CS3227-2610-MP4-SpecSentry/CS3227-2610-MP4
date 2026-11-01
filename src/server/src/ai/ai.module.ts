@@ -15,9 +15,11 @@ export class AiModule {
       module: AiModule,
       imports: [DatabaseModule.register(config)],
       providers: [
-        // OPEN-002 has no verified live configuration. Only a test bootstrap may
-        // replace these providers in-process; HTTP input cannot enable a model.
-        { provide: AI_GATEWAY_OPTIONS, useValue: { mode: 'disabled' } satisfies AiGatewayOptions },
+        // Only validated server configuration can enable live traffic.
+        { provide: AI_GATEWAY_OPTIONS, useValue: config.AI_LIVE_ENABLED
+          ? { mode: 'live', apiKey: config.AI_API_KEY!, model: config.AI_MODEL!, contextWindow: config.AI_CONTEXT_WINDOW!,
+            inputBudgetMethodId: 'utf8-bytes-framing-v1' } satisfies AiGatewayOptions
+          : { mode: 'disabled' } satisfies AiGatewayOptions },
         { provide: AI_CLOCK, useFactory: () => new SystemAiClock() },
         { provide: AI_TRANSPORT, useFactory: () => new SocLlmHttpsTransport() },
         { provide: INPUT_BUDGET_COUNTER, useFactory: () => new ConservativeInputBudgetCounter(config.AI_MODEL) },

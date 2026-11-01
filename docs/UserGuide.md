@@ -221,9 +221,12 @@ Suggestions are not restored from browser storage. A provider error, invalid
 result or unavailable configuration leaves manual editing and saving usable.
 Use the safe error reference when one is available.
 
-Live SoC operation is disabled pending provider verification. In the ordinary app,
-the unavailable message is expected; synthetic browser/server checks establish
-fallback and contract behavior, not live usefulness or provider compatibility.
+Live SoC operation is off by default. An operator can configure explicit live
+access after provider evaluation and data-handling review; see [AI integration](AI-Integration.md).
+With the default configuration, the unavailable message is expected. Synthetic
+browser/server checks establish fallback and contract behavior, not live usefulness
+or provider compatibility. The separate provider probe uses fixed synthetic drafts,
+does not save suggestions and does not enable this application's live switch.
 
 **Refresh my AI resource use** shows your application SGT-day requests, outbound
 attempts/retries, completed failures and preflight rejections. A failure rate with

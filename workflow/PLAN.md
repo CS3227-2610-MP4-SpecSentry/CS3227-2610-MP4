@@ -1,5 +1,13 @@
 # Delivery and implementation plan
 
+Opt-in live AI wiring, 1 November 2026: implement server-only explicit activation,
+complete key/model/context validation and a fixed synthetic verification command
+that shares production Contributor preparation, admission and strict decoding.
+The app remains off by default; the CLI does not change local configuration or
+business records. Actual execution/findings and remaining provider gates belong
+to the [live wiring run](../logs/yooplo/2026-11-01-live-ai-wiring.md). Model/key-limit,
+retention, cross-role review and deployment acceptance remain separate from wiring.
+
 Conservative AI budget, 1 November 2026: user approved replacing the exact verified
 tokenizer prerequisite with full-message UTF-8 byte/framing admission units.
 Contributor/Reviewer caps remain 4,000/10,000; actual usage remains provider-reported

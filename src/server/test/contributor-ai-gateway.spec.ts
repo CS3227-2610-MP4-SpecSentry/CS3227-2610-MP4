@@ -39,6 +39,18 @@ function harness() {
 }
 
 describe('Contributor draft v1 synthetic gateway evaluations', () => {
+  it('rejects standalone SoC credentials including fullwidth forms before attempts or transport', async () => {
+    const secret = 'clsk_synthetic_0123456789abcdefghijklmnop';
+    const fullwidth = [...secret].map(character => String.fromCharCode(character.charCodeAt(0) + 0xfee0)).join('');
+    for (const value of [secret, fullwidth]) {
+      const h = harness();
+      await expect(h.call(fixture(value))).rejects.toMatchObject({ errorClass: 'SECRET_DETECTED' });
+      expect(h.transport.complete).not.toHaveBeenCalled(); expect(h.attempt.create).not.toHaveBeenCalled();
+      expect(JSON.stringify([h.request.create.mock.calls, h.request.update.mock.calls])).not.toContain(secret);
+      expect(JSON.stringify([h.request.create.mock.calls, h.request.update.mock.calls])).not.toContain(fullwidth);
+    }
+  });
+
   it('applies the real conservative method to complete prepared messages without inventing provider usage', async () => {
     for (const problem of ['Validate the value.', 'x'.repeat(3500)]) {
       const h = harness(); const counter = new ConservativeInputBudgetCounter(h.counter.model);

@@ -42,6 +42,35 @@ function harness() {
 }
 
 describe('Reviewer gateway v1 synthetic evaluations', () => {
+  it('rejects standalone SoC credentials including fullwidth forms before attempts or transport', async () => {
+    const secret = 'clsk_synthetic_0123456789abcdefghijklmnop';
+    const fullwidth = [...secret].map(character => String.fromCharCode(character.charCodeAt(0) + 0xfee0)).join('');
+    for (const value of [secret, fullwidth]) {
+      const h = harness();
+      await expect(h.call(patchRiskContextFixture({ problem: value }))).rejects.toMatchObject({ errorClass: 'SECRET_DETECTED' });
+      expect(h.transport.complete).not.toHaveBeenCalled(); expect(h.attempt.create).not.toHaveBeenCalled();
+      expect(JSON.stringify([h.request.create.mock.calls, h.request.update.mock.calls])).not.toContain(secret);
+      expect(JSON.stringify([h.request.create.mock.calls, h.request.update.mock.calls])).not.toContain(fullwidth);
+    }
+  });
+
+  it('routes explicitly enabled live credentials through the bounded native transport without logging them', async () => {
+    const h = harness(); const apiKey = 'synthetic-live-key';
+    const fetchSpy = jest.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(envelope(), { status: 200 }));
+    try {
+      const gateway = createPatchRiskGateway({ prisma: h.prisma, options: { mode: 'live', apiKey,
+        model: h.counter.model, contextWindow: 16384, inputBudgetMethodId: h.counter.methodId },
+        transport: new SocLlmHttpsTransport(), counter: h.counter, clock: h.clock });
+      const response = await gateway.analyze(patchRiskContextFixture(), { actorId: 'actor', deadline: h.deadline,
+        beforeAttempt: h.beforeAttempt });
+      expect(fetchSpy).toHaveBeenCalledWith('https://soclaas-api.comp.nus.edu.sg/v1/chat/completions',
+        expect.objectContaining({ redirect: 'error', headers: expect.objectContaining({ Authorization: `Bearer ${apiKey}` }) }));
+      expect(h.beforeAttempt).toHaveBeenCalledTimes(1);
+      expect(JSON.stringify([response, h.request.create.mock.calls, h.request.update.mock.calls,
+        h.attempt.create.mock.calls, h.attempt.update.mock.calls])).not.toContain(apiKey);
+    } finally { fetchSpy.mockRestore(); }
+  });
+
   it('counts all prepared Reviewer messages with the conservative method before dispatch', async () => {
     for (const diffText of [patchRiskContextFixture().diffText, 'x'.repeat(9500)]) {
       const h = harness(); const counter = new ConservativeInputBudgetCounter(h.counter.model);

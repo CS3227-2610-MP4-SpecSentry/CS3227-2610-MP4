@@ -22,6 +22,7 @@
 | evaluations/ (when results exist) | Versioned evaluation and experiment evidence; create with the first result |
 | tooling/smoke.mjs | Existing HTTP liveness/readiness smoke check |
 | tooling/submission-check.mjs | Local required-artifact presence check; does not certify grading readiness |
+| tooling/verify-live-ai.mjs | Explicit fixed synthetic SoC verification using production Contributor prompt/budget/decoder; dry-run by default, metadata-only output and no database writes |
 | tests/browser/ | Playwright setup-page and accessibility smoke checks |
 
 Production source stays under `src/`, including the static GitHub Pages product

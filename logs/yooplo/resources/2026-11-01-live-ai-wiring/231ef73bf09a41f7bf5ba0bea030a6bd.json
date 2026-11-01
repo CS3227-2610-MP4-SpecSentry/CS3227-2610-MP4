@@ -1,0 +1,35 @@
+{
+  "id": "231ef73bf09a41f7bf5ba0bea030a6bd",
+  "prompter": "yooplo",
+  "session": "2026-11-01-live-ai-wiring",
+  "agent": "implementer",
+  "invocation": "implementer-2",
+  "stage": "soc-secret-fix",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings exact variant and effort unavailable",
+  "started_at": "2026-11-01T15:09:21.097458+00:00",
+  "ended_at": "2026-11-01T15:10:46.053867+00:00",
+  "elapsed_seconds": 84.956409,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "SoC secretguard and raw/fullwidth regression, configured-context naming and failed-call usage capture fixed; 47 focused tests serverbuild targetedlint passed",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution telemetry unavailable",
+    "output_tokens": "Attributable execution telemetry unavailable",
+    "cache_read_tokens": "Attributable execution telemetry unavailable",
+    "tool_calls": "Attributable execution telemetry unavailable",
+    "retries": "Attributable execution telemetry unavailable"
+  },
+  "unavailable_reason": "Attributable execution telemetry unavailable"
+}

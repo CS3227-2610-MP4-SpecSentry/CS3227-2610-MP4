@@ -106,11 +106,22 @@ describe('AI foundation boundaries', () => {
     expect(aiAuditResponseSchema.safeParse({ items: [{ ...entry, errorClass: 'provider secret raw message' }] }).success).toBe(false);
   });
 
-  it('keeps OPEN-002 live configuration disabled despite nonempty placeholders or flag assertions', () => {
+  it('keeps live off by default and requires complete validated server-only opt-in settings', () => {
     const base = { SESSION_SECRET: 'synthetic-test-session-secret-32-chars', DATABASE_URL: 'postgresql://test:test@localhost/test' };
     expect(readConfig({ ...base, AI_API_KEY: 'placeholder', AI_MODEL: 'placeholder' }).AI_LIVE_ENABLED).toBe(false);
     expect(readConfig({ ...base, AI_LIVE_ENABLED: 'false' }).AI_LIVE_ENABLED).toBe(false);
-    expect(() => readConfig({ ...base, AI_LIVE_ENABLED: 'true' })).toThrow('Invalid server configuration: AI_LIVE_ENABLED');
-    expect(() => readConfig({ ...base, AI_BASE_URL: 'https://unapproved.invalid/v1' })).toThrow('Invalid server configuration: AI_BASE_URL');
+    const live = { ...base, AI_LIVE_ENABLED: 'true', AI_API_KEY: 'synthetic-live-key', AI_MODEL: 'synthetic-model', AI_CONTEXT_WINDOW: '262144' };
+    expect(readConfig(live)).toMatchObject({ AI_LIVE_ENABLED: true, AI_CONTEXT_WINDOW: 262144 });
+    for (const [field, values] of [
+      ['AI_API_KEY', [undefined, '', ' ', 'api-key-here', 'YOUR_API_KEY']],
+      ['AI_MODEL', [undefined, '', ' ', 'model-here', 'placeholder']],
+      ['AI_CONTEXT_WINDOW', [undefined, '', '0', '-1', '1.5', 'Infinity', '9007199254740992']],
+      ['AI_LIVE_ENABLED', ['yes', '1', '']],
+    ] as const) for (const value of values) {
+      expect(() => readConfig({ ...live, [field]: value })).toThrow(`Invalid server configuration: ${field}`);
+    }
+    expect(() => readConfig({ ...live, AI_BASE_URL: 'https://unapproved.invalid/v1' })).toThrow('Invalid server configuration: AI_BASE_URL');
+    try { readConfig({ ...live, AI_CONTEXT_WINDOW: 'secret-canary' }); }
+    catch (error) { expect(String(error)).not.toContain('secret-canary'); expect(String(error)).not.toContain(live.AI_API_KEY); }
   });
 });

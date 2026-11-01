@@ -1,5 +1,16 @@
 # Requirement traceability
 
+## Opt-in live AI wiring — 1 November 2026
+
+OPEN-002 / NFR-RES-001 / REQ-CON-003 and shared advisory-AI boundaries now have
+an explicit server-only live configuration path and a separate fixed synthetic
+verification tool. Default app traffic remains disabled. The tool reuses the
+actual Contributor production prompt, conservative-unit admission and strict
+envelope/result decoder; it does not exercise authenticated app transactions,
+quota persistence or UI application. [Run/evidence](../logs/yooplo/2026-11-01-live-ai-wiring.md)
+records exact checks, findings and any real-provider execution. Offline tests or
+dry runs alone do not close live model-margin, key-limit, retention or deployment gates.
+
 ## Contributor lifecycle UI extension — 1 November 2026
 
 Current source and independent evidence are tracked in the

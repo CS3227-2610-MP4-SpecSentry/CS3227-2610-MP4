@@ -29,13 +29,13 @@ aggregates, separates requests/attempts/retries/preflight rejections, and report
 missing usage as unknown. Provider UTC spend windows and disabled application
 caching are labeled separately.
 
-Live configuration remains disabled under OPEN-002. Current synthetic tests and
+Live configuration is off by default under OPEN-002. Current synthetic tests and
 remaining live/deployment steps are tracked in the
 [Contributor completion run](../logs/yooplo/2026-11-01-contributor-completion.md).
-The current gateway deliberately exposes disabled/test options and rejects the
-native transport in test mode. After credentialed provider verification, a
-separately reviewed change must wire the approved live key/model/input-budget method
-and configuration; supplying environment credentials alone cannot enable it.
+The gateway supports a separate server-only live configuration while rejecting
+native transport in test mode. Credentials alone do not enable it: application
+traffic requires explicit live opt-in and complete model/context configuration.
+Wiring availability is not provider, data-handling or deployment approval.
 
 ## Reviewer Patch Risk integration
 
@@ -49,13 +49,58 @@ closed. Current evidence belongs to the
 
 ## Configuration and operation
 
-Live SoCLaaS calls remain disabled under OPEN-002. A nonempty API key/model or an
-environment flag cannot assert evaluated model/budget-method, parameter, quota and
-retention compatibility. `readConfig` rejects `AI_LIVE_ENABLED=true`. The approved
-base is `https://soclaas-api.comp.nus.edu.sg/v1`. Do not replace it with a browser
-value or infer that deterministic synthetic tests establish live compatibility,
-usefulness or latency. Contributor controls use the same disabled live default;
-the Maintainer assistant remains pending.
+`AI_LIVE_ENABLED` defaults to false. True requires a nonblank server-only
+`AI_API_KEY`, `AI_MODEL` and a positive safe-integer `AI_CONTEXT_WINDOW`; missing,
+placeholder or invalid live settings fail startup with field names only. The
+approved base is `https://soclaas-api.comp.nus.edu.sg/v1`. The canonical server
+settings are `AI_*`; `SOCLAAS_*` shell examples from the provider are not read by
+the application. Never prefix the key with `VITE_` or put it in a browser request.
+
+Keep the app flag false while evaluating with synthetic prompts. Before enabling
+real-draft traffic, review the model-specific evaluation, actual key limits and
+provider retention/data use with the affected owners. An environment flag cannot
+assert this evidence. Contributor and Reviewer share this switch and the same
+gateway protections; the Maintainer assistant remains pending. No local flag is
+automatically changed by the verification harness.
+
+For the model probed in this session, the operator configuration is:
+
+```dotenv
+AI_LIVE_ENABLED=false
+AI_BASE_URL=https://soclaas-api.comp.nus.edu.sg/v1
+AI_MODEL=qwen3.6:35b
+AI_CONTEXT_WINDOW=262144
+# Set AI_API_KEY locally through your environment or ignored .env; never commit it.
+```
+
+The context value is the user-reported catalog value, not a universal model
+default. Recheck catalog metadata and evaluation when switching aliases.
+
+## Synthetic live verification
+
+The verification command uses the application's exact Contributor message
+preparation, conservative admission units, bounded transport and strict
+envelope/result decoder. Fixed normal, multilingual, delimiter-heavy and near-cap
+drafts exercise production prompts; an over-cap case must be rejected locally.
+It does not connect to the application database, save suggestions or certify
+authenticated UI/authorization/transaction behavior.
+
+```powershell
+# Build server/shared and inspect synthetic case budgets; no network calls.
+npm.cmd run verify:ai:live
+
+# Explicitly send the bounded synthetic cases using the locally configured key.
+# Keep AI_LIVE_ENABLED=false; this harness is separate from app activation.
+npm.cmd run verify:ai:live -- --live
+```
+
+The command prints safe case metadata only: acceptance/error class, budget units,
+latency and provider-reported usage where available. Raw prompts, suggestions,
+provider error bodies and credentials are excluded. A passing shape/margin check
+does not rate usefulness or prove a universal token bound. Missing provider usage
+remains unknown; a live verification run cannot pass its empirical input-margin
+check without reported input-token usage for every dispatched case. A failed live case stays failed; do not relax schemas or truncate
+context to turn it green. Dry-run evidence is never live-provider evidence.
 
 Manual review remains available when AI is disabled or fails. Application tests
 inject transport, input-budget counter and clock providers in a test bootstrap; those
@@ -137,7 +182,8 @@ Live activation still needs actual production-prompt and near-cap multilingual/
 escaped-input evaluation against the selected alias, verified advertised context,
 key limits, data-handling review and live configuration wiring. Compare units
 with returned usage as evaluation evidence, never as proof of a universal bound.
-The current implementation continues to reject live enablement.
+The application remains off by default; the explicit synthetic harness can be
+used to gather provider evidence before an operator enables application traffic.
 
 Durable short PostgreSQL transactions serialize attempt/queue reservations across
 application instances: 10 outbound attempts per user per rolling ten minutes,

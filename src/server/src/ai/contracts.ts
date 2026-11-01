@@ -9,15 +9,11 @@ export const INPUT_BUDGET_COUNTER = Symbol('INPUT_BUDGET_COUNTER');
 export const AI_CLOCK = Symbol('AI_CLOCK');
 export const AI_GATEWAY_OPTIONS = Symbol('AI_GATEWAY_OPTIONS');
 
-// There is deliberately no live mode while OPEN-002 evidence is unavailable.
-// Test bootstrap must supply these options and deterministic transport/counter
-// providers in-process; configuration from an HTTP request cannot select them.
-export type AiGatewayOptions = Readonly<{ mode: 'disabled' }> | Readonly<{
-  mode: 'test';
-  model: string;
-  contextWindow: number;
-  inputBudgetMethodId: string;
-}>;
+// Live credentials remain server-only; test options cannot select native transport.
+type EnabledAiOptions = Readonly<{ model: string; contextWindow: number; inputBudgetMethodId: string }>;
+export type AiGatewayOptions = Readonly<{ mode: 'disabled' }>
+  | (EnabledAiOptions & Readonly<{ mode: 'test' }>)
+  | (EnabledAiOptions & Readonly<{ mode: 'live'; apiKey: string }>);
 
 export interface AiDeadline {
   readonly signal: AbortSignal;

@@ -1,0 +1,93 @@
+{
+  "mode": "dry-run",
+  "methodId": "utf8-bytes-framing-v1",
+  "configuredContextWindow": 262144,
+  "cases": [
+    {
+      "caseId": "normal",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 1781,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "multilingual",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 1770,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "delimiters",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 1821,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "near-cap",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 4000,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "over-cap",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 4001,
+      "status": "REJECTED",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": "INPUT_LIMIT",
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    }
+  ],
+  "passed": true
+}

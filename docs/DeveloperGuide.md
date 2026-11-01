@@ -47,7 +47,8 @@ Local checks do not establish deployment, live AI compatibility or teammate appr
 The [AI integration guide](AI-Integration.md) describes exact request/result
 contracts, authorization and assignment generations, transient UI retention,
 safe metadata, strict output validation, quotas and manual fallback. The default
-configured gateway remains disabled pending OPEN-002 live verification. Tests
+configured gateway is off by default; explicit server live configuration and a
+separate synthetic verification command are documented in the AI integration guide. Tests
 inject deterministic providers in-process; there is no browser-controlled model
 or production mock switch. Independent implementation/security review and
 revalidation closed all five findings. Use the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)
@@ -683,7 +684,8 @@ affected-owner agreement in the
 The Spec Draft Assistant uses the same server gateway/accounting with a distinct
 working-draft scope and the new AI metadata migration. It has a6,000-character/
 4,000-conservative-input-unit/800-output-token budget, typed suggestions, explicit local
-selection and safe own-usage metrics. Live configuration remains disabled. See
+selection and safe own-usage metrics. Live configuration is off by default, with
+explicit server opt-in and a separate metadata-only synthetic verification command. See
 [AI integration](AI-Integration.md) for boundaries and provider verification.
 Do not infer complete Contributor delivery from the earlier bounded UI checks. Current
 checks, findings and resource evidence belong to the
