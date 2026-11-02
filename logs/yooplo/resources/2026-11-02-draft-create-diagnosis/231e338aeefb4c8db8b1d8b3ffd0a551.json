@@ -1,0 +1,35 @@
+{
+  "id": "231e338aeefb4c8db8b1d8b3ffd0a551",
+  "prompter": "yooplo",
+  "session": "2026-11-02-draft-create-diagnosis",
+  "agent": "main",
+  "invocation": "diagnosis-1",
+  "stage": "local-diagnosis",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings unavailable",
+  "started_at": "2026-11-02T02:34:14.786813+00:00",
+  "ended_at": "2026-11-02T02:39:19.458552+00:00",
+  "elapsed_seconds": 304.671739,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Local schema mismatch confirmed; failed PG16 backup corrected with validated PG17 archive; four existing migrations applied; all9verified and rollback-only draft/working/activity smoke passed with0persistedrows",
+  "unavailable_reasons": {
+    "input_tokens": "Agent execution settings/token/cache/tool counters unavailable; failed and corrected backup tool attempts included within measured invocation",
+    "output_tokens": "Agent execution settings/token/cache/tool counters unavailable; failed and corrected backup tool attempts included within measured invocation",
+    "cache_read_tokens": "Agent execution settings/token/cache/tool counters unavailable; failed and corrected backup tool attempts included within measured invocation",
+    "tool_calls": "Agent execution settings/token/cache/tool counters unavailable; failed and corrected backup tool attempts included within measured invocation",
+    "retries": "Agent execution settings/token/cache/tool counters unavailable; failed and corrected backup tool attempts included within measured invocation"
+  },
+  "unavailable_reason": "Agent execution settings/token/cache/tool counters unavailable; failed and corrected backup tool attempts included within measured invocation"
+}

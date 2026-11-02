@@ -63,13 +63,13 @@ assert this evidence. Contributor and Reviewer share this switch and the same
 gateway protections; the Maintainer assistant remains pending. No local flag is
 automatically changed by the verification harness.
 
-For the model probed in this session, the operator configuration is:
+The Contributor v3 configuration verified on 2 November 2026 is:
 
 ```dotenv
 AI_LIVE_ENABLED=false
 AI_BASE_URL=https://soclaas-api.comp.nus.edu.sg/v1
-AI_MODEL=qwen3.6:35b
-AI_CONTEXT_WINDOW=262144
+AI_MODEL=llama3.1:8b
+AI_CONTEXT_WINDOW=65536
 # Set AI_API_KEY locally through your environment or ignored .env; never commit it.
 ```
 
@@ -107,10 +107,14 @@ Authenticated browser acceptance is separate. The opt-in
 server at3197 and an explicitly disposable loopback `_test` database. Its tests
 skip unless `RUN_LIVE_AI_ACCEPTANCE=1`, use zero retries and disable raw page/model
 captures. Do not point them at an ordinary database or private drafts. The first
-Llama app run failed strict output validation; backend denial/manual recovery
-passed, and deterministic selection/save regressions passed separately. See the
-[actual app run](../logs/yooplo/2026-11-01-live-ai-app-acceptance.md); this is not a
-claim that a live valid suggestion reached the browser and was saved.
+prompt-only Llama app run failed strict output validation, as preserved in the
+[earlier app run](../logs/yooplo/2026-11-01-live-ai-app-acceptance.md).
+The [v3 schema integration run](../logs/yooplo/2026-11-02-contributor-schema-integration.md)
+passed all three browser cases: real generation, explicit selection/application/save,
+real authentication/CSRF/input-limit denials with manual recovery, and simulated
+HTTP failure recovery. The successful real generation used one provider attempt
+with no retry; saved content remained unchanged until explicit Save. This is
+synthetic local acceptance, not approval for private-draft traffic or deployment.
 
 Manual review remains available when AI is disabled or fails. Application tests
 inject transport, input-budget counter and clock providers in a test bootstrap; those
@@ -156,8 +160,15 @@ SoC may include `tool_calls: []` and `function_call: null` on an ordinary text
 completion. Absent/null call metadata and an empty tool-call array mean no
 invocation; actual calls or malformed call metadata remain rejected. This
 compatibility rule never relaxes finish reason, refusal or role-schema checks.
-Contributor prompt v2 states the unchanged per-field list bounds explicitly;
-oversized model lists still fail validation and are never trimmed or repaired.
+Contributor generation v3 retains those field bounds and requests a fixed,
+server-owned `response_format` with `type: json_schema` and `strict: true`.
+The five required fields, string lengths and array counts match the runtime
+contract; additional fields are forbidden. Reviewer requests omit this format.
+Provider enforcement supplements local validation: whitespace-only text,
+oversized lists and malformed output still fail without trimming, repair or
+automatic fallback to unconstrained generation. A schema HTTP 400 is not retried.
+The [provider investigation](../logs/yooplo/2026-11-02-structured-output-investigation.md)
+records observed support, including invalid-schema and conflicting-prompt controls.
 
 Requests use versioned prompts with delimited untrusted data, no tools, secret
 screening before dispatch and no raw prompt, submitted text, reasoning or result
@@ -186,6 +197,11 @@ database waits, queueing, provider work, permitted retry and final disclosure.
 The server-owned `utf8-bytes-framing-v1` admission method uses 512 units plus
 64 per message and the UTF-8 byte lengths of every prepared message's role and
 content. It counts complete escaped/framed prompts, not just the user's draft.
+For Contributor schema requests, append one counting-only system frame containing
+the complete serialized `response_format` object before applying that same
+algorithm. This frame is never sent as a model message. The actual gateway and
+synthetic verifier use the same accounting path; schema overhead reduces the
+remaining draft allowance within the unchanged 4,000-unit cap.
 These units are a cautious estimate, not exact tokens or a proven upper bound
 for an undocumented tokenizer. The context check adds the 800-token output
 allowance and 128 reserve to these units; it is also a heuristic. Non-ASCII or

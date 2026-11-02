@@ -1,0 +1,35 @@
+{
+  "id": "df1c7a8a1fb742408e44f5ae22d3820c",
+  "prompter": "yooplo",
+  "session": "2026-11-02-contributor-schema-integration",
+  "agent": "schema_verifier",
+  "invocation": "verify-1",
+  "stage": "independent-acceptance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings unavailable",
+  "started_at": "2026-11-02T02:19:39.670450+00:00",
+  "ended_at": "2026-11-02T02:24:20.056347+00:00",
+  "elapsed_seconds": 280.385897,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent acceptance passed final121server,51PostgreSQL,4schema livecases,3authenticatedbrowser;1browserproviderattempt0retries;no blockers",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed elapsed includes wait; agent model/token/cache/tool telemetry unavailable; provider usage separate",
+    "output_tokens": "Coordinator-observed elapsed includes wait; agent model/token/cache/tool telemetry unavailable; provider usage separate",
+    "cache_read_tokens": "Coordinator-observed elapsed includes wait; agent model/token/cache/tool telemetry unavailable; provider usage separate",
+    "tool_calls": "Coordinator-observed elapsed includes wait; agent model/token/cache/tool telemetry unavailable; provider usage separate",
+    "retries": "Coordinator-observed elapsed includes wait; agent model/token/cache/tool telemetry unavailable; provider usage separate"
+  },
+  "unavailable_reason": "Coordinator-observed elapsed includes wait; agent model/token/cache/tool telemetry unavailable; provider usage separate"
+}

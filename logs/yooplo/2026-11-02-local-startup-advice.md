@@ -1,0 +1,8 @@
+# Local startup guidance
+
+- Prompter `yooplo` inferred from Git identity; 2 November 2026, Asia/Singapore. Human summary verification pending.
+- Request: how to run backend and frontend to test the app. Read-only advice; no request to launch services or change product configuration.
+- Inspected README, root/server/client package scripts, Vite proxy, backend entry point and developer guide. Safely inspected only nonsecret environment metadata: development mode, backend port3000, loopback PostgreSQL port5432; no database credentials or API key printed. The older IDE-referenced local-PostgreSQL setup log was absent; did not invent its instructions.
+- Root `npm.cmd run dev` builds/watches shared contracts and starts both services. For this known Windows ARM environment, supplied separate terminal commands using the existing portable x64 Node runtime for backend native argon2 compatibility, existing native-module search path and explicit server tsconfig; frontend uses its normal workspace dev command. Shared contracts are built before startup. Backend3000, Vite127.0.0.1:5173 with `/api` proxy. Existing `.env` must be retained, PostgreSQL must be running, and development mode supports local HTTP sign-in.
+- No app/server/database was started, no dependency installed, no ordinary `.env` changed and no database connection or live provider call verified. This records repository-specific guidance rather than a successful startup claim. No product code changed.
+- Resource interval started before this log edit; preceding discovery reads were read-only. Report: [resources](resources/2026-11-02-local-startup-advice/verification/resource-report.md). Agent model/effort/token/cache/tool telemetry unavailable; final report rendering outside measured interval.

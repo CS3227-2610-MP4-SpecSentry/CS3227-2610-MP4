@@ -1,5 +1,13 @@
 # Delivery and implementation plan
 
+Contributor schema integration, 2 November 2026: the user authorized a fixed
+Contributor-only JSON Schema transport format with unchanged strict runtime
+validation. Count its complete serialized metadata through an additional
+accounting-only frame within the existing budget. Version generation v3 and
+independently verify the authenticated generation/selection/application/save
+path. Checkpoint commits, actual results and remaining live-policy gates are in
+the [integration run](../logs/yooplo/2026-11-02-contributor-schema-integration.md).
+
 Opt-in live AI wiring, 1 November 2026: implement server-only explicit activation,
 complete key/model/context validation and a fixed synthetic verification command
 that shares production Contributor preparation, admission and strict decoding.

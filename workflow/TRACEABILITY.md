@@ -1,5 +1,27 @@
 # Requirement traceability
 
+## Contributor fixed-schema live acceptance — 2 November 2026
+
+REQ-CON-003, SHR-006 and AI typed-output/budget/privacy requirements map to the
+[v3 integration run](../logs/yooplo/2026-11-02-contributor-schema-integration.md):
+fixed server-owned `gateway/contributor-schema.ts`, optional internal transport
+format, shared accounting-only schema frame and unchanged strict local validator.
+Contributor generation/corpus v3 distinguishes this path from historical prompt-only
+failures; Reviewer requests omit the format and retain their admission behavior.
+Independent final server checks passed121/121; PostgreSQL Contributor/Reviewer AI
+integration passed51/51. Actual Llama/65,536 synthetic verification passed4/4,
+with4001units rejected before dispatch. Authenticated browser acceptance passed3/3,
+including generation → selection → application → explicit save with one provider
+attempt and no retry, and no saved-content changes until Save. Real401/403/422
+denials/manual recovery and simulated503 recovery passed. Independent security
+review closed SCHEMA-SEC-001–003 with no new blocker.
+
+This closes LIVE-APP-001 for the tested Contributor v3 Llama configuration only;
+earlier failures below remain historical evidence. It does not certify Qwen v2,
+other role schemas, production reliability or usefulness. Provider limits/data
+handling, human teammate review and deployment remain pending. Ordinary live mode
+remains off; owned local test server/database were stopped after acceptance.
+
 ## Authenticated synthetic live-AI app acceptance — 1 November 2026
 
 [App acceptance](../logs/yooplo/2026-11-01-live-ai-app-acceptance.md) used a fresh

@@ -1,0 +1,35 @@
+{
+  "id": "6dd6a3f5f0e84372851b7e14f0c6ed0b",
+  "prompter": "yooplo",
+  "session": "2026-11-02-contributor-schema-integration",
+  "agent": "schema_security",
+  "invocation": "security-patch-1",
+  "stage": "patch-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings unavailable",
+  "started_at": "2026-11-02T02:19:39.581239+00:00",
+  "ended_at": "2026-11-02T02:21:02.182719+00:00",
+  "elapsed_seconds": 82.60148,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent security patch review closed SCHEMA-SEC-001/002/003; 43 focused tests passed, no blocking findings",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed elapsed includes dispatch/wait; agent attributable model/token/cache/tool counters unavailable",
+    "output_tokens": "Coordinator-observed elapsed includes dispatch/wait; agent attributable model/token/cache/tool counters unavailable",
+    "cache_read_tokens": "Coordinator-observed elapsed includes dispatch/wait; agent attributable model/token/cache/tool counters unavailable",
+    "tool_calls": "Coordinator-observed elapsed includes dispatch/wait; agent attributable model/token/cache/tool counters unavailable",
+    "retries": "Coordinator-observed elapsed includes dispatch/wait; agent attributable model/token/cache/tool counters unavailable"
+  },
+  "unavailable_reason": "Coordinator-observed elapsed includes dispatch/wait; agent attributable model/token/cache/tool counters unavailable"
+}
