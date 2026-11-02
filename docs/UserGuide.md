@@ -1,5 +1,14 @@
 # SpecSentry User Guide
 
+## Reading Contributor responses as a Reviewer
+
+Open an assigned proposal and find **Contributor response history** in Manual
+review. It shows the response text, author, time, finding ID and response revision
+ID across submitted revisions, including older findings. Choose **Load more
+responses** to continue through the history. A failed read offers **Retry
+responses** while manual review remains available. Reading a response does not
+resolve a finding; make that decision explicitly using the existing finding controls.
+
 ## Revoke an approval before release
 
 The assigned Reviewer can revoke an effective approval from the current submitted

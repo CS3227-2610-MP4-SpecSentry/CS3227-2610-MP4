@@ -1,0 +1,1 @@
+{"id": "build", "kind": "build", "argv": ["npm.cmd", "run", "build"], "paths": ["src/client/src", "src/shared/src", "src/server/src", "package.json", "package-lock.json"], "depends_on": ["environment"], "resources": [], "environment": [], "database": null, "timeout": 180}

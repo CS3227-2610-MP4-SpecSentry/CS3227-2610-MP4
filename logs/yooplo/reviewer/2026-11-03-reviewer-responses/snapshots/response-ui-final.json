@@ -1,0 +1,120 @@
+{
+  "base": "HEAD",
+  "base_commit": "3a04492574c778bb9637c5bc9524ca38949d9edd",
+  "diff_sha256": "265e7f6585142e2246f88d9ade167f27bded8924d9c53b7432eb50518daae111",
+  "files": {
+    "package-lock.json": {
+      "bytes": 509922,
+      "sha256": "a7acd7dee2f944ee19c6fd2956bdff291502d7193c92a6365495f51113259aab"
+    },
+    "package.json": {
+      "bytes": 2378,
+      "sha256": "bc9ebf1ad6d3e3a48ef19ad97a4882892fef3ddb115837eed7eb0f37a2a61024"
+    },
+    "src/client/package.json": {
+      "bytes": 701,
+      "sha256": "c09b3ff23a6567e1cf8fe0a08369c9a9c7751a0d317c110b5a8e1c97ed05af62"
+    },
+    "src/client/src/features/reviewer/ApprovalRevocation.test.tsx": {
+      "bytes": 6384,
+      "sha256": "3fdf94d48f235aa60bee6370799daee07657de20a29d4c6b03222b8d23f2843e"
+    },
+    "src/client/src/features/reviewer/ApprovalRevocation.tsx": {
+      "bytes": 6740,
+      "sha256": "2e4dd7a639aa6b95a7d14a93404aed9ada759bdf63cc4e7075d6dff2c624779b"
+    },
+    "src/client/src/features/reviewer/ManualReview.test.tsx": {
+      "bytes": 20260,
+      "sha256": "b7f194df331f93af3dd255ef229969b16dbedbd559f60020f75647c85feea28c"
+    },
+    "src/client/src/features/reviewer/ManualReview.tsx": {
+      "bytes": 20524,
+      "sha256": "13c90a0d7eb8fc2e83e78bd2a64799f8cf43e4c2eb693a4ec20c37c70098b946"
+    },
+    "src/client/src/features/reviewer/PatchRiskAssistant.test.tsx": {
+      "bytes": 9415,
+      "sha256": "d8380caa095f835205c175dda19da843a4a51af9d88a7efdcd0c83039d28db35"
+    },
+    "src/client/src/features/reviewer/PatchRiskAssistant.tsx": {
+      "bytes": 14006,
+      "sha256": "45fc7f5aa1350d9ae888ad63da796d4a8973211a56ca1e8d640c83108dd14124"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.test.tsx": {
+      "bytes": 20622,
+      "sha256": "3ee4cec829883054d28b774784bc9c8c34facd7afe56a723d3917148fc68c10b"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+      "bytes": 20460,
+      "sha256": "051b39ff5ea15914b256484655f83c2c26e23b439203c36a28975ef580edb29a"
+    },
+    "src/client/src/features/reviewer/RevisionCycle.test.tsx": {
+      "bytes": 6277,
+      "sha256": "25857f208853ad3a58d0cb29aff2ff83a43969f3a03f64ce11b101e864d8bc89"
+    },
+    "src/client/src/features/reviewer/RevisionNotices.tsx": {
+      "bytes": 5073,
+      "sha256": "3e16ba27fe96792f2984ec312ec51f56ac56cf09beee52065930d242fb53d0fc"
+    },
+    "src/client/src/shared/Icon.tsx": {
+      "bytes": 757,
+      "sha256": "6e0fef44187fba2979be6b6ee734d92be740b607aa5efdfa1f82375146a0464d"
+    },
+    "src/client/src/shared/NavigationGuardProvider.tsx": {
+      "bytes": 952,
+      "sha256": "4558d188f0fc87f282ed469a1201787a6916f6fbdd8ca85d06854863e84fd658"
+    },
+    "src/client/src/shared/authorization.ts": {
+      "bytes": 100,
+      "sha256": "74d1fc278c14f37be585fd3407d086d461d3ba5be6a0eaedf86880fb0d3566b8"
+    },
+    "src/client/src/shared/navigationGuard.ts": {
+      "bytes": 1392,
+      "sha256": "d3feab6569ca70b54300ae00c5353584978fb6334b3a7f28581075a0c31750a0"
+    },
+    "src/shared/src/contracts/ai.ts": {
+      "bytes": 8989,
+      "sha256": "f55cf5f5b7e8b94b1170a41fb3c17488a10dd04c7488c3c98cea13fe0ab96971"
+    },
+    "src/shared/src/contracts/contributor.ts": {
+      "bytes": 3246,
+      "sha256": "725e8e177a4ff86807f35bf433022c25ef4bb185a91726282029c200a413aa52"
+    },
+    "src/shared/src/contracts/health.ts": {
+      "bytes": 390,
+      "sha256": "dab9233f63d584be75a60a341995973cad4720a9f5b1e15973be601b46a07856"
+    },
+    "src/shared/src/contracts/identity.ts": {
+      "bytes": 913,
+      "sha256": "98531cd3f409c2ad49daddfcdcfa454c0aff1c283989c6cfbb67d0ff99259a6d"
+    },
+    "src/shared/src/contracts/release.ts": {
+      "bytes": 4421,
+      "sha256": "730ab33426ec44380e8662cbfd214dc28cdfb7e9ec511dfceb0807b5efa4eef8"
+    },
+    "src/shared/src/contracts/reviewer.ts": {
+      "bytes": 21150,
+      "sha256": "890a64c6abe735fa2d2f1337b9b516d38546b41d6bd2718584d9157caf37d7c2"
+    },
+    "src/shared/src/contracts/revision-cycle.ts": {
+      "bytes": 4760,
+      "sha256": "09c0c0f15458ee55cbc63305062c7a56ce1eda5bd657810c36f28901cc420618"
+    },
+    "src/shared/src/contracts/revocation.ts": {
+      "bytes": 2133,
+      "sha256": "1d97a42ccd8d361b0ad3677716a6c8e9af55cc7b5a4b2dc886179762c039ee4c"
+    },
+    "src/shared/src/index.ts": {
+      "bytes": 509,
+      "sha256": "bcb1bcc19900eb93c36a1c4e4cbbde349c80aa24c67411595160eb8208c03094"
+    }
+  },
+  "head": "3a04492574c778bb9637c5bc9524ca38949d9edd",
+  "paths": [
+    "package-lock.json",
+    "package.json",
+    "src/client/package.json",
+    "src/client/src/features/reviewer",
+    "src/client/src/shared",
+    "src/shared/src"
+  ]
+}

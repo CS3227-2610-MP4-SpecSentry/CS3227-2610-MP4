@@ -1,5 +1,16 @@
 # Requirement traceability
 
+## Reviewer Contributor response visibility — 3 November 2026
+
+REQ-REV-015 / AC-REV-015 and REQ-CON-008: ManualReview consumes the existing
+authorized proposal response-history endpoint. Attributed escaped text includes
+finding/revision/time references across pages; loading, empty, failed-read retry
+and access-loss behavior remain explicit. Responses do not resolve findings or
+change decisions. ManualReview and independent ReviewerWorkspace tests cover
+rendering, pagination, failures, denial cleanup and late-response suppression.
+The [fix run](../logs/yooplo/2026-11-03-reviewer-responses.md) records actual
+verification and security findings; no backend contract or permission changes.
+
 ## Contributor breadcrumb hierarchy — 2 November 2026
 
 REQ-CON-013 / AC-CON-UX-004 now specify distinct My Drafts ancestors and one

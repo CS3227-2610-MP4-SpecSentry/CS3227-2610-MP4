@@ -1,0 +1,1 @@
+{"id": "environment", "kind": "preflight", "argv": ["node", "-e", "require.resolve('vitest/package.json');require.resolve('@playwright/test');console.log('dependencies available')"], "paths": ["package.json", "package-lock.json"], "depends_on": [], "resources": [], "environment": [], "database": null, "timeout": 30}

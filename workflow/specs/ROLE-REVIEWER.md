@@ -56,7 +56,7 @@ Each case is a verification obligation derived from the referenced requirement, 
 | AC-REV-012 | REQ-REV-012 | Pause AI response, then drop/withdraw/disable or submit a newer revision; unauthorized output is discarded or outdated output is stale and cannot create a current finding. |
 | AC-REV-013 | REQ-REV-013 | Select an AI risk; only an editable form opens. Cancel changes nothing; authorized human save creates a finding. Reload cannot recover raw suggestions. |
 | AC-REV-014 | REQ-REV-014 | Exceed the AI input cap on an otherwise valid submission; manual review remains usable and AI rejects without truncating/calling provider. |
-| AC-REV-015 | REQ-REV-015 | Reassign to another reviewer; human history is visible while previous reviewer AI metadata and private working drafts are absent. |
+| AC-REV-015 | REQ-REV-015 | Reassign to another reviewer; human history is visible while previous reviewer AI metadata and private working drafts are absent. In the Reviewer interface, read attributed Contributor response text with finding/revision references and timestamps across response-history pages, including historical findings; render text safely, distinguish empty/loading/failure states and preserve manual finding decisions. Access loss clears protected history and late reads cannot restore it. |
 | AC-REV-016 | REQ-REV-016 | Revoke before release; preserve original approval, notify candidate owner and block publication atomically. After release, revocation fails. |
 
 ## Approved queue and AI interaction defaults

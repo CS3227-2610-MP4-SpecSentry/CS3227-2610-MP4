@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import type { HumanReviewResponse, ProposalDetailResponse } from '@specsentry/shared';
+import { findingResponsesResponseSchema, type HumanReviewResponse, type ProposalDetailResponse } from '@specsentry/shared';
 import { ManualReview } from './ManualReview';
 const timestamp = '2026-10-01T00:00:00.000Z';
 const detail: ProposalDetailResponse = { hasUnreadLatestRevision: false, revisionNotice: null, id: 'p', version: 3, title: 'Example', author: { id: 'a', username: 'author' }, firstSubmittedAt: timestamp, latestSubmittedAt: timestamp, state: 'IN_REVIEW', assignment: { id: 'assignment', version: 2, revisionId: 'revision', reviewer: { id: 'r', username: 'reviewer' } }, revision: { id: 'revision', number: 1, summary: 'Summary', problem: 'Problem', expectedBehavior: 'Expected', constraints: '', diffText: '', submittedAt: timestamp, criteria: [{ id: 'c', stableKey: 'AC1', statement: 'Required behavior', required: true }], evidence: [], criterionEvidenceLinks: [] } };
@@ -142,4 +142,73 @@ it('starts finding history at page one whenever View history is selected again',
   fireEvent.click(screen.getByRole('button', { name: 'View history for f' }));
   await waitFor(() => expect(request.mock.calls.filter(call => call[0] === '/api/proposals/p/findings/f/history')).toHaveLength(2));
   expect(request.mock.calls.some(call => call[0].includes('cursor=page-three'))).toBe(false);
+});
+
+const response = { id: 'response', proposalId: 'p', findingId: 'historical-finding', revisionId: 'older-revision', actor: { id: 'a', username: 'Contributor author' }, text: '  <script>alert(1)</script>\nResponse details  ', mutationVersion: 2, createdAt: timestamp };
+
+describe('Contributor response history', () => {
+  it('shows attributed escaped multiline text with historical finding and revision identity independently of the findings page', async () => {
+    const { request } = setup({ read: url => url.endsWith('/responses') ? { items: [response], nextCursor: null } : undefined });
+    const history = screen.getByRole('region', { name: 'Finding responses' });
+    const text = await within(history).findByText((_, element) => element?.tagName === 'P' && element.textContent === response.text);
+    expect(text).toHaveClass('plain-text'); expect(document.querySelector('script')).toBeNull();
+    expect(history).toHaveTextContent(`Contributor author (a) · ${new Date(timestamp).toLocaleString()} · Finding: historical-finding · Revision: older-revision`);
+    expect(history).not.toHaveTextContent('Revision: revision');
+    expect(request).toHaveBeenCalledWith('/api/proposals/p/responses', findingResponsesResponseSchema);
+    expect(request.mock.calls.filter(call => call[2])).toHaveLength(0);
+  });
+
+  it('shows loading before a truthful empty result without blocking manual readiness', async () => {
+    let resolve!: (value: unknown) => void;
+    const pending = new Promise(done => { resolve = done; });
+    setup({ read: url => url.endsWith('/responses') ? pending : undefined }); await loaded();
+    expect(screen.getByText('Loading responses...')).toBeInTheDocument();
+    expect(screen.queryByText('No responses recorded.')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save AC1 assessment' })).toBeEnabled();
+    await act(async () => { resolve({ items: [], nextCursor: null }); });
+    expect(screen.getByText('No responses recorded.')).toBeInTheDocument();
+    expect(screen.queryByText('Loading responses...')).not.toBeInTheDocument();
+  });
+
+  it('retries initial failures without freezing manual review or claiming the history is empty', async () => {
+    let failed = true;
+    setup({ read: url => {
+      if (url.endsWith('/responses')) { if (failed) throw new Error('Unavailable'); return { items: [response], nextCursor: null }; }
+      return undefined;
+    } }); await loaded();
+    expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load responses');
+    expect(screen.queryByText('No responses recorded.')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save AC1 assessment' })).toBeEnabled();
+    failed = false; fireEvent.click(screen.getByRole('button', { name: 'Retry responses' }));
+    expect(await screen.findByText(/Contributor author/)).toBeInTheDocument(); expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('appends each page, encodes its cursor and retries a failed page without losing earlier responses', async () => {
+    let failed = true;
+    const { request } = setup({ read: url => {
+      if (url.endsWith('/responses')) return { items: [response], nextCursor: 'next/+=' };
+      if (url.includes('/responses?')) { if (failed) throw new Error('Unavailable'); return { items: [{ ...response, id: 'second-response', text: 'Older response', revisionId: 'earliest-revision' }], nextCursor: null }; }
+      return undefined;
+    } });
+    fireEvent.click(await screen.findByRole('button', { name: 'Load more responses' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load responses');
+    expect(screen.getByText(/Contributor author/)).toBeInTheDocument();
+    failed = false; fireEvent.click(screen.getByRole('button', { name: 'Retry responses' }));
+    expect(await screen.findByText('Older response')).toBeInTheDocument();
+    const history = screen.getByRole('region', { name: 'Finding responses' });
+    expect(within(history).getAllByRole('listitem')).toHaveLength(2);
+    expect(history).toHaveTextContent('Revision: earliest-revision');
+    expect(screen.queryByRole('button', { name: 'Load more responses' })).not.toBeInTheDocument();
+    expect(request.mock.calls.filter(call => call[0] === '/api/proposals/p/responses?cursor=next%2F%2B%3D')).toHaveLength(2);
+  });
+
+  it('ignores delayed response history after unmount and leaves a newly mounted proposal untouched', async () => {
+    let resolve!: (value: unknown) => void;
+    const pending = new Promise(done => { resolve = done; });
+    const { unmount } = setup({ read: url => url.endsWith('/responses') ? pending : undefined }); await loaded();
+    unmount(); setup({ detail: { ...detail, id: 'another-proposal' } }); await loaded();
+    await act(async () => { resolve({ items: [response], nextCursor: null }); });
+    expect(screen.queryByText(/Contributor author/)).not.toBeInTheDocument();
+    expect(screen.getByText('No responses recorded.')).toBeInTheDocument();
+  });
 });

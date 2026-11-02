@@ -1,0 +1,1 @@
+{"id": "response-ui", "agent": "response-implementer", "role": "implementer", "paths": ["src/client/src/features/reviewer/ManualReview.tsx", "src/client/src/features/reviewer/ManualReview.test.tsx"], "dependencies": []}
