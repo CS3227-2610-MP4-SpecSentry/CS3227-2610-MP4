@@ -19,11 +19,11 @@ async function testServer() {
   const { readConfig } = serverRequire(resolve('src/server/src/config')) as typeof import('../../../../src/server/src/config');
   const { configureHttp } = serverRequire(resolve('src/server/src/http')) as typeof import('../../../../src/server/src/http');
   const { AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER } = serverRequire(resolve('src/server/src/ai/contracts')) as typeof import('../../../../src/server/src/ai/contracts');
-  const { SafeAiError } = serverRequire(resolve('src/server/src/ai/gateway')) as typeof import('../../../../src/server/src/ai/gateway');
+  const { SafeAiError, CONTRIBUTOR_TEMPLATE_VERSION } = serverRequire(resolve('src/server/src/ai/gateway')) as typeof import('../../../../src/server/src/ai/gateway');
   if (!process.env.TEST_DATABASE_URL || !new URL(process.env.TEST_DATABASE_URL).pathname.endsWith('_test'))
     throw new Error('Explicit disposable test database required');
   const transport: AiTransport = { async complete(request: AiTransportRequest) {
-    if (request.messages[0]?.content.startsWith('Template contributor-draft-v1.')) {
+    if (request.messages[0]?.content.startsWith(`Template ${CONTRIBUTOR_TEMPLATE_VERSION}.`)) {
       // Contributor modes exist only in this synthetic DI transport, never the production gateway.
       const raw = request.messages[1]!.content.match(/\n(.*)\n<\/draft_context>/s)?.[1];
       const draft = JSON.parse(raw ?? '{}') as { problem: string };
