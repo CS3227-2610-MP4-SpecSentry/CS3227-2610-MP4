@@ -2,6 +2,11 @@
 # Exceptions bind commit + path + rule + line; no path/rule/global exclusions.
 # Evidence and validation: logs/ngkhengyang/2026-10-31-secret-scan.md
 
+# Reviewed synthetic SoC rejection fixtures; exact historical fingerprints only.
+# Evidence: logs/yooplo/2026-11-02-schema-publication.md
+f6f35731eb609e3e7547a7a39015e987cec1ad13:src/server/test/contributor-ai-gateway.spec.ts:generic-api-key:43
+f6f35731eb609e3e7547a7a39015e987cec1ad13:src/server/test/ai-gateway.spec.ts:generic-api-key:46
+
 # Synthetic test-only SESSION_SECRET configuration
 0becf9381c893bee8db3f50d6a7d61777f843898:src/server/test/notifications.integration.ts:generic-api-key:39
 81019188d443fcb377f6b1237cf802871a437a36:src/server/test/approval-revocation.integration.ts:generic-api-key:77
