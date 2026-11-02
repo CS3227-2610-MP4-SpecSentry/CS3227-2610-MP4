@@ -1,0 +1,95 @@
+{
+  "templateVersion": "contributor-draft-v2",
+  "contextSource": "Fresh key-visible catalog; minimum positive advertised context",
+  "mode": "live-synthetic",
+  "methodId": "utf8-bytes-framing-v1",
+  "configuredContextWindow": 65536,
+  "cases": [
+    {
+      "caseId": "normal",
+      "requestedModel": "llama3.1:8b",
+      "inputUnits": 2158,
+      "status": "SUCCESS",
+      "latencyMs": 2241,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 339,
+        "completionTokens": 123,
+        "totalTokens": 462,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "multilingual",
+      "requestedModel": "llama3.1:8b",
+      "inputUnits": 2147,
+      "status": "SUCCESS",
+      "latencyMs": 2391,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 342,
+        "completionTokens": 138,
+        "totalTokens": 480,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "delimiters",
+      "requestedModel": "llama3.1:8b",
+      "inputUnits": 2198,
+      "status": "SUCCESS",
+      "latencyMs": 1905,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 361,
+        "completionTokens": 103,
+        "totalTokens": 464,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "near-cap",
+      "requestedModel": "llama3.1:8b",
+      "inputUnits": 4000,
+      "status": "SUCCESS",
+      "latencyMs": 1671,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 570,
+        "completionTokens": 82,
+        "totalTokens": 652,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "over-cap",
+      "requestedModel": "llama3.1:8b",
+      "inputUnits": 4001,
+      "status": "REJECTED",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": "INPUT_LIMIT",
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    }
+  ],
+  "passed": true
+}

@@ -102,6 +102,16 @@ remains unknown; a live verification run cannot pass its empirical input-margin
 check without reported input-token usage for every dispatched case. A failed live case stays failed; do not relax schemas or truncate
 context to turn it green. Dry-run evidence is never live-provider evidence.
 
+Authenticated browser acceptance is separate. The opt-in
+`workflow/tests/browser/live-ai.config.ts` expects a separately managed loopback
+server at3197 and an explicitly disposable loopback `_test` database. Its tests
+skip unless `RUN_LIVE_AI_ACCEPTANCE=1`, use zero retries and disable raw page/model
+captures. Do not point them at an ordinary database or private drafts. The first
+Llama app run failed strict output validation; backend denial/manual recovery
+passed, and deterministic selection/save regressions passed separately. See the
+[actual app run](../logs/yooplo/2026-11-01-live-ai-app-acceptance.md); this is not a
+claim that a live valid suggestion reached the browser and was saved.
+
 Manual review remains available when AI is disabled or fails. Application tests
 inject transport, input-budget counter and clock providers in a test bootstrap; those
 providers cannot be selected by an HTTP request. The browser test bootstrap is
@@ -141,6 +151,13 @@ The [runtime schemas](../src/shared/src/contracts/ai.ts) implement the normative
 keys before object construction; envelope and role output are validated
 separately. Refusal, truncation, unknown role fields and invalid grounding fail
 safely without repair or validation retries. Severity ordering is stable.
+
+SoC may include `tool_calls: []` and `function_call: null` on an ordinary text
+completion. Absent/null call metadata and an empty tool-call array mean no
+invocation; actual calls or malformed call metadata remain rejected. This
+compatibility rule never relaxes finish reason, refusal or role-schema checks.
+Contributor prompt v2 states the unchanged per-field list bounds explicitly;
+oversized model lists still fail validation and are never trimmed or repaired.
 
 Requests use versioned prompts with delimited untrusted data, no tools, secret
 screening before dispatch and no raw prompt, submitted text, reasoning or result

@@ -1,5 +1,29 @@
 # Requirement traceability
 
+## Authenticated synthetic live-AI app acceptance — 1 November 2026
+
+[App acceptance](../logs/yooplo/2026-11-01-live-ai-app-acceptance.md) used a fresh
+loopback test database, real production bootstrap/gateway with process-only
+llama3.1:8b settings and a synthetic Contributor browser session. Live generation
+failed503/INVALID_OUTPUT after one provider attempt; no live selection/save success
+is claimed. Actual401/403/422 denials, zero added outbound budget and manual-save
+recovery passed; simulated browser503 recovery passed. Separate deterministic
+fixture regression passed3/3 for selection/apply/save/usage, failure recovery and
+late-result invalidation. These layers are distinct evidence; LIVE-APP-001 remains
+open and the normal live switch stays off. No private data/provider output captures.
+
+## Actual synthetic SoC evaluation — 1 November 2026
+
+[Provider evaluation](../logs/yooplo/2026-11-01-live-ai-provider-probe.md) records
+the failed v1 run, safe structural diagnostics, narrow no-call envelope compatibility
+fix and explicitly versioned Contributor v2 prompt with unchanged runtime schemas.
+Independent118server tests/typecheck and50focused security tests passed; actual
+qwen3.6:35b v2 evaluation passed2/4 calls (multilingual/delimiters), rejected2/4
+(normal/near-cap), and blocked4001units before dispatch. LIVE-PROBE-001 remains
+open; OPEN-002 is not satisfied and app live mode remains off. No private prompts,
+generated suggestions or credentials were recorded. This is provider-only synthetic
+evidence, not an authenticated UI/transaction, usefulness or production acceptance.
+
 ## Opt-in live AI wiring — 1 November 2026
 
 OPEN-002 / NFR-RES-001 / REQ-CON-003 and shared advisory-AI boundaries now have

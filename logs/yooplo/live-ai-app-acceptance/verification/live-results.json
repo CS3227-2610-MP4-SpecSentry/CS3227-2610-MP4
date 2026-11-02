@@ -1,0 +1,48 @@
+{
+  "model": "llama3.1:8b",
+  "configuredContextWindow": 65536,
+  "templateVersion": "contributor-draft-v2",
+  "environment": "Isolated loopback production bootstrap and disposable migrated test database",
+  "browserCases": {
+    "passed": 2,
+    "failed": 1,
+    "retries": 0
+  },
+  "liveGeneration": {
+    "passed": false,
+    "httpStatus": 503,
+    "errorClass": "INVALID_OUTPUT",
+    "requestLatencyMs": 3205,
+    "outboundAttempts": 1,
+    "attemptLatencyMs": 2851,
+    "usage": {
+      "promptTokens": 346,
+      "completionTokens": 162,
+      "totalTokens": 508,
+      "cachedTokens": null
+    },
+    "explicitSelectionApplySaveReached": false
+  },
+  "realBackendRecovery": {
+    "passed": true,
+    "anonymousStatus": 401,
+    "missingCsrfStatus": 403,
+    "overBudgetStatus": 422,
+    "additionalOutboundAttempts": 0,
+    "manualSavePassed": true
+  },
+  "simulatedBrowser503Recovery": {
+    "passed": true,
+    "actualProviderCalls": 0,
+    "manualSavePassed": true
+  },
+  "capture": {
+    "trace": false,
+    "screenshots": false,
+    "video": false,
+    "pageSnapshots": false,
+    "errorContext": "Static source/error context only; not a raw model/page capture"
+  },
+  "normalApplicationConfigurationChanged": false,
+  "productionReadiness": false
+}

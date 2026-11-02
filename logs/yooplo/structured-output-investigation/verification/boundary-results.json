@@ -1,0 +1,642 @@
+{
+  "contextId": "saved-draft-acceptance-synthetic-v1",
+  "templateVersion": "contributor-draft-v2",
+  "maxCalls": 10,
+  "retries": 0,
+  "runtimeChanged": false,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "objective",
+      "acceptanceCriteria",
+      "edgeCases",
+      "ambiguities",
+      "testIdeas"
+    ],
+    "properties": {
+      "objective": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "acceptanceCriteria": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 5,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      },
+      "edgeCases": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 3,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "ambiguities": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 3,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "testIdeas": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 3,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      }
+    }
+  },
+  "reports": [
+    {
+      "model": "llama3.1:8b",
+      "mode": "saved-draft",
+      "inputUnits": 2217,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 346,
+        "completionTokens": 91,
+        "totalTokens": 437,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 61
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              44
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              61,
+              52,
+              49
+            ]
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 1858
+    },
+    {
+      "model": "llama3.1:8b",
+      "mode": "multilingual",
+      "inputUnits": 2206,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 349,
+        "completionTokens": 147,
+        "totalTokens": 496,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 60
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              59
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              40,
+              52,
+              48
+            ]
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 2,
+            "itemCodePoints": [
+              54,
+              36
+            ]
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              54,
+              84,
+              60
+            ]
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 2689
+    },
+    {
+      "model": "llama3.1:8b",
+      "mode": "delimiter-injection",
+      "inputUnits": 2287,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 365,
+        "completionTokens": 90,
+        "totalTokens": 455,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 55
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              63
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              39,
+              52,
+              51
+            ]
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              46
+            ]
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 2079
+    },
+    {
+      "model": "llama3.1:8b",
+      "mode": "near-cap",
+      "inputUnits": 4000,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 571,
+        "completionTokens": 132,
+        "totalTokens": 703,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 42
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              42,
+              57,
+              40
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              53
+            ]
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              67
+            ]
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              66
+            ]
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 2454
+    },
+    {
+      "model": "llama3.1:8b",
+      "mode": "enforcement-canary",
+      "inputUnits": 2338,
+      "responseFormatBytes": 757,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 367,
+        "completionTokens": 71,
+        "totalTokens": 438,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 27
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              83
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "schemaCanaryEnforced": true,
+      "inputMarginSatisfied": true,
+      "latencyMs": 1974
+    },
+    {
+      "model": "qwen3.6:35b",
+      "mode": "saved-draft",
+      "inputUnits": 2217,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 363,
+        "completionTokens": 208,
+        "totalTokens": 571,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 105
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 4,
+            "itemCodePoints": [
+              36,
+              34,
+              40,
+              37
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              30,
+              33,
+              36
+            ]
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              47,
+              45,
+              42
+            ]
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              41,
+              28,
+              33
+            ]
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 2916
+    },
+    {
+      "model": "qwen3.6:35b",
+      "mode": "multilingual",
+      "inputUnits": 2206,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 366,
+        "completionTokens": 224,
+        "totalTokens": 590,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 104
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              70,
+              57,
+              55
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              46,
+              46,
+              50
+            ]
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              55,
+              43,
+              46
+            ]
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              52,
+              47,
+              49
+            ]
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 3635
+    },
+    {
+      "model": "qwen3.6:35b",
+      "mode": "delimiter-injection",
+      "inputUnits": 2287,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 386,
+        "completionTokens": 158,
+        "totalTokens": 544,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 60
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 2,
+            "itemCodePoints": [
+              35,
+              42
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 2,
+            "itemCodePoints": [
+              37,
+              37
+            ]
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              51,
+              37,
+              37
+            ]
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 2,
+            "itemCodePoints": [
+              38,
+              24
+            ]
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 2625
+    },
+    {
+      "model": "qwen3.6:35b",
+      "mode": "near-cap",
+      "inputUnits": 4000,
+      "responseFormatBytes": 749,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 588,
+        "completionTokens": 195,
+        "totalTokens": 783,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 114
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              36,
+              34,
+              41
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              45,
+              35,
+              49
+            ]
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              42,
+              43,
+              46
+            ]
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 3,
+            "itemCodePoints": [
+              39,
+              38,
+              28
+            ]
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "inputMarginSatisfied": true,
+      "latencyMs": 2575
+    },
+    {
+      "model": "qwen3.6:35b",
+      "mode": "enforcement-canary",
+      "inputUnits": 2338,
+      "responseFormatBytes": 757,
+      "httpStatus": 200,
+      "usage": {
+        "promptTokens": 384,
+        "completionTokens": 103,
+        "totalTokens": 487,
+        "cachedTokens": null
+      },
+      "diagnostic": {
+        "envelopeAccepted": true,
+        "strictSchemaAccepted": true,
+        "finishReason": "stop",
+        "fields": {
+          "objective": {
+            "type": "string",
+            "codePoints": 27
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "count": 1,
+            "itemCodePoints": [
+              160
+            ]
+          },
+          "edgeCases": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          },
+          "ambiguities": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          },
+          "testIdeas": {
+            "type": "array",
+            "count": 0,
+            "itemCodePoints": []
+          }
+        },
+        "unknownFieldsPresent": false
+      },
+      "schemaCanaryEnforced": true,
+      "inputMarginSatisfied": true,
+      "latencyMs": 2323
+    }
+  ]
+}

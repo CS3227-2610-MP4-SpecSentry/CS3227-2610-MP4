@@ -1,0 +1,95 @@
+{
+  "evidence": "Safe metadata transcribed from actual CLI output; template association added from reviewed compiled source",
+  "templateVersion": "contributor-draft-v2",
+  "mode": "live-synthetic",
+  "methodId": "utf8-bytes-framing-v1",
+  "configuredContextWindow": 262144,
+  "cases": [
+    {
+      "caseId": "normal",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 2158,
+      "status": "FAILED",
+      "latencyMs": 3020,
+      "httpStatus": 200,
+      "schemaValid": false,
+      "errorClass": "INVALID_OUTPUT",
+      "usage": {
+        "promptTokens": 355,
+        "completionTokens": 233,
+        "totalTokens": 588,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "multilingual",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 2147,
+      "status": "SUCCESS",
+      "latencyMs": 3187,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 358,
+        "completionTokens": 253,
+        "totalTokens": 611,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "delimiters",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 2198,
+      "status": "SUCCESS",
+      "latencyMs": 3706,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 385,
+        "completionTokens": 285,
+        "totalTokens": 670,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "near-cap",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 4000,
+      "status": "FAILED",
+      "latencyMs": 2630,
+      "httpStatus": 200,
+      "schemaValid": false,
+      "errorClass": "INVALID_OUTPUT",
+      "usage": {
+        "promptTokens": 586,
+        "completionTokens": 214,
+        "totalTokens": 800,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "over-cap",
+      "requestedModel": "qwen3.6:35b",
+      "inputUnits": 4001,
+      "status": "REJECTED",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": "INPUT_LIMIT",
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    }
+  ],
+  "passed": false
+}
