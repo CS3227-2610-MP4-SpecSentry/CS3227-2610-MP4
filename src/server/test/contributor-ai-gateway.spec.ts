@@ -2,12 +2,12 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { contributorDraftRequestSchema, type ContributorDraftResult } from '@specsentry/shared';
 import type { PrismaClient } from '../src/generated/prisma/client';
-import { ConservativeInputBudgetCounter, createContributorDraftGateway, SafeAiError } from '../src/ai/gateway';
+import { ConservativeInputBudgetCounter, CONTRIBUTOR_TEMPLATE_VERSION, createContributorDraftGateway, prepareContributorDraft, SafeAiError } from '../src/ai/gateway';
 import type { AiClock, AiDeadline, AiTransport, ContributorDraftContext } from '../src/ai/contracts';
 import { aiTestOptions } from './ai-fixtures';
 
-const corpus = JSON.parse(readFileSync(resolve(__dirname, '../../../workflow/tests/ai/contributor/v1.json'), 'utf8')) as {
-  normal: ContributorDraftResult; injections: string[]; highConfidenceSecrets: string[]; invalidJson: string[];
+const corpus = JSON.parse(readFileSync(resolve(__dirname, '../../../workflow/tests/ai/contributor/v2.json'), 'utf8')) as {
+  version: string; normal: ContributorDraftResult; injections: string[]; highConfidenceSecrets: string[]; invalidJson: string[];
 };
 const envelope = (content: unknown = corpus.normal, extra: object = {}) => JSON.stringify({
   choices: [{ finish_reason: 'stop', message: { role: 'assistant', content: JSON.stringify(content) } }], ...extra,
@@ -38,7 +38,33 @@ function harness() {
     call: (context = fixture()) => gateway.analyze(context, { actorId: 'owner', deadline, beforeAttempt }) };
 }
 
-describe('Contributor draft v1 synthetic gateway evaluations', () => {
+describe('Contributor draft v2 synthetic gateway evaluations', () => {
+  it('accepts empty or null optional call metadata as no invocation while preserving strict output', async () => {
+    for (const metadata of [{}, { tool_calls: null }, { tool_calls: [] }, { function_call: null },
+      { tool_calls: [], function_call: null, refusal: null }]) {
+      const h = harness();
+      jest.mocked(h.transport.complete).mockResolvedValue({ status: 200, retryAfter: null,
+        body: JSON.stringify({ choices: [{ finish_reason: 'stop', message: {
+          role: 'assistant', content: JSON.stringify(corpus.normal), ...metadata,
+        } }] }) });
+      expect((await h.call()).result).toEqual(corpus.normal);
+      expect(h.transport.complete).toHaveBeenCalledTimes(1);
+    }
+  });
+
+  it('versions explicit per-field bounds without weakening the strict result schema', () => {
+    expect(CONTRIBUTOR_TEMPLATE_VERSION).toBe('contributor-draft-v2');
+    expect(corpus.version).toBe(CONTRIBUTOR_TEMPLATE_VERSION);
+    const prepared = prepareContributorDraft(fixture());
+    expect(prepared.messages[0]!.content).toContain('edgeCases: an array of 0 to 3 strings');
+    expect(prepared.messages[0]!.content).toContain('ambiguities: an array of 0 to 3 strings');
+    expect(prepared.messages[0]!.content).toContain('testIdeas: an array of 0 to 3 strings');
+    for (const count of [4, 5]) {
+      expect(() => prepared.validate({ ...corpus.normal, edgeCases: Array(count).fill('Still too many.') })).toThrow();
+      expect(() => prepared.validate({ ...corpus.normal, ambiguities: Array(count).fill('Still too many.') })).toThrow();
+      expect(() => prepared.validate({ ...corpus.normal, testIdeas: Array(count).fill('Still too many.') })).toThrow();
+    }
+  });
   it('rejects standalone SoC credentials including fullwidth forms before attempts or transport', async () => {
     const secret = 'clsk_synthetic_0123456789abcdefghijklmnop';
     const fullwidth = [...secret].map(character => String.fromCharCode(character.charCodeAt(0) + 0xfee0)).join('');
@@ -124,7 +150,10 @@ describe('Contributor draft v1 synthetic gateway evaluations', () => {
       envelope(corpus.normal, { usage: { prompt_tokens: -1 } }),
       JSON.stringify({ choices: [{ finish_reason: 'length', message: { role: 'assistant', content: JSON.stringify(corpus.normal) } }] }),
       JSON.stringify({ choices: [{ finish_reason: 'stop', message: { role: 'assistant', content: JSON.stringify(corpus.normal), refusal: 'No' } }] }),
-      JSON.stringify({ choices: [{ finish_reason: 'stop', message: { role: 'assistant', content: JSON.stringify(corpus.normal), tool_calls: [] } }] }),
+      ...[{ tool_calls: [{}] }, { tool_calls: {} }, { tool_calls: 'invalid' }, { tool_calls: false },
+        { function_call: {} }, { function_call: [] }, { function_call: 'invalid' }, { function_call: 0 }].map(metadata =>
+        JSON.stringify({ choices: [{ finish_reason: 'stop', message: { role: 'assistant', content: JSON.stringify(corpus.normal), ...metadata } }] })),
+      JSON.stringify({ choices: [{ finish_reason: 'length', message: { role: 'assistant', content: JSON.stringify(corpus.normal), tool_calls: [], function_call: null } }] }),
     ];
     for (const body of invalid) {
       const h = harness(); jest.mocked(h.transport.complete).mockResolvedValue({ status: 200, body, retryAfter: null });

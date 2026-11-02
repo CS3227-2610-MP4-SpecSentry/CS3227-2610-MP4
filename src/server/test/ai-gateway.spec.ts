@@ -42,6 +42,19 @@ function harness() {
 }
 
 describe('Reviewer gateway v1 synthetic evaluations', () => {
+  it('accepts null or empty optional call metadata only when no invocation is present', async () => {
+    for (const metadata of [{}, { tool_calls: null }, { tool_calls: [] }, { function_call: null },
+      { tool_calls: [], function_call: null, refusal: null }]) {
+      const h = harness();
+      jest.mocked(h.transport.complete).mockResolvedValue({ status: 200, retryAfter: null,
+        body: JSON.stringify({ choices: [{ finish_reason: 'stop', message: {
+          role: 'assistant', content: JSON.stringify(reviewerRiskResultFixture()), ...metadata,
+        } }] }) });
+      expect((await h.call()).result).toEqual(reviewerRiskResultFixture());
+      expect(h.transport.complete).toHaveBeenCalledTimes(1);
+    }
+  });
+
   it('rejects standalone SoC credentials including fullwidth forms before attempts or transport', async () => {
     const secret = 'clsk_synthetic_0123456789abcdefghijklmnop';
     const fullwidth = [...secret].map(character => String.fromCharCode(character.charCodeAt(0) + 0xfee0)).join('');
@@ -105,7 +118,9 @@ describe('Reviewer gateway v1 synthetic evaluations', () => {
       envelope({...result,questions:['😀'.repeat(101)]}), envelope({...result,questions:Array(4).fill('Q')}),
       JSON.stringify({choices:[{finish_reason:'length',message:{role:'assistant',content:JSON.stringify(result)}}]}),
       JSON.stringify({choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(result),refusal:'No'}}]}),
-      JSON.stringify({choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(result),tool_calls:[]}}]}),
+      ...[{ tool_calls: [{}] }, { tool_calls: {} }, { tool_calls: 'invalid' }, { tool_calls: 0 }, { tool_calls: false },
+        { function_call: {} }, { function_call: [] }, { function_call: 'invalid' }, { function_call: false }].map(metadata =>
+        JSON.stringify({choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(result),...metadata}}]})),
       JSON.stringify({choices:[]}), envelope(result,{usage:{completion_tokens:801}}),
       envelope(result,{usage:{prompt_tokens:-1}}), envelope(result,{usage:{prompt_tokens_details:{cached_tokens:'3'}}}),
       'x'.repeat(65537),
