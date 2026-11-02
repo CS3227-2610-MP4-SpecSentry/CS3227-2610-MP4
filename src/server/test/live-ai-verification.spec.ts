@@ -1,6 +1,6 @@
 import { readAiConfig } from '../src/config';
 import { verifyContributorLive } from '../src/ai/live-verification';
-import { prepareContributorDraft, decodeContributorDraftResponse, ConservativeInputBudgetCounter } from '../src/ai/gateway';
+import { prepareContributorDraft, decodeContributorDraftResponse, ConservativeInputBudgetCounter, CONTRIBUTOR_RESPONSE_FORMAT, inputBudgetMessages } from '../src/ai/gateway';
 import type { AiTransport } from '../src/ai/contracts';
 
 const configuration = () => readAiConfig({ AI_MODEL: 'synthetic-model', AI_CONTEXT_WINDOW: '262144', AI_API_KEY: 'synthetic-key' });
@@ -12,6 +12,7 @@ describe('explicit synthetic live verification', () => {
   it('defaults to an offline five-case budget check, rejecting cap+1 before dispatch', async () => {
     const network = transport(); const report = await verifyContributorLive(configuration(), { live: false, transport: network });
     expect(report.passed).toBe(true); expect(network.complete).not.toHaveBeenCalled();
+    expect(report.templateVersion).toBe('contributor-draft-v3');
     expect(report.cases).toHaveLength(5);
     expect(report.cases.find(row => row.caseId === 'near-cap')).toMatchObject({ inputUnits: 4000, status: 'DRY_RUN' });
     expect(report.cases.find(row => row.caseId === 'over-cap')).toMatchObject({ inputUnits: 4001, status: 'REJECTED' });
@@ -23,8 +24,8 @@ describe('explicit synthetic live verification', () => {
     const calls = jest.mocked(network.complete).mock.calls;
     const counter = new ConservativeInputBudgetCounter('synthetic-model');
     for (let i = 0; i < calls.length; i++) {
-      expect(counter.countUnits(calls[i]![0].messages)).toBe(report.cases[i]!.inputUnits);
-      expect(calls[i]![0]).toMatchObject({ maxTokens: 800, reasoningEffort: 'none', stream: false });
+      expect(counter.countUnits(inputBudgetMessages(calls[i]![0].messages, calls[i]![0].responseFormat))).toBe(report.cases[i]!.inputUnits);
+      expect(calls[i]![0]).toMatchObject({ responseFormat: CONTRIBUTOR_RESPONSE_FORMAT, maxTokens: 800, reasoningEffort: 'none', stream: false });
       expect(report.cases[i]!.usage.promptTokens).toBe(100); expect(report.cases[i]!.inputMarginSatisfied).toBe(true);
     }
     const prepared = prepareContributorDraft({ scope: { proposalId: 'p', workingRevisionId: 'w', expectedVersion: 0 },

@@ -103,7 +103,7 @@ test('live suggestion needs explicit selection, application and save before owne
     const metadata = await pool.query('SELECT row_to_json(r) AS record FROM "AiRequest" r WHERE "proposalId"=$1', [id]);
     const attempts = await pool.query('SELECT row_to_json(a) AS record FROM "AiOutboundAttempt" a JOIN "AiRequest" r ON r.id=a."requestId" WHERE r."proposalId"=$1', [id]);
     assert(metadata.rows.length === 1 && attempts.rows.length === usage.data.attempts
-      && metadata.rows[0].record.outcome === 'SUCCESS' && metadata.rows[0].record.templateVersion === 'contributor-draft-v2', 'Durable AI metadata mismatched usage.');
+      && metadata.rows[0].record.outcome === 'SUCCESS' && metadata.rows[0].record.templateVersion === 'contributor-draft-v3', 'Durable AI metadata mismatched usage.');
     const serializedMetadata = JSON.stringify([metadata.rows, attempts.rows]);
     assert(!serializedMetadata.includes(original.content.problem) && !serializedMetadata.includes(suggestion.data.result.objective)
       && !serializedMetadata.includes(suggestion.data.result.acceptanceCriteria[0]) && !/clsk_[A-Za-z0-9]+_[A-Za-z0-9_-]{16,}/.test(serializedMetadata),

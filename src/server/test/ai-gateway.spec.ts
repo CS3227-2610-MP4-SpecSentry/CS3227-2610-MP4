@@ -78,6 +78,8 @@ describe('Reviewer gateway v1 synthetic evaluations', () => {
         beforeAttempt: h.beforeAttempt });
       expect(fetchSpy).toHaveBeenCalledWith('https://soclaas-api.comp.nus.edu.sg/v1/chat/completions',
         expect.objectContaining({ redirect: 'error', headers: expect.objectContaining({ Authorization: `Bearer ${apiKey}` }) }));
+      const payload = JSON.parse(fetchSpy.mock.calls[0]![1]!.body as string) as Record<string, unknown>;
+      expect(payload).not.toHaveProperty('response_format');
       expect(h.beforeAttempt).toHaveBeenCalledTimes(1);
       expect(JSON.stringify([response, h.request.create.mock.calls, h.request.update.mock.calls,
         h.attempt.create.mock.calls, h.attempt.update.mock.calls])).not.toContain(apiKey);

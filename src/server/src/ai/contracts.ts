@@ -68,11 +68,16 @@ export interface ContributorDraftGateway {
   }): Promise<{ readonly result: ContributorDraftResult; readonly metadata: AiSafeMetadata }>;
 }
 export interface AiMessage { readonly role: 'system' | 'user'; readonly content: string }
+export interface AiResponseFormat {
+  readonly type: 'json_schema';
+  readonly json_schema: Readonly<{ name: string; strict: true; schema: Readonly<Record<string, unknown>> }>;
+}
 export interface AiTransportRequest {
   readonly baseUrl: string;
   readonly apiKey: string;
   readonly model: string;
   readonly messages: readonly AiMessage[];
+  readonly responseFormat?: AiResponseFormat;
   readonly maxTokens: 800;
   readonly reasoningEffort: 'none';
   readonly stream: false;

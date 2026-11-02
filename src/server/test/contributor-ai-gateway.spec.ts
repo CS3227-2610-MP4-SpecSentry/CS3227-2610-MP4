@@ -2,11 +2,11 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { contributorDraftRequestSchema, type ContributorDraftResult } from '@specsentry/shared';
 import type { PrismaClient } from '../src/generated/prisma/client';
-import { ConservativeInputBudgetCounter, CONTRIBUTOR_TEMPLATE_VERSION, createContributorDraftGateway, prepareContributorDraft, SafeAiError } from '../src/ai/gateway';
+import { ConservativeInputBudgetCounter, CONTRIBUTOR_RESPONSE_FORMAT, CONTRIBUTOR_TEMPLATE_VERSION, createContributorDraftGateway, inputBudgetMessages, prepareContributorDraft, SafeAiError, SocLlmHttpsTransport } from '../src/ai/gateway';
 import type { AiClock, AiDeadline, AiTransport, ContributorDraftContext } from '../src/ai/contracts';
 import { aiTestOptions } from './ai-fixtures';
 
-const corpus = JSON.parse(readFileSync(resolve(__dirname, '../../../workflow/tests/ai/contributor/v2.json'), 'utf8')) as {
+const corpus = JSON.parse(readFileSync(resolve(__dirname, '../../../workflow/tests/ai/contributor/v3.json'), 'utf8')) as {
   version: string; normal: ContributorDraftResult; injections: string[]; highConfidenceSecrets: string[]; invalidJson: string[];
 };
 const envelope = (content: unknown = corpus.normal, extra: object = {}) => JSON.stringify({
@@ -38,7 +38,7 @@ function harness() {
     call: (context = fixture()) => gateway.analyze(context, { actorId: 'owner', deadline, beforeAttempt }) };
 }
 
-describe('Contributor draft v2 synthetic gateway evaluations', () => {
+describe('Contributor draft v3 synthetic gateway evaluations', () => {
   it('accepts empty or null optional call metadata as no invocation while preserving strict output', async () => {
     for (const metadata of [{}, { tool_calls: null }, { tool_calls: [] }, { function_call: null },
       { tool_calls: [], function_call: null, refusal: null }]) {
@@ -53,7 +53,7 @@ describe('Contributor draft v2 synthetic gateway evaluations', () => {
   });
 
   it('versions explicit per-field bounds without weakening the strict result schema', () => {
-    expect(CONTRIBUTOR_TEMPLATE_VERSION).toBe('contributor-draft-v2');
+    expect(CONTRIBUTOR_TEMPLATE_VERSION).toBe('contributor-draft-v3');
     expect(corpus.version).toBe(CONTRIBUTOR_TEMPLATE_VERSION);
     const prepared = prepareContributorDraft(fixture());
     expect(prepared.messages[0]!.content).toContain('edgeCases: an array of 0 to 3 strings');
@@ -86,13 +86,77 @@ describe('Contributor draft v2 synthetic gateway evaluations', () => {
       const call = gateway.analyze(fixture(problem), { actorId: 'owner', deadline: h.deadline, beforeAttempt: h.beforeAttempt });
       if (problem.length < 3500) {
         expect((await call).metadata.usage).toEqual({ promptTokens: null, completionTokens: null, totalTokens: null, cachedTokens: null });
-        expect(count).toHaveBeenCalledWith(jest.mocked(h.transport.complete).mock.calls[0]![0].messages);
+        const sent = jest.mocked(h.transport.complete).mock.calls[0]![0];
+        expect(count).toHaveBeenCalledWith(inputBudgetMessages(sent.messages, sent.responseFormat));
       } else {
         await expect(call).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
         expect(h.transport.complete).not.toHaveBeenCalled(); expect(h.attempt.create).not.toHaveBeenCalled();
       }
       expect(count.mock.calls[0]![0][0]!.role).toBe('system');
       expect(count.mock.calls[0]![0][1]!.content).toContain(problem);
+    }
+  });
+
+  it('counts the complete fixed schema before admission and never sends its counting-only frame as a message', async () => {
+    const h = harness(); const context = fixture(); const prepared = prepareContributorDraft(context);
+    const counter = new ConservativeInputBudgetCounter(h.counter.model);
+    const budget = inputBudgetMessages(prepared.messages, prepared.responseFormat);
+    expect(counter.countUnits(budget) - counter.countUnits(prepared.messages))
+      .toBe(64 + Buffer.byteLength('system') + Buffer.byteLength(JSON.stringify(CONTRIBUTOR_RESPONSE_FORMAT)));
+    await h.call();
+    const sent = jest.mocked(h.transport.complete).mock.calls[0]![0];
+    expect(sent.messages).toHaveLength(2);
+    expect(sent.responseFormat).toEqual(CONTRIBUTOR_RESPONSE_FORMAT);
+    expect(h.counter.countUnits).toHaveBeenCalledWith(budget);
+    expect(JSON.stringify(sent.messages)).not.toContain('additionalProperties');
+
+    context.draft.problem += 'x'.repeat(4000 - counter.countUnits(prepared.messages));
+    expect(counter.countUnits(prepareContributorDraft(context).messages)).toBe(4000);
+    const blocked = harness();
+    const gateway = createContributorDraftGateway({ prisma: blocked.prisma,
+      options: { mode: 'test', model: counter.model, contextWindow: 16384, inputBudgetMethodId: counter.methodId },
+      counter, transport: blocked.transport, clock: blocked.clock });
+    await expect(gateway.analyze(context, { actorId: 'owner', deadline: blocked.deadline, beforeAttempt: blocked.beforeAttempt }))
+      .rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
+    expect(blocked.attempt.create).not.toHaveBeenCalled(); expect(blocked.transport.complete).not.toHaveBeenCalled();
+  });
+
+  it('serializes the fixed server-owned schema in native transport without changing outbound messages', async () => {
+    const h = harness(); const prepared = prepareContributorDraft(fixture());
+    const fetchSpy = jest.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(envelope(), { status: 200 }));
+    try {
+      const gateway = createContributorDraftGateway({ prisma: h.prisma,
+        options: { mode: 'live', apiKey: 'synthetic-live-key', model: h.counter.model,
+          contextWindow: 16384, inputBudgetMethodId: h.counter.methodId },
+        counter: h.counter, transport: new SocLlmHttpsTransport(), clock: h.clock });
+      await gateway.analyze(fixture(), { actorId: 'owner', deadline: h.deadline, beforeAttempt: h.beforeAttempt });
+      const payload = JSON.parse(fetchSpy.mock.calls[0]![1]!.body as string) as Record<string, unknown>;
+      expect(payload).toMatchObject({ response_format: CONTRIBUTOR_RESPONSE_FORMAT,
+        messages: prepared.messages, max_tokens: 800, reasoning_effort: 'none', stream: false });
+      expect(CONTRIBUTOR_RESPONSE_FORMAT.json_schema).toMatchObject({ strict: true, schema: {
+        additionalProperties: false, required: ['objective', 'acceptanceCriteria', 'edgeCases', 'ambiguities', 'testIdeas'],
+      } });
+    } finally { fetchSpy.mockRestore(); }
+  });
+
+  it('enforces exact full-schema input and context-headroom boundaries before reserving attempts', async () => {
+    const counter = new ConservativeInputBudgetCounter(harness().counter.model);
+    const original = prepareContributorDraft(fixture());
+    const originalUnits = counter.countUnits(inputBudgetMessages(original.messages, original.responseFormat));
+    for (const [padding, contextWindow, accepted] of [
+      [4000 - originalUnits, 16384, true], [4001 - originalUnits, 16384, false],
+      [0, originalUnits + 928, true], [0, originalUnits + 927, false],
+    ] as const) {
+      const h = harness(); const context = fixture(); context.draft.problem += 'x'.repeat(padding);
+      const gateway = createContributorDraftGateway({ prisma: h.prisma,
+        options: { mode: 'test', model: counter.model, contextWindow, inputBudgetMethodId: counter.methodId },
+        counter, transport: h.transport, clock: h.clock });
+      const pending = gateway.analyze(context, { actorId: 'owner', deadline: h.deadline, beforeAttempt: h.beforeAttempt });
+      if (accepted) { await expect(pending).resolves.toMatchObject({ result: corpus.normal }); expect(h.attempt.create).toHaveBeenCalledTimes(1); }
+      else {
+        await expect(pending).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
+        expect(h.attempt.create).not.toHaveBeenCalled(); expect(h.transport.complete).not.toHaveBeenCalled();
+      }
     }
   });
 
@@ -146,7 +210,8 @@ describe('Contributor draft v2 synthetic gateway evaluations', () => {
     const invalid = [
       ...corpus.invalidJson.map(content => JSON.stringify({ choices: [{ finish_reason: 'stop', message: { role: 'assistant', content } }] })),
       envelope({ ...corpus.normal, approved: true }), envelope({ ...corpus.normal, objective: 'x'.repeat(201) }),
-      envelope({ ...corpus.normal, acceptanceCriteria: [] }), envelope(corpus.normal, { usage: { completion_tokens: 801 } }),
+      envelope({ ...corpus.normal, acceptanceCriteria: [] }), envelope({ ...corpus.normal, objective: ' \t\n' }),
+      envelope(corpus.normal, { usage: { completion_tokens: 801 } }),
       envelope(corpus.normal, { usage: { prompt_tokens: -1 } }),
       JSON.stringify({ choices: [{ finish_reason: 'length', message: { role: 'assistant', content: JSON.stringify(corpus.normal) } }] }),
       JSON.stringify({ choices: [{ finish_reason: 'stop', message: { role: 'assistant', content: JSON.stringify(corpus.normal), refusal: 'No' } }] }),
@@ -208,7 +273,8 @@ describe('Contributor draft v2 synthetic gateway evaluations', () => {
   it('accepts only the exact saved-draft request identity, never client context, model or lifecycle fields', () => {
     const body = { expectedVersion: 0, workingRevisionId: 'working' };
     expect(contributorDraftRequestSchema.parse(body)).toEqual(body);
-    for (const extra of [{ actorId: 'other' }, { context: 'private text' }, { model: 'override' }, { state: 'APPROVED' }, { expectedVersion: -1 }])
+    for (const extra of [{ actorId: 'other' }, { context: 'private text' }, { model: 'override' }, { state: 'APPROVED' },
+      { responseFormat: CONTRIBUTOR_RESPONSE_FORMAT }, { response_format: { type: 'text' } }, { expectedVersion: -1 }])
       expect(contributorDraftRequestSchema.safeParse({ ...body, ...extra }).success).toBe(false);
   });
 });

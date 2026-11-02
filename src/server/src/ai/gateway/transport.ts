@@ -1,4 +1,4 @@
-import type { AiClock, AiMessage, AiTransport, AiTransportRequest, AiTransportResponse, InputBudgetCounter } from '../contracts';
+import type { AiClock, AiMessage, AiResponseFormat, AiTransport, AiTransportRequest, AiTransportResponse, InputBudgetCounter } from '../contracts';
 import { SafeAiError } from './accounting';
 
 export class SystemAiClock implements AiClock {
@@ -22,6 +22,11 @@ export class ConservativeInputBudgetCounter implements InputBudgetCounter {
     return messages.reduce((units, message) => units + 64
       + Buffer.byteLength(message.role, 'utf8') + Buffer.byteLength(message.content, 'utf8'), 512);
   }
+}
+
+export function inputBudgetMessages(messages: readonly AiMessage[], responseFormat?: AiResponseFormat): readonly AiMessage[] {
+  // Count schema metadata as a full framed message without adding it to the provider prompt.
+  return responseFormat ? [...messages, { role: 'system', content: JSON.stringify(responseFormat) }] : messages;
 }
 
 export class SocLlmHttpsTransport implements AiTransport {
@@ -57,7 +62,8 @@ export class SocLlmHttpsTransport implements AiTransport {
         method: 'POST', redirect: 'error', signal: controller.signal,
         headers: { Authorization: `Bearer ${request.apiKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ model: request.model, messages: request.messages, stream: false,
-          max_tokens: 800, reasoning_effort: 'none' }),
+          max_tokens: 800, reasoning_effort: 'none',
+          ...(request.responseFormat ? { response_format: request.responseFormat } : {}) }),
       }).then(value => {
         responseBody = value.body;
         if (controller.signal.aborted) { cancelBody(); throw new SafeAiError('DEADLINE'); }
