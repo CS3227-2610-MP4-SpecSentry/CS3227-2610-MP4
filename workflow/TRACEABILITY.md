@@ -1,5 +1,16 @@
 # Requirement traceability
 
+## Contributor breadcrumb hierarchy — 2 November 2026
+
+REQ-CON-013 / AC-CON-UX-004 now specify distinct My Drafts ancestors and one
+plain-text current item for list/detail/edit/create, retaining REQ-CON-010 and
+REQ-SHR-005. PageHeader removes the redundant Workspace link; router, guard and
+CSS remain unchanged. NavigationPhase2/FunctionalUx and existing browser-script
+assertions cover exact ordered labels, unique destinations, current semantics,
+guarded stay/leave and clean history. The [refinement run](../logs/yooplo/2026-11-02-breadcrumb-refinement.md)
+records actual checks and bounded desktop/mobile browser evidence; other role
+pages introduce no invented breadcrumb destinations.
+
 ## Draft detail action spacing — 2 November 2026
 
 REQ-CON-017 / REQ-SHR-005: lifecycle actions use16px token gaps, primary Submit

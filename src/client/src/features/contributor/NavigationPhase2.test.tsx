@@ -35,6 +35,18 @@ describe('Phase 2 navigation refinement', () => {
     const breadcrumb = screen.getByRole('navigation', { name: 'Breadcrumb' });
     expect(within(breadcrumb).getByRole('list')).toBeInTheDocument();
     expect(breadcrumb.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+    if (path!.includes('/drafts/')) await within(breadcrumb).findByTitle(title);
+    const expected = path === '/contributor' ? ['My Drafts'] : path === '/contributor/new' ? ['My Drafts', 'Create Draft']
+      : path!.includes('/edit') ? ['My Drafts', title, 'Edit'] : ['My Drafts', title];
+    expect(within(breadcrumb).getAllByRole('listitem').map(item => item.textContent)).toEqual(expected);
+    const current = breadcrumb.querySelector('[aria-current="page"]');
+    expect(current?.tagName).toBe('SPAN');
+    expect(current?.textContent).toBe(expected.at(-1));
+    expect(current?.querySelector('a')).toBeNull();
+    const links = within(breadcrumb).queryAllByRole('link');
+    const destinations = links.map(link => link.getAttribute('href'));
+    expect(new Set(destinations).size).toBe(destinations.length);
+    expect(destinations).toEqual(path === '/contributor' ? [] : path!.includes('/edit') ? ['/contributor', `/contributor/drafts/${id}`] : ['/contributor']);
   });
   it('uses one existing protected read for loaded-title breadcrumbs and guards the title link', async () => {
     const { fetch, router } = setup(`/contributor/drafts/${id}/edit`);
@@ -49,6 +61,28 @@ describe('Phase 2 navigation refinement', () => {
     await act(async () => {});
     expect(confirm).toHaveBeenCalledOnce(); expect(router.state.location.pathname).toBe(`/contributor/drafts/${id}/edit`);
     expect(screen.getByLabelText('Problem (required)')).toHaveValue('Unsaved problem');
+    confirm.mockReturnValue(true);
+    fireEvent.click(titleLink);
+    await screen.findByRole('heading', { name: 'Private draft detail', level: 1 });
+    expect(confirm).toHaveBeenCalledTimes(2);
+    expect(router.state.location.pathname).toBe(`/contributor/drafts/${id}`);
+    await act(async () => { await router.navigate(-1); });
+    await screen.findByLabelText('Problem (required)');
+    expect(router.state.location.pathname).toBe(`/contributor/drafts/${id}/edit`);
+    expect(confirm).toHaveBeenCalledTimes(2);
+  });
+  it('navigates a clean ancestor link once and preserves browser history without a prompt', async () => {
+    const { router } = setup(`/contributor/drafts/${id}`);
+    const confirm = vi.spyOn(window, 'confirm');
+    const breadcrumb = await screen.findByRole('navigation', { name: 'Breadcrumb' });
+    fireEvent.click(within(breadcrumb).getByRole('link', { name: 'My Drafts' }));
+    await screen.findByRole('heading', { name: 'Private drafts', level: 1 });
+    expect(router.state.location.pathname).toBe('/contributor');
+    expect(router.state.historyAction).toBe('PUSH');
+    await act(async () => { await router.navigate(-1); });
+    await screen.findByRole('heading', { name: 'Private draft detail', level: 1 });
+    expect(router.state.location.pathname).toBe(`/contributor/drafts/${id}`);
+    expect(confirm).not.toHaveBeenCalled();
   });
   it('makes the complete primary row a single descriptive link with no nested controls', async () => {
     setup('/contributor', [{ proposalId: id, workingRevisionId: workingId, title, state: 'DRAFT', version: 0, createdAt: new Date().toISOString() }]);

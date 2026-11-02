@@ -71,6 +71,10 @@ Main scrolling pauses while the drawer is open. The current task stays visible.
 Contributor list/create/detail/editor one task-specific h1 and semantic ordered
 breadcrumbs. Loaded draft titles are reused without an extra metadata read;
 long labels truncate visually while the complete accessible/title text remains.
+The workspace shows only current My Drafts; details show My Drafts → draft title;
+editing shows My Drafts → draft title → Edit; creation shows My Drafts → Create Draft.
+Ancestor items are router links to distinct destinations. The current page is
+plain text with aria-current="page"; no redundant Workspace level is rendered.
 Only implemented authorized routes are linked. The primary area of each draft
 row is a real Link, including ordinary keyboard, modified-click and new-tab use;
 no nested controls or invented row actions are added.

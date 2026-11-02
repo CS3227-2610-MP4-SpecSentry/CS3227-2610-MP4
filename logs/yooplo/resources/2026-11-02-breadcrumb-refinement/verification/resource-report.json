@@ -1,0 +1,127 @@
+{
+  "records": [
+    {
+      "id": "ba6e54ead72a4636b1e8fa9da549c0cb",
+      "prompter": "yooplo",
+      "session": "2026-11-02-breadcrumb-refinement",
+      "agent": "breadcrumb_implementer",
+      "invocation": "implementation-1",
+      "stage": "breadcrumb-refinement",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Runtime model/effort not exposed",
+      "started_at": "2026-11-02T15:55:48.858314+00:00",
+      "ended_at": "2026-11-02T15:56:44.937655+00:00",
+      "elapsed_seconds": 56.079341,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Breadcrumb refinement and rendering/guard/history tests complete;24focusedtests and clienttypecheck passed",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record usage telemetry not exposed",
+        "output_tokens": "Per-record usage telemetry not exposed",
+        "cache_read_tokens": "Per-record usage telemetry not exposed",
+        "tool_calls": "Per-record usage telemetry not exposed",
+        "retries": "Per-record usage telemetry not exposed"
+      },
+      "unavailable_reason": "Per-record usage telemetry not exposed"
+    },
+    {
+      "id": "c3e5e98c6f9344349d15571621abd801",
+      "prompter": "yooplo",
+      "session": "2026-11-02-breadcrumb-refinement",
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "coordinate-navigation",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact runtime settings unavailable",
+      "started_at": "2026-11-02T15:55:28.238049+00:00",
+      "ended_at": "2026-11-02T15:59:47.583749+00:00",
+      "elapsed_seconds": 259.3457,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Breadcrumb refinement integrated;242clienttests,lint,alltypes,build and12screens9navigation checks passed",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime usage telemetry unavailable",
+        "output_tokens": "Per-record runtime usage telemetry unavailable",
+        "cache_read_tokens": "Per-record runtime usage telemetry unavailable",
+        "tool_calls": "Per-record runtime usage telemetry unavailable",
+        "retries": "Per-record runtime usage telemetry unavailable"
+      },
+      "unavailable_reason": "Per-record runtime usage telemetry unavailable"
+    },
+    {
+      "id": "c864bbc366fc4a81a407ef6ff8265c77",
+      "prompter": "yooplo",
+      "session": "2026-11-02-breadcrumb-refinement",
+      "agent": "breadcrumb-verifier",
+      "invocation": "verifier-1",
+      "stage": "independent-navigation-verification",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact runtime settings unavailable",
+      "started_at": "2026-11-02T15:55:58.994629+00:00",
+      "ended_at": "2026-11-02T15:59:22.157049+00:00",
+      "elapsed_seconds": 203.16242,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Independent12screen/9navigation browser checks,242clienttests,lint,allworkspace types and productionbuild passed; no blockers",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime usage telemetry unavailable",
+        "output_tokens": "Per-record runtime usage telemetry unavailable",
+        "cache_read_tokens": "Per-record runtime usage telemetry unavailable",
+        "tool_calls": "Per-record runtime usage telemetry unavailable",
+        "retries": "Per-record runtime usage telemetry unavailable"
+      },
+      "unavailable_reason": "Per-record runtime usage telemetry unavailable"
+    }
+  ],
+  "issues": [],
+  "ok": true,
+  "measured_totals_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "coverage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "summed_interval_seconds": 518.5874610000001,
+  "limit": "Only explicitly registered intervals. Null telemetry is unavailable, not zero; overlapping intervals are not wall time."
+}

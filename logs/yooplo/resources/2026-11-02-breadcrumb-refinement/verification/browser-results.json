@@ -1,0 +1,197 @@
+{
+  "scope": "Isolated synthetic API browser responses against actual frontend; no real database reads or mutations",
+  "screens": [
+    {
+      "width": 1440,
+      "path": "/contributor",
+      "labels": [
+        "My Drafts"
+      ],
+      "hrefs": [],
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "path": "/contributor/drafts/proposal-1",
+      "labels": [
+        "My Drafts",
+        "<b>Long draft title</b> accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title "
+      ],
+      "hrefs": [
+        "/contributor"
+      ],
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "path": "/contributor/drafts/proposal-1/edit",
+      "labels": [
+        "My Drafts",
+        "<b>Long draft title</b> accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title ",
+        "Edit"
+      ],
+      "hrefs": [
+        "/contributor",
+        "/contributor/drafts/proposal-1"
+      ],
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "path": "/contributor/new",
+      "labels": [
+        "My Drafts",
+        "Create Draft"
+      ],
+      "hrefs": [
+        "/contributor"
+      ],
+      "passed": true
+    },
+    {
+      "width": 768,
+      "path": "/contributor",
+      "labels": [
+        "My Drafts"
+      ],
+      "hrefs": [],
+      "passed": true
+    },
+    {
+      "width": 768,
+      "path": "/contributor/drafts/proposal-1",
+      "labels": [
+        "My Drafts",
+        "<b>Long draft title</b> accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title "
+      ],
+      "hrefs": [
+        "/contributor"
+      ],
+      "passed": true
+    },
+    {
+      "width": 768,
+      "path": "/contributor/drafts/proposal-1/edit",
+      "labels": [
+        "My Drafts",
+        "<b>Long draft title</b> accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title ",
+        "Edit"
+      ],
+      "hrefs": [
+        "/contributor",
+        "/contributor/drafts/proposal-1"
+      ],
+      "passed": true
+    },
+    {
+      "width": 768,
+      "path": "/contributor/new",
+      "labels": [
+        "My Drafts",
+        "Create Draft"
+      ],
+      "hrefs": [
+        "/contributor"
+      ],
+      "passed": true
+    },
+    {
+      "width": 375,
+      "path": "/contributor",
+      "labels": [
+        "My Drafts"
+      ],
+      "hrefs": [],
+      "passed": true
+    },
+    {
+      "width": 375,
+      "path": "/contributor/drafts/proposal-1",
+      "labels": [
+        "My Drafts",
+        "<b>Long draft title</b> accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title "
+      ],
+      "hrefs": [
+        "/contributor"
+      ],
+      "passed": true
+    },
+    {
+      "width": 375,
+      "path": "/contributor/drafts/proposal-1/edit",
+      "labels": [
+        "My Drafts",
+        "<b>Long draft title</b> accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title accessible title ",
+        "Edit"
+      ],
+      "hrefs": [
+        "/contributor",
+        "/contributor/drafts/proposal-1"
+      ],
+      "passed": true
+    },
+    {
+      "width": 375,
+      "path": "/contributor/new",
+      "labels": [
+        "My Drafts",
+        "Create Draft"
+      ],
+      "hrefs": [
+        "/contributor"
+      ],
+      "passed": true
+    }
+  ],
+  "navigation": [
+    {
+      "width": 1440,
+      "target": "My Drafts",
+      "stayAndLeave": true
+    },
+    {
+      "width": 1440,
+      "target": "Draft title",
+      "stayAndLeave": true
+    },
+    {
+      "width": 1440,
+      "browserBackStayLeave": true,
+      "cleanNoPrompt": true,
+      "businessMutations": 0
+    },
+    {
+      "width": 768,
+      "target": "My Drafts",
+      "stayAndLeave": true
+    },
+    {
+      "width": 768,
+      "target": "Draft title",
+      "stayAndLeave": true
+    },
+    {
+      "width": 768,
+      "browserBackStayLeave": true,
+      "cleanNoPrompt": true,
+      "businessMutations": 0
+    },
+    {
+      "width": 375,
+      "target": "My Drafts",
+      "stayAndLeave": true
+    },
+    {
+      "width": 375,
+      "target": "Draft title",
+      "stayAndLeave": true
+    },
+    {
+      "width": 375,
+      "browserBackStayLeave": true,
+      "cleanNoPrompt": true,
+      "businessMutations": 0
+    }
+  ],
+  "errors": []
+}

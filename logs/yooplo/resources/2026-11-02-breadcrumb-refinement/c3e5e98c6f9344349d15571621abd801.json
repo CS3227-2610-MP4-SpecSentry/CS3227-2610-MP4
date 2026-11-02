@@ -1,0 +1,35 @@
+{
+  "id": "c3e5e98c6f9344349d15571621abd801",
+  "prompter": "yooplo",
+  "session": "2026-11-02-breadcrumb-refinement",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "coordinate-navigation",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact runtime settings unavailable",
+  "started_at": "2026-11-02T15:55:28.238049+00:00",
+  "ended_at": "2026-11-02T15:59:47.583749+00:00",
+  "elapsed_seconds": 259.3457,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Breadcrumb refinement integrated;242clienttests,lint,alltypes,build and12screens9navigation checks passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry unavailable",
+    "output_tokens": "Per-record runtime usage telemetry unavailable",
+    "cache_read_tokens": "Per-record runtime usage telemetry unavailable",
+    "tool_calls": "Per-record runtime usage telemetry unavailable",
+    "retries": "Per-record runtime usage telemetry unavailable"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry unavailable"
+}

@@ -23,7 +23,7 @@ function mockFetch() {
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('functional UX with the production data-router adapter', () => {
-  it.each(['Contributor workspace', 'SpecSentry Specification workspace', 'Contributor workspace breadcrumb'])('guards %s once and retains edits on cancel', async name => {
+  it.each(['Contributor workspace', 'SpecSentry Specification workspace', 'My Drafts'])('guards %s once and retains edits on cancel', async name => {
     vi.stubGlobal('fetch', mockFetch()); const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
     const router = setup();
     fireEvent.change(await screen.findByLabelText('Title (required)'), { target: { value: 'Unsaved title' } });
