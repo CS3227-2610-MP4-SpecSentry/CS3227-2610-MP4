@@ -1,0 +1,35 @@
+{
+  "id": "e2f3fe7e66e549638d488c2b716782c6",
+  "prompter": "yooplo",
+  "session": "2026-11-02-schema-publication",
+  "agent": "main",
+  "invocation": "publish-1",
+  "stage": "review-commit-publish",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution settings unavailable",
+  "started_at": "2026-11-02T02:43:07.110313+00:00",
+  "ended_at": "2026-11-02T02:48:36.181277+00:00",
+  "elapsed_seconds": 329.070964,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Schema/evidence/precise synthetic fixture commits pushed; stacked PR18 created and confirmed mergeable; CI54inprogress; final metadata publication follows outside timing interval",
+  "unavailable_reasons": {
+    "input_tokens": "Agent model/effort/token/cache/tool counters unavailable; failed scanner and corrected tool parameter calls included in measured invocation",
+    "output_tokens": "Agent model/effort/token/cache/tool counters unavailable; failed scanner and corrected tool parameter calls included in measured invocation",
+    "cache_read_tokens": "Agent model/effort/token/cache/tool counters unavailable; failed scanner and corrected tool parameter calls included in measured invocation",
+    "tool_calls": "Agent model/effort/token/cache/tool counters unavailable; failed scanner and corrected tool parameter calls included in measured invocation",
+    "retries": "Agent model/effort/token/cache/tool counters unavailable; failed scanner and corrected tool parameter calls included in measured invocation"
+  },
+  "unavailable_reason": "Agent model/effort/token/cache/tool counters unavailable; failed scanner and corrected tool parameter calls included in measured invocation"
+}
