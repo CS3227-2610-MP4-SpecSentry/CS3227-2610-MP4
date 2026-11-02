@@ -110,6 +110,13 @@ Saved detail renders all acceptance criteria in stored order with Required or
 Optional text, escaped multiline statements and a clear empty state. Working
 detail never claims reviewer coverage or immutable submitted revision status.
 
+Saved-detail lifecycle actions use a shared spaced group: Submit remains primary
+and Withdraw uses the secondary control style. Delete private draft occupies a
+separate row with greater separation than the gaps within the lifecycle group.
+Spacing uses existing tokens; narrow layouts stack actions across the available
+width with at least44px targets. Confirmation, cancellation, disabled states and
+keyboard order retain existing behavior (REQ-CON-017; REQ-SHR-005).
+
 ## E. Draft editor and feedback
 
 The semantic sections are Overview, Acceptance criteria, Patch and Evidence.

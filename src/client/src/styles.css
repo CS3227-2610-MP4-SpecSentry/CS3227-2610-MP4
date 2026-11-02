@@ -123,6 +123,13 @@ fieldset > p { font-size: var(--text-sm); }
 .contributor-workspace > p { font-size: var(--text-sm); }
 .contributor-workspace > a:not(.button) { display: inline-block; margin: .4rem var(--space-4) .7rem 0; font-size: var(--text-sm); }
 .contributor-workspace > button { margin: var(--space-2) var(--space-2) var(--space-2) 0; }
+.proposal-actions { display: grid; gap: var(--space-4); }
+.proposal-action-buttons { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.draft-destructive-actions { display: flex; margin-block-start: var(--space-6); }
+@media (max-width: 767px) {
+  .proposal-action-buttons { flex-direction: column; }
+  .proposal-action-buttons > button, .draft-destructive-actions > button { width: 100%; }
+}
 dl { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: .3rem var(--space-6) var(--space-4); }
 dl > div { border-bottom: 1px solid var(--surface-muted); padding-bottom: var(--space-4); }
 dl > div:last-child { border-bottom: 0; padding-bottom: 0; }

@@ -1,0 +1,35 @@
+{
+  "id": "c5de075a4fd04906a860625acfe1af11",
+  "prompter": "yooplo",
+  "session": "2026-11-02-draft-action-spacing",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "coordinate-layout",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact runtime settings unavailable",
+  "started_at": "2026-11-02T15:50:17.449312+00:00",
+  "ended_at": "2026-11-02T15:52:52.225441+00:00",
+  "elapsed_seconds": 154.776129,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Layout integrated and independently verified at desktop/tablet/mobile;56tests,typecheck,lint passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry unavailable",
+    "output_tokens": "Per-record runtime usage telemetry unavailable",
+    "cache_read_tokens": "Per-record runtime usage telemetry unavailable",
+    "tool_calls": "Per-record runtime usage telemetry unavailable",
+    "retries": "Per-record runtime usage telemetry unavailable"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry unavailable"
+}

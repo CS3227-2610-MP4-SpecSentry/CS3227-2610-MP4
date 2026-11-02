@@ -99,11 +99,13 @@ export function ProposalActions({ proposalId, version, state, workingRevisionId,
     } catch { if (active.current) setError('Unable to check the current state. Actions remain paused; keep this page and try checking again.'); }
     finally { busy.current = false; if (active.current) setPending(false); }
   }
-  return <section aria-label="Proposal actions">
+  return <section className="proposal-actions" aria-label="Proposal actions">
+    <div className="proposal-action-buttons">
     {editableProposalStates.includes(state) && workingRevisionId && <button disabled={disabled || pending || blocked || !!operation} onClick={() => { setOperation('submit'); onLockChange?.(true); }}>Submit saved working copy</button>}
     {editableProposalStates.includes(state) && state !== 'DRAFT' && latestRevisionId && <button disabled={disabled || pending || blocked || !!operation} onClick={() => { setOperation('clone-latest'); onLockChange?.(true); }}>Clone latest submitted content</button>}
-    {editableProposalStates.includes(state) && <button disabled={disabled || pending || blocked || !!operation} onClick={() => { setOperation('withdraw'); onLockChange?.(true); }}>Withdraw proposal</button>}
+    {editableProposalStates.includes(state) && <button className="secondary-button" disabled={disabled || pending || blocked || !!operation} onClick={() => { setOperation('withdraw'); onLockChange?.(true); }}>Withdraw proposal</button>}
     {state === 'APPROVED' && <button disabled={disabled || pending || blocked || !!operation} onClick={() => { setOperation('reopen'); onLockChange?.(true); }}>Reopen approval for revision</button>}
+    </div>
     {operation && <form onSubmit={event => void execute(event, retryReady)} aria-label={`Confirm ${operation}`}>
       <h2>{operation === 'submit' ? 'Publish an immutable revision' : operation === 'withdraw' ? 'Confirm withdrawal' : operation === 'clone-latest' ? 'Replace the saved private working copy' : 'Confirm reopening'}</h2>
       <p>{operation === 'submit' ? 'Publish the saved working copy, including its summary, patch and optional evidence. Any existing reviewer stays assigned; earlier revisions remain unchanged.'

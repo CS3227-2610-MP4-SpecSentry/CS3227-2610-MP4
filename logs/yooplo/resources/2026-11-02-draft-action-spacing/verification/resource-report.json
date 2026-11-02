@@ -1,0 +1,162 @@
+{
+  "records": [
+    {
+      "id": "4f1a7f7589f6481da7ee9d388037e653",
+      "prompter": "yooplo",
+      "session": "2026-11-02-draft-action-spacing",
+      "agent": "main",
+      "invocation": "commit-1",
+      "stage": "commit-reviewed-layout",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact runtime settings unavailable",
+      "started_at": "2026-11-02T15:53:31.119528+00:00",
+      "ended_at": "2026-11-02T15:53:44.346935+00:00",
+      "elapsed_seconds": 13.227407,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Commit scope reviewed and authorized; final Git operation follows measurement closure",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime usage telemetry unavailable",
+        "output_tokens": "Per-record runtime usage telemetry unavailable",
+        "cache_read_tokens": "Per-record runtime usage telemetry unavailable",
+        "tool_calls": "Per-record runtime usage telemetry unavailable",
+        "retries": "Per-record runtime usage telemetry unavailable"
+      },
+      "unavailable_reason": "Per-record runtime usage telemetry unavailable"
+    },
+    {
+      "id": "831f5c517382479cbe4ab3449fc10fa8",
+      "prompter": "yooplo",
+      "session": "2026-11-02-draft-action-spacing",
+      "agent": "spacing_implementer",
+      "invocation": "implement-1",
+      "stage": "presentation-layout",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact runtime settings unavailable",
+      "started_at": "2026-11-02T15:50:43.722172+00:00",
+      "ended_at": "2026-11-02T15:51:22.460700+00:00",
+      "elapsed_seconds": 38.738528,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Presentation-only action grouping, token spacing and responsive hierarchy implemented; client typecheck/diff check passed",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime usage telemetry not exposed",
+        "output_tokens": "Per-record runtime usage telemetry not exposed",
+        "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+        "tool_calls": "Per-record runtime usage telemetry not exposed",
+        "retries": "Per-record runtime usage telemetry not exposed"
+      },
+      "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+    },
+    {
+      "id": "88b0c60182cb4bc09afab4e289b96f0d",
+      "prompter": "yooplo",
+      "session": "2026-11-02-draft-action-spacing",
+      "agent": "spacing-verifier",
+      "invocation": "verifier-1",
+      "stage": "independent-layout-verification",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact runtime settings unavailable",
+      "started_at": "2026-11-02T15:50:55.696085+00:00",
+      "ended_at": "2026-11-02T15:52:15.603677+00:00",
+      "elapsed_seconds": 79.907592,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "3 browser widths passed including geometry, hierarchy, keyboard and confirmation cancellation; 56 client tests and client typecheck passed",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime telemetry not exposed",
+        "output_tokens": "Per-record runtime telemetry not exposed",
+        "cache_read_tokens": "Per-record runtime telemetry not exposed",
+        "tool_calls": "Per-record runtime telemetry not exposed",
+        "retries": "Per-record runtime telemetry not exposed"
+      },
+      "unavailable_reason": "Per-record runtime telemetry not exposed"
+    },
+    {
+      "id": "c5de075a4fd04906a860625acfe1af11",
+      "prompter": "yooplo",
+      "session": "2026-11-02-draft-action-spacing",
+      "agent": "main",
+      "invocation": "main-1",
+      "stage": "coordinate-layout",
+      "attempt": 1,
+      "selected_model": "unavailable",
+      "selected_effort": "unavailable",
+      "observed_model": null,
+      "observed_effort": null,
+      "settings_reason": "Exact runtime settings unavailable",
+      "started_at": "2026-11-02T15:50:17.449312+00:00",
+      "ended_at": "2026-11-02T15:52:52.225441+00:00",
+      "elapsed_seconds": 154.776129,
+      "status": "succeeded",
+      "usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "tool_calls": null,
+        "retries": null
+      },
+      "usage_source": null,
+      "outcome": "Layout integrated and independently verified at desktop/tablet/mobile;56tests,typecheck,lint passed",
+      "unavailable_reasons": {
+        "input_tokens": "Per-record runtime usage telemetry unavailable",
+        "output_tokens": "Per-record runtime usage telemetry unavailable",
+        "cache_read_tokens": "Per-record runtime usage telemetry unavailable",
+        "tool_calls": "Per-record runtime usage telemetry unavailable",
+        "retries": "Per-record runtime usage telemetry unavailable"
+      },
+      "unavailable_reason": "Per-record runtime usage telemetry unavailable"
+    }
+  ],
+  "issues": [],
+  "ok": true,
+  "measured_totals_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "coverage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "tool_calls": 0,
+    "retries": 0
+  },
+  "summed_interval_seconds": 286.649656,
+  "limit": "Only explicitly registered intervals. Null telemetry is unavailable, not zero; overlapping intervals are not wall time."
+}

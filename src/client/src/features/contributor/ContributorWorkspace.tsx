@@ -267,7 +267,7 @@ function DraftDetail({ id, session, onSessionLost }: Props & { id: string }) {
           else if (result.revisionId) navigate(`/contributor/proposals/${encodeURIComponent(id)}`);
           else setAttempt(value => value + 1);
         }} />}
-      {detail.state === 'DRAFT' && <button className="danger-button" ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || actionPending || loading || blocked || confirming}>Delete private draft</button>}
+      {detail.state === 'DRAFT' && <div className="draft-destructive-actions"><button className="danger-button" ref={deleteButton} onClick={() => setConfirming(true)} disabled={pending || actionPending || loading || blocked || confirming}>Delete private draft</button></div>}
       {confirming && <form className="delete-confirmation" aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-description" onSubmit={event => void remove(event)}>
         <h2 id="delete-confirm-title">Confirm permanent deletion</h2>
         <p id="delete-confirm-description">Permanently delete "{detail.content.title}" and all its working content? This cannot be undone. Only never-submitted drafts can be deleted.</p>

@@ -1,0 +1,150 @@
+{
+  "scope": "Synthetic API routing against actual local frontend; no real data reads or mutations",
+  "widths": [
+    {
+      "width": 1440,
+      "passed": true,
+      "boxes": [
+        {
+          "x": 288,
+          "y": 824.03125,
+          "width": 209.28125,
+          "height": 44
+        },
+        {
+          "x": 513.28125,
+          "y": 824.03125,
+          "width": 155.40625,
+          "height": 44
+        },
+        {
+          "x": 288,
+          "y": 892.03125,
+          "width": 157.625,
+          "height": 44
+        }
+      ],
+      "appearance": [
+        {
+          "background": "rgb(37, 99, 235)",
+          "color": "rgb(255, 255, 255)",
+          "border": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "color": "rgb(51, 65, 85)",
+          "border": "rgb(203, 213, 225)"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "color": "rgb(185, 28, 28)",
+          "border": "rgb(254, 202, 202)"
+        }
+      ],
+      "keyboardOrder": true,
+      "confirmations": [
+        "submit",
+        "withdraw",
+        "delete"
+      ],
+      "businessMutations": 0
+    },
+    {
+      "width": 768,
+      "passed": true,
+      "boxes": [
+        {
+          "x": 244,
+          "y": 840.03125,
+          "width": 209.28125,
+          "height": 44
+        },
+        {
+          "x": 469.28125,
+          "y": 840.03125,
+          "width": 155.40625,
+          "height": 44
+        },
+        {
+          "x": 244,
+          "y": 908.03125,
+          "width": 157.625,
+          "height": 44
+        }
+      ],
+      "appearance": [
+        {
+          "background": "rgb(37, 99, 235)",
+          "color": "rgb(255, 255, 255)",
+          "border": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "color": "rgb(51, 65, 85)",
+          "border": "rgb(203, 213, 225)"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "color": "rgb(185, 28, 28)",
+          "border": "rgb(254, 202, 202)"
+        }
+      ],
+      "keyboardOrder": true,
+      "confirmations": [
+        "submit",
+        "withdraw",
+        "delete"
+      ],
+      "businessMutations": 0
+    },
+    {
+      "width": 375,
+      "passed": true,
+      "boxes": [
+        {
+          "x": 16,
+          "y": 787.71875,
+          "width": 333,
+          "height": 44
+        },
+        {
+          "x": 16,
+          "y": 847.71875,
+          "width": 333,
+          "height": 44
+        },
+        {
+          "x": 16,
+          "y": 915.71875,
+          "width": 333,
+          "height": 44
+        }
+      ],
+      "appearance": [
+        {
+          "background": "rgb(37, 99, 235)",
+          "color": "rgb(255, 255, 255)",
+          "border": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "color": "rgb(51, 65, 85)",
+          "border": "rgb(203, 213, 225)"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "color": "rgb(185, 28, 28)",
+          "border": "rgb(254, 202, 202)"
+        }
+      ],
+      "keyboardOrder": true,
+      "confirmations": [
+        "submit",
+        "withdraw",
+        "delete"
+      ],
+      "businessMutations": 0
+    }
+  ],
+  "errors": []
+}

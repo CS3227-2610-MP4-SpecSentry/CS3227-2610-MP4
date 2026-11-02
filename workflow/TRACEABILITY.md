@@ -1,5 +1,16 @@
 # Requirement traceability
 
+## Draft detail action spacing — 2 November 2026
+
+REQ-CON-017 / REQ-SHR-005: lifecycle actions use16px token gaps, primary Submit
+and secondary Withdraw; destructive Delete occupies its own row with24px spacing.
+Below768px actions stack at full available width with44px minimum targets.
+See the [change and independent verification](../logs/yooplo/2026-11-02-draft-action-spacing.md):
+Chrome1440/768/375px layout, hierarchy, keyboard and confirmation/cancel checks
+passed without business mutations;56existing lifecycle/deletion tests, client
+typecheck and root lint passed. This is bounded layout regression evidence, not
+new real-database or full accessibility certification.
+
 ## Contributor fixed-schema live acceptance — 2 November 2026
 
 REQ-CON-003, SHR-006 and AI typed-output/budget/privacy requirements map to the

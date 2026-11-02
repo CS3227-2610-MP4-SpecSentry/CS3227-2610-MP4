@@ -1,0 +1,35 @@
+{
+  "id": "4f1a7f7589f6481da7ee9d388037e653",
+  "prompter": "yooplo",
+  "session": "2026-11-02-draft-action-spacing",
+  "agent": "main",
+  "invocation": "commit-1",
+  "stage": "commit-reviewed-layout",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact runtime settings unavailable",
+  "started_at": "2026-11-02T15:53:31.119528+00:00",
+  "ended_at": "2026-11-02T15:53:44.346935+00:00",
+  "elapsed_seconds": 13.227407,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Commit scope reviewed and authorized; final Git operation follows measurement closure",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry unavailable",
+    "output_tokens": "Per-record runtime usage telemetry unavailable",
+    "cache_read_tokens": "Per-record runtime usage telemetry unavailable",
+    "tool_calls": "Per-record runtime usage telemetry unavailable",
+    "retries": "Per-record runtime usage telemetry unavailable"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry unavailable"
+}
