@@ -1,0 +1,35 @@
+{
+  "id": "3cc7b31094624072bde02cd80d95ba2b",
+  "prompter": "yooplo",
+  "session": "2026-10-31-ui-spec-publication",
+  "agent": "reviewer",
+  "invocation": "final-stage-review-1",
+  "stage": "staged-publication-hygiene-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T18:51:41.582619+00:00",
+  "ended_at": "2026-10-30T18:52:41.327459+00:00",
+  "elapsed_seconds": 59.74484,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent staged inventory review:308paths exactly match explicit commit manifest, all staged Markdown targets published,14 canonical screenshot aliases byte-identical, no unapproved asset candidates/common credential patterns. PUB-LINK001 closed. Commit readiness clear conditional on known whitespace cleanup clean cached diff plus post-normalization checks and mechanical metadata refresh.",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "output_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "cache_read_tokens": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "tool_calls": "Exact execution settings and attributable token/cache/tool telemetry not exposed",
+    "retries": "Exact execution settings and attributable token/cache/tool telemetry not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and attributable token/cache/tool telemetry not exposed"
+}

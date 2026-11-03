@@ -1,0 +1,9 @@
+{
+  "src/client/src/App.tsx": "b294cb9211d148cc53c9227260d45c86021d312257409b2a1b7259f65a411f13",
+  "src/client/src/main.tsx": "9b3c18f9da633c37022510f67e2f1a559ba090e44a5acc425e13dbbe2b0f4dce",
+  "src/client/src/styles.css": "c615584949932978f52f9e083034b2e12557ca5d0c6e247274b42dce7d6c4f1b",
+  "src/client/src/features/contributor/ContributorWorkspace.tsx": "8f230f74b406d90051c8f0699c487e641aedc736475e1cc1b3e86a180d82a4e6",
+  "src/client/src/features/contributor/PageHeader.tsx": "80228caeda7f282a6e1b3d746a738e3768a035b835ef0ee66c4fef854e98c9dd",
+  "src/client/src/shared/NavigationGuardProvider.tsx": "4558d188f0fc87f282ed469a1201787a6916f6fbdd8ca85d06854863e84fd658",
+  "src/client/src/shared/navigationGuard.ts": "43a8e7aa245f63fd752d64204841a44a2d73dca20be78e9efdbca0b4661630fc"
+}

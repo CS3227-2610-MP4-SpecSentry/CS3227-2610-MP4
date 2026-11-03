@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ContributorWorkspace } from './ContributorWorkspace';
@@ -37,13 +37,23 @@ describe('Contributor private drafts', () => {
     expect(await screen.findByText(/No drafts yet/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole('link', { name: 'Create New Draft' })); fill();
     fireEvent.click(screen.getByRole('button', { name: 'Create private draft' }));
-    expect(await screen.findByText(content.title)).toBeInTheDocument();
+    expect(await screen.findByText(content.title, { selector: 'dd' })).toBeInTheDocument();
     expect(document.querySelector('script')).toBeNull();
     expect(fetch.mock.calls[1]?.[1]).toMatchObject({ method: 'POST', headers: { 'x-csrf-token': token } });
     expect(JSON.parse(fetch.mock.calls[1]?.[1].body as string)).toEqual(content);
     fireEvent.click(screen.getByRole('link', { name: 'Back to your drafts' }));
     expect(await screen.findByRole('link', { name: content.title })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /submit|delete|edit/i })).not.toBeInTheDocument();
+  });
+  it('keeps the page count and one privacy explanation with the actual draft list', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply({ items: [], nextCursor: null })));
+    setup(); await screen.findByRole('heading', { name: 'No drafts yet' });
+    const panel = screen.getByRole('region', { name: 'Your private drafts' });
+    expect(within(panel).getByTestId('draft-page-count')).toHaveTextContent('0');
+    expect(within(panel).getByText('Drafts on this page')).toBeInTheDocument();
+    expect(within(panel).getByText('Only you can read these working drafts.')).toBeInTheDocument();
+    expect(screen.getAllByText('Only you can read these working drafts.')).toHaveLength(1);
+    expect(within(panel).getByRole('link', { name: 'Create your first draft' })).toHaveAttribute('href', '/contributor/new');
   });
   it('associates validation with fields, focuses the first error and retains input', async () => {
     const fetch = vi.fn(); vi.stubGlobal('fetch', fetch); setup('/contributor/new');

@@ -4,6 +4,40 @@ As of 25 October 2026. Imported dates are targets, not completion evidence. Hist
 
 ## Team Allocation
 
+UI specification/publication,31October2026: consolidate implemented phases1–3 in
+[UI-UX-SPEC](specs/UI-UX-SPEC.md), retaining REQ-CON-010–017 / AC-CON-UX-001–008.
+Curate source/spec/tests/reports and appropriate browser evidence using an explicit
+inventory; keep local worktrees/backups/build/env artifacts excluded without deletion.
+Fresh client/lint/types/build and Phase1–3 browser checks precede authorized commits
+and normal push to feature/contributor-ui-polish. No PR/merge/release/deployment.
+Actual evidence and publication outcome: [run](../logs/yooplo/2026-10-31-ui-spec-publication.md).
+
+Visual refinement Phase3,31October2026: approved REQ-CON-017 / AC-CON-UX-008
+compacts the truthful page-scoped draft dashboard and consolidates existing visual
+tokens/control feedback across implemented screens. Preserve REQ-CON-010–016 and
+all Phase1/2 behavior; investigate intermittent row-focus timing using evidence.
+Before edits,143 pending files were snapshotted and44 baseline screenshots captured.
+Implementation and independent verification follow the [Phase3 run](../logs/yooplo/2026-10-31-visual-phase3.md).
+No new dependencies, backend contracts, creation redirect or deployment scope.
+
+Navigation/workspace Phase2, 31 October2026: REQ-CON-013/014/015/016 and
+AC-CON-UX-004/005/006/007 refine task orientation, row links, editor section jumps,
+guidance, mobile context and truthful recovery copy. Implementation is isolated
+against the staged copy of uncommitted Phase1; original files remain unchanged.
+Creation still opens detail; inactive PROP-CON-001 needs explicit approval.
+Review/testing evidence is tracked in the [Phase2 run](../logs/yooplo/2026-10-31-navigation-phase2.md).
+No Phase3 or commit/publication authorization is inferred.
+
+Functional UX Phase 1, 31 October 2026: approved scope is REQ-CON-010/011/012
+(unsaved draft navigation safety, complete saved criteria detail, reachable Save
+and adjacent feedback). Preserve all existing domain APIs, design identity and
+session/version/recovery controls. Independent design/security and acceptance
+evidence belongs in the [functional UX run](../logs/yooplo/2026-10-31-functional-ux.md).
+Local implementation and independent review/browser acceptance are complete:
+98 client tests and28 Chrome cases passed, including the skip-link history bypass
+regression. Exact commands, production build and remaining limitations are recorded
+in the run. No Phase 2/3, commit or deployment authorization is inferred.
+
 Shell refinement, 31 October 2026: bounded workspace/navigation scroll areas,
 stationary topbar/sidebar, desktop icon rail and native mobile navigation drawer
 extend the existing presentation update. Implementation and independent acceptance
@@ -207,3 +241,21 @@ Subsequent review-preparation request authorized commit/push; [PR15](https://git
 now targets master. Final Increment5 teammate approval remains pending; merge and Increment6
 remain excluded. Inherited INC2-VER-001 remains unresolved.
 [Current brief and evidence](../logs/yooplo/2026-10-30-contributor-increment-5.md).
+
+### PR15/16 integration reconciliation — 1 November 2026
+
+Merged fetched master646eefd into the preparation branch, then propagated it into
+the stacked UI branch; both existing PR branches updated without force rewriting.
+PR15 still targets master; PR16 still targets the preparation branch. Neither PR
+merged into its target; teammate approval remains separate. Preserved both roles'
+styles/guides, Reviewer authorization and Contributor navigation/recovery. Corrected
+an obsolete submitted-working-copy test under existing REQ-CON-002 and restored
+Reviewer's heading hierarchy, including role-login browser assertions. No new
+server/shared API/schema/permission or feature increment.
+Final local evidence:88server units,213PostgreSQL cases,182UI client tests passed;
+typecheck/lint/build passed. PR15 live Chromium19/19 passed; final UI17cases passed
+before one obsolete Reviewer heading assertion failed, then all4affected scaffold
+cases independently passed after its correction (overlap; not one final19greenrun).
+Both PRs report mergeable; CI was still running at publication. Existing brand
+label-name mismatch and INC2-VER-001 remain unresolved.
+[Resolution decisions, independent checks and failures](../logs/yooplo/2026-11-01-pr-conflicts.md).

@@ -26,7 +26,7 @@ test('owner edits via keyboard with version conflicts, confirmed reload, uncerta
   await page.goto('/contributor');
   await page.getByLabel('Username').fill(username); await page.getByLabel('Password').fill(password);
   await page.getByLabel('Password').press('Enter');
-  await expect(page.getByRole('heading', { name: 'Contributor workspace' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Private drafts', exact: true })).toBeVisible();
   const auth = await (await page.request.get('/api/auth/session')).json();
   const initial = { title: 'Initial title', problem: 'Problem', constraints: '', expectedBehavior: 'Expected',
     summary: 'Hidden summary', diffText: 'Hidden diff', criteria: [{ statement: 'Hidden criterion', required: true }], evidence: [{ text: 'Hidden evidence' }] };
@@ -41,10 +41,11 @@ test('owner edits via keyboard with version conflicts, confirmed reload, uncerta
   await page.keyboard.press('Tab'); await page.keyboard.type('Edited constraints');
   await page.keyboard.press('Tab'); await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.type('Edited behavior');
   await page.getByRole('button', { name: 'Save private draft' }).focus(); await page.keyboard.press('Enter');
-  await expect(page.getByText('Draft saved. Version 1.')).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Save draft and status', exact: true }).getByRole('status').filter({ hasText: 'Draft saved. Version 1.' })).toBeVisible();
   expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([]);
   await page.getByRole('button', { name: 'Back to draft detail' }).click();
-  await expect(page.getByText('<script>Edited title</script>', { exact: true })).toBeVisible();
+  await expect(page.getByRole('definition').filter({ hasText: '<script>Edited title</script>' })).toBeVisible();
+  await expect(page.getByRole('definition').filter({ hasText: '<script>Edited title</script>' })).toHaveText('<script>Edited title</script>');
   await page.getByRole('link', { name: 'Edit private draft' }).click();
   await expect(page.getByLabel('Title (required)')).toHaveValue('<script>Edited title</script>');
   const latest = await (await page.request.get(`/api/proposals/${created.proposalId}/draft`)).json();
@@ -53,7 +54,10 @@ test('owner edits via keyboard with version conflicts, confirmed reload, uncerta
   expect(external.status()).toBe(200);
   await page.getByLabel('Title (required)').fill('My conflicting edits');
   await page.getByRole('button', { name: 'Save private draft' }).click();
-  await expect(page.getByRole('alert')).toContainText('This draft changed');
+  await expect(page.getByRole('region', { name: 'Save draft and status', exact: true }).getByRole('status')).toHaveText('Draft changed. Saving is paused.');
+  await page.getByRole('link', { name: 'Recovery details', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Save recovery details', exact: true })).toBeFocused();
+  await expect(page.getByRole('region', { name: 'Save recovery details', exact: true }).getByRole('alert')).toContainText('This draft changed');
   await expect(page.getByLabel('Title (required)')).toHaveValue('My conflicting edits');
   await expect(page.getByRole('button', { name: 'Save private draft' })).toBeDisabled();
   page.once('dialog', dialog => dialog.dismiss());
@@ -64,11 +68,14 @@ test('owner edits via keyboard with version conflicts, confirmed reload, uncerta
   await expect(page.getByLabel('Title (required)')).toHaveValue('External saved title');
   await page.getByLabel('Title (required)').fill('My reconciled edit');
   await page.getByRole('button', { name: 'Save private draft' }).click();
-  await expect(page.getByText('Draft saved. Version 3.')).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Save draft and status', exact: true }).getByRole('status').filter({ hasText: 'Draft saved. Version 3.' })).toBeVisible();
   await page.route('**/api/proposals/*/draft', route => route.request().method() === 'PATCH' ? route.abort('failed') : route.continue());
   await page.getByLabel('Title (required)').fill('Uncertain local text');
   await page.getByRole('button', { name: 'Save private draft' }).click();
-  await expect(page.getByRole('alert')).toContainText('save result is uncertain');
+  await expect(page.getByRole('region', { name: 'Save draft and status', exact: true }).getByRole('status')).toHaveText('Save result uncertain. Saving is paused.');
+  await page.getByRole('link', { name: 'Recovery details', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Save recovery details', exact: true })).toBeFocused();
+  await expect(page.getByRole('region', { name: 'Save recovery details', exact: true }).getByRole('alert')).toContainText('save result is uncertain');
   await expect(page.getByLabel('Title (required)')).toHaveValue('Uncertain local text');
   await expect(page.getByRole('button', { name: 'Save private draft' })).toBeDisabled();
   expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([]);

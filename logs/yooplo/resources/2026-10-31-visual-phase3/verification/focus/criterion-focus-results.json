@@ -1,0 +1,15 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "Supplement: criterion and evidence add/validation/removal focus",
+      "status": "passed"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [],
+  "warnings": [],
+  "screenshots": [
+    "criterion-evidence-focus-supplement.png"
+  ]
+}

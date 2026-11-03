@@ -1,0 +1,81 @@
+
+> @specsentry/client@0.1.0 test
+> vitest run src/features/contributor/CriteriaDraft.test.tsx -t before passive effects finish
+
+
+ RUN  v5.0.5 C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/src/client
+
+ ❯ src/features/contributor/CriteriaDraft.test.tsx (18 tests | 2 failed | 16 skipped) 189ms
+   ❯ Private draft acceptance criteria (18)
+     × focuses the committed new row when Add criterion happens before passive effects finish 149ms
+     × focuses the committed new row when Add evidence happens before passive effects finish 39ms
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 16 skipped (18)
+   Start at  02:11:12
+   Duration  1.73s (environment 64%, tests 12%, setup 12%, import 7%, transform 5%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/contributor/CriteriaDraft.test.tsx > Private draft acceptance criteria > focuses the committed new row when Add criterion happens before passive effects finish
+Error: expect(element).toHaveFocus()
+
+Expected element with focus:
+  <textarea
+  aria-describedby="criteria-hint"
+  aria-invalid="false"
+  id="criterion-1-statement"
+  rows="3"
+/>
+Received element with focus:
+  <button
+  id="add-criterion"
+  type="button"
+>
+  Add criterion
+</button>
+ ❯ src/features/contributor/CriteriaDraft.test.tsx:57:19
+     55|     const added = await screen.findByLabelText(addedLabel);
+     56|     expect(activated).toBe(true);
+     57|     expect(added).toHaveFocus();
+       |                   ^
+     58|   });
+     59|   it('requires a human meaning declaration, keeps a correction key, an…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/features/contributor/CriteriaDraft.test.tsx > Private draft acceptance criteria > focuses the committed new row when Add evidence happens before passive effects finish
+Error: expect(element).toHaveFocus()
+
+Expected element with focus:
+  <textarea
+  aria-describedby="evidence-hint"
+  aria-invalid="false"
+  id="evidence-1-text"
+  rows="4"
+/>
+Received element with focus:
+  <button
+  id="add-evidence"
+  type="button"
+>
+  Add evidence
+</button>
+ ❯ src/features/contributor/CriteriaDraft.test.tsx:57:19
+     55|     const added = await screen.findByLabelText(addedLabel);
+     56|     expect(activated).toBe(true);
+     57|     expect(added).toHaveFocus();
+       |                   ^
+     58|   });
+     59|   it('requires a human meaning declaration, keeps a correction key, an…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\Users\jjwr2\OneDrive\Desktop\Projects\CS3227-2610-MP4\src\client
+npm error workspace @specsentry/client@0.1.0
+npm error location C:\Users\jjwr2\OneDrive\Desktop\Projects\CS3227-2610-MP4\src\client
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c vitest run src/features/contributor/CriteriaDraft.test.tsx -t ^^^"before^^^ passive^^^ effects^^^ finish^^^"

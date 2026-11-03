@@ -1,0 +1,18 @@
+{
+  "permanent_source": "workflow/tests/browser/visual-phase3-checks.mjs",
+  "source_sha256": "63880fb0b32e8a715521db2386a54090716d3aaa0f4ef0ab56120fe16aba03f6",
+  "provenance": "Existing validated seven-case supplemental script plus the existing focus check body; assertions preserved, shared fixture prefix and safe output routing",
+  "focus_body_preserved": true,
+  "required_retained_baseline_pngs": [
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-375.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-768.png",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-1440.png"
+  ],
+  "source_has_no_tmp_runtime_imports": true,
+  "required_asset_sha256": {
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-375.png": "d5188b326ec09e0cd63a307dd6da18d203e12d8c23309018ee698d9bd4c75b6f",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-768.png": "3790ce63eafe1b72c0b83f0be7812adafceffa8838cc982834f4821a1a613ac0",
+    "logs/yooplo/resources/2026-10-31-visual-phase3/verification/baseline/empty-1440.png": "6f570036c2facc0853dc237dbac1e8dac150b4e6b86b37962e85bbc7ba4535bc"
+  },
+  "validated_cases": 8
+}

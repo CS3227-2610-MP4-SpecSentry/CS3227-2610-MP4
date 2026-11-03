@@ -1,0 +1,35 @@
+{
+  "id": "543a24eac25d4fb7b7b122f54f97ae08",
+  "prompter": "yooplo",
+  "session": "2026-10-31-navigation-phase2",
+  "agent": "implementer",
+  "invocation": "implementer-3",
+  "stage": "enlarged-text-recovery-fix",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T17:34:21.224284+00:00",
+  "ended_at": "2026-10-30T17:37:53.693204+00:00",
+  "elapsed_seconds": 212.46892,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "P2-A11Y-002 own-height skip hiding and P2-MOB-001 compact truthful sticky summary with normal-flow recovery details implemented; 110 client tests, typecheck, ESLint and diff check passed; fresh browser review pending",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

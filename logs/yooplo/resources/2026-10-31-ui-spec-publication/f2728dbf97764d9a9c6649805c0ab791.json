@@ -1,0 +1,35 @@
+{
+  "id": "f2728dbf97764d9a9c6649805c0ab791",
+  "prompter": "yooplo",
+  "session": "2026-10-31-ui-spec-publication",
+  "agent": "verifier",
+  "invocation": "publication-verify-1",
+  "stage": "prepare-reproducible-browser-checks",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T18:38:16.673462+00:00",
+  "ended_at": "2026-10-30T18:47:59.565726+00:00",
+  "elapsed_seconds": 582.892264,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "FinalcurrentCSS48/48functional34/34visual8/8permanentextraspass;zeroerrors/warnings;portabletestsource/assets/proofs/reportready;5189stopped",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ec3e5fbd17fb40139fb4133fba819232",
+  "prompter": "yooplo",
+  "session": "2026-10-31-functional-ux",
+  "agent": "reviewer",
+  "invocation": "reviewer-2",
+  "stage": "patch-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited exact settings not exposed",
+  "started_at": "2026-10-30T16:42:37.536066+00:00",
+  "ended_at": "2026-10-30T16:46:35.960702+00:00",
+  "elapsed_seconds": 238.424636,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent final source/security review found no confirmed blocker; UX-NAV-001 owned release and UX-NAV-002 reload wording verified; Chrome repeated-POP cancel/accept probes retained or left correct history safely",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage and exact execution settings not exposed",
+    "output_tokens": "Per-record runtime usage and exact execution settings not exposed",
+    "cache_read_tokens": "Per-record runtime usage and exact execution settings not exposed",
+    "tool_calls": "Per-record runtime usage and exact execution settings not exposed",
+    "retries": "Per-record runtime usage and exact execution settings not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage and exact execution settings not exposed"
+}

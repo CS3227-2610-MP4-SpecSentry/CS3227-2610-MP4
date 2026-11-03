@@ -1,0 +1,35 @@
+{
+  "id": "f55a8948511e4d67a9ded22be642c25c",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "browser-runtime",
+  "invocation": "ui-browser-3",
+  "stage": "final-cross-role-chromium",
+  "attempt": 3,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "External browser process, model settings not applicable",
+  "started_at": "2026-10-31T18:20:16.039501+00:00",
+  "ended_at": "2026-10-31T18:22:47.669182+00:00",
+  "elapsed_seconds": 151.629681,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "17finalcrossrolebrowsercasespassed;Reviewerloginassertionstillassumedplaceholderh1Reviewerworkspace;realintegratedh1Reviewer+h2workspace requirestestalignment;1caseunexecutedafterfailfast",
+  "unavailable_reasons": {
+    "input_tokens": "Browser subprocess interval;usage/model settings not exposed",
+    "output_tokens": "Browser subprocess interval;usage/model settings not exposed",
+    "cache_read_tokens": "Browser subprocess interval;usage/model settings not exposed",
+    "tool_calls": "Browser subprocess interval;usage/model settings not exposed",
+    "retries": "Browser subprocess interval;usage/model settings not exposed"
+  },
+  "unavailable_reason": "Browser subprocess interval;usage/model settings not exposed"
+}

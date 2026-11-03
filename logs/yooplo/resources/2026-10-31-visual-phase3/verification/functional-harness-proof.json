@@ -1,0 +1,6 @@
+{
+  "source_sha256": "c9f2045c2fbae6e0f49cf72ae431f37ecc5888a281c00aa956ffc12d9a54e228",
+  "temporary_sha256": "84175436ae464cc75ffff7dcd746aa831e62f418a5ea85972d90ac7e188798f3",
+  "only_difference": "one output directory substitution; UI_BASE_URL supplies5188",
+  "reverse_byte_equivalence": true
+}

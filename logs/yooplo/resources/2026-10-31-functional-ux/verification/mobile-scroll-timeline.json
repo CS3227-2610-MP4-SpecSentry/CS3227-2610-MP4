@@ -1,0 +1,38 @@
+[
+  {
+    "label": "after evidence edit",
+    "scroll": 1983,
+    "mainHeight": 831,
+    "barHeight": 118.984375,
+    "barY": 92.59375,
+    "evidenceY": 864.703125,
+    "focus": "<textarea id=\"evidence-0-text\" rows=\"4\" aria-invalid=\"false\" aria-describedby=\"evidence-hint\">Evidence changed</textarea>"
+  },
+  {
+    "label": "after Save focus",
+    "scroll": 1558,
+    "mainHeight": 831,
+    "barHeight": 118.984375,
+    "barY": 92.59375,
+    "evidenceY": 1289.703125,
+    "focus": "<button type=\"submit\" form=\"edit-draft-form\">Save private draft</button>"
+  },
+  {
+    "label": "pending",
+    "scroll": 1576,
+    "mainHeight": 831,
+    "barHeight": 137.578125,
+    "barY": 92.59375,
+    "evidenceY": 1290.296875,
+    "focus": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><a class=\"skip-link\" href=\"#main-content\">Skip to main content</a><aside class=\"sidebar desktop-sidebar\" id=\"wo"
+  },
+  {
+    "label": "saved",
+    "scroll": 1558,
+    "mainHeight": 831,
+    "barHeight": 118.984375,
+    "barY": 92.59375,
+    "evidenceY": 1289.703125,
+    "focus": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><a class=\"skip-link\" href=\"#main-content\">Skip to main content</a><aside class=\"sidebar desktop-sidebar\" id=\"wo"
+  }
+]

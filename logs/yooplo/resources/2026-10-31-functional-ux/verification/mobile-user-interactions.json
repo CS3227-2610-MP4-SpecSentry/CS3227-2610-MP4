@@ -1,0 +1,120 @@
+[
+  {
+    "method": "pointer",
+    "steps": [
+      {
+        "label": "edited evidence",
+        "scroll": 1983,
+        "bodyScroll": 0,
+        "focus": "evidence-0-text"
+      },
+      {
+        "label": "saved",
+        "scroll": 1558,
+        "bodyScroll": 0,
+        "focus": "\n    Skip to main contentSpecSentrySpeci"
+      }
+    ]
+  },
+  {
+    "method": "keyboard",
+    "steps": [
+      {
+        "label": "edited evidence",
+        "scroll": 1983,
+        "bodyScroll": 0,
+        "focus": "evidence-0-text"
+      },
+      {
+        "label": "ShiftTab 0",
+        "scroll": 1983,
+        "bodyScroll": 0,
+        "focus": "draft-diffText"
+      },
+      {
+        "label": "ShiftTab 1",
+        "scroll": 1983,
+        "bodyScroll": 0,
+        "focus": "draft-summary"
+      },
+      {
+        "label": "ShiftTab 2",
+        "scroll": 1394,
+        "bodyScroll": 0,
+        "focus": "add-criterion"
+      },
+      {
+        "label": "ShiftTab 3",
+        "scroll": 1394,
+        "bodyScroll": 0,
+        "focus": "Remove criterion 2"
+      },
+      {
+        "label": "ShiftTab 4",
+        "scroll": 1394,
+        "bodyScroll": 0,
+        "focus": ""
+      },
+      {
+        "label": "ShiftTab 5",
+        "scroll": 1394,
+        "bodyScroll": 0,
+        "focus": "criterion-1-statement"
+      },
+      {
+        "label": "ShiftTab 6",
+        "scroll": 1368,
+        "bodyScroll": 0,
+        "focus": "Remove criterion 1"
+      },
+      {
+        "label": "ShiftTab 7",
+        "scroll": 1337,
+        "bodyScroll": 0,
+        "focus": ""
+      },
+      {
+        "label": "ShiftTab 8",
+        "scroll": 915,
+        "bodyScroll": 0,
+        "focus": "criterion-0-statement"
+      },
+      {
+        "label": "ShiftTab 9",
+        "scroll": 914,
+        "bodyScroll": 0,
+        "focus": "draft-expectedBehavior"
+      },
+      {
+        "label": "ShiftTab 10",
+        "scroll": 347,
+        "bodyScroll": 0,
+        "focus": "draft-constraints"
+      },
+      {
+        "label": "ShiftTab 11",
+        "scroll": 347,
+        "bodyScroll": 0,
+        "focus": "draft-problem"
+      },
+      {
+        "label": "ShiftTab 12",
+        "scroll": 296,
+        "bodyScroll": 0,
+        "focus": "draft-title"
+      },
+      {
+        "label": "ShiftTab 13",
+        "scroll": 0,
+        "bodyScroll": 0,
+        "focus": "Save private draft"
+      },
+      {
+        "label": "saved",
+        "scroll": 0,
+        "bodyScroll": 0,
+        "focus": "\n    Skip to main contentSpecSentrySpeci"
+      }
+    ]
+  }
+]

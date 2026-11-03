@@ -1,0 +1,19 @@
+{
+  "scope": "Fresh original-tree validation after comprehensive implemented UI/UX specification and test portability updates; current final Phase3 application/CSS unchanged",
+  "checks": [
+    {"command": "npm.cmd run test -w @specsentry/client", "passed": 113, "test_files": 8, "exit_code": 0},
+    {"command": "npm.cmd run lint", "exit_code": 0},
+    {"command": "npm.cmd run typecheck --workspaces --if-present", "workspaces": ["shared", "server", "client"], "exit_code": 0},
+    {"command": "npm.cmd run build", "exit_code": 0},
+    {"suite": "Phase1/2 browser regressions", "passed": 48, "failed": 0},
+    {"suite": "Phase3 visual browser matrix", "passed": 34, "failed": 0},
+    {"suite": "Portable layout/state and criterion/evidence row focus", "passed": 8, "failed": 0},
+    {"command": "git diff --check", "exit_code": 0},
+    {"suite": "Changed Markdown links", "missing": 0, "excluded_local_targets": 0},
+    {"suite": "Explicit candidate sensitive-pattern screening", "findings": 0}
+  ],
+  "browser_limits": "Chrome synthetic API fixtures only; no live backend/cross-role, other-engine, real mobile keyboard or complete manual accessibility certification.",
+  "secret_screen_limit": "Pattern-based screening plus manual file-scope review, not proof that every possible secret format is detected.",
+  "code_preservation": "All prior386 pending paths still exist; validated source content matches Phase3 completion. Three files had exactly one redundant terminal CRLF removed; body-byte equality is recorded in whitespace-hygiene.json. No backend APIs, dependency versions or business workflows changed.",
+  "post_hygiene_rerun": "Fresh113 client tests, lint, all3 workspace typechecks and production build rechecked after final whitespace cleanup. Existing browser48/34/8 passes cover unchanged executable content."
+}

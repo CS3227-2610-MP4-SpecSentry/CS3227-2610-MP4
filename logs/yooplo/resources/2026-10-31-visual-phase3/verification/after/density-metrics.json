@@ -1,0 +1,73 @@
+[
+  {
+    "width": 375,
+    "before": {
+      "top": 529,
+      "method": "Baseline PNG longest left card border at known content x, minus frozen12px corner radius",
+      "x": 16,
+      "runs": [
+        {
+          "start": 541,
+          "end": 902,
+          "length": 361
+        },
+        {
+          "start": 280,
+          "end": 378,
+          "length": 98
+        },
+        {
+          "start": 411,
+          "end": 496,
+          "length": 85
+        }
+      ]
+    },
+    "after": 270.0625,
+    "movedUp": 258.9375
+  },
+  {
+    "width": 768,
+    "before": {
+      "top": 435,
+      "method": "Baseline PNG longest left card border at known content x, minus frozen12px corner radius",
+      "x": 244,
+      "runs": [
+        {
+          "start": 447,
+          "end": 801,
+          "length": 354
+        },
+        {
+          "start": 252,
+          "end": 394,
+          "length": 142
+        }
+      ]
+    },
+    "after": 230.0625,
+    "movedUp": 204.9375
+  },
+  {
+    "width": 1440,
+    "before": {
+      "top": 415,
+      "method": "Baseline PNG longest left card border at known content x, minus frozen12px corner radius",
+      "x": 288,
+      "runs": [
+        {
+          "start": 427,
+          "end": 780,
+          "length": 353
+        },
+        {
+          "start": 260,
+          "end": 374,
+          "length": 114
+        }
+      ]
+    },
+    "after": 238.0625,
+    "movedUp": 176.9375
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "id": "e0c4ee41f4b449b58a84ef45707b855f",
+  "prompter": "yooplo",
+  "session": "2026-10-31-navigation-phase2",
+  "agent": "reviewer",
+  "invocation": "reviewer-1",
+  "stage": "design-and-patch-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T17:19:54.945600+00:00",
+  "ended_at": "2026-10-30T17:21:59.313035+00:00",
+  "elapsed_seconds": 124.367435,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only Phase2 design/security/spec review completed in isolated copy; constrained private title ownership, semantic links, focus-only jump navigation without untracked hash history, unchanged recovery safety and creation redirect approval gate",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "output_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "cache_read_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "tool_calls": "Exact execution settings and per-record runtime telemetry not exposed",
+    "retries": "Exact execution settings and per-record runtime telemetry not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and per-record runtime telemetry not exposed"
+}

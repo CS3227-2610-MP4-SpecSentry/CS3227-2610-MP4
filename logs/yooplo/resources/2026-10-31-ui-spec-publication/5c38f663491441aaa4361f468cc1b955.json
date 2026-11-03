@@ -1,0 +1,35 @@
+{
+  "id": "5c38f663491441aaa4361f468cc1b955",
+  "prompter": "yooplo",
+  "session": "2026-10-31-ui-spec-publication",
+  "agent": "implementer",
+  "invocation": "whitespace-1",
+  "stage": "trailing-whitespace-hygiene",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact inherited execution settings not exposed",
+  "started_at": "2026-10-30T18:51:29.250084+00:00",
+  "ended_at": "2026-10-30T18:51:38.464568+00:00",
+  "elapsed_seconds": 9.214484,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Removed one redundant terminal CRLF from each of3 assigned files; preserved exactlyone CRLF and all nonterminal bytes; before/after SHA256 and byte assertions recorded; no staging or functional changes",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

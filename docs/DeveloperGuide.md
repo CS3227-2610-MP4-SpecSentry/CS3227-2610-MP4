@@ -585,6 +585,27 @@ code, text or assets here with source, license and affected files.
 
 ### AI-use declaration
 
+Codex assisted with Phase2 navigation/workspace refinement on 31 October2026:
+task headings/breadcrumbs, semantic draft-row links, editor section navigation,
+readable guidance, compact mobile task context and recovery copy. Work is isolated
+from the uncommitted Phase1 snapshot; the original worktree is preserved. Separate
+review and acceptance agents verify the Phase2 diff and Phase1 regressions.
+No dependency or backend contract change is included. The creation-to-editor
+shortcut is documented as inactive PROP-CON-001 and remains approval-gated.
+Actual results, isolation checks and the Phase2-only manifest/patch are recorded in
+the [Phase2 run](../logs/yooplo/2026-10-31-navigation-phase2.md). Human verification
+and teammate sign-off remain pending.
+
+Codex assisted with the approved functional UX Phase 1 on 31 October 2026:
+navigation safety for unsaved drafts, complete saved criteria detail and reachable
+Save/status feedback. Separate design/security review and independent acceptance
+agents assessed the bounded change. The installed React Router's supported
+data-router blocker and native browser unload warning were used; no dependency,
+backend API or storage-persistence feature was added. Official router API/source
+documentation was consulted through Context7. Actual checks, fixes and limits are
+in the [functional UX run](../logs/yooplo/2026-10-31-functional-ux.md).
+AI summaries and teammate verification remain pending human review.
+
 Codex assisted with the 31 October 2026 shell scrolling refinement, including a
 viewport-bounded shell, independent workspace/navigation scrolling, desktop icon
 rail, native mobile navigation dialog and independent browser verification.
@@ -615,3 +636,32 @@ quality. Each member must verify and extend this declaration with their actual
 tools, specific uses and adapted-source acknowledgements before submission. No
 human verification of this draft declaration is implied. The assignment's cited
 academic integrity policies are indexed in [ASSIGNMENT-SPEC](../workflow/specs/ASSIGNMENT-SPEC.md#references-supplied-by-the-brief).
+
+### Phase3 presentation refinement
+
+The consolidated [implemented UI/UX specification](../workflow/specs/UI-UX-SPEC.md)
+documents the current shell, navigation/editor states, actual CSS tokens and
+verification limits. Contributor/shared specs retain authoritative requirement IDs;
+the UI specification adds no speculative role functionality or duplicate IDs.
+
+Codex assisted with the approved compact dashboard and existing CSS design-token
+consolidation, responsive/control presentation, row-focus investigation, and
+independent before/after browser verification. No UI library, CSS framework,
+image asset, external application design, backend API or dependency was added.
+Source stays in the existing React/CSS architecture; business and recovery
+contracts remain governed by REQ-CON-010–016. REQ-CON-017 / AC-CON-UX-008 defines
+the approved visual scope. The [Phase3 run](../logs/yooplo/2026-10-31-visual-phase3.md)
+links the actual token inventory, modified-file manifest, baseline/after fixtures,
+focus reproduction, checks, resource records and remaining limits. Human review
+of AI-generated changes and prompt summaries remains required and unclaimed.
+
+The design tokens live in `src/client/src/styles.css` under `:root`: existing
+`--navy`/`--blue` plus semantic text/surface/border/info/danger colors;
+`--font-sans`, `--text-xs/sm/base/lg/heading/title`; `--space-1/2/3/4/6/8`;
+`--radius-sm`, `--radius-control`, `--radius`; `--shadow`,
+`--shadow-control`, `--shadow-raised`; `--motion-fast`140ms and
+`--motion-base`180ms; `--focus-ring` and `--focus-offset`.
+Use tokens for repeated conventions and keep one-off layout measurements local.
+Transitions run only under `prefers-reduced-motion: no-preference` and pressed
+feedback uses an inset shadow, avoiding a control-position shift. Preserve the
+editor's measured Save-height scroll clearance when changing spacing.

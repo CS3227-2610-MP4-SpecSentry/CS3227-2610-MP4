@@ -1,0 +1,11 @@
+{
+  "scope": "Original worktree after applying validated Phase2 patch, preserving uncommitted Phase1",
+  "checks": [
+    {"command": "npm.cmd run test -w @specsentry/client", "attempt": 1, "exit_code": 1, "passed": 109, "failed": 1, "detail": "CriteriaDraft.test.tsx:29 immediate criterion2 focus; expected textarea, received Add criterion button. Ran concurrently with lint/typechecks."},
+    {"command": "npm.cmd run test -w @specsentry/client", "attempt": 2, "exit_code": 0, "passed": 110, "failed": 0, "detail": "Unchanged standalone rerun; no source or test adjustment."},
+    {"command": "npm.cmd run lint", "exit_code": 0},
+    {"command": "npm.cmd run typecheck --workspaces --if-present", "exit_code": 0, "workspaces": ["shared", "server", "client"]},
+    {"command": "npm.cmd run build", "exit_code": 0, "workspaces": ["shared", "server", "client"]}
+  ],
+  "limitation": "Intermittent unit focus assertion remains documented; this integration does not alter validated artifact code. Browser synthetic API regressions recorded separately."
+}

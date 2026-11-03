@@ -48,7 +48,7 @@ describe('Own never-submitted draft deletion', () => {
     vi.stubGlobal('fetch', fetch); const view = render(tree()); await confirm();
     await screen.findByRole('alert');
     expect(screen.getByRole('button', { name: 'Delete private draft' })).toBeDisabled();
-    expect(screen.getByText(content.title)).toBeInTheDocument();
+    expect(screen.getByText(content.title, { selector: 'dd' })).toBeInTheDocument();
     expect(screen.queryByText('raw-private-stack')).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Check current draft' }));
     await waitFor(() => expect(screen.getByRole('button', { name: 'Check current draft' })).toBeEnabled());
@@ -56,7 +56,7 @@ describe('Own never-submitted draft deletion', () => {
     expect(fetch).toHaveBeenCalledTimes(3);
     expect(screen.getByRole('button', { name: 'Delete private draft' })).toBeDisabled();
     fireEvent.click(screen.getByRole('button', { name: 'Check current draft' }));
-    await screen.findByText('Latest saved');
+    await screen.findByText('Latest saved', { selector: 'dd' });
     expect(screen.queryByRole('button', { name: 'Permanently delete draft' })).not.toBeInTheDocument();
     await confirm(); await screen.findByText('Private draft deleted.');
     expect(JSON.parse(fetch.mock.calls[4]?.[1].body as string)).toEqual({ expectedVersion: 4, confirmed: true });
@@ -75,7 +75,7 @@ describe('Own never-submitted draft deletion', () => {
     render(tree()); await confirm(); await screen.findByRole('alert');
     expect(screen.queryByText('raw-private-stack')).not.toBeInTheDocument();
     if (status !== 422) expect(screen.queryByText(content.title)).not.toBeInTheDocument();
-    else expect(screen.getByText(content.title)).toBeInTheDocument();
+    else expect(screen.getByText(content.title, { selector: 'dd' })).toBeInTheDocument();
   });
   it.each([204, 401])('suppresses late route-only %s navigation but still reports genuine session loss', async status => {
     let resolve!: (r: ReturnType<typeof reply>) => void;
@@ -85,9 +85,9 @@ describe('Own never-submitted draft deletion', () => {
     const lost = vi.fn(); vi.stubGlobal('fetch', fetch); render(tree(lost)); await confirm();
     expect(screen.getByRole('button', { name: 'Deleting...' })).toBeDisabled();
     expect(screen.queryByRole('link', { name: 'Back to your drafts' })).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole('link', { name: 'Other draft' })); await screen.findByText('Other private draft');
+    fireEvent.click(screen.getByRole('link', { name: 'Other draft' })); await screen.findByText('Other private draft', { selector: 'dd' });
     await act(async () => { resolve(reply({}, status)); });
-    expect(screen.getByText('Other private draft')).toBeInTheDocument();
+    expect(screen.getByText('Other private draft', { selector: 'dd' })).toBeInTheDocument();
     expect(screen.queryByText('Private draft deleted.')).not.toBeInTheDocument();
     expect(lost).toHaveBeenCalledTimes(status === 401 ? 1 : 0);
   });
@@ -103,7 +103,7 @@ describe('Own never-submitted draft deletion', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Delete private draft' })).toBeEnabled());
     await act(async () => { resolve(reply({}, status)); });
     expect(screen.getByText('Signed in as alice')).toBeInTheDocument();
-    expect(screen.getByText(content.title)).toBeInTheDocument();
+    expect(screen.getByText(content.title, { selector: 'dd' })).toBeInTheDocument();
     expect(screen.queryByText('Private draft deleted.')).not.toBeInTheDocument();
   });
 });

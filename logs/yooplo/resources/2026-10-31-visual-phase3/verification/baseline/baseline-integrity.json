@@ -1,0 +1,26 @@
+{
+  "preexisting_frontend_files_checked": 17,
+  "changed_frontend_files": [],
+  "hashes_after": {
+    "src/client/src/App.test.tsx": "7e03c1173d37b4391c939dc0d13955ada84ef445cdd875ad2a27a3faf3c9cd43",
+    "src/client/src/App.tsx": "a31f2ec1cf396f392950fa5fd2adef3d932c7de5ee30aa2a9e379c99286798b4",
+    "src/client/src/main.tsx": "9b3c18f9da633c37022510f67e2f1a559ba090e44a5acc425e13dbbe2b0f4dce",
+    "src/client/src/styles.css": "98c3ffb2074abc88c419adcd4eafbd8a9f6622edc69c47cd0ddec8bf1812173a",
+    "src/client/src/shared/Icon.tsx": "6e0fef44187fba2979be6b6ee734d92be740b607aa5efdfa1f82375146a0464d",
+    "src/client/src/shared/navigationGuard.ts": "43a8e7aa245f63fd752d64204841a44a2d73dca20be78e9efdbca0b4661630fc",
+    "src/client/src/shared/NavigationGuardProvider.tsx": "4558d188f0fc87f282ed469a1201787a6916f6fbdd8ca85d06854863e84fd658",
+    "src/client/src/test/setup.ts": "e6fb71ea5185b022ef77fdf9b081851a9bf989a63cf6041b4d31ad2fe799bffa",
+    "src/client/src/features/contributor/ContributorWorkspace.test.tsx": "fd74c639dbeaed913635ab5da856a56ca35abee180c08777319ee263d414e9fd",
+    "src/client/src/features/contributor/ContributorWorkspace.tsx": "84f0f495ceab4c3ab2702af7f4913cd95c58bbfc7b547bc597c275f0046e077a",
+    "src/client/src/features/contributor/CriteriaDraft.test.tsx": "87afaa6bc6fa1a2f64a26b23576b2a99ac418c95d90ac1d0fa9623c7136330b6",
+    "src/client/src/features/contributor/DeleteDraft.test.tsx": "26501a1d40f066066410ef2dd67eb49e0453935492e9546d7545aaba684ab636",
+    "src/client/src/features/contributor/EditDraft.test.tsx": "367c46574bcfd8d5ccb25c939dbac5a4f3ac96ff8f4741c71bf131c0bbe5e556",
+    "src/client/src/features/contributor/FunctionalUx.test.tsx": "3687449467fec65f88594b30fdb4096f989c87e9507b74128bfdda34c06adfef",
+    "src/client/src/features/contributor/NavigationPhase2.test.tsx": "cedbf22cdf5ab663a2c0862e29ade5b88beadd52bc8789aac6873080f54d151e",
+    "src/client/src/features/contributor/PageHeader.tsx": "80228caeda7f282a6e1b3d746a738e3768a035b835ef0ee66c4fef854e98c9dd",
+    "src/client/src/features/contributor/PreparationDraft.test.tsx": "f43fa2bf73550a478bf2def3986145c032946df16b0a9c2d0ff46fec6c31e065"
+  },
+  "visual_harness_sha256": "2779f68e20f33dc1610c746e6006f3abb6beaf455819e92ca1394c80f6226b7c",
+  "baseline_checks_passed": 34,
+  "baseline_screenshots": 44
+}

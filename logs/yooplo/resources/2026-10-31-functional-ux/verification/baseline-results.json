@@ -1,0 +1,18 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "baseline unsaved sidebar should remain after cancelled exit",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline.mjs:83:525\n    at async check (file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline.mjs:67:9)\n    at async file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline.mjs:83:1"
+    },
+    {
+      "name": "baseline saved criteria should appear on detail",
+      "status": "failed",
+      "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByText('<script>first criterion</script>', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByText('<script>first criterion</script>', { exact: true }) with timeout 5000ms\n  - waiting for getByText('<script>first criterion</script>', { exact: true })\n\n    at captureRawStack (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright-core\\lib\\coreBundle.js:9282:17)\n    at callMatcherAsStep (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright\\lib\\matchers\\expect.js:13316:57)\n    at Object.toBeVisible (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\node_modules\\playwright\\lib\\matchers\\expect.js:13308:23)\n    at C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\logs\\yooplo\\resources\\2026-10-31-functional-ux\\verification\\baseline.mjs:84:345\n    at async check (C:\\Users\\jjwr2\\OneDrive\\Desktop\\Projects\\CS3227-2610-MP4\\logs\\yooplo\\resources\\2026-10-31-functional-ux\\verification\\baseline.mjs:67:9)\n    at async file:///C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/logs/yooplo/resources/2026-10-31-functional-ux/verification/baseline.mjs:84:1"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [],
+  "screenshots": []
+}

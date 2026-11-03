@@ -1,0 +1,8 @@
+{
+  "contributor-criteria.spec.ts": "c5d02a37337ae0867e425ef0078e7d87427f64453fd1f3eb3ecfebb23339c2cf",
+  "contributor-deletion.spec.ts": "0d941282e653578899092f6a82b52e57e01afe99b65cced6d7fbeec587eb90f8",
+  "contributor-drafts.spec.ts": "6f6d55e5e6fd44d8d7877b842d9c5d992fe12daeacbe767a355b63a74a0e5d21",
+  "contributor-editing.spec.ts": "551e29a93bc0160c0cb10ed58bded83f555943f17cfdfb11fd04af1bcb3a5cdf",
+  "contributor-preparation.spec.ts": "8060018f81a37462cd496cfdf4608f77db67f5ac37236a246689f7700570873a",
+  "scaffold.spec.ts": "c23a3a6abe12776c94d54748acb310d6ae1c6b4010c498c9b2dddc9a9c38223a"
+}

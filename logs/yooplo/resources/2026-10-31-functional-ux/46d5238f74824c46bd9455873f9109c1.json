@@ -1,0 +1,35 @@
+{
+  "id": "46d5238f74824c46bd9455873f9109c1",
+  "prompter": "yooplo",
+  "session": "2026-10-31-functional-ux",
+  "agent": "verifier",
+  "invocation": "verifier-6",
+  "stage": "hash-fix-revalidation",
+  "attempt": 6,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T16:50:53.135417+00:00",
+  "ended_at": "2026-10-30T16:51:58.201759+00:00",
+  "elapsed_seconds": 65.066342,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "UX-NAV-003 independently fixed: skip keeps URL/historyidx and focusesmain; full28/28 browserpass zero errors/warnings",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "5f74ca3b30c94708a53c4a6b799a6ec5",
+  "prompter": "yooplo",
+  "session": "2026-10-31-navigation-phase2",
+  "agent": "implementer",
+  "invocation": "implementer-2",
+  "stage": "jump-clearance-and-copy-fix",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T17:29:29.984506+00:00",
+  "ended_at": "2026-10-30T17:30:43.392632+00:00",
+  "elapsed_seconds": 73.408126,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "P2-JUMP-001 computed sticky padding offset fixed and tested; requested recovery wording simplified; 107 client tests, client typecheck, lint and diff check passed; independent fresh browser review pending",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

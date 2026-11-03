@@ -1,0 +1,15 @@
+{
+  "scope": "Original root after Phase3; existing Phase1/2 preserved",
+  "checks": [
+    {"command": "npm.cmd run test -w @specsentry/client", "exit_code": 0, "passed": 113, "files": 8},
+    {"command": "npm.cmd run lint", "exit_code": 0},
+    {"command": "npm.cmd run typecheck --workspaces --if-present", "exit_code": 0, "workspaces": ["shared", "server", "client"]},
+    {"command": "npm.cmd run build", "exit_code": 0, "workspaces": ["shared", "server", "client"]},
+    {"reviewer_focused_tests": ["CriteriaDraft", "ContributorWorkspace"], "passed": 28, "exit_code": 0},
+    {"controlled_focus_before_fix": {"failed": 2, "exit_code": 1}, "controlled_focus_after_fix": {"passed": 2, "exit_code": 0}, "ordinary_unchanged_targeted_runs_before_fix": 15}
+  ],
+  "focus_limit": "Controlled scheduling reproduction supports the effect-timing fix; exact historical failure timing is not established.",
+  "final_rerun": "After P3-COPY-001 label-order correction, identical-lock dependency repair and P3-SPACE-001 scoped sibling-field margin: all113 client tests, root lint, all3 workspace typechecks and production build passed again.",
+  "environment_repair": "User reported failed npm ci/db:generate. Offline locked ci initially hit native rolldown EPERM; stopped only owned5188, repeated ci successfully with scripts disabled and generated Prisma. Manifests/versions unchanged; no dependency upgrade.",
+  "browser_results": "Separate before/after visual and Phase1/2 regression evidence under this verification directory."
+}

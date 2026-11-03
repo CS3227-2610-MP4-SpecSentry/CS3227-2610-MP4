@@ -1,0 +1,12 @@
+
+> @specsentry/client@0.1.0 test
+> vitest run src/features/contributor/CriteriaDraft.test.tsx -t before passive effects finish
+
+
+ RUN  v5.0.5 C:/Users/jjwr2/OneDrive/Desktop/Projects/CS3227-2610-MP4/src/client
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed | 16 skipped (18)
+   Start at  02:11:15
+   Duration  1.61s (environment 65%, tests 14%, setup 11%, import 7%, transform 2%, worker 1%)

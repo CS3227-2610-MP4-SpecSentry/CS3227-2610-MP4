@@ -1,0 +1,35 @@
+{
+  "id": "f86977a9340d4c0f9463ba0138dd1c67",
+  "prompter": "yooplo",
+  "session": "2026-10-31-functional-ux",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "coordinate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T16:34:18.656122+00:00",
+  "ended_at": "2026-10-30T17:09:07.485997+00:00",
+  "elapsed_seconds": 2088.829875,
+  "status": "interrupted",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Original coordination interrupted by verifier final-message usage failure; recovery observed at resume, elapsed includes intervening wait; final artifacts show28browser cases passed",
+  "unavailable_reasons": {
+    "input_tokens": "Exact interruption instant and per-record runtime telemetry unavailable",
+    "output_tokens": "Exact interruption instant and per-record runtime telemetry unavailable",
+    "cache_read_tokens": "Exact interruption instant and per-record runtime telemetry unavailable",
+    "tool_calls": "Exact interruption instant and per-record runtime telemetry unavailable",
+    "retries": "Exact interruption instant and per-record runtime telemetry unavailable"
+  },
+  "unavailable_reason": "Exact interruption instant and per-record runtime telemetry unavailable"
+}

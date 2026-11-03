@@ -1,0 +1,35 @@
+{
+  "id": "4b03dcdcafa3418c980c91c54f6ea353",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "verifier",
+  "invocation": "ui-review-1",
+  "stage": "stacked-ui-independent-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings not exposed",
+  "started_at": "2026-10-31T17:55:46.549729+00:00",
+  "ended_at": "2026-10-31T17:59:20.242146+00:00",
+  "elapsed_seconds": 213.692417,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent180client tests passed;stacked auth/navigation composition good;foundmissingReviewerh1integrationgap PR-MERGE-002;fixpendingfreshrevalidation",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed timing;child usage not exposed",
+    "output_tokens": "Coordinator-observed timing;child usage not exposed",
+    "cache_read_tokens": "Coordinator-observed timing;child usage not exposed",
+    "tool_calls": "Coordinator-observed timing;child usage not exposed",
+    "retries": "Coordinator-observed timing;child usage not exposed"
+  },
+  "unavailable_reason": "Coordinator-observed timing;child usage not exposed"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "bcd564c54c784bb3bd83c73499e306d6",
+  "prompter": "yooplo",
+  "session": "2026-10-31-visual-phase3",
+  "agent": "reviewer",
+  "invocation": "baseline-review-1",
+  "stage": "visual-baseline-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T18:02:22.265080+00:00",
+  "ended_at": "2026-10-30T18:04:17.154580+00:00",
+  "elapsed_seconds": 114.8895,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only Phase3 baseline/source/spec review identified dashboard redundancy, verified stale selector candidates, token consolidation and nested-border simplification; supplied sticky/mobile/enlargement/focus regression constraints without changing existing files",
+  "unavailable_reasons": {
+    "input_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "output_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "cache_read_tokens": "Exact execution settings and per-record runtime telemetry not exposed",
+    "tool_calls": "Exact execution settings and per-record runtime telemetry not exposed",
+    "retries": "Exact execution settings and per-record runtime telemetry not exposed"
+  },
+  "unavailable_reason": "Exact execution settings and per-record runtime telemetry not exposed"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "10913144a8c142d488f77dbed457963d",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "verifier",
+  "invocation": "heading-revalidate-2",
+  "stage": "final-heading-ui-independent-recheck",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings not exposed",
+  "started_at": "2026-10-31T18:03:23.533737+00:00",
+  "ended_at": "2026-10-31T18:21:10.555472+00:00",
+  "elapsed_seconds": 1067.021735,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "PR-MERGE-002 independentlyclosed;realChromium4role-widthcombinations headings/keyboard/mobilefocus/reflowpassed;182clienttests passedpreviousattempt;preexistingbrandlabeldefectdisclosed",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed timing;child usage not exposed",
+    "output_tokens": "Coordinator-observed timing;child usage not exposed",
+    "cache_read_tokens": "Coordinator-observed timing;child usage not exposed",
+    "tool_calls": "Coordinator-observed timing;child usage not exposed",
+    "retries": "Coordinator-observed timing;child usage not exposed"
+  },
+  "unavailable_reason": "Coordinator-observed timing;child usage not exposed"
+}

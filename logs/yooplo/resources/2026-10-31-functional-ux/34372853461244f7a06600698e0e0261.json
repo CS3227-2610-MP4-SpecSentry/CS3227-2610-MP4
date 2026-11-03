@@ -1,0 +1,35 @@
+{
+  "id": "34372853461244f7a06600698e0e0261",
+  "prompter": "yooplo",
+  "session": "2026-10-31-functional-ux",
+  "agent": "reviewer",
+  "invocation": "reviewer-3",
+  "stage": "hash-history-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited exact settings not exposed",
+  "started_at": "2026-10-30T16:49:08.829983+00:00",
+  "ended_at": "2026-10-30T16:51:49.034191+00:00",
+  "elapsed_seconds": 160.204208,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "UX-NAV-003 native skip-link hash history bypass independently verified fixed: focus-only skip leaves history length/state/hash unchanged; real browser dirty Back cancel retains edits and confirm reaches detail once",
+  "unavailable_reasons": {
+    "input_tokens": "Exact settings and per-record runtime usage not exposed",
+    "output_tokens": "Exact settings and per-record runtime usage not exposed",
+    "cache_read_tokens": "Exact settings and per-record runtime usage not exposed",
+    "tool_calls": "Exact settings and per-record runtime usage not exposed",
+    "retries": "Exact settings and per-record runtime usage not exposed"
+  },
+  "unavailable_reason": "Exact settings and per-record runtime usage not exposed"
+}

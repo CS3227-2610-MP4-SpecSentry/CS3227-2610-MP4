@@ -1,0 +1,35 @@
+{
+  "id": "3783bba6d08e444b8c5b0ee66725867f",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "implementer",
+  "invocation": "test-policy-fix-1",
+  "stage": "align-preparation-lifecycle-tests",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings not exposed",
+  "started_at": "2026-10-31T17:56:28.927959+00:00",
+  "ended_at": "2026-10-31T17:58:29.954064+00:00",
+  "elapsed_seconds": 121.026105,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "PR-MERGE-001 test policy aligned with existingREQCON002;new submitted preparation immutable snapshot coverage;2focusedPGcases passed31skipped",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed timing;child usage not exposed",
+    "output_tokens": "Coordinator-observed timing;child usage not exposed",
+    "cache_read_tokens": "Coordinator-observed timing;child usage not exposed",
+    "tool_calls": "Coordinator-observed timing;child usage not exposed",
+    "retries": "Coordinator-observed timing;child usage not exposed"
+  },
+  "unavailable_reason": "Coordinator-observed timing;child usage not exposed"
+}

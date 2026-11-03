@@ -1,5 +1,23 @@
 # Requirement traceability
 
+## PR15/16 merge reconciliation — 1 November 2026
+
+[Integration run/evidence](../logs/yooplo/2026-11-01-pr-conflicts.md) preserves master's
+Reviewer implementation together with Contributor preparation and latest UI.
+
+| Requirement / finding | Actual integrated evidence |
+| --- | --- |
+| REQ-CON-002 / PR-MERGE-001 | Shared PATCH already permits owner working-copy saves in SUBMITTED/IN_REVIEW/CHANGES_REQUESTED. Test denial list aligned with existing policy; positive preparation save after real submission checks immutable revision/criteria/evidence, preserved identities, version/audit, stale and non-owner/role denials. Independently33ContributorPG cases passed; final full213PG passed. No service/contract changes |
+| REQ-SHR-001/002/003 / role privacy and sessions | Independent App/Reviewer/Contributor63tests, final182client tests,88server units and cross-role Chromium; security review verified unchanged generation/logout/CSRF/request/navigation guards |
+| REQ-SHR-005 / PR-MERGE-002/003 | Reviewer h1 restored above existingh2/h3 without duplicate Contributor/unknown-route headings. Controlled failing-before/passing-after tests; fresh4role-width Chromium keyboard/focus/reflow checks and4live scaffold login/reload/logout cases passed. Heading assertions corrected for real Reviewer UI, cookie/security assertions retained |
+
+The final UI browser run passed17, failed one outdated heading assertion and skipped
+one under fail-fast; the corrected scaffold file then passed4/4 independently.
+This is not a claim of a single fully green final19case run. The pre-existing desktop
+brand label-content-name mismatch (WCAG2.1A2.5.3) and inherited INC2-VER-001 remain
+unresolved; filtered axe scans are not full accessibility conformance. No deployment,
+live SoC verification or teammate approval is inferred from integration checks.
+
 Historical retention note, 27 October 2026: linked `state.json` files are now
 compact evidence summaries. Source fingerprints, original results and matrix
 history remain; full original state is recoverable from Git. See the
@@ -356,6 +374,66 @@ checks and screenshots cover the implemented screens; they do not establish live
 backend authorization, submitted-revision behavior or full WCAG compliance.
 The run records exact checks, environment failures and remaining manual review.
 
+## Consolidated implemented UI/UX publication — 31 October 2026
+
+PR16 CI follow-up: the production-server/PostgreSQL `npm run test:e2e` suite is
+distinct from the supplemental synthetic48/34/8 browser harnesses. Its legacy
+Contributor heading, duplicated-title and recovery locators now follow approved
+REQ-CON-010–017 presentation while retaining all security/version/identity,
+keyboard/axe and retained-input checks. The original CI run had6fail/3pass;
+fresh disposable-database execution and runner results are recorded in the
+[CI fix run](../logs/yooplo/2026-10-31-pr16-ci-fix.md). No product requirement or
+application behavior changes in this follow-up; full shared accessibility and
+other-browser/cross-role completion remain unclaimed.
+
+[UI-UX-SPEC](specs/UI-UX-SPEC.md) consolidates the implemented shell, screen states,
+actual design tokens and verification boundaries. Definitions remain in
+ROLE-CONTRIBUTOR and SHARED-REQUIREMENTS; no duplicate IDs or future features added.
+
+| Requirement | Acceptance | Implementation | Automated tests | Executed evidence |
+| --- | --- | --- | --- | --- |
+| REQ-CON-010 | AC-CON-UX-001 | [guard hook](../src/client/src/shared/navigationGuard.ts), [provider](../src/client/src/shared/NavigationGuardProvider.tsx), [router](../src/client/src/main.tsx), [workspace](../src/client/src/features/contributor/ContributorWorkspace.tsx) | [FunctionalUx](../src/client/src/features/contributor/FunctionalUx.test.tsx), [browser48](tests/browser/navigation-phase2.mjs) | [Phase1 report](../logs/yooplo/2026-10-31-functional-ux.md), [Phase3 regression results](../logs/yooplo/resources/2026-10-31-visual-phase3/verification/functional/acceptance-results.json) |
+| REQ-CON-011 | AC-CON-UX-002 | [saved detail](../src/client/src/features/contributor/ContributorWorkspace.tsx) | [FunctionalUx criteria cases](../src/client/src/features/contributor/FunctionalUx.test.tsx), browser48 saved-criteria checks | Phase1/Phase3 results above |
+| REQ-CON-012 | AC-CON-UX-003 | workspace Save/reconciliation/recovery and [styles](../src/client/src/styles.css) | [FunctionalUx](../src/client/src/features/contributor/FunctionalUx.test.tsx), [NavigationPhase2](../src/client/src/features/contributor/NavigationPhase2.test.tsx), browser48 | [Phase2 acceptance](../logs/yooplo/resources/2026-10-31-navigation-phase2/verification/acceptance-report.md), Phase3 regressions above |
+| REQ-CON-013 | AC-CON-UX-004 | [PageHeader](../src/client/src/features/contributor/PageHeader.tsx), [App](../src/client/src/App.tsx) | NavigationPhase2 heading/breadcrumb tests, browser48 | Phase2 report/Phase3 regressions above |
+| REQ-CON-014 | AC-CON-UX-005 | workspace semantic row Link | NavigationPhase2 row test; browser48 pointer/keyboard/modified/new-tab cases | Phase2 report/Phase3 regressions above |
+| REQ-CON-015 | AC-CON-UX-006 | workspace jumpToSection/semantic form and styles | NavigationPhase2 section cases; browser48 main/focus/history/Save-clearance cases | Phase2 report/Phase3 regressions above |
+| REQ-CON-016 | AC-CON-UX-007 | App topbar/native drawer; workspace hints/compact recovery | NavigationPhase2 enlarged recovery cases; browser48 enlarged/skip/drawer cases | Phase2 report/Phase3 regressions above |
+| REQ-CON-017 | AC-CON-UX-008 | App/workspace/styles | [ContributorWorkspace tests](../src/client/src/features/contributor/ContributorWorkspace.test.tsx), [CriteriaDraft race tests](../src/client/src/features/contributor/CriteriaDraft.test.tsx), [visual34](tests/browser/visual-phase3.mjs), [layout7/focus](tests/browser/visual-phase3-checks.mjs) | [Phase3 report](../logs/yooplo/resources/2026-10-31-visual-phase3/verification/acceptance-report.md), [paired gallery](../logs/yooplo/resources/2026-10-31-visual-phase3/verification/comparison.html) |
+| REQ-SHR-005 / NFR-A11Y-001 partial | AC-SHR-005 / AC-NFR-A11Y-001 | App/Icon/guard/workspace/styles | [App units](../src/client/src/App.test.tsx), keyboard/axe/drawer/reflow/reduced-motion cases in browser scripts above | Bounded Chrome fixtures; manual assistive technology, real mobile keyboards, other engines/live cross-role gaps remain explicit |
+
+Fresh final results, curated inventory and publication outcome are in the
+[publication run](../logs/yooplo/2026-10-31-ui-spec-publication.md). Historical phase
+reports retain actual failed/interrupted attempts; they do not imply full shared
+accessibility or backend authorization certification.
+
+## Functional UX Phase 1 — historical detailed evidence
+
+| Requirement | Acceptance scenarios | Implementation / evidence |
+| --- | --- | --- |
+| REQ-CON-010 | AC-CON-UX-001; existing session/recovery regressions | Client guard provider/hook, narrow main data-router wiring and create/edit integration. Native unload is browser-policy best effort. [Run](../logs/yooplo/2026-10-31-functional-ux.md) records actual router units, browser history/confirmation, forced-session and stale-release cases. |
+| REQ-CON-011 | AC-CON-UX-002 | DraftDetail saved criteria section; ordered required/optional classification, escaped plain text and empty state. Same owner-authorized working-content GET; no submitted-snapshot behavior added. |
+| REQ-CON-012 | AC-CON-UX-003; REQ-SHR-005 / NFR-A11Y-001 partial | Single sticky Save/adjacent textual feedback with measured focus clearance. Existing duplicate/version/identity reconciliation controls remain. Actual browser and final review disposition in the run; full manual accessibility remains pending. |
+
+This bounded change does not complete the broader submitted-revision, Reviewer,
+Maintainer or AI workflows. Final verification status is recorded in the linked run.
+
+## Navigation and workspace Phase 2 — 31 October 2026
+
+| Requirement | Acceptance | Implementation / executed evidence |
+| --- | --- | --- |
+| REQ-CON-013 | AC-CON-UX-004 | Task-specific primary h1 and local authorized-title PageHeader breadcrumbs, compact route-derived topbar task label. No added metadata fetch. |
+| REQ-CON-014 | AC-CON-UX-005 | Semantic encoded draft-row Link with normal link/touch/keyboard/new-tab behavior, no nested controls. |
+| REQ-CON-015 | AC-CON-UX-006 | Overview/Acceptance Criteria/Patch/Evidence focus/scroll navigation preserves main-only scrolling, actual Save clearance and router history safety; narrative/patch reading widths separated. |
+| REQ-CON-016 | AC-CON-UX-007 | Useful associated hints/limits, enlarged-text task visibility, compact accurate Save outcomes and history-safe Recovery details; drawer/guard/reconciliation protections retained. |
+
+The [isolated Phase2 run](../logs/yooplo/2026-10-31-navigation-phase2.md) records
+110 client units, the final48-case browser matrix including all28 Phase1 cases,
+independent reviewer findings/fix closure, exact final lint/type/build results and
+source-preservation checks. Fixtures are not live backend authorization evidence.
+PROP-CON-001 (creation-to-editor shortcut) is inactive and not implemented; current
+create-to-detail behavior is regression-verified. Human sign-off remains pending.
+
 ## Evidence update rule
 
 Shell refinement, 31 October 2026: REQ-SHR-005 / NFR-A11Y-001 presentation checks
@@ -369,6 +447,20 @@ Add actual source/test paths, scenario/test names, commands/results, environment
 
 
 ## Decision acceptance cases
+
+Phase3 visual refinement: REQ-CON-017 / AC-CON-UX-008 maps to the compact
+page-scoped dashboard in `ContributorWorkspace.tsx`, shared `styles.css` tokens
+and implemented `App.tsx` surfaces. Preserve REQ-CON-010–016 and shared keyboard,
+focus/reflow/reduced-motion criteria. Baseline44 screenshots/34 checks captured
+before edits; final units/build, Phase1/2 regressions and paired visual evidence
+are tracked in the [Phase3 run](../logs/yooplo/2026-10-31-visual-phase3.md).
+Executed evidence: fullclient113/113, rootlint, all3workspace typechecks and
+productionbuild passed after the final scoped field-spacing correction;
+Phase1/2 browser48/48 passed before that CSS-only margin, with final matched
+visual34/34 recapture and affected-layout checks linked in the run. Before/after
+focus tests fail/pass the controlled criterion/evidence scheduling case without
+weakened original assertions. Browser fixtures do not certify live database or
+complete manual accessibility behavior; human teammate verification remains pending.
 
 Unless a row links executed evidence, cases below remain planned and unexecuted. They supplement rather than replace the original 48 requirement mappings. Detailed limits/schemas in the linked specs are the authority; these cases test their effect.
 

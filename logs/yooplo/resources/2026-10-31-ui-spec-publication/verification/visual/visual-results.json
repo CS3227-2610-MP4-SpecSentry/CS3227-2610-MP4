@@ -1,0 +1,197 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "empty 375px",
+      "status": "passed"
+    },
+    {
+      "name": "empty 768px",
+      "status": "passed"
+    },
+    {
+      "name": "empty 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "populated 375px",
+      "status": "passed"
+    },
+    {
+      "name": "populated 768px",
+      "status": "passed"
+    },
+    {
+      "name": "populated 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "login 375px",
+      "status": "passed"
+    },
+    {
+      "name": "login 768px",
+      "status": "passed"
+    },
+    {
+      "name": "login 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "create 375px",
+      "status": "passed"
+    },
+    {
+      "name": "create 768px",
+      "status": "passed"
+    },
+    {
+      "name": "create 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "detail 375px",
+      "status": "passed"
+    },
+    {
+      "name": "detail 768px",
+      "status": "passed"
+    },
+    {
+      "name": "detail 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "editor 375px",
+      "status": "passed"
+    },
+    {
+      "name": "editor 768px",
+      "status": "passed"
+    },
+    {
+      "name": "editor 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "reviewer 375px",
+      "status": "passed"
+    },
+    {
+      "name": "reviewer 768px",
+      "status": "passed"
+    },
+    {
+      "name": "reviewer 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "release 375px",
+      "status": "passed"
+    },
+    {
+      "name": "release 768px",
+      "status": "passed"
+    },
+    {
+      "name": "release 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "error 375px",
+      "status": "passed"
+    },
+    {
+      "name": "error 768px",
+      "status": "passed"
+    },
+    {
+      "name": "error 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "not-found 375px",
+      "status": "passed"
+    },
+    {
+      "name": "not-found 768px",
+      "status": "passed"
+    },
+    {
+      "name": "not-found 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "loading 375px",
+      "status": "passed"
+    },
+    {
+      "name": "loading 768px",
+      "status": "passed"
+    },
+    {
+      "name": "loading 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "mobile drawer, button states, 200% text and reduced motion",
+      "status": "passed"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "warnings": [],
+  "screenshots": [
+    "empty-375.png",
+    "empty-768.png",
+    "empty-1440.png",
+    "populated-375.png",
+    "populated-768.png",
+    "populated-1440.png",
+    "login-375.png",
+    "login-focus-375.png",
+    "login-768.png",
+    "login-focus-768.png",
+    "login-1440.png",
+    "login-focus-1440.png",
+    "create-375.png",
+    "create-768.png",
+    "create-1440.png",
+    "detail-375.png",
+    "detail-768.png",
+    "detail-1440.png",
+    "editor-375.png",
+    "patch-375.png",
+    "editor-768.png",
+    "patch-768.png",
+    "editor-1440.png",
+    "patch-1440.png",
+    "reviewer-375.png",
+    "reviewer-768.png",
+    "reviewer-1440.png",
+    "release-375.png",
+    "release-768.png",
+    "release-1440.png",
+    "error-375.png",
+    "error-768.png",
+    "error-1440.png",
+    "not-found-375.png",
+    "not-found-768.png",
+    "not-found-1440.png",
+    "loading-375.png",
+    "loading-768.png",
+    "loading-1440.png",
+    "primary-hover-375.png",
+    "primary-focus-375.png",
+    "primary-pressed-375.png",
+    "drawer-375.png",
+    "enlarged-375.png"
+  ]
+}

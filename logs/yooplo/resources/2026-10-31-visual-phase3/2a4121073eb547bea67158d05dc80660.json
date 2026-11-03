@@ -1,0 +1,35 @@
+{
+  "id": "2a4121073eb547bea67158d05dc80660",
+  "prompter": "yooplo",
+  "session": "2026-10-31-visual-phase3",
+  "agent": "verifier",
+  "invocation": "baseline-1",
+  "stage": "visual-baseline",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T18:02:04.135441+00:00",
+  "ended_at": "2026-10-30T18:06:33.768396+00:00",
+  "elapsed_seconds": 269.632955,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Baselinebeforeexistingfrontendedits:34/34checks44PNG375/768/1440;allpreexistingfrontendhashesunchanged;zeroerrors/warnings;reportready",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

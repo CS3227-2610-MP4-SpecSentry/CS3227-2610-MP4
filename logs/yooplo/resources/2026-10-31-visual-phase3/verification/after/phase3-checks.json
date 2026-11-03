@@ -1,0 +1,51 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "dashboard density/count/pagination 375px",
+      "status": "passed"
+    },
+    {
+      "name": "dashboard density/count/pagination 768px",
+      "status": "passed"
+    },
+    {
+      "name": "dashboard density/count/pagination 1440px",
+      "status": "passed"
+    },
+    {
+      "name": "dashboard pending/unavailable counts remain truthful",
+      "status": "passed"
+    },
+    {
+      "name": "tokenized hover/pressed/focus and reduced-motion states",
+      "status": "passed"
+    },
+    {
+      "name": "disabled Save hover remains disabled presentation",
+      "status": "passed"
+    },
+    {
+      "name": "long patch at200% remains usable under sticky Save",
+      "status": "passed"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "warnings": [],
+  "screenshots": [
+    "long-patch-200.png"
+  ],
+  "tokens": {
+    "--font-sans": "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "--text-sm": ".875rem",
+    "--space-4": "1rem",
+    "--radius-control": "8px",
+    "--shadow": "0 2px 6px #0f172a05",
+    "--motion-fast": "140ms",
+    "--motion-base": "180ms",
+    "--focus-ring": "3px solid #2563eb"
+  }
+}

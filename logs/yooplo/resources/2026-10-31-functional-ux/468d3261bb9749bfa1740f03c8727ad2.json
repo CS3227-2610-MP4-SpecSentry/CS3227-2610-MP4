@@ -1,0 +1,35 @@
+{
+  "id": "468d3261bb9749bfa1740f03c8727ad2",
+  "prompter": "yooplo",
+  "session": "2026-10-31-functional-ux",
+  "agent": "verifier",
+  "invocation": "verifier-3",
+  "stage": "mobile-scroll-investigation",
+  "attempt": 3,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T16:43:36.662966+00:00",
+  "ended_at": "2026-10-30T16:45:46.392452+00:00",
+  "elapsed_seconds": 129.729486,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Measured scroll investigation: raw pointer1983->1983; real Tab natural navigation; Playwright focus/click artifact caused prior assertion. No product fix justified",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

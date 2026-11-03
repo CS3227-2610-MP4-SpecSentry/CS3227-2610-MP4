@@ -1,0 +1,35 @@
+{
+  "id": "d6bfb3b2845d4ed5b813e6e4d410c526",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "verifier",
+  "invocation": "scaffold-revalidate-1",
+  "stage": "final-role-session-browser-recheck",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings not exposed",
+  "started_at": "2026-10-31T18:23:46.523280+00:00",
+  "ended_at": "2026-10-31T18:25:11.995601+00:00",
+  "elapsed_seconds": 85.472321,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "PR-MERGE-003 independentlyclosed;4live scaffoldcases passed;exacttrackedtestcopy;allcookies/session/assertionsretained",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed timing;child usage not exposed",
+    "output_tokens": "Coordinator-observed timing;child usage not exposed",
+    "cache_read_tokens": "Coordinator-observed timing;child usage not exposed",
+    "tool_calls": "Coordinator-observed timing;child usage not exposed",
+    "retries": "Coordinator-observed timing;child usage not exposed"
+  },
+  "unavailable_reason": "Coordinator-observed timing;child usage not exposed"
+}

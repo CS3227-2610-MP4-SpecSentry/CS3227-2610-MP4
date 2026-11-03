@@ -1,0 +1,6 @@
+{
+  "source": "workflow/tests/browser/navigation-phase2.mjs",
+  "source_sha256": "c9f2045c2fbae6e0f49cf72ae431f37ecc5888a281c00aa956ffc12d9a54e228",
+  "copy_sha256": "351ef5d9309a765f289bf1e1e5fb0585bcadaf5c4ed848146f732fbfeccb0ef1",
+  "output_only_byte_equivalence": true
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ff7a6a2b13b64a0883e86d80239db9e2",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "implementer",
+  "invocation": "heading-fix-1",
+  "stage": "restore-reviewer-heading",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings not exposed",
+  "started_at": "2026-10-31T17:58:30.050123+00:00",
+  "ended_at": "2026-10-31T18:00:20.814261+00:00",
+  "elapsed_seconds": 110.764138,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "PR-MERGE-002 Reviewer h1 restored onlyoncorrectrolepath;2regressionscontrolledbeforefail/after37Apptests passed;noauthchanges",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed timing;child usage not exposed",
+    "output_tokens": "Coordinator-observed timing;child usage not exposed",
+    "cache_read_tokens": "Coordinator-observed timing;child usage not exposed",
+    "tool_calls": "Coordinator-observed timing;child usage not exposed",
+    "retries": "Coordinator-observed timing;child usage not exposed"
+  },
+  "unavailable_reason": "Coordinator-observed timing;child usage not exposed"
+}

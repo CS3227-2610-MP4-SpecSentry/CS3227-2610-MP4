@@ -1,3 +1,4 @@
+import { Profiler } from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Link, MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -38,6 +39,23 @@ describe('Private draft acceptance criteria', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Remove criterion 1' })); expect(screen.getByRole('button', { name: 'Add criterion' })).toHaveFocus();
     expect(screen.getByText('No criteria yet. You can save this incomplete draft.')).toBeVisible();
   });
+  it.each([
+    ['Add criterion', 'Criterion 2 statement'],
+    ['Add evidence', 'Evidence 2 text'],
+  ])('focuses the committed new row when %s happens before passive effects finish', async (buttonName, addedLabel) => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply(detail)));
+    let activated = false;
+    render(<Profiler id="editor-focus" onRender={() => {
+      const button = screen.queryByRole<HTMLButtonElement>('button', { name: buttonName });
+      if (!activated && button && !button.disabled) {
+        activated = true;
+        button.click();
+      }
+    }}>{tree()}</Profiler>);
+    const added = await screen.findByLabelText(addedLabel);
+    expect(activated).toBe(true);
+    expect(added).toHaveFocus();
+  });
   it('requires a human meaning declaration, keeps a correction key, and omits the key for material replacement', async () => {
     const corrected = { ...detail, version: 1, content: { ...content, criteria: [{ ...content.criteria[0]!, statement: 'Corrected wording' }] } };
     const rewritten = { ...detail, version: 2, content: { ...content, criteria: [{ stableKey: replacement, statement: 'Different meaning', required: true }] } };
@@ -59,7 +77,7 @@ describe('Private draft acceptance criteria', () => {
     vi.stubGlobal('fetch', fetch); render(tree());
     fireEvent.change(await screen.findByLabelText('Criterion 1 statement'), { target: { value: 'Retain my correction' } });
     fireEvent.change(screen.getByLabelText('Criterion 1 meaning'), { target: { value: 'same' } }); save();
-    expect(await screen.findByRole('alert')).toHaveTextContent('Draft saved, but its current identities could not be reconciled');
+    expect(await screen.findByRole('alert')).toHaveTextContent('Draft saved, but we could not verify the saved criteria and evidence');
     expect(screen.getByLabelText('Criterion 1 statement')).toHaveValue('Retain my correction'); expect(screen.getByLabelText('Criterion 1 meaning')).toHaveValue('same');
     expect(screen.getByRole('button', { name: 'Save private draft' })).toBeDisabled(); save(); expect(fetch).toHaveBeenCalledTimes(3);
   });
@@ -69,7 +87,7 @@ describe('Private draft acceptance criteria', () => {
     vi.stubGlobal('fetch', fetch); render(tree());
     fireEvent.change(await screen.findByLabelText('Criterion 1 statement'), { target: { value: 'Retain my correction' } });
     fireEvent.change(screen.getByLabelText('Criterion 1 meaning'), { target: { value: 'same' } }); save();
-    expect(await screen.findByRole('alert')).toHaveTextContent('Draft saved, but its current identities could not be reconciled');
+    expect(await screen.findByRole('alert')).toHaveTextContent('Draft saved, but we could not verify the saved criteria and evidence');
     expect(screen.getByLabelText('Criterion 1 statement')).toHaveValue('Retain my correction');
     expect(screen.getByLabelText('Criterion 1 meaning')).toHaveValue('same');
     expect(screen.getByText(/^Editing version 0 /)).toBeInTheDocument();

@@ -1,0 +1,35 @@
+{
+  "id": "5d6f4fccf2cf4785b4e3b6e6b5d711b2",
+  "prompter": "yooplo",
+  "session": "2026-11-01-pr-conflicts",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "inspect-and-coordinate",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Runtime settings not exposed",
+  "started_at": "2026-10-31T17:42:52.657113+00:00",
+  "ended_at": "2026-10-31T18:27:06.637474+00:00",
+  "elapsed_seconds": 2653.980361,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Both PRbranchesupdated andremote mergeable;independent semanticfixes closed;88serverunits213PG182UIclientpassed;19PR15browserpassed;17finalUIplus4correctedscaffoldpassed;historyscanpassed;CIpending;testclusterstopped;receiptready",
+  "unavailable_reasons": {
+    "input_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry not exposed;coordinator timing includes waiting",
+    "output_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry not exposed;coordinator timing includes waiting",
+    "cache_read_tokens": "Exact model/effort and attributable token/cache/tool/retry telemetry not exposed;coordinator timing includes waiting",
+    "tool_calls": "Exact model/effort and attributable token/cache/tool/retry telemetry not exposed;coordinator timing includes waiting",
+    "retries": "Exact model/effort and attributable token/cache/tool/retry telemetry not exposed;coordinator timing includes waiting"
+  },
+  "unavailable_reason": "Exact model/effort and attributable token/cache/tool/retry telemetry not exposed;coordinator timing includes waiting"
+}
