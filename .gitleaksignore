@@ -28,3 +28,8 @@ f6f35731eb609e3e7547a7a39015e987cec1ad13:src/server/test/ai-gateway.spec.ts:gene
 81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-implementation/reports/preintegration-source-manifest.json:generic-api-key:33
 81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/final-reviewed-manifest.json:generic-api-key:38
 81019188d443fcb377f6b1237cf802871a437a36:logs/ngkhengyang/reviewer/2026-10-27-reviewer-iteration4-review-fixes/reports/initial-reviewed-manifest.json:generic-api-key:38
+
+# Same reviewed synthetic fixtures after commit identities changed in merged history.
+# Evidence: logs/yooplo/2026-11-03-secret-scan-diagnosis.md
+ec824872299e4239cc73971f4249708b8ca9650b:src/server/test/ai-gateway.spec.ts:generic-api-key:46
+ec824872299e4239cc73971f4249708b8ca9650b:src/server/test/contributor-ai-gateway.spec.ts:generic-api-key:43
