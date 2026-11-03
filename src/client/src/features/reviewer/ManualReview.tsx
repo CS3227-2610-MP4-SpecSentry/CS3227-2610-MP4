@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import {
-  humanReviewResponseSchema, findingsResponseSchema, findingHistoryResponseSchema, coverageHistoryResponseSchema, decisionsResponseSchema,
+  humanReviewResponseSchema, findingsResponseSchema, findingHistoryResponseSchema, coverageHistoryResponseSchema, decisionsResponseSchema, findingResponsesResponseSchema,
   coverageWriteRequestSchema, createFindingRequestSchema, findingTransitionRequestSchema, findingAmendmentRequestSchema, reviewDecisionRequestSchema,
   coverageCommandResponseSchema, findingCommandResponseSchema, findingEventCommandResponseSchema, decisionCommandResponseSchema,
   type ProposalDetailResponse, type HumanReviewResponse, type FindingsResponse, type FindingHistoryResponse, type CoverageHistoryResponse, type DecisionsResponse,
@@ -23,6 +23,10 @@ export function ManualReview({ detail, stale, busy, request, onRefresh, onChange
   const [findings, setFindings] = useState<FindingsResponse | null>(null);
   const [coverageHistory, setCoverageHistory] = useState<CoverageHistoryResponse | null>(null);
   const [decisions, setDecisions] = useState<DecisionsResponse | null>(null);
+  const [responses, setResponses] = useState<ReturnType<typeof findingResponsesResponseSchema.parse> | null>(null);
+  const [responsesLoading, setResponsesLoading] = useState(true);
+  const [responsesError, setResponsesError] = useState(false);
+  const responsesPending = useRef(false);
   const [findingHistory, setFindingHistory] = useState<{ id: string; page: FindingHistoryResponse } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -35,6 +39,7 @@ export function ManualReview({ detail, stale, busy, request, onRefresh, onChange
   const editable = inSync && review.editable && !stale && !frozen && !busy && !loading && !uncertain && detail.revision.id === detail.assignment.revisionId && ['IN_REVIEW', 'CHANGES_REQUESTED'].includes(detail.state);
   useEffect(() => {
     active.current = true;
+    void loadResponses();
     void Promise.all([
       request(`${base}/review?revisionId=${encodeURIComponent(detail.revision.id)}`, humanReviewResponseSchema).then(result => { if (active.current) setReview(result); }),
       request(`${base}/findings`, findingsResponseSchema).then(result => { if (active.current) setFindings(result); }),
@@ -43,6 +48,16 @@ export function ManualReview({ detail, stale, busy, request, onRefresh, onChange
     ]).catch(() => { if (active.current) setError('Unable to load manual review. Refresh review to retry.'); }).finally(() => { if (active.current) setLoading(false); });
     return () => { active.current = false; };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  async function loadResponses() {
+    if (responsesPending.current) return;
+    responsesPending.current = true; setResponsesLoading(true); setResponsesError(false);
+    const cursor = responses?.nextCursor;
+    try {
+      const result = await request(`${base}/responses${cursor ? `?cursor=${encodeURIComponent(cursor)}` : ''}`, findingResponsesResponseSchema);
+      if (active.current) setResponses(previous => ({ items: [...(previous?.items ?? []), ...result.items], nextCursor: result.nextCursor }));
+    } catch { if (active.current) setResponsesError(true); }
+    finally { responsesPending.current = false; if (active.current) setResponsesLoading(false); }
+  }
   function validation(cause: unknown) { setError(cause instanceof Error && 'issues' in cause ? 'Check the form: required text, rationale, valid references and field limits (2,000 characters).' : 'Unable to complete review request.'); }
   async function write<T>(path: string, schema: Parser<T>, body: unknown, method = 'POST', decision = false) {
     if (locked.current || (!editable && !(decision && uncertain))) return;
@@ -140,6 +155,18 @@ export function ManualReview({ detail, stale, busy, request, onRefresh, onChange
       </fieldset></form>
     </section>)}
     {findings?.nextCursor && <button disabled={busy} onClick={() => void page('findings')}>Next findings page</button>}
+    <section aria-label="Finding responses">
+      <h5>Contributor response history</h5>
+      <p>Responses across submitted revisions. Each response identifies its finding and revision.</p>
+      {responsesLoading && <p role="status">Loading responses...</p>}
+      {responsesError && <p role="alert">Unable to load responses. <button disabled={responsesLoading} onClick={() => void loadResponses()}>Retry responses</button></p>}
+      {responses?.items.length === 0 && <p>No responses recorded.</p>}
+      <ol>{responses?.items.map(response => <li key={response.id}>
+        <p>{response.actor.username} ({response.actor.id}) · {stamp(response.createdAt)} · Finding: {response.findingId} · Revision: {response.revisionId}</p>
+        <p className="plain-text">{response.text}</p>
+      </li>)}</ol>
+      {responses?.nextCursor && !responsesError && <button disabled={responsesLoading} onClick={() => void loadResponses()}>Load more responses</button>}
+    </section>
     {findingHistory && <section aria-label="Finding transition history"><h6>History for {findingHistory.id}</h6>{findingHistory.page.items.length === 0 && <p>No transitions or amendments.</p>}<ol>{findingHistory.page.items.map(event => <li key={event.id}>{event.operation} · {event.actor.username} · {stamp(event.createdAt)} · {event.severity} · {event.status}<p>{event.reason}</p>{event.description && <p>{event.description}</p>}<p>Revision: {event.revisionId} · Assignment: {event.assignmentId}</p></li>)}</ol>{findingHistory.page.nextCursor && <button disabled={busy} onClick={() => void page('finding-history', findingHistory.id)}>Next finding history page</button>}</section>}
     <form onSubmit={createFinding} aria-label="Create finding"><fieldset disabled={!editable}><legend>Create finding</legend>
       <label>Severity<select name="severity" defaultValue="MEDIUM">{severities.map(severity => <option key={severity}>{severity}</option>)}</select></label>

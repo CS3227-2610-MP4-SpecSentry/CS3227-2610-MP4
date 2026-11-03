@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { PrismaClient } from '../src/generated/prisma/client';
-import { createPatchRiskGateway, parseStrictJson, PrismaAiAccounting, SafeAiError, SocLlmHttpsTransport, SystemAiClock } from '../src/ai/gateway';
+import { ConservativeInputBudgetCounter, createPatchRiskGateway, parseStrictJson, PrismaAiAccounting, SafeAiError, SocLlmHttpsTransport, SystemAiClock } from '../src/ai/gateway';
 import type { AiClock, AiDeadline, AiTransport, PatchRiskContext } from '../src/ai/contracts';
 import { aiTestOptions, patchRiskContextFixture, reviewerRiskResultFixture } from './ai-fixtures';
 
@@ -33,7 +33,7 @@ function harness() {
     $queryRaw: jest.fn(async () => []), $queryRawUnsafe: jest.fn(async () => [{ id: 'reviewer-patch-risk' }]) };
   const prisma = { ...tx, $transaction: async <T>(work: (value: typeof tx) => Promise<T>) => work(tx) } as unknown as PrismaClient;
   const transport: AiTransport = { complete: jest.fn(async () => ({ status: 200, body: envelope(), retryAfter: null })) };
-  const counter = { model: 'synthetic-reviewer-model', verificationId: 'synthetic-counter-v1', countInput: jest.fn(() => 100) };
+  const counter = { model: 'synthetic-reviewer-model', methodId: 'synthetic-counter-v1', countUnits: jest.fn(() => 100) };
   const beforeAttempt = jest.fn(async () => undefined);
   const gateway = createPatchRiskGateway({ prisma, options: aiTestOptions, transport, counter, clock });
   return { prisma, clock, deadline, request, attempt, queue, transport, counter, beforeAttempt, gateway,
@@ -42,6 +42,69 @@ function harness() {
 }
 
 describe('Reviewer gateway v1 synthetic evaluations', () => {
+  it('accepts null or empty optional call metadata only when no invocation is present', async () => {
+    for (const metadata of [{}, { tool_calls: null }, { tool_calls: [] }, { function_call: null },
+      { tool_calls: [], function_call: null, refusal: null }]) {
+      const h = harness();
+      jest.mocked(h.transport.complete).mockResolvedValue({ status: 200, retryAfter: null,
+        body: JSON.stringify({ choices: [{ finish_reason: 'stop', message: {
+          role: 'assistant', content: JSON.stringify(reviewerRiskResultFixture()), ...metadata,
+        } }] }) });
+      expect((await h.call()).result).toEqual(reviewerRiskResultFixture());
+      expect(h.transport.complete).toHaveBeenCalledTimes(1);
+    }
+  });
+
+  it('rejects standalone SoC credentials including fullwidth forms before attempts or transport', async () => {
+    const secret = 'clsk_synthetic_0123456789abcdefghijklmnop';
+    const fullwidth = [...secret].map(character => String.fromCharCode(character.charCodeAt(0) + 0xfee0)).join('');
+    for (const value of [secret, fullwidth]) {
+      const h = harness();
+      await expect(h.call(patchRiskContextFixture({ problem: value }))).rejects.toMatchObject({ errorClass: 'SECRET_DETECTED' });
+      expect(h.transport.complete).not.toHaveBeenCalled(); expect(h.attempt.create).not.toHaveBeenCalled();
+      expect(JSON.stringify([h.request.create.mock.calls, h.request.update.mock.calls])).not.toContain(secret);
+      expect(JSON.stringify([h.request.create.mock.calls, h.request.update.mock.calls])).not.toContain(fullwidth);
+    }
+  });
+
+  it('routes explicitly enabled live credentials through the bounded native transport without logging them', async () => {
+    const h = harness(); const apiKey = 'synthetic-live-key';
+    const fetchSpy = jest.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(envelope(), { status: 200 }));
+    try {
+      const gateway = createPatchRiskGateway({ prisma: h.prisma, options: { mode: 'live', apiKey,
+        model: h.counter.model, contextWindow: 16384, inputBudgetMethodId: h.counter.methodId },
+        transport: new SocLlmHttpsTransport(), counter: h.counter, clock: h.clock });
+      const response = await gateway.analyze(patchRiskContextFixture(), { actorId: 'actor', deadline: h.deadline,
+        beforeAttempt: h.beforeAttempt });
+      expect(fetchSpy).toHaveBeenCalledWith('https://soclaas-api.comp.nus.edu.sg/v1/chat/completions',
+        expect.objectContaining({ redirect: 'error', headers: expect.objectContaining({ Authorization: `Bearer ${apiKey}` }) }));
+      const payload = JSON.parse(fetchSpy.mock.calls[0]![1]!.body as string) as Record<string, unknown>;
+      expect(payload).not.toHaveProperty('response_format');
+      expect(h.beforeAttempt).toHaveBeenCalledTimes(1);
+      expect(JSON.stringify([response, h.request.create.mock.calls, h.request.update.mock.calls,
+        h.attempt.create.mock.calls, h.attempt.update.mock.calls])).not.toContain(apiKey);
+    } finally { fetchSpy.mockRestore(); }
+  });
+
+  it('counts all prepared Reviewer messages with the conservative method before dispatch', async () => {
+    for (const diffText of [patchRiskContextFixture().diffText, 'x'.repeat(9500)]) {
+      const h = harness(); const counter = new ConservativeInputBudgetCounter(h.counter.model);
+      const count = jest.spyOn(counter, 'countUnits');
+      const gateway = createPatchRiskGateway({ prisma: h.prisma, options: { mode: 'test', model: counter.model,
+        contextWindow: 16_384, inputBudgetMethodId: counter.methodId }, counter, transport: h.transport, clock: h.clock });
+      const call = gateway.analyze(patchRiskContextFixture({ diffText }), { actorId: 'actor', deadline: h.deadline, beforeAttempt: h.beforeAttempt });
+      if (diffText.length < 9500) {
+        expect((await call).metadata.usage.promptTokens).toBeNull();
+        expect(count).toHaveBeenCalledWith(jest.mocked(h.transport.complete).mock.calls[0]![0].messages);
+      } else {
+        await expect(call).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
+        expect(h.transport.complete).not.toHaveBeenCalled(); expect(h.attempt.create).not.toHaveBeenCalled();
+      }
+      expect(count.mock.calls[0]![0][0]!.role).toBe('system');
+      expect(count.mock.calls[0]![0][1]!.content).toContain('submitted_context');
+    }
+  });
+
   it('ai-output-rejection: normal result and invalid JSON/schema/envelopes fail without repair or retry', async () => {
     for (const raw of corpus.invalidJson) expect(() => parseStrictJson(raw)).toThrow();
     expect(() => parseStrictJson('['.repeat(34)+'0'+']'.repeat(34))).toThrow();
@@ -57,7 +120,9 @@ describe('Reviewer gateway v1 synthetic evaluations', () => {
       envelope({...result,questions:['😀'.repeat(101)]}), envelope({...result,questions:Array(4).fill('Q')}),
       JSON.stringify({choices:[{finish_reason:'length',message:{role:'assistant',content:JSON.stringify(result)}}]}),
       JSON.stringify({choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(result),refusal:'No'}}]}),
-      JSON.stringify({choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(result),tool_calls:[]}}]}),
+      ...[{ tool_calls: [{}] }, { tool_calls: {} }, { tool_calls: 'invalid' }, { tool_calls: 0 }, { tool_calls: false },
+        { function_call: {} }, { function_call: [] }, { function_call: 'invalid' }, { function_call: false }].map(metadata =>
+        JSON.stringify({choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(result),...metadata}}]})),
       JSON.stringify({choices:[]}), envelope(result,{usage:{completion_tokens:801}}),
       envelope(result,{usage:{prompt_tokens:-1}}), envelope(result,{usage:{prompt_tokens_details:{cached_tokens:'3'}}}),
       'x'.repeat(65537),
@@ -189,8 +254,9 @@ describe('Reviewer gateway v1 synthetic evaluations', () => {
     const h=harness();jest.mocked(h.transport.complete).mockResolvedValueOnce({status:503,body:'untrusted error',retryAfter:'1'});
     const answer=await h.call();expect(answer.metadata.attemptCount).toBe(2);expect(h.beforeAttempt).toHaveBeenCalledTimes(2);
     expect(h.attempt.create).toHaveBeenCalledTimes(2);expect(answer.metadata.usage.promptTokens).toBeNull();
-    for(const tokens of [10001,Number.NaN,-1]) {const bad=harness();bad.counter.countInput.mockReturnValue(tokens);
+    for(const units of [10001,Number.NaN,-1,Infinity,1.5,Number.MAX_SAFE_INTEGER]) {const bad=harness();bad.counter.countUnits.mockReturnValue(units);
       await expect(bad.call()).rejects.toMatchObject({errorClass:'INPUT_LIMIT'});expect(bad.transport.complete).not.toHaveBeenCalled();}
+    const fit=harness();fit.counter.countUnits.mockReturnValue(10000);await fit.call();
     const large=harness();await expect(large.call(patchRiskContextFixture({diffText:'x'.repeat(20001)}))).rejects.toMatchObject({errorClass:'INPUT_LIMIT'});
     for(const status of [400,401,403,429]) {const bad=harness();jest.mocked(bad.transport.complete).mockResolvedValue({status,body:'ambiguous',retryAfter:null});
       await expect(bad.call()).rejects.toBeInstanceOf(SafeAiError);expect(bad.attempt.create).toHaveBeenCalledTimes(1);}
@@ -198,15 +264,37 @@ describe('Reviewer gateway v1 synthetic evaluations', () => {
     await expect(slow.call()).rejects.toMatchObject({errorClass:'DEADLINE'});
     const rate=harness();rate.attempt.count.mockResolvedValue(10);await expect(rate.call()).rejects.toMatchObject({errorClass:'RATE_LIMIT'});expect(rate.transport.complete).not.toHaveBeenCalled();
     const queue=harness();queue.queue.count.mockResolvedValue(10);await expect(queue.call()).rejects.toMatchObject({errorClass:'QUEUE_FULL'});
-    const daily=harness();const a=new PrismaAiAccounting(daily.prisma,daily.clock);await a.reserveAttempt({requestId:'r',actorId:'actor',ordinal:1,deadline:daily.deadline});
+    const daily=harness();const a=new PrismaAiAccounting(daily.prisma,daily.clock);await a.reserveAttempt({requestId:'r',actorId:'actor',ordinal:1,deadline:daily.deadline,authorize:async()=>undefined});
     expect(daily.attempt.count.mock.calls[1]![0]).toMatchObject({where:{dispatchedAt:{gte:new Date('2026-10-25T16:00:00Z')}}});
+  });
+
+  it('uses conservative units for context admission and never as reported usage', async () => {
+    for (const [contextWindow, allowed] of [[1028, true], [1027, false]] as const) {
+      const h = harness();
+      const gateway = createPatchRiskGateway({ prisma: h.prisma, options: { mode: 'test', model: h.counter.model,
+        inputBudgetMethodId: h.counter.methodId, contextWindow },
+        transport: h.transport, counter: h.counter, clock: h.clock });
+      const call = gateway.analyze(patchRiskContextFixture(), { actorId: 'actor', deadline: h.deadline, beforeAttempt: h.beforeAttempt });
+      if (allowed) expect((await call).metadata.usage).toEqual({ promptTokens: null, completionTokens: null, totalTokens: null, cachedTokens: null });
+      else {
+        await expect(call).rejects.toMatchObject({ errorClass: 'INPUT_LIMIT' });
+        expect(h.attempt.create).not.toHaveBeenCalled(); expect(h.transport.complete).not.toHaveBeenCalled();
+      }
+    }
   });
 
   it('ai-live-disabled: unverified config cannot dispatch, endpoint and HTTPS transport are bounded', async () => {
     const h=harness();const disabled=createPatchRiskGateway({prisma:h.prisma,options:{mode:'disabled'},transport:h.transport,counter:h.counter,clock:h.clock});
     await expect(disabled.analyze(patchRiskContextFixture(),{actorId:'actor',deadline:h.deadline,beforeAttempt:h.beforeAttempt})).rejects.toMatchObject({errorClass:'DISABLED'});
     expect(h.transport.complete).not.toHaveBeenCalled();expect(h.attempt.create).not.toHaveBeenCalled();
-    const mismatch=harness();mismatch.counter.verificationId='wrong';await expect(mismatch.call()).rejects.toMatchObject({errorClass:'CONFIGURATION'});
+    const mismatch=harness();mismatch.counter.methodId='wrong';await expect(mismatch.call()).rejects.toMatchObject({errorClass:'CONFIGURATION'});
+    const blocked = harness(); const nativeProvider = new SocLlmHttpsTransport();
+    const dispatch = jest.spyOn(nativeProvider, 'complete');
+    const testGateway = createPatchRiskGateway({ prisma: blocked.prisma, options: aiTestOptions,
+      transport: nativeProvider, counter: blocked.counter, clock: blocked.clock });
+    await expect(testGateway.analyze(patchRiskContextFixture(), { actorId: 'actor', deadline: blocked.deadline,
+      beforeAttempt: blocked.beforeAttempt })).rejects.toMatchObject({ errorClass: 'DISABLED' });
+    expect(dispatch).not.toHaveBeenCalled(); expect(blocked.attempt.create).not.toHaveBeenCalled();
     const native=new SocLlmHttpsTransport();const request={baseUrl:'https://evil.invalid/v1',apiKey:'synthetic',model:'synthetic',messages:[],maxTokens:800 as const,reasoningEffort:'none' as const,stream:false as const,maxResponseBytes:65536 as const,deadline:h.deadline};
     await expect(native.complete(request)).rejects.toMatchObject({errorClass:'CONFIGURATION'});
     const fetchSpy=jest.spyOn(globalThis,'fetch').mockResolvedValue(new Response('x'.repeat(65537),{status:200}));

@@ -5,7 +5,7 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import request from 'supertest';
 import { type PatchRiskRequest, type ReviewCommandResponse, type WorkingContent } from '@specsentry/shared';
 import { AppModule } from '../src/app.module';
-import { AI_GATEWAY_OPTIONS, AI_TRANSPORT, VERIFIED_TOKEN_COUNTER, type AiTransportRequest } from '../src/ai/contracts';
+import { AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER, type AiTransportRequest } from '../src/ai/contracts';
 import { PrismaAiAccounting, SystemAiClock, SafeAiError } from '../src/ai/gateway';
 import { readConfig } from '../src/config';
 import { DatabaseService } from '../src/database/database.service';
@@ -19,7 +19,7 @@ import { ProposalsService } from '../src/proposals/proposals.service';
 import { persistedTestActor } from './business-fixtures';
 import { aiTestOptions } from './ai-fixtures';
 
-const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "AiQuotaCoordinator", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "AiQuotaCoordinator", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const content: WorkingContent = { title: 'Synthetic patch', summary: 'Entire submitted summary', problem: 'Entire submitted problem', constraints: 'Entire constraints',
   expectedBehavior: 'Entire expected behavior', diffText: '--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n',
   criteria: Array.from({ length: 5 }, (_, i) => ({ statement: `Criterion ${i}`, required: true })), evidence: [{ text: 'Entire evidence one' }, { text: 'Entire evidence two' }] };
@@ -53,7 +53,7 @@ describe('PostgreSQL Patch Risk integration', () => {
     const module = await Test.createTestingModule({ imports: [AppModule.register(readConfig({ NODE_ENV: 'test', DATABASE_URL: process.env.TEST_DATABASE_URL,
       SESSION_SECRET: 'patch-risk-synthetic-secret-at-least-32-characters' }))] })
       .overrideProvider(AI_GATEWAY_OPTIONS).useValue(aiTestOptions).overrideProvider(AI_TRANSPORT).useValue(transport)
-      .overrideProvider(VERIFIED_TOKEN_COUNTER).useValue({ model: 'synthetic-reviewer-model', verificationId: 'synthetic-counter-v1', countInput: () => 100 }).compile();
+      .overrideProvider(INPUT_BUDGET_COUNTER).useValue({ model: 'synthetic-reviewer-model', methodId: 'synthetic-counter-v1', countUnits: () => 100 }).compile();
     app = module.createNestApplication<NestExpressApplication>({ logger: false }); configureHttp(app); await app.init();
     database = app.get(DatabaseService); risks = app.get(PatchRiskService); reviews = app.get(ReviewsService); proposals = app.get(ProposalsService);
     administration = new AccountAdministrationService(database, reviews);
@@ -469,7 +469,7 @@ describe('PostgreSQL Patch Risk integration', () => {
     const rowA=await record();const rowB=await record();
     const deadlineA=new PatchRiskDeadline(clock,500);const deadlineB=new PatchRiskDeadline(clock,500);
     const start=barrier();const call=async(accounting:PrismaAiAccounting,row:{id:string},deadline:PatchRiskDeadline)=>{
-      await start.promise;return mode==='queue'?accounting.enqueue({requestId:row.id,actorId:ids.a,deadline}):accounting.reserveAttempt({requestId:row.id,actorId:ids.a,ordinal:1,deadline});};
+      await start.promise;return mode==='queue'?accounting.enqueue({requestId:row.id,actorId:ids.a,deadline}):accounting.reserveAttempt({requestId:row.id,actorId:ids.a,ordinal:1,deadline,authorize:async()=>undefined});};
     const first=call(accountingA,rowA,deadlineA);const second=call(accountingB,rowB,deadlineB);start.open();
     try{
       const results=await Promise.allSettled([first,second]);expect(results.filter(x=>x.status==='fulfilled')).toHaveLength(1);

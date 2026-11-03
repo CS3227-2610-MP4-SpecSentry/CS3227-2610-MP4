@@ -1,0 +1,35 @@
+{
+  "id": "f1feb58aebb54c629e4e8f0882506a43",
+  "prompter": "yooplo",
+  "session": "2026-11-01-ai-model-comparison",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "controlled-model-comparison",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact model variant and effort unavailable",
+  "started_at": "2026-11-01T15:28:01.732479+00:00",
+  "ended_at": "2026-11-01T15:32:01.355051+00:00",
+  "elapsed_seconds": 239.622572,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Controlled fixed-v2 model comparison completed: Llama4/4, Gemma3/4 with deadline, priorQwen2/4; metadata-only artifacts saved; configuration unchanged appoff",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable agent usage unavailable; actual product provider usage separately recorded",
+    "output_tokens": "Attributable agent usage unavailable; actual product provider usage separately recorded",
+    "cache_read_tokens": "Attributable agent usage unavailable; actual product provider usage separately recorded",
+    "tool_calls": "Attributable agent usage unavailable; actual product provider usage separately recorded",
+    "retries": "Attributable agent usage unavailable; actual product provider usage separately recorded"
+  },
+  "unavailable_reason": "Attributable agent usage unavailable; actual product provider usage separately recorded"
+}

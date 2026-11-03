@@ -38,13 +38,18 @@ Operations below define logical inputs and outcomes derived from existing requir
 | GET /api/review-pool | Reviewer; scoped filters/page | Allowed metadata only; no submitted detail or private AI fields |
 | GET /api/proposals/:id | Owner/current assignee or scoped Maintainer; submitted revision selector | Authorized representation; working drafts owner-only; linked content reauthorizes independently |
 | POST /api/proposals | Contributor; draft fields | New owned DRAFT; validation/role failure creates none |
+| GET /api/proposals/owned | Contributor; owner derived from session, scoped cursor/page | Own proposals across lifecycle states with state/version and nullable latest submitted revision; old GET /api/proposals remains DRAFT-only |
 | PATCH /api/proposals/:id/draft | Owner; expected proposal version and draft content | Working content updated only in eligible state; submitted snapshots unchanged |
+| POST /api/proposals/:id/clone-latest | Owner; expectedVersion, latest submitted revisionId, confirmed:true | Explicitly replace private working content in eligible unattached state; preserve criterion keys/history, regenerate working evidence identity, commit version/activity atomically |
+| POST /api/proposals/:id/ai/draft | Contributor owner; expectedVersion and workingRevisionId | Bounded typed suggestion from eligible saved structured draft; reauthorize before attempts and disclosure; never save or submit |
+| GET /api/contributor/ai/usage | Contributor session; actor derived server-side | Own SGT-day requests, attempts/retries, failures and valid/unknown token usage; cache disabled, provider UTC spend separately labeled |
 | POST /api/proposals/:id/submit | Owner; expected version, draft revision | Immutable revision, proper pool/assigned state, activity and assigned-reviewer notification together |
 | POST /api/proposals/:id/claim or /drop | Reviewer; expected version/assignment identity | One active assignment or correct queue return; concurrent loser sees conflict |
 | POST /api/proposals/:id/findings | Assignee; revision/assignment/version, severity, description, optional references | Human finding plus activity; frozen or stale state rejected |
 | POST /api/findings/:id/transitions or /amendments | Assignee; expected version, transition/amendment and explanation | Preserve original description and history; no delete operation |
 | PUT /api/proposals/:id/coverage/:criterionId | Assignee; same-revision criterion, expected version, status/rationale, optional evidence links or confirmation | Revision-specific assessment; no cross-revision evidence link |
 | POST /api/findings/:id/responses | Owner; current scope/version and plain text | Attributed response; no resolution side effect |
+| GET /api/proposals/:id/responses | Authorized submitted viewer; scoped cursor/page | Attributed chronological response history; same-proposal historical finding references remain valid |
 | POST /api/proposals/:id/decision | Assignee; latest revision/assignment/version, approve/request-changes and note as applicable | Deterministic gates checked; decision plus activity; request-changes final until resubmission |
 | POST /api/proposals/:id/reopen or /withdraw | Owner; expected version and required reason/confirmation | Existing lifecycle transitions; no attached-item edit bypass |
 | POST /api/proposals/:id/revoke-approval | Assignee; effective approval/version and reason | Approval invalidation, activity and responsible-Maintainer notice atomic; released records reject |

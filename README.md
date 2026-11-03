@@ -1,9 +1,13 @@
 # SpecSentry
 
 Secure specification and review workspace for CS3227 MP4. This repository currently
-contains base authentication, single-role accounts and the Contributor private-draft
-workspace. Reviewer/Release Maintainer landing pages show current availability;
-their full workflows and product AI are subsequent work. No deployed application is claimed.
+contains authentication, single-role accounts, Contributor drafting/submission/
+revision/response workflows, the Reviewer workspace and supporting release APIs.
+Contributor and Reviewer advisory AI use a bounded server gateway; live provider
+operation is disabled pending verification. The broader Release Maintainer UI
+remains pending. Current checks and open gates are in the
+[Contributor run](logs/yooplo/2026-11-01-contributor-completion.md).
+No deployed application is claimed.
 
 ## Directory map
 

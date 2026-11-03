@@ -1,5 +1,29 @@
 # Delivery and implementation plan
 
+Contributor schema integration, 2 November 2026: the user authorized a fixed
+Contributor-only JSON Schema transport format with unchanged strict runtime
+validation. Count its complete serialized metadata through an additional
+accounting-only frame within the existing budget. Version generation v3 and
+independently verify the authenticated generation/selection/application/save
+path. Checkpoint commits, actual results and remaining live-policy gates are in
+the [integration run](../logs/yooplo/2026-11-02-contributor-schema-integration.md).
+
+Opt-in live AI wiring, 1 November 2026: implement server-only explicit activation,
+complete key/model/context validation and a fixed synthetic verification command
+that shares production Contributor preparation, admission and strict decoding.
+The app remains off by default; the CLI does not change local configuration or
+business records. Actual execution/findings and remaining provider gates belong
+to the [live wiring run](../logs/yooplo/2026-11-01-live-ai-wiring.md). Model/key-limit,
+retention, cross-role review and deployment acceptance remain separate from wiring.
+
+Conservative AI budget, 1 November 2026: user approved replacing the exact verified
+tokenizer prerequisite with full-message UTF-8 byte/framing admission units.
+Contributor/Reviewer caps remain 4,000/10,000; actual usage remains provider-reported
+or unknown. The [budget run](../logs/yooplo/2026-11-01-conservative-ai-budget.md)
+records implementation and independent checks. Live configuration remains disabled;
+model-specific margin evaluation, key limits, data handling and human shared-owner/
+teammate review remain pending. This is not a live-provider or deployment claim.
+
 As of 25 October 2026. Imported dates are targets, not completion evidence. Historical administrative completion is unverified in this review. Behavior belongs in [the specification set](specs/PRODUCT-SPEC.md).
 
 ## Team Allocation
@@ -131,6 +155,29 @@ These focuses organize work and do not create exclusive ownership. The contribut
 - Confirm historical organization registration, Canvas ZIP-upload expectations, presentation sign-up/slot, and later peer-evaluation details; do not infer them from the PDF availability window. See [submission readiness](SUBMISSION.md).
 
 **Product decision.** Build SpecSentry as a new, narrowly scoped software engineering web application in the GitHub organization CS3227-2610-MP4-SpecSentry. Keep every AI capability advisory, typed, rate limited, reviewable, and separate from state-changing endpoints. Prioritize three complete role workflows, explicit security evidence, measurable context and resource experiments, and a reproducible two-environment release over optional integrations.
+
+## Contributor completion checkpoint — 1 November2026
+
+The [current Contributor run](../logs/yooplo/2026-11-01-contributor-completion.md)
+supersedes the older private-draft-only TASK-003 status below for local source:
+owner lifecycle discovery, submitted detail/history, initial/replacement/assigned
+submission, explicit latest-content cloning, eligible private editing,
+withdrawal/reopening, append-only finding responses and the bounded Spec Draft
+Assistant with safe own usage are implemented. The user relayed affected-owner
+interface agreement; final teammate patch approval remains separate.
+
+Final security revalidation independently closed P001–P005, including the shared
+gateway quota-admission authorization fix and late-session client checks.
+Combined independent acceptance passed241client/101server/238PostgreSQL tests,
+16real browser cases plus one separate real modified-navigation case, and28legacy
+functional checks. The47/48synthetic navigation result retains a popup-mocking
+limitation; its real authenticated counterpart passes without relaxed assertions.
+The fixed performance workload passed68,644requests with zero errors and113.97ms
+overall p95. Separate scoped runs are not presented as one summed green suite.
+TASK-005 now includes the Contributor gateway adapter but still lacks live
+OPEN-002/provider and all-role evaluation acceptance. Nothing is committed,
+pushed, merged or deployed by this run. Provider credentials/policy compatibility,
+human usefulness ratings and deployed verification remain external gates.
 
 ## Work packages and dependencies
 

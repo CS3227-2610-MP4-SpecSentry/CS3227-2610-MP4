@@ -104,8 +104,8 @@ for (const destination of ['sidebar', 'brand', 'breadcrumb', 'Back']) {
     try {
       await edit(f); await f.page.getByLabel('Problem (required)').fill('Unsaved guarded text');
       const target = destination === 'sidebar' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'Contributor workspace', exact: true })
-        : destination === 'brand' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'SpecSentry workspace' })
-          : destination === 'breadcrumb' ? f.page.locator('.breadcrumb').getByRole('link') : f.page.getByRole('button', { name: 'Back to draft detail' });
+        : destination === 'brand' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'SpecSentry Specification workspace' })
+          : destination === 'breadcrumb' ? f.page.getByRole('navigation', { name: 'Breadcrumb', exact: true }).getByRole('link').first() : f.page.getByRole('button', { name: 'Back to draft detail' });
       await leaveAttempt(f, () => target.click(), false); await expect(f.page).toHaveURL(baseURL + editorPath);
       await expect(f.page.getByLabel('Problem (required)')).toHaveValue('Unsaved guarded text');
       await leaveAttempt(f, () => target.click(), true); await expect(f.page).not.toHaveURL(baseURL + editorPath);
@@ -290,7 +290,16 @@ for (const mode of [409, 500, 'network', 'reconcile']) {
     const f = await fixture({ populated: true }); if (mode === 'reconcile') f.state.readFailure = true; else f.state.saveStatus = mode;
     try {
       await edit(f); await f.page.getByLabel('Problem (required)').fill(`Kept after ${mode}`); await f.page.getByRole('button', { name: 'Save private draft', exact: true }).click();
-      await expect(f.page.locator('.save-actions').getByRole('alert')).toBeVisible(); await expect(f.page.getByLabel('Problem (required)')).toHaveValue(`Kept after ${mode}`);
+      await expect(f.page.locator('.save-actions').getByRole('status')).toContainText(/paused|verification incomplete/i);
+      const recoveryLink = f.page.getByRole('link', { name: 'Recovery details', exact: true });
+      await expect(recoveryLink).toBeVisible(); await recoveryLink.focus(); await recoveryLink.press('Enter');
+      const recovery = f.page.getByRole('region', { name: 'Save recovery details', exact: true });
+      await expect(recovery).toBeFocused(); await expect(recovery.getByRole('alert')).toBeVisible();
+      const message = await recovery.getByRole('alert').textContent();
+      if (mode === 500 || mode === 'network') assert.match(message, /uncertain|may have been saved/i);
+      if (mode === 409) { assert.match(message, /changed/i); assert.match(message, /reload/i); }
+      if (mode === 'reconcile') { assert.match(message, /saved/i); assert.match(message, /could not|not.*verif/i); }
+      await expect(f.page.getByLabel('Problem (required)')).toHaveValue(`Kept after ${mode}`);
       await expect(f.page.getByRole('button', { name: 'Save private draft', exact: true })).toBeDisabled();
       await leaveAttempt(f, () => f.page.getByRole('button', { name: 'Back to draft detail' }).click(), false);
       await expect(f.page.getByLabel('Problem (required)')).toHaveValue(`Kept after ${mode}`); await capture(f.page, `failure-${mode}`);
@@ -303,7 +312,9 @@ await check('AC-CON-UX-003 validation focuses field and message remains adjacent
   try {
     await edit(f); await f.page.getByLabel('Title (required)').fill(''); await f.page.getByLabel('Evidence 1 text').focus();
     await f.page.getByRole('button', { name: 'Save private draft', exact: true }).click(); await expect(f.page.getByLabel('Title (required)')).toBeFocused();
-    await expect(f.page.locator('.save-actions').getByRole('alert')).toContainText('Check the highlighted fields.');
+    await expect(f.page.locator('.save-actions').getByRole('status')).toContainText('Save needs attention.');
+    await expect(f.page.getByRole('link', { name: 'Recovery details', exact: true })).toBeVisible();
+    await expect(f.page.getByRole('region', { name: 'Save recovery details', exact: true }).getByRole('alert')).toContainText('Check the highlighted fields.');
     const field = await f.page.getByLabel('Title (required)').boundingBox(); const bar = await f.page.locator('.save-actions').boundingBox();
     assert.ok(field.y >= bar.y + bar.height || field.y + field.height <= bar.y); assert.equal(f.state.requests.filter(item => item.method === 'PATCH').length, 0);
   } finally { await f.close(); }

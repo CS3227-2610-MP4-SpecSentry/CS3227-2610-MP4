@@ -1,0 +1,67 @@
+{
+  "templateVersion": "contributor-draft-v2",
+  "sameFixedCases": true,
+  "sameInputUnits": [
+    2158,
+    2147,
+    2198,
+    4000,
+    4001
+  ],
+  "outputCapTokens": 800,
+  "deadlineMs": 20000,
+  "runsPerModel": 1,
+  "comparisonCaveats": [
+    "Qwen baseline from earlier v2 batch, not contemporaneous rerun",
+    "Sequential live runs; backend load, warm/cold state and model routing not controlled",
+    "Four attempted cases per model; not statistical reliability or usefulness certification",
+    "Gemma timeout usage unknown; subtotal is not total consumption",
+    "Cache telemetry unavailable; no monetary savings inferred"
+  ],
+  "preferredNextTestCandidate": "llama3.1:8b",
+  "configurationChanged": false,
+  "rows": [
+    {
+      "model": "qwen3.6:35b",
+      "successfulCases": 2,
+      "attemptedCases": 4,
+      "deadlineCases": 0,
+      "completedHttpResponseLatencyMs": [
+        2630,
+        3706
+      ],
+      "reportedTotalTokensKnownSubtotal": 2669,
+      "tokenUsageCoverageCases": 4,
+      "tokenUsageComplete": true,
+      "evidence": "logs/yooplo/live-ai-provider-probe/verification/v2-live-results.json"
+    },
+    {
+      "model": "llama3.1:8b",
+      "successfulCases": 4,
+      "attemptedCases": 4,
+      "deadlineCases": 0,
+      "completedHttpResponseLatencyMs": [
+        1671,
+        2391
+      ],
+      "reportedTotalTokensKnownSubtotal": 2058,
+      "tokenUsageCoverageCases": 4,
+      "tokenUsageComplete": true,
+      "evidence": "logs/yooplo/ai-model-comparison/verification/llama3.1-8b-v2.json"
+    },
+    {
+      "model": "gemma4:26b",
+      "successfulCases": 3,
+      "attemptedCases": 4,
+      "deadlineCases": 1,
+      "completedHttpResponseLatencyMs": [
+        4020,
+        5772
+      ],
+      "reportedTotalTokensKnownSubtotal": 2008,
+      "tokenUsageCoverageCases": 3,
+      "tokenUsageComplete": false,
+      "evidence": "logs/yooplo/ai-model-comparison/verification/gemma4-26b-v2.json"
+    }
+  ]
+}

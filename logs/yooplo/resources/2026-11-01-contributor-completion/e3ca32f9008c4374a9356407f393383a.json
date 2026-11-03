@@ -1,0 +1,35 @@
+{
+  "id": "e3ca32f9008c4374a9356407f393383a",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "acceptance",
+  "invocation": "performance-final-1",
+  "stage": "prescribed-seeded-performance",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T05:08:42.965700+00:00",
+  "ended_at": "2026-11-01T05:09:31.644536+00:00",
+  "elapsed_seconds": 48.678836,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Safe setup refusal before seed/warmup:inet_server_addr text includes/32networkmask; confirmed dedicatedperfDBempty and host()canonical loopback; no measuredloadstarted",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry not exposed",
+    "output_tokens": "Per-record runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+    "tool_calls": "Per-record runtime usage telemetry not exposed",
+    "retries": "Per-record runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+}

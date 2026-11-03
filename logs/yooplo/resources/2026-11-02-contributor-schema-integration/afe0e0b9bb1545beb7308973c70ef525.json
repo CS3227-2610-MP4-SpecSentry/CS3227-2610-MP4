@@ -1,0 +1,35 @@
+{
+  "id": "afe0e0b9bb1545beb7308973c70ef525",
+  "prompter": "yooplo",
+  "session": "2026-11-02-contributor-schema-integration",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "checkpoint-and-plan",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort unavailable",
+  "started_at": "2026-11-02T02:13:54.302473+00:00",
+  "ended_at": "2026-11-02T02:16:43.783500+00:00",
+  "elapsed_seconds": 169.481027,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Three authorized checkpoint commits created; integration brief and bounded security design assignment recorded",
+  "unavailable_reasons": {
+    "input_tokens": "Agent execution model/effort and attributable token/cache/tool counters unavailable",
+    "output_tokens": "Agent execution model/effort and attributable token/cache/tool counters unavailable",
+    "cache_read_tokens": "Agent execution model/effort and attributable token/cache/tool counters unavailable",
+    "tool_calls": "Agent execution model/effort and attributable token/cache/tool counters unavailable",
+    "retries": "Agent execution model/effort and attributable token/cache/tool counters unavailable"
+  },
+  "unavailable_reason": "Agent execution model/effort and attributable token/cache/tool counters unavailable"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "1c7e9ea7cbe5446eb7ed6f8a1804e128",
+  "prompter": "yooplo",
+  "session": "2026-11-01-live-ai-app-acceptance",
+  "agent": "verifier",
+  "invocation": "verifier-1",
+  "stage": "app-acceptance",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings exact variant and effort unavailable",
+  "started_at": "2026-11-01T15:35:25.797759+00:00",
+  "ended_at": "2026-11-01T15:45:49.387906+00:00",
+  "elapsed_seconds": 623.590147,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Actualgeneration503 INVALID_OUTPUT oneproviderattempt346input162output;2recoverycasespassed; safe testfiles/fixturealignment written andlintpassed; no liverequest retry",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable agent telemetry unavailable",
+    "output_tokens": "Attributable agent telemetry unavailable",
+    "cache_read_tokens": "Attributable agent telemetry unavailable",
+    "tool_calls": "Attributable agent telemetry unavailable",
+    "retries": "Attributable agent telemetry unavailable"
+  },
+  "unavailable_reason": "Attributable agent telemetry unavailable"
+}

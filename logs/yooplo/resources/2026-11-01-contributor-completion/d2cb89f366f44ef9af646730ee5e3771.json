@@ -1,0 +1,35 @@
+{
+  "id": "d2cb89f366f44ef9af646730ee5e3771",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "security",
+  "invocation": "security-2",
+  "stage": "patch-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:01:53.220852+00:00",
+  "ended_at": "2026-11-01T04:03:53.803910+00:00",
+  "elapsed_seconds": 120.583058,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent patch review identified blocking recovery findings P001 and P002; targeted tests startup unavailable",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

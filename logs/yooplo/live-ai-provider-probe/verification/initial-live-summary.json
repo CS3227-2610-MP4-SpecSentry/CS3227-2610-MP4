@@ -1,0 +1,71 @@
+{
+  "evidence": "Safe reduced metadata transcribed from first actual harness output; raw prompts/results not retained",
+  "mode": "live-synthetic",
+  "methodId": "utf8-bytes-framing-v1",
+  "configuredContextWindow": 262144,
+  "passed": false,
+  "cases": [
+    {
+      "caseId": "normal",
+      "inputUnits": 1781,
+      "latencyMs": 4417,
+      "httpStatus": 200,
+      "errorClass": "INVALID_OUTPUT",
+      "schemaValid": false,
+      "usage": {
+        "promptTokens": 267,
+        "completionTokens": 246,
+        "totalTokens": 513,
+        "cachedTokens": null
+      }
+    },
+    {
+      "caseId": "multilingual",
+      "inputUnits": 1770,
+      "latencyMs": 5160,
+      "httpStatus": 200,
+      "errorClass": "INVALID_OUTPUT",
+      "schemaValid": false,
+      "usage": {
+        "promptTokens": 270,
+        "completionTokens": 282,
+        "totalTokens": 552,
+        "cachedTokens": null
+      }
+    },
+    {
+      "caseId": "delimiters",
+      "inputUnits": 1821,
+      "latencyMs": 5856,
+      "httpStatus": 200,
+      "errorClass": "INVALID_OUTPUT",
+      "schemaValid": false,
+      "usage": {
+        "promptTokens": 297,
+        "completionTokens": 275,
+        "totalTokens": 572,
+        "cachedTokens": null
+      }
+    },
+    {
+      "caseId": "near-cap",
+      "inputUnits": 4000,
+      "latencyMs": 7167,
+      "httpStatus": 200,
+      "errorClass": "INVALID_OUTPUT",
+      "schemaValid": false,
+      "usage": {
+        "promptTokens": 545,
+        "completionTokens": 394,
+        "totalTokens": 939,
+        "cachedTokens": null
+      }
+    },
+    {
+      "caseId": "over-cap",
+      "inputUnits": 4001,
+      "errorClass": "INPUT_LIMIT",
+      "httpStatus": null
+    }
+  ]
+}

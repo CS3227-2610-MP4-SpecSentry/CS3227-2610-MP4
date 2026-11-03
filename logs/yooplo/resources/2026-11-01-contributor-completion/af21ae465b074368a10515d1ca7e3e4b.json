@@ -1,0 +1,35 @@
+{
+  "id": "af21ae465b074368a10515d1ca7e3e4b",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "implementer",
+  "invocation": "implementer-4",
+  "stage": "browser-retry",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed; retry already started before coordinator learned boundary",
+  "started_at": "2026-11-01T04:07:38.692981+00:00",
+  "ended_at": "2026-11-01T04:09:12.000812+00:00",
+  "elapsed_seconds": 93.307831,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Browser retry2passed exit0 in1.6minutes; owned fixture teardown intervention; boundary limitation disclosed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

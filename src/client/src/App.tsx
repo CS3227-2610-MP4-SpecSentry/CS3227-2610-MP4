@@ -61,7 +61,7 @@ type NavigationProps = {
 
 function SidebarContent({ workspace, username, loggingOut, onLogout, onNavigate }: NavigationProps) {
   return <>
-    <Link className="brand" to={workspace.path} aria-label="SpecSentry workspace" title="SpecSentry workspace" onClick={onNavigate}><span className="brand-mark"><Icon name="shield" /></span><span className="sidebar-label">SpecSentry<small>Specification workspace</small></span></Link>
+    <Link className="brand" to={workspace.path} aria-label="SpecSentry Specification workspace" title="SpecSentry Specification workspace" onClick={onNavigate}><span className="brand-mark"><Icon name="shield" /></span><span className="sidebar-label">SpecSentry{' '}<small>Specification workspace</small></span></Link>
     <div className="sidebar-scroll">
       <p className="nav-caption sidebar-label">WORKSPACE</p>
       <nav aria-label="Account"><Link className="nav-link active" aria-current="page" aria-label={`${workspace.label} workspace`} title={`${workspace.label} workspace`} to={workspace.path} onClick={onNavigate}><Icon name="grid" /><span className="sidebar-label">{workspace.label} workspace</span></Link></nav>
@@ -178,7 +178,7 @@ export function App() {
   const workspace = session ? workspaces[session.account.role] : null;
   const path = location.pathname.replace(/\/+$/, '');
   const taskTitle = session?.account.role === 'CONTRIBUTOR' && path.startsWith('/contributor')
-    ? path.endsWith('/edit') ? 'Edit draft' : path === '/contributor/new' ? 'Create draft' : path.includes('/drafts/') ? 'Draft details' : 'Private drafts'
+    ? path.endsWith('/edit') ? 'Edit draft' : path === '/contributor/new' ? 'Create draft' : path.includes('/drafts/') ? 'Draft details' : path.includes('/proposals/') ? 'Submitted proposal' : path === '/contributor/proposals' ? 'Your proposals' : 'Private drafts'
     : workspace ? `${workspace.label} workspace` : 'SpecSentry';
   return <div className={session && workspace ? `app-shell${navigationOpen ? '' : ' navigation-collapsed'}` : 'login-shell'}>
     <a className="skip-link" href="#main-content" onClick={event => { event.preventDefault(); document.getElementById('main-content')?.focus(); }}>Skip to main content</a>

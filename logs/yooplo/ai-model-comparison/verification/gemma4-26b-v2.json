@@ -1,0 +1,95 @@
+{
+  "templateVersion": "contributor-draft-v2",
+  "contextSource": "Fresh key-visible catalog; minimum positive advertised context",
+  "mode": "live-synthetic",
+  "methodId": "utf8-bytes-framing-v1",
+  "configuredContextWindow": 131072,
+  "cases": [
+    {
+      "caseId": "normal",
+      "requestedModel": "gemma4:26b",
+      "inputUnits": 2158,
+      "status": "FAILED",
+      "latencyMs": 20012,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": "DEADLINE",
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "multilingual",
+      "requestedModel": "gemma4:26b",
+      "inputUnits": 2147,
+      "status": "SUCCESS",
+      "latencyMs": 5772,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 355,
+        "completionTokens": 260,
+        "totalTokens": 615,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "delimiters",
+      "requestedModel": "gemma4:26b",
+      "inputUnits": 2198,
+      "status": "SUCCESS",
+      "latencyMs": 5650,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 387,
+        "completionTokens": 247,
+        "totalTokens": 634,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "near-cap",
+      "requestedModel": "gemma4:26b",
+      "inputUnits": 4000,
+      "status": "SUCCESS",
+      "latencyMs": 4020,
+      "httpStatus": 200,
+      "schemaValid": true,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": 582,
+        "completionTokens": 177,
+        "totalTokens": 759,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": true
+    },
+    {
+      "caseId": "over-cap",
+      "requestedModel": "gemma4:26b",
+      "inputUnits": 4001,
+      "status": "REJECTED",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": "INPUT_LIMIT",
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    }
+  ],
+  "passed": false
+}

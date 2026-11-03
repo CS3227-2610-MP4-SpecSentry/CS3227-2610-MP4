@@ -105,7 +105,7 @@ for (const destination of ['sidebar', 'brand', 'breadcrumb', 'Back']) {
     try {
       await edit(f); await f.page.getByLabel('Problem (required)').fill('Unsaved guarded text');
       const target = destination === 'sidebar' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'Contributor workspace', exact: true })
-        : destination === 'brand' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'SpecSentry workspace' })
+        : destination === 'brand' ? f.page.locator('#workspace-navigation').getByRole('link', { name: 'SpecSentry Specification workspace' })
           : destination === 'breadcrumb' ? f.page.getByRole('navigation', { name: 'Breadcrumb', exact: true }).getByRole('link').first() : f.page.getByRole('button', { name: 'Back to draft detail' });
       await leaveAttempt(f, () => target.click(), false); await expect(f.page).toHaveURL(baseURL + editorPath);
       await expect(f.page.getByLabel('Problem (required)')).toHaveValue('Unsaved guarded text');
@@ -354,6 +354,12 @@ for (const [path, title] of [['/contributor','Private drafts'], ['/contributor/n
       assert.equal(levels[0], 1); for (let index = 1; index < levels.length; index++) assert.ok(levels[index] <= levels[index - 1] + 1, `Heading hierarchy ${levels}`);
       await expect(f.page.locator('.topbar-task')).toHaveText(path === '/contributor' ? 'Private drafts' : path.endsWith('/edit') ? 'Edit draft' : path.endsWith('/new') ? 'Create draft' : 'Draft details');
       if (path.includes('drafts/')) { await expect(breadcrumbs.locator('.draft-title-crumb > [title]')).toHaveAttribute('title', initial.title); assert.equal(f.state.requests.filter(item => item.path.endsWith('/draft') && item.method === 'GET').length - f.state.requestFailures.filter(item => item.path.endsWith('/draft') && item.error === 'net::ERR_ABORTED').length, 1); }
+      const expectedCrumbs = path === '/contributor' ? ['My Drafts'] : path.endsWith('/new') ? ['My Drafts', 'Create Draft'] : path.endsWith('/edit') ? ['My Drafts', initial.title, 'Edit'] : ['My Drafts', initial.title];
+      await expect(breadcrumbs.getByRole('listitem')).toHaveText(expectedCrumbs);
+      const destinations = await breadcrumbs.getByRole('link').evaluateAll(links => links.map(link => link.getAttribute('href')));
+      assert.equal(new Set(destinations).size, destinations.length);
+      assert.deepEqual(destinations, path === '/contributor' ? [] : path.endsWith('/edit') ? ['/contributor', '/contributor/drafts/proposal-1'] : ['/contributor']);
+      await expect(breadcrumbs.locator('span[aria-current="page"]')).toHaveText(expectedCrumbs.at(-1));
       await scan(f.page, `task orientation ${path}`); await capture(f.page, `orientation-${path.split('/').at(-1)}`);
     } finally { await f.close(); }
   });

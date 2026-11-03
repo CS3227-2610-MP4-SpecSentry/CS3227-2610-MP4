@@ -1,5 +1,14 @@
 # SpecSentry User Guide
 
+## Reading Contributor responses as a Reviewer
+
+Open an assigned proposal and find **Contributor response history** in Manual
+review. It shows the response text, author, time, finding ID and response revision
+ID across submitted revisions, including older findings. Choose **Load more
+responses** to continue through the history. A failed read offers **Retry
+responses** while manual review remains available. Reading a response does not
+resolve a finding; make that decision explicitly using the existing finding controls.
+
 ## Revoke an approval before release
 
 The assigned Reviewer can revoke an effective approval from the current submitted
@@ -64,8 +73,9 @@ criterion coverage. Earlier assessments and decisions remain in history.
 Findings preserve original authorship and transitions; unresolved HIGH/CRITICAL
 findings still block approval, and resolved findings do not reopen automatically.
 A request for changes cannot be reversed without Contributor resubmission. The
-Contributor API supports this cycle; the private drafting screen is implemented,
-while its submission and submitted-editing controls remain future work. Original submission age does not reset on resubmission.
+Contributor can submit a saved working copy and edit it again in eligible states
+using the local workspace controls described below. Explicit cloning restores the
+latest submitted content into the private working copy. Original submission age does not reset on resubmission.
 
 If another revision arrives or the assignment changes, the server rejects an old
 form. The workspace freezes those forms and retains entered text while access
@@ -83,9 +93,11 @@ the unassigned awaiting-revision queue so the owner can resubmit or withdraw.
 Manual review remains usable without AI. Verification boundaries and current
 evidence are in the [iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md).
 
-Status: locally implemented Reviewer workflows and Contributor private drafts/editing/deletion/criteria/submission-preparation,
-combined 31 October 2026. Per-increment verification is linked below; combined merge verification
-is recorded separately. No live application URL or
+Status: local Reviewer workflows and the Contributor draft, lifecycle, revision,
+response and advisory assistant implementation, updated1November2026. Current
+independent checks and unresolved gates are recorded in the
+[Contributor run](../logs/yooplo/2026-11-01-contributor-completion.md); earlier
+increment/merge results remain historical evidence. No live application URL or
 peer-testing accounts have been verified. This guide describes current behavior;
 the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
@@ -101,8 +113,9 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-Full Contributor submitted-editing/submission UI, broader release workspace and
-Contributor/Maintainer AI assistants remain pending. Approval revocation and the supporting release API are described above.
+The broader release workspace and Maintainer AI assistant remain pending.
+Contributor submission, working-copy editing and submitted detail controls are
+available locally as described below. Approval revocation and the supporting release API are described above.
 Reviewer AI has a bounded implementation with live operation
 disabled pending provider verification.
 Contributors can create, list and open/edit/delete their own never-submitted private
@@ -121,8 +134,114 @@ enter constraints. Title is limited to 200 Unicode characters; each narrative fi
 to 10,000. Select **Create private draft** to save and open its private detail.
 Select a draft row to open its saved detail, or **Back to your drafts** to return.
 The row is a normal link and supports opening in another tab.
-Only the owner can read this working content. Submission, responses and lifecycle actions are not exposed in this private-draft
-workspace; the drafting assistant remains pending.
+Only the owner can read this working content. Submission, finding responses,
+lifecycle actions and the advisory drafting assistant are described below.
+
+### Submit and inspect a proposal
+
+Save a working copy with a Contributor summary, at least one required acceptance
+criterion and a valid non-empty unified diff. From saved private detail choose
+**Submit saved working copy**, inspect the explanation, then **Confirm submit**.
+Submission publishes an immutable revision and opens submitted detail. Optional
+plain-text evidence may be empty. A replacement submission preserves earlier
+revisions and retains any current Reviewer.
+
+Submitted detail shows the current state and Reviewer, a submitted revision
+selector, immutable specification/criteria/patch/evidence, findings, decisions with
+their revision numbers, and activity ordered oldest first. Use the history paging
+controls to load more entries. **Refresh submitted proposal** checks current state.
+These pages remain owner-authorized even when opened by a direct URL.
+
+From eligible submitted detail, **Open private working copy** returns to the saved
+working content. Edit and save it, then explicitly submit again. Working edits are
+private; they do not change the revision the Reviewer sees. Editing is permitted
+in DRAFT, SUBMITTED, IN_REVIEW and CHANGES_REQUESTED, subject to server checks.
+An approval must first be reopened, and release attachments block editing and
+submission. To start from submitted content, choose **Clone latest submitted
+content**, read the overwrite explanation and confirm. This replaces the saved
+private working copy with the latest submission even when viewing older history.
+It preserves unchanged criterion identities, assignment and immutable history;
+it does not submit. Opening a working copy alone never clones it.
+
+Choose **All proposals** from the private draft list to discover your own proposals
+across lifecycle states. Each row identifies its state and latest submitted
+revision where one exists. Submitted rows open immutable history; never-submitted
+rows open private detail. The separate private list still contains only DRAFTs.
+Both lists show current-page counts, loading/unavailable states and paging.
+
+The submitted page heading is the current proposal title. Historical immutable
+revision content comprises the summary, specification, criteria, patch and
+evidence; historical title snapshots are not stored by the existing data model.
+
+### Respond to a finding
+
+In IN_REVIEW or CHANGES_REQUESTED, enter an attributed plain-text response under a
+finding and explicitly save it. Text is limited to 2,000 Unicode characters and
+appears in authorized response history and proposal activity. You may respond to
+a finding from an earlier revision of the same proposal; the response identifies
+the current revision. A response never resolves or changes a finding's severity.
+Only the assigned Reviewer can make the permitted finding transitions.
+
+Unsaved response text uses the navigation guard. Conflicts and uncertain replies
+retain input and pause another save until explicit reconciliation. Check the
+response history before deciding whether another response is needed; an
+interrupted reply does not prove the earlier write failed. Competing proposal
+actions and history controls stay locked while entered response state needs
+protection. Session/access loss clears protected page state.
+
+### Withdraw or reopen
+
+Choose **Withdraw proposal**, enter a plain-text reason of at most 2,000 characters,
+and choose **Confirm withdraw**. Withdrawal is terminal, retains history, closes
+any assignment and notifies its Reviewer. It differs from permanent deletion of
+a never-submitted draft. Attached proposals cannot be withdrawn.
+
+For an eligible APPROVED proposal choose **Reopen approval for revision** and
+**Confirm reopen**. Reopening invalidates the approval and enters changes
+requested; the earlier decision remains in history. Attached or released
+proposals cannot be reopened.
+
+Pending actions prevent repeated requests. After a conflict or uncertain result,
+use **Check current proposal state** before continuing. Submission recovery can
+offer **Retry original submission**, which uses the original key and body rather
+than creating another submission. Other actions require current-state
+reconciliation. A failed check leaves actions paused and does not claim whether
+the earlier request committed. Session expiry requires signing in again.
+
+### Spec Draft Assistant
+
+In an eligible private working-copy editor, save and reconcile your content, then
+choose **Generate draft suggestions**. The server analyzes the saved structured
+draft, not unsaved edits. It excludes the patch and evidence and rejects context
+that exceeds its character/conservative input budget rather than truncating it.
+
+Suggestions start with no selections. Select the objective to replace Expected
+behavior, select criteria to append new required criteria, or select edge-case,
+ambiguity and test notes to append labeled text to Constraints. Choose **Apply
+selected suggestions to editor** to change only the unsaved form. Review the
+result and explicitly **Save private draft** when ready. Applying suggestions
+does not save, submit, assign a Reviewer or change lifecycle state. If the combined
+selection exceeds a field or criterion limit, nothing is applied.
+
+Manual editing remains available during generation. Editing, changing saved
+scope, navigation or page-session loss invalidates suggestions; late results do
+not overwrite current input. **Discard suggestions** removes the transient panel.
+Suggestions are not restored from browser storage. A provider error, invalid
+result or unavailable configuration leaves manual editing and saving usable.
+Use the safe error reference when one is available.
+
+Live SoC operation is off by default. An operator can configure explicit live
+access after provider evaluation and data-handling review; see [AI integration](AI-Integration.md).
+With the default configuration, the unavailable message is expected. Synthetic
+browser/server checks establish fallback and contract behavior, not live usefulness
+or provider compatibility. The separate provider probe uses fixed synthetic drafts,
+does not save suggestions and does not enable this application's live switch.
+
+**Refresh my AI resource use** shows your application SGT-day requests, outbound
+attempts/retries, completed failures and preflight rejections. A failure rate with
+no completed attempts is N/A. Missing provider token/cache measurements are
+Unknown, with reporting coverage shown separately. Application response caching
+is disabled. Provider spend windows use UTC and remain separate from SGT quotas.
 
 The application sidebar shows your account's workspace and **Sign out**. Use
 **Collapse navigation** or **Expand navigation** in the top bar to switch between
@@ -166,7 +285,7 @@ Open your private draft detail and select **Edit private draft**. Change title, 
 constraints or expected behavior, then select **Save private draft**. A successful save
 shows the new version; you can keep editing or select **Back to draft detail**. Hidden
 fields from the existing draft are preserved. Criteria controls are described below;
-there are no submission controls. The server rejects editing if the draft is no longer eligible.
+submission is an explicit action from saved detail. The server rejects editing if the draft is no longer eligible.
 
 The editor keeps **Save private draft** and its textual save status together in a
 compact action area while you scroll. Saving disables repeat submissions. A saved
@@ -306,7 +425,8 @@ the first submission; latest revision age is shown separately.
    Dropping ends your access to full content. Another Reviewer can then claim it.
 
 An awaiting-revision item can be claimed, inspected and edited, but another
-decision requires Contributor resubmission through the owner API. After takeover on the same revision, confirm or replace each preserved
+decision requires explicit Contributor resubmission from its saved working-copy
+detail (the owner API is also available). After takeover on the same revision, confirm or replace each preserved
 assessment individually. Findings retain their original author and history;
 unresolved findings remain actionable. A new revision needs fresh assessments.
 Resolved findings stay historical until explicitly reopened. Approval freezes
@@ -356,8 +476,8 @@ and unimplemented product workflows.
 The Contributor list presents its loaded-page count beside the draft list, with a
 concise privacy explanation. The count describes this page, not all your drafts;
 loading or an unavailable result is distinct from zero. The empty state offers the
-existing Create action. Reviewer and Release Maintainer landings continue to show
-their current availability message; visual refinement does not add workflow features.
+existing Create action. The Reviewer landing opens its implemented review
+workspace; the broader Release Maintainer landing retains its availability message.
 
 Long editors retain section navigation, independent workspace scrolling, sticky
 Save/status, field validation and explicit protection before discarding unsaved

@@ -26,7 +26,7 @@ export const reviewerCursorSchema = z.string().min(1).max(REVIEWER_LIMITS.cursor
 export const reviewerTimestampSchema = z.iso.datetime({ offset: true });
 export const proposalStateSchema = z.enum(['DRAFT', 'SUBMITTED', 'IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN']);
 export const assignedReviewStateSchema = z.enum(['IN_REVIEW', 'CHANGES_REQUESTED', 'APPROVED', 'IN_RELEASE', 'RELEASED']);
-export const proposalActivityActionSchema = z.enum(['DRAFT_CREATED', 'DRAFT_SAVED', 'WITHDRAWN', 'REOPENED', 'NOTIFICATION_CREATED', 'SUBMITTED', 'RESUBMITTED', 'CLAIMED', 'DROPPED', 'ASSIGNMENT_RELEASED', 'COVERAGE_ASSESSED', 'COVERAGE_CONFIRMED', 'FINDING_CREATED', 'FINDING_TRANSITIONED', 'FINDING_AMENDED', 'REVIEW_APPROVED', 'CHANGES_REQUESTED', 'APPROVAL_REVOKED', 'RELEASE_ATTACHED', 'RELEASE_REMOVED', 'RELEASE_PUBLISHED']);
+export const proposalActivityActionSchema = z.enum(['DRAFT_CREATED', 'DRAFT_SAVED', 'DRAFT_CLONED', 'FINDING_RESPONDED', 'WITHDRAWN', 'REOPENED', 'NOTIFICATION_CREATED', 'SUBMITTED', 'RESUBMITTED', 'CLAIMED', 'DROPPED', 'ASSIGNMENT_RELEASED', 'COVERAGE_ASSESSED', 'COVERAGE_CONFIRMED', 'FINDING_CREATED', 'FINDING_TRANSITIONED', 'FINDING_AMENDED', 'REVIEW_APPROVED', 'CHANGES_REQUESTED', 'APPROVAL_REVOKED', 'RELEASE_ATTACHED', 'RELEASE_REMOVED', 'RELEASE_PUBLISHED']);
 
 export const normalizeReviewerText = (value: string): string => value.replace(/\r\n?/g, '\n');
 export const reviewerCodePointLength = (value: string): number => Array.from(normalizeReviewerText(value)).length;

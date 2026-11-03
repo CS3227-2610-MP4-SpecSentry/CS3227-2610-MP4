@@ -1,0 +1,1 @@
+{"id": "lint", "kind": "static", "argv": ["npm.cmd", "run", "lint"], "paths": ["src/client/src", "src/shared/src", "src/server/src", "package.json", "package-lock.json"], "depends_on": ["environment"], "resources": [], "environment": [], "database": null, "timeout": 180}

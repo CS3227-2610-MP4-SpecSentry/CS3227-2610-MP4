@@ -1,0 +1,35 @@
+{
+  "id": "be27ec8d4790443c97dfe91d35b5d7f8",
+  "prompter": "yooplo",
+  "session": "2026-11-02-contributor-schema-integration",
+  "agent": "schema_security",
+  "invocation": "security-design-1",
+  "stage": "design-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent execution settings unavailable",
+  "started_at": "2026-11-02T02:15:32.745110+00:00",
+  "ended_at": "2026-11-02T02:17:26.334537+00:00",
+  "elapsed_seconds": 113.589427,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Design reviewed: three implementation acceptance gates for full format accounting, strict local validation, Contributor-only isolation; no design blocker",
+  "unavailable_reasons": {
+    "input_tokens": "Coordinator-observed stage includes dispatch/wait; agent model/token/tool telemetry unavailable",
+    "output_tokens": "Coordinator-observed stage includes dispatch/wait; agent model/token/tool telemetry unavailable",
+    "cache_read_tokens": "Coordinator-observed stage includes dispatch/wait; agent model/token/tool telemetry unavailable",
+    "tool_calls": "Coordinator-observed stage includes dispatch/wait; agent model/token/tool telemetry unavailable",
+    "retries": "Coordinator-observed stage includes dispatch/wait; agent model/token/tool telemetry unavailable"
+  },
+  "unavailable_reason": "Coordinator-observed stage includes dispatch/wait; agent model/token/tool telemetry unavailable"
+}

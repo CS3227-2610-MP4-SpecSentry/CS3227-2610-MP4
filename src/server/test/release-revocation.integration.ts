@@ -14,7 +14,7 @@ import { ReleasesService } from '../src/releases/releases.service';
 import { ApprovalRevocationService } from '../src/reviews/approval-revocation.service';
 import { persistedTestActor } from './business-fixtures';
 
-const tables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const prefix = `release-${randomUUID()}`;
 const ids = { owner: `${prefix}-owner`, reviewer: `${prefix}-reviewer`, otherReviewer: `${prefix}-other-reviewer`,
   maintainer: `${prefix}-maintainer`, otherMaintainer: `${prefix}-other-maintainer` };

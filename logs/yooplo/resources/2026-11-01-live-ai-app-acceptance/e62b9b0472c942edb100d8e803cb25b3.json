@@ -1,0 +1,35 @@
+{
+  "id": "e62b9b0472c942edb100d8e803cb25b3",
+  "prompter": "yooplo",
+  "session": "2026-11-01-live-ai-app-acceptance",
+  "agent": "security",
+  "invocation": "security-2",
+  "stage": "acceptance-source-review",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings exact variant and effort unavailable",
+  "started_at": "2026-11-01T15:40:29.554964+00:00",
+  "ended_at": "2026-11-01T15:51:19.726048+00:00",
+  "elapsed_seconds": 650.171084,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only acceptance-source security review no blockers; safe capture and isolated loopback design; actual live result remainsfailed",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable agent telemetry unavailable",
+    "output_tokens": "Attributable agent telemetry unavailable",
+    "cache_read_tokens": "Attributable agent telemetry unavailable",
+    "tool_calls": "Attributable agent telemetry unavailable",
+    "retries": "Attributable agent telemetry unavailable"
+  },
+  "unavailable_reason": "Attributable agent telemetry unavailable"
+}

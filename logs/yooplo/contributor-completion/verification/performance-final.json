@@ -1,0 +1,91 @@
+{
+  "requirement": "NFR-PERF-001",
+  "source": "authenticated loopback HTTP, full response body included",
+  "fixture": {
+    "proposals": 1000,
+    "revisions": 3000,
+    "findings": 10000,
+    "reviewers": 20,
+    "current_assignments": 400
+  },
+  "users": 20,
+  "startedAt": "2026-11-01T05:10:37.091Z",
+  "finishedAt": "2026-11-01T05:15:37.258Z",
+  "warmupMs": 60062.8527,
+  "measuredMs": 300060.8564,
+  "protocol": {
+    "requestedWarmupMs": 60000,
+    "requestedMeasureMs": 300000,
+    "targetP95Ms": 800,
+    "excludes": [
+      "AI calls",
+      "static assets",
+      "login setup",
+      "warmup"
+    ],
+    "errorsInvalidatePass": true
+  },
+  "endpoints": {
+    "pool": {
+      "requests": 13729,
+      "successes": 13729,
+      "errors": 0,
+      "errorRate": 0,
+      "statuses": {
+        "200": 13729
+      },
+      "p95SuccessfulMs": 97.46839999998338
+    },
+    "assigned": {
+      "requests": 13729,
+      "successes": 13729,
+      "errors": 0,
+      "errorRate": 0,
+      "statuses": {
+        "200": 13729
+      },
+      "p95SuccessfulMs": 128.29330000001937
+    },
+    "detail": {
+      "requests": 13728,
+      "successes": 13728,
+      "errors": 0,
+      "errorRate": 0,
+      "statuses": {
+        "200": 13728
+      },
+      "p95SuccessfulMs": 108.15630000000237
+    },
+    "revisions": {
+      "requests": 13728,
+      "successes": 13728,
+      "errors": 0,
+      "errorRate": 0,
+      "statuses": {
+        "200": 13728
+      },
+      "p95SuccessfulMs": 99.84910000002128
+    },
+    "activity": {
+      "requests": 13730,
+      "successes": 13730,
+      "errors": 0,
+      "errorRate": 0,
+      "statuses": {
+        "200": 13730
+      },
+      "p95SuccessfulMs": 101.58580000000075
+    }
+  },
+  "overall": {
+    "requests": 68644,
+    "successes": 68644,
+    "errors": 0,
+    "errorRate": 0,
+    "statuses": {
+      "200": 68644
+    },
+    "p95SuccessfulMs": 113.96850000000268
+  },
+  "passed": true
+}

@@ -4,7 +4,7 @@ import type { AiGatewayOptions, PatchRiskContext } from '../src/ai/contracts';
 // Synthetic only. Tests never enable a live provider or reuse submitted content.
 export const aiTestOptions: AiGatewayOptions = {
   mode: 'test', model: 'synthetic-reviewer-model', contextWindow: 16_384,
-  tokenCounterVerificationId: 'synthetic-counter-v1',
+  inputBudgetMethodId: 'synthetic-counter-v1',
 };
 export function patchRiskRequestFixture(overrides: Partial<PatchRiskRequest> = {}): PatchRiskRequest {
   return { revisionId: 'revision-1', assignmentId: 'assignment-1', expectedVersion: 2,

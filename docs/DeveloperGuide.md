@@ -47,7 +47,8 @@ Local checks do not establish deployment, live AI compatibility or teammate appr
 The [AI integration guide](AI-Integration.md) describes exact request/result
 contracts, authorization and assignment generations, transient UI retention,
 safe metadata, strict output validation, quotas and manual fallback. The default
-configured gateway remains disabled pending OPEN-002 live verification. Tests
+configured gateway is off by default; explicit server live configuration and a
+separate synthetic verification command are documented in the AI integration guide. Tests
 inject deterministic providers in-process; there is no browser-controlled model
 or production mock switch. Independent implementation/security review and
 revalidation closed all five findings. Use the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)
@@ -665,3 +666,34 @@ Use tokens for repeated conventions and keep one-off layout measurements local.
 Transitions run only under `prefers-reduced-motion: no-preference` and pressed
 feedback uses an inset shadow, avoiding a control-position shift. Preserve the
 editor's measured Save-height scroll clearance when changing spacing.
+
+### Contributor lifecycle UI — 1 November 2026
+
+The local Contributor workspace consumes the existing submitted detail, revision,
+finding, decision and activity endpoints. Its proposal actions reuse the existing
+submit/withdraw/reopen commands; submission recovery retains its original
+idempotency key/body. Eligible working-copy editing reuses the existing save and
+committed-version/identity reconciliation. Those initial UI controls reuse the
+existing server authorization and transaction rules.
+
+The original DRAFT-only API remains unchanged. Additive owner lifecycle discovery,
+explicit latest-content cloning and append-only finding responses now extend the
+Contributor services/shared contracts and response migration. The user relayed
+affected-owner agreement in the
+[shared coordination record](../logs/yooplo/2026-11-01-contributor-contract-coordination.md).
+The Spec Draft Assistant uses the same server gateway/accounting with a distinct
+working-draft scope and the new AI metadata migration. It has a6,000-character/
+4,000-conservative-input-unit/800-output-token budget, typed suggestions, explicit local
+selection and safe own-usage metrics. Live configuration is off by default, with
+explicit server opt-in and a separate metadata-only synthetic verification command. See
+[AI integration](AI-Integration.md) for boundaries and provider verification.
+Do not infer complete Contributor delivery from the earlier bounded UI checks. Current
+checks, findings and resource evidence belong to the
+[completion run](../logs/yooplo/2026-11-01-contributor-completion.md) and
+[acceptance ledger](../logs/yooplo/2026-11-01-contributor-acceptance.md).
+
+Codex assisted with this implementation, the interface proposal, test preparation,
+documentation and separate security/acceptance assignments. Existing same-repository
+services and tests were reused; no prior-MP source, external UI kit, new dependency
+or build-and-host service was introduced. Human summary verification, teammate
+patch approval, deployed acceptance and live SoC verification remain separate.

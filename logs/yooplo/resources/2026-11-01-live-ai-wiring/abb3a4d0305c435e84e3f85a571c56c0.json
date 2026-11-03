@@ -1,0 +1,35 @@
+{
+  "id": "abb3a4d0305c435e84e3f85a571c56c0",
+  "prompter": "yooplo",
+  "session": "2026-11-01-live-ai-wiring",
+  "agent": "security",
+  "invocation": "security-1",
+  "stage": "design",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings exact variant and effort unavailable",
+  "started_at": "2026-11-01T15:00:02.858294+00:00",
+  "ended_at": "2026-11-01T15:02:38.960329+00:00",
+  "elapsed_seconds": 156.102035,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Design review no blocker with explicit opt-in defaults and synthetic-only harness; security constraints assigned to implementer",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution telemetry unavailable",
+    "output_tokens": "Attributable execution telemetry unavailable",
+    "cache_read_tokens": "Attributable execution telemetry unavailable",
+    "tool_calls": "Attributable execution telemetry unavailable",
+    "retries": "Attributable execution telemetry unavailable"
+  },
+  "unavailable_reason": "Attributable execution telemetry unavailable"
+}

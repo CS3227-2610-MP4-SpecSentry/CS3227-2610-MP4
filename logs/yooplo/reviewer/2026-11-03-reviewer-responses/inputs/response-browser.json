@@ -1,0 +1,11 @@
+{
+  "id": "response-browser",
+  "kind": "browser",
+  "argv": ["node", "tmp/reviewer-responses-20261103/browser.mjs"],
+  "paths": ["tmp/reviewer-responses-20261103/browser.mjs", "src/client/src", "src/shared/src", "package.json", "package-lock.json", "src/client/vite.config.ts"],
+  "depends_on": ["environment"],
+  "resources": ["build"],
+  "environment": [],
+  "database": null,
+  "timeout": 120
+}

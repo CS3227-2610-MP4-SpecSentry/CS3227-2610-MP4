@@ -1,0 +1,35 @@
+{
+  "id": "5074e363cfc94a9997cc72af6b376e2d",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "acceptance",
+  "invocation": "acceptance-3",
+  "stage": "independent-lifecycle-checks",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:11:36.989277+00:00",
+  "ended_at": "2026-11-01T04:13:49.743467+00:00",
+  "elapsed_seconds": 132.75419,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Added independent SQL barrier tests; first execution blocked before tests by concurrent AI shared declaration build mismatch",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry not exposed",
+    "output_tokens": "Per-record runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+    "tool_calls": "Per-record runtime usage telemetry not exposed",
+    "retries": "Per-record runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+}

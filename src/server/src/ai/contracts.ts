@@ -1,21 +1,19 @@
 // Server-only contracts. Never re-export from @specsentry/shared.
-import type { AiErrorClass, AiOutcome, AiTokenUsage, PatchRiskAnalyzedScope, ReviewerRiskResult } from '@specsentry/shared';
+import type { AiErrorClass, AiOutcome, AiTokenUsage, ContributorDraftRequest, ContributorDraftResult, PatchRiskAnalyzedScope, ReviewerRiskResult } from '@specsentry/shared';
+import type { Prisma } from '../generated/prisma/client';
 
 export const PATCH_RISK_GATEWAY = Symbol('PATCH_RISK_GATEWAY');
+export const CONTRIBUTOR_DRAFT_GATEWAY = Symbol('CONTRIBUTOR_DRAFT_GATEWAY');
 export const AI_TRANSPORT = Symbol('AI_TRANSPORT');
-export const VERIFIED_TOKEN_COUNTER = Symbol('VERIFIED_TOKEN_COUNTER');
+export const INPUT_BUDGET_COUNTER = Symbol('INPUT_BUDGET_COUNTER');
 export const AI_CLOCK = Symbol('AI_CLOCK');
 export const AI_GATEWAY_OPTIONS = Symbol('AI_GATEWAY_OPTIONS');
 
-// There is deliberately no live mode while OPEN-002 evidence is unavailable.
-// Test bootstrap must supply these options and deterministic transport/counter
-// providers in-process; configuration from an HTTP request cannot select them.
-export type AiGatewayOptions = Readonly<{ mode: 'disabled' }> | Readonly<{
-  mode: 'test';
-  model: string;
-  contextWindow: number;
-  tokenCounterVerificationId: string;
-}>;
+// Live credentials remain server-only; test options cannot select native transport.
+type EnabledAiOptions = Readonly<{ model: string; contextWindow: number; inputBudgetMethodId: string }>;
+export type AiGatewayOptions = Readonly<{ mode: 'disabled' }>
+  | (EnabledAiOptions & Readonly<{ mode: 'test' }>)
+  | (EnabledAiOptions & Readonly<{ mode: 'live'; apiKey: string }>);
 
 export interface AiDeadline {
   readonly signal: AbortSignal;
@@ -56,15 +54,30 @@ export interface PatchRiskGateway {
     readonly actorId: string;
     readonly deadline: AiDeadline;
     // Fresh authorization after queue wait and before each dispatch/retry.
-    readonly beforeAttempt: () => Promise<void>;
+    readonly beforeAttempt: (tx: Prisma.TransactionClient) => Promise<void>;
   }): Promise<PatchRiskGatewayResult>;
 }
+export interface ContributorDraftContext {
+  readonly scope: ContributorDraftRequest & { proposalId: string };
+  readonly draft: { title: string; summary: string; problem: string; constraints: string; expectedBehavior: string;
+    criteria: readonly Readonly<{ statement: string; required: boolean }>[] };
+}
+export interface ContributorDraftGateway {
+  analyze(context: ContributorDraftContext, options: {
+    readonly actorId: string; readonly deadline: AiDeadline; readonly beforeAttempt: (tx: Prisma.TransactionClient) => Promise<void>;
+  }): Promise<{ readonly result: ContributorDraftResult; readonly metadata: AiSafeMetadata }>;
+}
 export interface AiMessage { readonly role: 'system' | 'user'; readonly content: string }
+export interface AiResponseFormat {
+  readonly type: 'json_schema';
+  readonly json_schema: Readonly<{ name: string; strict: true; schema: Readonly<Record<string, unknown>> }>;
+}
 export interface AiTransportRequest {
   readonly baseUrl: string;
   readonly apiKey: string;
   readonly model: string;
   readonly messages: readonly AiMessage[];
+  readonly responseFormat?: AiResponseFormat;
   readonly maxTokens: 800;
   readonly reasoningEffort: 'none';
   readonly stream: false;
@@ -77,11 +90,11 @@ export interface AiTransportResponse {
   readonly retryAfter: string | null;
 }
 export interface AiTransport { complete(request: AiTransportRequest): Promise<AiTransportResponse> }
-export interface VerifiedTokenCounter {
-  // Exact alias and verification evidence must match the enabled live configuration.
+export interface InputBudgetCounter {
+  // Admission units are a policy heuristic, never provider-reported token usage.
   readonly model: string;
-  readonly verificationId: string;
-  countInput(messages: readonly AiMessage[]): number;
+  readonly methodId: string;
+  countUnits(messages: readonly AiMessage[]): number;
 }
 export interface AiSafeFailure {
   readonly requestId: string;

@@ -1,0 +1,35 @@
+{
+  "id": "c49f5d101b264dc1abf2777e396ddb78",
+  "prompter": "yooplo",
+  "session": "2026-11-01-live-ai-wiring",
+  "agent": "security",
+  "invocation": "security-3",
+  "stage": "revalidate",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings exact variant and effort unavailable",
+  "started_at": "2026-11-01T15:10:46.151251+00:00",
+  "ended_at": "2026-11-01T15:13:20.388548+00:00",
+  "elapsed_seconds": 154.237297,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Fresh security revalidation47 focused tests passed; LIVE-SEC001 and002 closed; no scoped blockers",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution telemetry unavailable",
+    "output_tokens": "Attributable execution telemetry unavailable",
+    "cache_read_tokens": "Attributable execution telemetry unavailable",
+    "tool_calls": "Attributable execution telemetry unavailable",
+    "retries": "Attributable execution telemetry unavailable"
+  },
+  "unavailable_reason": "Attributable execution telemetry unavailable"
+}

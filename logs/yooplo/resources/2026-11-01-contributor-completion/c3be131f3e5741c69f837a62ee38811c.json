@@ -1,0 +1,35 @@
+{
+  "id": "c3be131f3e5741c69f837a62ee38811c",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "implementer",
+  "invocation": "implementer-form-accessibility",
+  "stage": "fix",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:30:26.954324+00:00",
+  "ended_at": "2026-11-01T04:31:04.070542+00:00",
+  "elapsed_seconds": 37.116218,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "New form accessibility implementation and 20 lifecycle unit cases passed; typecheck/build found test-only one-argument mock tuple indexed at position1; lint passed; correcting test assertion without changing production behavior",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token/cache/tool telemetry not exposed",
+    "output_tokens": "Per-record token/cache/tool telemetry not exposed",
+    "cache_read_tokens": "Per-record token/cache/tool telemetry not exposed",
+    "tool_calls": "Per-record token/cache/tool telemetry not exposed",
+    "retries": "Per-record token/cache/tool telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token/cache/tool telemetry not exposed"
+}

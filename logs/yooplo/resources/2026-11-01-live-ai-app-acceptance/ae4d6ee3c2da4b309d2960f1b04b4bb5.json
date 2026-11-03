@@ -1,0 +1,35 @@
+{
+  "id": "ae4d6ee3c2da4b309d2960f1b04b4bb5",
+  "prompter": "yooplo",
+  "session": "2026-11-01-live-ai-app-acceptance",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "bootstrap-fix-and-execution",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact model variant and effort unavailable",
+  "started_at": "2026-11-01T15:39:46.653924+00:00",
+  "ended_at": "2026-11-01T15:51:47.917790+00:00",
+  "elapsed_seconds": 721.263866,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Isolated authenticated livegenerationfailed503INVALID_OUTPUT;2recoverycasespassed; separateDI3/3passed; no retries; testinfra stopped and normalappoff; readinessissue retained",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable agent telemetry unavailable; product provider usage separate",
+    "output_tokens": "Attributable agent telemetry unavailable; product provider usage separate",
+    "cache_read_tokens": "Attributable agent telemetry unavailable; product provider usage separate",
+    "tool_calls": "Attributable agent telemetry unavailable; product provider usage separate",
+    "retries": "Attributable agent telemetry unavailable; product provider usage separate"
+  },
+  "unavailable_reason": "Attributable agent telemetry unavailable; product provider usage separate"
+}

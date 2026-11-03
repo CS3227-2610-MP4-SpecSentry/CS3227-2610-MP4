@@ -1,0 +1,35 @@
+{
+  "id": "d2f3654d7bd7472cb18407ae69e6c866",
+  "prompter": "yooplo",
+  "session": "2026-11-02-contributor-schema-integration",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "integration-coordination",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings unavailable",
+  "started_at": "2026-11-02T02:16:43.948204+00:00",
+  "ended_at": "2026-11-02T02:23:26.605500+00:00",
+  "elapsed_seconds": 402.657296,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Implementation/security/independent acceptance coordinated:121 unit,51PG,4live synthetic,3browser passed; owned testserver andPG stopped",
+  "unavailable_reasons": {
+    "input_tokens": "Main execution model/token/cache/tool counters unavailable",
+    "output_tokens": "Main execution model/token/cache/tool counters unavailable",
+    "cache_read_tokens": "Main execution model/token/cache/tool counters unavailable",
+    "tool_calls": "Main execution model/token/cache/tool counters unavailable",
+    "retries": "Main execution model/token/cache/tool counters unavailable"
+  },
+  "unavailable_reason": "Main execution model/token/cache/tool counters unavailable"
+}

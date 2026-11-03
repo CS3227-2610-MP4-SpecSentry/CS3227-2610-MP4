@@ -1,8 +1,12 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ReviewerWorkspace } from './ReviewerWorkspace';
-// Manual controls have their own contract and lifecycle tests.
-vi.mock('./ManualReview', () => ({ ManualReview: () => null }));
+const manual = vi.hoisted(() => ({ real: false }));
+// Most intake tests isolate manual controls; access tests exercise the real child.
+vi.mock('./ManualReview', async importOriginal => {
+  const actual = await importOriginal<typeof import('./ManualReview')>();
+  return { ManualReview: (props: Parameters<typeof actual.ManualReview>[0]) => manual.real ? <actual.ManualReview {...props} /> : null };
+});
 const timestamp = '2026-10-01T00:00:00.000Z';
 const session = { account: { id: 'r', username: 'reviewer', role: 'REVIEWER' as const }, csrfToken: 'a'.repeat(64), expiresAt: Date.now() + 100000 };
 const item = { id: 'p', version: 1, title: 'Example', author: { id: 'a', username: 'author' }, summary: 'Summary', firstSubmittedAt: timestamp, latestSubmittedAt: timestamp, awaitingRevision: true };
@@ -13,9 +17,9 @@ const { awaitingRevision: _awaiting, summary: _summary, ...projection } = detail
 void _awaiting; void _summary;
 const page = { items: [], nextCursor: null };
 const reply = (body: unknown, status = 200) => ({ ok: status < 400, status, json: async () => body });
-function setup(fetch: ReturnType<typeof vi.fn>) { vi.stubGlobal('fetch', (url: string, ...args: unknown[]) => url.startsWith('/api/notifications') ? Promise.resolve(reply(page)) : (fetch as (...args: unknown[]) => unknown)(url, ...args)); let generation = 0; return render(<ReviewerWorkspace session={session} authorization={{ current: () => generation, invalidate: () => { generation++; } }} onUnauthorized={vi.fn()} />); }
+function setup(fetch: ReturnType<typeof vi.fn>, onUnauthorized = vi.fn()) { vi.stubGlobal('fetch', (url: string, ...args: unknown[]) => url.startsWith('/api/notifications') ? Promise.resolve(reply(page)) : (fetch as (...args: unknown[]) => unknown)(url, ...args)); let generation = 0; return render(<ReviewerWorkspace session={session} authorization={{ current: () => generation, invalidate: () => { generation++; } }} onUnauthorized={onUnauthorized} />); }
 function deferred() { let resolve!: (value: unknown) => void; const promise = new Promise(yes => { resolve = yes; }); return { promise, resolve }; }
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { manual.real = false; vi.unstubAllGlobals(); });
 
 describe('Reviewer intake', () => {
   it('claims awaiting revision, renders escaped immutable content and drops with current versions', async () => {
@@ -176,4 +180,49 @@ it('passes unresolved severity as an assigned queue filter', async () => {
   fireEvent.click(screen.getByRole('button', { name: 'My assignments' })); await screen.findByText('No proposals match these filters.');
   fireEvent.change(screen.getByLabelText('Unresolved severity'), { target: { value: 'CRITICAL' } }); fireEvent.click(screen.getByRole('button', { name: 'Apply filters' }));
   await waitFor(() => expect(fetch.mock.calls.at(-1)![0]).toContain('severity=CRITICAL'));
+});
+
+describe('response history authorization and navigation', () => {
+  const response = { id: 'response', proposalId: 'p', findingId: 'finding', revisionId: 'revision', actor: { id: 'a', username: 'author' }, text: 'PROTECTED RESPONSE', mutationVersion: 1, createdAt: timestamp };
+
+  it.each([401, 403, 404])('clears the proposal and existing response history when the next response page returns %s', async status => {
+    manual.real = true;
+    const unauthorized = vi.fn();
+    const fetch = vi.fn().mockImplementation(async (url: string) => {
+      if (url.includes('assignments')) return reply({ items: [assigned], nextCursor: null });
+      if (url.endsWith('/p')) return reply(projection);
+      if (url.endsWith('/responses')) return reply({ items: [response], nextCursor: 'next' });
+      if (url.includes('/responses?')) return reply({}, status);
+      return reply(page);
+    });
+    setup(fetch, unauthorized); fireEvent.click(screen.getByRole('button', { name: 'My assignments' }));
+    fireEvent.click(await screen.findByRole('button', { name: 'Open Example' }));
+    expect(await screen.findByText('PROTECTED RESPONSE')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Load more responses' }));
+    await waitFor(() => expect(screen.queryByText('PROTECTED RESPONSE')).not.toBeInTheDocument());
+    expect(screen.queryByText('<script>hostile</script>')).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Manual review' })).not.toBeInTheDocument();
+    expect(unauthorized).toHaveBeenCalledTimes(status === 401 ? 1 : 0);
+  });
+
+  it('discards response JSON that finishes parsing after queue navigation', async () => {
+    manual.real = true;
+    const held = deferred(); const parsing = deferred();
+    const fetch = vi.fn().mockImplementation(async (url: string) => {
+      if (url.includes('assignments')) return reply({ items: [assigned], nextCursor: null });
+      if (url.endsWith('/p')) return reply(projection);
+      if (url.endsWith('/responses')) return { ok: true, status: 200, json: () => { parsing.resolve(null); return held.promise; } };
+      return reply(page);
+    });
+    setup(fetch); fireEvent.click(screen.getByRole('button', { name: 'My assignments' }));
+    fireEvent.click(await screen.findByRole('button', { name: 'Open Example' }));
+    await screen.findByText('Loading responses...');
+    await act(async () => { await parsing.promise; });
+    fireEvent.click(screen.getByRole('button', { name: 'Review pool' }));
+    await screen.findByText('No proposals match these filters.');
+    await act(async () => { held.resolve({ items: [response], nextCursor: 'stale-response-page' }); });
+    expect(screen.queryByText('PROTECTED RESPONSE')).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Finding responses' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Load more responses' })).not.toBeInTheDocument();
+  });
 });

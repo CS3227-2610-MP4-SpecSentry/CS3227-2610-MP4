@@ -1,0 +1,35 @@
+{
+  "browserCasesPassed": 3,
+  "actualProviderRequests": 1,
+  "retries": 0,
+  "requests": [
+    {
+      "feature": "CONTRIBUTOR",
+      "templateVersion": "contributor-draft-v3",
+      "outcome": "SUCCESS",
+      "errorClass": null,
+      "latencyMs": 2141,
+      "expectedVersion": 0
+    },
+    {
+      "feature": "CONTRIBUTOR",
+      "templateVersion": "contributor-draft-v3",
+      "outcome": "REJECTED",
+      "errorClass": "INPUT_LIMIT",
+      "latencyMs": 15,
+      "expectedVersion": 0
+    }
+  ],
+  "attempts": [
+    {
+      "ordinal": 1,
+      "outcome": "SUCCESS",
+      "errorClass": null,
+      "latencyMs": 1870,
+      "promptTokens": 346,
+      "completionTokens": 94,
+      "totalTokens": 440,
+      "cachedTokens": null
+    }
+  ]
+}

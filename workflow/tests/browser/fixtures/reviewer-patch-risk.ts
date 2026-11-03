@@ -18,11 +18,30 @@ async function testServer() {
   const { AppModule } = serverRequire(resolve('src/server/src/app.module')) as typeof import('../../../../src/server/src/app.module');
   const { readConfig } = serverRequire(resolve('src/server/src/config')) as typeof import('../../../../src/server/src/config');
   const { configureHttp } = serverRequire(resolve('src/server/src/http')) as typeof import('../../../../src/server/src/http');
-  const { AI_GATEWAY_OPTIONS, AI_TRANSPORT, VERIFIED_TOKEN_COUNTER } = serverRequire(resolve('src/server/src/ai/contracts')) as typeof import('../../../../src/server/src/ai/contracts');
-  const { SafeAiError } = serverRequire(resolve('src/server/src/ai/gateway')) as typeof import('../../../../src/server/src/ai/gateway');
+  const { AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER } = serverRequire(resolve('src/server/src/ai/contracts')) as typeof import('../../../../src/server/src/ai/contracts');
+  const { SafeAiError, CONTRIBUTOR_TEMPLATE_VERSION } = serverRequire(resolve('src/server/src/ai/gateway')) as typeof import('../../../../src/server/src/ai/gateway');
   if (!process.env.TEST_DATABASE_URL || !new URL(process.env.TEST_DATABASE_URL).pathname.endsWith('_test'))
     throw new Error('Explicit disposable test database required');
   const transport: AiTransport = { async complete(request: AiTransportRequest) {
+    if (request.messages[0]?.content.startsWith(`Template ${CONTRIBUTOR_TEMPLATE_VERSION}.`)) {
+      // Contributor modes exist only in this synthetic DI transport, never the production gateway.
+      const raw = request.messages[1]!.content.match(/\n(.*)\n<\/draft_context>/s)?.[1];
+      const draft = JSON.parse(raw ?? '{}') as { problem: string };
+      if (draft.problem.includes('[test-ai-unavailable]')) throw new SafeAiError('PROVIDER_AUTH');
+      if (draft.problem.includes('[test-ai-delayed]')) {
+        const pool = new Pool({ connectionString: process.env.TEST_DATABASE_URL, statement_timeout: 15000 });
+        const client = await pool.connect();
+        try {
+          await client.query('SELECT pg_advisory_lock(hashtext($1))', ['contributor-ai-browser-' + draft.problem]);
+          await client.query('SELECT pg_advisory_unlock(hashtext($1))', ['contributor-ai-browser-' + draft.problem]);
+        } finally { client.release(); await pool.end(); }
+      }
+      const result = { objective: '<script>Suggested objective remains text</script>', acceptanceCriteria: ['Suggested required behavior'],
+        edgeCases: ['Check empty input'], ambiguities: ['Clarify the boundary'], testIdeas: ['Exercise the boundary'],
+        ...(draft.problem.includes('[test-ai-invalid]') ? { submit: true } : {}) };
+      return { status: 200, retryAfter: null, body: JSON.stringify({ choices: [{ finish_reason: 'stop', message: { role: 'assistant', content: JSON.stringify(result) } }],
+        usage: { prompt_tokens: 100, completion_tokens: 80, total_tokens: 180, prompt_tokens_details: { cached_tokens: 0 } } }) };
+    }
     const data = request.messages[1]!.content.match(/\n(.*)\n<\/submitted_context>/s)?.[1];
     const context = JSON.parse(data ?? '{}') as {selectedCriterionIds:string[];summary:string;scope:{proposalId:string}};
     if (context.summary.includes('[test-unavailable]')) throw new SafeAiError('PROVIDER_AUTH');
@@ -42,9 +61,9 @@ async function testServer() {
   } };
   const config=readConfig({...process.env,NODE_ENV:'production',DATABASE_URL:process.env.TEST_DATABASE_URL});
   const module=await Test.createTestingModule({imports:[AppModule.register(config)]})
-    .overrideProvider(AI_GATEWAY_OPTIONS).useValue({mode:'test',model:'synthetic-reviewer-model',contextWindow:16384,tokenCounterVerificationId:'synthetic-counter-v1'})
+    .overrideProvider(AI_GATEWAY_OPTIONS).useValue({mode:'test',model:'synthetic-reviewer-model',contextWindow:16384,inputBudgetMethodId:'synthetic-counter-v1'})
     .overrideProvider(AI_TRANSPORT).useValue(transport)
-    .overrideProvider(VERIFIED_TOKEN_COUNTER).useValue({model:'synthetic-reviewer-model',verificationId:'synthetic-counter-v1',countInput:()=>100}).compile();
+    .overrideProvider(INPUT_BUDGET_COUNTER).useValue({model:'synthetic-reviewer-model',methodId:'synthetic-counter-v1',countUnits:()=>100}).compile();
   const app=module.createNestApplication<NestExpressApplication>({logger:false});
   configureHttp(app,resolve('src/client/dist'));app.enableShutdownHooks();await app.listen(3000,'127.0.0.1');
 }

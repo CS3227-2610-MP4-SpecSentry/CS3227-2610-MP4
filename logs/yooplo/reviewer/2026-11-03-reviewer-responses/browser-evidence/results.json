@@ -1,0 +1,22 @@
+{
+  "scope": "Synthetic API routes only; actual local frontend 5173",
+  "widths": [
+    {
+      "width": 1440,
+      "escaped": true,
+      "paginated": true,
+      "manualEnabled": true,
+      "noOverflow": true,
+      "businessMutations": 0
+    },
+    {
+      "width": 375,
+      "escaped": true,
+      "paginated": true,
+      "manualEnabled": true,
+      "noOverflow": true,
+      "businessMutations": 0
+    }
+  ],
+  "errors": []
+}

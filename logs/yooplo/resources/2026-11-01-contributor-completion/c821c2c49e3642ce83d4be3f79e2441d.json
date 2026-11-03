@@ -1,0 +1,35 @@
+{
+  "id": "c821c2c49e3642ce83d4be3f79e2441d",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "acceptance",
+  "invocation": "performance-final-2",
+  "stage": "prescribed-seeded-performance",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T05:09:31.745757+00:00",
+  "ended_at": "2026-11-01T05:15:57.540162+00:00",
+  "elapsed_seconds": 385.794405,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "PrescribedNFR-PERF-001PASS:1000proposals3000revisions10000findings20users60swarmup300smeasure;68644HTTP200zeroerrors;overallp95=113.9685ms<800ms;owned3197serverstopped",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry not exposed",
+    "output_tokens": "Per-record runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+    "tool_calls": "Per-record runtime usage telemetry not exposed",
+    "retries": "Per-record runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+}

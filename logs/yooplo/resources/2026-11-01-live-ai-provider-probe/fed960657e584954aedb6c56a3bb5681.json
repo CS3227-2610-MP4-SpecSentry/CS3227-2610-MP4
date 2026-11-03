@@ -1,0 +1,35 @@
+{
+  "id": "fed960657e584954aedb6c56a3bb5681",
+  "prompter": "yooplo",
+  "session": "2026-11-01-live-ai-provider-probe",
+  "agent": "security",
+  "invocation": "security-1",
+  "stage": "diagnose-design-review",
+  "attempt": 1,
+  "selected_model": "GPT-6",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited settings exact variant and effort unavailable",
+  "started_at": "2026-11-01T15:19:02.070128+00:00",
+  "ended_at": "2026-11-01T15:20:58.613999+00:00",
+  "elapsed_seconds": 116.543871,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Design no blocker to absent-call metadata compatibility and clearer versioned Contributor prompt; strict schemas unchanged; final review required",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable execution telemetry unavailable",
+    "output_tokens": "Attributable execution telemetry unavailable",
+    "cache_read_tokens": "Attributable execution telemetry unavailable",
+    "tool_calls": "Attributable execution telemetry unavailable",
+    "retries": "Attributable execution telemetry unavailable"
+  },
+  "unavailable_reason": "Attributable execution telemetry unavailable"
+}

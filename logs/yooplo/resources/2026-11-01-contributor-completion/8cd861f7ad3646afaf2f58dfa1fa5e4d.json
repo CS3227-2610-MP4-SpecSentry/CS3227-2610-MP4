@@ -1,0 +1,35 @@
+{
+  "id": "8cd861f7ad3646afaf2f58dfa1fa5e4d",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "implementer",
+  "invocation": "implementer-5",
+  "stage": "discovery-clone-response-ui",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:09:12.082842+00:00",
+  "ended_at": "2026-11-01T04:17:24.129155+00:00",
+  "elapsed_seconds": 492.046313,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Discovery/clone/responses UI;108Contributor units,typecheck,lint,clientbuild and2updatedbrowsercases pass; ownedserverteardown intervention",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

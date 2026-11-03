@@ -1,0 +1,35 @@
+{
+  "id": "fbfd0c3b3e2a4aeeb50f85f68bbdf6be",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "evidence-closure",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-11-01T05:16:11.205151+00:00",
+  "ended_at": "2026-11-01T05:22:07.699897+00:00",
+  "elapsed_seconds": 356.494746,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Evidence closure:60delivery files,23security hashes unchanged,15evidence links,unstaged/HEAD preserved,owned cluster stopped; independent tests/performance recorded",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

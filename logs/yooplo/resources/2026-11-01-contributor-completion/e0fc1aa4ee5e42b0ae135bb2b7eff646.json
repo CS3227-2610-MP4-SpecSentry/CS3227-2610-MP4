@@ -1,0 +1,35 @@
+{
+  "id": "e0fc1aa4ee5e42b0ae135bb2b7eff646",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "acceptance",
+  "invocation": "acceptance-final-browser-2",
+  "stage": "resolve-browser-port-and-regression",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:44:26.150406+00:00",
+  "ended_at": "2026-11-01T04:56:41.627511+00:00",
+  "elapsed_seconds": 735.477105,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Dedicated3193copiesverifiedassertionsunchanged; PIDpreloadusingNodeESMimportchangedts-nodeentrymode,fixturestartupfailedbefore0tests; correctinglocalrunnercommandonly",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry not exposed",
+    "output_tokens": "Per-record runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+    "tool_calls": "Per-record runtime usage telemetry not exposed",
+    "retries": "Per-record runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "c7f3fd5933b44349819f41fc0cde008a",
+  "prompter": "yooplo",
+  "session": "2026-11-01-contributor-completion",
+  "agent": "acceptance",
+  "invocation": "acceptance-performance-1",
+  "stage": "performance-fixture-preparation",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-11-01T04:17:02.842419+00:00",
+  "ended_at": "2026-11-01T04:20:40.047051+00:00",
+  "elapsed_seconds": 217.204632,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Prepared guarded fixed-protocol performance fixture/load script and README; syntax,self-check and explicit ESLint passed; no DB or measured load executed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record runtime usage telemetry not exposed",
+    "output_tokens": "Per-record runtime usage telemetry not exposed",
+    "cache_read_tokens": "Per-record runtime usage telemetry not exposed",
+    "tool_calls": "Per-record runtime usage telemetry not exposed",
+    "retries": "Per-record runtime usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record runtime usage telemetry not exposed"
+}

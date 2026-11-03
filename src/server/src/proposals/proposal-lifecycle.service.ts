@@ -1,7 +1,8 @@
 import { ConflictException, ForbiddenException, Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { createHash } from 'node:crypto';
 import { ownDraftsResponseSchema, type DeleteDraftRequest, type OwnDraftsQuery, draftResponseSchema, proposalLifecycleResponseSchema, workingContentSchema, type WorkingContent,
-  type SaveDraftRequest, type SubmitProposalRequest, type WithdrawProposalRequest, type ReopenProposalRequest } from '@specsentry/shared';
+  type SaveDraftRequest, type SubmitProposalRequest, type WithdrawProposalRequest, type ReopenProposalRequest,
+  ownProposalsResponseSchema, type OwnProposalsQuery, type CloneLatestRequest } from '@specsentry/shared';
 import { ActivityService } from '../activity/activity.service';
 import { DatabaseService } from '../database/database.service';
 import type { Prisma } from '../generated/prisma/client';
@@ -231,6 +232,55 @@ export class ProposalLifecycleService {
         ? encodeCursor(scope, { id: last.id, timestamp: last.createdAt.toISOString() }) : null });
       await this.readAudit(tx, actor, 'PROPOSAL_DRAFT_LISTED', 'own-drafts');
       return result;
+    });
+  }
+
+  owned(actor: BusinessActor, query: OwnProposalsQuery) {
+    return businessTransaction(this.database, actor, 'CONTRIBUTOR', 'own-proposals', 'PROPOSAL_LIST', async tx => {
+      const scope = JSON.stringify(['owner-proposals', actor.accountId]);
+      const cursor = decodeCursor(query.cursor, scope, 'timestamp');
+      const rows = await tx.changeProposal.findMany({ where: { ownerId: actor.accountId, ...(cursor ? { OR: [
+        { createdAt: { lt: new Date(cursor.timestamp!) } }, { createdAt: new Date(cursor.timestamp!), id: { gt: cursor.id } },
+      ] } : {}) }, orderBy: [{ createdAt: 'desc' }, { id: 'asc' }], take: query.limit + 1,
+        select: { id: true, title: true, state: true, version: true, createdAt: true,
+          currentRevision: { select: { id: true, number: true, submittedAt: true } } } });
+      const page = rows.slice(0, query.limit);
+      const working = await tx.workingRevision.findMany({ where: { proposalId: { in: page.map(row => row.id) } },
+        select: { id: true, proposalId: true, content: true } });
+      const byProposal = new Map(working.map(row => [row.proposalId, row]));
+      const last = page.at(-1);
+      const result = ownProposalsResponseSchema.parse({ items: page.map(row => {
+        const draft = byProposal.get(row.id);
+        return { proposalId: row.id, workingRevisionId: draft?.id ?? null,
+          title: row.currentRevision ? row.title : draft ? workingContentSchema.parse(draft.content).title : row.title,
+          state: row.state, version: row.version, createdAt: row.createdAt.toISOString(),
+          latestRevision: row.currentRevision ? { ...row.currentRevision, submittedAt: row.currentRevision.submittedAt.toISOString() } : null };
+      }), nextCursor: rows.length > query.limit && last ? encodeCursor(scope, { id: last.id, timestamp: last.createdAt.toISOString() }) : null });
+      await this.readAudit(tx, actor, 'PROPOSAL_LISTED', 'own-proposals');
+      return result;
+    });
+  }
+
+  cloneLatest(actor: BusinessActor, id: string, body: CloneLatestRequest) {
+    return businessTransaction(this.database, actor, 'CONTRIBUTOR', id, 'PROPOSAL_CLONE', async tx => {
+      const root = await this.proposals.lockRoot(tx, id);
+      this.editable(root, actor, body.expectedVersion);
+      if (!body.confirmed || !root.currentRevisionId || root.currentRevisionId !== body.revisionId || root.state === 'DRAFT')
+        throw new ConflictException();
+      const revision = await tx.proposalRevision.findFirstOrThrow({ where: { id: body.revisionId, proposalId: id },
+        include: { criteria: { orderBy: { id: 'asc' } }, evidence: { orderBy: { id: 'asc' } } } });
+      // Only this explicit clone may restore keys removed from the private copy.
+      const content = prepareWorkingContent({ title: root.title, summary: revision.summary, problem: revision.problem,
+        constraints: revision.constraints, expectedBehavior: revision.expectedBehavior, diffText: revision.diffText,
+        criteria: revision.criteria.map(c => ({ stableKey: c.stableKey, statement: c.statement, required: c.required })),
+        evidence: revision.evidence.map(e => ({ text: e.text })) }, [revision]);
+      const working = await tx.workingRevision.upsert({ where: { proposalId: id },
+        create: { proposalId: id, content: content as Prisma.InputJsonValue }, update: { content: content as Prisma.InputJsonValue } });
+      const version = nextVersion(root.version);
+      await tx.changeProposal.update({ where: { id }, data: { version } });
+      await this.activity.append(tx, { proposalId: id, revisionId: revision.id, actorId: actor.accountId,
+        action: 'DRAFT_CLONED', summary: 'Latest submitted content explicitly cloned into the private working copy.' });
+      return this.response(root, working.id, { version });
     });
   }
 

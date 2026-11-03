@@ -21,14 +21,27 @@ Maintainer. All roles can sign in, restore a session, navigate their authorized
 workspace shell and sign out. Contributor UI implements owned never-submitted
 DRAFT listing, creation, saved detail, editing, criteria/evidence preparation and
 confirmed draft deletion. Saved detail is working data, not a submitted snapshot.
-The current editor only saves eligible DRAFTs; broader lifecycle capabilities in
-the product specification are planned and must not be inferred from this UI.
+The 1 November2026 local extension also permits working-copy saves in eligible
+SUBMITTED, IN_REVIEW and CHANGES_REQUESTED states, using existing server checks
+and save reconciliation. Submitted detail at `/contributor/proposals/:id` is
+distinct from private working detail and displays immutable revision content,
+findings, revision-numbered decisions and chronological activity. Explicit
+submission, confirmed reasoned withdrawal and approval reopening consume existing
+server commands. See the [current run](../../logs/yooplo/2026-11-01-contributor-completion.md)
+for actual verification and limits.
 
-Reviewer/Maintainer landing pages truthfully report that workflow features will
-appear when available. No fake queues, statistics, assistant results or disabled
-feature previews are supplied. Submission/review/release/AI operations and the
-proposed create-to-editor shortcut PROP-CON-001 are outside this implementation.
-Successful creation continues to open saved detail, not the editor.
+The integrated Reviewer workspace supplies its existing manual review and bounded
+Patch Risk controls; the broader Maintainer workspace remains pending. No fake
+queues, statistics or assistant results are supplied. Contributor all-state
+discovery uses an additive owner list while preserving private drafts. Explicit
+latest-content cloning explains replacement of saved private edits; attributed
+finding responses retain history and never resolve findings. The Spec Draft
+Assistant presents typed suggestions with initially empty selection, applies only
+to the unsaved editor and retains manual operation on failure. Live AI stays
+disabled pending provider verification. Final local checks and open findings are
+reported in the current run; this description alone is not acceptance. The proposed
+create-to-editor shortcut PROP-CON-001 stays inactive. Successful creation
+continues to open saved detail, not the editor.
 
 ## B. Application layout
 
@@ -58,6 +71,10 @@ Main scrolling pauses while the drawer is open. The current task stays visible.
 Contributor list/create/detail/editor one task-specific h1 and semantic ordered
 breadcrumbs. Loaded draft titles are reused without an extra metadata read;
 long labels truncate visually while the complete accessible/title text remains.
+The workspace shows only current My Drafts; details show My Drafts → draft title;
+editing shows My Drafts → draft title → Edit; creation shows My Drafts → Create Draft.
+Ancestor items are router links to distinct destinations. The current page is
+plain text with aria-current="page"; no redundant Workspace level is rendered.
 Only implemented authorized routes are linked. The primary area of each draft
 row is a real Link, including ordinary keyboard, modified-click and new-tab use;
 no nested controls or invented row actions are added.
@@ -96,6 +113,13 @@ confirmation; version/ownership checks remain server responsibilities.
 Saved detail renders all acceptance criteria in stored order with Required or
 Optional text, escaped multiline statements and a clear empty state. Working
 detail never claims reviewer coverage or immutable submitted revision status.
+
+Saved-detail lifecycle actions use a shared spaced group: Submit remains primary
+and Withdraw uses the secondary control style. Delete private draft occupies a
+separate row with greater separation than the gaps within the lifecycle group.
+Spacing uses existing tokens; narrow layouts stack actions across the available
+width with at least44px targets. Confirmation, cancellation, disabled states and
+keyboard order retain existing behavior (REQ-CON-017; REQ-SHR-005).
 
 ## E. Draft editor and feedback
 

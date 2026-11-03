@@ -1,0 +1,1 @@
+{"id": "client-regression", "kind": "unit", "argv": ["npm.cmd", "run", "test", "-w", "@specsentry/client"], "paths": ["src/client/src", "src/shared/src", "src/server/src", "package.json", "package-lock.json"], "depends_on": ["environment"], "resources": [], "environment": [], "database": null, "timeout": 180}

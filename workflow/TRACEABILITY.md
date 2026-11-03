@@ -1,5 +1,127 @@
 # Requirement traceability
 
+## Reviewer Contributor response visibility — 3 November 2026
+
+REQ-REV-015 / AC-REV-015 and REQ-CON-008: ManualReview consumes the existing
+authorized proposal response-history endpoint. Attributed escaped text includes
+finding/revision/time references across pages; loading, empty, failed-read retry
+and access-loss behavior remain explicit. Responses do not resolve findings or
+change decisions. ManualReview and independent ReviewerWorkspace tests cover
+rendering, pagination, failures, denial cleanup and late-response suppression.
+The [fix run](../logs/yooplo/2026-11-03-reviewer-responses.md) records actual
+verification and security findings; no backend contract or permission changes.
+
+## Contributor breadcrumb hierarchy — 2 November 2026
+
+REQ-CON-013 / AC-CON-UX-004 now specify distinct My Drafts ancestors and one
+plain-text current item for list/detail/edit/create, retaining REQ-CON-010 and
+REQ-SHR-005. PageHeader removes the redundant Workspace link; router, guard and
+CSS remain unchanged. NavigationPhase2/FunctionalUx and existing browser-script
+assertions cover exact ordered labels, unique destinations, current semantics,
+guarded stay/leave and clean history. The [refinement run](../logs/yooplo/2026-11-02-breadcrumb-refinement.md)
+records actual checks and bounded desktop/mobile browser evidence; other role
+pages introduce no invented breadcrumb destinations.
+
+## Draft detail action spacing — 2 November 2026
+
+REQ-CON-017 / REQ-SHR-005: lifecycle actions use16px token gaps, primary Submit
+and secondary Withdraw; destructive Delete occupies its own row with24px spacing.
+Below768px actions stack at full available width with44px minimum targets.
+See the [change and independent verification](../logs/yooplo/2026-11-02-draft-action-spacing.md):
+Chrome1440/768/375px layout, hierarchy, keyboard and confirmation/cancel checks
+passed without business mutations;56existing lifecycle/deletion tests, client
+typecheck and root lint passed. This is bounded layout regression evidence, not
+new real-database or full accessibility certification.
+
+## Contributor fixed-schema live acceptance — 2 November 2026
+
+REQ-CON-003, SHR-006 and AI typed-output/budget/privacy requirements map to the
+[v3 integration run](../logs/yooplo/2026-11-02-contributor-schema-integration.md):
+fixed server-owned `gateway/contributor-schema.ts`, optional internal transport
+format, shared accounting-only schema frame and unchanged strict local validator.
+Contributor generation/corpus v3 distinguishes this path from historical prompt-only
+failures; Reviewer requests omit the format and retain their admission behavior.
+Independent final server checks passed121/121; PostgreSQL Contributor/Reviewer AI
+integration passed51/51. Actual Llama/65,536 synthetic verification passed4/4,
+with4001units rejected before dispatch. Authenticated browser acceptance passed3/3,
+including generation → selection → application → explicit save with one provider
+attempt and no retry, and no saved-content changes until Save. Real401/403/422
+denials/manual recovery and simulated503 recovery passed. Independent security
+review closed SCHEMA-SEC-001–003 with no new blocker.
+
+This closes LIVE-APP-001 for the tested Contributor v3 Llama configuration only;
+earlier failures below remain historical evidence. It does not certify Qwen v2,
+other role schemas, production reliability or usefulness. Provider limits/data
+handling, human teammate review and deployment remain pending. Ordinary live mode
+remains off; owned local test server/database were stopped after acceptance.
+
+## Authenticated synthetic live-AI app acceptance — 1 November 2026
+
+[App acceptance](../logs/yooplo/2026-11-01-live-ai-app-acceptance.md) used a fresh
+loopback test database, real production bootstrap/gateway with process-only
+llama3.1:8b settings and a synthetic Contributor browser session. Live generation
+failed503/INVALID_OUTPUT after one provider attempt; no live selection/save success
+is claimed. Actual401/403/422 denials, zero added outbound budget and manual-save
+recovery passed; simulated browser503 recovery passed. Separate deterministic
+fixture regression passed3/3 for selection/apply/save/usage, failure recovery and
+late-result invalidation. These layers are distinct evidence; LIVE-APP-001 remains
+open and the normal live switch stays off. No private data/provider output captures.
+
+## Actual synthetic SoC evaluation — 1 November 2026
+
+[Provider evaluation](../logs/yooplo/2026-11-01-live-ai-provider-probe.md) records
+the failed v1 run, safe structural diagnostics, narrow no-call envelope compatibility
+fix and explicitly versioned Contributor v2 prompt with unchanged runtime schemas.
+Independent118server tests/typecheck and50focused security tests passed; actual
+qwen3.6:35b v2 evaluation passed2/4 calls (multilingual/delimiters), rejected2/4
+(normal/near-cap), and blocked4001units before dispatch. LIVE-PROBE-001 remains
+open; OPEN-002 is not satisfied and app live mode remains off. No private prompts,
+generated suggestions or credentials were recorded. This is provider-only synthetic
+evidence, not an authenticated UI/transaction, usefulness or production acceptance.
+
+## Opt-in live AI wiring — 1 November 2026
+
+OPEN-002 / NFR-RES-001 / REQ-CON-003 and shared advisory-AI boundaries now have
+an explicit server-only live configuration path and a separate fixed synthetic
+verification tool. Default app traffic remains disabled. The tool reuses the
+actual Contributor production prompt, conservative-unit admission and strict
+envelope/result decoder; it does not exercise authenticated app transactions,
+quota persistence or UI application. [Run/evidence](../logs/yooplo/2026-11-01-live-ai-wiring.md)
+records exact checks, findings and any real-provider execution. Offline tests or
+dry runs alone do not close live model-margin, key-limit, retention or deployment gates.
+
+## Contributor lifecycle UI extension — 1 November 2026
+
+Current source and independent evidence are tracked in the
+[completion run](../logs/yooplo/2026-11-01-contributor-completion.md) and
+[requirement ledger](../logs/yooplo/2026-11-01-contributor-acceptance.md).
+The run now includes the agreed additive server/contracts/migration work and
+Contributor assistant. P001–P005 are independently closed in the
+[final security report](../logs/yooplo/contributor-completion/verification/security-final.md).
+Final combined acceptance and the prescribed seeded performance workload passed
+with the bounded synthetic-popup fixture limitation recorded in the
+[acceptance report](../logs/yooplo/contributor-completion/verification/acceptance-final.md).
+
+| Requirement | Affected implementation / verification | Boundary |
+| --- | --- | --- |
+| CON-001/007/009; deletion | Existing ContributorWorkspace, lifecycle/working-revisions, contributor contracts; private draft/editor/criteria/preparation/deletion unit, PostgreSQL and browser suites | Existing behavior retained; final regression checks include earlier increments |
+| CON-002/004/005/007/009 | ContributorWorkspace.tsx, SubmittedProposal.tsx, clone-latest controller/service/shared contract; contributor-lifecycle integration/contracts/browser and existing lifecycle suites | Explicit latest-content clone, eligible private working edits and immutable submission/resubmission; retained reviewer, criterion identity and earlier content/history |
+| CON-006; approval reopening | ProposalActions in SubmittedProposal.tsx; existing proposal-lifecycle integration tests | Explicit confirmed reasoned withdrawal and approval reopening; server retains attachment/state/version/transaction enforcement |
+| Contributor discovery/detail; SHR-001/002/007 | GET /api/proposals/owned and Contributor list; SubmittedProposal.tsx and submitted-access/reviews/activity endpoints | Owner lifecycle discovery is additive; old DRAFT API remains compatible; revision selection, findings/amendments, revision-numbered decisions and chronological activity |
+| CON-008; SHR-003/004/007 | FindingResponsesService/controller, Contributor shared response contracts, migration20261101050000; SubmittedProposal response forms; contributor-lifecycle and independent contributor-acceptance integration/browser tests | Attributed append-only plain text, historical same-proposal finding scope, version/ownership/state/CSRF checks, atomic activity; no resolution side effect; real response-versus-withdraw and disablement barriers |
+| CON-003; SHR-006; NFR-PRV/RES | Contributor assistant controller/service, shared gateway adapter/accounting, migration20261101060000, shared AI contracts, SpecDraftAssistant.tsx; contributor-ai gateway/integration/UI/browser and versioned corpus | Server-selected bounded context, strict output, explicit selection into unsaved editor, safe usage metrics and manual fallback; live provider disabled; P003/P004/P005 independently closed on final source |
+| CON-010–017; SHR-005 | Existing navigation/editor guards and new route/action tests; App task orientation | Reuse reconciliation, manual saving, input retention and accessible task context; current executed checks/failures belong in the run, not inferred from filenames |
+| NFR-PERF-001 | workflow/tests/performance/contributor-workload.mjs and README; performance-final.json in the run verification directory | Actual1000proposal/3000revision/10000finding fixture,20users,60s warmup+300s measurement:68,644HTTP200,zero errors,overall p95=113.97ms against<800ms; local loopback only |
+
+The user relayed all four named-owner interface agreements in the
+[coordination record](../logs/yooplo/2026-11-01-contributor-contract-coordination.md).
+This is not final teammate patch approval. Live provider verification, deployed
+acceptance, full manual accessibility certification and human teammate review
+remain separate gates. The local performance result does not certify deployed
+latency. Current proposal titles are root metadata; immutable
+revision content follows the existing integration data model without fabricated
+historical title snapshots.
+
 ## PR15/16 merge reconciliation — 1 November 2026
 
 [Integration run/evidence](../logs/yooplo/2026-11-01-pr-conflicts.md) preserves master's
@@ -467,7 +589,7 @@ Unless a row links executed evidence, cases below remain planned and unexecuted.
 | Scenario | Decision / requirements | Verification obligation | Evidence |
 | --- | --- | --- | --- |
 | AC-DEC-001 | OPEN-001; REQ-REV-003/014, REQ-CON-003, REQ-REL-003 | Analyze batches of 1 and 5 selected criteria; reject 0/6, missing/duplicate/unknown coverage IDs, invalid confidence/severity, extra fields and truncated JSON. Label unselected criteria not analyzed; never write human coverage. Validate all three exact role schemas. | Pending |
-| AC-DEC-002 | OPEN-002; NFR-RES-001/PRV-001 | Verify configured endpoint/key-scoped catalog and actual alias context/parameters; test 4k/10k/6k input and 800 output caps, retry attempt accounting, SGT application versus UTC provider reset, unknown usage, no cache and safe disabled-AI fallback. | Pending live provider and mocked tests |
+| AC-DEC-002 | OPEN-002; NFR-RES-001/PRV-001 | Verify configured endpoint/key-scoped catalog and actual alias context/parameters; test 4k/10k/6k conservative input-unit and 800 output-token caps, full-message byte/framing accounting, Unicode/escaped inputs, method/model mismatch, context margin, invalid counts and provider-only usage. Preserve retry attempt accounting, SGT application versus UTC provider reset, unknown usage, no cache and safe disabled-AI fallback. | Conservative budget policy approved 1 November; scoped evidence in [budget run](../logs/yooplo/2026-11-01-conservative-ai-budget.md). Live provider production-prompt/margin evaluation, key limits and data handling pending |
 | AC-DEC-003 | OPEN-003; REQ-SHR-002/003, REQ-CON-004, REQ-REV-005/016, REQ-REL-004 | Boundary-test text/count/body limits and cursor sizes. Same actor/key/body replays one committed mutation/event/notice; changed body gives conflict; access loss denies replay disclosure; stale writes and concurrent keys never duplicate state. | Pending |
 | AC-DEC-004 | OPEN-004; REQ-SHR-001/002, NFR-SEC-001 | Enforce one role/project, seed without Git credentials, 30-minute idle/eight-hour absolute expiry, rotation/logout/disablement, account and IP throttles, generic errors and saved-draft-only recovery. | Pending |
 | AC-DEC-005 | OPEN-005; REQ-REL-001/002/004/007/008 | Other Maintainer cannot edit/publish; empty or duplicate-version publication fails. PASS smoke test must match current content version; add/remove/change revision invalidates it; revocation independently blocks release. | Pending |
