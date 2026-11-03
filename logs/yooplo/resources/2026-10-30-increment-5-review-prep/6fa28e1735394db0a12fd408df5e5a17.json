@@ -1,0 +1,35 @@
+{
+  "id": "6fa28e1735394db0a12fd408df5e5a17",
+  "prompter": "yooplo",
+  "session": "2026-10-30-increment-5-review-prep",
+  "agent": "main",
+  "invocation": "publish-1",
+  "stage": "final-inspect-publish-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-10-30T07:31:10.590491+00:00",
+  "ended_at": "2026-10-30T07:35:30.817025+00:00",
+  "elapsed_seconds": 260.226534,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final21filepatch/hash/review/evidence/links/secret checks;f6c884bcommittedpushed; PR15againstmasteropen; initialCIempty; no blocker/newscope/mergeInc6",
+  "unavailable_reasons": {
+    "input_tokens": "Exact settings and attributable token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Exact settings and attributable token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Exact settings and attributable token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Exact settings and attributable token/cache/tool/retry telemetry not exposed",
+    "retries": "Exact settings and attributable token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Exact settings and attributable token/cache/tool/retry telemetry not exposed"
+}

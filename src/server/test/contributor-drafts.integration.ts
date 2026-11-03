@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { createHash, randomUUID } from 'node:crypto';
 import { Pool } from 'pg';
+import { createProposalRequestSchema } from '@specsentry/shared';
 import type { SessionData } from 'express-session';
 import { Test } from '@nestjs/testing';
 import type { NestExpressApplication } from '@nestjs/platform-express';
@@ -105,6 +106,141 @@ describe('Contributor private drafts (REQ-CON-001/002, REQ-SHR-001/002/004/005/0
     ]));
     expect(JSON.stringify(events)).not.toContain(content.title);
     expect(JSON.stringify(events)).not.toContain(content.problem);
+  });
+
+  it('round-trips private preparation text, normalizes newlines and preserves criterion/evidence identities without submission gates', async () => {
+    const id = (await create(owner, { ...content, criteria: [{ statement: 'Keep this criterion', required: false }], evidence: [{ text: 'Old evidence' }] }).expect(201)).body.proposalId as string;
+    const initial = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body.content;
+    const edited = { ...initial, summary: '<script>summary</script>\r\nWritten by owner', diffText: '--- a/file\r\n+++ b/file\r@@ incomplete\n$(touch never-executed)',
+      evidence: [{ ...initial.evidence[0], text: '[plain link](https://invalid.example)\r\nCommand: rm -rf fake' }, { text: 'New evidence\rSecond line' }] };
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: edited }).expect(200);
+    const latest = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    expect(latest).toMatchObject({ version: 1, state: 'DRAFT', content: { summary: '<script>summary</script>\nWritten by owner', diffText: edited.diffText.replace(/\r\n?/g, '\n') } });
+    expect(latest.content.criteria).toEqual(initial.criteria); expect(latest.content.evidence[0]).toEqual({ id: initial.evidence[0].id, text: edited.evidence[0].text.replace(/\r\n?/g, '\n') });
+    expect(latest.content.evidence[1]).toMatchObject({ id: expect.any(String), text: 'New evidence\nSecond line' });
+    const newId = latest.content.evidence[1].id;
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 1, content: latest.content }).expect(200);
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body.content).toEqual(latest.content);
+    const cleared = { ...latest.content, summary: '', diffText: '', evidence: [] };
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 2, content: cleared }).expect(200);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 3, content: { ...cleared, evidence: [{ id: newId, text: 'Cannot revive removed ID' }] } }).expect(422);
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body.content).toEqual(cleared);
+    expect(await database.client.proposalRevision.count({ where: { proposalId: id } })).toBe(0);
+    const events = await database.client.proposalActivity.findMany({ where: { proposalId: id, action: 'DRAFT_SAVED' } });
+    expect(events).toHaveLength(3); expect(JSON.stringify(events)).not.toContain('Written by owner');
+  });
+
+  it('enforces preparation Unicode and aggregate limits with no truncation or partial saves', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const bounded = { ...content, summary: '\u{1F600}'.repeat(500), diffText: '\u{1F600}'.repeat(100000), evidence: [{ text: '\u{1F600}'.repeat(25000) }, { text: 'x\r\n'.repeat(12500) }] };
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: bounded }).expect(200);
+    const latest = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    expect(latest.content.summary).toBe(bounded.summary); expect(latest.content.diffText).toBe(bounded.diffText); expect(latest.content.evidence[1].text).toBe('x\n'.repeat(12500));
+    const cases = [{ ...latest.content, summary: '\u{1F600}'.repeat(501) }, { ...latest.content, diffText: 'x'.repeat(100001) },
+      { ...latest.content, evidence: [{ text: 'x'.repeat(50001) }] }, { ...latest.content, evidence: [{ text: 'x'.repeat(25000) }, { text: 'y'.repeat(25001) }] },
+      { ...latest.content, evidence: [{ text: ' \n ' }] }, { ...latest.content, evidence: [{ id: randomUUID(), text: 'Foreign evidence' }] },
+      { ...latest.content, evidence: [latest.content.evidence[0], latest.content.evidence[0]] }];
+    for (const value of cases) await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 1, content: value }).expect(422);
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toEqual(latest);
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(1);
+  });
+
+  it('enforces exact JSON byte cap independently from valid preparation-field limits', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const body = JSON.stringify({ expectedVersion: 0, content: { ...content, summary: 'At byte boundary', diffText: 'incomplete' } });
+    const exact = body + ' '.repeat(1048576 - Buffer.byteLength(body));
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).set('Content-Type', 'application/json').send(exact).expect(200);
+    const before = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    const over = await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).set('Content-Type', 'application/json').send(exact + ' ').expect(413);
+    expect(over.body).toMatchObject({ code: 'VALIDATION_FAILED', correlationId: expect.any(String) }); expect(over.text).not.toContain('At byte boundary');
+    const escaped = { ...content, summary: '\u0001'.repeat(500), diffText: '\u0001'.repeat(100000), evidence: [{ text: '\u0001'.repeat(50000) }], criteria: Array.from({ length: 50 }, () => ({ statement: '\u0001'.repeat(2000), required: true })) };
+    expect(createProposalRequestSchema.safeParse(escaped).success).toBe(true);
+    const serialized = JSON.stringify({ expectedVersion: 1, content: escaped }); expect(Buffer.byteLength(serialized)).toBeGreaterThan(1048576);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).set('Content-Type', 'application/json').send(serialized).expect(413);
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toEqual(before);
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(1);
+  });
+
+  it('protects preparation mutations with roles, ownership, CSRF, actual history, state and version checks', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const prepared = { ...content, summary: 'Private summary', diffText: 'Private incomplete diff', evidence: [{ text: 'Private evidence' }] };
+    const patch = (session: Login, version = 0) => session.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', session.token).send({ expectedVersion: version, content: prepared });
+    await request(app.getHttpServer()).patch(`/api/proposals/${id}/draft`).send({ expectedVersion: 0, content: prepared }).expect(401);
+    for (const session of [other, reviewer, maintainer]) expect((await patch(session).expect(403)).text).not.toContain('Private summary');
+    await owner.agent.patch(`/api/proposals/${id}/draft`).send({ expectedVersion: 0, content: prepared }).expect(403);
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', 'f'.repeat(64)).send({ expectedVersion: 0, content: prepared }).expect(403);
+    await patch(owner).expect(200); await patch(owner).expect(409);
+    for (const state of ['APPROVED', 'IN_RELEASE', 'RELEASED', 'WITHDRAWN'] as ProposalState[]) {
+      await database.client.changeProposal.update({ where: { id }, data: { state } }); await patch(owner, 1).expect(409);
+    }
+    await database.client.changeProposal.update({ where: { id }, data: { state: 'DRAFT' } });
+    const snapshot = await database.client.proposalRevision.create({ data: { proposalId: id, number: 1, summary: 'Immutable', problem: 'Old submitted', constraints: '', expectedBehavior: 'Old behavior', diffText: 'Old diff' } });
+    await patch(owner, 1).expect(409); expect(await database.client.proposalRevision.findUniqueOrThrow({ where: { id: snapshot.id } })).toEqual(snapshot);
+    expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toMatchObject(prepared);
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(1);
+  });
+
+  it('keeps submitted preparation immutable while the owner saves a private working copy through the shared API', async () => {
+    const initial = { ...content, summary: 'Frozen submitted summary',
+      diffText: '--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n',
+      criteria: [{ statement: 'Preserve submitted criterion', required: true }], evidence: [{ text: 'Frozen submitted evidence' }] };
+    const created = (await create(owner, initial).expect(201)).body;
+    const id = created.proposalId as string;
+    const submitted = (await owner.agent.post(`/api/proposals/${id}/submit`).set('x-csrf-token', owner.token)
+      .set('Idempotency-Key', randomUUID()).send({ expectedVersion: created.version, workingRevisionId: created.workingRevisionId }).expect(200)).body;
+    expect(submitted).toMatchObject({ state: 'SUBMITTED', version: 1 });
+    const snapshot = await database.client.proposalRevision.findUniqueOrThrow({ where: { id: submitted.revisionId },
+      include: { criteria: true, evidence: true } });
+    const draft = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    const prepared = { ...draft.content, summary: 'Private replacement summary', diffText: 'Incomplete private replacement diff',
+      evidence: [{ ...draft.content.evidence[0], text: 'Private replacement evidence' }, { text: 'Additional private evidence' }] };
+    const result = await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token)
+      .send({ expectedVersion: submitted.version, content: prepared }).expect(200);
+    expect(result.body).toMatchObject({ proposalId: id, workingRevisionId: created.workingRevisionId,
+      revisionId: submitted.revisionId, state: 'SUBMITTED', version: 2 });
+    const latest = (await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body;
+    expect(latest).toMatchObject({ version: 2, state: 'SUBMITTED', content: { summary: prepared.summary, diffText: prepared.diffText } });
+    expect(latest.content.criteria).toEqual(draft.content.criteria);
+    expect(latest.content.evidence).toEqual([
+      { id: draft.content.evidence[0].id, text: prepared.evidence[0].text },
+      { id: expect.any(String), text: prepared.evidence[1].text },
+    ]);
+    expect((await database.client.workingRevision.findUniqueOrThrow({ where: { proposalId: id } })).content).toEqual(latest.content);
+    expect(await database.client.changeProposal.findUniqueOrThrow({ where: { id } })).toMatchObject({ state: 'SUBMITTED', version: 2,
+      currentRevisionId: submitted.revisionId, title: initial.title });
+    for (const session of [other, reviewer, maintainer]) {
+      const denied = await session.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', session.token)
+        .send({ expectedVersion: latest.version, content: prepared }).expect(403);
+      expect(denied.text).not.toContain(prepared.summary);
+      await session.agent.get(`/api/proposals/${id}/draft`).expect(403);
+    }
+    await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token)
+      .send({ expectedVersion: submitted.version, content: prepared }).expect(409);
+    expect(await database.client.proposalRevision.count({ where: { proposalId: id } })).toBe(1);
+    expect(await database.client.proposalRevision.findUniqueOrThrow({ where: { id: submitted.revisionId },
+      include: { criteria: true, evidence: true } })).toEqual(snapshot);
+    const events = await database.client.proposalActivity.findMany({ where: { proposalId: id, action: 'DRAFT_SAVED' } });
+    expect(events).toEqual([expect.objectContaining({ actorId: ids[0], revisionId: submitted.revisionId, summary: 'Private working draft saved.' })]);
+    expect(JSON.stringify(events)).not.toContain(prepared.summary);
+    expect(JSON.stringify(events)).not.toContain(prepared.evidence[0].text);
+  });
+
+  it('rolls preparation content, version and audit back on audit failure and transaction-end expiry', async () => {
+    const id = (await create().expect(201)).body.proposalId as string;
+    const prepared = { ...content, summary: 'Must roll back', diffText: 'Unsafe to partially save', evidence: [{ text: 'Must roll back evidence' }] };
+    const rejected = jest.spyOn(activity, 'append').mockRejectedValueOnce(new Error('Synthetic preparation audit failure'));
+    try { const result = await owner.agent.patch(`/api/proposals/${id}/draft`).set('x-csrf-token', owner.token).send({ expectedVersion: 0, content: prepared }).expect(500); expect(result.text).not.toContain(prepared.summary); }
+    finally { rejected.mockRestore(); }
+    const actor = await actorForOwner(); const expiry = new Date(Date.now() + 500);
+    await database.client.authSession.update({ where: { id: owner.digest }, data: { expiresAt: expiry } });
+    const append = activity.append.bind(activity); const awaited: { append: (...args: Parameters<ActivityService['append']>) => Promise<unknown> } = activity;
+    const delayed = jest.spyOn(awaited, 'append').mockImplementationOnce(async (tx, event) => {
+      const result = await append(tx, event); await new Promise(resolve => setTimeout(resolve, Math.max(0, expiry.getTime() - Date.now() + 30))); return result;
+    });
+    try { await expect(lifecycle.save(actor, id, { expectedVersion: 0, content: prepared })).rejects.toMatchObject({ status: 401 }); }
+    finally { delayed.mockRestore(); await database.client.authSession.update({ where: { id: owner.digest }, data: { expiresAt: new Date(Date.now() + IDLE_MS) } }); }
+    expect((await owner.agent.get(`/api/proposals/${id}/draft`).expect(200)).body).toMatchObject({ version: 0, content });
+    expect(await database.client.proposalActivity.count({ where: { proposalId: id, action: 'DRAFT_SAVED' } })).toBe(0);
   });
 
   it('saves an own private draft with versioned full-content preservation and atomic activity', async () => {

@@ -1,0 +1,19 @@
+{
+  "before": {
+    "clientWidth": 216,
+    "offsetWidth": 216,
+    "navWidth": 208,
+    "linkWidth": 208,
+    "scrollbarGutter": "auto",
+    "overflows": false
+  },
+  "after": {
+    "clientWidth": 216,
+    "offsetWidth": 216,
+    "navWidth": 208,
+    "linkWidth": 208,
+    "scrollbarGutter": "auto",
+    "overflows": true
+  },
+  "navWidthChange": 0
+}

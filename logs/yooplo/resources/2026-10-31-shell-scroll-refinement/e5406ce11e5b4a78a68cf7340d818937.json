@@ -1,0 +1,35 @@
+{
+  "id": "e5406ce11e5b4a78a68cf7340d818937",
+  "prompter": "yooplo",
+  "session": "2026-10-31-shell-scroll-refinement",
+  "agent": "implementer",
+  "invocation": "implementer-1",
+  "stage": "implement",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited exact settings not exposed",
+  "started_at": "2026-10-30T16:09:51.475092+00:00",
+  "ended_at": "2026-10-30T16:14:00.403099+00:00",
+  "elapsed_seconds": 248.928007,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Viewport-bounded shell, desktop icon rail and native mobile dialog implemented; client units 87/87 and typecheck passed; independent browser verification pending",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

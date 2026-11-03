@@ -1,0 +1,35 @@
+{
+  "id": "1db3a203b56f4b22a0feb725f5d1bfa9",
+  "prompter": "yooplo",
+  "session": "2026-10-30-contributor-increment-5",
+  "agent": "acceptance",
+  "invocation": "design-1",
+  "stage": "preparation-acceptance-design",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator-observed boundary; settings not exposed",
+  "started_at": "2026-10-30T07:03:38.587787+00:00",
+  "ended_at": "2026-10-30T07:08:00.630186+00:00",
+  "elapsed_seconds": 262.042399,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent readonlypreparationtestdesign18casefamilies no newcontract/migrationblocker; no runtimetests/productwrites",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "output_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "cache_read_tokens": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "tool_calls": "Attributable settings/token/cache/tool/retry telemetry not exposed",
+    "retries": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+  },
+  "unavailable_reason": "Attributable settings/token/cache/tool/retry telemetry not exposed"
+}

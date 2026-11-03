@@ -1,0 +1,59 @@
+{
+  "scope": "Synthetic API browser fixtures; no live backend/database authorization certification",
+  "checks": [
+    {
+      "name": "bounded independent shell 1440x900",
+      "status": "passed"
+    },
+    {
+      "name": "bounded independent shell 1920x1080",
+      "status": "passed"
+    },
+    {
+      "name": "bounded independent shell 1024x900",
+      "status": "passed"
+    },
+    {
+      "name": "bounded independent shell 768x900",
+      "status": "passed"
+    },
+    {
+      "name": "bounded independent shell 375x812",
+      "status": "passed"
+    },
+    {
+      "name": "sidebar navigation overflow is independent and footer stays accessible",
+      "status": "passed"
+    },
+    {
+      "name": "desktop rail accessible names, stable gutter and preserved editor state",
+      "status": "passed"
+    },
+    {
+      "name": "compact content-driven empty state and reduced motion",
+      "status": "passed"
+    },
+    {
+      "name": "mobile drawer Escape, focus trap, scroll blocking and resize",
+      "status": "passed"
+    },
+    {
+      "name": "existing create/save/delete and sign-out workflow",
+      "status": "passed"
+    }
+  ],
+  "consoleErrors": [],
+  "expectedHttpErrors": [],
+  "screenshots": [
+    "shell-1440.png",
+    "shell-1920.png",
+    "shell-1024.png",
+    "shell-768.png",
+    "shell-375.png",
+    "sidebar-overflow.png",
+    "rail-desktop.png",
+    "empty-compact.png",
+    "mobile-drawer.png",
+    "mobile-drawer-short.png"
+  ]
+}

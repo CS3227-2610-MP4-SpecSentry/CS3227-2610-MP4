@@ -272,12 +272,33 @@ security report is attributed in the run. Submitted classification changes/immut
 criterion history/finding resolution and complete AC-CON-007/009 remain deferred.
 No full manual WCAG/deployment/performance evidence; INC2-VER-001 remains unresolved.
 
+### Increment 5: draft submission preparation — 30 October 2026
+
+PR10–13 merges verified; new branch starts at fetched origin/master `c384d39`.
+[Brief/run and actual evidence](../logs/yooplo/2026-10-30-contributor-increment-5.md)
+distinguish verified draft preparation from deferred submission and sanitization gates.
+
+| Requirement / portion | Independent local evidence |
+| --- | --- |
+| REQ-CON-004 preparation/UI only; REQ-CON-002 ownership | Editor summary/diff/optional evidence plus safe detail; existing PATCH/DTO/WorkingRevision and auth/state/history/version/audit reused. No actual submission, revision, assignment or notification created |
+| Integration input limits / strict references | Contract/PG cases verify500/501summary,100000/100001diff,50000/50001aggregate evidence, normalizedUnicode, blank evidence, exact1MiB/+1 and field-valid escaped JSON overflow; existing criterion/evidence ID preservation and scoped ID denial |
+| REQ-SHR-001/002/003/004/007, NFR-REL-001 | Preparation auth/CSRF/owner/role/state/history/stale/CAS denials and audit/expiry rollback passed; safe summaries contain no preparation text; create/edit/criteria/delete regressions passed |
+| REQ-SHR-005, NFR-A11Y-001, shared failure contract | [Preparation RTL](../src/client/src/features/contributor/PreparationDraft.test.tsx) and [Chromium](tests/browser/contributor-preparation.spec.ts): labels/focus, retained field/aggregate/413errors, conflict/read-failure recovery, keyboard/axe/reflow, inert escaped detail |
+
+Independent31server/84client units,43PG/four suites,nineChromium,typecheck/lint/build passed
+against final five-file manifest. Separate security report is attributed in the run.
+No backend/sharedDTO/schema/migration/App/auth changes. Sanitization here is existing
+LF normalization/strict bounded validation/escaped text, not a submission diff parser.
+Empty summary/diff/evidence and zero/alloptional criteria remain saveable drafts.
+Full AC-CON-004/immutable submitted summary/revisions/lifecycle/notifications/AI remain
+deferred. Deployment/performance/full manual WCAG unavailable; INC2-VER-001 unresolved.
+
 | Requirement | Authoritative definition / capability | Planned scenario | Implementation / test evidence |
 | --- | --- | --- | --- |
 | [REQ-CON-001](specs/ROLE-CONTRIBUTOR.md#requirements) | Draft proposal | [AC-CON-001](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local create acceptance verified above; deployed verification pending |
 | [REQ-CON-002](specs/ROLE-CONTRIBUTOR.md#requirements) | Edit ownership | [AC-CON-002](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Local private-read and never-submitted DRAFT edit/ownership/version/state/attachment portions covered above; submitted editing/revision lifecycle pending |
 | [REQ-CON-003](specs/ROLE-CONTRIBUTOR.md#requirements) | AI specification draft | [AC-CON-003](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
-| [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
+| [REQ-CON-004](specs/ROLE-CONTRIBUTOR.md#requirements) | Submit revision | [AC-CON-004](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Increment5 draft-preparation portion locally verified above; actual submission/immutable revision/activity/notification gates pending |
 | [REQ-CON-005](specs/ROLE-CONTRIBUTOR.md#requirements) | Respond to changes | [AC-CON-005](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-006](specs/ROLE-CONTRIBUTOR.md#requirements) | Withdraw | [AC-CON-006](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Private-draft portion verified above; submitted-classification scenario pending |
@@ -323,7 +344,26 @@ No full manual WCAG/deployment/performance evidence; INC2-VER-001 remains unreso
 | [NFR-PORT-001](specs/SHARED-REQUIREMENTS.md#nonfunctional-requirements) | Portability | [AC-NFR-PORT-001](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
 | [NFR-RES-001](specs/SHARED-REQUIREMENTS.md#nonfunctional-requirements) | Resource budget | [AC-NFR-RES-001](specs/SHARED-REQUIREMENTS.md#acceptance-scenarios) | Pending |
 
+## Existing application UI redesign — 30 October 2026
+
+Presentation coverage for REQ-CON-001/002/007/009 (implemented private-draft portions),
+REQ-SHR-005 and NFR-A11Y-001 is recorded in the
+[redesign run](../logs/yooplo/2026-10-30-saas-ui-redesign-run.md).
+The client adds a role-scoped collapsible navigation shell, responsive draft dashboard,
+consistent forms/status/confirmation styling and a shared decorative icon component.
+Existing business/API contracts remain intact. Independent synthetic-API Chrome
+checks and screenshots cover the implemented screens; they do not establish live
+backend authorization, submitted-revision behavior or full WCAG compliance.
+The run records exact checks, environment failures and remaining manual review.
+
 ## Evidence update rule
+
+Shell refinement, 31 October 2026: REQ-SHR-005 / NFR-A11Y-001 presentation checks
+now include independent workspace/navigation scroll containers, stationary desktop
+sidebar/topbar, accessible collapsed icon rail and native mobile navigation dialog.
+The [refinement run](../logs/yooplo/2026-10-31-shell-scroll-refinement.md) links the
+actual browser assertions, responsive screenshots, unit/build checks and remaining
+manual accessibility gaps. No domain-contract or authorization change is included.
 
 Add actual source/test paths, scenario/test names, commands/results, environment/version and independent review evidence for each implemented slice. Record failures and open decisions. Documentation or mock existence alone is not a pass. Expand multi-clause requirements into normal, boundary, failure and authorization cases. Update affected criteria, contracts, scenarios and guides with material behavior changes; tests verify intent rather than mirror implementation. OPEN-001 through OPEN-009 now record approved baseline policy; OPEN-002 live verification and actual implementation/evidence remain pending.
 

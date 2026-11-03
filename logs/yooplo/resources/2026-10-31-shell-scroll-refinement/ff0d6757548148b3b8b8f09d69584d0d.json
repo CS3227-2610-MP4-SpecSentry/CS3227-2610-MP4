@@ -1,0 +1,35 @@
+{
+  "id": "ff0d6757548148b3b8b8f09d69584d0d",
+  "prompter": "yooplo",
+  "session": "2026-10-31-shell-scroll-refinement",
+  "agent": "verifier",
+  "invocation": "verifier-2",
+  "stage": "revalidation",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited execution settings not exposed",
+  "started_at": "2026-10-30T16:14:01.713554+00:00",
+  "ended_at": "2026-10-30T16:15:30.754791+00:00",
+  "elapsed_seconds": 89.041237,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final independent shell browser checks 10/10; scroll isolation, rail, drawer focus/resize, short screen, CRUD and axe pass; zero console errors",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry not exposed",
+    "output_tokens": "Per-record usage telemetry not exposed",
+    "cache_read_tokens": "Per-record usage telemetry not exposed",
+    "tool_calls": "Per-record usage telemetry not exposed",
+    "retries": "Per-record usage telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry not exposed"
+}

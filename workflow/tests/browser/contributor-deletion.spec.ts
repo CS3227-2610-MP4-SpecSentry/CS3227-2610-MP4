@@ -57,7 +57,7 @@ test('owner confirms deletion by keyboard with conflict/uncertainty recovery and
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.keyboard.press('Tab'); await page.keyboard.press('Enter');
   await expect(page.getByText('Private draft deleted.', { exact: true })).toBeFocused();
-  await expect(page.getByText('No drafts here yet. Create a draft to get started.')).toBeVisible();
+  await expect(page.getByText('No drafts yet')).toBeVisible();
   expect((await page.request.get(`${url}/draft`)).status()).toBe(404);
   const tombstones = (await pool.query('SELECT * FROM "DraftTombstone" WHERE "proposalId"=$1', [created.proposalId])).rows;
   expect(tombstones).toHaveLength(1); expect(Object.keys(tombstones[0]).sort()).toEqual(['action', 'actorId', 'proposalId', 'timestamp']);
