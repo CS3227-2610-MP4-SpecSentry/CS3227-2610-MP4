@@ -114,8 +114,9 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-The release candidate foundation described below is available locally; its member,
-smoke, publication, notice, audit and Maintainer AI controls remain pending.
+The release candidate workspace described below is available locally; smoke-test
+recording is implemented, while its member, publication, notice, audit and
+Maintainer AI controls remain pending.
 Contributor submission, working-copy editing and submitted detail controls are
 available locally as described below. Approval revocation and the supporting release API are described above.
 Reviewer AI has a bounded implementation with live operation
@@ -469,11 +470,23 @@ save result, editing remains disabled until detail refresh succeeds. Stored note
 are rendered as text, and session replacement/unmount prevents an old request from
 changing the new workspace.
 
-This foundation does not yet expose proposal add/remove, Maintainer smoke-test
-recording, approval-revocation notices, publication confirmation/idempotency,
-released annotations, audit filters or advisory AI. Use no API call as a substitute
+The responsible Maintainer can record a release smoke test while the candidate is
+OPEN. Enter the procedure and observed results as non-empty plain text, select Pass
+or Fail, and submit. The record is bound to the content version shown on the page.
+After submission, the workspace refreshes the server's history and blocker list;
+it does not decide readiness in the browser. A FAIL remains evidence but does not
+clear the SMOKE blocker. A prior PASS stays visible after membership changes, but
+the newer content version requires another passing test. If the request conflicts
+or its result is uncertain, both editing and smoke recording stay disabled until a
+detail refresh succeeds. Other Maintainers and RELEASED candidates receive no
+recording controls. Procedure/results are displayed only as text.
+
+This workspace does not yet expose proposal add/remove, approval-revocation notices,
+publication confirmation/idempotency, released annotations, audit filters or
+advisory AI. Use no API call as a substitute
 for the required future human publication flow. Local verification is recorded in
-the [Maintainer run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md); no live
+the [Maintainer foundation run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md)
+and [smoke-test increment](../logs/yu-sutong/2026-11-04-maintainer-assembly.md); no live
 application URL or deployed acceptance is claimed.
 
 ## Troubleshooting

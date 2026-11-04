@@ -1,0 +1,35 @@
+{
+  "id": "722a9f2002f049ec8586423a6708922b",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-assembly",
+  "agent": "security-reviewer",
+  "invocation": "security-1",
+  "stage": "pre-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-04T15:42:10.791925+00:00",
+  "ended_at": "2026-11-04T15:47:39.659920+00:00",
+  "elapsed_seconds": 328.867995,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Pre-reviewed Maintainer smoke-test recording boundary; confirmed existing server role/session/CSRF/ownership/lifecycle/version transaction controls and defined reconciliation, session-replacement, rendering, and regression requirements.",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "output_tokens": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "cache_read_tokens": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "tool_calls": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "retries": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime"
+  },
+  "unavailable_reason": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime"
+}

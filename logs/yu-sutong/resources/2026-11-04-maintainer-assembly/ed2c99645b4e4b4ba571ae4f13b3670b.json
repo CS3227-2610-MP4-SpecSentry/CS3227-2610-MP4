@@ -1,0 +1,35 @@
+{
+  "id": "ed2c99645b4e4b4ba571ae4f13b3670b",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-assembly",
+  "agent": "maintainer-architect",
+  "invocation": "architect-1",
+  "stage": "analyze",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-04T15:42:10.726469+00:00",
+  "ended_at": "2026-11-04T15:46:18.857761+00:00",
+  "elapsed_seconds": 248.131292,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Recommended bounded smoke-test recording UI slice; identified exact client write set, server contract reuse, denial/failure coverage, and deferred larger membership assembly.",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "output_tokens": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "cache_read_tokens": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "tool_calls": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime",
+    "retries": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime"
+  },
+  "unavailable_reason": "Per-agent token, cache, tool-call, and retry telemetry is not exposed by the collaboration runtime"
+}

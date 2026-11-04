@@ -1,0 +1,35 @@
+{
+  "id": "2b82b341c3394f4e955cf2eb66ee6b1c",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-assembly",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "fix",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-04T15:50:10.272310+00:00",
+  "ended_at": "2026-11-04T15:50:31.387707+00:00",
+  "elapsed_seconds": 21.115397,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Corrected two focused client test harness issues; all 15 Maintainer workspace tests passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+}

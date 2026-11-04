@@ -5,11 +5,15 @@ contains authentication, single-role accounts, Contributor drafting/submission/
 revision/response workflows, the Reviewer workspace, supporting release APIs and
 the first Release Maintainer workspace slice. Release Maintainers can locally
 list/filter candidates, create and open them, inspect server-computed blockers and
-edit an owned open candidate. Membership, smoke recording, publication, notices,
-audit and advisory-AI controls remain pending in the browser workspace.
+edit an owned open candidate. The responsible Maintainer can also record a bounded
+PASS or FAIL release smoke test against the candidate's current content version;
+the browser refreshes the server-authoritative history and blockers before another
+mutation. Membership, publication, notices, audit and advisory-AI controls remain
+pending in the browser workspace.
 Contributor and Reviewer advisory AI use a bounded server gateway; live provider
 operation is disabled pending verification. Maintainer implementation evidence is
-in the [Maintainer run](logs/yu-sutong/2026-11-04-maintainer-deployment.md); broader
+in the [Maintainer foundation run](logs/yu-sutong/2026-11-04-maintainer-deployment.md)
+and [smoke-test increment](logs/yu-sutong/2026-11-04-maintainer-assembly.md); broader
 checks and open gates are also tracked in the
 [Contributor run](logs/yooplo/2026-11-01-contributor-completion.md).
 No deployed application is claimed.

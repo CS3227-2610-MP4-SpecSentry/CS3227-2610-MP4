@@ -202,6 +202,40 @@ describe('PostgreSQL release candidate and revocation integration', () => {
     expect(await snapshot(c)).toEqual(before);
     expect(await db.client.changeProposal.findUniqueOrThrow({ where: { id: extra.proposal.id } })).toEqual(extraBefore);
   });
+  it('release-smoke rejects stale or released candidates without appending evidence', async () => {
+    const created = await candidate();
+    await expect(releases.smoke(maintainer, created.candidateId, { expectedVersion: created.version + 1,
+      testedContentVersion: created.contentVersion, procedure: 'run', results: 'pass', outcome: 'PASS' }))
+      .rejects.toMatchObject({ status: 409 });
+    await expect(releases.smoke(maintainer, created.candidateId, { expectedVersion: created.version,
+      testedContentVersion: created.contentVersion + 1, procedure: 'run', results: 'pass', outcome: 'PASS' }))
+      .rejects.toMatchObject({ status: 409 });
+    expect(await db.client.releaseSmokeTest.count({ where: { candidateId: created.candidateId } })).toBe(0);
+
+    const releasable = await attached(); const readyCandidate = await ready(releasable);
+    const published = await releases.publish(maintainer, readyCandidate.id, { expectedVersion: readyCandidate.version,
+      expectedContentVersion: readyCandidate.contentVersion }, randomUUID());
+    const smokeCount = await db.client.releaseSmokeTest.count({ where: { candidateId: readyCandidate.id } });
+    await expect(releases.smoke(maintainer, readyCandidate.id, { expectedVersion: published.version,
+      testedContentVersion: published.contentVersion, procedure: 'run again', results: 'pass', outcome: 'PASS' }))
+      .rejects.toMatchObject({ status: 409 });
+    expect(await db.client.releaseSmokeTest.count({ where: { candidateId: readyCandidate.id } })).toBe(smokeCount);
+  });
+  it('release-smoke rolls back appended evidence when candidate version advancement fails', async () => {
+    const created = await candidate();
+    const before = await db.client.releaseCandidate.findUniqueOrThrow({ where: { id: created.candidateId } });
+    const name = `smoke_fail_${randomUUID().replace(/-/g, '')}`;
+    await db.client.$executeRawUnsafe(`CREATE FUNCTION "${name}"() RETURNS trigger LANGUAGE plpgsql AS 'BEGIN RAISE EXCEPTION ''synthetic smoke update failure''; END'`);
+    try {
+      await db.client.$executeRawUnsafe(`CREATE TRIGGER "${name}" BEFORE UPDATE ON "ReleaseCandidate" FOR EACH ROW WHEN (OLD."id" = '${created.candidateId}') EXECUTE FUNCTION "${name}"()`);
+      try {
+        await expect(releases.smoke(maintainer, created.candidateId, { expectedVersion: created.version,
+          testedContentVersion: created.contentVersion, procedure: 'run', results: 'pass', outcome: 'PASS' })).rejects.toThrow();
+      } finally { await db.client.$executeRawUnsafe(`DROP TRIGGER "${name}" ON "ReleaseCandidate"`); }
+    } finally { await db.client.$executeRawUnsafe(`DROP FUNCTION "${name}"()`); }
+    expect(await db.client.releaseSmokeTest.count({ where: { candidateId: created.candidateId } })).toBe(0);
+    expect(await db.client.releaseCandidate.findUniqueOrThrow({ where: { id: created.candidateId } })).toEqual(before);
+  });
   it('release-gates reject empty, no smoke, and a real content change after smoke', async () => {
     const empty = await candidate();
     await expect(releases.publish(maintainer, empty.candidateId, { expectedVersion: empty.version,

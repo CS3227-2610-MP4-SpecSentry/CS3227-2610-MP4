@@ -72,6 +72,97 @@ describe('Release Maintainer workspace foundation', () => {
     expect(await screen.findByRole('heading', { name: 'Release 1.0.0' })).toBeInTheDocument();
     expect(screen.getByText(/another Release Maintainer created it/)).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Save candidate details' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Record smoke test' })).not.toBeInTheDocument();
+  });
+
+  it.each(['PASS', 'FAIL'] as const)('records an owner %s smoke test with CSRF and exact optimistic versions', async outcome => {
+    const recorded = { ...detail, version: detail.version + 1, smokeTests: [{ id: `smoke-${outcome}`,
+      testedContentVersion: detail.contentVersion, outcome, procedure: '<script>run checks</script>',
+      results: 'Observed text only', actorId: session.account.id, createdAt: timestamp }],
+      blockers: outcome === 'PASS' ? [{ code: 'EMPTY' as const }] : detail.blockers };
+    const command = { candidateId: detail.id, version: recorded.version, contentVersion: detail.contentVersion, status: 'OPEN' as const };
+    const fetch = vi.fn().mockResolvedValueOnce(reply(detail)).mockResolvedValueOnce(reply(command)).mockResolvedValueOnce(reply(recorded));
+    setup(fetch, '/releases/candidate-one');
+    fireEvent.change(await screen.findByLabelText('Procedure'), { target: { value: '<script>run checks</script>' } });
+    fireEvent.change(screen.getByLabelText('Results'), { target: { value: 'Observed text only' } });
+    fireEvent.change(screen.getByLabelText('Outcome'), { target: { value: outcome } });
+    fireEvent.click(screen.getByRole('button', { name: 'Record smoke test' }));
+    expect(await screen.findByText(`Observed text only`)).toBeInTheDocument();
+    expect(document.querySelector('script')).toBeNull();
+    expect(fetch.mock.calls[1]?.[0]).toBe('/api/release-candidates/candidate-one/smoke-tests');
+    expect(fetch.mock.calls[1]?.[1]).toMatchObject({ method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrfToken } });
+    expect(JSON.parse(fetch.mock.calls[1]?.[1].body as string)).toEqual({ expectedVersion: detail.version,
+      testedContentVersion: detail.contentVersion, procedure: '<script>run checks</script>',
+      results: 'Observed text only', outcome });
+    if (outcome === 'FAIL') expect(screen.getByText(/Record a passing smoke test/)).toBeInTheDocument();
+  });
+
+  it('rejects blank and oversized smoke-test text without a request', async () => {
+    const fetch = vi.fn().mockResolvedValueOnce(reply(detail));
+    setup(fetch, '/releases/candidate-one');
+    await screen.findByRole('button', { name: 'Record smoke test' });
+    fireEvent.click(screen.getByRole('button', { name: 'Record smoke test' }));
+    expect(screen.getByRole('alert')).toHaveTextContent('non-empty procedure and result');
+    fireEvent.change(screen.getByLabelText('Procedure'), { target: { value: 'x'.repeat(10_001) } });
+    fireEvent.change(screen.getByLabelText('Results'), { target: { value: 'Passed' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Record smoke test' }));
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps an old PASS visible while the server blocks the newer content version', async () => {
+    const changed = { ...detail, contentVersion: 2, smokeTests: [{ id: 'old-smoke', testedContentVersion: 1,
+      outcome: 'PASS' as const, procedure: 'Test old contents', results: 'Passed old contents',
+      actorId: session.account.id, createdAt: timestamp }] };
+    setup(vi.fn().mockResolvedValue(reply(changed)), '/releases/candidate-one');
+    expect(await screen.findByText((_, element) => element?.tagName === 'LI' &&
+      element.textContent?.includes('PASS for content version 1') === true)).toBeInTheDocument();
+    expect(screen.getByText(/Record a passing smoke test for the current candidate contents/)).toBeInTheDocument();
+    expect(screen.getByText(/Record the checks run against content version 2/)).toBeInTheDocument();
+  });
+
+  it('requires authoritative refresh after a stale smoke-test response and locks both mutations', async () => {
+    const refreshed = { ...detail, version: detail.version + 1, contentVersion: detail.contentVersion + 1 };
+    const fetch = vi.fn().mockResolvedValueOnce(reply(detail)).mockResolvedValueOnce(reply({}, 409)).mockResolvedValueOnce(reply(refreshed));
+    setup(fetch, '/releases/candidate-one');
+    fireEvent.change(await screen.findByLabelText('Procedure'), { target: { value: 'Run checks' } });
+    fireEvent.change(screen.getByLabelText('Results'), { target: { value: 'Passed' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Record smoke test' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('changed. Refresh');
+    expect(screen.getByRole('button', { name: 'Save candidate details' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Record smoke test' })).toBeDisabled();
+    fireEvent.click(screen.getByRole('button', { name: 'Refresh candidate before editing' }));
+    expect(await screen.findByText(/Record the checks run against content version 2/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Record smoke test' })).toBeEnabled();
+  });
+
+  it('requires refresh after an uncertain smoke result and ignores its late response after unmount', async () => {
+    const uncertainFetch = vi.fn().mockResolvedValueOnce(reply(detail)).mockRejectedValueOnce(new TypeError('connection interrupted'));
+    const uncertainView = setup(uncertainFetch, '/releases/candidate-one');
+    fireEvent.change(await screen.findByLabelText('Procedure'), { target: { value: 'Run checks' } });
+    fireEvent.change(screen.getByLabelText('Results'), { target: { value: 'Passed' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Record smoke test' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('may be uncertain');
+    expect(screen.getByRole('button', { name: 'Record smoke test' })).toBeDisabled();
+    uncertainView.unmount();
+
+    vi.unstubAllGlobals();
+    const pending = deferred<ReturnType<typeof reply>>();
+    const onSessionLost = vi.fn();
+    const view = setup(vi.fn().mockResolvedValueOnce(reply(detail)).mockImplementationOnce(() => pending.promise),
+      '/releases/candidate-one', onSessionLost);
+    fireEvent.change(await screen.findByLabelText('Procedure'), { target: { value: 'Run checks' } });
+    fireEvent.change(screen.getByLabelText('Results'), { target: { value: 'Passed' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Record smoke test' }));
+    view.unmount();
+    await act(async () => { pending.resolve(reply({}, 401)); await pending.promise; });
+    expect(onSessionLost).not.toHaveBeenCalled();
+  });
+
+  it('hides smoke-test controls for a released candidate', async () => {
+    setup(vi.fn().mockResolvedValue(reply({ ...detail, status: 'RELEASED' as const })), '/releases/candidate-one');
+    expect(await screen.findByRole('heading', { name: 'Release 1.0.0' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Record smoke test' })).not.toBeInTheDocument();
   });
 
   it('requires refresh after stale edits and sends the current optimistic version', async () => {

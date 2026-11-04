@@ -1,5 +1,30 @@
 # Requirement traceability
 
+## Release Maintainer smoke-test recording — 4 November 2026
+
+REQ-REL-002 / AC-REL-002 is extended by an owner-only OPEN-candidate form that
+records explicit PASS or FAIL release evidence against the exact displayed
+candidate/content versions. Shared strict schemas bound non-empty normalized
+procedure/results to 10,000 code points. The current session CSRF token accompanies
+the request; the server remains authoritative for role, ownership, lifecycle,
+versions, transactionality and readiness. Success, 409, network/5xx uncertainty and
+invalid successful responses cannot unlock another mutation until authoritative
+detail reconciliation succeeds. Other Maintainers and RELEASED candidates receive
+no controls. Stored content renders as escaped React text.
+
+`MaintainerWorkspace.test.tsx` covers PASS/FAIL, validation, CSRF and exact versions,
+read-only states, stale/uncertain locking, old PASS/current SMOKE behavior, plain-text
+rendering and late unmounted responses. `release-revocation.integration.ts` adds
+stale candidate/content no-insert, RELEASED denial and late-failure transaction
+rollback checks while retaining existing wrong-owner and membership-invalidation
+coverage. The final local gate passed 124 server unit tests, 266 client tests,
+type-check, lint, production build and `git diff --check`; fresh independent Release
+and Security reviews found no reportable issues. The new PostgreSQL cases were not
+executed locally because no disposable test URL or Docker daemon was available and
+must pass in configured CI. Proposal membership, publication, browser E2E, teammate
+approval and live deployment remain pending. Exact workflow interactions and
+resources are in the [increment log](../logs/yu-sutong/2026-11-04-maintainer-assembly.md).
+
 ## Release Maintainer workspace foundation — 4 November 2026
 
 REQ-REL-001 / AC-REL-001 is partially implemented in the local browser workspace:

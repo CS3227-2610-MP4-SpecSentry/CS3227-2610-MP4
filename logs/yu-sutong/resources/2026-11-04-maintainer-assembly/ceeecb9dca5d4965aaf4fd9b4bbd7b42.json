@@ -1,0 +1,19 @@
+{
+  "id": "ceeecb9dca5d4965aaf4fd9b4bbd7b42",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-assembly",
+  "agent": "main",
+  "invocation": "main-8",
+  "stage": "publish-feature-branch",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-04T16:01:20.406514+00:00",
+  "ended_at": null,
+  "elapsed_seconds": null,
+  "status": "running",
+  "usage": null
+}

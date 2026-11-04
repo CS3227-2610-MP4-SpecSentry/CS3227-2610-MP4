@@ -33,7 +33,18 @@ blockers, and permits only the creator to edit an OPEN candidate. List cursors a
 bound to project and status filter and ordered by `(createdAt,id)` descending.
 Create and edit uncertainty locks further mutation until a successful authoritative
 refresh; workspace unmount/session replacement suppresses late callbacks. This is
-not the full Maintainer role: member, smoke, publish, notice, audit and AI controls
+not the full Maintainer role.
+
+The next bounded slice exposes creator-only smoke-test recording for an OPEN
+candidate. It validates the existing strict shared request, sends the displayed
+candidate version and content version with the current CSRF token, and records an
+explicit PASS or FAIL plus non-empty plain-text procedure/results. Success, stale
+conflict, an uncertain network/5xx outcome and response-contract failure all require
+authoritative detail reconciliation before another edit or smoke mutation. The
+browser never removes the SMOKE blocker itself. An older PASS remains visible but
+cannot satisfy readiness after candidate membership advances `contentVersion`.
+Server transactions still enforce role, persisted session, creator ownership,
+lifecycle and optimistic versions. Member, publish, notice, audit and AI controls
 remain pending in the browser.
 
 Lock order is sorted relevant accounts, actor session, candidates, then sorted
@@ -545,6 +556,15 @@ release verification and specification/documentation verification. A workflow fi
 or local pass is not image, provider or production evidence. Workflow-tool tests do
 not prove product acceptance. Root `AGENTS.md` and `.agents/skills` stay at natural
 discovery locations; workflow content is otherwise consolidated under `workflow/`.
+
+The 4 November Maintainer smoke-test increment exercised that separation with a
+coordinator, read-only architecture and security pre-review, bounded implementation,
+failed-test correction, fresh Release and Security verification, and a final
+specification/documentation check. Safe handoffs, measured intervals, unavailable
+telemetry and the local PostgreSQL limitation are preserved in the
+[interaction log](../logs/yu-sutong/2026-11-04-maintainer-assembly.md) for the
+individual presentation. This evidence describes a local product increment, not a
+Render/Neon deployment or production release.
 
 The [AI security specification](../workflow/specs/AI-SECURITY-SPEC.md) defines planned
 context restrictions, validation, quotas, timeouts and adversarial tests. Implement
