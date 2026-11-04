@@ -12,8 +12,24 @@
   "observed_effort": null,
   "settings_reason": "Exact execution model and effort are not exposed",
   "started_at": "2026-11-04T16:01:20.406514+00:00",
-  "ended_at": null,
-  "elapsed_seconds": null,
-  "status": "running",
-  "usage": null
+  "ended_at": "2026-11-04T16:02:48.080412+00:00",
+  "elapsed_seconds": 87.673898,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Committed 6289c3b as Yu Sutong, pushed feature/release-maintainer-assembly through active yu-sutong account, and opened PR 20; CI observed queued and no merge/deployment performed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
 }

@@ -19,7 +19,7 @@
 7. A fresh read-only Security Reviewer closed all seven pre-review controls with no stable findings and passed 7/7 smoke contract cases. Both reviewers retained PostgreSQL CI as a required acceptance gate and made no deployment claim.
 8. An unexpected nested architect child was shown as interrupted without a handoff, file edits or registered coordinator timing. It contributed no decision or evidence; exact model/timing/usage are unavailable. This process gap is preserved rather than reconstructed.
 9. Documentation distinguishes the implemented smoke UI from pending membership/publication and links this interaction record for presentation use. A fresh read-only Spec/Docs Verifier passed the complete diff with no findings, confirmed the evidence counts/hashes and resolved links, and found no deployment overclaim.
-10. Git identity was rechecked as `Yu Sutong <e0483972@u.nus.edu>` and GitHub CLI as active `yu-sutong`; `yust-planner` remained inactive. Feature-branch and PR publication outcomes are appended after they occur.
+10. Git identity was rechecked as `Yu Sutong <e0483972@u.nus.edu>` and GitHub CLI as active `yu-sutong`; `yust-planner` remained inactive. Commit `6289c3b06d5eee1b881de1c5f741c49241adc878` was pushed to `feature/release-maintainer-assembly` and [PR #20](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/20) was opened against `master` by `yu-sutong`. CI was queued, not passed, at observation time. No merge or deployment occurred.
 
 ## Changes and evidence
 
@@ -35,5 +35,6 @@
 - Structured records: `logs/yu-sutong/resources/2026-11-04-maintainer-assembly/`.
 - Timing coverage began before the first repository edit. Each coordinator stage and every known direct specialist/reviewer invocation has a measured interval. The unexpected interrupted nested attempt has no reconstructable interval and is disclosed above.
 - Per-stage token/cache/tool/retry and observed-model telemetry are unavailable because the collaboration runtime does not expose attributable counters.
-- Final generated resource table/report: pending completion of final docs verification and publication stages.
-- End-to-end wall time and summed overlapping interval time: pending final report.
+- Final generated resource table/report: [resource report](2026-11-04-maintainer-assembly-resources.md). The recorder passed with no unfinished or invalid records.
+- Thirteen registered intervals totalled 2,193.225086 seconds; concurrent intervals overlap. End-to-end observed wall time was 1,256.265787 seconds (20 minutes 56.265787 seconds).
+- Token/cache/tool-call/retry and observed-model coverage was 0/13 because attributable telemetry is not exposed; null values are unavailable, not measured zero usage.
