@@ -1,0 +1,35 @@
+{
+  "id": "0ba2182a54454ffa8e5f3cd5c9263d25",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-deployment",
+  "agent": "spec-docs-verifier",
+  "invocation": "spec-docs-verifier-2",
+  "stage": "reverify-docs",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-04T06:53:54.107951+00:00",
+  "ended_at": "2026-11-04T06:54:58.100997+00:00",
+  "elapsed_seconds": 63.993046,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Fresh docs re-verification closed all four prior documentation findings with no new contradiction",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

@@ -35,20 +35,30 @@ endpoint is `/api/ready`. Do not add a Render source-build command.
 4. Apply the reviewed identity/proposal migration chain before first use. Run `npm ci --ignore-scripts`,
    `npm run db:generate` and `npm run db:migrate:deploy` in the release job using
    the matching environment's direct URL. Review SQL before committing it.
-5. Build/test/scan/sign/publish one image in CI, deploy its digest to development,
-   and run `SMOKE_BASE_URL=<development-url> node workflow/tooling/smoke.mjs`.
+5. Build/test/scan/sign/publish one image in CI and deploy its digest to development.
+   `SMOKE_BASE_URL=<development-url> node workflow/tooling/smoke.mjs` is only a
+   preliminary public-route check: it makes one short attempt and cannot establish
+   deployment acceptance. Before promotion, add a bounded cold-start retry window,
+   verify the expected source/digest marker, migration status and authenticated
+   session/CSRF plus a safe role-owned read.
 6. Promote that same digest after manual production-environment approval. Never
    rebuild independently on Render or automatically deploy unreviewed production tags.
 
 Steps 4-6 describe the intended release pipeline; the initial CI workflow validates
 the scaffold and Docker image but does not publish, sign or deploy it. Real cloud
 IDs, credentials, environment approvals and release workflows remain unconfigured.
+Use the [Release Maintainer and deployment-agent workflow](../workflow/deployment/README.md)
+to separate implementation, database/recovery review, security review, immutable-
+digest verification and protected production approval. The workflow definition and
+local checks are process evidence only; they are not a deployed environment.
 Set an independent random `SESSION_SECRET` of at least 32 characters per service
 and configure `TRUST_PROXY_HOPS` to the verified TLS proxy topology (the template
 assumes one trusted hop). Provision accounts from a trusted checkout using
-[Authentication](Authentication.md). Base authentication and Contributor private drafts
-are implemented locally; other domain workflows and actual deployed verification
-remain pending. No AI keys are needed or used at this stage.
+[Authentication](Authentication.md). Authentication, Contributor and Reviewer
+workflows and the first Release Maintainer candidate workspace slice are implemented
+locally to the limits described in their guides. Remaining role controls and actual
+deployed verification stay pending. No AI key is required for this deployment
+foundation; live advisory-AI acceptance remains a separate gate.
 
 ## Free-tier considerations
 

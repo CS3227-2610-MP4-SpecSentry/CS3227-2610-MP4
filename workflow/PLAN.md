@@ -1,5 +1,16 @@
 # Delivery and implementation plan
 
+Release Maintainer foundation, 4 November 2026: implement the smallest locally
+complete candidate workspace slice for REQ-REL-001/002: strict bounded listing,
+status filtering, create/open/detail, responsible-Maintainer display, owner-only
+open-candidate editing and server-authoritative blocker rendering. The dedicated
+[deployment-agent workflow](deployment/README.md) was used for architecture,
+security pre-review, disjoint implementation, independent verification, correction
+and re-verification. Exact evidence and remaining deployment gates are in the
+[run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md). Membership, smoke,
+publication, notices, audit, Maintainer AI and live Render/Neon delivery remain
+separate work; no commit, push, migration or deployment is inferred.
+
 Contributor schema integration, 2 November 2026: the user authorized a fixed
 Contributor-only JSON Schema transport format with unchanged strict runtime
 validation. Count its complete serialized metadata through an additional
@@ -190,7 +201,7 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Private create/list/detail, editing, deletion and criteria increments 1–4 have local independent evidence; see [Contributor evidence](../logs/yooplo/2026-10-28-contributor-increment-4.md). Reviewer iteration 2 supplies shared submission/revision APIs; full Contributor submission UI and combined/deployed acceptance remain pending. |
 | TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Reviewer iterations 1–4 implement manual review, revision cycles, bounded AI integration and approval revocation; see [traceability](TRACEABILITY.md). Live provider, deployment and broader acceptance gates remain separate. |
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
-| TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Planned; publication/revocation race evidence |
+| TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Partial: locally verified candidate list/filter/create/open/detail/edit foundation and server blocker display; membership, smoke, publication, notices/audit UI, Maintainer AI, browser/PostgreSQL acceptance and teammate review remain pending. See the [Maintainer run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md). |
 | TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Planned; requirement-linked results |
 | TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Planned; verified dev/prod release |
 

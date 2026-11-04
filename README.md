@@ -2,10 +2,15 @@
 
 Secure specification and review workspace for CS3227 MP4. This repository currently
 contains authentication, single-role accounts, Contributor drafting/submission/
-revision/response workflows, the Reviewer workspace and supporting release APIs.
+revision/response workflows, the Reviewer workspace, supporting release APIs and
+the first Release Maintainer workspace slice. Release Maintainers can locally
+list/filter candidates, create and open them, inspect server-computed blockers and
+edit an owned open candidate. Membership, smoke recording, publication, notices,
+audit and advisory-AI controls remain pending in the browser workspace.
 Contributor and Reviewer advisory AI use a bounded server gateway; live provider
-operation is disabled pending verification. The broader Release Maintainer UI
-remains pending. Current checks and open gates are in the
+operation is disabled pending verification. Maintainer implementation evidence is
+in the [Maintainer run](logs/yu-sutong/2026-11-04-maintainer-deployment.md); broader
+checks and open gates are also tracked in the
 [Contributor run](logs/yooplo/2026-11-01-contributor-completion.md).
 No deployed application is claimed.
 

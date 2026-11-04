@@ -3,6 +3,7 @@ import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { csrfResponseSchema, sessionResponseSchema, type AccountRole, type SessionResponse } from '@specsentry/shared';
 import { ReviewerWorkspace } from './features/reviewer/ReviewerWorkspace';
 import { ContributorWorkspace } from './features/contributor/ContributorWorkspace';
+import { MaintainerWorkspace } from './features/maintainer/MaintainerWorkspace';
 import { Icon } from './shared/Icon';
 
 const workspaces: Record<AccountRole, { path: string; label: string }> = {
@@ -200,9 +201,10 @@ export function App() {
           <Route path="/contributor/*" element={session.account.role === 'CONTRIBUTOR'
             ? <ContributorWorkspace key={`${session.account.id}:${session.csrfToken}`} session={session} onSessionLost={sessionLost} />
             : <section className="workspace-placeholder"><h1>Access denied</h1><p>This workspace requires a different account role.</p></section>} />
-          {Object.entries(workspaces).filter(([role]) => role !== 'CONTRIBUTOR').map(([role, item]) => <Route key={role} path={item.path} element={role === session.account.role ? role === 'REVIEWER' ? <ReviewerWorkspace key={`${JSON.stringify(session.account)}:${session.csrfToken}`} session={session} authorization={authorization} onUnauthorized={() => invalidate('Your session ended. Please sign in again.')} /> : <section className="workspace-placeholder">
-            <h1>{item.label} workspace</h1><p className="notice">Your account is ready. Workflow features will appear here as they become available.</p>
-          </section> : <section className="workspace-placeholder"><h1>Access denied</h1><p>This workspace requires a different account role.</p></section>} />)}
+          {Object.entries(workspaces).filter(([role]) => role !== 'CONTRIBUTOR').map(([role, item]) => <Route key={role} path={role === 'RELEASE_MAINTAINER' ? `${item.path}/*` : item.path} element={role === session.account.role ? role === 'REVIEWER'
+            ? <ReviewerWorkspace key={`${JSON.stringify(session.account)}:${session.csrfToken}`} session={session} authorization={authorization} onUnauthorized={() => invalidate('Your session ended. Please sign in again.')} />
+            : <MaintainerWorkspace key={`${JSON.stringify(session.account)}:${session.csrfToken}`} session={session} onSessionLost={sessionLost} />
+            : <section className="workspace-placeholder"><h1>Access denied</h1><p>This workspace requires a different account role.</p></section>} />)}
           <Route path="*" element={<section className="workspace-placeholder"><h1>Page not found</h1><Link to={workspace.path}>Return to your workspace</Link></section>} />
         </Routes>
       </>}

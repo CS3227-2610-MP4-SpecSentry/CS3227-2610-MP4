@@ -1,11 +1,21 @@
 import { z } from 'zod';
 import { normalizeReviewerText, reviewerCodePointLength, reviewerIdSchema as id,
-  reviewerVersionSchema as version, reviewerTimestampSchema as timestamp } from './reviewer';
+  REVIEWER_LIMITS, reviewerCursorSchema, reviewerVersionSchema as version,
+  reviewerTimestampSchema as timestamp } from './reviewer';
 
 const bounded = (max: number, required = false) => z.string().transform(normalizeReviewerText)
   .refine(value => reviewerCodePointLength(value) <= max, `Maximum ${max} Unicode code points`)
   .refine(value => !required || value.trim().length > 0, 'Must not be empty');
 export const releaseCandidateStatusSchema = z.enum(['OPEN', 'RELEASED']);
+const releaseQueryInteger = (max: number, min = 0) => z.preprocess(
+  value => typeof value === 'string' && /^(0|[1-9][0-9]*)$/.test(value) ? Number(value) : value,
+  z.number().int().min(min).max(max),
+);
+export const releaseCandidatesQuerySchema = z.object({
+  status: releaseCandidateStatusSchema.optional(),
+  limit: releaseQueryInteger(REVIEWER_LIMITS.pageMax, 1).default(REVIEWER_LIMITS.pageDefault),
+  cursor: reviewerCursorSchema.optional(),
+}).strict();
 export const releaseSemanticVersionSchema = z.string().max(64)
   .regex(/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/);
 export const createReleaseCandidateRequestSchema = z.object({
@@ -53,6 +63,15 @@ export const releaseCandidateDetailResponseSchema = z.object({
   blockers: z.array(releaseReadinessBlockerSchema).max(1_000),
   publishedAt: timestamp.nullable(),
 }).strict();
+export const releaseCandidateSummarySchema = z.object({
+  id, versionLabel: releaseSemanticVersionSchema, status: releaseCandidateStatusSchema,
+  createdById: id, createdAt: timestamp, publishedAt: timestamp.nullable(),
+  version, contentVersion: version,
+}).strict();
+export const releaseCandidatesResponseSchema = z.object({
+  items: z.array(releaseCandidateSummarySchema).max(REVIEWER_LIMITS.pageMax),
+  nextCursor: reviewerCursorSchema.nullable(),
+}).strict();
 // Reviewer-facing candidate data must be projected separately from detail/readiness.
 export const reviewerReleaseContextSchema = z.object({
   candidateId: id, candidateVersion: version, ownInvalidApprovalBlocker: z.boolean(),
@@ -71,3 +90,6 @@ export type RemoveReleaseMemberRequest = z.infer<typeof removeReleaseMemberReque
 export type AppendReleaseSmokeTestRequest = z.infer<typeof appendReleaseSmokeTestRequestSchema>;
 export type PublishReleaseCandidateRequest = z.infer<typeof publishReleaseCandidateRequestSchema>;
 export type ReleaseCandidateDetailResponse = z.infer<typeof releaseCandidateDetailResponseSchema>;
+export type ReleaseCandidateSummary = z.infer<typeof releaseCandidateSummarySchema>;
+export type ReleaseCandidatesResponse = z.infer<typeof releaseCandidatesResponseSchema>;
+export type ReleaseCandidatesQuery = z.infer<typeof releaseCandidatesQuerySchema>;

@@ -1,0 +1,35 @@
+{
+  "id": "f4fe6303c8a24ca1b2ff3954722869f9",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-deployment",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "docs",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-04T06:42:42.481185+00:00",
+  "ended_at": "2026-11-04T06:45:58.864321+00:00",
+  "elapsed_seconds": 196.383136,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Reconciled README, guides, plan, traceability and instantiated deployment run; diff and submission presence checks passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

@@ -1,6 +1,6 @@
 # Development and specification maintenance
 
-Status: process baseline, not executed review evidence. Contributor implementation follows the specialized [Contributor workflow](contributor/README.md); Reviewer implementation follows the specialized [Reviewer workflow](reviewer/README.md). Root AGENTS.md remains the instruction entry point.
+Status: process baseline, not executed review evidence. Contributor implementation follows the specialized [Contributor workflow](contributor/README.md); Reviewer implementation follows the specialized [Reviewer workflow](reviewer/README.md); Release Maintainer and deployment work follows the specialized [deployment workflow](deployment/README.md). Root AGENTS.md remains the instruction entry point.
 
 ## Specification Driven Development
 
@@ -33,7 +33,7 @@ The [assignment specification](specs/ASSIGNMENT-SPEC.md) captures course constra
 
 ## Multi Agent Software Engineering Workflow
 
-The table below is the generic responsibility model. Contributor work specializes it into a coordinator (requirements interpretation and architecture), implementer (including code integration), security reviewer, and acceptance verifier (including specification/docs verification), with permissions and execution gates in its [workflow](contributor/README.md). Reviewer work has its own scoped specialization. Release Maintainer and standalone shared work retain this generic process until an applicable specialization is agreed. A role-specific process does not change another role's procedure or waive shared recording, contract coordination, security, or teammate review.
+The table below is the generic responsibility model. Contributor work specializes it into a coordinator (requirements interpretation and architecture), implementer (including code integration), security reviewer, and acceptance verifier (including specification/docs verification), with permissions and execution gates in its [workflow](contributor/README.md). Reviewer work has its own scoped specialization. Release Maintainer and deployment work use the [deployment specialization](deployment/README.md); unrelated shared work retains this generic process. A role-specific process does not change another role's procedure or waive shared recording, contract coordination, security, or teammate review.
 
 | **Agent** | **Responsibility** | **Required input** | **Handoff** | **Permission** |
 | --- | --- | --- | --- | --- |

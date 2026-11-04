@@ -1,15 +1,15 @@
 import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { createHash, randomUUID } from 'node:crypto';
 import { releaseCandidateCommandResponseSchema, releaseCandidateDetailResponseSchema,
-  releasePublicationResponseSchema, reviewerReleaseContextSchema,
+  releaseCandidatesResponseSchema, releasePublicationResponseSchema, reviewerReleaseContextSchema,
   type AddReleaseMemberRequest, type AppendReleaseSmokeTestRequest,
-  type CreateReleaseCandidateRequest, type PublishReleaseCandidateRequest,
+  type CreateReleaseCandidateRequest, type PublishReleaseCandidateRequest, type ReleaseCandidatesQuery,
   type RemoveReleaseMemberRequest, type UpdateReleaseCandidateRequest } from '@specsentry/shared';
 import { Prisma, type ReleaseCandidate } from '../generated/prisma/client';
 import { ActivityService } from '../activity/activity.service';
 import { DatabaseService } from '../database/database.service';
 import { businessTransaction, type BusinessActor } from '../identity/business-context';
-import { nextVersion } from '../reviews/reviewer-context';
+import { decodeCursor, encodeCursor, nextVersion } from '../reviews/reviewer-context';
 import { lockCandidateMemberProposals, lockReleaseCandidates, lockReleaseProposals, RELEASE_PROJECT_KEY } from './release-locks';
 
 type Tx = Prisma.TransactionClient;
@@ -83,6 +83,32 @@ export class ReleasesService {
         semanticVersion: body.versionLabel, rollbackPlan: body.rollbackNote,
         dependencyNotes: body.dependencyNotes, createdById: actor.accountId } });
       return this.command(candidate);
+    });
+  }
+
+  list(actor: BusinessActor, query: ReleaseCandidatesQuery) {
+    const scope = JSON.stringify(['release-candidates', RELEASE_PROJECT_KEY, query.status ?? null]);
+    return businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', 'release-candidates', 'RELEASE_LIST', async tx => {
+      const cursor = decodeCursor(query.cursor, scope, 'timestamp');
+      const rows = await tx.releaseCandidate.findMany({
+        where: { projectKey: RELEASE_PROJECT_KEY, status: query.status,
+          ...(cursor ? { OR: [{ createdAt: { lt: new Date(cursor.timestamp!) } },
+            { createdAt: new Date(cursor.timestamp!), id: { lt: cursor.id } }] } : {}) },
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+        take: query.limit + 1,
+        select: { id: true, semanticVersion: true, status: true, createdById: true,
+          createdAt: true, publishedAt: true, version: true, contentVersion: true },
+      });
+      const page = rows.slice(0, query.limit);
+      const last = page.at(-1);
+      return releaseCandidatesResponseSchema.parse({
+        items: page.map(candidate => ({ id: candidate.id, versionLabel: candidate.semanticVersion,
+          status: candidate.status, createdById: candidate.createdById,
+          createdAt: candidate.createdAt.toISOString(), publishedAt: candidate.publishedAt?.toISOString() ?? null,
+          version: candidate.version, contentVersion: candidate.contentVersion })),
+        nextCursor: rows.length > query.limit && last
+          ? encodeCursor(scope, { id: last.id, timestamp: last.createdAt.toISOString() }) : null,
+      });
     });
   }
 

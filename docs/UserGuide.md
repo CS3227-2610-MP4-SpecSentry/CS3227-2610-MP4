@@ -27,8 +27,9 @@ not restore approval or remove the blocker.
 Recoverable errors keep the entered reason. After a conflict, refresh and reconcile
 the displayed state before another submission. An offered uncertain-response retry
 uses the original request identity. Session expiry or lost access clears protected
-page content. General release management and Maintainer notice viewing are currently
-available through the API; a broader Maintainer workspace is outside this increment.
+page content. General release management and Maintainer notice viewing are available
+through the API. The local Maintainer workspace now provides the candidate foundation
+described below; notice viewing and member removal controls are not yet exposed there.
 
 This is the local iteration-4 implementation. Its verification, independent review
 and fix status are recorded in the [iteration log](../logs/ngkhengyang/2026-10-26-reviewer-iteration4.md).
@@ -113,7 +114,8 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-The broader release workspace and Maintainer AI assistant remain pending.
+The release candidate foundation described below is available locally; its member,
+smoke, publication, notice, audit and Maintainer AI controls remain pending.
 Contributor submission, working-copy editing and submitted detail controls are
 available locally as described below. Approval revocation and the supporting release API are described above.
 Reviewer AI has a bounded implementation with live operation
@@ -253,8 +255,8 @@ or press Escape to return to the workspace. Keyboard focus stays within the open
 drawer, and the background workspace stops scrolling. Toggling navigation keeps
 your current form open. A **Skip to main content** link is available when navigating
 by keyboard. Reviewer accounts open their implemented review workspace; Release
-Maintainer accounts retain an availability message while their broader workspace
-remains pending.
+Maintainer accounts open the candidate foundation described below; the remaining
+release actions are clearly identified as pending.
 
 Contributor pages show the current task as the primary heading, with breadcrumbs
 back to the workspace/draft list and the saved draft where applicable. Long draft
@@ -446,6 +448,34 @@ Local demonstration submissions are supplied through the development fixture
 command described in the [Developer Guide](DeveloperGuide.md#reviewer-intake-fixtures).
 The authenticated owner API can create submissions; there is no public fixture endpoint.
 
+## Release candidate workspace foundation
+
+After signing in as a Release Maintainer, the workspace lists project release
+candidates newest first. Filter the list by OPEN or RELEASED status, continue to
+the next bounded page, or return to the first page. Each row shows its status,
+responsible Maintainer identifier, candidate version and content version.
+
+Create an open candidate with a unique `major.minor.patch` version, a non-empty
+rollback note and optional dependency notes. If the create result is interrupted,
+the form remains locked until a candidate-list refresh succeeds; this prevents an
+uncertain request from creating a duplicate. Open a candidate to see its included
+proposals, smoke-test history and the blocker codes/text recomputed by the server.
+The browser does not decide that a candidate is ready.
+
+Only the responsible Maintainer (the creator) can edit the version, rollback note
+or dependency notes while the candidate remains OPEN. Other Maintainers can read
+the same detail but receive no edit controls. After a stale conflict or uncertain
+save result, editing remains disabled until detail refresh succeeds. Stored notes
+are rendered as text, and session replacement/unmount prevents an old request from
+changing the new workspace.
+
+This foundation does not yet expose proposal add/remove, Maintainer smoke-test
+recording, approval-revocation notices, publication confirmation/idempotency,
+released annotations, audit filters or advisory AI. Use no API call as a substitute
+for the required future human publication flow. Local verification is recorded in
+the [Maintainer run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md); no live
+application URL or deployed acceptance is claimed.
+
 ## Troubleshooting
 
 If sign-in is unavailable, confirm the backend is running and Vite proxies
@@ -460,7 +490,7 @@ Include the action, observed result and safe correlation identifier when present
 - Safe test-account distribution and sign-in instructions for each role: pending.
 - Local Reviewer intake walkthrough: verified in Chromium; deployed peer testing
   and full Contributor/Reviewer/Maintainer workflows remain pending.
-- Deployed Contributor walkthroughs and broader Maintainer workspace: pending.
+- Deployed Contributor walkthroughs and the remaining Maintainer controls: pending.
 - AI success, limits, failure recovery and manual fallback walkthroughs: pending.
 - Known release-specific limitations and supported browser evidence: pending.
 
@@ -477,7 +507,8 @@ The Contributor list presents its loaded-page count beside the draft list, with 
 concise privacy explanation. The count describes this page, not all your drafts;
 loading or an unavailable result is distinct from zero. The empty state offers the
 existing Create action. The Reviewer landing opens its implemented review
-workspace; the broader Release Maintainer landing retains its availability message.
+workspace; the Release Maintainer landing opens its locally verified candidate
+foundation, with the remaining controls explicitly out of scope above.
 
 Long editors retain section navigation, independent workspace scrolling, sticky
 Save/status, field validation and explicit protection before discarding unsaved

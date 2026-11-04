@@ -1,0 +1,35 @@
+{
+  "id": "fb11dfab484c4a4a819cacd78fc2681b",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-deployment",
+  "agent": "main",
+  "invocation": "main-4",
+  "stage": "docs-fix",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-04T06:48:12.514837+00:00",
+  "ended_at": "2026-11-04T06:51:05.435678+00:00",
+  "elapsed_seconds": 172.920841,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Corrected Deployment guide smoke/status statements and reconciled later yu-sutong push authorization in run records",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

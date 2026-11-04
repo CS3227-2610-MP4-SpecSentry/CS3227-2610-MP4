@@ -1,0 +1,21 @@
+# Release Maintainer / deployment run
+
+- Prompter and inference source:
+- Goal and requirement IDs:
+- Source revision / branch:
+- Target environment (or local-only):
+- Approved authority and excluded actions:
+- Agent assignments and exact write sets:
+- Focused context supplied / retrieved later:
+- Secret names required (names only; no values):
+- Source SHA / immutable image digest:
+- Migration compatibility and recovery decision:
+- Acceptance, denial, failure and rollback checks:
+- Commands and actual results:
+- Stable findings and dispositions:
+- Failed/interrupted attempts and retry cost:
+- Resource-record references:
+- Human approvals required / observed evidence:
+- Unresolved risks and unavailable telemetry:
+- Next authorized action:
+- Status: planned / active / blocked / verified / released
