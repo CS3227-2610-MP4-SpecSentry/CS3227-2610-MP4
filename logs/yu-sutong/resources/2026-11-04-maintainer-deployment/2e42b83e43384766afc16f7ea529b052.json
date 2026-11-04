@@ -12,8 +12,24 @@
   "observed_effort": null,
   "settings_reason": "Exact execution model and effort are not exposed",
   "started_at": "2026-11-04T06:54:58.209879+00:00",
-  "ended_at": null,
-  "elapsed_seconds": null,
-  "status": "running",
-  "usage": null
+  "ended_at": "2026-11-04T06:55:36.555955+00:00",
+  "elapsed_seconds": 38.346076,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Switched active GitHub CLI identity to yu-sutong, verified Yu Sutong commit metadata, committed e6e228a and pushed the new feature branch",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
 }

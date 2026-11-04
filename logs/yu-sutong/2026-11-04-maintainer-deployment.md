@@ -26,7 +26,11 @@
 - Added the `/releases/*` workspace for list/filter/create/open/detail/edit, responsible-Maintainer display, server-computed blockers, owner-only edit controls and safe plain-text rendering.
 - Create and edit uncertainty now prevents another mutation until an authoritative refresh succeeds. Late mutation responses are ignored after workspace unmount/session replacement.
 - Added eight focused client cases and three focused server cases. Reconciled README, User/Developer/Deployment guides, plan and traceability without claiming the unfinished role or a live deployment.
-- External state: no provider, repository setting, secret, migration, deployment, commit, push or merge was changed.
+- External state: GitHub CLI was switched from `yust-planner` to the existing
+  `yu-sutong` login and verified active. Commit `e6e228a7aeade20759cbe2f71b007a682328ad65`
+  was authored/committed by `Yu Sutong <e0483972@u.nus.edu>` and pushed as the new
+  `origin/feature/release-maintainer-workflow` branch. No provider, repository
+  setting, secret, migration, deployment, pull request or merge was changed.
 
 ## Findings and validation
 
@@ -74,4 +78,9 @@ The instantiated run and frozen code hashes are in
 - Structured records: `logs/yu-sutong/resources/2026-11-04-maintainer-deployment/`.
 - Timing coverage began before the first repository edit. Token/cache/tool/retry and observed child-model telemetry are unavailable because the runtime does not expose attributable per-agent counters.
 - One verifier interval began immediately after dispatch rather than before it; that boundary limitation is retained in its record. The first verifier's optional broad security sub-scan was interrupted to keep the release gate bounded; the manual release review completed, followed by fresh focused Release Verifier and Security Reviewer passes.
-- The generated report and complete resource table are appended after all intervals finish.
+- The final report passed with no unfinished/invalid records. Seventeen registered
+  intervals totalled 5,214.143344 seconds; this is not wall time because intervals
+  overlap. End-to-end observed wall time was 2,370.936839 seconds. All token/cache/
+  tool-call/retry counters were unavailable, so measured totals must not be read as
+  zero usage. The complete generated table and limitations are in the
+  [resource report](2026-11-04-maintainer-deployment-resources.md).
