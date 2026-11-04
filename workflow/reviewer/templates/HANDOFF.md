@@ -21,6 +21,7 @@ Keep the task, ownership, constraints and completion checks self-contained. Link
 - Shared-file/contract owners, dependencies, coordination needed:
 - Completion criteria and checks expected from recipient:
 - Authorization source and boundaries:
+- Direct recipient/acknowledgement, assigned fix owner, prerequisite gate, authorized evidence writer or fallback recorder:
 
 ## 4. Current state and changes
 

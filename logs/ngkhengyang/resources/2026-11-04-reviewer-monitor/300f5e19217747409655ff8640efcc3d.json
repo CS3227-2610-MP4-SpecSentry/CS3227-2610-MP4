@@ -1,0 +1,35 @@
+{
+  "id": "300f5e19217747409655ff8640efcc3d",
+  "prompter": "ngkhengyang",
+  "session": "2026-11-04-reviewer-monitor",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "document",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution settings not exposed",
+  "started_at": "2026-11-04T10:09:11.233548+00:00",
+  "ended_at": "2026-11-04T10:14:05.119101+00:00",
+  "elapsed_seconds": 293.885553,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Workflow policy and role documents updated; 114 local links and diff whitespace checks passed",
+  "unavailable_reasons": {
+    "input_tokens": "MP4 sessions sample delta retained separately; runtime event cutoffs do not exactly align recorder boundaries, so no per-record counters inferred",
+    "output_tokens": "MP4 sessions sample delta retained separately; runtime event cutoffs do not exactly align recorder boundaries, so no per-record counters inferred",
+    "cache_read_tokens": "MP4 sessions sample delta retained separately; runtime event cutoffs do not exactly align recorder boundaries, so no per-record counters inferred",
+    "tool_calls": "MP4 sessions sample delta retained separately; runtime event cutoffs do not exactly align recorder boundaries, so no per-record counters inferred",
+    "retries": "MP4 sessions sample delta retained separately; runtime event cutoffs do not exactly align recorder boundaries, so no per-record counters inferred"
+  },
+  "unavailable_reason": "MP4 sessions sample delta retained separately; runtime event cutoffs do not exactly align recorder boundaries, so no per-record counters inferred"
+}

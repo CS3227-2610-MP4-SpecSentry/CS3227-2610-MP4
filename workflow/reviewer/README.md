@@ -15,6 +15,7 @@ Shared invariants, resource measurements, and prompt logging in the root [contex
 | Coordinate implementation of a task/feature | [Implementation workflow](IMPLEMENTATION.md), then [main agent](agents/MAIN.md) |
 | Review architecture/security or a changed trust boundary | [Security reviewer](agents/SECURITY-REVIEWER.md) |
 | Implement a bounded assignment or fix | [Implementer](agents/IMPLEMENTER.md) |
+| Write a substantial separable test suite, when explicitly assigned | [Test agent](agents/TESTER.md) |
 | Execute delegated integration | [Integrator](agents/INTEGRATOR.md) |
 | Independently review or revalidate fixes | [Reviewer](agents/REVIEWER.md) |
 | Record briefs, assignments, or findings | Relevant section of [run template](templates/RUN.md) |
@@ -26,6 +27,8 @@ Shared invariants, resource measurements, and prompt logging in the root [contex
 Load only the guidance needed for the current assignment and its linked requirement sections. Prompter-named logs are historical evidence, not an alternative source of workflow instructions.
 
 Workflow revisions are tracked in the implementation specification's final [changelog](IMPLEMENTATION.md#changelog), with links to the corresponding change logs. Current model/effort selection and the Astra exception are defined only in [resource guidance](RESOURCES.md#dispatch-policy).
+
+After main settles the brief, security review, contracts and dispatch plan, execution uses direct assigned-agent handoffs and owner-scoped finding batches. Separate test and integration agents are conditional; omitted responsibilities belong to named implementers. Main monitors compact references, handles recorded exceptions, and closes with [run consolidation](../../.agents/skills/consolidate-multi-agent-run/SKILL.md). See the implementation procedure for gates and permissions; this is procedural routing over the existing version 3 harness, not automatic agent orchestration.
 
 ## Skills
 
