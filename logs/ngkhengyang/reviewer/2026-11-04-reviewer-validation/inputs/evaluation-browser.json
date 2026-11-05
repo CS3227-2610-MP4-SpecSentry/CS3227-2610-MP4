@@ -1,0 +1,59 @@
+{
+  "id": "evaluation-browser",
+  "kind": "browser",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const fs=require('node:fs'),cp=require('node:child_process');const r=cp.spawnSync(process.execPath,[\"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\", \"run\", \"test:e2e\", \"--\", \"workflow/tests/browser/reviewer-patch-risk.spec.ts\", \"workflow/tests/browser/reviewer-accessibility.spec.ts\"],{encoding:'utf8',maxBuffer:4194304});const f=\"logs\\\\ngkhengyang\\\\reviewer\\\\2026-11-04-reviewer-validation\\\\reports\\\\evaluation-browser-\"+Date.now()+'.txt';fs.writeFileSync(f,(r.stdout||'')+(r.stderr||''));process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');console.log('Check output: '+f);process.exit(r.status??1);"
+  ],
+  "paths": [
+    "src/shared/src/contracts/ai.ts",
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+    "src/server/test/reviewer-ai-usage.integration.ts",
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts",
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/tooling/verify-live-ai.mjs",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tests/browser/reviewer-accessibility.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/identity",
+    "src/server/src/database",
+    "src/server/jest.integration.config.cjs",
+    "playwright.config.ts",
+    "src/client/src",
+    "src/shared/src",
+    "src/server/src/ai",
+    "src/server/src/reviews"
+  ],
+  "depends_on": [
+    "fixture-readiness"
+  ],
+  "resources": [
+    "browser",
+    "build",
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_test"
+  },
+  "timeout": 360
+}

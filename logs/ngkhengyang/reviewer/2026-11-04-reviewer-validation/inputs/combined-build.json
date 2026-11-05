@@ -1,0 +1,39 @@
+{
+  "id": "combined-build",
+  "kind": "build",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const fs=require('node:fs'),cp=require('node:child_process');const r=cp.spawnSync(process.execPath,[\"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\", \"run\", \"build\"],{encoding:'utf8',maxBuffer:4194304});const f=\"logs\\\\ngkhengyang\\\\reviewer\\\\2026-11-04-reviewer-validation\\\\reports\\\\combined-build-\"+Date.now()+'.txt';fs.writeFileSync(f,(r.stdout||'')+(r.stderr||''));process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');console.log('Check output: '+f);process.exit(r.status??1);"
+  ],
+  "paths": [
+    "src/client/src",
+    "src/server/src/ai",
+    "src/server/src/reviews",
+    "src/server/src/identity",
+    "src/server/src/database",
+    "src/server/src/proposals",
+    "src/shared/src",
+    "src/server/test",
+    "src/server/tsconfig.json",
+    "src/server/tsconfig.build.json",
+    "src/client/tsconfig.json",
+    "src/client/vite.config.ts",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json",
+    "eslint.config.mjs",
+    "playwright.config.ts",
+    "workflow/tooling/verify-live-ai.mjs"
+  ],
+  "depends_on": [
+    "fixture-readiness"
+  ],
+  "resources": [
+    "build"
+  ],
+  "environment": [],
+  "database": null,
+  "timeout": 360
+}

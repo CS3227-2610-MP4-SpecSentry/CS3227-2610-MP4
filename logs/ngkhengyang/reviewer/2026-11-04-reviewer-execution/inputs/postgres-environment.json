@@ -1,0 +1,29 @@
+{
+  "id": "postgres-environment",
+  "kind": "preflight",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const {Pool}=require('pg');(async()=>{const u=new URL(process.env.TEST_DATABASE_URL);if(u.hostname!=='127.0.0.1'||u.port!=='55433'||u.pathname!=='/specsentry_test')throw Error('Isolated test DB required'); const p=new Pool({connectionString:u.href,connectionTimeoutMillis:5000});try{const r=await p.query('SELECT current_database() AS name');if(r.rows[0].name!=='specsentry_test')throw Error('Wrong DB'); const m=await p.query('SELECT count(*)::int n FROM \"_prisma_migrations\" WHERE finished_at IS NOT NULL AND rolled_back_at IS NULL');if(m.rows[0].n!==9)throw Error('Migration prerequisite'); const c=await p.query('SELECT count(*)::int n FROM \"AiQuotaCoordinator\" WHERE id=$1',['reviewer-patch-risk']);if(c.rows[0].n!==1)throw Error('Coordinator prerequisite');console.log('Isolated PostgreSQL connection, nine migrations, quota coordinator passed');}finally{await p.end();}})().catch(()=>{console.error('Isolated PostgreSQL readiness failed');process.exitCode=1;});"
+  ],
+  "paths": [
+    "src/server/prisma/schema.prisma",
+    "src/server/prisma/migrations",
+    "src/server/prisma.config.ts",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "offline-environment"
+  ],
+  "resources": [
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_test"
+  },
+  "timeout": 30
+}

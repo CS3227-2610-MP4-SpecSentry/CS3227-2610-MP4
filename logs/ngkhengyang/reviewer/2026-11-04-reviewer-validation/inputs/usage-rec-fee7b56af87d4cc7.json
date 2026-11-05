@@ -1,0 +1,15 @@
+{
+  "import_id": "telemetry-rec-fee7b56af87d4cc7",
+  "record_id": "rec-fee7b56af87d4cc7",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\2026-11-04-reviewer-validation-main-document-delta.json; actual main thread only, baseline cutoff 2026-11-04T12:44:02.258Z; end cutoff 2026-11-04T12:46:30.099Z; sampled lagging/unflushed tails excluded; no descendant totals imported",
+  "input_tokens": 1314814,
+  "output_tokens": 5370,
+  "cache_read_tokens": 1307008,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "not exposed by collector",
+    "retries": "not exposed by collector"
+  }
+}

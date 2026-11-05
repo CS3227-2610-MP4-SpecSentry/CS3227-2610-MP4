@@ -1,0 +1,63 @@
+
+> specsentry@0.1.0 test:e2e
+> playwright test workflow/tests/browser/reviewer-patch-risk.spec.ts workflow/tests/browser/reviewer-accessibility.spec.ts
+
+
+Running 8 tests using 1 worker
+
+  x  1 [chromium] › workflow\tests\browser\reviewer-accessibility.spec.ts:5:5 › reviewer-accessibility keyboard labels status axe and narrow reflow (7.3s)
+  ok 2 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:16:5 › ai-human-save (2.6s)
+  ok 3 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:31:5 › ai-transient-page synthetic lifecycle handler and reload clearing (2.4s)
+  ok 4 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:44:5 › ai-real-navigation clears suggestions after browser back and forward (2.4s)
+  -  5 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:68:5 › ai-genuine-bfcache clears restored suggestions when browser admits caching
+  ok 6 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:91:5 › ai-ui-fallback (2.2s)
+  ok 7 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:100:5 › ai-ui-input-limit makes zero outbound attempts and preserves manual review (2.1s)
+  ok 8 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:112:5 › ai-ui-selection-stale (2.5s)
+
+
+  1) [chromium] › workflow\tests\browser\reviewer-accessibility.spec.ts:5:5 › reviewer-accessibility keyboard labels status axe and narrow reflow 
+
+    Error: expect(locator).toHaveAccessibleName(expected) failed
+
+    Locator: getByRole('region', { name: 'Patch Risk assistant' }).getByRole('checkbox').first()
+    Expected pattern: /AC-1/
+    Received string:  "AC-2 (a6c90055-e514-468f-b8eb-4f8558ceeaa2)"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveAccessibleName" getByRole('region', { name: 'Patch Risk assistant' }).getByRole('checkbox').first() with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Patch Risk assistant' }).getByRole('checkbox').first()
+        11 × locator resolved to <input type="checkbox"/>
+           - unexpected value "AC-2 (a6c90055-e514-468f-b8eb-4f8558ceeaa2)"
+
+
+      15 |     const panel = page.getByRole('region', { name: 'Patch Risk assistant' });
+      16 |     const checkbox = panel.getByRole('checkbox').first();
+    > 17 |     await expect(checkbox).toHaveAccessibleName(/AC-1/);
+         |                            ^
+      18 |     await checkbox.focus(); await page.keyboard.press('Space'); await expect(checkbox).toBeChecked();
+      19 |     const analyze = panel.getByRole('button', { name: 'Analyze selected criteria' });
+      20 |     await page.keyboard.press('Tab'); await expect(panel.getByRole('checkbox').nth(1)).toBeFocused();
+        at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\workflow\tests\browser\reviewer-accessibility.spec.ts:17:28
+
+    Error Context: test-results\reviewer-accessibility-rev-137be-tatus-axe-and-narrow-reflow-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\reviewer-accessibility-rev-137be-tatus-axe-and-narrow-reflow-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\reviewer-accessibility-rev-137be-tatus-axe-and-narrow-reflow-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › workflow\tests\browser\reviewer-accessibility.spec.ts:5:5 › reviewer-accessibility keyboard labels status axe and narrow reflow 
+  1 skipped
+  6 passed (31.2s)
+[WebServer] (node:28228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:5092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28228) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:8668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

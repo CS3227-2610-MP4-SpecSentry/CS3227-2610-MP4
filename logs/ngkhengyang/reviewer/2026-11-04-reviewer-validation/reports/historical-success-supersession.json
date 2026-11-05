@@ -1,0 +1,142 @@
+[
+  {
+    "old": "verify-ddbc08e78e5b48d3",
+    "by": "verify-bd5ecd9abb9047ff",
+    "check": "fixture-readiness"
+  },
+  {
+    "old": "verify-d8ec58be3a1246f1",
+    "by": "verify-386ab45b3bf4470c",
+    "check": "shared-build"
+  },
+  {
+    "old": "verify-05d8559f5ffc4d97",
+    "by": "verify-b07077dab92b40c5",
+    "check": "evaluation-unit"
+  },
+  {
+    "old": "verify-807ca70a6ed34158",
+    "by": "verify-03c9c70551ba4d4f",
+    "check": "combined-build"
+  },
+  {
+    "old": "verify-f9ae492a88ba469e",
+    "by": "verify-b07077dab92b40c5",
+    "check": "evaluation-unit"
+  },
+  {
+    "old": "verify-1fba61bde4994e20",
+    "by": "verify-8cd235342d634f24",
+    "check": "evaluation-browser"
+  },
+  {
+    "old": "verify-8d1969444b7143f9",
+    "by": "verify-814e4d0fcf7741e0",
+    "check": "retention-unit"
+  },
+  {
+    "old": "verify-0f8bc5b02fdd434f",
+    "by": "verify-428c09d68e064ec8",
+    "check": "reviewer-dry-run"
+  },
+  {
+    "old": "verify-0851dd34642e4335",
+    "by": "verify-814e4d0fcf7741e0",
+    "check": "retention-unit"
+  },
+  {
+    "old": "verify-2cff3c1c19564274",
+    "by": "verify-814e4d0fcf7741e0",
+    "check": "retention-unit"
+  },
+  {
+    "old": "verify-8881299a08ee4095",
+    "by": "verify-fea9ec5476954bab",
+    "check": "retention-postgres"
+  },
+  {
+    "old": "verify-5a10c066b1034a58",
+    "by": "verify-187c2a4586a845a3",
+    "check": "dashboard-server"
+  },
+  {
+    "old": "verify-0fcc21fd57f34367",
+    "by": "verify-bd5ecd9abb9047ff",
+    "check": "fixture-readiness"
+  },
+  {
+    "old": "verify-1b1beb5049554697",
+    "by": "verify-386ab45b3bf4470c",
+    "check": "shared-build"
+  },
+  {
+    "old": "verify-aeaf5a82a204420c",
+    "by": "verify-187c2a4586a845a3",
+    "check": "dashboard-server"
+  },
+  {
+    "old": "verify-4ccf9182908444db",
+    "by": "verify-713c0bbe17754389",
+    "check": "dashboard-ui"
+  },
+  {
+    "old": "verify-97e02d78d6474d89",
+    "by": "verify-f0a56059409e464a",
+    "check": "dashboard-postgres"
+  },
+  {
+    "old": "verify-170c89a6d6fd457e",
+    "by": "verify-bd5ecd9abb9047ff",
+    "check": "fixture-readiness"
+  },
+  {
+    "old": "verify-106c4287f8c34fbd",
+    "by": "verify-03c9c70551ba4d4f",
+    "check": "combined-build"
+  },
+  {
+    "old": "verify-781be1f6aacf451a",
+    "by": "verify-386ab45b3bf4470c",
+    "check": "shared-build"
+  },
+  {
+    "old": "verify-42275ec6d9e84a50",
+    "by": "verify-187c2a4586a845a3",
+    "check": "dashboard-server"
+  },
+  {
+    "old": "verify-e39c5616a98540cb",
+    "by": "verify-713c0bbe17754389",
+    "check": "dashboard-ui"
+  },
+  {
+    "old": "verify-694ec4cb7e5b42eb",
+    "by": "verify-f0a56059409e464a",
+    "check": "dashboard-postgres"
+  },
+  {
+    "old": "verify-ef8a5ff2abed4c0e",
+    "by": "verify-8063305c45004393",
+    "check": "dashboard-browser"
+  },
+  {
+    "old": "verify-d3df9f91528c4b05",
+    "by": "verify-8cd235342d634f24",
+    "check": "evaluation-browser"
+  },
+  {
+    "old": "verify-93d4cfaacc824bc1",
+    "by": "verify-7baa9d2464294cbb",
+    "check": "combined-typecheck"
+  },
+  {
+    "old": "verify-dfb1b64d4d794e1d",
+    "by": "verify-8063305c45004393",
+    "check": "dashboard-browser"
+  },
+  {
+    "old": "verify-c199d9e40a58408f",
+    "by": "verify-b07077dab92b40c5",
+    "check": "evaluation-unit"
+  }
+]

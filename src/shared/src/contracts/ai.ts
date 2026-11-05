@@ -101,6 +101,8 @@ export const contributorAiUsageResponseSchema = z.object({
   usage: aiTokenUsageSchema, usageReportedAttempts: z.number().int().nonnegative(),
   applicationCache: z.literal('DISABLED'), providerSpendWindow: z.literal('UTC; separate from application quota'),
 }).strict();
+export const reviewerAiUsageResponseSchema = z.object(contributorAiUsageResponseSchema.shape).strict();
+export type ReviewerAiUsageResponse = z.infer<typeof reviewerAiUsageResponseSchema>;
 export const aiAuditEntrySchema = z.object({
   requestId: reviewerIdSchema, analyzedScope: patchRiskScopeSchema,
   requestedAt: reviewerTimestampSchema, completedAt: reviewerTimestampSchema.nullable(),

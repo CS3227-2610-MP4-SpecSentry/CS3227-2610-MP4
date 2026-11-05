@@ -1,0 +1,19 @@
+{
+  "import_id": "telemetry-security-design-1",
+  "record_id": "rec-e00e8eae18874575",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\2026-11-04-security-design-1-delta.json; own-thread baseline cutoff 2026-11-04T10:38:06.775Z end cutoff 2026-11-04T10:41:18.830Z; lagging tail and bootstrap excluded",
+  "input_tokens": 1276710,
+  "output_tokens": 5770,
+  "cache_read_tokens": 1211648,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed as attributable runtime counters",
+    "retries": "Not exposed as attributable runtime counters",
+    "observed_model": "Runtime collector does not expose settings",
+    "observed_effort": "Runtime collector does not expose settings"
+  }
+}

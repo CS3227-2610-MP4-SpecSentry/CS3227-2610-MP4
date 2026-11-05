@@ -19,7 +19,7 @@ async function testServer() {
   const { readConfig } = serverRequire(resolve('src/server/src/config')) as typeof import('../../../../src/server/src/config');
   const { configureHttp } = serverRequire(resolve('src/server/src/http')) as typeof import('../../../../src/server/src/http');
   const { AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER } = serverRequire(resolve('src/server/src/ai/contracts')) as typeof import('../../../../src/server/src/ai/contracts');
-  const { SafeAiError, CONTRIBUTOR_TEMPLATE_VERSION } = serverRequire(resolve('src/server/src/ai/gateway')) as typeof import('../../../../src/server/src/ai/gateway');
+  const { SafeAiError, ConservativeInputBudgetCounter, CONTRIBUTOR_TEMPLATE_VERSION } = serverRequire(resolve('src/server/src/ai/gateway')) as typeof import('../../../../src/server/src/ai/gateway');
   if (!process.env.TEST_DATABASE_URL || !new URL(process.env.TEST_DATABASE_URL).pathname.endsWith('_test'))
     throw new Error('Explicit disposable test database required');
   const transport: AiTransport = { async complete(request: AiTransportRequest) {
@@ -63,7 +63,7 @@ async function testServer() {
   const module=await Test.createTestingModule({imports:[AppModule.register(config)]})
     .overrideProvider(AI_GATEWAY_OPTIONS).useValue({mode:'test',model:'synthetic-reviewer-model',contextWindow:16384,inputBudgetMethodId:'synthetic-counter-v1'})
     .overrideProvider(AI_TRANSPORT).useValue(transport)
-    .overrideProvider(INPUT_BUDGET_COUNTER).useValue({model:'synthetic-reviewer-model',methodId:'synthetic-counter-v1',countUnits:()=>100}).compile();
+    .overrideProvider(INPUT_BUDGET_COUNTER).useValue({model:'synthetic-reviewer-model',methodId:'synthetic-counter-v1',countUnits:(messages: Parameters<InstanceType<typeof ConservativeInputBudgetCounter>['countUnits']>[0]) => messages.some(message => message.content.includes('[test-input-limit]')) ? new ConservativeInputBudgetCounter().countUnits(messages) : 100}).compile();
   const app=module.createNestApplication<NestExpressApplication>({logger:false});
   configureHttp(app,resolve('src/client/dist'));app.enableShutdownHooks();await app.listen(3000,'127.0.0.1');
 }
@@ -77,7 +77,7 @@ export async function createPatchRiskFixture(mode='normal') {
   const hash=await argon2.hash(password,{type:argon2.argon2id});
   await pool.query('INSERT INTO "UserAccount"(id,username,"passwordHash",role) VALUES ($1,$2,$3,\'CONTRIBUTOR\'),($4,$5,$3,\'REVIEWER\')',[owner,prefix+'-owner',hash,reviewer,prefix+'-reviewer']);
   await pool.query('INSERT INTO "ChangeProposal"(id,"ownerId",title,state,"firstSubmittedAt") VALUES ($1,$2,$3,\'SUBMITTED\',now())',[proposal,owner,prefix]);
-  await pool.query('INSERT INTO "ProposalRevision"(id,"proposalId",number,summary,problem,constraints,"expectedBehavior","diffText") VALUES ($1,$2,1,$3,\'Synthetic problem\',\'\',\'Expected behavior\',$4)',[revision,proposal,mode==='unavailable'?'[test-unavailable]':mode==='delayed'?'[test-delayed]':'Synthetic summary','--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n']);
+  await pool.query('INSERT INTO "ProposalRevision"(id,"proposalId",number,summary,problem,constraints,"expectedBehavior","diffText") VALUES ($1,$2,1,$3,\'Synthetic problem\',\'\',\'Expected behavior\',$4)',[revision,proposal,mode==='unavailable'?'[test-unavailable]':mode==='delayed'?'[test-delayed]':mode==='input-limit'?'[test-input-limit]':'Synthetic summary','--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new'+(mode==='input-limit'?'x'.repeat(10000):'')+'\n']);
   for(let i=0;i<criteria.length;i++)await pool.query('INSERT INTO "AcceptanceCriterion"(id,"revisionId","stableKey",statement,required) VALUES($1,$2,$3,\'Criterion\',true)',[criteria[i],revision,'AC-'+(i+1)]);
   await pool.query('UPDATE "ChangeProposal" SET "currentRevisionId"=$2 WHERE id=$1',[proposal,revision]);
   const gate=mode==='delayed'?await pool.connect():null;

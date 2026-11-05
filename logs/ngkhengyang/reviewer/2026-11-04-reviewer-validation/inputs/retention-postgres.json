@@ -1,0 +1,41 @@
+{
+  "id": "retention-postgres",
+  "kind": "integration",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const fs=require('node:fs'),cp=require('node:child_process');const r=cp.spawnSync(process.execPath,[\"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\", \"run\", \"test:integration\", \"-w\", \"@specsentry/server\", \"--\", \"--runTestsByPath\", \"test/ai-retention.integration.ts\"],{encoding:'utf8',maxBuffer:4194304});const f=\"logs\\\\ngkhengyang\\\\reviewer\\\\2026-11-04-reviewer-validation\\\\reports\\\\retention-postgres-\"+Date.now()+'.txt';fs.writeFileSync(f,(r.stdout||'')+(r.stderr||''));process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');console.log('Check output: '+f);process.exit(r.status??1);"
+  ],
+  "paths": [
+    "src/server/src/ai/gateway/accounting.ts",
+    "src/server/src/ai/cleanup-ai-records.ts",
+    "src/server/test/ai-retention.spec.ts",
+    "src/server/test/ai-retention.integration.ts",
+    "src/server/test/ai-gateway.spec.ts",
+    "src/server/test/contributor-ai-gateway.spec.ts",
+    "docs/ai-retention.md",
+    "src/server/src/ai",
+    "src/server/src/identity",
+    "src/shared/src",
+    "src/server/prisma/schema.prisma",
+    "package.json",
+    "package-lock.json",
+    "src/server/jest.config.cjs",
+    "src/server/jest.integration.config.cjs"
+  ],
+  "depends_on": [
+    "fixture-readiness"
+  ],
+  "resources": [
+    "build",
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_test"
+  },
+  "timeout": 360
+}

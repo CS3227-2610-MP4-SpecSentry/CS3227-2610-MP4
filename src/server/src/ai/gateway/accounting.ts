@@ -106,9 +106,19 @@ export class PrismaAiAccounting {
     if (deadline) await this.bounded(deadline, work); else await work(this.prisma);
   }
 
-  async cleanup(): Promise<void> {
-    const now = this.clock.now();
-    await this.prisma.aiQueueLease.deleteMany({ where: { expiresAt: { lte: now } } });
-    await this.prisma.aiRequest.deleteMany({ where: { retainedUntil: { lte: now } } });
+  async cleanup(deadline: AiDeadline): Promise<void> {
+    await this.locked(deadline, async (tx, now) => {
+      const recentCutoff = new Date(now.getTime() - 86_400_000);
+      // Preserve live work and the longest quota window, including future timestamps.
+      await tx.$executeRaw`DELETE FROM "AiRequest" AS request
+        WHERE request."retainedUntil" <= ${now}
+          AND request."requestedAt" < ${recentCutoff}
+          AND (request."completedAt" IS NULL OR request."completedAt" < ${recentCutoff})
+          AND NOT EXISTS (SELECT 1 FROM "AiQueueLease" AS lease
+            WHERE lease."requestId" = request.id AND lease."expiresAt" > ${now})
+          AND NOT EXISTS (SELECT 1 FROM "AiOutboundAttempt" AS attempt
+            WHERE attempt."requestId" = request.id
+              AND (attempt."dispatchedAt" >= ${recentCutoff} OR attempt."completedAt" >= ${recentCutoff}))`;
+    });
   }
 }

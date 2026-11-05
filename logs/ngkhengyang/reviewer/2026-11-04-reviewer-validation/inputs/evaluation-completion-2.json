@@ -1,0 +1,30 @@
+{
+  "assignment": "evaluation",
+  "record_id": "rec-678d7c8324ef4cc1",
+  "snapshot_id": "evaluation-settled-2",
+  "commands": [
+    "verify-f9ae492a88ba469e",
+    "verify-1fba61bde4994e20",
+    "verify-0f8bc5b02fdd434f",
+    "verify-807ca70a6ed34158"
+  ],
+  "changed_paths": [
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/tooling/verify-live-ai.mjs",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tests/browser/reviewer-accessibility.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts"
+  ],
+  "summary": "Implemented shared Reviewer preparation/strict decoding seam, bounded finite verifier and --role reviewer CLI preserving Contributor default; production parity and exact-cap units; real navigation, explicit editable human save, manual failure/input-limit paths and bounded keyboard/axe/reflow evidence. Coordinated gateway cleanup uses retention authority before request-create transaction. Nine units and seven browser cases pass; compiled Reviewer CLI dry-run passes ten metadata cases.",
+  "risks": "Genuine BFCache test skipped because Chromium did not emit pageshow.persisted=true; normal history clearing passed but BFCache remains unverified. Live provider settings absent; no provider compatibility/usefulness claim or live calls. CSS zoom and 320 CSS-pixel viewport are bounded evidence, not OS/browser zoom or screen-reader certification. Initial test compilation and app-redirect probe failures retained with explicit passing supersessions. Prior execution run interrupted due coordinator fixture-wrapper error.",
+  "next_action": "Dashboard integration executor: accept direct completion; run combined typecheck/lint and Contributor/Reviewer gateway regressions with retention; independently review current scoped snapshot. Preserve BFCache/live limitations.",
+  "references": [
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/inputs/matrix.json",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-execution/handoffs/01-main-to-evaluation.md",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/inputs/evaluation-implement-2-usage.json"
+  ],
+  "unavailable_reason": "Tool/retry counts and observed runtime model settings not exposed; end sample excludes unflushed completion/final tail."
+}

@@ -1,0 +1,19 @@
+{
+  "import_id": "verifier-review1-usage",
+  "record_id": "rec-95eda3dc3b404ace",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\verifier-review1-end.json; fresh baseline verifier-review1-start.json; cutoff 2026-11-04T13:47:33.925Z; lagging report/pause-finalization tail excluded",
+  "input_tokens": 1175299,
+  "output_tokens": 4235,
+  "cache_read_tokens": 1166080,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed by token collector",
+    "retries": "Not exposed by token collector",
+    "observed_model": "Not independently exposed",
+    "observed_effort": "Not independently exposed"
+  }
+}

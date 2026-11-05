@@ -1,0 +1,15 @@
+{
+  "record_id": "rec-59ba54302cf54b59",
+  "import_id": "main-final-consolidation3-usage",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\2026-11-05-reviewer-f001-main-close-delta.json; main only; baseline 2026-11-04T20:09:41.764Z; cutoff 2026-11-04T20:18:35.125Z; unflushed/final measurement-rendering and response excluded",
+  "input_tokens": 4475003,
+  "output_tokens": 17836,
+  "cache_read_tokens": 4468480,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "not exposed",
+    "retries": "not exposed"
+  }
+}

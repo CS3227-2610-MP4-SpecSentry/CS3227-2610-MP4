@@ -1,0 +1,17 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/ai-retention.integration.ts
+
+  console.info
+    Prior synthetic retention fixture IDs: [
+      'retention-560d1fa6-09c4-48b3-a264-4f6e6ce52510',
+      'retention-e039ea63-ae04-463c-a8aa-60f30b75ee8c'
+    ]
+
+      at Object.<anonymous> (test/ai-retention.integration.ts:73:13)
+
+Test Suites: 1 passed, 1 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        5.664 s, estimated 6 s
+Ran all test suites within paths "test/ai-retention.integration.ts".

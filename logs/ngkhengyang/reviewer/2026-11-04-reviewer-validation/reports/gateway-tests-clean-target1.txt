@@ -1,0 +1,20 @@
+(node:9568) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+    at Client.query (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\pg\lib\client.js:780:7)
+    at PgTransaction.performIO (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\adapter-pg\dist\index.js:681:40)
+    at PgTransaction.queryRaw (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\adapter-pg\dist\index.js:631:41)
+    at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:202:18
+    at callback (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\tracing.ts:80:12)
+    at e.withQuerySpanAndEvent (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:592:12)
+    at #withQuerySpanAndEvent (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:200:39)
+    at e.fn (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:515:14)
+    at e.#withChunkTransaction [as interpretNode] (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:196:21)
+    at e.interpretNode (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:149:40)
+    at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:261:39
+    at Array.map (<anonymous>)
+    at e.interpretNode (C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\node_modules\@prisma\client-engine-runtime\src\interpreter\query-interpreter.ts:259:30)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+Test Suites: 1 passed, 1 total
+Tests:       36 skipped, 1 passed, 37 total
+Snapshots:   0 total
+Time:        9.241 s, estimated 54 s
+Ran all test suites within paths "src/server/test/patch-risk.integration.ts".

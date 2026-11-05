@@ -1,0 +1,195 @@
+{
+  "mode": "dry-run",
+  "templateVersion": "reviewer-risk-v1",
+  "methodId": "utf8-bytes-framing-v1",
+  "configuredContextWindow": 65536,
+  "cases": [
+    {
+      "caseId": "batch-1",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 2572,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "batch-2",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 2686,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "batch-3",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 2800,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "batch-4",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 2914,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "batch-5",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 3028,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "adversarial",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 2635,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "multilingual",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 2620,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "delimiters",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 2679,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "near-cap",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 10000,
+      "status": "DRY_RUN",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": null,
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    },
+    {
+      "caseId": "over-cap",
+      "requestedModel": "synthetic-offline-reviewer",
+      "inputUnits": 10001,
+      "status": "REJECTED",
+      "latencyMs": null,
+      "httpStatus": null,
+      "schemaValid": null,
+      "errorClass": "INPUT_LIMIT",
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null,
+        "cachedTokens": null
+      },
+      "inputMarginSatisfied": null
+    }
+  ],
+  "protocolPassed": true,
+  "latency": {
+    "sampleCount": 0,
+    "expectedSampleCount": 9,
+    "complete": false,
+    "medianMs": null,
+    "p95Ms": null,
+    "sampleBasis": "All completed outbound attempts, including failures; local rejection, dry-run and skipped cases excluded.",
+    "medianRule": "Middle sorted sample; arithmetic mean of the two middle samples for even counts.",
+    "p95Rule": "Nearest rank: sorted sample at ceil(0.95 * sampleCount), using one-based ranks.",
+    "targets": {
+      "medianBelowMs": 8000,
+      "p95BelowMs": 18000
+    },
+    "status": "UNAVAILABLE"
+  },
+  "passed": true
+}

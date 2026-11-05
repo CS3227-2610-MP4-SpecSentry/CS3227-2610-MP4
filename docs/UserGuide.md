@@ -60,6 +60,23 @@ See [AI integration and verification boundaries](AI-Integration.md). Independent
 implementation review and the five resulting fixes have completed. Live operation
 still awaits provider verification.
 
+## My Reviewer AI usage
+
+Choose **Show my AI usage** in the Reviewer workspace, then **Refresh AI usage**
+to reload your own Reviewer-feature totals for the current Asia/Singapore day.
+You do not need to open or claim a proposal. Counts include your current and former
+assignments without exposing proposal identifiers or another reviewer's history.
+This aggregate view does not grant access to a former assignment's private audit.
+
+Requests, outbound attempts, retries and local preflight rejections are separate.
+The failure rate includes only completed outbound attempts; no completed attempts
+shows **N/A**. Provider token/cache fields show **Unknown** when complete measured
+usage is unavailable. Application caching is disabled. Provider UTC spend windows
+are separate from the application day, and these feature totals do not represent
+remaining shared-account quota. Usage errors leave manual review available.
+Signing out, losing access or changing accounts clears protected totals; returning
+from browser history requires a fresh authorized read.
+
 ## Reviewing a replacement revision
 
 Reviewer notices identify each newly submitted revision. Choose **Open notified

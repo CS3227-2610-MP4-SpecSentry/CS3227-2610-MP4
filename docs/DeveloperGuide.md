@@ -54,6 +54,41 @@ or production mock switch. Independent implementation/security review and
 revalidation closed all five findings. Use the [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md)
 for actual test results and source evidence.
 
+### Reviewer usage and evaluation tooling
+
+`GET /api/reviews/ai/usage` uses fresh deterministic Reviewer/session/account checks
+and returns only the authenticated actor's Reviewer-feature daily aggregates.
+Its strict shared response schema follows the existing Contributor accounting
+shape. Request windows use admission time; outbound windows use dispatch time,
+including retries across SGT midnight. Incomplete attempts do not enter the failure
+denominator; a successful provider attempt remains successful after a later denied
+delivery. Missing provider usage is unknown, never an admission estimate or a
+measured cache hit rate. The proposal audit endpoint still requires current
+assignment. The client clears visible data and fences late fetch/body completion
+on authorization loss, account replacement and page-session boundaries.
+
+Run `npm run verify:ai:live -- --role reviewer` for fixed synthetic dry-run checks;
+add `--live` only with separately approved server-side model/context/key settings.
+The Contributor default is unchanged. Reviewer preparation, sanitization, strict
+decoding and grounding are shared with production, including all 1–5-criterion
+batches and conservative input limits. The tool emits bounded case metadata and
+provider-reported usage, not prompts or raw results. It never enables ordinary
+application live traffic. Offline validation does not establish live-provider
+compatibility, authenticated live workflows or human usefulness.
+
+The Reviewer report separates `protocolPassed` from its overall `passed` result.
+Latency reports the measured sample count and expected count, median (averaging
+the middle pair for even counts), and nearest-rank p95. Completed outbound calls,
+including failures, are sampled; rejected, skipped and dry-run cases are not zero
+latencies. Complete samples must meet median <8s and p95 <18s for a live synthetic
+run to pass. Missing/incomplete samples are `UNAVAILABLE`; a successful dry run
+does not claim measured latency or release acceptance.
+
+The shared [AI retention maintenance guide](ai-retention.md) describes the explicit
+maintenance command and atomic request/attempt/lease cleanup. Scheduler ownership,
+cadence, monitoring and deployed physical-deletion evidence remain separate gates;
+the command alone does not establish a scheduled retention guarantee.
+
 ## Reviewer revision cycles
 
 The owner API now supplies the minimal Contributor integration for real review cycles:
@@ -565,6 +600,15 @@ Application hosting remains separate and team-managed; see [Deployment](Deployme
 Neither live deployment is claimed here.
 
 ## Acknowledgements
+
+Codex assisted with the 4 November 2026 Reviewer usage dashboard, role-specific
+evaluation tooling, shared retention maintenance, requirement-based tests and
+documentation, with separate design/security review and independent verification.
+Existing same-repository accounting, authorization, UI and gateway code was reused;
+no prior-MP source, new dependency or integrated hosting service was introduced.
+Actual checks, unsuccessful attempts, resource cutoffs and remaining live/provider,
+deployment and human-review gates are in the
+[completion run](../logs/ngkhengyang/2026-11-04-reviewer-completion-execution.md).
 
 The scaffold is new source, with no prior-MP code reused. It uses the APIs described
 in [NestJS](https://docs.nestjs.com/), [Vite](https://vite.dev/guide/),

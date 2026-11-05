@@ -1,0 +1,19 @@
+{
+  "import_id": "telemetry-security-retention-1",
+  "record_id": "rec-8531c76407be48db",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\2026-11-04-security-retention-1-delta.json; own thread baseline cutoff 2026-11-04T10:42:28.499Z end cutoff 2026-11-04T12:27:31.889Z; lagging tail excluded",
+  "input_tokens": 350539,
+  "output_tokens": 1157,
+  "cache_read_tokens": 346496,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "tool_calls": "Attributable runtime counter unavailable",
+    "retries": "Attributable runtime counter unavailable",
+    "observed_model": "Collector does not expose settings",
+    "observed_effort": "Collector does not expose settings"
+  }
+}

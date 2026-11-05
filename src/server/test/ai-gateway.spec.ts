@@ -30,6 +30,7 @@ function harness() {
     updateMany: jest.fn(async () => ({ count: 0 })), count: jest.fn(async (query: object) => { void query; return 0; }), findFirst: jest.fn(async () => null) };
   const queue = { create: jest.fn(async () => ({})), deleteMany: jest.fn(async () => ({ count: 0 })), count: jest.fn(async () => 0) };
   const tx = { aiRequest: request, aiOutboundAttempt: attempt, aiQueueLease: queue,
+    $executeRaw: jest.fn(async () => 0),
     $queryRaw: jest.fn(async () => []), $queryRawUnsafe: jest.fn(async () => [{ id: 'reviewer-patch-risk' }]) };
   const prisma = { ...tx, $transaction: async <T>(work: (value: typeof tx) => Promise<T>) => work(tx) } as unknown as PrismaClient;
   const transport: AiTransport = { complete: jest.fn(async () => ({ status: 200, body: envelope(), retryAfter: null })) };

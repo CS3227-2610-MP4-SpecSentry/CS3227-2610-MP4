@@ -1,0 +1,19 @@
+{
+  "import_id": "verifier-security1-usage",
+  "record_id": "rec-7c87a59d95a94a8e",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\verifier-security1-end.json; baseline verifier-security1-start.json; cutoff 2026-11-04T13:44:25.131Z; unflushed tail excluded",
+  "input_tokens": 827805,
+  "output_tokens": 2716,
+  "cache_read_tokens": 729984,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed by token collector",
+    "retries": "Not exposed by token collector",
+    "observed_model": "Not independently exposed",
+    "observed_effort": "Not independently exposed"
+  }
+}

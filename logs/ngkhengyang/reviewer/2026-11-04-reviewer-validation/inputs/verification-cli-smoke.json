@@ -1,0 +1,28 @@
+{
+  "depends_on": [
+    "combined-build"
+  ],
+  "database": null,
+  "timeout": 120,
+  "paths": [
+    "workflow/tooling/verify-live-ai.mjs",
+    "src/server/src/ai/live-verification.ts",
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/src/ai/gateway",
+    "src/server/src/config.ts",
+    "src/shared/src/contracts/ai.ts",
+    "package.json",
+    "package-lock.json"
+  ],
+  "environment": [],
+  "resources": [
+    "build"
+  ],
+  "kind": "unit",
+  "id": "verification-cli-smoke",
+  "argv": [
+    "C:/Program Files/nodejs/node.exe",
+    "-e",
+    "const assert=require('node:assert/strict'),{spawnSync}=require('node:child_process'),{writeFileSync}=require('node:fs');\nconst env={...process.env,AI_MODEL:'synthetic-reviewer-model',AI_CONTEXT_WINDOW:'16384',AI_LIVE_ENABLED:'false'};\nconst cases=[];\nfor(const [name,args,expected] of [['contributor-default',[],0],['reviewer',['--role','reviewer'],0],['unsupported-role',['--role','unknown'],1],['duplicate-role',['--role','reviewer','--role','contributor'],1],['unsupported-flag',['--unknown'],1]]){\n const r=spawnSync(process.execPath,['workflow/tooling/verify-live-ai.mjs',...args],{encoding:'utf8',timeout:15000,env});\n assert.ok(r.status===expected,'Unexpected verification CLI exit status');\n if(expected===0){const report=JSON.parse(r.stdout);assert.ok(report.mode==='dry-run'&&report.passed===true,'Dry-run must pass without live mode');assert.ok(report.templateVersion===(name==='contributor-default'?'contributor-draft-v1':'reviewer-risk-v1'),'Wrong CLI role');assert.ok(report.cases.every(c=>c.status==='DRY_RUN'||c.status==='REJECTED'),'Dry-run cannot report provider results');cases.push({caseId:name,metadataCases:report.cases.length,mode:report.mode,passed:true});}\n else {const report=JSON.parse(r.stderr);assert.ok(report.status==='FAILED'&&report.errorClass==='CONFIGURATION','Invalid CLI arguments must fail safely');cases.push({caseId:name,exitCode:1,passed:true});}\n}\nconst path='logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/reports/verification-cli-smoke-'+Date.now()+'.json';writeFileSync(path,JSON.stringify({passed:true,cases},null,2));console.log(JSON.stringify({passed:true,cases:cases.length,report:path}));"
+  ]
+}

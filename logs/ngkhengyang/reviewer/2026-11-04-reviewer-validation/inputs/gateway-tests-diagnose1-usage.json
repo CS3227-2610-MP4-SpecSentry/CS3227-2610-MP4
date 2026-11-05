@@ -1,0 +1,19 @@
+{
+  "retries": null,
+  "output_tokens": 9119,
+  "scope": "record",
+  "input_tokens": 2418746,
+  "cache_read_tokens": 2392832,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "observed_effort": "No observed effort telemetry",
+    "observed_model": "Selected model recorded; observed metadata not imported",
+    "retries": "Collector does not measure retries",
+    "tool_calls": "Collector does not measure calls"
+  },
+  "import_id": "gateway-tests-diagnose1-usage",
+  "source": "Own actual-thread aligned baseline/end outside Git: gateway-tests-diagnose1-start.json to gateway-tests-diagnose1-end.json; cutoff2026-11-04T13:37:46.284Z",
+  "record_id": "rec-4b3d18a909e24a2b",
+  "tool_calls": null
+}

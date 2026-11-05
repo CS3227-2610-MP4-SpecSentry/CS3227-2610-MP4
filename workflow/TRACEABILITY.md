@@ -1,5 +1,33 @@
 # Requirement traceability
 
+## Reviewer completion — 4 November 2026
+
+NFR-RES-001 and REQ-REV-015 gain an own-actor Reviewer-feature aggregate endpoint
+and workspace usage view, separate from the assignment-scoped proposal audit.
+Named cases cover role/session/privacy, SGT request/attempt/retry windows, completed
+outbound failure semantics, unknown provider fields, safe audit rollback and
+clearing both displayed and late-arriving state after access loss. REQ-REV-003/014
+gain production-shared preparation/strict decoding and a fixed Reviewer verifier
+for batches 1–5, grounding/adversarial/Unicode/delimiter inputs and near/over-cap
+admission. REQ-REV-012/013 and accessibility checks extend actual navigation,
+editable explicit human-save and manual fallback evidence. Genuine BFCache and
+live-provider acceptance are distinct gates; synthetic events do not establish them.
+
+Shared atomic AI request/attempt/lease maintenance supports NFR-PRV-001/REL-001
+without deleting durable business history. The deployment scheduler and broader
+operational-log physical deletion remain pending. Current source, executable
+matrix/checks, actual results/failures, independent findings and resource coverage
+are indexed in the [canonical completion account](../logs/ngkhengyang/2026-11-04-reviewer-completion-execution.md).
+Older table rows below are historical baseline plans; this section links current
+scoped evidence rather than treating every historical Pending cell as a new gap.
+
+C3 latency follow-up (F-001) adds measured sample coverage, median/nearest-rank p95,
+strict <8s/<18s target evaluation and explicit unavailable dry-run/incomplete
+measurements. Protocol validity alone cannot pass a slow live synthetic suite.
+Deterministic clock tests and independent finding revalidation are recorded in
+the canonical completion account; no actual provider latency or human ratings
+are inferred from those tests.
+
 ## Reviewer Contributor response visibility — 3 November 2026
 
 REQ-REV-015 / AC-REV-015 and REQ-CON-008: ManualReview consumes the existing

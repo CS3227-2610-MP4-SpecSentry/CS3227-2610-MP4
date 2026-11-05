@@ -1,0 +1,77 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "7703549918753e89018fe1c4ba3c65e212834b8b9fb1eb09da5329d5dd33095c",
+  "files": {
+    "package-lock.json": {
+      "bytes": 509922,
+      "sha256": "a7acd7dee2f944ee19c6fd2956bdff291502d7193c92a6365495f51113259aab"
+    },
+    "package.json": {
+      "bytes": 2378,
+      "sha256": "bc9ebf1ad6d3e3a48ef19ad97a4882892fef3ddb115837eed7eb0f37a2a61024"
+    },
+    "src/client/package.json": {
+      "bytes": 701,
+      "sha256": "c09b3ff23a6567e1cf8fe0a08369c9a9c7751a0d317c110b5a8e1c97ed05af62"
+    },
+    "src/server/package.json": {
+      "bytes": 1606,
+      "sha256": "5785316cc9910a09cb43813e0fec028b46d1627a0b419914f3b7828b3d45faa9"
+    },
+    "src/shared/package.json": {
+      "bytes": 561,
+      "sha256": "2fb9f30cb96a5b2f5e95b9e2f7be9c222860599790eb9f1477eedf913b6d8399"
+    },
+    "src/shared/src/contracts/ai.ts": {
+      "bytes": 9180,
+      "sha256": "3c7066d5d8dd2b6e3c5043ddb57e895fbbfa8abfa9d8aec684d9dfdc7c19d7ef"
+    },
+    "src/shared/src/contracts/contributor.ts": {
+      "bytes": 3246,
+      "sha256": "725e8e177a4ff86807f35bf433022c25ef4bb185a91726282029c200a413aa52"
+    },
+    "src/shared/src/contracts/health.ts": {
+      "bytes": 390,
+      "sha256": "dab9233f63d584be75a60a341995973cad4720a9f5b1e15973be601b46a07856"
+    },
+    "src/shared/src/contracts/identity.ts": {
+      "bytes": 913,
+      "sha256": "98531cd3f409c2ad49daddfcdcfa454c0aff1c283989c6cfbb67d0ff99259a6d"
+    },
+    "src/shared/src/contracts/release.ts": {
+      "bytes": 4421,
+      "sha256": "730ab33426ec44380e8662cbfd214dc28cdfb7e9ec511dfceb0807b5efa4eef8"
+    },
+    "src/shared/src/contracts/reviewer.ts": {
+      "bytes": 21150,
+      "sha256": "890a64c6abe735fa2d2f1337b9b516d38546b41d6bd2718584d9157caf37d7c2"
+    },
+    "src/shared/src/contracts/revision-cycle.ts": {
+      "bytes": 4760,
+      "sha256": "09c0c0f15458ee55cbc63305062c7a56ce1eda5bd657810c36f28901cc420618"
+    },
+    "src/shared/src/contracts/revocation.ts": {
+      "bytes": 2133,
+      "sha256": "1d97a42ccd8d361b0ad3677716a6c8e9af55cc7b5a4b2dc886179762c039ee4c"
+    },
+    "src/shared/src/index.ts": {
+      "bytes": 509,
+      "sha256": "bcb1bcc19900eb93c36a1c4e4cbbde349c80aa24c67411595160eb8208c03094"
+    },
+    "src/shared/tsconfig.json": {
+      "bytes": 155,
+      "sha256": "99cab6b1b1638d7ffea19eb8b5c8b6fddb650cea5035cfab5c64b244c9b46ac7"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "package-lock.json",
+    "package.json",
+    "src/client/package.json",
+    "src/server/package.json",
+    "src/shared/package.json",
+    "src/shared/src",
+    "src/shared/tsconfig.json"
+  ]
+}

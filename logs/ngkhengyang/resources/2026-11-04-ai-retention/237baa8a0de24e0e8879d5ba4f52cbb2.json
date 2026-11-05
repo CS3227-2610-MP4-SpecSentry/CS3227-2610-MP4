@@ -1,0 +1,32 @@
+{
+  "id": "237baa8a0de24e0e8879d5ba4f52cbb2",
+  "prompter": "ngkhengyang",
+  "session": "2026-11-04-ai-retention",
+  "agent": "retention",
+  "invocation": "retention-fix-1",
+  "stage": "fix",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Selected settings supplied by caller; observed metadata may be unavailable",
+  "started_at": "2026-11-04T12:48:19.771328+00:00",
+  "ended_at": "2026-11-04T12:50:06.014013+00:00",
+  "elapsed_seconds": 106.242685,
+  "status": "failed",
+  "usage": {
+    "input_tokens": 714509,
+    "output_tokens": 2575,
+    "cache_read_tokens": 705792,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": "Own thread external retention-fix-1 baseline/delta; excludes unflushed tail",
+  "outcome": "Request scope fixture fixed; 45 units and 5 PostgreSQL cases passed, 9 remaining fixture constraint failures",
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed",
+    "retries": "Not exposed"
+  },
+  "unavailable_reason": "Observed settings/tool/retry counts and unflushed tail unavailable"
+}

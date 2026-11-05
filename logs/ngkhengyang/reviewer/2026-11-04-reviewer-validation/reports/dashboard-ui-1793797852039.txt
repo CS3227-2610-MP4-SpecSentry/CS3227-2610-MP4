@@ -1,0 +1,13 @@
+
+> @specsentry/client@0.1.0 test
+> vitest run ReviewerAiUsage.test.tsx -t Reviewer usage
+
+
+ RUN  v5.0.5 C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/client
+
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  21:10:46
+   Duration  5.63s (environment 47%, tests 21%, import 17%, setup 10%, transform 5%)
+

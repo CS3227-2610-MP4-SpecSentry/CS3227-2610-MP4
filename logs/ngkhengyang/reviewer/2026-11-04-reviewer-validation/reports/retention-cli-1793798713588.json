@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "caseId": "isolated-success",
+      "exitCode": 0,
+      "safeMessage": true
+    },
+    {
+      "caseId": "empty",
+      "exitCode": 1,
+      "safeMessage": true
+    },
+    {
+      "caseId": "invalid",
+      "exitCode": 1,
+      "safeMessage": true
+    }
+  ]
+}

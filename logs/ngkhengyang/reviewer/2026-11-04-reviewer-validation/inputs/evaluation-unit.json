@@ -1,0 +1,37 @@
+{
+  "id": "evaluation-unit",
+  "kind": "unit",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const fs=require('node:fs'),cp=require('node:child_process');const r=cp.spawnSync(process.execPath,[\"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\", \"run\", \"test\", \"-w\", \"@specsentry/server\", \"--\", \"--runTestsByPath\", \"test/reviewer-live-verification.spec.ts\", \"--testNamePattern\", \"Reviewer verification\"],{encoding:'utf8',maxBuffer:4194304});const f=\"logs\\\\ngkhengyang\\\\reviewer\\\\2026-11-04-reviewer-validation\\\\reports\\\\evaluation-unit-\"+Date.now()+'.txt';fs.writeFileSync(f,(r.stdout||'')+(r.stderr||''));process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');console.log('Check output: '+f);process.exit(r.status??1);"
+  ],
+  "paths": [
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/tooling/verify-live-ai.mjs",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tests/browser/reviewer-accessibility.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "src/server/src/ai/contracts.ts",
+    "src/server/src/ai/gateway/transport.ts",
+    "src/server/src/ai/gateway/strict-json.ts",
+    "src/shared/src/contracts/ai.ts",
+    "src/server/jest.config.cjs",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json"
+  ],
+  "depends_on": [
+    "shared-build"
+  ],
+  "resources": [
+    "build"
+  ],
+  "environment": [],
+  "database": null,
+  "timeout": 240
+}

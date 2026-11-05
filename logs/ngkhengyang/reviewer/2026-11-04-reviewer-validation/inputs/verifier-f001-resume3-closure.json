@@ -1,0 +1,10 @@
+{
+  "reviewer": "verifier",
+  "record_id": "rec-59390f005e08461b",
+  "snapshot_id": "verifier-f001-resume3-final",
+  "findings": [{
+    "id": "F-001",
+    "evidence": ["logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/reports/latency-revalidation-final.md"],
+    "reason": "Independent compiled-helper injected-clock probe rejects original nine19s and exact thresholds, passes fast case, verifies partial/even/failure/no-sample/dry-run semantics; registered bounded unit15/15 passes. Scope excludes unresolved full gateway/live/human/deployment gates."
+  }]
+}

@@ -1,0 +1,61 @@
+
+> specsentry@0.1.0 test:e2e
+> playwright test workflow/tests/browser/reviewer-patch-risk.spec.ts workflow/tests/browser/reviewer-accessibility.spec.ts
+
+
+Running 8 tests using 1 worker
+
+  ok 1 [chromium] › workflow\tests\browser\reviewer-accessibility.spec.ts:5:5 › reviewer-accessibility keyboard labels status axe and narrow reflow (5.5s)
+  ok 2 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:16:5 › ai-human-save (2.1s)
+  ok 3 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:31:5 › ai-transient-page synthetic lifecycle handler and reload clearing (2.4s)
+  x  4 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:44:5 › ai-real-navigation clears suggestions after browser back and forward (7.3s)
+  -  5 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:68:5 › ai-genuine-bfcache clears restored suggestions when browser admits caching
+  ok 6 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:87:5 › ai-ui-fallback (1.7s)
+  ok 7 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:96:5 › ai-ui-input-limit makes zero outbound attempts and preserves manual review (1.7s)
+  ok 8 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:108:5 › ai-ui-selection-stale (2.4s)
+
+
+  1) [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:44:5 › ai-real-navigation clears suggestions after browser back and forward 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /navigation-probe=1/
+    Received string:  "http://127.0.0.1:3000/reviewer"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        14 × locator resolved to <html lang="en">…</html>
+           - unexpected value "http://127.0.0.1:3000/reviewer"
+
+
+      59 |     test.info().annotations.push({type:'restoration',description:persisted?'Browser pageshow.persisted=true observed':'Browser pageshow.persisted=false; this run proves normal history navigation only, not BFCache'});
+      60 |     expect(await page.evaluate(()=>JSON.stringify({...localStorage,...sessionStorage}))).not.toContain('Synthetic advisory');
+    > 61 |     await page.goForward();await expect(page).toHaveURL(/navigation-probe=1/);
+         |                                               ^
+      62 |     await page.goBack();
+      63 |     await expect(page.getByRole('region',{name:'Patch Risk result'})).toHaveCount(0);
+      64 |     expect((await f.pool.query('SELECT count(*)::int n FROM "ReviewFinding" WHERE "proposalId"=$1',[f.proposal])).rows[0].n).toBe(0);
+        at C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\workflow\tests\browser\reviewer-patch-risk.spec.ts:61:47
+
+    Error Context: test-results\reviewer-patch-risk-ai-rea-1fab9-er-browser-back-and-forward-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\reviewer-patch-risk-ai-rea-1fab9-er-browser-back-and-forward-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\reviewer-patch-risk-ai-rea-1fab9-er-browser-back-and-forward-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:44:5 › ai-real-navigation clears suggestions after browser back and forward 
+  1 skipped
+  6 passed (35.2s)
+[WebServer] (node:19416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:10196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19416) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(node:7100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
