@@ -35,7 +35,8 @@ test('login page withholds workspace content and passes automated accessibility 
 
 for (const [role, label] of [['CONTRIBUTOR', 'Contributor'], ['REVIEWER', 'Reviewer'], ['RELEASE_MAINTAINER', 'Release Maintainer']]) {
   test(`${label} can sign in, restore the session, and sign out`, async ({ page }) => {
-    const workspaceHeading = role === 'CONTRIBUTOR' ? 'Private drafts' : role === 'REVIEWER' ? label : `${label} workspace`;
+    const workspaceHeading = role === 'CONTRIBUTOR' ? 'Private drafts'
+      : role === 'REVIEWER' ? label : 'Release candidates';
     // Simulate the controlled TLS-terminating proxy used by the production server.
     await page.setExtraHTTPHeaders({ 'X-Forwarded-Proto': 'https' });
     await page.goto('/');

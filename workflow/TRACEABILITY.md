@@ -27,6 +27,34 @@ measurements. Protocol validity alone cannot pass a slow live synthetic suite.
 Deterministic clock tests and independent finding revalidation are recorded in
 the canonical completion account; no actual provider latency or human ratings
 are inferred from those tests.
+## Release Maintainer workspace foundation — 4 November 2026
+
+REQ-REL-001 / AC-REL-001 is partially implemented in the local browser workspace:
+strict bounded candidate list/filter contracts, deterministic `(createdAt,id)`
+cursor pagination, create/open/detail, responsible-Maintainer display and creator-
+only editing of an open candidate. Other Maintainers receive read-only detail.
+The existing server remains authoritative for role, persisted session, CSRF,
+ownership, lifecycle and optimistic-version enforcement. Proposal membership and
+the unapproved/already-attached rejection scenario remain outside this UI slice.
+
+REQ-REL-002 / AC-REL-002 is partially represented: detail renders only the strict
+blocker array recomputed by the server and never manufactures browser readiness.
+The slice displays current members and smoke history but does not yet add/remove
+members or record smoke tests, so complete independent gate coverage remains
+pending. Publication, notifications, audit, corrections and Maintainer AI are not
+claimed.
+
+Implementation is in `src/client/src/features/maintainer/`, the release list
+contracts/controller/service and `App.tsx`. Focused client tests cover create,
+owner/non-owner detail, escaped text, stale/uncertain reconciliation and late
+unmounted responses; focused server tests cover strict query parsing, response
+projection, pagination and cursor/filter binding. The final local gate passed
+124 server and 259 client tests, type-check, lint, production build, submission
+presence and `git diff --check`. Independent review found four UI issues and a
+later list/create overlap race, all corrected and freshly re-verified. The
+[Maintainer run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md)
+records exact findings, resources and limitations. Authenticated HTTP/PostgreSQL,
+browser E2E, teammate approval and live deployment evidence remain pending.
 
 ## Reviewer Contributor response visibility — 3 November 2026
 
@@ -472,8 +500,8 @@ deferred. Deployment/performance/full manual WCAG unavailable; INC2-VER-001 unre
 | [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Private-draft portion verified above; submitted-classification scenario pending |
 | [REQ-CON-008](specs/ROLE-CONTRIBUTOR.md#requirements) | Finding response | [AC-CON-008](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-009](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion identity | [AC-CON-009](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | [Increment4 private-draft portion](../logs/yooplo/2026-10-28-contributor-increment-4.md) verified; submitted history/finding scenario pending |
-| [REQ-REL-001](specs/ROLE-MAINTAINER.md#requirements) | Release candidate | [AC-REL-001](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
-| [REQ-REL-002](specs/ROLE-MAINTAINER.md#requirements) | Deterministic gates | [AC-REL-002](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
+| [REQ-REL-001](specs/ROLE-MAINTAINER.md#requirements) | Release candidate | [AC-REL-001](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Partial local foundation verified above; membership acceptance and deployed evidence pending |
+| [REQ-REL-002](specs/ROLE-MAINTAINER.md#requirements) | Deterministic gates | [AC-REL-002](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Partial server-authoritative blocker display verified above; full gate actions and acceptance pending |
 | [REQ-REL-003](specs/ROLE-MAINTAINER.md#requirements) | AI readiness summary | [AC-REL-003](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-004](specs/ROLE-MAINTAINER.md#requirements) | Publish release | [AC-REL-004](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
 | [REQ-REL-005](specs/ROLE-MAINTAINER.md#requirements) | Post-release record | [AC-REL-005](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |

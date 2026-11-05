@@ -26,6 +26,16 @@ content. Publication snapshots immutable evidence atomically. Membership changes
 advance contentVersion; explicit removal of a revoked item enters CHANGES_REQUESTED.
 New API contracts are in `src/shared/src/contracts/release.ts` and `revocation.ts`.
 
+The first Maintainer client slice adds a strict paginated `GET /api/release-candidates`
+projection and a `/releases/*` React workspace. It lists/filters candidates,
+creates and opens them, displays the responsible Maintainer and server-computed
+blockers, and permits only the creator to edit an OPEN candidate. List cursors are
+bound to project and status filter and ordered by `(createdAt,id)` descending.
+Create and edit uncertainty locks further mutation until a successful authoritative
+refresh; workspace unmount/session replacement suppresses late callbacks. This is
+not the full Maintainer role: member, smoke, publish, notice, audit and AI controls
+remain pending in the browser.
+
 Lock order is sorted relevant accounts, actor session, candidates, then sorted
 proposals before approval/membership writes. Resolve opaque pointers before locking
 and revalidate under locks; never acquire a candidate after a proposal lock.
@@ -167,8 +177,10 @@ confirmation, append-only findings/transitions/amendments, human decisions,
 approval gates, decision idempotency and authorized history. Revision cycles add
 the minimal Contributor API, durable notifications and withdrawal/reopening.
 Contributor private draft create/list/detail, editing, confirmed deletion and criteria
-management are implemented by Contributor increments 1–4. Full submitted-editing/submission
-UI, broader release UI and Contributor/Maintainer AI remain pending.
+management are implemented by Contributor increments 1–4. The Release Maintainer
+candidate list/create/open/detail/edit foundation is implemented locally; its broader
+actions and Maintainer AI remain pending. Full submitted-editing/submission UI status
+is tracked by the later Contributor completion evidence.
 The bounded revocation/release API is described above; consult its current review status.
 Reviewer AI is integrated with live operation disabled pending provider verification.
 See [Authentication](Authentication.md).
@@ -530,9 +542,10 @@ may contain credentials. TLS verification must remain enabled for Neon.
 
 See [Architecture](Architecture.md) for responsibilities, the diagram and transaction
 seams. `AppModule` registers Identity, Proposals, Reviews, Releases, Activity,
-Notifications and AI modules. Identity, Proposals, Reviews, Activity and Notifications
-implement the documented bounded workflows. The AI module now provides the
-Reviewer gateway through dependency injection; Releases remains a registration.
+Notifications and AI modules. Identity, Proposals, Reviews, Releases, Activity and
+Notifications implement the documented bounded workflows. The AI module now provides
+the Reviewer gateway through dependency injection; the Maintainer client consumes a
+bounded subset of the existing Releases API.
 `DatabaseModule` encapsulates the configured Prisma provider. Add frontend role
 folders as their features are implemented; `shared/src/contracts` holds wire
 schemas while retaining the existing package exports.
@@ -560,9 +573,13 @@ agent responsibilities. Contributor-specific execution starts at
 bounded vertical slices, independent acceptance/security checks, and a shared run
 template. This is an instruction-based workflow, not an automated agent runner or
 evidence of implemented Contributor features. Reviewer-specific execution starts at
-[its entry point](../workflow/reviewer/README.md). Workflow-tool tests do not prove
-product acceptance. Root `AGENTS.md` and `.agents/skills` stay at natural discovery
-locations; workflow content is otherwise consolidated under `workflow/`.
+[its entry point](../workflow/reviewer/README.md). Release Maintainer and delivery
+work starts at the [deployment-agent workflow](../workflow/deployment/README.md),
+which separates coordination, implementation, database/recovery review, security,
+release verification and specification/documentation verification. A workflow file
+or local pass is not image, provider or production evidence. Workflow-tool tests do
+not prove product acceptance. Root `AGENTS.md` and `.agents/skills` stay at natural
+discovery locations; workflow content is otherwise consolidated under `workflow/`.
 
 The [AI security specification](../workflow/specs/AI-SECURITY-SPEC.md) defines planned
 context restrictions, validation, quotas, timeouts and adversarial tests. Implement

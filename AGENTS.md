@@ -28,6 +28,12 @@ Repository-wide skills are available for [specification conformance review](.age
 
 When working on Contributor functionality, read the [Contributor workflow entry point](workflow/contributor/README.md). When working on Reviewer functionality, read the [Reviewer workflow entry point](workflow/reviewer/README.md). Apply each procedure only to its role portion; standalone shared infrastructure retains the generic [development process](workflow/DEVELOPMENT.md). Coordinate shared contracts before editing them.
 
+When working on Release Maintainer functionality or deployment automation, read
+the [Release Maintainer and deployment workflow](workflow/deployment/README.md).
+External provisioning, migration, deployment, promotion and rollback require the
+workflow's explicit human and environment gates; repository instructions alone
+never authorize those mutations.
+
 Discover current source, commands, and CI from the repository before checks. Product-spec paths may describe planned artifacts; distinguish those from working controls. Link authoritative artifacts instead of copying broad histories.
 
 ## Code Review Rules

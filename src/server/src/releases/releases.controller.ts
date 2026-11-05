@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Headers, HttpCode, Param, Post, Put, Req } from '@nestjs/common';
+import { Body, Controller, Get, Headers, HttpCode, Param, Post, Put, Query, Req } from '@nestjs/common';
 import { addReleaseMemberRequestSchema, appendReleaseSmokeTestRequestSchema,
   createReleaseCandidateRequestSchema, publishReleaseCandidateRequestSchema,
-  removeReleaseMemberRequestSchema, reviewerIdSchema, reviewIdempotencyKeySchema,
+  releaseCandidatesQuerySchema, removeReleaseMemberRequestSchema, reviewerIdSchema, reviewIdempotencyKeySchema,
   updateReleaseCandidateRequestSchema } from '@specsentry/shared';
 import { Roles, type AuthRequest } from '../identity/access';
 import { businessActor } from '../identity/business-context';
@@ -15,6 +15,9 @@ export class ReleasesController {
 
   @Post() create(@Req() req: AuthRequest, @Body() body: unknown) {
     return this.releases.create(businessActor(req), validate(createReleaseCandidateRequestSchema, body));
+  }
+  @Get() list(@Req() req: AuthRequest, @Query() query: unknown) {
+    return this.releases.list(businessActor(req), validate(releaseCandidatesQuerySchema, query));
   }
   @Roles('RELEASE_MAINTAINER', 'REVIEWER')
   @Get(':id') detail(@Req() req: AuthRequest, @Param('id') id: string) {
