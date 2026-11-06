@@ -1,0 +1,35 @@
+{
+  "id": "7e80b68cfd8d472f85135531a89390c6",
+  "prompter": "yu-sutong",
+  "session": "2026-11-05-maintainer-lecture-alignment",
+  "agent": "security-reviewer",
+  "invocation": "security-1",
+  "stage": "independent-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-05T16:03:49.396058+00:00",
+  "ended_at": "2026-11-05T16:28:26.993035+00:00",
+  "elapsed_seconds": 1477.596977,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent Security Reviewer found SEC-EVID-001 symlink escape, SEC-EVID-002 incomplete evidence acceptance, SEC-EVID-003 unbounded input denial of service, and SEC-EVID-004 diagnostic fragment disclosure",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+}

@@ -57,6 +57,32 @@ before dispatch and keeps independent verification separate from authorship.
    traceability, prompt logs and reflections. Human teammate approval remains a
    merge/release gate.
 
+## Observable contract and harness
+
+The [workflow contract](CONTRACT.md) maps rules to observable evidence and explains
+when orchestrator-subagent or generator-verifier coordination is appropriate. At
+closure, run the deterministic evidence checker against the completed run:
+
+```bash
+npm run verify:deployment-run -- \
+  --run logs/<prompter>/<run>.md \
+  --prompt-log logs/<prompter>/<prompt-log>.md \
+  --resources logs/<prompter>/resources/<session> \
+  --base-ref <base-sha> \
+  [--candidate-ref <committed-candidate-sha>]
+```
+
+It accepts only the exact terminal labels `verified`, `verified locally` or
+`released`; it rejects pending closure markers, missing or shallow real log sections,
+unfinished/malformed resource intervals, unavailable usage without reasons,
+unsafe/oversized inputs, excessive directory entries and drift or omissions in the
+frozen SHA-256 manifest. Candidate coverage is compared with Git's non-log changed-file
+inventory from `base-ref`; `candidate-ref` validates a historical committed candidate,
+while omission validates the current worktree.
+`npm run test:deployment-workflow` exercises the checker and is part of the root
+`npm test` CI gate. Records remain editable repository self-reports: this validates
+internal consistency, not authenticity, product behavior, deployment or human approval.
+
 ## Stop conditions
 
 Stop before a production or external mutation when credentials, provider IDs,

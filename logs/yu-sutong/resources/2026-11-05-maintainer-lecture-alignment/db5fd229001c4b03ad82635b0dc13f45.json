@@ -1,0 +1,35 @@
+{
+  "id": "db5fd229001c4b03ad82635b0dc13f45",
+  "prompter": "yu-sutong",
+  "session": "2026-11-05-maintainer-lecture-alignment",
+  "agent": "release-verifier",
+  "invocation": "verifier-2",
+  "stage": "independent-review",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-06T03:33:29.989930+00:00",
+  "ended_at": "2026-11-06T03:42:18.614890+00:00",
+  "elapsed_seconds": 528.62496,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Fresh Release Verifier confirmed complete manifest and path containment; found WF-EVID-001 terminal-status parsing remained too permissive",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+}

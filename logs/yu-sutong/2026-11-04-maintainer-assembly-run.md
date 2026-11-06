@@ -1,0 +1,37 @@
+# Release Maintainer / deployment run
+
+- Prompter and inference source: `yu-sutong`; explicit current request and the existing Git identity/account constraint.
+- Goal and requirement IDs: implement the next smallest complete Maintainer slice and document every deployment-agent interaction for presentation evidence; partial REQ-REL-002 / AC-REL-002.
+- Source revision / branch: base `191e65c`; `feature/release-maintainer-assembly`; implementation/evidence commit `6289c3b06d5eee1b881de1c5f741c49241adc878` was authored by `Yu Sutong <e0483972@u.nus.edu>`, pushed through active GitHub account `yu-sutong`, and opened as [PR #20](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/pull/20). A final evidence-only commit follows after resource closure.
+- Target environment (or local-only): local-only source and tests. No Render, Neon, GHCR, migration or live application target.
+- Approved authority and excluded actions: repository source/tests/docs/logs, safe checks, feature-branch publication and PR preparation under the user's `yu-sutong` instruction. Provider provisioning, secrets, remote migration, deployment, production promotion/rollback and merge remain excluded.
+- Agent assignments and exact write sets: coordinator/main agent alone writes client, test, documentation and logs. Maintainer Architect, pre-review Security Reviewer, fresh Release Verifier and fresh Security Reviewer are read-only. A Spec/Docs Verifier receives the frozen documentation diff read-only.
+- Focused context supplied / retrieved later: REQ-REL-002 smoke defaults, existing strict smoke request/command/detail contracts, release service transaction, client session remount, current diff, tests and explicit stop conditions.
+- Secret names required (names only; no values): none.
+- Source SHA / immutable image digest: base SHA above; no image was built or pushed and no immutable image digest exists.
+- Migration compatibility and recovery decision: no schema or migration changes. Database recovery and image rollback are not applicable to this local slice and remain separate authorized release operations.
+- Acceptance, denial, failure and rollback checks: owner PASS/FAIL with exact versions and CSRF; strict text bounds; non-owner/RELEASED controls absent; wrong-owner/RELEASED/stale server denial; no insert on conflict; atomic rollback after late database failure; server-only blockers; old PASS invalidation; 401 cleanup; 409/network/5xx reconciliation; unmount/session late-response suppression; escaped text.
+- Commands and actual results: focused Maintainer client 15/15; Security Reviewer smoke contracts 7/7; full server units 18 suites/124 tests; full client 16 files/266 tests; type-check, lint, production build, submission-presence and `git diff --check` passed. Build retained the existing non-failing chunk-size warning. PostgreSQL integration was unavailable locally because `TEST_DATABASE_URL` was unset and Docker was unavailable. Final Spec/Docs verification passed with no findings and confirmed that relative links resolve. GitHub PR #20 `checks` and `secret-scan` later passed.
+- Stable findings and dispositions: pre-review `SEC-SMOKE-01` through `SEC-SMOKE-07` shaped the implementation. Fresh Release and Security verification returned PASS with no reportable findings and retained configured PostgreSQL CI as the acceptance gate.
+- Failed/interrupted attempts and retry cost: the first focused client run failed two test-harness checks: a matcher crossed a nested `<strong>` node and one test left its first render mounted. A separate fix interval corrected both; 15/15 then passed. An unexpected nested architect child appeared interrupted without a handoff, edits or a coordinator-started interval; its exact timing/model/usage are unavailable and it contributed no evidence.
+- Resource-record references: `logs/yu-sutong/resources/2026-11-04-maintainer-assembly/`; the [generated report](2026-11-04-maintainer-assembly-resources.md) covers 13 finished records, 2,193.225086 summed overlapping seconds and 1,256.265787 seconds end to end.
+- Human approvals required / observed evidence: teammate review, merge authorization and any protected production approval remain pending. Human verification of AI-produced interaction summaries is pending.
+- Unresolved risks and unavailable telemetry: local PostgreSQL execution was unavailable; no browser E2E or live deployment evidence; per-agent model/token/cache/tool/retry telemetry is not exposed. Proposal assembly needs a new minimum-data eligibility API and remains deferred.
+- Next authorized action: wait for teammate review and explicit merge authorization; do not treat unexecuted local PostgreSQL cases as passed.
+- Status: verified
+
+## Frozen code-candidate manifest
+
+Base `191e65c` plus these SHA-256 identities. Documentation changes do not alter
+the reviewed code candidate.
+
+| File | SHA-256 |
+| --- | --- |
+| `README.md` | `5906c24075ac6769a2057e6da746424c20b630ced7b9a174f901580837b818c6` |
+| `docs/DeveloperGuide.md` | `8df55a211b4dc3089571255f83c9ade059f8e4958790356cf96e463dacce054c` |
+| `docs/UserGuide.md` | `1e972db2a15ac7bab17362a3655aa9e935ba46ce89cb82e68ef65b12bc5a6295` |
+| `src/client/src/features/maintainer/MaintainerWorkspace.tsx` | `1253d1fee9d6788c0b49f080ebb9553d75a9fb2b562d64454a73f4762b646092` |
+| `src/client/src/features/maintainer/MaintainerWorkspace.test.tsx` | `70f8aef72820c29c5fab19bc8235be4799012202560578238cafcff03530f6fb` |
+| `src/server/test/release-revocation.integration.ts` | `5f5966c286d8f3d618f43497cb7459db459f06a6a34d4a7de6f6f9ba9c9d732c` |
+| `workflow/PLAN.md` | `a2d68429966264ea4844bc6812dc34ae648fa8d86f7aa98d45c1cfcf6656d7cb` |
+| `workflow/TRACEABILITY.md` | `2e4b5d81d1a281a4b1987f7ae00c9a562ba35610ea75f1e060e06f132fac9ce8` |

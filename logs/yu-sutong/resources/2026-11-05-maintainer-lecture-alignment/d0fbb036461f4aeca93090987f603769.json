@@ -1,0 +1,35 @@
+{
+  "id": "d0fbb036461f4aeca93090987f603769",
+  "prompter": "yu-sutong",
+  "session": "2026-11-05-maintainer-lecture-alignment",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "fix",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-05T16:28:27.115906+00:00",
+  "ended_at": "2026-11-06T03:33:29.830612+00:00",
+  "elapsed_seconds": 39902.714706,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Closed WF/SEC-EVID findings with terminal substantive evidence rules, strict resource schema, Git-complete manifest, symlink/traversal denial, bounded inputs, sanitized diagnostics and 14 adversarial tests; full local gate passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+}

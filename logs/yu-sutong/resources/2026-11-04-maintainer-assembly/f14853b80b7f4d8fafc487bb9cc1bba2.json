@@ -1,0 +1,35 @@
+{
+  "id": "f14853b80b7f4d8fafc487bb9cc1bba2",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-assembly",
+  "agent": "release-verifier",
+  "invocation": "release-verifier-1",
+  "stage": "independent-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-04T15:52:03.799954+00:00",
+  "ended_at": "2026-11-04T15:53:14.841472+00:00",
+  "elapsed_seconds": 71.041518,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent Release Verifier passed the frozen smoke-test slice with no reportable findings; locally reran 15 focused client tests and retained PostgreSQL CI gap",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+}

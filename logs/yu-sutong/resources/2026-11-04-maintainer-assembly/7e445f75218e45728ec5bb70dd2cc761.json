@@ -1,0 +1,35 @@
+{
+  "id": "7e445f75218e45728ec5bb70dd2cc761",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-assembly",
+  "agent": "security-reviewer",
+  "invocation": "security-reviewer-2",
+  "stage": "independent-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-04T15:52:03.852634+00:00",
+  "ended_at": "2026-11-04T15:54:13.742301+00:00",
+  "elapsed_seconds": 129.889667,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Independent Security Reviewer closed SEC-SMOKE-01 through SEC-SMOKE-07 with no stable findings; focused client and contract checks passed; PostgreSQL CI execution remains required",
+  "unavailable_reasons": {
+    "input_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-agent model, token, cache, tool-call, and retry telemetry are not exposed"
+}

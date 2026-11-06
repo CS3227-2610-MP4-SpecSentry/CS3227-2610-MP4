@@ -1,0 +1,35 @@
+{
+  "id": "8818d62d17e24533a600fa8bc71ab9bc",
+  "prompter": "yu-sutong",
+  "session": "2026-11-04-maintainer-assembly",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "implement",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-04T15:48:08.042066+00:00",
+  "ended_at": "2026-11-04T15:50:10.217947+00:00",
+  "elapsed_seconds": 122.175881,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Implemented bounded smoke-test UI and server regressions; focused client run failed on two test-harness assertions (split text and an unmounted first render)",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+}

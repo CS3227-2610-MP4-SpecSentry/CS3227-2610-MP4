@@ -1,5 +1,15 @@
 # Delivery and implementation plan
 
+Release Maintainer smoke-test recording, 4 November 2026: extend the local candidate
+workspace with the smallest complete next slice of REQ-REL-002. The responsible
+Maintainer can append bounded PASS/FAIL procedure/results against the exact current
+content version; server detail remains the only source of blockers/readiness and
+stale or uncertain results lock mutation until reconciliation. Read-only architecture
+and security pre-review, a failed focused-test correction, fresh Release/Security
+verification and final docs review are recorded in the
+[interaction log](../logs/yu-sutong/2026-11-04-maintainer-assembly.md). Proposal
+assembly, publication and live deployment remain separate work.
+
 Release Maintainer foundation, 4 November 2026: implement the smallest locally
 complete candidate workspace slice for REQ-REL-001/002: strict bounded listing,
 status filtering, create/open/detail, responsible-Maintainer display, owner-only
@@ -201,7 +211,7 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Private create/list/detail, editing, deletion and criteria increments 1–4 have local independent evidence; see [Contributor evidence](../logs/yooplo/2026-10-28-contributor-increment-4.md). Reviewer iteration 2 supplies shared submission/revision APIs; full Contributor submission UI and combined/deployed acceptance remain pending. |
 | TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Reviewer iterations 1–4 implement manual review, revision cycles, bounded AI integration and approval revocation; see [traceability](TRACEABILITY.md). Live provider, deployment and broader acceptance gates remain separate. |
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
-| TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Partial: locally verified candidate list/filter/create/open/detail/edit foundation and server blocker display; membership, smoke, publication, notices/audit UI, Maintainer AI, browser/PostgreSQL acceptance and teammate review remain pending. See the [Maintainer run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md). |
+| TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Partial: locally verified candidate list/filter/create/open/detail/edit plus creator-only PASS/FAIL smoke recording against the current content version and server blocker display; membership, publication, notices/audit UI, Maintainer AI, browser/PostgreSQL acceptance and teammate review remain pending. See the [foundation](../logs/yu-sutong/2026-11-04-maintainer-deployment.md) and [smoke increment](../logs/yu-sutong/2026-11-04-maintainer-assembly.md). |
 | TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Planned; requirement-linked results |
 | TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Planned; verified dev/prod release |
 

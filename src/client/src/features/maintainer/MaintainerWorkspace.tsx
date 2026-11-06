@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import {
+  appendReleaseSmokeTestRequestSchema,
   createReleaseCandidateRequestSchema,
   releaseCandidateCommandResponseSchema,
   releaseCandidateDetailResponseSchema,
@@ -234,6 +235,49 @@ function CandidateDetail({ session, onSessionLost }: Props) {
     } finally { if (active.current) setPending(false); }
   }
 
+  async function recordSmokeTest(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!detail || pending || reconciliationRequired) return;
+    const data = new FormData(event.currentTarget);
+    const parsed = appendReleaseSmokeTestRequestSchema.safeParse({
+      expectedVersion: detail.version,
+      testedContentVersion: detail.contentVersion,
+      procedure: data.get('procedure'),
+      results: data.get('results'),
+      outcome: data.get('outcome'),
+    });
+    if (!parsed.success) {
+      setError('Enter a non-empty procedure and result, each no longer than 10,000 characters.');
+      return;
+    }
+    setPending(true); setError('');
+    try {
+      const response = await fetch(`/api/release-candidates/${encodeURIComponent(candidateId)}/smoke-tests`, {
+        method: 'POST', credentials: 'same-origin', cache: 'no-store',
+        headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrfToken },
+        body: JSON.stringify(parsed.data),
+      });
+      if (!active.current) return;
+      if (response.status === 401) { setDetail(null); onSessionLost(); return; }
+      if (!response.ok) throw await parseFailure(response);
+      releaseCandidateCommandResponseSchema.parse(await response.json());
+      if (!active.current) return;
+      setReconciliationRequired(true);
+      setAttempt(value => value + 1);
+    } catch (cause) {
+      if (!active.current) return;
+      const reference = cause instanceof RequestFailure && cause.correlationId ? ` Reference: ${cause.correlationId}` : '';
+      if (cause instanceof RequestFailure && cause.status < 500 && cause.status !== 409) {
+        setError(`Unable to record this smoke test. Check your access and entered values.${reference}`);
+      } else {
+        setReconciliationRequired(true);
+        setError(cause instanceof RequestFailure && cause.status === 409
+          ? `This candidate changed. Refresh it before recording another smoke test.${reference}`
+          : `The smoke-test result may be uncertain. Refresh the candidate before retrying.${reference}`);
+      }
+    } finally { if (active.current) setPending(false); }
+  }
+
   if (loading) return <p role="status">Loading release candidate...</p>;
   if (!detail) return <><h1>Release candidate unavailable</h1>{error && <p role="alert">{error}</p>}<button onClick={() => setAttempt(value => value + 1)}>Retry</button><p><Link to="/releases">Back to release candidates</Link></p></>;
   const owner = detail.createdById === session.account.id;
@@ -248,6 +292,14 @@ function CandidateDetail({ session, onSessionLost }: Props) {
     </section>
     <section><h2>Included proposals</h2>{detail.members.length === 0 ? <p>No proposals are attached.</p> : <ul>{detail.members.map(member => <li key={member.id}>Proposal {member.proposalId} · {member.status} · Revision {member.revisionId}</li>)}</ul>}</section>
     <section><h2>Smoke-test history</h2>{detail.smokeTests.length === 0 ? <p>No smoke tests recorded.</p> : <ol>{detail.smokeTests.map(test => <li key={test.id}><strong>{test.outcome}</strong> for content version {test.testedContentVersion}: {test.procedure}<p>{test.results}</p></li>)}</ol>}</section>
+    {editable && <form className="draft-form" noValidate onSubmit={event => void recordSmokeTest(event)}>
+      <h2>Record release smoke test</h2>
+      <p>Record the checks run against content version {detail.contentVersion}. Readiness is recalculated by the server after refresh.</p>
+      <label htmlFor="smoke-procedure">Procedure</label><textarea id="smoke-procedure" name="procedure" rows={4} required maxLength={10000} disabled={pending || reconciliationRequired} />
+      <label htmlFor="smoke-results">Results</label><textarea id="smoke-results" name="results" rows={4} required maxLength={10000} disabled={pending || reconciliationRequired} />
+      <label htmlFor="smoke-outcome">Outcome</label><select id="smoke-outcome" name="outcome" defaultValue="PASS" disabled={pending || reconciliationRequired}><option value="PASS">Pass</option><option value="FAIL">Fail</option></select>
+      <button type="submit" disabled={pending || reconciliationRequired}>{pending ? 'Recording...' : 'Record smoke test'}</button>
+    </form>}
     {editable ? <form key={`${detail.version}:${detail.contentVersion}`} className="draft-form" onSubmit={event => void edit(event)}>
       <h2>Edit candidate details</h2>
       <label htmlFor="candidate-version">Semantic version</label><input id="candidate-version" name="versionLabel" defaultValue={detail.versionLabel} required disabled={pending || reconciliationRequired} />
