@@ -23,6 +23,7 @@
     "lint": "eslint src workflow/tooling/*.mjs workflow/deployment/tooling/*.mjs workflow/deployment/tests/*.mjs playwright.config.ts",
     "test": "npm run build -w @specsentry/shared && npm run test -w @specsentry/server && npm run test -w @specsentry/client && npm run test:deployment-workflow",
     "test:deployment-workflow": "node --test workflow/deployment/tests/*.test.mjs",
+    "verify:migrations": "node workflow/deployment/tooling/release-candidate.mjs verify-migrations",
     "verify:deployment-run": "node workflow/deployment/tooling/verify-run-evidence.mjs",
     "test:integration": "npm run build -w @specsentry/shared && npm run test:integration -w @specsentry/server",
     "test:e2e": "playwright test",
@@ -48,5 +49,9 @@
   },
   "overrides": {
     "multer": "2.5.0"
+  },
+  "dependencies": {
+    "@neon/config": "1.12.0",
+    "@neon/env": "2.0.0"
   }
 }

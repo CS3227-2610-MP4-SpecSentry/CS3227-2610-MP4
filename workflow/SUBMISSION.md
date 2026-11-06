@@ -20,7 +20,7 @@ completion certificate. Run `npm run check:submission` for local artifact presen
 | Coordinated specialized agents | workflow/reviewer/, DEVELOPMENT.md | Final evidence must show triggering, context/resource sharing, handoffs, verification, conflicts, idle/blocked work and retry overhead; toolkit use does not replace team-managed agents |
 | AI and development-process security | AI-SECURITY-SPEC.md, evaluations/, CI | Planned controls and scaffold checks; explicit AI/adversarial/authorization test evidence pending |
 | Context/resource engineering | RESOURCES.md, logs/, evaluations/, Reflections.md | Recording rules/template initialized; actual controlled comparisons pending |
-| Online app with separated dev/prod | render.yaml, docs/Deployment.md | Topology template only; provision and verify separate team-managed environments |
+| Online app with separated dev/prod | `.github/workflows/application-release.yml`, deployment tooling/tests, render.yaml, docs/Deployment.md | Fail-closed release automation is tested offline; provision, protect and verify separate team-managed environments, migrations and same-digest promotion |
 | SoC LLM only; quotas and guardrails | workflow/specs/AI-SECURITY-SPEC.md | No live integration or provider compatibility claimed |
 | No prior-MP reuse or integrated build-and-host deployment | DeveloperGuide.md, Deployment.md | New scaffold; preserve acknowledgements and separately team-managed build/deployment evidence |
 | Substantial role/shared contribution per member | workflow/PLAN.md, logs/, Reflections.md | Allocation exists; attach actual contributions and review evidence |

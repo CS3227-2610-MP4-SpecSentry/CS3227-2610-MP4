@@ -71,6 +71,18 @@ test attempt and an unmeasured interrupted nested invocation are retained. Witho
 a matched single-agent condition or attributable token/tool telemetry, this is
 presentation evidence about coordination behavior, not a causal efficiency result.
 
+The [deployment-agent workflow observation](../workflow/evaluations/2026-11-07-deployment-agent-workflow-observation.md)
+records a second real coordinated run. Three independent pre-reviews converged on a
+repository-only scope while preserving different concerns: provider trust, database
+recovery and pipeline architecture. The coordinator rejected the first
+`workflow_run`/`develop` design because its attestation identity would describe the
+default branch rather than the checked-out source, selecting a protected-`master`
+development canary instead. A later integration review found the first-image/Render
+dependency and caused one bounded bootstrap correction. These are concrete examples
+of specialist disagreement and useful rework; unavailable attributable token/tool
+telemetry and the absence of a matched single-agent condition prevent efficiency or
+cost claims.
+
 ## Context Engineering
 
 Compare focused requirement/interface packs with broader context on comparable
@@ -103,6 +115,7 @@ limitations. Include each member's actual role and shared-work contribution.
 | --- | --- | --- |
 | Single agent versus coordinated agents | Pending | No comparative result yet |
 | Maintainer smoke coordinated workflow | [Observed run](../workflow/evaluations/2026-11-05-maintainer-smoke-workflow-observation.md) | Real quality/time/coordination evidence; no single-agent baseline, so not a controlled comparison |
+| Deployment-agent coordinated workflow | [Observed run](../workflow/evaluations/2026-11-07-deployment-agent-workflow-observation.md) | Real architecture/security/database handoffs and two coordinator corrections; no live deployment or matched single-agent baseline |
 | Focused versus broad context | Pending | No comparative result yet |
 | Prompt/skill versions and AI security | Pending | No comparative result yet |
 | Model choice and resource cost | Pending | No comparative result yet |

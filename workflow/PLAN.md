@@ -1,5 +1,19 @@
 # Delivery and implementation plan
 
+Deployment automation, 7 November 2026: TASK-008 now has a disabled-by-default,
+repository-managed protected-`master` canary pipeline. It waits for exact-SHA CI,
+publishes one immutable GHCR digest with provenance/SBOM/attestation and exact-digest
+scan, verifies reviewed migrations and UTC, deploys/verifies development, and permits
+production to reuse only that verified digest behind a human GitHub Environment gate.
+The three manual operations separate first-image bootstrap, development release and
+production promotion. Action/container pins, migration checksums, Render API failure
+handling, authenticated bounded smoke and dev/prod target-isolation policies have
+offline regression tests. The [deployment run](../logs/yu-sutong/2026-11-07-deployment-release-pipeline-run.md)
+records specialist disagreements, correction cost and local evidence. Provider
+accounts, environment protections, remote migrations/deployments, restore rehearsal,
+N-1 compatibility and observed URLs remain external gates; no online environment is
+claimed by this source increment.
+
 Release Maintainer completion, 6 November 2026: TASK-006 source now implements the
 remaining role workflow across REQ-REL-001–008: minimal approved-proposal discovery,
 exact-version membership, recipient-scoped revocation notices, explicit atomic
@@ -225,7 +239,7 @@ Statuses below distinguish implemented infrastructure from pending product behav
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
 | TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Source complete locally for REQ-REL-001–008: candidate assembly, deterministic gates/smoke evidence, publication/revocation serialization, notices, released corrections, restricted audit and advisory Maintainer AI. Server/client units and focused PostgreSQL integration pass; configured browser/deployed acceptance and teammate review remain TASK-007/008 gates. See the [final run](../logs/yu-sutong/2026-11-06-maintainer-final.md). |
 | TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Planned; requirement-linked results |
-| TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Planned; verified dev/prod release |
+| TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Partial source automation: protected-master build/attest/scan, migration/provider guards, dev canary and same-digest production graph implemented and tested offline on 7 November; provider resources, protected environment configuration, restore/N-1 evidence and verified dev/prod release remain pending |
 
 Record actual commands, failures and outcomes rather than marking elapsed dates complete. Produce detailed task breakdown for each approved slice.
 

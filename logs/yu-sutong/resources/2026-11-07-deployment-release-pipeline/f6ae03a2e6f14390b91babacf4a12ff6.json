@@ -1,0 +1,35 @@
+{
+  "id": "f6ae03a2e6f14390b91babacf4a12ff6",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-deployment-release-pipeline",
+  "agent": "security-reviewer",
+  "invocation": "security-4",
+  "stage": "final-security-reverification",
+  "attempt": 2,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Final read-only review of TLS and migration-inventory corrections on complete code diff",
+  "started_at": "2026-11-06T17:34:14.393424+00:00",
+  "ended_at": "2026-11-06T17:37:01.365449+00:00",
+  "elapsed_seconds": 166.972025,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final complete-diff security pass closed DEP-SEC-001 through DEP-SEC-009 for repository assurance; 28 deployment tests, lint, ten-migration verification and diff check passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

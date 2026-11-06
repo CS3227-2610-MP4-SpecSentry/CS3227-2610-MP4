@@ -1,0 +1,35 @@
+{
+  "id": "01013807280b49b9ade2adc7fbf73e10",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-deployment-release-pipeline",
+  "agent": "deployment-implementer",
+  "invocation": "implementer-2",
+  "stage": "bootstrap-correction",
+  "attempt": 2,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator identified the first-image Render bootstrap gap before candidate freeze",
+  "started_at": "2026-11-06T16:59:24.157630+00:00",
+  "ended_at": "2026-11-06T17:01:28.289766+00:00",
+  "elapsed_seconds": 124.132136,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Added safe publish-image, release-development and promote-production operations with separate image/deploy enable flags; focused tests, YAML parsing, lint and diff checks passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

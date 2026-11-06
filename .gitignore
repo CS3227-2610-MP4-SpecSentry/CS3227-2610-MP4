@@ -38,3 +38,4 @@ tmp
 /logs/yooplo/resources/2026-10-31-ui-publication-receipt/
 # Fresh rerun captures stay local; publish results and the retained Phase3 gallery.
 /logs/yooplo/resources/2026-10-31-ui-spec-publication/verification/**/*.png
+.neon

@@ -28,7 +28,8 @@ describe('scaffold HTTP boundary', () => {
 
   it('liveness works without a database and includes security headers', async () => {
     const response = await request(app.getHttpServer()).get('/api/health').expect(200);
-    expect(response.body).toEqual({ status: 'ok', service: 'specsentry' });
+    expect(response.body).toEqual({ status: 'ok', service: 'specsentry',
+      deployment: { sourceRevision: 'local' } });
     expect(checkConnection).not.toHaveBeenCalled();
     expect(response.headers['content-security-policy']).toBeDefined();
     expect(response.headers['x-powered-by']).toBeUndefined();
@@ -55,5 +56,21 @@ describe('scaffold HTTP boundary', () => {
   });
   it('rejects invalid configuration without echoing sensitive input', () => {
     expect(() => readConfig({ SESSION_SECRET: 'synthetic-test-session-secret-32-chars', DATABASE_URL: 'secret-value', PORT: '-1' })).toThrow('Invalid server configuration: PORT, DATABASE_URL');
+  });
+  it('normalizes Neon TLS to explicit full certificate verification', () => {
+    const config = readConfig({
+      SESSION_SECRET: 'synthetic-test-session-secret-32-chars',
+      DATABASE_URL: 'postgresql://user:pass@ep-test-pooler.example.neon.tech/app?channel_binding=require&sslmode=require',
+    });
+    expect(new URL(config.DATABASE_URL).searchParams.get('sslmode')).toBe('verify-full');
+  });
+  it('exposes only a validated source revision as deployment identity', () => {
+    const sourceRevision = 'a'.repeat(40);
+    expect(readConfig({ SESSION_SECRET: 'synthetic-test-session-secret-32-chars',
+      DATABASE_URL: 'postgresql://test:test@localhost/test', DEPLOYMENT_SOURCE_SHA: sourceRevision }))
+      .toMatchObject({ DEPLOYMENT_SOURCE_SHA: sourceRevision });
+    expect(() => readConfig({ SESSION_SECRET: 'synthetic-test-session-secret-32-chars',
+      DATABASE_URL: 'postgresql://test:test@localhost/test', DEPLOYMENT_SOURCE_SHA: 'main' }))
+      .toThrow('Invalid server configuration: DEPLOYMENT_SOURCE_SHA');
   });
 });

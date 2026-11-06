@@ -18,6 +18,13 @@ function requireLiveSettings(value: { AI_LIVE_ENABLED: boolean; AI_API_KEY?: str
   if (value.AI_CONTEXT_WINDOW === undefined) ctx.addIssue({ code: 'custom', path: ['AI_CONTEXT_WINDOW'], message: 'Required live setting' });
 }
 const aiEnvironmentSchema = z.object(aiFields).superRefine(requireLiveSettings);
+function normalizeDatabaseUrl(value: string): string {
+  const url = new URL(value);
+  if (url.hostname.endsWith('.neon.tech') && url.searchParams.get('sslmode') === 'require') {
+    url.searchParams.set('sslmode', 'verify-full');
+  }
+  return url.toString();
+}
 const environmentSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),
@@ -26,7 +33,11 @@ const environmentSchema = z.object({
   DATABASE_URL: z.string().url().refine(
     (value) => URL.canParse(value) && ['postgres:', 'postgresql:'].includes(new URL(value).protocol),
     'Must be a PostgreSQL URL',
-  ),
+  ).transform(normalizeDatabaseUrl),
+  DEPLOYMENT_SOURCE_SHA: z.union([
+    z.literal('local'),
+    z.string().regex(/^[0-9a-f]{40}$/),
+  ]).default('local'),
   ...aiFields,
 }).superRefine(requireLiveSettings);
 
@@ -43,3 +54,7 @@ function parseConfig<T>(schema: z.ZodType<T>, environment: NodeJS.ProcessEnv): T
 }
 export function readConfig(environment: NodeJS.ProcessEnv): ServerConfig { return parseConfig(environmentSchema, environment); }
 export function readAiConfig(environment: NodeJS.ProcessEnv): AiConfig { return parseConfig(aiEnvironmentSchema, environment); }
+export function deploymentSourceRevision(environment: NodeJS.ProcessEnv = process.env): ServerConfig['DEPLOYMENT_SOURCE_SHA'] {
+  return z.union([z.literal('local'), z.string().regex(/^[0-9a-f]{40}$/)])
+    .parse(environment.DEPLOYMENT_SOURCE_SHA ?? 'local');
+}

@@ -17,7 +17,15 @@
 | reviewer/templates/ | Reviewer run and handoff record formats |
 | reviewer/scripts/ | Workflow CLI, evidence validation, checks and recording helpers; see its README |
 | reviewer/tests/ | Python tests of the workflow tooling, not product acceptance |
+| deployment/README.md | Release Maintainer and deployment-agent procedure, permission gates, role flow and stop conditions |
+| deployment/agents/ | Coordinator, implementer, database/recovery, security, release and specification/documentation role instructions |
 | deployment/CONTRACT.md | Observable Release Maintainer/deployment workflow rules, coordination-pattern choice and evidence expectations |
+| deployment/templates/RUN.md | Deployment brief, assignments, findings, commands, approvals and terminal status record |
+| deployment/migrations.sha256 | Reviewed migration-file inventory and checksums used by CI and release preflight |
+| deployment/tooling/release-candidate.mjs | Immutable source/image/candidate and migration-manifest validation |
+| deployment/tooling/render-deploy.mjs | Explicit, allowlisted Render image-digest deployment client |
+| deployment/tooling/verify-database.mjs | Direct Neon target, TLS, UTC, migration-state and schema verification |
+| deployment/tooling/verify-remote.mjs | Bounded source-marker, readiness, session/CSRF and Maintainer-read deployment smoke |
 | deployment/tooling/verify-run-evidence.mjs | Deterministic completed-run/resource/manifest checker |
 | deployment/tests/ | Node tests of the deployment workflow harness, not product acceptance |
 | templates/PROMPT-LOG.md | Prompt/change/resource summary format |
