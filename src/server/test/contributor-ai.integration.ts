@@ -18,7 +18,7 @@ import { ContributorAssistantService } from '../src/proposals/contributor-assist
 import { persistedTestActor } from './business-fixtures';
 import { aiTestOptions } from './ai-fixtures';
 
-const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "ReleaseAnnotation", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const content: WorkingContent = { title: 'Synthetic AI draft', summary: 'Saved summary', problem: 'Validate a synthetic input.', constraints: 'Local validation only.',
   expectedBehavior: 'Reject invalid values.', diffText: 'PRIVATE_PATCH_NOT_AI_CONTEXT',
   criteria: [{ statement: 'Reject invalid input.', required: true }], evidence: [{ text: 'PRIVATE_EVIDENCE_NOT_AI_CONTEXT' }] };

@@ -19,7 +19,7 @@ import { aiTestOptions } from './ai-fixtures';
 
 const content: WorkingContent = { title: 'Usage synthetic proposal', summary: 'Synthetic summary', problem: 'Check boundaries.', constraints: '',
   expectedBehavior: 'Valid behavior.', diffText: '--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n', criteria: [{ statement: 'Reject invalid input.', required: true }], evidence: [] };
-const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "ReleaseAnnotation", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 function barrier() { let open!: () => void; const promise = new Promise<void>(yes => { open = yes; }); return { promise, open }; }
 
 describe('Reviewer usage PostgreSQL integration', () => {
@@ -92,7 +92,8 @@ describe('Reviewer usage PostgreSQL integration', () => {
     // This isolated suite truncates the full business FK graph before/after each test and removes its own sessions/accounts at closure.
     const expectedTables = ['AiOutboundAttempt', 'AiQueueLease', 'AiRequest', 'WorkingRevision', 'FindingResponse', 'FindingEvent', 'ReviewFinding', 'ReviewDecision',
       'CoverageEvidence', 'CoverageAssessment', 'ReviewIdempotency', 'CriterionEvidenceLink', 'ProposalActivity', 'ReviewAssignment', 'AcceptanceCriterion',
-      'TestEvidence', 'ProposalRevision', 'ChangeProposal', 'Notification', 'ReleaseCandidate', 'ReleaseCandidateMember', 'ApprovalInvalidation', 'ReleasePublicationSnapshot', 'ReleaseSmokeTest'];
+      'TestEvidence', 'ProposalRevision', 'ChangeProposal', 'Notification', 'ReleaseCandidate', 'ReleaseCandidateMember',
+      'ApprovalInvalidation', 'ReleaseAnnotation', 'ReleasePublicationSnapshot', 'ReleaseSmokeTest'];
     for (const table of expectedTables) {
       expect(tables).toContain(`"${table}"`);
       expect(Number((await pool.query<{ count: string }>(`SELECT count(*) FROM "${table}"`)).rows[0]!.count)).toBe(0);

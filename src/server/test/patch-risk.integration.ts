@@ -19,7 +19,7 @@ import { ProposalsService } from '../src/proposals/proposals.service';
 import { persistedTestActor } from './business-fixtures';
 import { aiTestOptions } from './ai-fixtures';
 
-const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "AiQuotaCoordinator", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"AiOutboundAttempt", "AiQueueLease", "AiRequest", "AiQuotaCoordinator", "ReleaseAnnotation", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const content: WorkingContent = { title: 'Synthetic patch', summary: 'Entire submitted summary', problem: 'Entire submitted problem', constraints: 'Entire constraints',
   expectedBehavior: 'Entire expected behavior', diffText: '--- a/file\n+++ b/file\n@@ -1 +1 @@\n-old\n+new\n',
   criteria: Array.from({ length: 5 }, (_, i) => ({ statement: `Criterion ${i}`, required: true })), evidence: [{ text: 'Entire evidence one' }, { text: 'Entire evidence two' }] };

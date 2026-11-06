@@ -1,0 +1,35 @@
+{
+  "id": "c1cfe05469e3477aa80f2992ea01d0b9",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "security-reviewer",
+  "invocation": "security-4",
+  "stage": "final-security-reverification",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Existing independent verifier reused with inherited coordinator settings",
+  "started_at": "2026-11-06T13:16:01.844406+00:00",
+  "ended_at": "2026-11-06T13:29:50.414949+00:00",
+  "elapsed_seconds": 828.570543,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Security re-verification closed SEC-REL-RESOURCE-001 and SEC-AI-RESOURCE-001; later superseded only by annotation newline normalization found in PostgreSQL integration",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "retries": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+}

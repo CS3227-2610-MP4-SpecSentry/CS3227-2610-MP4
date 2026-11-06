@@ -11,10 +11,11 @@ import { NotificationsModule } from '../src/notifications/notifications.module';
 import { NotificationsService } from '../src/notifications/notifications.service';
 import { ReleasesModule } from '../src/releases/releases.module';
 import { ReleasesService } from '../src/releases/releases.service';
+import { MaintainerAuditService } from '../src/releases/maintainer-audit.service';
 import { ApprovalRevocationService } from '../src/reviews/approval-revocation.service';
 import { persistedTestActor } from './business-fixtures';
 
-const tables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"ReleaseAnnotation", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const prefix = `release-${randomUUID()}`;
 const ids = { owner: `${prefix}-owner`, reviewer: `${prefix}-reviewer`, otherReviewer: `${prefix}-other-reviewer`,
   maintainer: `${prefix}-maintainer`, otherMaintainer: `${prefix}-other-maintainer` };
@@ -22,6 +23,7 @@ type Actor = Awaited<ReturnType<typeof persistedTestActor>>;
 
 describe('PostgreSQL release candidate and revocation integration', () => {
   let db: DatabaseService; let releases: ReleasesService; let notices: NotificationsService;
+  let maintainerAudit: MaintainerAuditService;
   let revocation: ApprovalRevocationService; let module: TestingModule;
   let reviewer: Actor; let maintainer: Actor; let otherMaintainer: Actor;
   async function seed(approved = true, assignedReviewerId = ids.reviewer) {
@@ -107,6 +109,7 @@ describe('PostgreSQL release candidate and revocation integration', () => {
       providers: [ApprovalRevocationService] });
     module = await builder.compile(); db = module.get(DatabaseService); releases = module.get(ReleasesService);
     notices = module.get(NotificationsService); revocation = module.get(ApprovalRevocationService);
+    maintainerAudit = module.get(MaintainerAuditService);
     await db.client.userAccount.createMany({ data: Object.entries(ids).map(([name, id]) => ({ id,
       username: `${prefix}-${name}`.toLowerCase(), passwordHash: 'synthetic-only',
       role: name === 'owner' ? 'CONTRIBUTOR' as const : name.toLowerCase().includes('reviewer')
@@ -374,6 +377,102 @@ describe('PostgreSQL release candidate and revocation integration', () => {
     expect(published.status).toBe('RELEASED');
     const after = await snapshot(c); expect(after.publication).toBeDefined();
     expect(after.proposal.state).toBe('RELEASED'); expect(after.invalidations).toEqual([]);
+  });
+  it('release-eligible preserves completed approval after Reviewer disablement and returns minimal exact coordinates', async () => {
+    const item = await seed(); const created = await candidate();
+    await db.client.userAccount.update({ where: { id: ids.reviewer }, data: { enabled: false, version: { increment: 1 } } });
+    const page = await releases.eligible(maintainer, created.candidateId, { limit: 20 });
+    expect(page.items).toEqual([expect.objectContaining({ proposalId: item.proposal.id,
+      proposalVersion: item.proposal.version, revisionId: item.revision.id,
+      assignmentId: item.assignment.id, assignmentVersion: item.assignment.version,
+      owner: expect.objectContaining({ id: ids.owner }), reviewer: expect.objectContaining({ id: ids.reviewer }) })]);
+    expect(JSON.stringify(page)).not.toContain(item.decision!.id);
+    expect(JSON.stringify(page)).not.toContain('+safe');
+    await expect(releases.eligible(otherMaintainer, created.candidateId, { limit: 20 }))
+      .rejects.toMatchObject({ status: 403 });
+    const added = await releases.add(maintainer, created.candidateId, { expectedCandidateVersion: created.version,
+      expectedContentVersion: created.contentVersion, proposalId: item.proposal.id,
+      revisionId: item.revision.id, assignmentId: item.assignment.id,
+      expectedProposalVersion: item.proposal.version, expectedAssignmentVersion: item.assignment.version });
+    expect(added.contentVersion).toBe(created.contentVersion + 1);
+    expect((await releases.eligible(maintainer, created.candidateId, { limit: 20 })).items).toEqual([]);
+  });
+  it('release-annotations are creator-appended, all-Maintainer-readable and immutable without changing the snapshot', async () => {
+    const c = await attached(); const candidate = await ready(c);
+    const published = await releases.publish(maintainer, candidate.id, { expectedVersion: candidate.version,
+      expectedContentVersion: candidate.contentVersion }, randomUUID());
+    const snapshotBefore = await db.client.releasePublicationSnapshot.findUniqueOrThrow({ where: { id: published.snapshotId } });
+    await expect(releases.annotate(otherMaintainer, candidate.id, { expectedVersion: published.version,
+      snapshotId: published.snapshotId, text: 'Other Maintainer correction' })).rejects.toMatchObject({ status: 403 });
+    const annotation = await releases.annotate(maintainer, candidate.id, { expectedVersion: published.version,
+      snapshotId: published.snapshotId, text: 'Correct deployment note\r\nNo snapshot rewrite.' });
+    expect(annotation.text).toBe('Correct deployment note\nNo snapshot rewrite.');
+    expect((await releases.annotations(otherMaintainer, candidate.id, { limit: 20 })).items)
+      .toEqual([expect.objectContaining({ id: annotation.id, text: annotation.text })]);
+    await expect(db.client.releaseAnnotation.update({ where: { id: annotation.id }, data: { text: 'rewritten' } })).rejects.toThrow();
+    await expect(db.client.releaseAnnotation.delete({ where: { id: annotation.id } })).rejects.toThrow();
+    expect(await db.client.releasePublicationSnapshot.findUniqueOrThrow({ where: { id: published.snapshotId } })).toEqual(snapshotBefore);
+    const release = await db.client.releaseCandidate.findUniqueOrThrow({ where: { id: candidate.id } });
+    expect(release.version).toBe(published.version); expect(release.contentVersion).toBe(published.contentVersion);
+    const releasedDetail = await releases.detail(otherMaintainer, candidate.id);
+    expect(releasedDetail).toMatchObject({ status: 'RELEASED', blockers: [],
+      members: [expect.objectContaining({ status: 'RELEASED' })] });
+
+    const audit = await maintainerAudit.list(otherMaintainer, { releaseId: candidate.id,
+      action: 'RELEASE_ANNOTATED', outcome: 'SUCCESS', limit: 20 });
+    expect(audit.items).toEqual(expect.arrayContaining([expect.objectContaining({ source: 'ANNOTATION',
+      actorId: ids.maintainer, releaseId: candidate.id, action: 'RELEASE_ANNOTATED', outcome: 'SUCCESS' })]));
+    expect(JSON.stringify(audit)).not.toContain(annotation.text);
+    expect(JSON.stringify(audit)).not.toContain('idempotency');
+  });
+  it('release-annotations reject OPEN, stale and wrong-snapshot coordinates without fragments', async () => {
+    const open = await candidate();
+    await expect(releases.annotate(maintainer, open.candidateId, { expectedVersion: open.version,
+      snapshotId: 'missing-snapshot', text: 'Not released' })).rejects.toMatchObject({ status: 409 });
+    const c = await attached(); const readyCandidate = await ready(c);
+    const published = await releases.publish(maintainer, readyCandidate.id, { expectedVersion: readyCandidate.version,
+      expectedContentVersion: readyCandidate.contentVersion }, randomUUID());
+    await expect(releases.annotate(maintainer, readyCandidate.id, { expectedVersion: published.version + 1,
+      snapshotId: published.snapshotId, text: 'Stale' })).rejects.toMatchObject({ status: 409 });
+    await expect(releases.annotate(maintainer, readyCandidate.id, { expectedVersion: published.version,
+      snapshotId: 'missing-snapshot', text: 'Wrong snapshot' })).rejects.toMatchObject({ status: 409 });
+    expect(await db.client.releaseAnnotation.count({ where: { candidateId: readyCandidate.id } })).toBe(0);
+  });
+  it('keeps detail constant-size and paginates high-cardinality smoke history within a UTF-8 byte budget', async () => {
+    const open = await candidate();
+    const startedAt = Date.parse('2026-11-06T00:00:00.000Z');
+    await db.client.releaseSmokeTest.createMany({ data: Array.from({ length: 1_001 }, (_, index) => ({
+      id: `smoke-${String(index).padStart(4, '0')}`, candidateId: open.candidateId,
+      testedContentVersion: open.contentVersion, actorId: ids.maintainer,
+      outcome: index === 1_000 ? 'PASS' as const : 'FAIL' as const,
+      procedure: `Procedure ${index}`, results: `Result ${index}`, createdAt: new Date(startedAt + index),
+    })) });
+    const projected = await releases.detail(maintainer, open.candidateId);
+    expect(projected).toMatchObject({ smokeTestsTruncated: true,
+      smokeTests: [expect.objectContaining({ id: 'smoke-1000', outcome: 'PASS' })] });
+    expect('smokeTests' in projected && projected.smokeTests).toHaveLength(1);
+    expect(JSON.stringify(projected)).not.toContain('smoke-0000');
+    expect('blockers' in projected && projected.blockers).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: 'SMOKE' }),
+    ]));
+    const firstPage = await releases.smokeHistory(maintainer, open.candidateId, { limit: 20 });
+    expect(firstPage.items).toHaveLength(20);
+    expect(firstPage.items[0]).toMatchObject({ id: 'smoke-1000', outcome: 'PASS' });
+    expect(firstPage.nextCursor).not.toBeNull();
+    const secondPage = await releases.smokeHistory(maintainer, open.candidateId,
+      { limit: 20, cursor: firstPage.nextCursor! });
+    expect(secondPage.items[0]).toMatchObject({ id: 'smoke-0980' });
+
+    const maximumText = '😀'.repeat(10_000);
+    await db.client.releaseSmokeTest.createMany({ data: Array.from({ length: 6 }, (_, index) => ({
+      id: `smoke-max-${index}`, candidateId: open.candidateId,
+      testedContentVersion: open.contentVersion, actorId: ids.maintainer, outcome: 'FAIL' as const,
+      procedure: maximumText, results: maximumText, createdAt: new Date(startedAt + 2_000 + index),
+    })) });
+    const byteBounded = await releases.smokeHistory(maintainer, open.candidateId, { limit: 20 });
+    expect(byteBounded.items).toHaveLength(3);
+    expect(byteBounded.contentBytes).toBe(240_000);
+    expect(byteBounded.nextCursor).not.toBeNull();
   });
   it('revoke-candidate-privacy projects only own member scope', async () => {
     const c = await attached(); const other = await persistedTestActor(db, ids.otherReviewer);

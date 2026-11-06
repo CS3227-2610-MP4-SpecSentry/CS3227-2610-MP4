@@ -1,0 +1,35 @@
+{
+  "id": "2df26076b7d04037aa4f15c567ceb2c8",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "security-reviewer",
+  "invocation": "security-2",
+  "stage": "final-security-verification",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-06T12:31:48.637061+00:00",
+  "ended_at": "2026-11-06T12:45:41.226475+00:00",
+  "elapsed_seconds": 832.589414,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final security review passed with no stable actionable finding; authorization, concurrency, privacy, AI and client reconciliation boundaries verified",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "output_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "tool_calls": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "retries": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+}

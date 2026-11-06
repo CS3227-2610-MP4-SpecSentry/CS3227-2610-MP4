@@ -56,7 +56,13 @@ Operations below define logical inputs and outcomes derived from existing requir
 | POST /api/proposals/:id/ai-risk | Assignee; latest submitted revision identity | Server builds context; no client-selected unrelated records. Response rechecks access; no business mutation |
 | GET /api/proposals/:id/activity | Authorized submission viewer; cursor | Safe chronological projection; excludes private draft contents and reviewer AI/security audit |
 | POST /api/release-candidates and candidate membership operations | Maintainer; candidate/item versions and approved revision identity | OPEN candidate/membership with constraints; Only candidate creator may mutate/publish; other Maintainers read only |
+| GET /api/release-candidates/:id/eligible-proposals | Responsible Maintainer; OPEN candidate; bounded cursor | Minimal exact proposal/revision/assignment/version coordinates for effective unattached approvals; no approval ID, patch, evidence or private content |
+| POST /api/release-candidates/:id/ai/readiness | Responsible Maintainer; exact candidate/content versions | CURRENT or STALE bounded advisory readiness result; no business mutation |
+| GET /api/release-candidates/:id/smoke-tests | Maintainer; bounded candidate-scoped cursor | Newest-first history page; maximum 20 records and 256 KiB UTF-8 procedure/result content per response |
 | POST /api/release-candidates/:id/publish | Maintainer; expected candidate version | Reevaluate gates with member approvals; publish snapshot or roll back everything |
+| GET/POST /api/release-candidates/:id/annotations | Maintainer read; responsible Maintainer write against exact RELEASED version/snapshot | Bounded append-only correction history; published candidate and snapshot unchanged |
+| GET /api/maintainer/audit | Maintainer; strict actor/proposal/release/action/date/outcome filters and bounded cursor | Allowlisted project audit projection without raw prompts, responses, request bodies, credentials or private content |
+| GET /api/maintainer/ai/usage | Maintainer | SGT-day project aggregate requests/attempts/retries/failures/provider-reported usage without per-user run disclosure |
 | GET /api/notifications and acknowledgement | Recipient only; notification identity/version as applicable | No access grant through notice; acknowledgement never clears a readiness blocker |
 
 ## Error and concurrency semantics
@@ -141,10 +147,10 @@ Business audit history and operational/security audit retention are separated lo
 
 ### Authentication input defaults
 
-Usernames contain 1–80 ASCII letters, digits, dots, underscores or hyphens;
+Usernames contain 1â€“80 ASCII letters, digits, dots, underscores or hyphens;
 trim and normalize to lowercase before lookup/provisioning. Login passwords are
-1–256 characters without trimming or rewriting. Administrative provisioning
-requires 12–256 characters. Role is server-owned and cannot be supplied at login.
+1â€“256 characters without trimming or rewriting. Administrative provisioning
+requires 12â€“256 characters. Role is server-owned and cannot be supplied at login.
 These controls implement REQ-SHR-001/002 and NFR-SEC-001; the login CSRF bootstrap
 is part of the public login exception. See [Authentication](../../docs/Authentication.md)
 for implementation boundaries and administrative operation.

@@ -1,9 +1,11 @@
 // Server-only contracts. Never re-export from @specsentry/shared.
-import type { AiErrorClass, AiOutcome, AiTokenUsage, ContributorDraftRequest, ContributorDraftResult, PatchRiskAnalyzedScope, ReviewerRiskResult } from '@specsentry/shared';
+import type { AiErrorClass, AiOutcome, AiTokenUsage, ContributorDraftRequest, ContributorDraftResult,
+  MaintainerGateAnalyzedScope, MaintainerGateResult, PatchRiskAnalyzedScope, ReviewerRiskResult } from '@specsentry/shared';
 import type { Prisma } from '../generated/prisma/client';
 
 export const PATCH_RISK_GATEWAY = Symbol('PATCH_RISK_GATEWAY');
 export const CONTRIBUTOR_DRAFT_GATEWAY = Symbol('CONTRIBUTOR_DRAFT_GATEWAY');
+export const MAINTAINER_GATEWAY = Symbol('MAINTAINER_GATEWAY');
 export const AI_TRANSPORT = Symbol('AI_TRANSPORT');
 export const INPUT_BUDGET_COUNTER = Symbol('INPUT_BUDGET_COUNTER');
 export const AI_CLOCK = Symbol('AI_CLOCK');
@@ -66,6 +68,34 @@ export interface ContributorDraftGateway {
   analyze(context: ContributorDraftContext, options: {
     readonly actorId: string; readonly deadline: AiDeadline; readonly beforeAttempt: (tx: Prisma.TransactionClient) => Promise<void>;
   }): Promise<{ readonly result: ContributorDraftResult; readonly metadata: AiSafeMetadata }>;
+}
+export type MaintainerGateCode = 'EMPTY' | 'VERSION' | 'ROLLBACK' | 'SMOKE' | 'REVISION' | 'APPROVAL' | 'COVERAGE' | 'FINDING';
+export interface MaintainerGateContext {
+  readonly scope: Readonly<MaintainerGateAnalyzedScope>;
+  readonly candidate: Readonly<{
+    versionLabel: string;
+    rollbackNote: string;
+    dependencyNotes: string;
+    blockerCodes: readonly MaintainerGateCode[];
+  }>;
+  readonly items: readonly Readonly<{
+    itemId: string;
+    title: string;
+    revisionNumber: number;
+    submittedSummary: string;
+    gateStatuses: Readonly<{
+      currentRevision: 'PASS' | 'FAIL';
+      approval: 'PASS' | 'FAIL';
+      requiredCoverage: 'PASS' | 'FAIL';
+      highCriticalFindings: 'PASS' | 'FAIL';
+    }>;
+  }>[];
+}
+export interface MaintainerGateGateway {
+  analyze(context: MaintainerGateContext, options: {
+    readonly actorId: string; readonly deadline: AiDeadline;
+    readonly beforeAttempt: (tx: Prisma.TransactionClient) => Promise<void>;
+  }): Promise<{ readonly result: MaintainerGateResult; readonly metadata: AiSafeMetadata }>;
 }
 export interface AiMessage { readonly role: 'system' | 'user'; readonly content: string }
 export interface AiResponseFormat {

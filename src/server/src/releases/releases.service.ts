@@ -1,10 +1,13 @@
 import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { createHash, randomUUID } from 'node:crypto';
-import { releaseCandidateCommandResponseSchema, releaseCandidateDetailResponseSchema,
-  releaseCandidatesResponseSchema, releasePublicationResponseSchema, reviewerReleaseContextSchema,
-  type AddReleaseMemberRequest, type AppendReleaseSmokeTestRequest,
-  type CreateReleaseCandidateRequest, type PublishReleaseCandidateRequest, type ReleaseCandidatesQuery,
-  type RemoveReleaseMemberRequest, type UpdateReleaseCandidateRequest } from '@specsentry/shared';
+import { eligibleReleaseProposalsResponseSchema, RELEASE_LIMITS, releaseAnnotationSchema,
+  releaseAnnotationsResponseSchema, releaseCandidateCommandResponseSchema, releaseCandidateDetailResponseSchema,
+  releaseCandidatesResponseSchema, releasePublicationResponseSchema, releaseSmokeTestsResponseSchema,
+  normalizeReviewerText, reviewerReleaseContextSchema, REVIEWER_LIMITS,
+  type AddReleaseMemberRequest, type AppendReleaseAnnotationRequest, type AppendReleaseSmokeTestRequest,
+  type CreateReleaseCandidateRequest, type EligibleReleaseProposalsQuery, type PublishReleaseCandidateRequest,
+  type ReleaseAnnotationsQuery, type ReleaseCandidatesQuery, type ReleaseSmokeTestsQuery, type RemoveReleaseMemberRequest,
+  type UpdateReleaseCandidateRequest } from '@specsentry/shared';
 import { Prisma, type ReleaseCandidate } from '../generated/prisma/client';
 import { ActivityService } from '../activity/activity.service';
 import { DatabaseService } from '../database/database.service';
@@ -14,6 +17,11 @@ import { lockCandidateMemberProposals, lockReleaseCandidates, lockReleaseProposa
 
 type Tx = Prisma.TransactionClient;
 type Blocker = { code: 'EMPTY' | 'VERSION' | 'ROLLBACK' | 'SMOKE' | 'REVISION' | 'APPROVAL' | 'COVERAGE' | 'FINDING'; proposalId?: string };
+type EligibleProposalRow = {
+  proposalId: string; title: string; ownerId: string; ownerUsername: string; proposalVersion: number;
+  revisionId: string; revisionNumber: number; submittedAt: Date; assignmentId: string;
+  assignmentVersion: number; reviewerId: string; reviewerUsername: string;
+};
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 
 @Injectable()
@@ -27,6 +35,10 @@ export class ReleasesService {
   private owner(candidate: ReleaseCandidate, actor: BusinessActor) {
     if (candidate.createdById !== actor.accountId) throw new ForbiddenException();
     if (candidate.status !== 'OPEN') throw new ConflictException('Candidate is released');
+  }
+  private releasedOwner(candidate: ReleaseCandidate, actor: BusinessActor) {
+    if (candidate.createdById !== actor.accountId) throw new ForbiddenException();
+    if (candidate.status !== 'RELEASED') throw new ConflictException('Candidate is not released');
   }
   private command(candidate: ReleaseCandidate) {
     return releaseCandidateCommandResponseSchema.parse({ candidateId: candidate.id, version: candidate.version,
@@ -112,31 +124,114 @@ export class ReleasesService {
     });
   }
 
+  eligible(actor: BusinessActor, id: string, query: EligibleReleaseProposalsQuery) {
+    const scope = JSON.stringify(['eligible-release-proposals', id]);
+    return businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id, 'RELEASE_ELIGIBLE_LIST', async tx => {
+      const candidate = await this.locked(tx, id); this.owner(candidate, actor);
+      const cursor = decodeCursor(query.cursor, scope, 'timestamp');
+      const cursorClause = cursor ? Prisma.sql`AND (
+        r."submittedAt" < ${new Date(cursor.timestamp!)} OR
+        (r."submittedAt" = ${new Date(cursor.timestamp!)} AND p."id" < ${cursor.id})
+      )` : Prisma.empty;
+      const rows = await tx.$queryRaw<EligibleProposalRow[]>(Prisma.sql`
+        SELECT p."id" AS "proposalId", p."title", p."ownerId", owner."username" AS "ownerUsername",
+          p."version" AS "proposalVersion", r."id" AS "revisionId", r."number" AS "revisionNumber",
+          r."submittedAt", a."id" AS "assignmentId", a."version" AS "assignmentVersion",
+          reviewer."id" AS "reviewerId", reviewer."username" AS "reviewerUsername"
+        FROM "ChangeProposal" p
+        JOIN "ProposalRevision" r
+          ON r."proposalId" = p."id" AND r."id" = p."currentRevisionId"
+        JOIN "ReviewAssignment" a
+          ON a."proposalId" = p."id" AND a."revisionId" = r."id" AND a."id" = p."currentAssignmentId"
+        JOIN "UserAccount" owner ON owner."id" = p."ownerId"
+        JOIN "UserAccount" reviewer ON reviewer."id" = a."reviewerId"
+        JOIN "ReviewDecision" d
+          ON d."proposalId" = p."id" AND d."revisionId" = r."id"
+          AND d."assignmentId" = a."id" AND d."decision" = 'APPROVE'
+        LEFT JOIN "ApprovalInvalidation" invalidation ON invalidation."decisionId" = d."id"
+        WHERE p."state" = 'APPROVED'
+          AND p."releaseAttachmentRef" IS NULL
+          AND a."status" = 'ACTIVE'
+          AND reviewer."role" = 'REVIEWER'
+          AND invalidation."id" IS NULL
+          AND NOT EXISTS (
+            SELECT 1 FROM "ReleaseCandidateMember" member
+            WHERE member."proposalId" = p."id" AND member."status" <> 'REMOVED'
+          )
+          ${cursorClause}
+        ORDER BY r."submittedAt" DESC, p."id" DESC
+        LIMIT ${query.limit + 1}
+      `);
+      const page = rows.slice(0, query.limit);
+      const last = page.at(-1);
+      return eligibleReleaseProposalsResponseSchema.parse({
+        items: page.map(row => ({ proposalId: row.proposalId, title: row.title,
+          owner: { id: row.ownerId, username: row.ownerUsername }, proposalVersion: row.proposalVersion,
+          revisionId: row.revisionId, revisionNumber: row.revisionNumber,
+          submittedAt: row.submittedAt.toISOString(), assignmentId: row.assignmentId,
+          assignmentVersion: row.assignmentVersion,
+          reviewer: { id: row.reviewerId, username: row.reviewerUsername } })),
+        nextCursor: rows.length > query.limit && last
+          ? encodeCursor(scope, { id: last.proposalId, timestamp: last.submittedAt.toISOString() }) : null,
+      });
+    });
+  }
+
   detail(actor: BusinessActor, id: string) {
     const role = actor.role === 'REVIEWER' ? 'REVIEWER' : 'RELEASE_MAINTAINER';
     return businessTransaction(this.database, actor, role, id, 'RELEASE_DETAIL', async tx => {
       const candidate = await this.locked(tx, id);
       if (role === 'REVIEWER') {
-        const own = await tx.releaseCandidateMember.findFirst({ where: { candidateId: id, status: 'ATTACHED',
+        const own = await tx.releaseCandidateMember.findFirst({ where: { candidateId: id, status: { in: ['ATTACHED', 'RELEASED'] },
           assignment: { reviewerId: actor.accountId, status: 'ACTIVE' } }, select: { approvalId: true } });
         if (!own) throw new ForbiddenException();
         const invalidation = await tx.approvalInvalidation.findUnique({ where: { decisionId: own.approvalId }, select: { id: true } });
         return reviewerReleaseContextSchema.parse({ candidateId: id, candidateVersion: candidate.version,
           ownInvalidApprovalBlocker: !!invalidation });
       }
-      const members = await tx.releaseCandidateMember.findMany({ where: { candidateId: id }, orderBy: { attachedAt: 'asc' } });
-      const smokeTests = await tx.releaseSmokeTest.findMany({ where: { candidateId: id }, orderBy: { createdAt: 'asc' } });
-      const blockers = await this.blockers(tx, candidate);
+      const members = await tx.releaseCandidateMember.findMany({
+        where: { candidateId: id, status: { in: ['ATTACHED', 'RELEASED'] } },
+        orderBy: [{ attachedAt: 'asc' }, { id: 'asc' }], take: 1_001,
+        select: { id: true, proposalId: true, revisionId: true, assignmentId: true, status: true,
+          attachedAt: true, removedAt: true,
+          proposal: { select: { title: true, version: true } }, revision: { select: { number: true } } },
+      });
+      if (members.length > 1_000) throw new ConflictException('Candidate member limit exceeded');
+      const smokeRows = await tx.releaseSmokeTest.findMany({ where: { candidateId: id },
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: 2 });
+      const smokeTests = smokeRows.slice(0, 1);
+      const publication = await tx.releasePublicationSnapshot.findUnique({ where: { candidateId: id },
+        select: { id: true, actorId: true, candidateVersion: true, contentVersion: true, createdAt: true } });
+      const unreadRows = candidate.createdById === actor.accountId
+        ? await tx.notification.findMany({ where: { recipientId: actor.accountId, candidateId: id,
+          kind: 'APPROVAL_REVOKED', readAt: null }, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+          take: REVIEWER_LIMITS.pageMax + 1,
+          select: { id: true, proposalId: true, revisionId: true, invalidationId: true,
+            reviewerId: true, reason: true, createdAt: true } }) : [];
+      const unreadRevocationNotices = unreadRows.slice(0, REVIEWER_LIMITS.pageMax);
+      const blockers = candidate.status === 'RELEASED' ? [] : await this.blockers(tx, candidate);
       return releaseCandidateDetailResponseSchema.parse({ id, projectKey: candidate.projectKey,
         createdById: candidate.createdById, status: candidate.status, versionLabel: candidate.semanticVersion,
         rollbackNote: candidate.rollbackPlan, dependencyNotes: candidate.dependencyNotes,
         version: candidate.version, contentVersion: candidate.contentVersion,
-        members: members.map(m => ({ id: m.id, proposalId: m.proposalId, revisionId: m.revisionId,
-          assignmentId: m.assignmentId, approvalId: m.approvalId, status: m.status,
+        members: members.map(m => ({ id: m.id, proposalId: m.proposalId,
+          proposalTitle: m.proposal.title, proposalVersion: m.proposal.version,
+          revisionId: m.revisionId, revisionNumber: m.revision.number,
+          assignmentId: m.assignmentId, status: m.status,
           attachedAt: m.attachedAt.toISOString(), removedAt: m.removedAt?.toISOString() ?? null })),
         smokeTests: smokeTests.map(s => ({ id: s.id, testedContentVersion: s.testedContentVersion,
           outcome: s.outcome, procedure: s.procedure, results: s.results, actorId: s.actorId,
-          createdAt: s.createdAt.toISOString() })), blockers, publishedAt: candidate.publishedAt?.toISOString() ?? null });
+          createdAt: s.createdAt.toISOString() })), smokeTestsTruncated: smokeRows.length > 1,
+        blockers: blockers.slice(0, 1_000),
+        publishedAt: candidate.publishedAt?.toISOString() ?? null,
+        publication: publication ? { snapshotId: publication.id, actorId: publication.actorId,
+          candidateVersion: publication.candidateVersion, contentVersion: publication.contentVersion,
+          createdAt: publication.createdAt.toISOString() } : null,
+        unreadRevocationNotices: unreadRevocationNotices.map(notice => ({ id: notice.id,
+          proposalId: notice.proposalId, revisionId: notice.revisionId,
+          invalidationId: notice.invalidationId, reviewerId: notice.reviewerId,
+          reason: notice.reason, createdAt: notice.createdAt.toISOString() })),
+        unreadRevocationNoticesTruncated: unreadRows.length > REVIEWER_LIMITS.pageMax });
     });
   }
 
@@ -161,22 +256,94 @@ export class ReleasesService {
     });
   }
 
+  smokeHistory(actor: BusinessActor, id: string, query: ReleaseSmokeTestsQuery) {
+    const scope = JSON.stringify(['release-smoke-tests', id]);
+    return businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id,
+      'RELEASE_SMOKE_HISTORY', async tx => {
+        await this.locked(tx, id);
+        const cursor = decodeCursor(query.cursor, scope, 'timestamp');
+        const rows = await tx.releaseSmokeTest.findMany({ where: { candidateId: id,
+          ...(cursor ? { OR: [{ createdAt: { lt: new Date(cursor.timestamp!) } },
+            { createdAt: new Date(cursor.timestamp!), id: { lt: cursor.id } }] } : {}) },
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: query.limit + 1,
+        select: { id: true, testedContentVersion: true, outcome: true, procedure: true,
+          results: true, actorId: true, createdAt: true } });
+        const page: typeof rows = []; let contentBytes = 0;
+        for (const row of rows.slice(0, query.limit)) {
+          const rowBytes = Buffer.byteLength(row.procedure, 'utf8') + Buffer.byteLength(row.results, 'utf8');
+          if (page.length && contentBytes + rowBytes > RELEASE_LIMITS.smokeHistoryContentBytes) break;
+          page.push(row); contentBytes += rowBytes;
+        }
+        const last = page.at(-1);
+        return releaseSmokeTestsResponseSchema.parse({ items: page.map(row => ({ ...row,
+          createdAt: row.createdAt.toISOString() })), contentBytes,
+        nextCursor: last && rows.length > page.length
+          ? encodeCursor(scope, { id: last.id, timestamp: last.createdAt.toISOString() }) : null });
+      });
+  }
+
+  annotations(actor: BusinessActor, id: string, query: ReleaseAnnotationsQuery) {
+    const scope = JSON.stringify(['release-annotations', id]);
+    return businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id, 'RELEASE_ANNOTATIONS_LIST', async tx => {
+      const candidate = await this.locked(tx, id);
+      if (candidate.status !== 'RELEASED') throw new ConflictException('Candidate is not released');
+      const cursor = decodeCursor(query.cursor, scope, 'timestamp');
+      const rows = await tx.releaseAnnotation.findMany({ where: { candidateId: id,
+        ...(cursor ? { OR: [{ createdAt: { lt: new Date(cursor.timestamp!) } },
+          { createdAt: new Date(cursor.timestamp!), id: { lt: cursor.id } }] } : {}) },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }], take: query.limit + 1,
+      select: { id: true, candidateId: true, text: true, createdAt: true,
+        actor: { select: { id: true, username: true } } } });
+      const page = rows.slice(0, query.limit);
+      const last = page.at(-1);
+      return releaseAnnotationsResponseSchema.parse({ items: page.map(row => ({ ...row,
+        createdAt: row.createdAt.toISOString() })), nextCursor: rows.length > query.limit && last
+        ? encodeCursor(scope, { id: last.id, timestamp: last.createdAt.toISOString() }) : null });
+    });
+  }
+
+  annotate(actor: BusinessActor, id: string, body: AppendReleaseAnnotationRequest) {
+    return businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id, 'RELEASE_ANNOTATE', async tx => {
+      const candidate = await this.locked(tx, id); this.releasedOwner(candidate, actor);
+      if (candidate.version !== body.expectedVersion) throw new ConflictException('Candidate version changed');
+      const snapshot = await tx.releasePublicationSnapshot.findUnique({ where: { id: body.snapshotId },
+        select: { id: true, candidateId: true } });
+      if (!snapshot || snapshot.candidateId !== id) throw new ConflictException('Publication snapshot changed');
+      const annotation = await tx.releaseAnnotation.create({ data: { candidateId: id,
+        snapshotId: snapshot.id, actorId: actor.accountId, candidateVersion: candidate.version,
+        text: normalizeReviewerText(body.text) },
+      select: { id: true, candidateId: true, text: true, createdAt: true,
+        actor: { select: { id: true, username: true } } } });
+      await tx.securityEvent.create({ data: { actorId: actor.accountId, action: 'RELEASE_ANNOTATED',
+        target: id, outcome: 'success', correlationId: actor.correlationId } });
+      return releaseAnnotationSchema.parse({ ...annotation, createdAt: annotation.createdAt.toISOString() });
+    });
+  }
+
   async add(actor: BusinessActor, id: string, body: AddReleaseMemberRequest) {
-    const pointer = await this.database.client.reviewAssignment.findUnique({ where: { id: body.assignmentId },
-      select: { reviewerId: true } });
-    if (!pointer) throw new NotFoundException();
+    const pointer = await businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id,
+      'RELEASE_ADD_POINTER', async tx => {
+        this.owner(await this.locked(tx, id), actor);
+        const found = await tx.reviewAssignment.findUnique({ where: { id: body.assignmentId },
+          select: { reviewerId: true } });
+        if (!found) throw new NotFoundException();
+        return found;
+      });
     return businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id, 'RELEASE_ADD', async (tx, accounts) => {
       const candidate = await this.locked(tx, id); this.owner(candidate, actor);
       await lockReleaseProposals(tx, [body.proposalId]);
       const proposal = await tx.changeProposal.findUniqueOrThrow({ where: { id: body.proposalId } });
       const assignment = await tx.reviewAssignment.findUnique({ where: { id: body.assignmentId } });
+      const memberCount = await tx.releaseCandidateMember.count({ where: { candidateId: id,
+        status: { in: ['ATTACHED', 'RELEASED'] } } });
       if (candidate.version !== body.expectedCandidateVersion || candidate.contentVersion !== body.expectedContentVersion ||
+          memberCount >= 1_000 ||
           proposal.version !== body.expectedProposalVersion || proposal.state !== 'APPROVED' || proposal.releaseAttachmentRef ||
           proposal.currentRevisionId !== body.revisionId || proposal.currentAssignmentId !== body.assignmentId ||
           !assignment || assignment.proposalId !== body.proposalId || assignment.revisionId !== body.revisionId ||
           assignment.reviewerId !== pointer.reviewerId || assignment.status !== 'ACTIVE' ||
           assignment.version !== body.expectedAssignmentVersion ||
-          !accounts.some(a => a.id === assignment.reviewerId && a.enabled && a.role === 'REVIEWER')) throw new ConflictException();
+          !accounts.some(a => a.id === assignment.reviewerId && a.role === 'REVIEWER')) throw new ConflictException();
       const approval = await tx.reviewDecision.findFirst({ where: { proposalId: body.proposalId,
         revisionId: body.revisionId, assignmentId: body.assignmentId, decision: 'APPROVE' }, select: { id: true } });
       if (!approval || await tx.approvalInvalidation.findUnique({ where: { decisionId: approval.id } }) ||
@@ -195,9 +362,14 @@ export class ReleasesService {
   }
 
   async remove(actor: BusinessActor, id: string, body: RemoveReleaseMemberRequest) {
-    const pointer = await this.database.client.releaseCandidateMember.findUnique({ where: { id: body.memberId },
-      select: { candidateId: true, proposalId: true, assignment: { select: { reviewerId: true } } } });
-    if (!pointer || pointer.candidateId !== id) throw new NotFoundException();
+    const pointer = await businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id,
+      'RELEASE_REMOVE_POINTER', async tx => {
+        this.owner(await this.locked(tx, id), actor);
+        const found = await tx.releaseCandidateMember.findUnique({ where: { id: body.memberId },
+          select: { candidateId: true, proposalId: true, assignment: { select: { reviewerId: true } } } });
+        if (!found || found.candidateId !== id) throw new NotFoundException();
+        return found;
+      });
     // The affected Reviewer account is always locked, including when already disabled.
     return businessTransaction(this.database, actor, 'RELEASE_MAINTAINER', id, 'RELEASE_REMOVE', async (tx, accounts) => {
       const candidate = await this.locked(tx, id); this.owner(candidate, actor);

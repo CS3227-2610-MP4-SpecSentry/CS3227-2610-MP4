@@ -1,0 +1,35 @@
+{
+  "id": "323d95de8c064a5988cf431c659baa1f",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-membership",
+  "agent": "maintainer-architect",
+  "invocation": "architect-1",
+  "stage": "design-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-06T11:47:09.501946+00:00",
+  "ended_at": "2026-11-06T11:52:15.341987+00:00",
+  "elapsed_seconds": 305.840041,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Completed read-only proposal-membership architecture and test design review",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry is not exposed",
+    "output_tokens": "Per-record usage telemetry is not exposed",
+    "cache_read_tokens": "Per-record usage telemetry is not exposed",
+    "tool_calls": "Per-record usage telemetry is not exposed",
+    "retries": "Per-record usage telemetry is not exposed"
+  },
+  "unavailable_reason": "Per-record usage telemetry is not exposed"
+}

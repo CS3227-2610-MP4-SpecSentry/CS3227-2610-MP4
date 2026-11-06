@@ -1,0 +1,35 @@
+{
+  "id": "380ef36b6c53487fa5661e7081487a6d",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "release-verifier",
+  "invocation": "release-4",
+  "stage": "independent-review",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Existing independent verifier reused after final PostgreSQL-driven source correction",
+  "started_at": "2026-11-06T13:29:50.497986+00:00",
+  "ended_at": "2026-11-06T13:49:49.012743+00:00",
+  "elapsed_seconds": 1198.514757,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final release review passed; annotation normalization preserves released ownership/version/snapshot and REL-VER-001 through REL-VER-003 remain closed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "retries": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+}
