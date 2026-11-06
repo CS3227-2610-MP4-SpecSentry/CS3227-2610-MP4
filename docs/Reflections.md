@@ -39,6 +39,14 @@ Results pending: no controlled comparison is reported by this initialization.
 Analyze whether reduced defects or parallel progress justified coordination cost,
 and identify situations where a single agent was sufficient.
 
+The [Maintainer smoke workflow observation](../workflow/evaluations/2026-11-05-maintainer-smoke-workflow-observation.md)
+now records one real orchestrator-subagent plus generator-verifier run. It completed
+the bounded slice with clean final independent reviews in 1,256.265787 seconds of
+wall time, while 2,193.225086 summed interval seconds overlapped. One failed focused
+test attempt and an unmeasured interrupted nested invocation are retained. Without
+a matched single-agent condition or attributable token/tool telemetry, this is
+presentation evidence about coordination behavior, not a causal efficiency result.
+
 ## Context Engineering
 
 Compare focused requirement/interface packs with broader context on comparable
@@ -70,6 +78,7 @@ limitations. Include each member's actual role and shared-work contribution.
 | Experiment | Evidence | Analysis / limitation |
 | --- | --- | --- |
 | Single agent versus coordinated agents | Pending | No comparative result yet |
+| Maintainer smoke coordinated workflow | [Observed run](../workflow/evaluations/2026-11-05-maintainer-smoke-workflow-observation.md) | Real quality/time/coordination evidence; no single-agent baseline, so not a controlled comparison |
 | Focused versus broad context | Pending | No comparative result yet |
 | Prompt/skill versions and AI security | Pending | No comparative result yet |
 | Model choice and resource cost | Pending | No comparative result yet |

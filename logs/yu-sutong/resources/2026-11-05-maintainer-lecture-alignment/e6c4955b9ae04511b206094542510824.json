@@ -1,0 +1,35 @@
+{
+  "id": "e6c4955b9ae04511b206094542510824",
+  "prompter": "yu-sutong",
+  "session": "2026-11-05-maintainer-lecture-alignment",
+  "agent": "main",
+  "invocation": "main-4",
+  "stage": "re-review-coordination",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-06T03:33:29.885140+00:00",
+  "ended_at": "2026-11-06T03:42:18.763859+00:00",
+  "elapsed_seconds": 528.878719,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Coordinated fresh frozen re-review; collected one workflow and three security residual findings for a third correction cycle",
+  "unavailable_reasons": {
+    "input_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "output_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "tool_calls": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed",
+    "retries": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-stage model, token, cache, tool-call, and retry telemetry are not exposed"
+}

@@ -17,6 +17,9 @@
 | reviewer/templates/ | Reviewer run and handoff record formats |
 | reviewer/scripts/ | Workflow CLI, evidence validation, checks and recording helpers; see its README |
 | reviewer/tests/ | Python tests of the workflow tooling, not product acceptance |
+| deployment/CONTRACT.md | Observable Release Maintainer/deployment workflow rules, coordination-pattern choice and evidence expectations |
+| deployment/tooling/verify-run-evidence.mjs | Deterministic completed-run/resource/manifest checker |
+| deployment/tests/ | Node tests of the deployment workflow harness, not product acceptance |
 | templates/PROMPT-LOG.md | Prompt/change/resource summary format |
 | templates/EXPERIMENT.md | Controlled comparison and result format |
 | evaluations/ (when results exist) | Versioned evaluation and experiment evidence; create with the first result |
