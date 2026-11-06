@@ -1,0 +1,36 @@
+{
+  "snapshot_id": "dashboard-settled-2",
+  "references": [
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "workflow/specs/SHARED-REQUIREMENTS.md",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-completion/brief.md",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-completion/reports/security-design.md"
+  ],
+  "next_action": "Separate recorded integration: current combined build/typecheck/lint, Reviewer UI/gateway PostgreSQL regressions and affected evaluation-browser; then independent verifier.",
+  "commands": [
+    "verify-42275ec6d9e84a50",
+    "verify-e39c5616a98540cb",
+    "verify-694ec4cb7e5b42eb",
+    "verify-ef8a5ff2abed4c0e",
+    "verify-106c4287f8c34fbd"
+  ],
+  "risks": "Independent security/spec review remains pending. No live provider, deployment, production load, or genuine BFCache acceptance claimed. Existing pg concurrent-client deprecation and bundle-size warnings remain; shared quotas are not inferred from Reviewer-only totals.",
+  "record_id": "rec-95237763f2b44d96",
+  "unavailable_reason": "Aligned own-stage runtime token delta imported. Observed settings/tool-call/retry counters unavailable; sampling lag and final rendering excluded.",
+  "summary": "Implemented own Reviewer AI usage endpoint, strict schema, workspace panel and all callers/tests/fixtures. Actor AND Reviewer request-feature filtering, independent SGT windows, outbound-only completed failure rate, all-or-unknown provider fields, safe audit transaction and observable UI clearing preserve assignment-scoped proposal audit/manual review. Final checks: server15/UI12/PostgreSQL11/browser3 passed. Failed UI status-selector and browser timezone-fixture attempts preserved and superseded.",
+  "changed_paths": [
+    "src/shared/src/contracts/ai.ts",
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+    "src/server/test/reviewer-ai-usage.integration.ts",
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts"
+  ],
+  "assignment": "dashboard"
+}

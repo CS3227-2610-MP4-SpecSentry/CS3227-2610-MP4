@@ -1,0 +1,29 @@
+{
+  "assignment": "evaluation",
+  "record_id": "rec-5961c35aae354a6a",
+  "snapshot_id": "evaluation-settled-resume2",
+  "commands": [
+    "verify-b07077dab92b40c5",
+    "verify-8cd235342d634f24"
+  ],
+  "changed_paths": [
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/tooling/verify-live-ai.mjs",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tests/browser/reviewer-accessibility.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts"
+  ],
+  "summary": "Successor evaluation fix: retained original evaluation implementation; changed only reviewer-accessibility.spec.ts to check checkbox count and exact accessible criterion key+ID for each seeded criterion without assuming UUID rendering order. Keyboard first/second checkbox focus, Space selection, Enter analysis, status, manual fallback, axe and reflow assertions retained. Nine units and seven browser tests pass. Original failed integration browser result retained and explicitly superseded.",
+  "risks": "Genuine BFCache test skipped because Chromium did not emit pageshow.persisted=true; normal history clearing passed but BFCache remains unverified. Live provider settings absent; no provider compatibility/usefulness claim or live calls. CSS zoom and 320 CSS-pixel viewport are bounded evidence, not OS/browser zoom or screen-reader certification. Initial test compilation and app-redirect probe failures retained with explicit passing supersessions. Prior execution run interrupted due coordinator fixture-wrapper error.",
+  "next_action": "Dashboard integration executor: resume integration using current passing evaluation evidence; refresh broad dashboard-browser evidence as required, then route independent verification. Current client build reused because only browser test changed.",
+  "references": [
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/inputs/matrix.json",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-execution/handoffs/01-main-to-evaluation.md",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/inputs/evaluation-implement-2-usage.json",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/inputs/evaluation-fix-resume2-usage.json"
+  ],
+  "unavailable_reason": "Tool/retry counts and observed runtime model settings not exposed; aligned own-thread delta ends before unflushed final tail and completion rendering."
+}

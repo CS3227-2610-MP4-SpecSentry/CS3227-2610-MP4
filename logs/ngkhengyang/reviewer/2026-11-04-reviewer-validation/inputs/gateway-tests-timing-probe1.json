@@ -1,0 +1,52 @@
+{
+  "id": "gateway-tests-timing-probe1",
+  "kind": "integration",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "node_modules/jest/bin/jest.js",
+    "--runInBand",
+    "--config",
+    "src/server/jest.integration.config.cjs",
+    "--runTestsByPath",
+    "src/server/test/patch-risk.integration.ts",
+    "--testNamePattern",
+    "ai-save-approval|ai-response-drop",
+    "--verbose"
+  ],
+  "paths": [
+    "src/client/src",
+    "src/server/src/ai",
+    "src/server/src/reviews",
+    "src/server/src/identity",
+    "src/server/src/database",
+    "src/server/src/proposals",
+    "src/shared/src",
+    "src/server/test",
+    "src/server/tsconfig.json",
+    "src/server/tsconfig.build.json",
+    "src/client/tsconfig.json",
+    "src/client/vite.config.ts",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json",
+    "eslint.config.mjs",
+    "playwright.config.ts",
+    "workflow/tooling/verify-live-ai.mjs"
+  ],
+  "depends_on": [
+    "fixture-readiness"
+  ],
+  "resources": [
+    "build",
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_test"
+  },
+  "timeout": 360
+}

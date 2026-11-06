@@ -1,0 +1,15 @@
+{
+  "record_id": "rec-1e4dcce8616a4010",
+  "import_id": "evaluation-f001-paused-recovered",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\evaluation-f001-baseline.json -> C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\evaluation-f001-paused.json; actual child root 01a1a6b3-19ec-7882-b9c1-536f0697ec9a only; cutoff 2026-11-04T13:47:59.204Z; partial flushed stage sample, unflushed/final tail excluded",
+  "input_tokens": 76591,
+  "output_tokens": 318,
+  "cache_read_tokens": 76032,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "not exposed",
+    "retries": "not exposed"
+  }
+}

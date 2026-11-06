@@ -1,0 +1,44 @@
+{
+  "id": "evaluation-unit",
+  "kind": "unit",
+  "argv": [
+    "C:\\Program Files\\nodejs\\npm.cmd",
+    "run",
+    "test",
+    "-w",
+    "@specsentry/server",
+    "--",
+    "--runTestsByPath",
+    "test/reviewer-live-verification.spec.ts",
+    "--testNamePattern",
+    "Reviewer verification"
+  ],
+  "paths": [
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/tooling/verify-live-ai.mjs",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tests/browser/reviewer-accessibility.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "src/server/src/ai/contracts.ts",
+    "src/server/src/ai/gateway/transport.ts",
+    "src/server/src/ai/gateway/strict-json.ts",
+    "src/shared/src/contracts/ai.ts",
+    "src/server/jest.config.cjs",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json"
+  ],
+  "depends_on": [
+    "shared-build"
+  ],
+  "resources": [
+    "build"
+  ],
+  "environment": [],
+  "database": null,
+  "timeout": 240
+}

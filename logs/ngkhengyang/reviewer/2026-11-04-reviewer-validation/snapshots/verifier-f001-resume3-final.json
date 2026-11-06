@@ -1,0 +1,30 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "7f5c67d811d7d1a67c68c04d8e8da466a0e647ced263263d249a6f71bc06e5eb",
+  "files": {
+    "docs/DeveloperGuide.md": {
+      "bytes": 51081,
+      "sha256": "dc1c66a9ab23f9363ddb79880528c2fc8972ce896534ab556dadd863eea2c205"
+    },
+    "src/server/src/ai/reviewer-live-verification.ts": {
+      "bytes": 7781,
+      "sha256": "bac523cf11c94e211bb3fc6259ae22f4e5cce5da47ffb93e899329db5baa0e05"
+    },
+    "src/server/test/reviewer-live-verification.spec.ts": {
+      "bytes": 17293,
+      "sha256": "7b9bf7e9a73552e4e6c54270cb2cbbf5d351b1c6598d9f19786ce7ed52ebeb53"
+    },
+    "workflow/TRACEABILITY.md": {
+      "bytes": 69306,
+      "sha256": "52c3cc2fbb0bc1b212aac9c25799aaf36040a0efb512a7aa0f27dfd9486359fe"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "docs/DeveloperGuide.md",
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/TRACEABILITY.md"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "import_id": "main-close-1-telemetry",
+  "record_id": "rec-eae61ec091584765",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\2026-11-04-reviewer-prep-main-close-delta.json; parent thread only; cutoff 2026-11-04T10:44:45.387Z; baseline cutoff 2026-11-04T10:42:30.733Z; excludes unflushed tail and final report/response rendering",
+  "input_tokens": 381578,
+  "output_tokens": 6047,
+  "cache_read_tokens": 377728,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "not exposed by collector",
+    "retries": "not exposed by collector"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "9c4df6f6fbec422ea02945edf66271f0",
+  "prompter": "ngkhengyang",
+  "session": "2026-11-04-ai-retention",
+  "agent": "retention",
+  "invocation": "retention-verify-1",
+  "stage": "verify",
+  "attempt": 1,
+  "selected_model": "gpt-6.1-sol",
+  "selected_effort": "high",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Selected settings supplied by caller; observed metadata may be unavailable",
+  "started_at": "2026-11-04T12:46:35.103738+00:00",
+  "ended_at": "2026-11-04T12:48:19.547812+00:00",
+  "elapsed_seconds": 104.444074,
+  "status": "failed",
+  "usage": {
+    "input_tokens": 835135,
+    "output_tokens": 1348,
+    "cache_read_tokens": 826368,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": "Own thread external retention-verify-1 baseline/delta; excludes unflushed tail",
+  "outcome": "45 unit/gateway tests passed; 14 integration cases rejected at fixture creation by existing feature scope database constraint",
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed",
+    "retries": "Not exposed"
+  },
+  "unavailable_reason": "Observed settings/tool/retry counts and unflushed tail unavailable"
+}

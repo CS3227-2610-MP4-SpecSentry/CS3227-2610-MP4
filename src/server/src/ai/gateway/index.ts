@@ -11,7 +11,8 @@ import { CONTRIBUTOR_RESPONSE_FORMAT } from './contributor-schema';
 
 export { PrismaAiAccounting, SafeAiError, ConservativeInputBudgetCounter, inputBudgetMessages, SocLlmHttpsTransport, SystemAiClock, parseStrictJson, CONTRIBUTOR_RESPONSE_FORMAT };
 export type ReviewerPatchRiskGateway = PatchRiskGateway;
-const TEMPLATE_VERSION = 'reviewer-risk-v1';
+export const REVIEWER_TEMPLATE_VERSION = 'reviewer-risk-v1';
+const TEMPLATE_VERSION = REVIEWER_TEMPLATE_VERSION;
 const BASE_URL = 'https://soclaas-api.comp.nus.edu.sg/v1';
 const UNKNOWN_USAGE: AiTokenUsage = { promptTokens: null, completionTokens: null, totalTokens: null, cachedTokens: null };
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -156,9 +157,8 @@ function createAdvisoryGateway<Context, Result>(deps: GatewayDependencies, adapt
     let requestCreated = false;
     try {
       call.deadline.assertRemaining();
+      await accounting.cleanup(call.deadline);
       await accounting.bounded(call.deadline, async tx => {
-      await tx.aiQueueLease.deleteMany({ where: { expiresAt: { lte: clock.now() } } });
-      await tx.aiRequest.deleteMany({ where: { retainedUntil: { lte: clock.now() } } });
       return tx.aiRequest.create({ data: {
         id: requestId, correlationId: requestId, actorId: call.actorId,
         ...adapter.scope(rawContext), templateVersion: adapter.templateVersion,
@@ -257,15 +257,24 @@ export function createPatchRiskGateway(deps: GatewayDependencies): ReviewerPatch
   return createAdvisoryGateway<PatchRiskContext, PatchRiskGatewayResult['result']>(deps, {
     templateVersion: TEMPLATE_VERSION, inputUnitCap: AI_LIMITS.reviewerInputUnits,
     scope: context => ({ feature: 'REVIEWER', ...context.scope, selectedCriterionCount: context.selectedCriterionIds.length }),
-    prepare: rawContext => {
-      const context = sanitize(rawContext);
-      const selected = selectedCriterionIdsSchema.parse(context.selectedCriterionIds);
-      if (new Set(context.criteria.map(c => c.id)).size !== context.criteria.length
-        || selected.some(id => !context.criteria.some(c => c.id === id))
-        || Array.from(context.diffText).length > AI_LIMITS.reviewerDiffCodePoints) throw new SafeAiError('INPUT_LIMIT');
-      return { messages: buildMessages(context), validate: output => validateReviewerRiskResult(output, selected) };
-    },
+    prepare: prepareReviewerRisk,
   });
+}
+
+export function prepareReviewerRisk(rawContext: PatchRiskContext) {
+  const context = sanitize(rawContext);
+  const selected = selectedCriterionIdsSchema.parse(context.selectedCriterionIds);
+  if (new Set(context.criteria.map(c => c.id)).size !== context.criteria.length
+    || selected.some(id => !context.criteria.some(c => c.id === id))
+    || Array.from(context.diffText).length > AI_LIMITS.reviewerDiffCodePoints) throw new SafeAiError('INPUT_LIMIT');
+  return { messages: buildMessages(context), validate: (output: unknown) => validateReviewerRiskResult(output, selected) };
+}
+
+export function decodeReviewerRiskResponse(body: string, selectedCriterionIds: readonly string[]) {
+  const selected = selectedCriterionIdsSchema.parse(selectedCriterionIds);
+  const envelope = parseEnvelope(body);
+  const usage = usageFrom(envelope);
+  return { result: decode(envelope, output => validateReviewerRiskResult(output, selected), usage), usage };
 }
 
 export const CONTRIBUTOR_TEMPLATE_VERSION = 'contributor-draft-v3';

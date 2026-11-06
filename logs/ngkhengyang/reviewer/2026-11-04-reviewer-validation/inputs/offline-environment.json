@@ -1,0 +1,20 @@
+{
+  "id": "offline-environment",
+  "kind": "preflight",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const fs=require('node:fs'); if(Number(process.versions.node.split('.')[0])!==24) process.exit(1); for(const x of ['typescript','jest','vitest','ts-node','pg'])require.resolve(x); if(!fs.existsSync('src/server/src/generated/prisma/client.ts'))process.exit(1); console.log('Offline Node/dependencies/generated Prisma readiness passed; DB/browser/live are separately gated');"
+  ],
+  "paths": [
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json"
+  ],
+  "depends_on": [],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 30
+}

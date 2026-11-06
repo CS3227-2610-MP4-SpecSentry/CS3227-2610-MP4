@@ -1,0 +1,70 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/patch-risk.integration.ts test/contributor-ai.integration.ts
+
+(node:8164) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+FAIL test/contributor-ai.integration.ts (25.726 s)
+  ● PostgreSQL Contributor Spec Draft Assistant security and resource integration › shares real per-user attempt quota across Reviewer and Contributor feature metadata without leaking another actor usage
+
+    Query read timeout
+
+      71 |   });
+      72 |   beforeEach(async () => {
+    > 73 |     await database.client.$executeRawUnsafe(`TRUNCATE ${tables}`);
+         |     ^
+      74 |     await database.client.userAccount.updateMany({ where: { id: { startsWith: prefix } }, data: { enabled: true, version: 1 } });
+      75 |     Object.assign(options, aiTestOptions); counter.countUnits.mockReturnValue(100);
+      76 |     jest.mocked(transport.complete).mockReset().mockResolvedValue({ status: 200, body: envelope(), retryAfter: null });
+
+      at ../../node_modules/pg-pool/index.js:45:11
+      at PrismaPgAdapter.performIO (../../node_modules/@prisma/adapter-pg/dist/index.js:681:22)
+      at PrismaPgAdapter.executeRaw (../../node_modules/@prisma/adapter-pg/dist/index.js:670:13)
+      at ../../node_modules/@prisma/client-engine-runtime/src/interpreter/query-interpreter.ts:180:20
+      at e.run (../../node_modules/@prisma/client-engine-runtime/src/interpreter/query-interpreter.ts:115:40)
+      at execute (../../node_modules/@prisma/client/src/runtime/core/engines/client/LocalExecutor.ts:81:12)
+      at yr.request (../../node_modules/@prisma/client/src/runtime/core/engines/client/ClientEngine.ts:510:22)
+      at Object.singleLoader (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:113:26)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:150:14)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/contributor-ai.integration.ts:73:5)
+
+(node:8164) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+FAIL test/patch-risk.integration.ts (61.466 s)
+  ● PostgreSQL Patch Risk integration › ai-final-slot-user-window
+
+    Query read timeout
+
+      41 |   async function clean() {
+      42 |     if (!process.env.TEST_DATABASE_URL) throw new Error('Explicit disposable TEST_DATABASE_URL required');
+    > 43 |     await database.client.$executeRawUnsafe(`TRUNCATE ${tables}`);
+         |     ^
+      44 |     await database.client.aiQuotaCoordinator.create({ data: { id: 'reviewer-patch-risk' } });
+      45 |   }
+      46 |   async function login(name: keyof typeof ids): Promise<Session> {
+
+      at ../../node_modules/pg-pool/index.js:45:11
+      at PrismaPgAdapter.performIO (../../node_modules/@prisma/adapter-pg/dist/index.js:681:22)
+      at PrismaPgAdapter.executeRaw (../../node_modules/@prisma/adapter-pg/dist/index.js:670:13)
+      at ../../node_modules/@prisma/client-engine-runtime/src/interpreter/query-interpreter.ts:180:20
+      at e.run (../../node_modules/@prisma/client-engine-runtime/src/interpreter/query-interpreter.ts:115:40)
+      at execute (../../node_modules/@prisma/client/src/runtime/core/engines/client/LocalExecutor.ts:81:12)
+      at yr.request (../../node_modules/@prisma/client/src/runtime/core/engines/client/ClientEngine.ts:510:22)
+      at Object.singleLoader (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:113:26)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:150:14)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at clean (test/patch-risk.integration.ts:43:5)
+      at Object.<anonymous> (test/patch-risk.integration.ts:65:5)
+
+Test Suites: 2 failed, 2 total
+Tests:       2 failed, 49 passed, 51 total
+Snapshots:   0 total
+Time:        87.586 s
+Ran all test suites within paths "test/patch-risk.integration.ts", "test/contributor-ai.integration.ts".
+npm error Lifecycle script `test:integration` failed with error:
+npm error code 1
+npm error path C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error workspace @specsentry/server@0.1.0
+npm error location C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/patch-risk.integration.ts test/contributor-ai.integration.ts

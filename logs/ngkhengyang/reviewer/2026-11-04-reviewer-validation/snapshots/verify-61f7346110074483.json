@@ -1,0 +1,30 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "files": {
+    "package-lock.json": {
+      "bytes": 509922,
+      "sha256": "a7acd7dee2f944ee19c6fd2956bdff291502d7193c92a6365495f51113259aab"
+    },
+    "package.json": {
+      "bytes": 2378,
+      "sha256": "bc9ebf1ad6d3e3a48ef19ad97a4882892fef3ddb115837eed7eb0f37a2a61024"
+    },
+    "src/client/package.json": {
+      "bytes": 701,
+      "sha256": "c09b3ff23a6567e1cf8fe0a08369c9a9c7751a0d317c110b5a8e1c97ed05af62"
+    },
+    "src/server/package.json": {
+      "bytes": 1606,
+      "sha256": "5785316cc9910a09cb43813e0fec028b46d1627a0b419914f3b7828b3d45faa9"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "package-lock.json",
+    "package.json",
+    "src/client/package.json",
+    "src/server/package.json"
+  ]
+}

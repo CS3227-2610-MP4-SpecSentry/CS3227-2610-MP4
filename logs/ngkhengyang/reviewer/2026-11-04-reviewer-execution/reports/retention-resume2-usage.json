@@ -1,0 +1,18 @@
+{
+  "record_id": "4878015ee1a1433099067eeda4564ba5",
+  "scope": "record",
+  "source": "Own thread 01a1a6ac-673f-78c2-a513-d82cc7cb7559 sampled baseline/delta at C:/Users/User/Documents/NUS/CS3227/MP4 sessions/local-resource-tracking/2026-11-04-retention-resume2-{baseline,delta}.json; cutoff 2026-11-04T13:13:55.351Z; 1/1 coverage; excludes unflushed counters and rendering tail",
+  "input_tokens": 1095446,
+  "output_tokens": 2381,
+  "cache_read_tokens": 1087104,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed by local usage collector",
+    "retries": "Not exposed by local usage collector",
+    "observed_model": "Execution metadata unavailable; selected settings supplied by coordinator",
+    "observed_effort": "Execution metadata unavailable; selected settings supplied by coordinator"
+  },
+  "observed_model": null,
+  "observed_effort": null
+}

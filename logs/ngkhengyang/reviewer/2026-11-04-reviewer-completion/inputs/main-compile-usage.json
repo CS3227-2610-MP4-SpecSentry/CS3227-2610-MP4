@@ -1,0 +1,15 @@
+{
+  "import_id": "main-compile-1-telemetry",
+  "record_id": "rec-f462cbde1be242fc",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\2026-11-04-reviewer-prep-main-compile-delta.json; parent thread only; cutoff 2026-11-04T10:40:10.353Z; baseline cutoff 2026-11-04T10:34:45.959Z; excludes unflushed and boundary-call output",
+  "input_tokens": 1892354,
+  "output_tokens": 11257,
+  "cache_read_tokens": 1820672,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "not exposed by collector",
+    "retries": "not exposed by collector"
+  }
+}

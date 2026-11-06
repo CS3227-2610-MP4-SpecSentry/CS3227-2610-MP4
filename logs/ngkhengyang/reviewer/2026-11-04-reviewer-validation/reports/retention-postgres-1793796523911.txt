@@ -1,0 +1,251 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/ai-retention.integration.ts
+
+FAIL test/ai-retention.integration.ts (5.75 s)
+  ● PostgreSQL AI retention › deletes at expiry equality, cascades old abandoned attempts, and is idempotent under concurrent cleanup
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiQueueLease.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:40:41
+
+      37     dispatchedAt: old(), ...overrides } });
+      38 }
+      39 async function lease(requestId: string, expiresAt: Date) {
+    → 40   return database.client.aiQueueLease.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiQueueLease" violates check constraint "AiQueueLease_bounded_deadline"`
+
+      75 |   it('deletes at expiry equality, cascades old abandoned attempts, and is idempotent under concurrent cleanup', async () => {
+      76 |     const request = await create('expired'); await attempt(request.id);
+    > 77 |     await lease(request.id, new Date(time)); await lease(`${prefix}-orphan-expired`, new Date(time));
+         |     ^
+      78 |     await Promise.all([cleanup(), cleanup(), cleanup()]); await cleanup();
+      79 |     expect(await database.client.aiRequest.findUnique({ where: { id: request.id } })).toBeNull();
+      80 |     expect(await database.client.aiOutboundAttempt.count({ where: { requestId: request.id } })).toBe(0);
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:77:5)
+
+  ● PostgreSQL AI retention › purges just outside the recent boundary but preserves future retention and live/orphan leases until expiry
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiQueueLease.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:40:41
+
+      37     dispatchedAt: old(), ...overrides } });
+      38 }
+      39 async function lease(requestId: string, expiresAt: Date) {
+    → 40   return database.client.aiQueueLease.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiQueueLease" violates check constraint "AiQueueLease_bounded_deadline"`
+
+      100 |     await attempt(expired.id, { dispatchedAt: stale, completedAt: stale });
+      101 |     const retained = await create('future-retention', { retainedUntil: new Date(time + 1) });
+    > 102 |     const active = await create('live-lease'); await lease(active.id, new Date(time + 1));
+          |                                                ^
+      103 |     const orphan = `${prefix}-live-orphan`; await lease(orphan, new Date(time + 1));
+      104 |     await cleanup();
+      105 |     expect(await database.client.aiRequest.findUnique({ where: { id: expired.id } })).toBeNull();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:102:48)
+
+  ● PostgreSQL AI retention › captures the cutoff after waiting for the coordinator and reclaims newly expired leases
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiQueueLease.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:40:41
+
+      37     dispatchedAt: old(), ...overrides } });
+      38 }
+      39 async function lease(requestId: string, expiresAt: Date) {
+    → 40   return database.client.aiQueueLease.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiQueueLease" violates check constraint "AiQueueLease_bounded_deadline"`
+
+      113 |   it('captures the cutoff after waiting for the coordinator and reclaims newly expired leases', async () => {
+      114 |     const request = await create('cross-cutoff', { retainedUntil: new Date(time + 1000) });
+    > 115 |     await lease(request.id, new Date(time + 1000));
+          |     ^
+      116 |     const holder = holdCoordinator(); await holder.entered.promise;
+      117 |     const pending = cleanup();
+      118 |     try { await waitForCoordinatorWaiter(); time += 1000; } finally { holder.release.open(); }
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:115:5)
+
+  ● PostgreSQL AI retention › rolls back expired lease deletion and parent/attempt cascade when the cleanup transaction fails
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiQueueLease.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:40:41
+
+      37     dispatchedAt: old(), ...overrides } });
+      38 }
+      39 async function lease(requestId: string, expiresAt: Date) {
+    → 40   return database.client.aiQueueLease.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiQueueLease" violates check constraint "AiQueueLease_bounded_deadline"`
+
+      123 |
+      124 |   it('rolls back expired lease deletion and parent/attempt cascade when the cleanup transaction fails', async () => {
+    > 125 |     const request = await create('rollback'); await attempt(request.id); await lease(request.id, new Date(time));
+          |                                                                          ^
+      126 |     const prisma = { $transaction: (work: (tx: Prisma.TransactionClient) => Promise<unknown>, options: object) =>
+      127 |       database.client.$transaction(tx => work(new Proxy(tx, { get(target, property) {
+      128 |         if (property === '$executeRaw') return async (...args: unknown[]) => {
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:125:74)
+
+  ● PostgreSQL AI retention › times out behind the coordinator without deleting partial data
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiQueueLease.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:40:41
+
+      37     dispatchedAt: old(), ...overrides } });
+      38 }
+      39 async function lease(requestId: string, expiresAt: Date) {
+    → 40   return database.client.aiQueueLease.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiQueueLease" violates check constraint "AiQueueLease_bounded_deadline"`
+
+      139 |
+      140 |   it('times out behind the coordinator without deleting partial data', async () => {
+    > 141 |     const request = await create('timeout'); await lease(request.id, new Date(time));
+          |                                              ^
+      142 |     const holder = holdCoordinator(); await holder.entered.promise;
+      143 |     try { await expect(cleanup(accounting(), 75)).rejects.toMatchObject({ errorClass: 'DEADLINE' }); }
+      144 |     finally { holder.release.open(); await holder.pending; }
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:141:46)
+
+  ● PostgreSQL AI retention › rolls back all deletion when its deadline is aborted before commit
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiQueueLease.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:40:41
+
+      37     dispatchedAt: old(), ...overrides } });
+      38 }
+      39 async function lease(requestId: string, expiresAt: Date) {
+    → 40   return database.client.aiQueueLease.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiQueueLease" violates check constraint "AiQueueLease_bounded_deadline"`
+
+      148 |
+      149 |   it('rolls back all deletion when its deadline is aborted before commit', async () => {
+    > 150 |     const request = await create('aborted'); await attempt(request.id); await lease(request.id, new Date(time));
+          |                                                                         ^
+      151 |     const deadline = new AiRequestDeadline(clock, 2000);
+      152 |     const prisma = { $transaction: (work: (tx: Prisma.TransactionClient) => Promise<unknown>, options: object) =>
+      153 |       database.client.$transaction(tx => work(new Proxy(tx, { get(target, property) {
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:150:73)
+
+  ● PostgreSQL AI retention › fails closed without a coordinator
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiQueueLease.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:40:41
+
+      37     dispatchedAt: old(), ...overrides } });
+      38 }
+      39 async function lease(requestId: string, expiresAt: Date) {
+    → 40   return database.client.aiQueueLease.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiQueueLease" violates check constraint "AiQueueLease_bounded_deadline"`
+
+      166 |
+      167 |   it('fails closed without a coordinator', async () => {
+    > 168 |     const request = await create('no-coordinator'); await lease(request.id, new Date(time));
+          |                                                     ^
+      169 |     await database.client.aiQuotaCoordinator.delete({ where: { id: 'reviewer-patch-risk' } });
+      170 |     try { await expect(cleanup()).rejects.toMatchObject({ errorClass: 'INTERNAL' }); }
+      171 |     finally { await database.client.aiQuotaCoordinator.create({ data: { id: 'reviewer-patch-risk' } }); }
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:168:53)
+
+  ● PostgreSQL AI retention › preserves daily quota exhaustion evidence after cleanup
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiOutboundAttempt.createMany()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:199:45
+
+      196 
+      197 it('preserves daily quota exhaustion evidence after cleanup', async () => {
+      198   const request = await create('daily-quota');
+    → 199   await database.client.aiOutboundAttempt.createMany(
+    Database error. Code: `23514`. Message: `new row for relation "AiOutboundAttempt" violates check constraint "AiOutboundAttempt_safe_bounds"`
+
+      197 |   it('preserves daily quota exhaustion evidence after cleanup', async () => {
+      198 |     const request = await create('daily-quota');
+    > 199 |     await database.client.aiOutboundAttempt.createMany({ data: Array.from({ length: 60 }, (_, ordinal) => ({
+          |     ^
+      200 |       requestId: request.id, actorId: prefix, ordinal, dispatchedAt: new Date('2026-11-04T00:00:00Z'),
+      201 |     })) });
+      202 |     await cleanup();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:199:5)
+
+  ● PostgreSQL AI retention › leaves immutable submissions, activity, notifications, and security history untouched
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.notification.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:218:55
+
+      215   summary: 'Synthetic submission', problem: 'Preserve history', constraints: '', expectedBehavior: 'History remains', diffText: '', submittedAt: old() } });
+      216 const activity = await database.client.proposalActivity.create({ data: { proposalId: proposal.id, revisionId: revision.id,
+      217   actorId: user.id, action: 'SUBMITTED', summary: 'Synthetic history', timestamp: old() } });
+    → 218 const notice = await database.client.notification.create(
+    Foreign key constraint violated on the constraint: `Notification_proposalId_revisionId_assignmentId_fkey`
+
+      216 |     const activity = await database.client.proposalActivity.create({ data: { proposalId: proposal.id, revisionId: revision.id,
+      217 |       actorId: user.id, action: 'SUBMITTED', summary: 'Synthetic history', timestamp: old() } });
+    > 218 |     const notice = await database.client.notification.create({ data: { recipientId: user.id, proposalId: proposal.id, revisionId: revision.id,
+          |                    ^
+      219 |       assignmentId: prefix, activityId: activity.id, kind: 'NEW_REVISION', createdAt: old() } });
+      220 |     const event = await database.client.securityEvent.create({ data: { actorId: user.id, action: 'synthetic', target: prefix, outcome: 'success', timestamp: old() } });
+      221 |     try {
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:218:20)
+
+Test Suites: 1 failed, 1 total
+Tests:       9 failed, 5 passed, 14 total
+Snapshots:   0 total
+Time:        6.136 s
+Ran all test suites within paths "test/ai-retention.integration.ts".
+npm error Lifecycle script `test:integration` failed with error:
+npm error code 1
+npm error path C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error workspace @specsentry/server@0.1.0
+npm error location C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/ai-retention.integration.ts

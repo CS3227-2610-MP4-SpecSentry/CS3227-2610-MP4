@@ -1,0 +1,43 @@
+{
+  "id": "dashboard-ui",
+  "kind": "unit",
+  "argv": [
+    "C:\\Program Files\\nodejs\\npm.cmd",
+    "run",
+    "test",
+    "-w",
+    "@specsentry/client",
+    "--",
+    "ReviewerAiUsage.test.tsx",
+    "-t",
+    "Reviewer usage"
+  ],
+  "paths": [
+    "src/shared/src/contracts/ai.ts",
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+    "src/server/test/reviewer-ai-usage.integration.ts",
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts",
+    "src/client/src/App.tsx",
+    "src/client/src/shared",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json"
+  ],
+  "depends_on": [
+    "shared-build"
+  ],
+  "resources": [
+    "build"
+  ],
+  "environment": [],
+  "database": null,
+  "timeout": 240
+}

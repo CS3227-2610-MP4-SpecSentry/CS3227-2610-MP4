@@ -1,0 +1,17 @@
+{
+  "id": "evaluation",
+  "agent": "evaluation",
+  "role": "implementer",
+  "paths": [
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/tooling/verify-live-ai.mjs",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tests/browser/reviewer-accessibility.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts"
+  ],
+  "dependencies": [],
+  "created_at": "2026-11-04T12:24:28.238599+00:00"
+}

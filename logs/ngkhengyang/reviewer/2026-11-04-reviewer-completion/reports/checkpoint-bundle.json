@@ -1,0 +1,34 @@
+{
+  "consistency": {
+    "ok": false,
+    "errors": [
+      "required stage dispatch: no successful resource record",
+      "required stage implement: no successful resource record",
+      "required stage integrate: no successful resource record",
+      "required stage review: no successful resource record",
+      "independent review: no successful reviewer distinct from implementation/fix agents",
+      "commands: no current evidence recorded",
+      "handoffs: no current snapshot-bound implementation handoff recorded",
+      "acceptance matrix is missing",
+      "register and run at least one environment/fixture preflight check",
+      "environment preflight check is missing"
+    ],
+    "warnings": [
+      "record rec-f462cbde1be242fc: tool_calls unavailable (not exposed by collector)",
+      "record rec-f462cbde1be242fc: retries unavailable (not exposed by collector)",
+      "record rec-e00e8eae18874575: tool_calls unavailable (Not exposed as attributable runtime counters)",
+      "record rec-e00e8eae18874575: retries unavailable (Not exposed as attributable runtime counters)",
+      "record rec-73cc09b38ec24410: tool_calls unavailable (not exposed by collector)",
+      "record rec-73cc09b38ec24410: retries unavailable (not exposed by collector)",
+      "record rec-eae61ec091584765: tool_calls unavailable (not exposed by collector)",
+      "record rec-eae61ec091584765: retries unavailable (not exposed by collector)"
+    ],
+    "coverage": {
+      "expected_records": 4,
+      "resource_records": 4,
+      "unavailable_token_metrics": 0
+    },
+    "scope": "Local consistency checks do not establish semantic correctness."
+  },
+  "markdown": "# Reviewer run report\n\nCanonical source: state.json; this report is a derived view.\n\nRun: 2026\\-11\\-04\\-reviewer\\-completion; consistent: False.\n\n## Assignments and completion\n\n| Assignment | Agent | Latest completion | Current |\n| --- | --- | --- | --- |\n\n## Acceptance evidence\n\n| Case | Requirement | Kind | Owner | Check |\n| --- | --- | --- | --- | --- |\n\n## Findings\n\nNo findings recorded; this does not certify review coverage.\n\n## Evidence and limitations\n\n- handoffs: 01\\-main\\-to\\-security; snapshot None; superseded by None\n- handoffs: 02\\-security\\-to\\-main; snapshot None; superseded by None\n\n- required stage dispatch: no successful resource record\n- required stage implement: no successful resource record\n- required stage integrate: no successful resource record\n- required stage review: no successful resource record\n- independent review: no successful reviewer distinct from implementation/fix agents\n- commands: no current evidence recorded\n- handoffs: no current snapshot\\-bound implementation handoff recorded\n- acceptance matrix is missing\n- register and run at least one environment/fixture preflight check\n- environment preflight check is missing\n\n## Telemetry limitations\n\n- Aligned token delta imported separately; exact main settings/tool/retry counters unavailable; rec\\-f462cbde1be242fc: usage\\_source, observed\\_model, observed\\_effort; rec\\-73cc09b38ec24410: usage\\_source, observed\\_model, observed\\_effort\n- not exposed by collector; rec\\-f462cbde1be242fc: tool\\_calls, retries; rec\\-73cc09b38ec24410: tool\\_calls, retries; rec\\-eae61ec091584765: tool\\_calls, retries\n- Attributable token delta imported separately; observed settings/tool calls/retries unexposed; bootstrap and lagging tail excluded; rec\\-e00e8eae18874575: usage\\_source, observed\\_model, observed\\_effort\n- Not exposed as attributable runtime counters; rec\\-e00e8eae18874575: tool\\_calls, retries\n- Aligned own\\-thread delta imported separately; unflushed tail/final rendering and tool/retry/settings unavailable; rec\\-eae61ec091584765: usage\\_source, observed\\_model, observed\\_effort# Reviewer resource summary\n\nRecords: 4; finished: 4.\n\n| Agent / invocation / stage / attempt | Selected model / effort | Status | Elapsed seconds | Input / output / cache |\n| --- | --- | --- | --- | --- |\n| main / main\\-prep\\-1 / compile / 1 | unavailable / unavailable | succeeded | 322.037846 | 1892354 / 11257 / 1820672 |\n| security / security\\-design\\-1 / security / 1 | gpt\\-6.1\\-sol / high | succeeded | 228.404314 | 1276710 / 5770 / 1211648 |\n| main / main\\-contracts\\-1 / security / 1 | unavailable / unavailable | succeeded | 159.163791 | 1316614 / 3792 / 1312384 |\n| main / main\\-checkpoint\\-consolidation\\-1 / close / 1 | unavailable / unavailable | succeeded | 128.632626 | 381578 / 6047 / 377728 |\n\n\\{&quot;expected&quot;: 4, &quot;finished&quot;: 4, &quot;measured\\_record\\_coverage&quot;: \\{&quot;cache\\_read\\_tokens&quot;: 4, &quot;input\\_tokens&quot;: 4, &quot;output\\_tokens&quot;: 4, &quot;retries&quot;: 0, &quot;tool\\_calls&quot;: 0\\}, &quot;measured\\_totals\\_only&quot;: \\{&quot;cache\\_read\\_tokens&quot;: 4722432, &quot;input\\_tokens&quot;: 4867256, &quot;output\\_tokens&quot;: 26866, &quot;retries&quot;: 0, &quot;tool\\_calls&quot;: 0\\}, &quot;note&quot;: &quot;Span covers recorded boundaries only, not unrecorded full\\-run time. Missing usage is not zero. Cache reads are included in input; reasoning is not added again.&quot;, &quot;observed\\_record\\_span\\_seconds&quot;: 610.871297, &quot;records&quot;: 4, &quot;summed\\_agent\\_elapsed\\_seconds&quot;: 838.238577\\}\n\n"
+}

@@ -1,0 +1,16 @@
+{
+  "observed_effort": null,
+  "retries": null,
+  "scope": "record",
+  "observed_model": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed",
+    "retries": "Not exposed"
+  },
+  "tool_calls": null,
+  "input_tokens": 835135,
+  "output_tokens": 1348,
+  "record_id": "9c4df6f6fbec422ea02945edf66271f0",
+  "cache_read_tokens": 826368,
+  "source": "Own thread external retention-verify-1 baseline/delta; excludes unflushed tail"
+}

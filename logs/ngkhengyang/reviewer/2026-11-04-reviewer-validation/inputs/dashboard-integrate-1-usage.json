@@ -1,0 +1,19 @@
+{
+  "output_tokens": 5018,
+  "import_id": "telemetry-dashboard-integrate-1",
+  "cache_read_tokens": 2647808,
+  "observed_model": null,
+  "input_tokens": 2662527,
+  "scope": "record",
+  "retries": null,
+  "unavailable_reasons": {
+    "retries": "Not exposed as attributable runtime counters",
+    "observed_effort": "Collector does not expose settings",
+    "observed_model": "Collector does not expose settings",
+    "tool_calls": "Not exposed as attributable runtime counters"
+  },
+  "record_id": "rec-1987b796d6174ef5",
+  "tool_calls": null,
+  "source": "C:/Users/User/Documents/NUS/CS3227/MP4 sessions/local-resource-tracking/2026-11-04-dashboard-integrate-1-delta.json; own thread 01a1a685-0971-71d0-b1d6-70dae98581e2; baseline cutoff 11/04/2026 12:59:46, end cutoff 11/04/2026 13:03:03; final rendering and lagging tail excluded",
+  "observed_effort": null
+}

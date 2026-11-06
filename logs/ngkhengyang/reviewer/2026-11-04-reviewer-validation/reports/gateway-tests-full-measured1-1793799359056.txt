@@ -1,0 +1,13 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/patch-risk.integration.ts test/contributor-ai.integration.ts
+
+(node:35084) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:35084) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+
+Test Suites: 2 passed, 2 total
+Tests:       51 passed, 51 total
+Snapshots:   0 total
+Time:        72.145 s
+Ran all test suites within paths "test/patch-risk.integration.ts", "test/contributor-ai.integration.ts".

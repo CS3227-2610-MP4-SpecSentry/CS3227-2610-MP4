@@ -1,0 +1,9 @@
+{
+  "requirement": "REQ-REV-003",
+  "severity": "MEDIUM",
+  "blocks": true,
+  "owner": "evaluation",
+  "reviewer": "verifier",
+  "description": "C3 evaluation report omits required median/p95 latency summary and a truthful latency-target outcome. reviewer-live-verification.ts returns passed=true for nine valid synthetic 19000ms responses despite the documented median<8000/p95<18000 targets. Add bounded aggregate latency metrics/explicit target status, keep dry-run unavailable, and prevent broad passed/CLI output from implying all declared targets passed; verify with deterministic injected-clock assertions. Evidence is reporting-path only, not live provider latency.",
+  "evidence": ["logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/reports/verifier-evaluation-latency.md"]
+}

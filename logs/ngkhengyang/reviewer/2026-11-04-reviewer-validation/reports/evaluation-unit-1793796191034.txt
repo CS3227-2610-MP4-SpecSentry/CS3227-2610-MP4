@@ -1,0 +1,9 @@
+
+> @specsentry/server@0.1.0 test
+> jest --runInBand --config jest.config.cjs --runTestsByPath test/reviewer-live-verification.spec.ts --testNamePattern Reviewer verification
+
+Test Suites: 1 passed, 1 total
+Tests:       9 passed, 9 total
+Snapshots:   0 total
+Time:        5.286 s
+Ran all test suites within paths "test/reviewer-live-verification.spec.ts".

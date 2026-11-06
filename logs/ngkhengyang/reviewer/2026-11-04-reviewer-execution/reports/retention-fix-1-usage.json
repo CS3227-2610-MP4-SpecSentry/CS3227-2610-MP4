@@ -1,0 +1,16 @@
+{
+  "source": "Own thread external retention-fix-1 baseline/delta; excludes unflushed tail",
+  "tool_calls": null,
+  "input_tokens": 714509,
+  "cache_read_tokens": 705792,
+  "observed_effort": null,
+  "observed_model": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed",
+    "retries": "Not exposed"
+  },
+  "output_tokens": 2575,
+  "record_id": "237baa8a0de24e0e8879d5ba4f52cbb2",
+  "scope": "record"
+}

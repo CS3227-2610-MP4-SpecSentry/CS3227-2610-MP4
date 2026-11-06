@@ -1,0 +1,37 @@
+{
+  "snapshot_id": "dashboard-settled-resume2",
+  "references": [
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "workflow/specs/SHARED-REQUIREMENTS.md",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-completion/brief.md",
+    "logs/ngkhengyang/reviewer/2026-11-04-reviewer-completion/reports/security-design.md",
+    "logs\\ngkhengyang\\reviewer\\2026-11-04-reviewer-validation\\inputs\\dashboard-fix-resume2-usage.json"
+  ],
+  "next_action": "Separate recorded integration: current combined build/typecheck/lint, Reviewer UI/gateway PostgreSQL regressions and affected evaluation-browser; then independent verifier.",
+  "commands": [
+    "verify-187c2a4586a845a3",
+    "verify-713c0bbe17754389",
+    "verify-f0a56059409e464a",
+    "verify-dfb1b64d4d794e1d",
+    "verify-03c9c70551ba4d4f"
+  ],
+  "risks": "Independent security/spec review remains pending. No live provider, deployment, production load, or genuine BFCache acceptance claimed. Existing pg concurrent-client deprecation and bundle-size warnings remain; shared quotas are not inferred from Reviewer-only totals.",
+  "record_id": "rec-c44874be8cc44fb6",
+  "unavailable_reason": "Not exposed by collector; late/unflushed samples and completion rendering excluded. Baseline precedes readiness/start and includes preparatory operations.",
+  "summary": "Successor dashboard lint fix: authorization current delegates to parent method so React memoization follows object dependency; effect cleanup uses existing clear helper preserving request abort, generation increment and visible-state clearing. Full dashboard acceptance remains server15/UI12/PostgreSQL11/browser3 passed; browser replacement ran after current client build. Original complete implementation remains in prior completion.",
+  "changed_paths": [
+    "src/shared/src/contracts/ai.ts",
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+    "src/server/test/reviewer-ai-usage.integration.ts",
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts"
+  ],
+  "assignment": "dashboard"
+}

@@ -17,6 +17,30 @@ It does not establish the benefits of multi-agent coordination. The repository's
 [Reviewer workflow](../workflow/reviewer/README.md) defines specialized assignments;
 executed run evidence must be assessed separately.
 
+### Reviewer completion observations, 4 November 2026
+
+The [Reviewer completion run](../logs/ngkhengyang/2026-11-04-reviewer-completion-execution.md)
+uses one dashboard vertical-slice worker and one evaluation worker, with shared
+retention assigned only after independent security review settled the deletion
+contract. Implementers own their tests; the dashboard worker executes integration,
+and an independent non-author performs verification. These choices are an executed
+coordination example, not a controlled comparison with a single-agent run.
+
+Environment and harness costs were concrete: sandbox visibility obscured native
+browser availability, the generated Prisma client was stale, and the coordinator's
+Windows command quoting prevented an initial fixture test from launching. Immutable
+prerequisites could not be replaced, so the failed run and measured interrupted
+attempts were preserved while a corrected canonical validation run continued.
+Writers froze source during recovery and verification resources were serialized.
+The run log separates these costs from product defects and records actual checks.
+
+The requested pause closed all preparation intervals; resumption used fresh
+per-thread stage baselines, excluding idle time. Cumulative parent/descendant
+counters were not added to both parent and child records. Waiting counts as elapsed
+time, not measured model computation. Token/cache samples can lag, and cached input
+is a subset of input. No causal time saving, model advantage, monetary saving,
+human usefulness rating or teammate signoff follows from this single run.
+
 ## Multi-Agent Software Engineering
 
 The [assignment discussion guide](../workflow/specs/ASSIGNMENT-SPEC.md#reflection-discussion-guide)

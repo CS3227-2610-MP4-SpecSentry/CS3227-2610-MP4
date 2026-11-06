@@ -1,0 +1,4 @@
+
+> specsentry@0.1.0 lint
+> eslint src workflow/tooling/*.mjs playwright.config.ts
+

@@ -1,0 +1,35 @@
+{
+  "depends_on": [
+    "fixture-readiness",
+    "combined-build"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_test"
+  },
+  "timeout": 120,
+  "paths": [
+    "src/server/src/ai/cleanup-ai-records.ts",
+    "src/server/src/ai/gateway/accounting.ts",
+    "src/server/src/ai/gateway/transport.ts",
+    "src/server/src/ai/deadline.ts",
+    "src/server/prisma/schema.prisma",
+    "src/server/package.json",
+    "package.json",
+    "package-lock.json"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "resources": [
+    "build",
+    "database"
+  ],
+  "kind": "integration",
+  "id": "retention-cli",
+  "argv": [
+    "C:/Program Files/nodejs/node.exe",
+    "-e",
+    "const assert=require('node:assert/strict'),{spawnSync}=require('node:child_process'),{writeFileSync}=require('node:fs');\nconst safeFailure='AI record cleanup failed. Check database configuration, coordinator, and availability.';\nconst results=[];\nfor(const [name,value,expected] of [['isolated-success',process.env.TEST_DATABASE_URL,0],['empty','',1],['invalid','https://synthetic-user:synthetic-sensitive@invalid.invalid/not-postgres',1]]){\n const r=spawnSync(process.execPath,['src/server/dist/ai/cleanup-ai-records.js'],{encoding:'utf8',timeout:30000,env:{...process.env,DATABASE_URL:value,AI_LIVE_ENABLED:'false'}});\n assert.ok(r.status===expected,'Unexpected retention CLI exit status');\n const output=(r.stdout||'')+(r.stderr||'');\n assert.ok(output.trim()===(expected===0?'AI record cleanup completed.':safeFailure),'Retention CLI output must be the fixed safe message');\n assert.ok(!output.includes('synthetic-sensitive')&&!output.includes('synthetic-user')&&!output.includes(value||'not-present'),'Retention CLI disclosed sensitive configuration');\n results.push({caseId:name,exitCode:r.status,safeMessage:true});\n}\nconst path='logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/reports/retention-cli-'+Date.now()+'.json';writeFileSync(path,JSON.stringify({passed:true,cases:results},null,2));console.log(JSON.stringify({passed:true,cases:3,report:path}));"
+  ]
+}

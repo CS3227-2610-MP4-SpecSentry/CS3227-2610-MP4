@@ -1,0 +1,17 @@
+
+> specsentry@0.1.0 test:e2e
+> playwright test workflow/tests/browser/reviewer-ai-usage.spec.ts
+
+
+Running 3 tests using 1 worker
+
+  ok 1 [chromium] › workflow\tests\browser\reviewer-ai-usage.spec.ts:13:7 › Reviewer usage › usage-own-keyboard: opens without assignment, shows only own Reviewer totals and remains accessible (3.1s)
+  ok 2 [chromium] › workflow\tests\browser\reviewer-ai-usage.spec.ts:28:7 › Reviewer usage › usage-navigation-auth: clears on real navigation/back, refreshes authorization and hides visible totals on session loss (1.5s)
+  ok 3 [chromium] › workflow\tests\browser\reviewer-ai-usage.spec.ts:44:7 › Reviewer usage › usage-manual-fallback: a failed usage read leaves explicit manual review usable (1.7s)
+
+  3 passed (14.1s)
+[WebServer] (node:24140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:20648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24140) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.

@@ -1,0 +1,85 @@
+{
+  "note": "Command outcomes only; selected-source freshness, independent scope and unresolved gates remain explicit in final report/bundle",
+  "checks": [
+    {
+      "check": "dashboard-server",
+      "command": "verify-187c2a4586a845a3",
+      "passed": true
+    },
+    {
+      "check": "dashboard-ui",
+      "command": "verify-713c0bbe17754389",
+      "passed": true
+    },
+    {
+      "check": "dashboard-postgres",
+      "command": "verify-f0a56059409e464a",
+      "passed": true
+    },
+    {
+      "check": "dashboard-browser",
+      "command": "verify-8063305c45004393",
+      "passed": true
+    },
+    {
+      "check": "evaluation-unit",
+      "command": "verify-e513c5061552460f",
+      "passed": true
+    },
+    {
+      "check": "evaluation-browser",
+      "command": "verify-8cd235342d634f24",
+      "passed": true
+    },
+    {
+      "check": "retention-unit",
+      "command": "verify-814e4d0fcf7741e0",
+      "passed": true
+    },
+    {
+      "check": "retention-postgres",
+      "command": "verify-fea9ec5476954bab",
+      "passed": true
+    },
+    {
+      "check": "combined-build",
+      "command": "verify-e485f49a16cf44bc",
+      "passed": true
+    },
+    {
+      "check": "combined-typecheck",
+      "command": "verify-fc18e8a1971b46d9",
+      "passed": true
+    },
+    {
+      "check": "combined-lint",
+      "command": "verify-5990e30001474a1b",
+      "passed": true
+    },
+    {
+      "check": "reviewer-ui-regressions",
+      "command": "verify-2e0f936b9a4b49e7",
+      "passed": true
+    },
+    {
+      "check": "reviewer-dry-run",
+      "command": "verify-11661957a5624d01",
+      "passed": true
+    },
+    {
+      "check": "retention-cli",
+      "command": "verify-033401e2938345be",
+      "passed": true
+    },
+    {
+      "check": "verification-cli-smoke-v2",
+      "command": "verify-3d50f06850ae4ee0",
+      "passed": true
+    },
+    {
+      "check": "gateway-postgres-regressions",
+      "command": "verify-2985827343384cac",
+      "passed": false
+    }
+  ]
+}

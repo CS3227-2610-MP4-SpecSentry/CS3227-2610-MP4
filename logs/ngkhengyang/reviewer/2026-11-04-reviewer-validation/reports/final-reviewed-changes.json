@@ -1,0 +1,186 @@
+{
+  "scope": "Changed product/test/guide files only; dependencies reviewed through linked integration and independent snapshots, not a whole-repository certification",
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "files": [
+    {
+      "path": "docs/DeveloperGuide.md",
+      "sha256": "dc1c66a9ab23f9363ddb79880528c2fc8972ce896534ab556dadd863eea2c205",
+      "bytes": 51081,
+      "change": "modified"
+    },
+    {
+      "path": "docs/Reflections.md",
+      "sha256": "ec14a360805b6f931085c8a5631791e62c2112b8d117d88efd3ec939d0c86ad7",
+      "bytes": 5819,
+      "change": "modified"
+    },
+    {
+      "path": "docs/UserGuide.md",
+      "sha256": "580f31bc50d83de373af5cc666a4fa2a16c0e29848a941539ab430cf3781c89f",
+      "bytes": 32377,
+      "change": "modified"
+    },
+    {
+      "path": "docs/ai-retention.md",
+      "sha256": "4f7e0601f8bcec29fad7fa3b05d11d6c50187986f664dac1d07c46d18a28afa6",
+      "bytes": 2192,
+      "change": "added"
+    },
+    {
+      "path": "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+      "sha256": "d001bbe48810730fa72e625e97c82f6a6e44b9d6b6f1aed6353d0eea8a755b27",
+      "bytes": 8593,
+      "change": "added"
+    },
+    {
+      "path": "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+      "sha256": "042a96882235f9230bb74d7d32b3ff694e16095095a79c50f735d301ae320b26",
+      "bytes": 5069,
+      "change": "added"
+    },
+    {
+      "path": "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+      "sha256": "d19fb61de88aeab63f9229064ef85e411d861e6d7d1dbc9f104cd2e64faf96ea",
+      "bytes": 21272,
+      "change": "modified"
+    },
+    {
+      "path": "src/server/src/ai/cleanup-ai-records.ts",
+      "sha256": "6aa2d502c5efafbdef83fc7b1680719a5ebf6148d5418eaaa656910b48043655",
+      "bytes": 1541,
+      "change": "added"
+    },
+    {
+      "path": "src/server/src/ai/gateway/accounting.ts",
+      "sha256": "b5a7ff645efc7e8cc873dcabf3b9edd123fe29fde41178d13f6f923d9406118a",
+      "bytes": 7435,
+      "change": "modified"
+    },
+    {
+      "path": "src/server/src/ai/gateway/index.ts",
+      "sha256": "3d52a95bd8211a06e46686fc9cb35b2ba4ad7423b61b68e19b4c1c6d3903ca75",
+      "bytes": 22757,
+      "change": "modified"
+    },
+    {
+      "path": "src/server/src/ai/reviewer-live-verification.ts",
+      "sha256": "bac523cf11c94e211bb3fc6259ae22f4e5cce5da47ffb93e899329db5baa0e05",
+      "bytes": 7781,
+      "change": "added"
+    },
+    {
+      "path": "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+      "sha256": "48253caedcc83eccfd33ea672b4416ca615caabdd7048b949957ae1b3fd16b0b",
+      "bytes": 685,
+      "change": "added"
+    },
+    {
+      "path": "src/server/src/reviews/reviewer-ai-usage.service.ts",
+      "sha256": "06cf2c832b4f27108dcf3d0bcbca05cc0756c14ddabbfc06deef90d2df825649",
+      "bytes": 3364,
+      "change": "added"
+    },
+    {
+      "path": "src/server/src/reviews/reviews.module.ts",
+      "sha256": "052450064980e1709ef2e58a3ab93c065d59d9341d8417fde3943c85f95c5608",
+      "bytes": 1482,
+      "change": "modified"
+    },
+    {
+      "path": "src/server/test/ai-gateway.spec.ts",
+      "sha256": "92d31b343f671dfb6acf05239b6c294c17f7258a03a9b0394209ba00795e5439",
+      "bytes": 29536,
+      "change": "modified"
+    },
+    {
+      "path": "src/server/test/ai-retention.integration.ts",
+      "sha256": "eb996ccb13d55c83dd4b1d0a1c60eb42ed4caaf0a382f28f88b238d91786e514",
+      "bytes": 16769,
+      "change": "added"
+    },
+    {
+      "path": "src/server/test/ai-retention.spec.ts",
+      "sha256": "f376b0e73636549e35bd32decf2f4c8b4b4539301a9f3d9b84bde544a8ce834d",
+      "bytes": 4951,
+      "change": "added"
+    },
+    {
+      "path": "src/server/test/contributor-ai-gateway.spec.ts",
+      "sha256": "2b6aa1fa605e2c7dcac3f4f6c65148ad65b81ed86c3189abd9901c9ef4fda70e",
+      "bytes": 20770,
+      "change": "modified"
+    },
+    {
+      "path": "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+      "sha256": "cea82cccc5421473e4705b8d2cda95bd8ebe016166f2ea4ee7651b5e2a2e6f50",
+      "bytes": 8629,
+      "change": "added"
+    },
+    {
+      "path": "src/server/test/reviewer-ai-usage.integration.ts",
+      "sha256": "b99f806e3088df93d3fb9c69a1459ee9950a4e4abff986ea94b82c8ee84f0f18",
+      "bytes": 18685,
+      "change": "added"
+    },
+    {
+      "path": "src/server/test/reviewer-live-verification.spec.ts",
+      "sha256": "7b9bf7e9a73552e4e6c54270cb2cbbf5d351b1c6598d9f19786ce7ed52ebeb53",
+      "bytes": 17293,
+      "change": "added"
+    },
+    {
+      "path": "src/shared/src/contracts/ai.ts",
+      "sha256": "3c7066d5d8dd2b6e3c5043ddb57e895fbbfa8abfa9d8aec684d9dfdc7c19d7ef",
+      "bytes": 9180,
+      "change": "modified"
+    },
+    {
+      "path": "workflow/TRACEABILITY.md",
+      "sha256": "52c3cc2fbb0bc1b212aac9c25799aaf36040a0efb512a7aa0f27dfd9486359fe",
+      "bytes": 69306,
+      "change": "modified"
+    },
+    {
+      "path": "workflow/tests/ai/reviewer/v1.json",
+      "sha256": "bcaf56827f4e43970a44eadfebdd7ba72a06c0d6018e9f1b5f0364d592f3b955",
+      "bytes": 1940,
+      "change": "modified"
+    },
+    {
+      "path": "workflow/tests/browser/fixtures/reviewer-ai-usage.ts",
+      "sha256": "4b65eb8f97019d8d44b5acbacae0fdf207557502834bdcdeb1532184d005259e",
+      "bytes": 2061,
+      "change": "added"
+    },
+    {
+      "path": "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+      "sha256": "1eebe662c3f1ceb88dd13fe505e2443f3443768be8c02b6db4a46df3479589ac",
+      "bytes": 8987,
+      "change": "modified"
+    },
+    {
+      "path": "workflow/tests/browser/reviewer-accessibility.spec.ts",
+      "sha256": "1a4a065031cc0f1aafdd011b95ffb9ac537be7ec20183f4ef9f14a2e730854a9",
+      "bytes": 2852,
+      "change": "added"
+    },
+    {
+      "path": "workflow/tests/browser/reviewer-ai-usage.spec.ts",
+      "sha256": "f6734c6e34f12b8b21b260a30ae8492634328d6243675dc4507a55240ff7a641",
+      "bytes": 4127,
+      "change": "added"
+    },
+    {
+      "path": "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+      "sha256": "e10b952451d514c4e861940be3237355eab911bd67fb9aabb59f3a4bf635e885",
+      "bytes": 10820,
+      "change": "modified"
+    },
+    {
+      "path": "workflow/tooling/verify-live-ai.mjs",
+      "sha256": "da6ad8159fe244f3369d93467fa1a1ec7dd5d2ac8589746d4ad27e0e0f49ba64",
+      "bytes": 1744,
+      "change": "modified"
+    }
+  ]
+}

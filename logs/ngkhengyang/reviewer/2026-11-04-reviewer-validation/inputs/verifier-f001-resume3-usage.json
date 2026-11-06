@@ -1,0 +1,17 @@
+{
+  "import_id": "verifier-f001-resume3-usage",
+  "record_id": "rec-59390f005e08461b",
+  "scope": "record",
+  "source": "Own thread 01a1a82d-f58a-7e20-b574-6a6d2c80c694 only; outside-Git MP4 sessions/local-resource-tracking/verifier-f001-resume3-start.json to verifier-f001-resume3-end.json; baseline cutoff UTC 2026-11-04T20:09:44.838Z, end cutoff UTC 2026-11-04T20:12:00.876Z. Initial retrieval, unflushed tail and subsequent evidence/closure/final rendering excluded. Cache within input; reasoning within output.",
+  "input_tokens": 515722,
+  "output_tokens": 3085,
+  "cache_read_tokens": 496640,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "Collector does not expose tool counters",
+    "retries": "Collector does not expose retry counters",
+    "observed_model": "Runtime execution settings not exposed by collector",
+    "observed_effort": "Runtime execution settings not exposed by collector"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "files": {
+    "package-lock.json": {
+      "bytes": 509922,
+      "sha256": "a7acd7dee2f944ee19c6fd2956bdff291502d7193c92a6365495f51113259aab"
+    },
+    "package.json": {
+      "bytes": 2378,
+      "sha256": "bc9ebf1ad6d3e3a48ef19ad97a4882892fef3ddb115837eed7eb0f37a2a61024"
+    },
+    "src/client/package.json": {
+      "bytes": 701,
+      "sha256": "c09b3ff23a6567e1cf8fe0a08369c9a9c7751a0d317c110b5a8e1c97ed05af62"
+    },
+    "src/server/package.json": {
+      "bytes": 1606,
+      "sha256": "5785316cc9910a09cb43813e0fec028b46d1627a0b419914f3b7828b3d45faa9"
+    },
+    "src/server/prisma.config.ts": {
+      "bytes": 570,
+      "sha256": "86f6bbae956b8074cee8c7585e30803e76c07048ee5f7a898bfc2a64a8a88983"
+    },
+    "src/server/prisma/migrations/20261025060000_identity/migration.sql": {
+      "bytes": 1473,
+      "sha256": "ad4ce9e0ce0c3b489ce8f61e21f20d63f27a4677159a6005ffec7cdfbf0a7fe2"
+    },
+    "src/server/prisma/migrations/20261025070000_reviewer_intake/migration.sql": {
+      "bytes": 13630,
+      "sha256": "1cd93e9700d81ceb8bd365b88de331d305bf3dddfa442901dd14dc5e2ad2094f"
+    },
+    "src/server/prisma/migrations/20261025170000_manual_review/migration.sql": {
+      "bytes": 12840,
+      "sha256": "499e2375f1421515f37b46392eb9eda22ecba5b5eea04b39eb35fb9a92944ca8"
+    },
+    "src/server/prisma/migrations/20261026030000_revision_cycle/migration.sql": {
+      "bytes": 4015,
+      "sha256": "e7a1146c0bf0996ae5a38e63eb6d33201eef06f35caee289799701008d0c1ed0"
+    },
+    "src/server/prisma/migrations/20261026090000_reviewer_ai/migration.sql": {
+      "bytes": 4639,
+      "sha256": "156d00f688064d6c27a2002ce89071c36cf4afe327411b3eaa028a5372662404"
+    },
+    "src/server/prisma/migrations/20261026160000_approval_revocation/migration.sql": {
+      "bytes": 18763,
+      "sha256": "8c46d8c1fc86e2482edb63260d6c720e1883cfd63a9a7c2025ed64890bd1567c"
+    },
+    "src/server/prisma/migrations/20261028000000_private_draft_deletion/migration.sql": {
+      "bytes": 5010,
+      "sha256": "99cd6e0765a7b529f2e35b9ed86c093b776d6d379de90934b3601713f15d7a3f"
+    },
+    "src/server/prisma/migrations/20261101050000_contributor_responses/migration.sql": {
+      "bytes": 1456,
+      "sha256": "4971fecffa2c0a97500b4f1497304a8698fd012c0f1ea6e0801be3db129c116a"
+    },
+    "src/server/prisma/migrations/20261101060000_contributor_ai/migration.sql": {
+      "bytes": 994,
+      "sha256": "5a4037db1d57128d8ef88e91746e5e43c5ce2472907eb519e064ae01c13168b3"
+    },
+    "src/server/prisma/migrations/migration_lock.toml": {
+      "bytes": 25,
+      "sha256": "e0f301404b533bea819cafbc56ca2a9d9bcc2cf97d6350473e3a008f0637cc12"
+    },
+    "src/server/prisma/schema.prisma": {
+      "bytes": 21592,
+      "sha256": "c4a266c0cbc9bdf6c36c3b5afb6baf62ec20fff07bf917326b1783f190bf84fc"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "package-lock.json",
+    "package.json",
+    "src/client/package.json",
+    "src/server/package.json",
+    "src/server/prisma.config.ts",
+    "src/server/prisma/migrations",
+    "src/server/prisma/schema.prisma"
+  ]
+}
