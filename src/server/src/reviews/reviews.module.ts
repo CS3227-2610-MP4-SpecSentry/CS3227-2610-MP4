@@ -10,6 +10,8 @@ import { PatchRiskService } from './patch-risk.service';
 import { PatchRiskController } from './patch-risk.controller';
 import { ApprovalRevocationService } from './approval-revocation.service';
 import { NotificationsModule } from '../notifications/notifications.module';
+import { ReviewerAiUsageController } from './reviewer-ai-usage.controller';
+import { ReviewerAiUsageService } from './reviewer-ai-usage.service';
 
 // Reviewer intake, human assessment, immutable findings and decisions.
 @Module({})
@@ -17,6 +19,6 @@ export class ReviewsModule {
   static register(config: ServerConfig): DynamicModule {
     return { module: ReviewsModule, imports: [DatabaseModule.register(config), ProposalsCoreModule, ActivityModule, AiModule.register(config),
       NotificationsModule.register(config)],
-      controllers: [ReviewsController, PatchRiskController], providers: [ReviewsService, PatchRiskService, ApprovalRevocationService], exports: [ReviewsService] };
+      controllers: [ReviewsController, PatchRiskController, ReviewerAiUsageController], providers: [ReviewsService, PatchRiskService, ApprovalRevocationService, ReviewerAiUsageService], exports: [ReviewsService] };
   }
 }

@@ -1,0 +1,12 @@
+{
+  "assignment": "evaluation",
+  "record_id": "rec-410a44abf6014abb",
+  "snapshot_id": "evaluation-f001-resume3-settled",
+  "commands": ["verify-5aca4eed377f4ffa", "verify-e485f49a16cf44bc", "verify-fc18e8a1971b46d9", "verify-5990e30001474a1b", "verify-11661957a5624d01"],
+  "changed_paths": ["src/server/src/ai/reviewer-live-verification.ts", "src/server/test/reviewer-live-verification.spec.ts"],
+  "summary": "F-001: report actual completed outbound sample count, expected admitted count, completeness, usual median and nearest-rank p95 with explicit rules/basis and strict median<8000ms/p95<18000ms gate. Failed attempt durations count; rejection/skips do not. Incomplete/no evidence is UNAVAILABLE with null percentiles when empty. Live passed combines protocolPassed with measured latency PASS; dry-run preserves existing protocol-only success/CLI exit0 and explicitly reports unmeasured latency. Deterministic fake-clock tests cover fast, nine19s, equality at each target, even-count median, partial sampling including failure and zero samples.",
+  "risks": "Independent verifier must revalidate/close F-001; owner does not close it. No real provider calls or human ratings; no live performance/usefulness claim. Existing BFCache and external deployment gates remain. Only two owned source/test files changed; no gateway/UI/CLI changes. Initial verify missing TEST_DATABASE_URL and concurrent own fixture lease rejected before check execution; force prerequisites then bounded checks passed.",
+  "next_action": "Independent verifier: assess F-001 against settled two-file snapshot, current unit15/15/build/typecheck/lint/compiled dry-run evidence; close finding only after independent revalidation. Main owns narrative logging and integration evidence refresh.",
+  "references": ["logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/brief.md", "logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/reports/verifier-evaluation-latency.md", "logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/inputs/evaluation-f001-resume3-usage.json"],
+  "unavailable_reason": "Own thread delta imported; initial retrieval and unflushed/final completion tail excluded, tool/retry counters and observed runtime settings unavailable. No human verification of prompt summaries claimed."
+}

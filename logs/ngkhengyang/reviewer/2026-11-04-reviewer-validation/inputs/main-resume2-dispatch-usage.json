@@ -1,0 +1,15 @@
+{
+  "record_id": "rec-324eb55e3cf04795",
+  "import_id": "main-resume2-dispatch-final",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\2026-11-04-reviewer-resume2-main-dispatch-delta.json; main thread only; baseline cutoff 2026-11-04T13:07:04.966Z; sample cutoff 2026-11-04T13:42:04.350Z; lagging/current boundary tail excluded",
+  "input_tokens": 24740810,
+  "output_tokens": 17061,
+  "cache_read_tokens": 24704000,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "not exposed",
+    "retries": "not exposed"
+  }
+}

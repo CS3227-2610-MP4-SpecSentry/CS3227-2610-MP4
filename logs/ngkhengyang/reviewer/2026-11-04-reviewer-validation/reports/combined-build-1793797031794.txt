@@ -1,0 +1,46 @@
+
+> specsentry@0.1.0 build
+> npm run build -w @specsentry/shared && npm run build -w @specsentry/server && npm run build -w @specsentry/client
+
+
+> @specsentry/shared@0.1.0 build
+> tsup src/index.ts --format cjs,esm --dts --clean
+
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v9.0.0
+CLI Target: es2023
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+CJS dist\index.js 53.23 KB
+CJS ⚡️ Build success in 63ms
+ESM dist\index.mjs 40.75 KB
+ESM ⚡️ Build success in 63ms
+DTS Build start
+DTS ⚡️ Build success in 2790ms
+DTS dist\index.d.ts  89.98 KB
+DTS dist\index.d.mts 89.98 KB
+
+> @specsentry/server@0.1.0 build
+> tsc -p tsconfig.build.json
+
+
+> @specsentry/client@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 132 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.49 kB │ gzip:   0.30 kB
+dist/assets/index-DDgCYIcz.css   22.23 kB │ gzip:   5.23 kB
+dist/assets/index-75UgliNI.js   541.02 kB │ gzip: 158.20 kB
+
+✓ built in 285ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

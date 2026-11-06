@@ -1,0 +1,50 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "09dcfd86fb9493844110aca9e090504109eee19f8c722439c3202a462c018b36",
+  "files": {
+    "src/server/src/ai/gateway/index.ts": {
+      "bytes": 22757,
+      "sha256": "3d52a95bd8211a06e46686fc9cb35b2ba4ad7423b61b68e19b4c1c6d3903ca75"
+    },
+    "src/server/src/ai/reviewer-live-verification.ts": {
+      "bytes": 6454,
+      "sha256": "d9633e5382cdb8454a1b6b8dc53a89fc9367baf1ea2d0b202a4238214ad2ab64"
+    },
+    "src/server/test/reviewer-live-verification.spec.ts": {
+      "bytes": 14197,
+      "sha256": "c2401cfb488a309aafded9b111bdabdc1e0042124c7cf1b36442c87a313b2835"
+    },
+    "workflow/tests/ai/reviewer/v1.json": {
+      "bytes": 1940,
+      "sha256": "bcaf56827f4e43970a44eadfebdd7ba72a06c0d6018e9f1b5f0364d592f3b955"
+    },
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts": {
+      "bytes": 8987,
+      "sha256": "1eebe662c3f1ceb88dd13fe505e2443f3443768be8c02b6db4a46df3479589ac"
+    },
+    "workflow/tests/browser/reviewer-accessibility.spec.ts": {
+      "bytes": 2646,
+      "sha256": "2eb0ad48b4a3778ece3d6f62bf03b8f6d8782042dcbd25ea04e51416013092c5"
+    },
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts": {
+      "bytes": 10820,
+      "sha256": "e10b952451d514c4e861940be3237355eab911bd67fb9aabb59f3a4bf635e885"
+    },
+    "workflow/tooling/verify-live-ai.mjs": {
+      "bytes": 1744,
+      "sha256": "da6ad8159fe244f3369d93467fa1a1ec7dd5d2ac8589746d4ad27e0e0f49ba64"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "src/server/src/ai/gateway/index.ts",
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "src/server/test/reviewer-live-verification.spec.ts",
+    "workflow/tests/ai/reviewer/v1.json",
+    "workflow/tests/browser/fixtures/reviewer-patch-risk.ts",
+    "workflow/tests/browser/reviewer-accessibility.spec.ts",
+    "workflow/tests/browser/reviewer-patch-risk.spec.ts",
+    "workflow/tooling/verify-live-ai.mjs"
+  ]
+}

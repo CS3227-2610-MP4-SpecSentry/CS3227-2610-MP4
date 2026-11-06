@@ -1,0 +1,209 @@
+{
+  "cases": [
+    {
+      "id": "usage-own-only",
+      "requirement": "REQ-REV-015",
+      "kind": "normal",
+      "owner": "dashboard",
+      "check": "dashboard-postgres",
+      "scenario": "NFR-RES-001 own Reviewer aggregate privacy",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Only authenticated actor REVIEWER feature totals; no identifiers/content/other actor or feature metadata",
+      "events": []
+    },
+    {
+      "id": "usage-role-session",
+      "requirement": "REQ-REV-015",
+      "kind": "authorization",
+      "owner": "dashboard",
+      "check": "dashboard-postgres",
+      "scenario": "REQ-SHR-001/002 absent/wrong-role/expired/disabled session",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Denied before protected retrieval; safe denial audit only",
+      "events": []
+    },
+    {
+      "id": "usage-day-retry",
+      "requirement": "REQ-REV-015",
+      "kind": "boundary",
+      "owner": "dashboard",
+      "check": "dashboard-postgres",
+      "scenario": "NFR-RES-001 SGT midnight and parent-yesterday retry-today",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Independent half-open request/dispatch windows; UTC separately labeled",
+      "events": []
+    },
+    {
+      "id": "usage-outcomes",
+      "requirement": "REQ-REV-015",
+      "kind": "boundary",
+      "owner": "dashboard",
+      "check": "dashboard-postgres",
+      "scenario": "NFR-RES-001 request/attempt/retry/preflight/incomplete accounting",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Only completed outbound outcomes in failure rate; transport/HTTP/refusal/validation fail, delivered-denial after provider success does not; zero denominator null",
+      "events": []
+    },
+    {
+      "id": "usage-unknown",
+      "requirement": "REQ-REV-015",
+      "kind": "boundary",
+      "owner": "dashboard",
+      "check": "dashboard-postgres",
+      "scenario": "NFR-RES-001 absent/mixed/genuine-zero provider token/cache fields",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Absent or incomplete aggregate field null; real zero preserved; application cache disabled",
+      "events": []
+    },
+    {
+      "id": "usage-former-assignment",
+      "requirement": "REQ-REV-015",
+      "kind": "lifecycle",
+      "owner": "dashboard",
+      "check": "dashboard-postgres",
+      "scenario": "Own aggregate after drop/reassignment vs proposal audit access",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Own identifier-free usage remains; proposal audit current-assignment restriction unchanged",
+      "events": []
+    },
+    {
+      "id": "usage-late-read",
+      "requirement": "REQ-REV-012",
+      "kind": "normal",
+      "owner": "dashboard",
+      "check": "dashboard-ui",
+      "scenario": "REQ-SHR-001/002 late read/body during access loss",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "No protected data reappears",
+      "events": []
+    },
+    {
+      "id": "usage-auth-races",
+      "requirement": "REQ-REV-012",
+      "kind": "concurrency",
+      "owner": "dashboard",
+      "check": "dashboard-ui",
+      "scenario": "Visible aggregate and pending fetch/body lose access in competing orders",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Already-visible data actively hidden and late response fenced; refresh manual workflow usable",
+      "events": [
+        "Global authorization invalidates/account changes",
+        "Usage fetch or JSON completes"
+      ]
+    },
+    {
+      "id": "usage-view-rollback",
+      "requirement": "REQ-REV-015",
+      "kind": "rollback",
+      "owner": "dashboard",
+      "check": "dashboard-postgres",
+      "scenario": "REQ-SHR-004 safe usage-view event fails",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "No successful read response, transaction rejects without business state change; DB atomic proof separately gated",
+      "events": []
+    },
+    {
+      "id": "eval-batches",
+      "requirement": "REQ-REV-003",
+      "kind": "normal",
+      "owner": "evaluation",
+      "check": "evaluation-unit",
+      "scenario": "Batches 1-5 against real preparation/decoding and grounding",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Exact selected identifiers, complete submitted context, batch-only assessment",
+      "events": []
+    },
+    {
+      "id": "eval-transient-human",
+      "requirement": "REQ-REV-013",
+      "kind": "normal",
+      "owner": "evaluation",
+      "check": "evaluation-browser",
+      "scenario": "Evaluation advisory-only transport has no business mutation",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Authenticated ai-human-save opens editable form, cancel leaves findings/coverage unchanged; explicit authorized human save alone creates finding",
+      "events": []
+    },
+    {
+      "id": "eval-limits",
+      "requirement": "REQ-REV-014",
+      "kind": "normal",
+      "owner": "evaluation",
+      "check": "evaluation-unit",
+      "scenario": "Real conservative prepared-message admission",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Near cap admits, over cap rejects without provider call or truncation; default dry run makes zero calls",
+      "events": []
+    },
+    {
+      "id": "eval-adversarial",
+      "requirement": "REQ-REV-003",
+      "kind": "authorization",
+      "owner": "evaluation",
+      "check": "evaluation-unit",
+      "scenario": "Hostile multilingual/delimiter corpus, secret screening and invalid/unknown grounding",
+      "preconditions": "Synthetic isolated accounts/attempts or component state; product source at current execution snapshot",
+      "expected": "Typed/grounded valid result or explicit rejection; no interpreted authorization, secrets/raw output retained",
+      "events": []
+    },
+    {
+      "id": "reviewer-stale-result",
+      "requirement": "REQ-REV-012",
+      "kind": "concurrency",
+      "owner": "evaluation",
+      "check": "evaluation-browser",
+      "scenario": "ai-ui-selection-stale: submitted revision changes before provider finishes",
+      "preconditions": "Isolated migrated specsentry_test with product-owned role fixtures and actual authenticated Chromium",
+      "expected": "Old revision result stale, cannot apply to current review",
+      "events": [
+        "Provider analysis is held",
+        "Contributor submits next revision then provider completes"
+      ]
+    },
+    {
+      "id": "reviewer-overcap-manual",
+      "requirement": "REQ-REV-014",
+      "kind": "boundary",
+      "owner": "evaluation",
+      "check": "evaluation-browser",
+      "scenario": "ai-ui-input-limit: oversized full submitted context",
+      "preconditions": "Isolated migrated specsentry_test with product-owned role fixtures and actual authenticated Chromium",
+      "expected": "Zero outbound attempts; clear limit message; unsaved manual review remains usable",
+      "events": []
+    },
+    {
+      "id": "reviewer-real-history",
+      "requirement": "REQ-REV-013",
+      "kind": "lifecycle",
+      "owner": "evaluation",
+      "check": "evaluation-browser",
+      "scenario": "ai-real-navigation: real cross-document navigation then back/forward",
+      "preconditions": "Isolated migrated specsentry_test with product-owned role fixtures and actual authenticated Chromium",
+      "expected": "Transient suggestions/forms not restored; storage empty. Genuine BFCache proof remains separately unavailable if persisted=false",
+      "events": []
+    },
+    {
+      "id": "reviewer-a11y",
+      "requirement": "REQ-REV-013",
+      "kind": "normal",
+      "owner": "evaluation",
+      "check": "evaluation-browser",
+      "scenario": "REQ-SHR-005/NFR-A11Y-001: reviewer-accessibility keyboard labels status axe narrow reflow",
+      "preconditions": "Isolated migrated specsentry_test with product-owned role fixtures and actual authenticated Chromium",
+      "expected": "Applicable named scan, focus, keyboard, status, label and reflow assertions pass; no full-compliance claim",
+      "events": []
+    },
+    {
+      "id": "usage-browser-own",
+      "requirement": "REQ-REV-015",
+      "kind": "normal",
+      "owner": "dashboard",
+      "check": "dashboard-browser",
+      "scenario": "usage-own-keyboard and usage-navigation-auth with actual session",
+      "preconditions": "Isolated migrated specsentry_test with product-owned role fixtures and actual authenticated Chromium",
+      "expected": "Own totals without assignment, no other actor data, visible clearing on real navigation/session loss, manual fallback",
+      "events": []
+    }
+  ],
+  "not_applicable": {}
+}

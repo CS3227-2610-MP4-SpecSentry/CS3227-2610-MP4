@@ -1,0 +1,19 @@
+{
+  "import_id": "telemetry-dashboard-admin-resume3",
+  "record_id": "rec-0367f271b90341e7",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\dashboard-admin-resume3-end.json; own successor runtime 01a1a6ac-398a-7331-8bb1-7abb68f456df; baseline 2026-11-04T13:29:26.312Z cutoff 2026-11-04T13:30:18.781Z",
+  "input_tokens": 504341,
+  "output_tokens": 1127,
+  "cache_read_tokens": 502528,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed by collector; unflushed final tail and record close excluded.",
+    "retries": "Not exposed by collector; unflushed final tail and record close excluded.",
+    "observed_model": "Not exposed by collector; unflushed final tail and record close excluded.",
+    "observed_effort": "Not exposed by collector; unflushed final tail and record close excluded."
+  }
+}

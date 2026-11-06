@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "caseId": "contributor-default",
+      "metadataCases": 5,
+      "mode": "dry-run",
+      "passed": true
+    },
+    {
+      "caseId": "reviewer",
+      "metadataCases": 10,
+      "mode": "dry-run",
+      "passed": true
+    },
+    {
+      "caseId": "unsupported-role",
+      "exitCode": 1,
+      "passed": true
+    },
+    {
+      "caseId": "duplicate-role",
+      "exitCode": 1,
+      "passed": true
+    },
+    {
+      "caseId": "unsupported-flag",
+      "exitCode": 1,
+      "passed": true
+    }
+  ]
+}

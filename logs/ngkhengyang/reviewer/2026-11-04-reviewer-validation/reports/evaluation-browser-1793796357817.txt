@@ -1,0 +1,23 @@
+
+> specsentry@0.1.0 test:e2e
+> playwright test workflow/tests/browser/reviewer-patch-risk.spec.ts workflow/tests/browser/reviewer-accessibility.spec.ts
+
+
+Running 8 tests using 1 worker
+
+  ok 1 [chromium] › workflow\tests\browser\reviewer-accessibility.spec.ts:5:5 › reviewer-accessibility keyboard labels status axe and narrow reflow (5.5s)
+  ok 2 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:16:5 › ai-human-save (2.4s)
+  ok 3 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:31:5 › ai-transient-page synthetic lifecycle handler and reload clearing (2.3s)
+  ok 4 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:44:5 › ai-real-navigation clears suggestions after browser back and forward (2.2s)
+  -  5 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:68:5 › ai-genuine-bfcache clears restored suggestions when browser admits caching
+  ok 6 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:91:5 › ai-ui-fallback (1.9s)
+  ok 7 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:100:5 › ai-ui-input-limit makes zero outbound attempts and preserves manual review (1.9s)
+  ok 8 [chromium] › workflow\tests\browser\reviewer-patch-risk.spec.ts:112:5 › ai-ui-selection-stale (2.0s)
+
+  1 skipped
+  7 passed (26.2s)
+[WebServer] (node:38888) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:38888) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.

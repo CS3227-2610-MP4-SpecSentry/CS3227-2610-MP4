@@ -1,0 +1,19 @@
+{
+  "import_id": "evaluation-fix-resume2-usage",
+  "record_id": "rec-5961c35aae354a6a",
+  "scope": "record",
+  "source": "C:/Users/User/Documents/NUS/CS3227/MP4 sessions/local-resource-tracking/evaluation-fix-resume2-end.json; own successor thread 01a1a6b3-19ec-7882-b9c1-536f0697ec9a; baseline 11/04/2026 13:15:57; cutoff 11/04/2026 13:17:41",
+  "input_tokens": 597253,
+  "output_tokens": 1595,
+  "cache_read_tokens": 580608,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "observed_effort": "Not exposed by collector",
+    "tool_calls": "Not exposed by collector; unflushed final tail and completion excluded",
+    "retries": "Not exposed by collector",
+    "observed_model": "Not exposed by collector"
+  }
+}

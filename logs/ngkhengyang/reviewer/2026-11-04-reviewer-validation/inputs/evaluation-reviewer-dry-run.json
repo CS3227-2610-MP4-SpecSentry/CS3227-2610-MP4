@@ -1,0 +1,25 @@
+{
+  "id": "reviewer-dry-run",
+  "kind": "unit",
+  "argv": [
+    "C:/Program Files/nodejs/node.exe",
+    "-e",
+    "const{spawnSync}=require('node:child_process');const{writeFileSync}=require('node:fs');const{randomUUID}=require('node:crypto');const r=spawnSync(process.execPath,['workflow/tooling/verify-live-ai.mjs','--role','reviewer'],{encoding:'utf8',env:{...process.env,AI_MODEL:'synthetic-offline-reviewer',AI_CONTEXT_WINDOW:'65536',AI_LIVE_ENABLED:'false'}});if(r.status!==0)throw Error('CLI dry-run failed');const report=JSON.parse(r.stdout);const assert=require('node:assert/strict');assert.equal(report.mode,'dry-run');assert.equal(report.templateVersion,'reviewer-risk-v1');assert.equal(report.passed,true);assert.equal(report.cases.length,10);assert.equal(report.cases.filter(c=>c.status==='DRY_RUN').length,9);assert.equal(report.cases.at(-1).caseId,'over-cap');assert.equal(report.cases.at(-1).errorClass,'INPUT_LIMIT');assert.equal(report.cases.at(-1).inputUnits,10001);assert.equal(report.cases.find(c=>c.caseId==='near-cap').inputUnits,10000);const path='logs/ngkhengyang/reviewer/2026-11-04-reviewer-validation/reports/reviewer-dry-run-'+randomUUID()+'.json';writeFileSync(path,JSON.stringify(report,null,2));console.log(JSON.stringify({passed:true,report:path,cases:report.cases.length}));"
+  ],
+  "paths": [
+    "src/server/src/ai/reviewer-live-verification.ts",
+    "workflow/tooling/verify-live-ai.mjs",
+    "src/server/src/config.ts",
+    "src/server/src/ai/gateway",
+    "src/shared/src/contracts/ai.ts",
+    "package.json",
+    "package-lock.json"
+  ],
+  "depends_on": [
+    "combined-build"
+  ],
+  "resources": [],
+  "environment": [],
+  "database": null,
+  "timeout": 60
+}

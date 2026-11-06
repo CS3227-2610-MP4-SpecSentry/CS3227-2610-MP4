@@ -1,0 +1,19 @@
+{
+  "import_id": "telemetry-dashboard-fix-resume2",
+  "record_id": "rec-c44874be8cc44fb6",
+  "scope": "record",
+  "source": "C:\\Users\\User\\Documents\\NUS\\CS3227\\MP4 sessions\\local-resource-tracking\\dashboard-fix-resume2-end.json; own successor thread 01a1a6ac-398a-7331-8bb1-7abb68f456df; baseline 2026-11-04T13:08:21.489Z; cutoff 2026-11-04T13:12:53.369Z",
+  "input_tokens": 1387640,
+  "output_tokens": 4557,
+  "cache_read_tokens": 1354624,
+  "tool_calls": null,
+  "retries": null,
+  "observed_model": null,
+  "observed_effort": null,
+  "unavailable_reasons": {
+    "tool_calls": "Not exposed by collector; late/unflushed samples and completion rendering excluded. Baseline precedes readiness/start and includes preparatory operations.",
+    "retries": "Not exposed by collector; late/unflushed samples and completion rendering excluded. Baseline precedes readiness/start and includes preparatory operations.",
+    "observed_model": "Not exposed by collector; late/unflushed samples and completion rendering excluded. Baseline precedes readiness/start and includes preparatory operations.",
+    "observed_effort": "Not exposed by collector; late/unflushed samples and completion rendering excluded. Baseline precedes readiness/start and includes preparatory operations."
+  }
+}

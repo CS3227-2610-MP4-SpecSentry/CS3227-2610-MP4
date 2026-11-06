@@ -1,0 +1,9 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/reviewer-ai-usage.integration.ts --testNamePattern Reviewer usage fixture readiness
+
+Test Suites: 1 passed, 1 total
+Tests:       10 skipped, 1 passed, 11 total
+Snapshots:   0 total
+Time:        6.551 s, estimated 36 s
+Ran all test suites within paths "test/reviewer-ai-usage.integration.ts".

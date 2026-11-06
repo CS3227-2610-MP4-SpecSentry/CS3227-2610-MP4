@@ -1,0 +1,18 @@
+{
+  "source": "Own thread baseline/delta: external MP4 sessions/local-resource-tracking/2026-11-04-retention-1-delta.json; sampled cutoff excludes unflushed tail",
+  "tool_calls": null,
+  "unavailable_reasons": {
+    "observed_model": "Not exposed",
+    "tool_calls": "Not exposed",
+    "observed_effort": "Not exposed",
+    "retries": "Not exposed"
+  },
+  "observed_effort": null,
+  "output_tokens": 16645,
+  "scope": "record",
+  "record_id": "0f76c1d42e9d4417a40f7195e3b9156f",
+  "retries": null,
+  "input_tokens": 3460692,
+  "observed_model": null,
+  "cache_read_tokens": 3435264
+}

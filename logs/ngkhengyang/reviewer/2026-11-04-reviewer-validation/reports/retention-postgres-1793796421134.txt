@@ -1,0 +1,381 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/ai-retention.integration.ts
+
+FAIL test/ai-retention.integration.ts (5.285 s)
+  ● PostgreSQL AI retention › deletes at expiry equality, cascades old abandoned attempts, and is idempotent under concurrent cleanup
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      72 |
+      73 |   it('deletes at expiry equality, cascades old abandoned attempts, and is idempotent under concurrent cleanup', async () => {
+    > 74 |     const request = await create('expired'); await attempt(request.id);
+         |                     ^
+      75 |     await lease(request.id, new Date(time)); await lease(`${prefix}-orphan-expired`, new Date(time));
+      76 |     await Promise.all([cleanup(), cleanup(), cleanup()]); await cleanup();
+      77 |     expect(await database.client.aiRequest.findUnique({ where: { id: request.id } })).toBeNull();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:74:21)
+
+  ● PostgreSQL AI retention › preserves equality and future values of requestedAt without an upper cutoff
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      84 |       for (const offset of [-day, day]) {
+      85 |         const stamp = new Date(time + offset);
+    > 86 |         const request = await create(`${field}-${offset}`, field === 'requestedAt' || field === 'completedAt' ? { [field]: stamp } : {});
+         |                         ^
+      87 |         await attempt(request.id, field === 'dispatchedAt' ? { dispatchedAt: stamp }
+      88 |           : field === 'attemptCompletedAt' ? { completedAt: stamp } : {});
+      89 |         await cleanup();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/ai-retention.integration.ts:86:25
+
+  ● PostgreSQL AI retention › preserves equality and future values of completedAt without an upper cutoff
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      84 |       for (const offset of [-day, day]) {
+      85 |         const stamp = new Date(time + offset);
+    > 86 |         const request = await create(`${field}-${offset}`, field === 'requestedAt' || field === 'completedAt' ? { [field]: stamp } : {});
+         |                         ^
+      87 |         await attempt(request.id, field === 'dispatchedAt' ? { dispatchedAt: stamp }
+      88 |           : field === 'attemptCompletedAt' ? { completedAt: stamp } : {});
+      89 |         await cleanup();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/ai-retention.integration.ts:86:25
+
+  ● PostgreSQL AI retention › preserves equality and future values of dispatchedAt without an upper cutoff
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      84 |       for (const offset of [-day, day]) {
+      85 |         const stamp = new Date(time + offset);
+    > 86 |         const request = await create(`${field}-${offset}`, field === 'requestedAt' || field === 'completedAt' ? { [field]: stamp } : {});
+         |                         ^
+      87 |         await attempt(request.id, field === 'dispatchedAt' ? { dispatchedAt: stamp }
+      88 |           : field === 'attemptCompletedAt' ? { completedAt: stamp } : {});
+      89 |         await cleanup();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/ai-retention.integration.ts:86:25
+
+  ● PostgreSQL AI retention › preserves equality and future values of attemptCompletedAt without an upper cutoff
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      84 |       for (const offset of [-day, day]) {
+      85 |         const stamp = new Date(time + offset);
+    > 86 |         const request = await create(`${field}-${offset}`, field === 'requestedAt' || field === 'completedAt' ? { [field]: stamp } : {});
+         |                         ^
+      87 |         await attempt(request.id, field === 'dispatchedAt' ? { dispatchedAt: stamp }
+      88 |           : field === 'attemptCompletedAt' ? { completedAt: stamp } : {});
+      89 |         await cleanup();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at test/ai-retention.integration.ts:86:25
+
+  ● PostgreSQL AI retention › purges just outside the recent boundary but preserves future retention and live/orphan leases until expiry
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+       95 |   it('purges just outside the recent boundary but preserves future retention and live/orphan leases until expiry', async () => {
+       96 |     const stale = new Date(time - day - 1);
+    >  97 |     const expired = await create('outside-boundary', { requestedAt: stale, completedAt: stale });
+          |                     ^
+       98 |     await attempt(expired.id, { dispatchedAt: stale, completedAt: stale });
+       99 |     const retained = await create('future-retention', { retainedUntil: new Date(time + 1) });
+      100 |     const active = await create('live-lease'); await lease(active.id, new Date(time + 1));
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:97:21)
+
+  ● PostgreSQL AI retention › captures the cutoff after waiting for the coordinator and reclaims newly expired leases
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      110 |
+      111 |   it('captures the cutoff after waiting for the coordinator and reclaims newly expired leases', async () => {
+    > 112 |     const request = await create('cross-cutoff', { retainedUntil: new Date(time + 1000) });
+          |                     ^
+      113 |     await lease(request.id, new Date(time + 1000));
+      114 |     const holder = holdCoordinator(); await holder.entered.promise;
+      115 |     const pending = cleanup();
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:112:21)
+
+  ● PostgreSQL AI retention › rolls back expired lease deletion and parent/attempt cascade when the cleanup transaction fails
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      121 |
+      122 |   it('rolls back expired lease deletion and parent/attempt cascade when the cleanup transaction fails', async () => {
+    > 123 |     const request = await create('rollback'); await attempt(request.id); await lease(request.id, new Date(time));
+          |                     ^
+      124 |     const prisma = { $transaction: (work: (tx: Prisma.TransactionClient) => Promise<unknown>, options: object) =>
+      125 |       database.client.$transaction(tx => work(new Proxy(tx, { get(target, property) {
+      126 |         if (property === '$executeRaw') return async (...args: unknown[]) => {
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:123:21)
+
+  ● PostgreSQL AI retention › times out behind the coordinator without deleting partial data
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      137 |
+      138 |   it('times out behind the coordinator without deleting partial data', async () => {
+    > 139 |     const request = await create('timeout'); await lease(request.id, new Date(time));
+          |                     ^
+      140 |     const holder = holdCoordinator(); await holder.entered.promise;
+      141 |     try { await expect(cleanup(accounting(), 75)).rejects.toMatchObject({ errorClass: 'DEADLINE' }); }
+      142 |     finally { holder.release.open(); await holder.pending; }
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:139:21)
+
+  ● PostgreSQL AI retention › rolls back all deletion when its deadline is aborted before commit
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      146 |
+      147 |   it('rolls back all deletion when its deadline is aborted before commit', async () => {
+    > 148 |     const request = await create('aborted'); await attempt(request.id); await lease(request.id, new Date(time));
+          |                     ^
+      149 |     const deadline = new AiRequestDeadline(clock, 2000);
+      150 |     const prisma = { $transaction: (work: (tx: Prisma.TransactionClient) => Promise<unknown>, options: object) =>
+      151 |       database.client.$transaction(tx => work(new Proxy(tx, { get(target, property) {
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:148:21)
+
+  ● PostgreSQL AI retention › fails closed without a coordinator
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      164 |
+      165 |   it('fails closed without a coordinator', async () => {
+    > 166 |     const request = await create('no-coordinator'); await lease(request.id, new Date(time));
+          |                     ^
+      167 |     await database.client.aiQuotaCoordinator.delete({ where: { id: 'reviewer-patch-risk' } });
+      168 |     try { await expect(cleanup()).rejects.toMatchObject({ errorClass: 'INTERNAL' }); }
+      169 |     finally { await database.client.aiQuotaCoordinator.create({ data: { id: 'reviewer-patch-risk' } }); }
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:166:21)
+
+  ● PostgreSQL AI retention › serializes cleanup with active enqueue, reserve, and finish without losing quota evidence
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      173 |
+      174 |   it('serializes cleanup with active enqueue, reserve, and finish without losing quota evidence', async () => {
+    > 175 |     const queued = await create('enqueue-race', { requestedAt: new Date(time) });
+          |                    ^
+      176 |     const deadline = new AiRequestDeadline(clock, 3000);
+      177 |     try {
+      178 |       await Promise.all([accounting().enqueue({ requestId: queued.id, actorId: prefix, deadline }), cleanup()]);
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:175:20)
+
+  ● PostgreSQL AI retention › preserves daily quota exhaustion evidence after cleanup
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.aiRequest.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:29:38
+
+      26   try { await value.cleanup(deadline); } finally { deadline.close(); }
+      27 }
+      28 async function create(suffix: string, overrides: Partial<Prisma.AiRequestUncheckedCreateInput> = {}) {
+    → 29   return database.client.aiRequest.create(
+    Database error. Code: `23514`. Message: `new row for relation "AiRequest" violates check constraint "AiRequest_feature_scope"`
+
+      194 |
+      195 |   it('preserves daily quota exhaustion evidence after cleanup', async () => {
+    > 196 |     const request = await create('daily-quota');
+          |                     ^
+      197 |     await database.client.aiOutboundAttempt.createMany({ data: Array.from({ length: 60 }, (_, ordinal) => ({
+      198 |       requestId: request.id, actorId: prefix, ordinal, dispatchedAt: new Date('2026-11-04T00:00:00Z'),
+      199 |     })) });
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:196:21)
+
+  ● PostgreSQL AI retention › leaves immutable submissions, activity, notifications, and security history untouched
+
+    PrismaClientKnownRequestError: 
+    Invalid `database.client.notification.create()` invocation in
+    C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.integration.ts:216:55
+
+      213   summary: 'Synthetic submission', problem: 'Preserve history', constraints: '', expectedBehavior: 'History remains', diffText: '', submittedAt: old() } });
+      214 const activity = await database.client.proposalActivity.create({ data: { proposalId: proposal.id, revisionId: revision.id,
+      215   actorId: user.id, action: 'SUBMITTED', summary: 'Synthetic history', timestamp: old() } });
+    → 216 const notice = await database.client.notification.create(
+    Foreign key constraint violated on the constraint: `Notification_proposalId_revisionId_assignmentId_fkey`
+
+      214 |     const activity = await database.client.proposalActivity.create({ data: { proposalId: proposal.id, revisionId: revision.id,
+      215 |       actorId: user.id, action: 'SUBMITTED', summary: 'Synthetic history', timestamp: old() } });
+    > 216 |     const notice = await database.client.notification.create({ data: { recipientId: user.id, proposalId: proposal.id, revisionId: revision.id,
+          |                    ^
+      217 |       assignmentId: prefix, activityId: activity.id, kind: 'NEW_REVISION', createdAt: old() } });
+      218 |     const event = await database.client.securityEvent.create({ data: { actorId: user.id, action: 'synthetic', target: prefix, outcome: 'success', timestamp: old() } });
+      219 |     try {
+
+      at vn.handleRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:238:13)
+      at vn.handleAndLogRequestError (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:184:12)
+      at vn.request (../../node_modules/@prisma/client/src/runtime/RequestHandler.ts:153:12)
+      at a (../../node_modules/@prisma/client/src/runtime/getPrismaClient.ts:1012:24)
+      at Object.<anonymous> (test/ai-retention.integration.ts:216:20)
+
+Test Suites: 1 failed, 1 total
+Tests:       14 failed, 14 total
+Snapshots:   0 total
+Time:        5.657 s
+Ran all test suites within paths "test/ai-retention.integration.ts".
+npm error Lifecycle script `test:integration` failed with error:
+npm error code 1
+npm error path C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error workspace @specsentry/server@0.1.0
+npm error location C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/ai-retention.integration.ts

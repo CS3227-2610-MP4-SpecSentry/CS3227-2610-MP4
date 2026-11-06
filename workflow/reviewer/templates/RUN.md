@@ -22,6 +22,8 @@ Copy relevant sections to `logs/<name>/<log_name.md>` (use the prompting person'
 - Context supplied and significant additional retrievals with purpose:
 - Expected checks and environment prerequisites:
 - Preflight ready/missing status; cold setup costs and any explicitly supplied resource budget:
+- Separate integrator/test agent inclusion or omission, size/structure rationale, and named fallback implementers:
+- Routing table: sender/recipient agent IDs, allowed transitions/prerequisites, fix owners, cross-owner lead/dependencies, evidence writers and read-only fallback recorder:
 
 ## Security disposition
 
@@ -47,7 +49,7 @@ Copy relevant sections to `logs/<name>/<log_name.md>` (use the prompting person'
 ## Integration
 
 - Base and integrated state (commit or diff/content hashes, including relevant untracked files):
-- Combined changes and main-agent integration edits:
+- Combined changes, named integration executor and permitted wiring edits:
 - Interface/configuration/migration checks:
 - Build/integration commands, outcomes, evidence:
 - Limitations and gate outcome:
@@ -66,6 +68,15 @@ Use CRITICAL/HIGH/MEDIUM/LOW with a concrete impact explanation. State blocking 
 - Initial batch / revalidation cycle number:
 - Fix diff and regression scope/rationale:
 - New findings, security re-review triggers, gate outcome:
+- Owner-specific batch references/delivery acknowledgements; main-agent compact status references:
+
+## Exceptional main-agent intervention
+
+| Trigger / evidence | Why assigned-owner resolution is insufficient | Bounded action / owner / exit criterion | Ownership and resource record | Outcome / independent review |
+| --- | --- | --- | --- | --- |
+| | | | | |
+
+Record no interventions when none occurred. Main implementation additionally explains why reassignment was inadequate; permissions, recording and independent review still apply.
 
 ## Resource record
 
@@ -77,6 +88,7 @@ Use CRITICAL/HIGH/MEDIUM/LOW with a concrete impact explanation. State blocking 
 - Summed agent elapsed time (overlaps included):
 - Parallel-merged elapsed; measured waits/pauses/setup where exposed; unknown idle and computation-time limits:
 - Measurement coverage, unavailable values, aggregation limits:
+- Per-agent/per-step MP4 sessions cumulative baseline and delta references, actual thread IDs, sample cutoffs and mapping to resource records:
 
 ## Final evidence and continuation
 
@@ -87,3 +99,4 @@ Use CRITICAL/HIGH/MEDIUM/LOW with a concrete impact explanation. State blocking 
 - Decisions/findings/open questions retained for continuation:
 - Next actions and concise change log:
 - Workflow observations: defects, rework, repeated retrieval, coordination cost:
+- Main-agent consolidation skill used; generated CLI bundle and canonical narrative references; separately measured consolidation interval/cutoff:

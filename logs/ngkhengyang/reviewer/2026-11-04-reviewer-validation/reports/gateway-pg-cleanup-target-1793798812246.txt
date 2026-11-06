@@ -1,0 +1,11 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/patch-risk.integration.ts --testNamePattern ai-response-drop-completion-first
+
+(node:18148) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Test Suites: 1 passed, 1 total
+Tests:       36 skipped, 1 passed, 37 total
+Snapshots:   0 total
+Time:        35.715 s, estimated 82 s
+Ran all test suites within paths "test/patch-risk.integration.ts".

@@ -1,0 +1,49 @@
+{
+  "id": "fixture-readiness",
+  "kind": "fixture",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const {spawnSync}=require('node:child_process');for(const args of [['run','build','-w','@specsentry/shared'],['run','test:integration','-w','@specsentry/server','--','--runTestsByPath','test/reviewer-ai-usage.integration.ts','--testNamePattern','Reviewer usage fixture readiness']]){const r=spawnSync(process.env.ComSpec||'cmd.exe',['/d','/s','/c','npm '+args.map(a=>'\"'+a+'\"').join(' ')],{stdio:'inherit'});if(r.status!==0)process.exit(r.status||1);}"
+  ],
+  "paths": [
+    "src/shared/src/contracts/ai.ts",
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+    "src/server/test/reviewer-ai-usage.integration.ts",
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json",
+    "src/server/prisma/schema.prisma",
+    "src/server/src/identity",
+    "src/server/src/database",
+    "src/server/jest.integration.config.cjs",
+    "src/shared/src",
+    "src/server/src/app.module.ts",
+    "src/server/src/reviews",
+    "src/server/src/ai"
+  ],
+  "depends_on": [
+    "postgres-environment"
+  ],
+  "resources": [
+    "build",
+    "database"
+  ],
+  "environment": [
+    "TEST_DATABASE_URL"
+  ],
+  "database": {
+    "environment": "TEST_DATABASE_URL",
+    "name": "specsentry_test"
+  },
+  "timeout": 360
+}

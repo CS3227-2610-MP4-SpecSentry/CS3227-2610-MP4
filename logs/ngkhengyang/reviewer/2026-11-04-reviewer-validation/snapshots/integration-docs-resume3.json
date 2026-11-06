@@ -1,0 +1,80 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "8458117411b7feb7adffb304481ab9181ae9f8f8bfe3619b28dd3845ea927466",
+  "files": {
+    "docs/DeveloperGuide.md": {
+      "bytes": 50529,
+      "sha256": "180cc5146ff89e41c168dffbd0478c67c7befbe5647ca2320a0c82e1c60cc4a3"
+    },
+    "docs/Reflections.md": {
+      "bytes": 5819,
+      "sha256": "ec14a360805b6f931085c8a5631791e62c2112b8d117d88efd3ec939d0c86ad7"
+    },
+    "docs/UserGuide.md": {
+      "bytes": 32377,
+      "sha256": "580f31bc50d83de373af5cc666a4fa2a16c0e29848a941539ab430cf3781c89f"
+    },
+    "docs/ai-retention.md": {
+      "bytes": 2192,
+      "sha256": "4f7e0601f8bcec29fad7fa3b05d11d6c50187986f664dac1d07c46d18a28afa6"
+    },
+    "workflow/TRACEABILITY.md": {
+      "bytes": 68868,
+      "sha256": "899f8e6e2f2b1686314683c25aa968bf475dcacaec6e75a289133942514ef8ca"
+    },
+    "workflow/specs/AI-SECURITY-SPEC.md": {
+      "bytes": 23460,
+      "sha256": "6e62ec67a5ad0dff4f126aebe16b0b773e07296b2e63044158a1d8d51554875d"
+    },
+    "workflow/specs/ASSIGNMENT-SPEC.md": {
+      "bytes": 10211,
+      "sha256": "1a82e6f5cd5096bd213d6c871f37f27eb7b9705d6847accfe5210489cfac7963"
+    },
+    "workflow/specs/INTEGRATION-SPEC.md": {
+      "bytes": 19810,
+      "sha256": "d8ac5f22c5d18eb2948297bd131bd01334f7a4d5a85a7c10f4ceac841a0361c1"
+    },
+    "workflow/specs/OPEN-DECISIONS.md": {
+      "bytes": 5252,
+      "sha256": "16c03c4c5505b1765dbe942aa9c972c0d14749055e34366b913ad22ae79def3a"
+    },
+    "workflow/specs/PRODUCT-SPEC.md": {
+      "bytes": 16346,
+      "sha256": "9b75c846e0d05e3d36be9ab496319e3ece1a40a2d64b162397057d16b6a8f060"
+    },
+    "workflow/specs/ROLE-CONTRIBUTOR.md": {
+      "bytes": 17839,
+      "sha256": "2fde2edd078431d1f5d25280472057328cb2bccbee5673630762f10972b9fe1a"
+    },
+    "workflow/specs/ROLE-MAINTAINER.md": {
+      "bytes": 8006,
+      "sha256": "0f0a629b558290c059c8b7f75afd8e0449b3cb5d2bceb3cfe646759561f2c63f"
+    },
+    "workflow/specs/ROLE-REVIEWER.md": {
+      "bytes": 15350,
+      "sha256": "139eaefe90180e115ecd31dddde3b81bce2845637de6204e8aa51d263ec17f9e"
+    },
+    "workflow/specs/SHARED-REQUIREMENTS.md": {
+      "bytes": 12910,
+      "sha256": "b4826e795c6909efe6368fc47b33b6756dd9ba721cf26c45a93c473ccda46ddc"
+    },
+    "workflow/specs/TECHNICAL-SPEC.md": {
+      "bytes": 8420,
+      "sha256": "9122998a7ae8271f446a52aab2beb78f3f8cc1e669b0739e912fa939190faf69"
+    },
+    "workflow/specs/UI-UX-SPEC.md": {
+      "bytes": 18911,
+      "sha256": "d0c75ccb354ca1a57faf971570d5af276b48af9f857c9232d5ff07ac5005b5a7"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "docs/DeveloperGuide.md",
+    "docs/Reflections.md",
+    "docs/UserGuide.md",
+    "docs/ai-retention.md",
+    "workflow/TRACEABILITY.md",
+    "workflow/specs"
+  ]
+}

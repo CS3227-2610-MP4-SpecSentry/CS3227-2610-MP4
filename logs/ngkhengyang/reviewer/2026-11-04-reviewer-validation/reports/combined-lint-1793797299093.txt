@@ -1,0 +1,31 @@
+
+> specsentry@0.1.0 lint
+> eslint src workflow/tooling/*.mjs playwright.config.ts
+
+
+C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\client\src\features\reviewer\ReviewerAiUsage.tsx
+  27:18  warning  The ref value 'generation.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'generation.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\client\src\features\reviewer\ReviewerWorkspace.tsx
+  21:33  error  Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. The inferred dependencies did not match the manually specified dependencies, which could cause the value to change more or less frequently than expected. The inferred dependency was `parentAuthorization.current`, but the source dependencies were [parentAuthorization]. Differences in ref.current access.
+
+C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\client\src\features\reviewer\ReviewerWorkspace.tsx:21:33
+  19 |   const [usageGeneration, setUsageGeneration] = useState(0);
+  20 |   // Existing authorization generations fence requests; remount also erases already-visible totals.
+> 21 |   const authorization = useMemo(() => ({ current: parentAuthorization.current, invalidate: () => {
+     |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 22 |     parentAuthorization.invalidate(); setUsageGeneration(value => value + 1);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 23 |   } }), [parentAuthorization]);
+     | ^^^^^^^ Could not preserve existing manual memoization
+  24 |   const [tab, setTab] = useState<'pool' | 'assigned'>('pool');
+  25 |   const [query, setQuery] = useState('');
+  26 |   const [queue, setQueue] = useState<Queue | null>(null);  react-hooks/preserve-manual-memoization
+
+C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server\test\ai-retention.spec.ts
+  15:36  error  '_args' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 3 problems (2 errors, 1 warning)
+

@@ -1,0 +1,17 @@
+{
+  "import_id": "evaluation-f001-resume3-usage",
+  "record_id": "rec-410a44abf6014abb",
+  "scope": "record",
+  "source": "Own thread 01a1a827-cc14-77f0-8ea1-edfa91223032 only; MP4 sessions/local-resource-tracking/evaluation-f001-resume3-start.json to evaluation-f001-resume3-end.json outside Git; baseline cutoff 2026-11-04T20:03:05.806Z, end cutoff 2026-11-04T20:08:11.223Z; excludes initial retrieval and unflushed/final completion rendering tail. Cache included in input; reasoning included in output.",
+  "input_tokens": 1521691,
+  "output_tokens": 5582,
+  "cache_read_tokens": 1505280,
+  "tool_calls": null,
+  "retries": null,
+  "unavailable_reasons": {
+    "tool_calls": "Collector does not expose tool counters",
+    "retries": "Collector does not expose retry counters",
+    "observed_model": "Runtime execution settings not exposed by collector",
+    "observed_effort": "Runtime execution settings not exposed by collector"
+  }
+}

@@ -1,0 +1,30 @@
+
+> @specsentry/server@0.1.0 test:integration
+> jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/reviewer-ai-usage.integration.ts --testNamePattern Reviewer usage fixture readiness
+
+FAIL test/reviewer-ai-usage.integration.ts
+  ● Test suite failed to run
+
+    [96mtest/reviewer-ai-usage.integration.ts[0m:[93m48[0m:[93m92[0m - [91merror[0m[90m TS2322: [0mType '{ templateVersion: string; requestedAt: Date; outcome: "STALE" | "SUCCESS" | "REJECTED" | "FAILED" | "CANCELLED"; attempts: { create: AiOutboundAttemptCreateWithoutRequestInput[]; }; ... 9 more ...; expectedVersion: number; } | { ...; }' is not assignable to type '((Without<AiRequestCreateInput, AiRequestUncheckedCreateInput> & AiRequestUncheckedCreateInput) | (Without<...> & AiRequestCreateInput)) & object'.
+      Object literal may only specify known properties, and 'feature' does not exist in type '((Without<AiRequestCreateInput, AiRequestUncheckedCreateInput> & AiRequestUncheckedCreateInput) | (Without<...> & AiRequestCreateInput)) & object'.
+
+    [7m48[0m     return database.client.aiRequest.create({ data: { correlationId: 'synthetic', actorId, feature, proposalId: 'private-proposal', expectedVersion: 0,
+    [7m  [0m [91m                                                                                           ~~~~~~~[0m
+
+      [96msrc/generated/prisma/models/AiRequest.ts[0m:[93m1612[0m:[93m3[0m
+        [7m1612[0m   data: Prisma.XOR<Prisma.AiRequestCreateInput, Prisma.AiRequestUncheckedCreateInput>
+        [7m    [0m [96m  ~~~~[0m
+        The expected type comes from property 'data' which is declared here on type '{ select?: AiRequestSelect<DefaultArgs> | null | undefined; omit?: AiRequestOmit<DefaultArgs> | null | undefined; include?: AiRequestInclude<...> | ... 1 more ... | undefined; data: ((Without<...> & AiRequestUncheckedCreateInput) | (Without<...> & AiRequestCreateInput)) & object; }'
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        18.058 s
+Ran all test suites within paths "test/reviewer-ai-usage.integration.ts".
+npm error Lifecycle script `test:integration` failed with error:
+npm error code 1
+npm error path C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error workspace @specsentry/server@0.1.0
+npm error location C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c jest --runInBand --config jest.integration.config.cjs --runTestsByPath test/reviewer-ai-usage.integration.ts --testNamePattern ^^^"Reviewer^^^ usage^^^ fixture^^^ readiness^^^"

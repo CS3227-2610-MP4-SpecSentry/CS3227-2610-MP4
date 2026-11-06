@@ -1,0 +1,15 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "files": {
+    "src/server/test/patch-risk.integration.ts": {
+      "bytes": 40778,
+      "sha256": "0f1c495d05875ad9730966a34c8fde4a1c6ad094d3e6f7024008922defe58b1f"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "src/server/test/patch-risk.integration.ts"
+  ]
+}

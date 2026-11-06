@@ -1,0 +1,35 @@
+
+> @specsentry/server@0.1.0 test
+> jest --runInBand --config jest.config.cjs --runTestsByPath test/reviewer-live-verification.spec.ts --testNamePattern Reviewer verification
+
+FAIL test/reviewer-live-verification.spec.ts
+  ● Test suite failed to run
+
+    [96mtest/reviewer-live-verification.spec.ts[0m:[93m91[0m:[93m114[0m - [91merror[0m[90m TS2551: [0mProperty 'model' does not exist on type 'AiGatewayOptions'. Did you mean 'mode'?
+      Property 'model' does not exist on type 'Readonly<{ mode: "disabled"; }>'.
+
+    [7m91[0m     const base = reviewerVerificationContext(); const counter = new ConservativeInputBudgetCounter(aiTestOptions.model);
+    [7m  [0m [91m                                                                                                                 ~~~~~[0m
+    [96mtest/reviewer-live-verification.spec.ts[0m:[93m96[0m:[93m95[0m - [91merror[0m[90m TS2322: [0mType '{ inputBudgetMethodId: string; mode: "disabled"; } | { inputBudgetMethodId: string; model: string; contextWindow: number; mode: "test"; } | { inputBudgetMethodId: string; model: string; contextWindow: number; mode: "live"; apiKey: string; }' is not assignable to type 'AiGatewayOptions'.
+      Object literal may only specify known properties, and 'inputBudgetMethodId' does not exist in type 'Readonly<{ mode: "disabled"; }>'.
+
+    [7m96[0m       const gateway = createPatchRiskGateway({ prisma: h.prisma, options: { ...aiTestOptions, inputBudgetMethodId: counter.methodId }, counter, transport, clock: h.clock });
+    [7m  [0m [91m                                                                                              ~~~~~~~~~~~~~~~~~~~[0m
+
+      [96msrc/ai/gateway/index.ts[0m:[93m135[0m:[93m52[0m
+        [7m135[0m type GatewayDependencies = { prisma: PrismaClient; options: AiGatewayOptions;
+        [7m   [0m [96m                                                   ~~~~~~~[0m
+        The expected type comes from property 'options' which is declared here on type 'GatewayDependencies'
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        3.434 s
+Ran all test suites within paths "test/reviewer-live-verification.spec.ts".
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error workspace @specsentry/server@0.1.0
+npm error location C:\Users\User\Documents\NUS\CS3227\CS3227-2610-MP4\src\server
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c jest --runInBand --config jest.config.cjs --runTestsByPath test/reviewer-live-verification.spec.ts --testNamePattern ^^^"Reviewer^^^ verification^^^"

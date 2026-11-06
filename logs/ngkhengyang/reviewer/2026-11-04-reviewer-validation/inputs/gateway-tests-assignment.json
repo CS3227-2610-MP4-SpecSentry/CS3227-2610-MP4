@@ -1,0 +1,9 @@
+{
+  "id": "gateway-tests",
+  "agent": "gateway-tests",
+  "role": "implementer",
+  "paths": [
+    "src/server/test/patch-risk.integration.ts"
+  ],
+  "dependencies": []
+}

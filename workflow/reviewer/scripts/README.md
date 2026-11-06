@@ -2,6 +2,8 @@
 
 New runs use [version 3](V3.md): matrix dispatch gates, verification with resource leases, canonical completion and derived reports. Follow that procedure for new work. The reference below covers lower-level commands and version 2 compatibility; legacy examples explicitly select version 2.
 
+For direct handoffs, optional test/integration agents, delegated recording and main-agent monitoring, follow the [execution policy](../IMPLEMENTATION.md) and [version 3 mapping](V3.md). A named implementer executes the required integration stage when no integrator is spawned. Routing, wakeups and MP4 sessions sampling remain explicit agent/runtime operations, not CLI automation.
+
 Python 3.11+ standard library only. Run from the repository root; use `python -B` to avoid bytecode artifacts. All scripts, tests, and this execution policy are Reviewer-specific. They neither start agents nor impose this workflow on other functionalities.
 
 ```powershell
@@ -87,7 +89,7 @@ python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/
 python -B workflow/reviewer/scripts/workflow.py --run logs/ngkhengyang/reviewer/coverage-validation handoff validate --id 01-main-to-reviewer
 ```
 
-Generated files live in the run's `handoffs/` directory, matching the handoff skill's default layout. IDs are unique; existing artifacts are never overwritten. Ordinary fields are escaped literal text, with links generated only from validated local references. Code-state freshness and artifact hashes are checked. Read-only agents return structured content for the authorized coordinator to persist; the generator does not expand permissions.
+Generated files live in the run's `handoffs/` directory, matching the handoff skill's default layout. IDs are unique; existing artifacts are never overwritten. Ordinary fields are escaped literal text, with links generated only from validated local references. Code-state freshness and artifact hashes are checked. Agents need explicit run-evidence write permission; otherwise return structured content to the named authorized recorder. The generator does not expand permissions.
 
 ## 5. Ownership, findings and fix cycles
 

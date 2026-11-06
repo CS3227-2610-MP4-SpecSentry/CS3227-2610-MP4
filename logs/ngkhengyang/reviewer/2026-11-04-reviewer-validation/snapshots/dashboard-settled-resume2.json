@@ -1,0 +1,65 @@
+{
+  "base": "HEAD",
+  "base_commit": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "diff_sha256": "0b823b04c9265a53d0a86b679cc719f36348c382429d1cace45b2bd96d7f7355",
+  "files": {
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx": {
+      "bytes": 8593,
+      "sha256": "d001bbe48810730fa72e625e97c82f6a6e44b9d6b6f1aed6353d0eea8a755b27"
+    },
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx": {
+      "bytes": 5069,
+      "sha256": "042a96882235f9230bb74d7d32b3ff694e16095095a79c50f735d301ae320b26"
+    },
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx": {
+      "bytes": 21272,
+      "sha256": "d19fb61de88aeab63f9229064ef85e411d861e6d7d1dbc9f104cd2e64faf96ea"
+    },
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts": {
+      "bytes": 685,
+      "sha256": "48253caedcc83eccfd33ea672b4416ca615caabdd7048b949957ae1b3fd16b0b"
+    },
+    "src/server/src/reviews/reviewer-ai-usage.service.ts": {
+      "bytes": 3364,
+      "sha256": "06cf2c832b4f27108dcf3d0bcbca05cc0756c14ddabbfc06deef90d2df825649"
+    },
+    "src/server/src/reviews/reviews.module.ts": {
+      "bytes": 1482,
+      "sha256": "052450064980e1709ef2e58a3ab93c065d59d9341d8417fde3943c85f95c5608"
+    },
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts": {
+      "bytes": 8629,
+      "sha256": "cea82cccc5421473e4705b8d2cda95bd8ebe016166f2ea4ee7651b5e2a2e6f50"
+    },
+    "src/server/test/reviewer-ai-usage.integration.ts": {
+      "bytes": 18685,
+      "sha256": "b99f806e3088df93d3fb9c69a1459ee9950a4e4abff986ea94b82c8ee84f0f18"
+    },
+    "src/shared/src/contracts/ai.ts": {
+      "bytes": 9180,
+      "sha256": "3c7066d5d8dd2b6e3c5043ddb57e895fbbfa8abfa9d8aec684d9dfdc7c19d7ef"
+    },
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts": {
+      "bytes": 2061,
+      "sha256": "4b65eb8f97019d8d44b5acbacae0fdf207557502834bdcdeb1532184d005259e"
+    },
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts": {
+      "bytes": 4127,
+      "sha256": "f6734c6e34f12b8b21b260a30ae8492634328d6243675dc4507a55240ff7a641"
+    }
+  },
+  "head": "8707d19b94f1bf00e26564b67c84a0e76eee42f8",
+  "paths": [
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+    "src/server/test/reviewer-ai-usage.integration.ts",
+    "src/shared/src/contracts/ai.ts",
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts",
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts"
+  ]
+}

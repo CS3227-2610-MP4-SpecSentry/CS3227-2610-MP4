@@ -1,0 +1,64 @@
+# Reviewer completion: preparation checkpoint
+
+Prompter: ngkhengyang, explicitly supplied in the attached task. Date: 4 November 2026, Asia/Singapore. Human verification of this AI-produced summary: pending.
+
+## Requests and outcome
+
+The supplied task requests remaining Reviewer implementation/evidence: own AI usage dashboard, Reviewer-specific evaluation tooling, retention assessment, genuine browser restoration and accessibility evidence, then guides/traceability/acknowledgements and supported reflections. Preserve existing Reviewer behavior, including already displayed Contributor response history. No commits/push/merge/deployment or workflow rewrite.
+
+Subsequent user steering: start the workflow but pause immediately before implementation, after contract establishment; report subagents/models and pause timing. Applied as the controlling scope: prepare requirements/design, independently assess security, establish contracts for the independent slices, record conditional shared work, then stop before implementation dispatch. Implementation has not begun. Only run evidence and this log were written; product/specification/workflow source remains at the initial HEAD.
+
+Preparation delivered [the brief, contracts, ownership, named acceptance/race cases and resume conditions](reviewer/2026-11-04-reviewer-completion/brief.md). Source identity: clean initial reviewer-completion branch, HEAD/base 8707d19b94f1bf00e26564b67c84a0e76eee42f8, matching the supplied baseline. No existing contributor changes were overwritten. No commit was made.
+
+## Contract and security outcome
+
+[Independent security report](reviewer/2026-11-04-reviewer-completion/reports/security-design.md) assessed actual code/spec and amended brief hash 45cb5e91ce935a4fa1641ee243067f83be2c1e5da70d139404f35cd8dc4528b8. Subsequent brief changes record status/disposition only.
+
+- C1 established: GET /api/reviews/ai/usage returns strictly bounded own Reviewer-feature aggregate usage; fresh deterministic session/account/role checks and restricted safe read event. No proposal/run IDs, content, hashes or other users' history. Own aggregates across former assignments do not change the existing assignment-scoped audit contract. Independent SGT request/attempt windows, retries/incomplete attempts, unknown usage and cache-disabled labels are explicit.
+- C2 established: accessible workspace usage region, observable clearing of already-rendered data on auth loss/account replacement, late fetch/body fences and fresh authorization before restoration display. Manual workflow remains independent.
+- C3 established: narrow server-only production/verifier preparation/strict-decoder sharing, fixed synthetic Reviewer evaluation, 1–5 criterion batches, adversarial/multilingual/delimiter inputs, exact conservative-policy cap boundaries and safe metadata reports. No Contributor schema-mode assumptions or permanent live switch changes.
+- SEC-D01 and SEC-D02 closed for design wording only. Their future implementation and independent acceptance are pending. Changes clarify completed outbound failures versus later delivery denial and actively clear visible data rather than relying only on a mutable generation ref.
+- SEC-D03 remains HIGH/open, blocking retention dispatch only. The shared AI owner must settle atomic cleanup authority and enqueue/reserve/finish concurrency. Scheduler/cadence/identity/recovery and deployed physical deletion remain team-owned gates. Existing unused cleanup helper is two independent deletes; opportunistic gateway deletion is separate. A command wrapping that helper cannot claim atomic or scheduled guarantees. C4 remains explicitly conditional; it is not represented as an established implementation contract.
+
+C1–C3 can proceed independently after the user resumes and dispatch prerequisites pass. No implementation acceptance, provider compatibility, deployed security or human signoff is claimed.
+
+## Agents and execution plan
+
+Resource policy: [Reviewer model selection](../../workflow/reviewer/RESOURCES.md). Focused packets without full-history forks; no Astra exception needed.
+
+| Agent | Model / effort | Actual/planned contribution |
+| --- | --- | --- |
+| main | exact model/effort unavailable | Actual brief/source/preflight inspection, security assignment/disposition, contract establishment and checkpoint consolidation. Narrative owner only; no implementation. |
+| security | gpt-6.1-sol / high | Actual independent design review. High effort justified by aggregate/audit privacy, auth races, accounting windows and destructive retention concurrency. Product/spec read-only; wrote own report and resource payload. Interval finished. |
+| dashboard | gpt-6.1-sol / high | Planned one complete API/schema/UI dashboard slice and its unit/PostgreSQL/browser tests. High effort for authorization races and accounting consistency. Also named integration executor after writers settle. Not spawned. |
+| evaluation | gpt-6.1-sol / medium | Planned real Reviewer preparation/decoder reuse, fixed offline/live evaluation helper and bounded browser/navigation/accessibility evidence. Established patterns; medium effort sufficient. Not spawned. |
+| retention | gpt-6.1-sol / high | Conditional standalone shared maintenance after owner/concurrency contract coordination; generic process. High effort for deletion/lease/transaction races. Not spawned; blocked before dispatch. |
+| verifier | gpt-6.1-sol / high | Planned independent implementation/spec/security review and owner-scoped revalidation after all writers/integration settle. High effort for cross-layer privacy/accounting. Not spawned. |
+
+Separate test agent omitted because slice-specific tests are tightly coupled to their implementer; there is no substantial disjoint suite worth another setup/handoff. Separate integrator omitted; dashboard implementer executes the required recorded integration stage, with main accountable. Exact disjoint file ownership and commands are in the brief. Existing shared browser fixture belongs solely to evaluation; dashboard gets a separate fixture. Four active slots including main are respected; security completes before implementation, conditional retention waits for coordination/capacity, verifier waits for settled writers.
+
+[Security assignment handoff](reviewer/2026-11-04-reviewer-completion/handoffs/01-main-to-security.md) was acknowledged by the actual child thread 01a1a622-df1d-71d0-ba30-3a9214423e6f. Main accepted the findings, amended contracts and requested bounded recheck; security independently re-read the final contract text and returned the report/resource references. No fix cycle or main implementation intervention occurred. Routine future routing is implementer → named integration executor → verifier; verifier batches findings directly to original owners, who return evidence directly for revalidation. Main handles scope/contract/ownership exceptions and compact status.
+
+## Environment and checks
+
+Read-only preflight verified Node v24.20.0, npm 11.19.0, Python 3.11.7, installed dependencies and generated Prisma client. Commands/CI were discovered from actual manifests and .github/workflows/ci.yml. Safe presence-only .env/process probe found no TEST_DATABASE_URL, AI model/key/context settings, or installed configured Chromium executable; local PostgreSQL TCP 5432 was unavailable. Existing runtime DATABASE_URL and SESSION_SECRET were present but not printed or used. Actual AI switch is AI_LIVE_ENABLED, default false; the initial probe checked obsolete AI_ENABLED, so it cannot establish switch state.
+
+No product tests, builds, database migrations/fixtures/resets, app servers, browser sessions or provider calls ran. PostgreSQL authenticated connectivity/fixture validity, browser executable installation and approved live configuration remain prerequisites. Existing local full performance evidence is preserved and must be reassessed for changed endpoints rather than automatically rerun; it does not establish deployed-network latency. Human usefulness ratings/summary verification and provider quotas/data handling remain external gates.
+
+Actual preparation validation: git branch/HEAD/status, clean tracked diff checks, source searches/reads, generated security handoff validation, brief boundary/section checks, security report local-link existence checks, source identity and resource-state inspection. Final derived report and pause-state validation are linked below. These are preparation checks, not behavioral acceptance.
+
+## Workflow limitations and resume
+
+Initial prep CLI registration declared only REQ-REV-005; this does not cover the full task. The CLI cannot revise initialized requirement IDs and only accepts Reviewer IDs. Preserve that preparation state rather than editing raw JSON. On resume, initialize the single canonical execution run with relevant REQ-REV-003/012/013/014/015 and justified preservation obligations, explicitly trace shared NFR/security references in case descriptions, and link this preparation state. This corrected scope is documented; no matrix or readiness claim was fabricated. No harness source was changed.
+
+Resume requires an explicit user instruction, fresh per-stage resource baselines, current source/environment recheck, exclusive assignments, executable named check registration, acceptance matrix, real preflight/fixture readiness and build/database/browser leases. No tests need to be invented as passing stubs to reach this pause. Retention remains blocked until its shared-owner contract settles; dashboard/evaluation work need not wait for that independent external decision.
+
+## Resources and pause
+
+Canonical interval records: [preparation state](reviewer/2026-11-04-reviewer-completion/state.json). No double counting through a shared recorder. Main actual thread is 01a1a61f-a84e-7990-a396-4d0235b5b58c from CODEX_THREAD_ID, not a copied example ID. Every measured main stage and actual child invocation has its own boundary and outside-Git cumulative baseline/end delta. Only matching thread/stage deltas are imported; descendant totals printed in parent collector output are excluded from parent imports. Cache is within input and reasoning within output. Main exact settings, observed child settings, tool counts and retries are unavailable. Sample cutoffs/unflushed tails and read-only bootstrap before recording are explicit; no retrospective timings are fabricated.
+
+Main compile: rec-f462cbde1be242fc. Main contract establishment: rec-73cc09b38ec24410. Security: rec-e00e8eae18874575. Checkpoint consolidation: rec-eae61ec091584765. Outside-Git samples are under C:/Users/User/Documents/NUS/CS3227/MP4 sessions/local-resource-tracking/2026-11-04-reviewer-prep-* and 2026-11-04-security-design-1-*; exact sources/cutoffs are in imported payloads/state. Resource summary and derived bundle are finalized after checkpoint validation, with zero running intervals verified before response. Human summary verification remains pending. Final response/report rendering after the last finish is outside measured elapsed time, and user pause/idle time is not included in a running timer.
+
+Final measurement rendering: [per-stage resource summary](reviewer/2026-11-04-reviewer-completion/reports/resources.md), [derived checkpoint bundle](reviewer/2026-11-04-reviewer-completion/reports/checkpoint-bundle.json), and [security return handoff](reviewer/2026-11-04-reviewer-completion/handoffs/02-security-to-main.md). Four expected intervals, four finished, zero running; last finish 4 November 2026 18:45:12.828 Asia/Singapore (10:45:12.828 UTC). Calendar span 610.871297 seconds; summed agent elapsed 838.238577 seconds; merged measured interval coverage 610.334607 seconds. Waiting is included in elapsed, not measured active computation. Input 4,867,256 and output 26,866 tokens across sampled stage deltas; cached input 4,722,432 is included in input, not additional consumption. Four/four stage token fields have sampled telemetry, with explicit lagging/unflushed tails excluded; tool/retry coverage is zero/four, unavailable rather than measured zero. Final rendering after this cutoff is outside the stopped timer.
+
+The bundle exits 1 because this is intentionally an incomplete implementation run: no dispatch/implementation/integration/independent implementation-review stages, executable evidence, snapshot-bound implementation handoff, matrix or V3 preflight/fixture evidence. All ten listed consistency errors correspond to these unstarted gates; none is hidden as passing. Preparation and handoff checks passed, including 19 local evidence links, unchanged source HEAD, evidence-only added paths, no implementation records and zero running intervals. Only the explicitly requested preparation checkpoint is finished. Resume does not inherit a claim of application acceptance or continuous environment readiness.

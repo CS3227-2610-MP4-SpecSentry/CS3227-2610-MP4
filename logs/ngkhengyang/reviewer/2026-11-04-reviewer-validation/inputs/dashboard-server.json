@@ -1,0 +1,39 @@
+{
+  "id": "dashboard-server",
+  "kind": "unit",
+  "argv": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "-e",
+    "const fs=require('node:fs'),cp=require('node:child_process');const r=cp.spawnSync(process.execPath,[\"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\", \"run\", \"test\", \"-w\", \"@specsentry/server\", \"--\", \"--runTestsByPath\", \"test/reviewer-ai-usage-contracts.spec.ts\", \"--testNamePattern\", \"Reviewer usage\"],{encoding:'utf8',maxBuffer:4194304});const f=\"logs\\\\ngkhengyang\\\\reviewer\\\\2026-11-04-reviewer-validation\\\\reports\\\\dashboard-server-\"+Date.now()+'.txt';fs.writeFileSync(f,(r.stdout||'')+(r.stderr||''));process.stdout.write(r.stdout||'');process.stderr.write(r.stderr||'');console.log('Check output: '+f);process.exit(r.status??1);"
+  ],
+  "paths": [
+    "src/shared/src/contracts/ai.ts",
+    "src/server/src/reviews/reviewer-ai-usage.service.ts",
+    "src/server/src/reviews/reviewer-ai-usage.controller.ts",
+    "src/server/src/reviews/reviews.module.ts",
+    "src/client/src/features/reviewer/ReviewerAiUsage.tsx",
+    "src/client/src/features/reviewer/ReviewerWorkspace.tsx",
+    "src/client/src/features/reviewer/ReviewerAiUsage.test.tsx",
+    "src/server/test/reviewer-ai-usage-contracts.spec.ts",
+    "src/server/test/reviewer-ai-usage.integration.ts",
+    "workflow/tests/browser/reviewer-ai-usage.spec.ts",
+    "workflow/tests/browser/fixtures/reviewer-ai-usage.ts",
+    "src/server/src/identity",
+    "src/server/src/reviews/patch-risk.service.ts",
+    "src/server/prisma/schema.prisma",
+    "src/server/jest.config.cjs",
+    "package.json",
+    "package-lock.json",
+    "src/server/package.json",
+    "src/client/package.json"
+  ],
+  "depends_on": [
+    "shared-build"
+  ],
+  "resources": [
+    "build"
+  ],
+  "environment": [],
+  "database": null,
+  "timeout": 240
+}

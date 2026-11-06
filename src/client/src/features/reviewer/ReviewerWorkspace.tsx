@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { assignedReviewsResponseSchema, proposalActivityResponseSchema, proposalDetailResponseSchema, reviewCommandResponseSchema, reviewPoolResponseSchema, submittedRevisionsResponseSchema, type AssignedReviewItem, type PoolItem, type ProposalDetailResponse, type ProposalActivityResponse, type SubmittedRevisionsResponse, type SessionResponse } from '@specsentry/shared';
 import type { AuthorizationGeneration } from '../../shared/authorization';
 import { ManualReview } from './ManualReview';
 import { ApprovalRevocation } from './ApprovalRevocation';
 import { PatchRiskAssistant } from './PatchRiskAssistant';
 import { RevisionNotices } from './RevisionNotices';
+import { ReviewerAiUsage } from './ReviewerAiUsage';
 import { acknowledgeNotificationResponseSchema } from '@specsentry/shared';
 
 type Queue = { items: (PoolItem | AssignedReviewItem)[]; nextCursor: string | null };
@@ -14,7 +15,12 @@ class RequestFailure extends Error { constructor(public status: number, public c
 const age = (date: string) => Math.max(0, Math.floor((Date.now() - Date.parse(date)) / 86400000));
 const date = (value: string) => new Date(value).toLocaleString();
 
-export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { session: SessionResponse; authorization: AuthorizationGeneration; onUnauthorized: () => void }) {
+export function ReviewerWorkspace({ session, authorization: parentAuthorization, onUnauthorized }: { session: SessionResponse; authorization: AuthorizationGeneration; onUnauthorized: () => void }) {
+  const [usageGeneration, setUsageGeneration] = useState(0);
+  // Existing authorization generations fence requests; remount also erases already-visible totals.
+  const authorization = useMemo(() => ({ current: () => parentAuthorization.current(), invalidate: () => {
+    parentAuthorization.invalidate(); setUsageGeneration(value => value + 1);
+  } }), [parentAuthorization]);
   const [tab, setTab] = useState<'pool' | 'assigned'>('pool');
   const [query, setQuery] = useState('');
   const [queue, setQueue] = useState<Queue | null>(null);
@@ -36,6 +42,7 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
   const initialLoadNeeded = useRef(true);
   const title = useRef<HTMLHeadingElement>(null);
   const clearProtected = useCallback(() => { generation.current++; if (!mutationPending.current) setPending(false); setSelected(null); renderedView.current = null; setLatest(undefined); setDetail(null); setHistory(null); setActivity(null); setLoading(false); }, []);
+  const usageAccessLost = useCallback(() => { authorization.invalidate(); clearProtected(); setQueue(null); onUnauthorized(); }, [authorization, clearProtected, onUnauthorized]);
   useEffect(() => () => { generation.current++; }, []);
   useEffect(() => { if (detail) title.current?.focus(); }, [detail]);
 
@@ -156,6 +163,7 @@ export function ReviewerWorkspace({ session, authorization, onUnauthorized }: { 
   }
   const revision = detail?.revision;
   return <section aria-label="Reviewer workspace">
+    <ReviewerAiUsage key={`${session.account.id}:${usageGeneration}`} authorization={authorization} expiresAt={session.expiresAt} onAccessLost={usageAccessLost} />
     <h2>Reviewer workspace</h2>
     <RevisionNotices session={session} authorization={authorization} refresh={noticeRefresh} selected={selected}
       onOpen={(id, revisionId) => void open(id, revisionId)}

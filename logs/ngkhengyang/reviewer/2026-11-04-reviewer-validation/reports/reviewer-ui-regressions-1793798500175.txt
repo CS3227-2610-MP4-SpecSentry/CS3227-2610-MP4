@@ -1,0 +1,13 @@
+
+> @specsentry/client@0.1.0 test
+> vitest run src/features/reviewer src/App.test.tsx
+
+
+ RUN  v5.0.5 C:/Users/User/Documents/NUS/CS3227/CS3227-2610-MP4/src/client
+
+
+ Test Files  7 passed (7)
+      Tests  113 passed (113)
+   Start at  21:21:31
+   Duration  8.39s (environment 48%, tests 28%, setup 10%, transform 7%, import 5%, worker 1%)
+

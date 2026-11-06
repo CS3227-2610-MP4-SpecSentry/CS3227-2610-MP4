@@ -13,12 +13,16 @@ Read the [implementation workflow](../IMPLEMENTATION.md) when coordinating a tas
 
 ## Integration and evidence
 
-Own integration accountability, workflow records, documentation, and traceability within the authorized task. Choose one executor under [step 4](../IMPLEMENTATION.md#4-integrate); for substantial assembled work, supply a fresh-context [integrator](INTEGRATOR.md) a bounded packet and consume its result. For localized work, direct integration remains appropriate. Assign substantive implementation fixes to original owners or explicitly assigned replacements. This role retains code integration permissions; it is not restricted to workflow files.
+Before dispatch, decide whether separate [integration](INTEGRATOR.md) and [test](TESTER.md) agents earn their coordination cost. Record the inclusion/omission rationale and assign these responsibilities to implementers when omitted. Name one integration executor, all file/test/fixture owners, direct handoff routes, prerequisites, fix owners and evidence writers. Retain version 3 readiness and acceptance gates.
 
-Keep the reviewed state stable and record integration edits for independent review. Gather evidence from actual commands and reviewer reports. Keep draft documentation provisional until it matches verified behavior. Use only relevant sections of the [run template](../templates/RUN.md).
+After dispatch, primarily monitor stage transitions, blockers and compact artifact/resource references. Agents directly execute assigned implementation, testing, integration and owner-scoped review/fix handoffs. Respond to prompter status requests from current evidence. Retrieve detailed artifacts only for a decision, requested explanation or final consolidation; avoid repeated unchanged polls and duplicate checks. Runtime-delivered completion messages should also be compact.
 
-Use the [handoff skill procedure](../skills/reviewer-role-agent-handoff.md) for assignments and phase transitions; persist read-only subagents' returned handoff content without expanding their permissions.
+Own integration accountability and the narrative log without relaying every handoff. Authorize narrowly scoped run-evidence writes at dispatch or name a recorder for read-only agents; retain one writer per artifact and use CLI locking rather than manual state edits. Use the [handoff procedure](../skills/reviewer-role-agent-handoff.md). If the runtime needs parent action to wake an idle recipient, forward only the dispatch/reference.
+
+Intervene only under the [intervention rule](../IMPLEMENTATION.md#main-agent-intervention). Record evidence, reason, bounded action and outcome. Main implementation requires a documented reason reassignment is inadequate, explicit supported ownership, pre-edit recording and independent review; monitoring is not a reason to take over.
 
 When claims conflict, preserve the competing claims and run the smallest discriminating check. If existing requirements cannot settle a material ambiguity, ask the prompter with a recommendation and continue independent work.
 
-**Completion:** integrated behavior, independent findings, documentation, and resource records agree; remaining blockers and unavailable checks are explicit in the final report.
+Close with [consolidate-multi-agent-run](../../../.agents/skills/consolidate-multi-agent-run/SKILL.md), linking the generated CLI bundle and canonical records into one final account. Account for each agent/stage/attempt, MP4 sessions token coverage, tests, findings, interventions and unavailable evidence. Measure consolidation separately and do not infer savings from reduced main-agent context alone.
+
+**Completion:** integrated behavior, independent findings, documentation, and resource records agree; all participants/attempts are accounted for and remaining blockers and unavailable checks are explicit in the final report.
