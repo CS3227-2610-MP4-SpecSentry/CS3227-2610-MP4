@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Headers, HttpCode, Param, Post, Put, Query, Req } from '@nestjs/common';
-import { addReleaseMemberRequestSchema, appendReleaseSmokeTestRequestSchema,
-  createReleaseCandidateRequestSchema, publishReleaseCandidateRequestSchema,
-  releaseCandidatesQuerySchema, removeReleaseMemberRequestSchema, reviewerIdSchema, reviewIdempotencyKeySchema,
-  updateReleaseCandidateRequestSchema } from '@specsentry/shared';
+import { addReleaseMemberRequestSchema, appendReleaseAnnotationRequestSchema, appendReleaseSmokeTestRequestSchema,
+  createReleaseCandidateRequestSchema, eligibleReleaseProposalsQuerySchema, publishReleaseCandidateRequestSchema,
+  releaseAnnotationsQuerySchema, releaseCandidatesQuerySchema, releaseSmokeTestsQuerySchema, removeReleaseMemberRequestSchema,
+  reviewerIdSchema, reviewIdempotencyKeySchema, updateReleaseCandidateRequestSchema } from '@specsentry/shared';
 import { Roles, type AuthRequest } from '../identity/access';
 import { businessActor } from '../identity/business-context';
 import { validate } from '../reviews/reviewer-context';
@@ -18,6 +18,26 @@ export class ReleasesController {
   }
   @Get() list(@Req() req: AuthRequest, @Query() query: unknown) {
     return this.releases.list(businessActor(req), validate(releaseCandidatesQuerySchema, query));
+  }
+  @Get(':id/eligible-proposals')
+  eligible(@Req() req: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
+    return this.releases.eligible(businessActor(req), validate(reviewerIdSchema, id),
+      validate(eligibleReleaseProposalsQuerySchema, query));
+  }
+  @Get(':id/annotations')
+  annotations(@Req() req: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
+    return this.releases.annotations(businessActor(req), validate(reviewerIdSchema, id),
+      validate(releaseAnnotationsQuerySchema, query));
+  }
+  @Get(':id/smoke-tests')
+  smokeHistory(@Req() req: AuthRequest, @Param('id') id: string, @Query() query: unknown) {
+    return this.releases.smokeHistory(businessActor(req), validate(reviewerIdSchema, id),
+      validate(releaseSmokeTestsQuerySchema, query));
+  }
+  @Post(':id/annotations') @HttpCode(200)
+  annotate(@Req() req: AuthRequest, @Param('id') id: string, @Body() body: unknown) {
+    return this.releases.annotate(businessActor(req), validate(reviewerIdSchema, id),
+      validate(appendReleaseAnnotationRequestSchema, body));
   }
   @Roles('RELEASE_MAINTAINER', 'REVIEWER')
   @Get(':id') detail(@Req() req: AuthRequest, @Param('id') id: string) {

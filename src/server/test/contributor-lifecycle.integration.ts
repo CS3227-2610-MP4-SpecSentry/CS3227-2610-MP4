@@ -12,7 +12,7 @@ import { DatabaseService } from '../src/database/database.service';
 import { configureHttp } from '../src/http';
 import { hashPassword } from '../src/identity/identity.service';
 
-const tables = '"ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
+const tables = '"ReleaseAnnotation", "ReleasePublicationSnapshot", "ReleaseSmokeTest", "ReleaseCandidateMember", "Notification", "ApprovalInvalidation", "ReleaseCandidate", "WorkingRevision", "CoverageEvidence", "CoverageAssessment", "FindingResponse", "FindingEvent", "ReviewFinding", "ReviewDecision", "ReviewIdempotency", "CriterionEvidenceLink", "ProposalActivity", "ReviewAssignment", "AcceptanceCriterion", "TestEvidence", "ProposalRevision", "ChangeProposal"';
 const content: WorkingContent = { title: 'Submitted title', summary: 'Submission summary', problem: 'Problem', constraints: 'Limits',
   expectedBehavior: 'Expected result', diffText: '--- a/f\n+++ b/f\n@@ -1 +1 @@\n-old\n+new\n',
   criteria: [{ statement: 'Required result', required: true }], evidence: [{ text: 'Optional evidence' }] };

@@ -1,0 +1,35 @@
+{
+  "id": "df6a81a6b89849e6afc220cfedf5c33c",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "security-reviewer",
+  "invocation": "security-1",
+  "stage": "full-scope-security-pre-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-06T11:53:41.630005+00:00",
+  "ended_at": "2026-11-06T11:55:31.379019+00:00",
+  "elapsed_seconds": 109.749014,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Security pre-review completed with controls for full Maintainer completion scope: membership, publication, corrections, audit, notifications, AI and cross-cutting authorization/concurrency/reconciliation",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "output_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "tool_calls": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "retries": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+}

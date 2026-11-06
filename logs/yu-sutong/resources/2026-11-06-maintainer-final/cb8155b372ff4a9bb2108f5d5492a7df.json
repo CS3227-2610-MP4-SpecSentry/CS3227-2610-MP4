@@ -1,0 +1,35 @@
+{
+  "id": "cb8155b372ff4a9bb2108f5d5492a7df",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "maintainer-architect",
+  "invocation": "architect-1",
+  "stage": "full-scope-design-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-06T11:53:41.568081+00:00",
+  "ended_at": "2026-11-06T11:59:09.309225+00:00",
+  "elapsed_seconds": 327.741144,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Full Maintainer architecture inventory and endpoint/model/service/test plan completed for REQ-REL-001 through REQ-REL-008 plus project AI aggregate usage",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "output_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "tool_calls": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "retries": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+}

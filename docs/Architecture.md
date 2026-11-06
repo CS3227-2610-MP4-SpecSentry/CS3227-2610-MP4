@@ -1,12 +1,11 @@
 # Architecture
 
-Status: authentication, manual Reviewer/revision cycles, bounded Reviewer AI, and
-iteration-4 approval revocation/supporting release API, 27 October 2026.
-The AI increment's independent review is complete; the revocation increment's
-independent findings, fixes and revalidation are recorded separately in its iteration log.
-Live provider verification remains pending.
-The remaining domain behavior is planned under the
-[technical specification](../workflow/specs/TECHNICAL-SPEC.md).
+Status: local authentication and complete Contributor, Reviewer and Release
+Maintainer role source, 6 November 2026. The three advisory assistants share the
+bounded gateway; live-provider, deployed-environment and teammate acceptance remain
+pending. Current Maintainer evidence is in the
+[final run](../logs/yu-sutong/2026-11-06-maintainer-final.md). The
+[technical specification](../workflow/specs/TECHNICAL-SPEC.md) remains normative.
 
 ## Deployment and responsibilities
 
@@ -41,12 +40,11 @@ flowchart TB
     AI --> SoC[SoC LLM]
 ```
 
-The diagram is the target design. Health/readiness, authentication, database
-connectivity, manual Reviewer/revision cycles and bounded Reviewer AI are
-implemented. Approval revocation and bounded real release operations are added in
-iteration 4; broader Maintainer UI and other role assistants remain planned.
-Live AI stays disabled pending OPEN-002. See [Authentication](Authentication.md) and
-[AI integration](AI-Integration.md).
+The diagram is the implemented local module design. Health/readiness,
+authentication, database connectivity, Contributor lifecycle, Reviewer cycles and
+the Release Maintainer workflow are present. All three bounded role assistants are
+wired through the server gateway. Live AI stays disabled pending OPEN-002. See
+[Authentication](Authentication.md) and [AI integration](AI-Integration.md).
 
 | Module / directory under server source | Single responsibility |
 | --- | --- |
@@ -63,8 +61,10 @@ Live AI stays disabled pending OPEN-002. See [Authentication](Authentication.md)
 `AppModule` composes the modules. `ReviewsModule.register(config)` supplies Reviewer
 routes and imports transaction-aware Proposals, Activity and configured AI
 services. The bounded Contributor lifecycle API, manual findings/coverage/decisions
-and Notifications are implemented. Releases remain an empty registration.
-`AiModule.register(config)` supplies a gateway through injectable transport,
+and Notifications are implemented. `ReleasesModule.register(config)` supplies
+candidate assembly, gates, publication, corrections, restricted audit and
+Maintainer AI/usage routes.
+`AiModule.register(config)` supplies the three role gateways through injectable transport,
 conservative input-budget and clock contracts; its default options disable live AI.
 `DatabaseModule.register(config)` owns connectivity configuration and
 exports `DatabaseService` for the existing health controller without global state. `IdentityModule.register(config)` imports the same configured

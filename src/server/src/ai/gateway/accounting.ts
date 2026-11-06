@@ -14,6 +14,11 @@ export class SafeAiError extends Error {
 type AccountingPrisma = Pick<PrismaClient, '$transaction' | 'aiQueueLease' | 'aiRequest' | 'aiOutboundAttempt'>;
 const coordinator = 'reviewer-patch-risk';
 const seconds = (milliseconds: number) => Math.max(1, Math.ceil(milliseconds / 1000));
+export const AI_REQUEST_LIMITS = {
+  actorTenMinutes: 120,
+  actorSgtDay: 1_000,
+  projectMinute: 300,
+} as const;
 
 export class PrismaAiAccounting {
   constructor(private readonly prisma: AccountingPrisma, private readonly clock: AiClock) {}
@@ -58,6 +63,35 @@ export class PrismaAiAccounting {
       if (count >= 10) throw new SafeAiError('QUEUE_FULL', 1, input.requestId);
       const expiresAt = new Date(now.getTime() + Math.max(1, Math.min(20_000, Math.floor(input.deadline.remainingMs()))));
       await tx.aiQueueLease.create({ data: { requestId: input.requestId, actorId: input.actorId, enqueuedAt: now, expiresAt } });
+    });
+  }
+
+  async createRequest(input: { actorId: string; data: Prisma.AiRequestUncheckedCreateInput;
+    deadline: AiDeadline }): Promise<void> {
+    await this.locked(input.deadline, async (tx, now) => {
+      const tenMinutes = new Date(now.getTime() - 600_000);
+      const minute = new Date(now.getTime() - 60_000);
+      const sgtDay = new Date(Math.floor((now.getTime() + 28_800_000) / 86_400_000) * 86_400_000 - 28_800_000);
+      const [actorTen, actorDay, projectMinute] = await Promise.all([
+        tx.aiRequest.count({ where: { actorId: input.actorId, requestedAt: { gt: tenMinutes } } }),
+        tx.aiRequest.count({ where: { actorId: input.actorId, requestedAt: { gte: sgtDay } } }),
+        tx.aiRequest.count({ where: { requestedAt: { gt: minute } } }),
+      ]);
+      if (actorTen >= AI_REQUEST_LIMITS.actorTenMinutes || actorDay >= AI_REQUEST_LIMITS.actorSgtDay ||
+          projectMinute >= AI_REQUEST_LIMITS.projectMinute) {
+        const oldest = await tx.aiRequest.findFirst({ where: actorDay >= AI_REQUEST_LIMITS.actorSgtDay
+          ? { actorId: input.actorId, requestedAt: { gte: sgtDay } }
+          : actorTen >= AI_REQUEST_LIMITS.actorTenMinutes
+            ? { actorId: input.actorId, requestedAt: { gt: tenMinutes } }
+            : { requestedAt: { gt: minute } },
+        orderBy: { requestedAt: 'asc' }, select: { requestedAt: true } });
+        const wait = actorDay >= AI_REQUEST_LIMITS.actorSgtDay
+          ? sgtDay.getTime() + 86_400_000 - now.getTime()
+          : (oldest?.requestedAt.getTime() ?? now.getTime()) +
+            (actorTen >= AI_REQUEST_LIMITS.actorTenMinutes ? 600_000 : 60_000) - now.getTime();
+        throw new SafeAiError('RATE_LIMIT', seconds(wait));
+      }
+      await tx.aiRequest.create({ data: input.data });
     });
   }
 

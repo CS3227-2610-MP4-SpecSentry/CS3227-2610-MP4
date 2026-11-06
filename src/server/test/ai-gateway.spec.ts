@@ -25,7 +25,9 @@ function harness() {
   const end = time + 20_000;
   const deadline: AiDeadline = { signal: new AbortController().signal, remainingMs: () => Math.max(0, end-time),
     assertRemaining: () => { if (time >= end) throw new SafeAiError('DEADLINE'); } };
-  const request = { create: jest.fn(async () => ({})), update: jest.fn(async () => ({})), deleteMany: jest.fn(async () => ({ count: 0 })) };
+  const request = { create: jest.fn(async () => ({})), update: jest.fn(async () => ({})),
+    count: jest.fn(async () => 0), findFirst: jest.fn(async () => null),
+    deleteMany: jest.fn(async () => ({ count: 0 })) };
   const attempt = { create: jest.fn(async () => ({ id: 'attempt' })), update: jest.fn(async () => ({})),
     updateMany: jest.fn(async () => ({ count: 0 })), count: jest.fn(async (query: object) => { void query; return 0; }), findFirst: jest.fn(async () => null) };
   const queue = { create: jest.fn(async () => ({})), deleteMany: jest.fn(async () => ({ count: 0 })), count: jest.fn(async () => 0) };

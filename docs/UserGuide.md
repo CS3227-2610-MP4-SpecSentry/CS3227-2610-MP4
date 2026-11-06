@@ -27,9 +27,8 @@ not restore approval or remove the blocker.
 Recoverable errors keep the entered reason. After a conflict, refresh and reconcile
 the displayed state before another submission. An offered uncertain-response retry
 uses the original request identity. Session expiry or lost access clears protected
-page content. General release management and Maintainer notice viewing are available
-through the API. The local Maintainer workspace now provides the candidate foundation
-described below; notice viewing and member removal controls are not yet exposed there.
+page content. The local Maintainer workspace described below exposes recipient-scoped
+notice viewing, exact rendered-notice acknowledgement and explicit member removal.
 
 This is the local iteration-4 implementation. Its verification, independent review
 and fix status are recorded in the [iteration log](../logs/ngkhengyang/2026-10-26-reviewer-iteration4.md).
@@ -131,9 +130,9 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-The release candidate workspace described below is available locally; smoke-test
-recording is implemented, while its member, publication, notice, audit and
-Maintainer AI controls remain pending.
+The release candidate workspace described below is available locally, including
+membership, smoke-test, publication, notice, correction, restricted-audit and
+advisory Maintainer-AI controls.
 Contributor submission, working-copy editing and submitted detail controls are
 available locally as described below. Approval revocation and the supporting release API are described above.
 Reviewer AI has a bounded implementation with live operation
@@ -466,7 +465,7 @@ Local demonstration submissions are supplied through the development fixture
 command described in the [Developer Guide](DeveloperGuide.md#reviewer-intake-fixtures).
 The authenticated owner API can create submissions; there is no public fixture endpoint.
 
-## Release candidate workspace foundation
+## Release Maintainer workspace
 
 After signing in as a Release Maintainer, the workspace lists project release
 candidates newest first. Filter the list by OPEN or RELEASED status, continue to
@@ -477,8 +476,10 @@ Create an open candidate with a unique `major.minor.patch` version, a non-empty
 rollback note and optional dependency notes. If the create result is interrupted,
 the form remains locked until a candidate-list refresh succeeds; this prevents an
 uncertain request from creating a duplicate. Open a candidate to see its included
-proposals, smoke-test history and the blocker codes/text recomputed by the server.
-The browser does not decide that a candidate is ready.
+proposals, the latest authoritative smoke-test result, unread approval-revocation
+notices and the blocker codes/text recomputed by the server. Choose **Browse
+smoke-test history** for newest-first pages of at most five records and 256 KiB of
+procedure/result text. The browser does not decide that a candidate is ready.
 
 Only the responsible Maintainer (the creator) can edit the version, rollback note
 or dependency notes while the candidate remains OPEN. Other Maintainers can read
@@ -498,13 +499,45 @@ or its result is uncertain, both editing and smoke recording stay disabled until
 detail refresh succeeds. Other Maintainers and RELEASED candidates receive no
 recording controls. Procedure/results are displayed only as text.
 
-This workspace does not yet expose proposal add/remove, approval-revocation notices,
-publication confirmation/idempotency, released annotations, audit filters or
-advisory AI. Use no API call as a substitute
-for the required future human publication flow. Local verification is recorded in
-the [Maintainer foundation run](../logs/yu-sutong/2026-11-04-maintainer-deployment.md)
-and [smoke-test increment](../logs/yu-sutong/2026-11-04-maintainer-assembly.md); no live
-application URL or deployed acceptance is claimed.
+For an OPEN candidate that you created, the eligible-proposal section lists only
+effective APPROVED items that are not attached elsewhere. Choose **Add to candidate**
+to send the displayed proposal, revision, assignment and optimistic versions. Removing
+an item requires confirmation and the server-provided proposal version. Either change
+advances the content version, so record a fresh passing smoke test. After a successful,
+stale, uncertain or malformed membership result, every candidate mutation stays locked
+until detail and eligibility both refresh successfully. A completed approval remains
+eligible after its Reviewer is disabled unless it is explicitly invalidated.
+
+The notification panel links approval revocations to the affected candidate. Opening
+that candidate renders its exact unread notices and acknowledges only those displayed
+IDs; a newer unseen notice stays unread. Acknowledgement never clears the approval
+blocker. The responsible Maintainer must remove the invalid item or otherwise resolve
+the server-reported gates.
+
+The **Release Gate Assistant** is optional and advisory. It uses structured item
+summaries and current gate statuses, not patches, evidence bodies or credentials.
+Its output cannot clear gates or publish. A stale, invalid or unavailable response is
+discarded while the manual readiness workflow remains usable. **Project AI resource
+use** shows only SGT-day aggregates and provider-reported usage coverage, never another
+person's prompt, output or run history.
+
+When every deterministic blocker is clear, explicitly tick the publication confirmation
+and choose **Publish release**. The server rechecks all gates and atomically creates an
+immutable snapshot. If a response is interrupted, refresh first; an unchanged OPEN
+candidate may retry only the identical request body and idempotency key. A released
+candidate shows safe snapshot metadata and append-only corrections. All Maintainers
+can read corrections; only the responsible Maintainer can append one, and no correction
+rewrites the published record.
+
+A released candidate is a terminal immutable record. Its page no longer presents
+OPEN-candidate readiness blockers; it shows publication and correction evidence.
+
+Use **Restricted project audit** to filter safe events by actor, proposal, release,
+action, outcome and date. The view contains allowlisted business/security/correction
+events and AI metadata only. Raw prompts, model responses, request bodies, credentials,
+private drafts and snapshot evidence are never displayed. Current work is local and
+still requires configured PostgreSQL/browser CI, teammate approval and deployment;
+no live application URL or provider acceptance is claimed here.
 
 ## Troubleshooting
 
@@ -519,8 +552,8 @@ Include the action, observed result and safe correlation identifier when present
 - Verified production application URL and release identifier: pending.
 - Safe test-account distribution and sign-in instructions for each role: pending.
 - Local Reviewer intake walkthrough: verified in Chromium; deployed peer testing
-  and full Contributor/Reviewer/Maintainer workflows remain pending.
-- Deployed Contributor walkthroughs and the remaining Maintainer controls: pending.
+  of the complete role workflows remains pending.
+- Deployed Contributor and Maintainer walkthroughs: pending.
 - AI success, limits, failure recovery and manual fallback walkthroughs: pending.
 - Known release-specific limitations and supported browser evidence: pending.
 

@@ -2,19 +2,17 @@
 
 Secure specification and review workspace for CS3227 MP4. This repository currently
 contains authentication, single-role accounts, Contributor drafting/submission/
-revision/response workflows, the Reviewer workspace, supporting release APIs and
-the first Release Maintainer workspace slice. Release Maintainers can locally
-list/filter candidates, create and open them, inspect server-computed blockers and
-edit an owned open candidate. The responsible Maintainer can also record a bounded
-PASS or FAIL release smoke test against the candidate's current content version;
-the browser refreshes the server-authoritative history and blockers before another
-mutation. Membership, publication, notices, audit and advisory-AI controls remain
-pending in the browser workspace.
-Contributor and Reviewer advisory AI use a bounded server gateway; live provider
-operation is disabled pending verification. Maintainer implementation evidence is
-in the [Maintainer foundation run](logs/yu-sutong/2026-11-04-maintainer-deployment.md)
-and [smoke-test increment](logs/yu-sutong/2026-11-04-maintainer-assembly.md); broader
-checks and open gates are also tracked in the
+revision/response workflows, the Reviewer workspace and the Release Maintainer
+workspace. Release Maintainers can assemble approved proposals, record exact-version
+smoke evidence, inspect deterministic blockers, explicitly publish an immutable
+snapshot, acknowledge recipient-scoped revocation notices, append released
+corrections and filter a restricted project audit. The optional Release Gate
+Assistant is advisory and cannot mutate or publish release state.
+All three role assistants use the bounded server gateway; live provider operation
+is disabled pending verification. Maintainer implementation evidence is in the
+[final Maintainer run](logs/yu-sutong/2026-11-06-maintainer-final.md); earlier
+foundation and smoke-test increments remain historical checkpoints. Broader
+release gates are also tracked in the
 [Contributor run](logs/yooplo/2026-11-01-contributor-completion.md).
 No deployed application is claimed.
 

@@ -1,0 +1,35 @@
+{
+  "id": "f0a8bfce646b40adb9353d864290dba0",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "final-evidence-documentation",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator is finalizing run, manifest, resource and presentation evidence",
+  "started_at": "2026-11-06T13:49:58.526167+00:00",
+  "ended_at": "2026-11-06T13:56:39.567338+00:00",
+  "elapsed_seconds": 401.041171,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final run record, prompt log, 61-file manifest and presentation evidence completed; Release, Security and Spec/Docs reviews passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "retries": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+}

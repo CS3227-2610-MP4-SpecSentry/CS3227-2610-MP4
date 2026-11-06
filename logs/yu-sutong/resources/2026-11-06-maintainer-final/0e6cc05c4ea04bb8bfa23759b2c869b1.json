@@ -1,0 +1,35 @@
+{
+  "id": "0e6cc05c4ea04bb8bfa23759b2c869b1",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "security-reviewer",
+  "invocation": "security-5",
+  "stage": "independent-review",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Existing independent verifier reused after final PostgreSQL-driven source correction",
+  "started_at": "2026-11-06T13:29:50.578280+00:00",
+  "ended_at": "2026-11-06T13:31:37.379816+00:00",
+  "elapsed_seconds": 106.801536,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final security review passed; annotation CRLF normalization preserves exact released ownership/version/snapshot and append-only controls, and both resource findings remain closed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime",
+    "retries": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry is not exposed by the agent runtime"
+}

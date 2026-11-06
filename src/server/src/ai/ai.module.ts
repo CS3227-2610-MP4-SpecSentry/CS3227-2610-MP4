@@ -3,10 +3,12 @@ import type { ServerConfig } from '../config';
 import { DatabaseModule } from '../database/database.module';
 import { DatabaseService } from '../database/database.service';
 import {
-  AI_CLOCK, AI_GATEWAY_OPTIONS, AI_TRANSPORT, PATCH_RISK_GATEWAY, CONTRIBUTOR_DRAFT_GATEWAY, INPUT_BUDGET_COUNTER,
+  AI_CLOCK, AI_GATEWAY_OPTIONS, AI_TRANSPORT, PATCH_RISK_GATEWAY, CONTRIBUTOR_DRAFT_GATEWAY, MAINTAINER_GATEWAY,
+  INPUT_BUDGET_COUNTER,
   type AiClock, type AiGatewayOptions, type AiTransport, type InputBudgetCounter,
 } from './contracts';
-import { createPatchRiskGateway, createContributorDraftGateway, ConservativeInputBudgetCounter, SocLlmHttpsTransport, SystemAiClock } from './gateway';
+import { createPatchRiskGateway, createContributorDraftGateway, createMaintainerGateGateway,
+  ConservativeInputBudgetCounter, SocLlmHttpsTransport, SystemAiClock } from './gateway';
 
 @Module({})
 export class AiModule {
@@ -39,8 +41,17 @@ export class AiModule {
             prisma: database.client, options, transport, counter, clock,
           }),
         },
+        {
+          provide: MAINTAINER_GATEWAY,
+          inject: [DatabaseService, AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER, AI_CLOCK],
+          useFactory: (database: DatabaseService, options: AiGatewayOptions, transport: AiTransport,
+            counter: InputBudgetCounter, clock: AiClock) => createMaintainerGateGateway({
+            prisma: database.client, options, transport, counter, clock,
+          }),
+        },
       ],
-      exports: [PATCH_RISK_GATEWAY, CONTRIBUTOR_DRAFT_GATEWAY, AI_CLOCK, AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER],
+      exports: [PATCH_RISK_GATEWAY, CONTRIBUTOR_DRAFT_GATEWAY, MAINTAINER_GATEWAY,
+        AI_CLOCK, AI_GATEWAY_OPTIONS, AI_TRANSPORT, INPUT_BUDGET_COUNTER],
     };
   }
 }

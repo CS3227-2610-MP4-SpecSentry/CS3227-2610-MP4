@@ -12,6 +12,15 @@ void _createdAt;
 const detail = { ...detailSummary, projectKey: 'specsentry', rollbackNote: '<script>rollback</script>',
   dependencyNotes: 'Database first', members: [], smokeTests: [],
   blockers: [{ code: 'EMPTY' as const }, { code: 'SMOKE' as const }], publishedAt: null };
+const eligibleItem = { proposalId: 'proposal-one', title: 'Approved proposal',
+  owner: { id: 'contributor-one', username: 'contributor' }, proposalVersion: 3,
+  revisionId: 'revision-one', revisionNumber: 2, submittedAt: timestamp,
+  assignmentId: 'assignment-one', assignmentVersion: 1,
+  reviewer: { id: 'reviewer-one', username: 'reviewer' } };
+const attachedMember = { id: 'member-one', proposalId: eligibleItem.proposalId,
+  proposalTitle: eligibleItem.title, proposalVersion: 4, revisionId: eligibleItem.revisionId,
+  revisionNumber: eligibleItem.revisionNumber, assignmentId: eligibleItem.assignmentId,
+  status: 'ATTACHED' as const, attachedAt: timestamp, removedAt: null };
 const reply = (body: unknown, status = 200) => ({ ok: status < 400, status, json: async () => body });
 function deferred<T>() {
   let resolve!: (value: T) => void;
@@ -25,14 +34,26 @@ function enterCandidate(version = '2.0.0') {
   fireEvent.change(screen.getByLabelText('Dependency notes (optional)'), { target: { value: 'Apply compatible migrations first.' } });
 }
 
-function setup(fetch: ReturnType<typeof vi.fn>, initial = '/releases', onSessionLost = vi.fn()) {
-  vi.stubGlobal('fetch', fetch);
+function setup(fetch: ReturnType<typeof vi.fn>, initial = '/releases', onSessionLost = vi.fn(), extras?: {
+  eligible?: unknown; notifications?: unknown; annotations?: unknown; acknowledge?: unknown; smokeHistory?: unknown;
+}) {
+  const routed = vi.fn((input: string | URL | Request, init?: RequestInit) => {
+    const url = String(input);
+    if (url.includes('/eligible-proposals')) return Promise.resolve(reply(extras?.eligible ?? { items: [], nextCursor: null }));
+    if (url.includes('/acknowledge')) return Promise.resolve(reply(extras?.acknowledge ?? { id: 'notice-one', readAt: timestamp }));
+    if (url.startsWith('/api/notifications')) return Promise.resolve(reply(extras?.notifications ?? { items: [], nextCursor: null }));
+    if (url.includes('/smoke-tests') && (!init?.method || init.method === 'GET'))
+      return Promise.resolve(reply(extras?.smokeHistory ?? { items: [], nextCursor: null, contentBytes: 0 }));
+    if (url.includes('/annotations')) return Promise.resolve(reply(extras?.annotations ?? { items: [], nextCursor: null }));
+    return (fetch as unknown as (request: string | URL | Request, options?: RequestInit) => unknown)(input, init);
+  });
+  vi.stubGlobal('fetch', routed);
   return { onSessionLost, ...render(<MemoryRouter initialEntries={[initial]}><Routes>
     <Route path="/releases/*" element={<MaintainerWorkspace session={session} onSessionLost={onSessionLost} />} />
   </Routes></MemoryRouter>) };
 }
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('Release Maintainer workspace foundation', () => {
   it('lists candidates, opens server-computed blockers and permits only owner edits', async () => {
@@ -159,10 +180,24 @@ describe('Release Maintainer workspace foundation', () => {
     expect(onSessionLost).not.toHaveBeenCalled();
   });
 
-  it('hides smoke-test controls for a released candidate', async () => {
-    setup(vi.fn().mockResolvedValue(reply({ ...detail, status: 'RELEASED' as const })), '/releases/candidate-one');
+  it('treats a released candidate as terminal and loads byte-bounded smoke history on demand', async () => {
+    const released = { ...detail, status: 'RELEASED' as const, smokeTestsTruncated: true,
+      smokeTests: [{ id: 'smoke-latest', testedContentVersion: detail.contentVersion,
+        outcome: 'PASS' as const, procedure: 'Latest checks', results: 'Passed',
+        actorId: session.account.id, createdAt: timestamp }] };
+    setup(vi.fn().mockResolvedValue(reply(released)), '/releases/candidate-one', vi.fn(), {
+      smokeHistory: { items: released.smokeTests, nextCursor: 'older-smoke-cursor', contentBytes: 25 },
+    });
     expect(await screen.findByRole('heading', { name: 'Release 1.0.0' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Record smoke test' })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Published release record' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Readiness' })).not.toBeInTheDocument();
+    expect(screen.getByText((_, element) => element?.tagName === 'LI' &&
+      element.textContent?.includes('PASS for content version 1: Latest checks') === true)).toBeInTheDocument();
+    expect(screen.getByText(/Earlier smoke records are available/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Browse smoke-test history' }));
+    expect(await screen.findByRole('heading', { name: 'Smoke-test history' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Next smoke-test page' })).toBeEnabled();
   });
 
   it('requires refresh after stale edits and sends the current optimistic version', async () => {
@@ -223,5 +258,99 @@ describe('Release Maintainer workspace foundation', () => {
     setup(vi.fn().mockResolvedValue(reply({}, 401)), '/releases/candidate-one', onSessionLost);
     await waitFor(() => expect(onSessionLost).toHaveBeenCalledOnce());
     expect(screen.queryByText('<script>rollback</script>')).not.toBeInTheDocument();
+  });
+
+  it('attaches an eligible proposal with exact server coordinates and reconciles detail plus eligibility', async () => {
+    const command = { candidateId: detail.id, version: detail.version + 1,
+      contentVersion: detail.contentVersion + 1, status: 'OPEN' as const };
+    const refreshed = { ...detail, version: command.version, contentVersion: command.contentVersion,
+      members: [attachedMember], blockers: [{ code: 'SMOKE' as const }] };
+    const fetch = vi.fn().mockResolvedValueOnce(reply(detail)).mockResolvedValueOnce(reply(command)).mockResolvedValueOnce(reply(refreshed));
+    setup(fetch, '/releases/candidate-one', vi.fn(), { eligible: { items: [eligibleItem], nextCursor: null } });
+    fireEvent.click(await screen.findByRole('button', { name: 'Add to candidate' }));
+    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(3));
+    expect(fetch.mock.calls[1]?.[0]).toBe('/api/release-candidates/candidate-one/members');
+    expect(fetch.mock.calls[1]?.[1]).toMatchObject({ method: 'POST', headers: { 'x-csrf-token': session.csrfToken } });
+    expect(JSON.parse(fetch.mock.calls[1]?.[1].body as string)).toEqual({ expectedCandidateVersion: detail.version,
+      expectedContentVersion: detail.contentVersion, proposalId: eligibleItem.proposalId,
+      revisionId: eligibleItem.revisionId, assignmentId: eligibleItem.assignmentId,
+      expectedProposalVersion: eligibleItem.proposalVersion, expectedAssignmentVersion: eligibleItem.assignmentVersion });
+    expect(await screen.findByRole('button', { name: 'Remove from candidate' })).toBeEnabled();
+  });
+
+  it('confirms removal and sends the server-provided proposal version', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    const withMember = { ...detail, members: [attachedMember], blockers: [{ code: 'SMOKE' as const }] };
+    const command = { candidateId: detail.id, version: detail.version + 1,
+      contentVersion: detail.contentVersion + 1, status: 'OPEN' as const };
+    const refreshed = { ...detail, version: command.version, contentVersion: command.contentVersion };
+    const fetch = vi.fn().mockResolvedValueOnce(reply(withMember)).mockResolvedValueOnce(reply(command)).mockResolvedValueOnce(reply(refreshed));
+    setup(fetch, '/releases/candidate-one');
+    fireEvent.click(await screen.findByRole('button', { name: 'Remove from candidate' }));
+    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(3));
+    expect(window.confirm).toHaveBeenCalledWith('Remove Approved proposal from this release candidate?');
+    expect(JSON.parse(fetch.mock.calls[1]?.[1].body as string)).toEqual({ expectedCandidateVersion: detail.version,
+      expectedContentVersion: detail.contentVersion, memberId: attachedMember.id,
+      expectedProposalVersion: attachedMember.proposalVersion });
+  });
+
+  it('requires explicit confirmation and publishes with exact versions, CSRF and one idempotency key', async () => {
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue('00000000-0000-4000-8000-000000000001');
+    const ready = { ...detail, members: [attachedMember], blockers: [] };
+    const publication = { candidateId: detail.id, version: detail.version + 1,
+      contentVersion: detail.contentVersion, status: 'RELEASED' as const, snapshotId: 'snapshot-one', publishedAt: timestamp };
+    const released = { ...ready, status: 'RELEASED' as const, version: publication.version,
+      members: [{ ...attachedMember, status: 'RELEASED' as const }], publishedAt: timestamp,
+      publication: { snapshotId: publication.snapshotId, actorId: session.account.id,
+        candidateVersion: detail.version, contentVersion: detail.contentVersion, createdAt: timestamp } };
+    const fetch = vi.fn().mockResolvedValueOnce(reply(ready)).mockResolvedValueOnce(reply(publication)).mockResolvedValueOnce(reply(released));
+    setup(fetch, '/releases/candidate-one');
+    expect(await screen.findByRole('button', { name: 'Publish release' })).toBeDisabled();
+    fireEvent.click(screen.getByRole('checkbox', { name: /I confirm/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Publish release' }));
+    expect(await screen.findByText(/Published snapshot snapshot-one/)).toBeInTheDocument();
+    expect(fetch.mock.calls[1]?.[1]).toMatchObject({ method: 'POST', headers: {
+      'x-csrf-token': session.csrfToken, 'idempotency-key': '00000000-0000-4000-8000-000000000001' } });
+    expect(JSON.parse(fetch.mock.calls[1]?.[1].body as string)).toEqual({ expectedVersion: detail.version,
+      expectedContentVersion: detail.contentVersion });
+  });
+
+  it('reconciles an uncertain publication and retries the identical body and idempotency key', async () => {
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue('00000000-0000-4000-8000-000000000002');
+    const ready = { ...detail, members: [attachedMember], blockers: [] };
+    const publication = { candidateId: detail.id, version: detail.version + 1,
+      contentVersion: detail.contentVersion, status: 'RELEASED' as const,
+      snapshotId: 'snapshot-recovered', publishedAt: timestamp };
+    const released = { ...ready, status: 'RELEASED' as const, version: publication.version,
+      members: [{ ...attachedMember, status: 'RELEASED' as const }], publishedAt: timestamp,
+      publication: { snapshotId: publication.snapshotId, actorId: session.account.id,
+        candidateVersion: detail.version, contentVersion: detail.contentVersion, createdAt: timestamp } };
+    const fetch = vi.fn().mockResolvedValueOnce(reply(ready))
+      .mockRejectedValueOnce(new TypeError('connection interrupted'))
+      .mockResolvedValueOnce(reply(ready)).mockResolvedValueOnce(reply(publication))
+      .mockResolvedValueOnce(reply(released));
+    setup(fetch, '/releases/candidate-one');
+    fireEvent.click(await screen.findByRole('checkbox', { name: /I confirm/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Publish release' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('may be uncertain');
+    fireEvent.click(screen.getByRole('button', { name: 'Refresh candidate before editing' }));
+    expect(await screen.findByText(/earlier publication response was uncertain/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Retry identical publication request' }));
+    expect(await screen.findByText(/Published snapshot snapshot-recovered/)).toBeInTheDocument();
+    expect(fetch.mock.calls[1]?.[1].body).toBe(fetch.mock.calls[3]?.[1].body);
+    expect(fetch.mock.calls[1]?.[1].headers).toEqual(fetch.mock.calls[3]?.[1].headers);
+  });
+
+  it('renders and acknowledges only the revocation notices returned with this candidate', async () => {
+    const noticed = { ...detail, unreadRevocationNotices: [{ id: 'notice-one', proposalId: 'proposal-one',
+      revisionId: 'revision-one', invalidationId: 'invalidation-one', reviewerId: 'reviewer-one',
+      reason: '<script>approval withdrawn</script>', createdAt: timestamp }], unreadRevocationNoticesTruncated: false };
+    setup(vi.fn().mockResolvedValueOnce(reply(noticed)), '/releases/candidate-one');
+    expect(await screen.findByText('<script>approval withdrawn</script>')).toBeInTheDocument();
+    expect(document.querySelector('script')).toBeNull();
+    await waitFor(() => expect(vi.mocked(globalThis.fetch).mock.calls.some(call => String(call[0]).includes('/notice-one/acknowledge'))).toBe(true));
+    const call = vi.mocked(globalThis.fetch).mock.calls.find(item => String(item[0]).includes('/notice-one/acknowledge'))!;
+    expect(JSON.parse(call[1]?.body as string)).toEqual({ kind: 'APPROVAL_REVOKED', candidateId: detail.id,
+      invalidationId: 'invalidation-one' });
   });
 });

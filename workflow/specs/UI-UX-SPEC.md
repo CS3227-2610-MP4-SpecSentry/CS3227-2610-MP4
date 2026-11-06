@@ -31,8 +31,10 @@ server commands. See the [current run](../../logs/yooplo/2026-11-01-contributor-
 for actual verification and limits.
 
 The integrated Reviewer workspace supplies its existing manual review and bounded
-Patch Risk controls; the broader Maintainer workspace remains pending. No fake
-queues, statistics or assistant results are supplied. Contributor all-state
+Patch Risk controls. The 6 November local extension completes the Maintainer
+workspace for candidate assembly, smoke evidence, publication, notices, released
+corrections, restricted audit and advisory release-gate analysis. No fake queues,
+statistics or assistant results are supplied. Contributor all-state
 discovery uses an additive owner list while preserving private drafts. Explicit
 latest-content cloning explains replacement of saved private edits; attributed
 finding responses retain history and never resolve findings. The Spec Draft

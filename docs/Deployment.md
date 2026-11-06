@@ -54,11 +54,10 @@ local checks are process evidence only; they are not a deployed environment.
 Set an independent random `SESSION_SECRET` of at least 32 characters per service
 and configure `TRUST_PROXY_HOPS` to the verified TLS proxy topology (the template
 assumes one trusted hop). Provision accounts from a trusted checkout using
-[Authentication](Authentication.md). Authentication, Contributor and Reviewer
-workflows and the first Release Maintainer candidate workspace slice are implemented
-locally to the limits described in their guides. Remaining role controls and actual
-deployed verification stay pending. No AI key is required for this deployment
-foundation; live advisory-AI acceptance remains a separate gate.
+[Authentication](Authentication.md). Authentication and all three role workflows
+are implemented locally to the limits described in their guides. Actual deployed
+verification stays pending. No AI key is required for this deployment foundation;
+live advisory-AI acceptance remains a separate gate.
 
 ## Free-tier considerations
 

@@ -1,5 +1,38 @@
 # Requirement traceability
 
+## Release Maintainer completion — 6 November 2026
+
+This local completion supersedes the older Maintainer pending markers below while
+preserving their historical evidence boundaries. Shared contracts live in
+`src/shared/src/contracts/release.ts`, `maintainer-audit.ts` and `ai.ts`; server
+behavior is in `src/server/src/releases/`; the browser workflow is in
+`src/client/src/features/maintainer/`. The migration
+`20261106120000_maintainer_completion` bounds candidate membership, makes released
+annotations append-only and adds Maintainer AI scope metadata.
+
+| Requirement / acceptance | Implementation and executable evidence | Current boundary |
+| --- | --- | --- |
+| REQ-REL-001 / AC-REL-001 | Strict paginated eligible-proposal projection; exact proposal/revision/assignment/candidate versions on add/remove; creator-only OPEN mutation; effective completed approval independent of later Reviewer disablement. `release-revocation.integration.ts`, `maintainer-contracts.spec.ts`, `MaintainerWorkspace.test.tsx` | Projection excludes approval IDs, patches, evidence, findings and private working content; 1,000-member database/API bound |
+| REQ-REL-002 / AC-REL-002 | Existing server-computed blockers and creator smoke records remain exact-content-version gates; membership changes invalidate prior PASS. Candidate detail returns only the latest authoritative smoke record; optional history uses candidate-bound newest-first cursor pages (default 5, maximum 20) with a 256 KiB UTF-8 procedure/result budget. Release service integration and client reconciliation cases cover stale/uncertain results, 1,001 rows and maximum-size Unicode records | Browser never manufactures readiness; optional Contributor evidence is not a gate |
+| REQ-REL-003 / AC-REL-003 | `release-gate-assistant.service.ts`, shared Maintainer gateway adapter and `ReleaseGateAssistant.tsx`; strict six-field output, supplied-item grounding, failed-gate/READY denial, 6,000-unit admission, secret screening and CURRENT/STALE delivery. `maintainer-ai-gateway.spec.ts`, `release-gate-assistant.spec.ts`, `ReleaseGateAssistant.test.tsx` | Advisory only; live-provider usefulness/latency/data-handling acceptance remains external |
+| REQ-REL-004 / AC-REL-004 | Explicit browser confirmation, exact candidate/content versions and preserved idempotency intent use the existing atomic publish transaction and publication/revocation lock order. `release-revocation.integration.ts`, `approval-revocation-races.integration.ts`, `MaintainerWorkspace.test.tsx` | No browser or response can bypass the server gate recomputation; no remote publication executed |
+| REQ-REL-005 / AC-REL-005 | `ReleaseAnnotation` exact released candidate/snapshot/version constraint plus update/delete trigger; all Maintainers read, creator alone appends. `release-revocation.integration.ts` and `ReleaseAnnotations.tsx` | Correction text never rewrites the immutable publication snapshot |
+| REQ-REL-006 / AC-REL-006 | Restricted source-aware newest-first audit with actor/proposal/release/action/outcome/date filters across allowlisted business/security/AI/annotation metadata. `maintainer-audit.service.ts`, `maintainer-contracts.spec.ts`, `MaintainerAudit.test.tsx` | No raw prompts/responses, credentials, request bodies, private drafts or snapshot evidence selected |
+| REQ-REL-007 / AC-REL-007 | Candidate detail projects bounded unread recipient notices without read side effects; client acknowledges only exact rendered IDs with CSRF. Existing notice blocker/removal semantics retained. `release-revocation.integration.ts`, `notifications.integration.ts`, `MaintainerWorkspace.test.tsx` | Acknowledgement never clears approval or restores readiness |
+| REQ-REL-008 / AC-REL-008 | Existing common candidate/proposal/account lock order and exact versions serialize publication against approval revocation. `approval-revocation-races.integration.ts` retains both winner orderings | RELEASED candidates and snapshots remain immutable |
+| NFR-RES-001 | `maintainer-ai-usage.service.ts` computes only SGT-day project aggregate requests/attempts/retries/failures and provider-usage coverage with database count/aggregate operations. `AiRequest(requestedAt)` supports project windows. Serialized request-record admission bounds preflight-only floods at 120 per actor/rolling 10 minutes, 1,000 per actor/SGT day and 300 project-wide/rolling minute; excess requests create no row. `ai-gateway.spec.ts`, `maintainer-ai-usage-contracts.spec.ts`, `ReleaseGateAssistant.test.tsx` | No per-user prompt, output, target or run history disclosure; aggregate rows are not hydrated into application memory |
+
+Current complete evidence is 186 server unit and 289 client tests plus workspace
+type-check after the final resource-control corrections. The coordinator started an
+isolated local PostgreSQL 14 instance, applied all ten migrations and passed all 269
+integration tests, including the 1,001-row/maximum-Unicode smoke-history boundary,
+annotation/capacity triggers and publication/revocation races. The backend
+implementation interval's earlier 33 focused cases remain separately attributed.
+Configured browser execution remains a CI/release gate rather than an inferred local
+pass. The [final Maintainer run](../logs/yu-sutong/2026-11-06-maintainer-final.md)
+records workflow interactions, failures, reviews and complete validation. No live
+provider call, remote migration, deployment, commit, push or merge is claimed.
+
 ## Release Maintainer smoke-test recording — 4 November 2026
 
 REQ-REL-002 / AC-REL-002 is extended by an owner-only OPEN-candidate form that
@@ -526,14 +559,14 @@ deferred. Deployment/performance/full manual WCAG unavailable; INC2-VER-001 unre
 | [REQ-CON-007](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion classification | [AC-CON-007](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Private-draft portion verified above; submitted-classification scenario pending |
 | [REQ-CON-008](specs/ROLE-CONTRIBUTOR.md#requirements) | Finding response | [AC-CON-008](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | Pending |
 | [REQ-CON-009](specs/ROLE-CONTRIBUTOR.md#requirements) | Criterion identity | [AC-CON-009](specs/ROLE-CONTRIBUTOR.md#acceptance-scenarios) | [Increment4 private-draft portion](../logs/yooplo/2026-10-28-contributor-increment-4.md) verified; submitted history/finding scenario pending |
-| [REQ-REL-001](specs/ROLE-MAINTAINER.md#requirements) | Release candidate | [AC-REL-001](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Partial local foundation verified above; membership acceptance and deployed evidence pending |
-| [REQ-REL-002](specs/ROLE-MAINTAINER.md#requirements) | Deterministic gates | [AC-REL-002](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Partial server-authoritative blocker display verified above; full gate actions and acceptance pending |
-| [REQ-REL-003](specs/ROLE-MAINTAINER.md#requirements) | AI readiness summary | [AC-REL-003](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
-| [REQ-REL-004](specs/ROLE-MAINTAINER.md#requirements) | Publish release | [AC-REL-004](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
-| [REQ-REL-005](specs/ROLE-MAINTAINER.md#requirements) | Post-release record | [AC-REL-005](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
-| [REQ-REL-006](specs/ROLE-MAINTAINER.md#requirements) | Audit view | [AC-REL-006](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
-| [REQ-REL-007](specs/ROLE-MAINTAINER.md#requirements) | Candidate responsibility and revocation notice | [AC-REL-007](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
-| [REQ-REL-008](specs/ROLE-MAINTAINER.md#requirements) | Publication and revocation race | [AC-REL-008](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Pending |
+| [REQ-REL-001](specs/ROLE-MAINTAINER.md#requirements) | Release candidate | [AC-REL-001](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Local source/unit/PostgreSQL completion verified in the 6 November section; browser/deployed acceptance pending |
+| [REQ-REL-002](specs/ROLE-MAINTAINER.md#requirements) | Deterministic gates | [AC-REL-002](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Local source/unit/PostgreSQL completion verified in the 6 November section; browser/deployed acceptance pending |
+| [REQ-REL-003](specs/ROLE-MAINTAINER.md#requirements) | AI readiness summary | [AC-REL-003](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Strict local gateway/service/client evidence above; live-provider acceptance pending |
+| [REQ-REL-004](specs/ROLE-MAINTAINER.md#requirements) | Publish release | [AC-REL-004](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Atomic publication and both revocation race orderings verified locally; deployed acceptance pending |
+| [REQ-REL-005](specs/ROLE-MAINTAINER.md#requirements) | Post-release record | [AC-REL-005](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Append-only exact-snapshot correction path verified locally; deployed acceptance pending |
+| [REQ-REL-006](specs/ROLE-MAINTAINER.md#requirements) | Audit view | [AC-REL-006](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Restricted filtered projection and client rendering verified locally; deployed acceptance pending |
+| [REQ-REL-007](specs/ROLE-MAINTAINER.md#requirements) | Candidate responsibility and revocation notice | [AC-REL-007](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Recipient projection/rendered-ID acknowledgement/removal verified locally; deployed acceptance pending |
+| [REQ-REL-008](specs/ROLE-MAINTAINER.md#requirements) | Publication and revocation race | [AC-REL-008](specs/ROLE-MAINTAINER.md#acceptance-scenarios) | Both PostgreSQL transaction orderings verified locally; deployed acceptance pending |
 | [REQ-REV-001](specs/ROLE-REVIEWER.md#requirements) | Review pool and assigned queue | [AC-REV-001](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Manual-review evidence: unresolved-severity filtering verified in PostgreSQL; see iteration 1 session |
 | [REQ-REV-002](specs/ROLE-REVIEWER.md#requirements) | Criterion assessment | [AC-REV-002](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Manual implementation and evidence: [iteration 1](../logs/ngkhengyang/2026-10-25-manual-review.md); final browser/review closure recorded there |
 | [REQ-REV-003](specs/ROLE-REVIEWER.md#requirements) | AI risk review | [AC-REV-003](specs/ROLE-REVIEWER.md#acceptance-scenarios) | Pending |
@@ -674,7 +707,7 @@ Unless a row links executed evidence, cases below remain planned and unexecuted.
 | AC-DEC-002 | OPEN-002; NFR-RES-001/PRV-001 | Verify configured endpoint/key-scoped catalog and actual alias context/parameters; test 4k/10k/6k conservative input-unit and 800 output-token caps, full-message byte/framing accounting, Unicode/escaped inputs, method/model mismatch, context margin, invalid counts and provider-only usage. Preserve retry attempt accounting, SGT application versus UTC provider reset, unknown usage, no cache and safe disabled-AI fallback. | Conservative budget policy approved 1 November; scoped evidence in [budget run](../logs/yooplo/2026-11-01-conservative-ai-budget.md). Live provider production-prompt/margin evaluation, key limits and data handling pending |
 | AC-DEC-003 | OPEN-003; REQ-SHR-002/003, REQ-CON-004, REQ-REV-005/016, REQ-REL-004 | Boundary-test text/count/body limits and cursor sizes. Same actor/key/body replays one committed mutation/event/notice; changed body gives conflict; access loss denies replay disclosure; stale writes and concurrent keys never duplicate state. | Pending |
 | AC-DEC-004 | OPEN-004; REQ-SHR-001/002, NFR-SEC-001 | Enforce one role/project, seed without Git credentials, 30-minute idle/eight-hour absolute expiry, rotation/logout/disablement, account and IP throttles, generic errors and saved-draft-only recovery. | Pending |
-| AC-DEC-005 | OPEN-005; REQ-REL-001/002/004/007/008 | Other Maintainer cannot edit/publish; empty or duplicate-version publication fails. PASS smoke test must match current content version; add/remove/change revision invalidates it; revocation independently blocks release. | Pending |
+| AC-DEC-005 | OPEN-005; REQ-REL-001/002/004/007/008 | Other Maintainer cannot edit/publish; empty or duplicate-version publication fails. PASS smoke test must match current content version; add/remove/change revision invalidates it; revocation independently blocks release. | Local source/unit/PostgreSQL evidence is mapped in the 6 November Maintainer completion section; deployed acceptance remains pending |
 | AC-DEC-006 | OPEN-006; REQ-SHR-004/007, REQ-REV-015 | Order equal-time events by ID, page by cursor, retain business events while pruning operational records after 90 days; views/rejections/read acknowledgments stay restricted and no prior-reviewer AI data leaks. | Pending |
 | AC-DEC-007 | OPEN-007; REQ-CON-004, REQ-REV-001/008/015 | Submit with summary, resubmit later, preserve original age and show latest age. Severity filter matches unresolved findings only. Withdrawn owner/Maintainer access works and former-reviewer notice cannot reopen content. | Pending |
 | AC-DEC-008 | OPEN-008; NFR-PERF-001/A11Y-001/OBS-001/RES-001 | Run fixed workload and applicable accessibility checks; dashboard computes failure denominator correctly, displays N/A for zero attempts, unknown for absent token/cache usage, and enforces aggregate/own-user privacy. | Pending |

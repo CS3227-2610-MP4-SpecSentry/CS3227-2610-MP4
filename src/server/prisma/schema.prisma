@@ -34,6 +34,7 @@ model UserAccount {
   createdReleaseCandidates ReleaseCandidate[]
   releaseSmokeTests ReleaseSmokeTest[]
   releasePublications ReleasePublicationSnapshot[]
+  releaseAnnotations ReleaseAnnotation[]
 }
 
 model AuthSession {
@@ -357,6 +358,7 @@ model ReleaseCandidate {
   invalidations ApprovalInvalidation[]
   notifications Notification[]
   activities ProposalActivity[]
+  annotations ReleaseAnnotation[]
   @@unique([projectKey, semanticVersion])
   @@index([createdById, status, createdAt, id])
 }
@@ -404,6 +406,26 @@ model ReleasePublicationSnapshot {
   createdAt DateTime @default(now())
   candidate ReleaseCandidate @relation(fields: [candidateId], references: [id], onDelete: Restrict)
   actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  annotations ReleaseAnnotation[]
+
+  @@unique([candidateId, id], map: "ReleasePublicationSnapshot_candidate_id_key")
+}
+
+// Post-publication corrections are append-only and never rewrite the release snapshot.
+model ReleaseAnnotation {
+  id String @id @default(uuid())
+  candidateId String
+  snapshotId String
+  actorId String
+  candidateVersion Int
+  text String
+  createdAt DateTime @default(now())
+  candidate ReleaseCandidate @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  publication ReleasePublicationSnapshot @relation(fields: [candidateId, snapshotId], references: [candidateId, id], onDelete: Restrict)
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict)
+
+  @@index([candidateId, createdAt(sort: Desc), id(sort: Desc)])
+  @@index([actorId, createdAt(sort: Desc), id(sort: Desc)])
 }
 
 enum CoverageStatus {
@@ -590,14 +612,17 @@ model AiRequest {
   feature String @default("REVIEWER")
   correlationId String
   actorId String
-  proposalId String
+  proposalId String?
   revisionId String?
   assignmentId String?
   accessGenerationId String?
   workingRevisionId String?
+  candidateId String?
   expectedVersion Int
   expectedAssignmentVersion Int?
+  expectedContentVersion Int?
   selectedCriterionCount Int?
+  candidateItemCount Int?
   templateVersion String
   contextHash String?
   requestedAt DateTime @default(now())
@@ -608,6 +633,8 @@ model AiRequest {
   retainedUntil DateTime @default(dbgenerated("(CURRENT_TIMESTAMP + '90 days'::interval)"))
   attempts AiOutboundAttempt[]
   @@index([actorId, proposalId, requestedAt, id])
+  @@index([actorId, candidateId, requestedAt, id])
+  @@index([requestedAt])
   @@index([retainedUntil])
 }
 model AiOutboundAttempt {

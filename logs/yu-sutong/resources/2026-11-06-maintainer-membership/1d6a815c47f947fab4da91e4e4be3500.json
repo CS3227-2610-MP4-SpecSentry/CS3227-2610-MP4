@@ -1,0 +1,35 @@
+{
+  "id": "1d6a815c47f947fab4da91e4e4be3500",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-membership",
+  "agent": "security-reviewer",
+  "invocation": "security-1",
+  "stage": "security-pre-review",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Inherited agent settings are not exposed",
+  "started_at": "2026-11-06T11:47:09.554172+00:00",
+  "ended_at": "2026-11-06T11:52:10.009324+00:00",
+  "elapsed_seconds": 300.455152,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Security pre-review returned SEC-MEMBER-01 through SEC-MEMBER-07 controls for authorization, eligibility, concurrency, versions, pagination, reconciliation and atomicity",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "output_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "tool_calls": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "retries": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+}

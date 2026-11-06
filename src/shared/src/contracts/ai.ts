@@ -5,6 +5,7 @@ import { reviewerIdSchema, reviewerTimestampSchema, reviewerVersionSchema } from
 export const AI_LIMITS = {
   contributorInputUnits: 4_000, contributorInputCodePoints: 6_000,
   reviewerCriteria: 5, reviewerInputUnits: 10_000, reviewerDiffCodePoints: 20_000,
+  maintainerInputUnits: 6_000,
   outputTokens: 800, responseBytes: 65_536, deadlineMs: 20_000, auditPage: 50,
 } as const;
 
@@ -81,9 +82,30 @@ export const maintainerGateResultSchema = z.object({
   readinessRecommendation: z.enum(['READY', 'NOT_READY', 'NEEDS_REVIEW']), confidence: aiConfidenceSchema,
 }).strict();
 export function validateMaintainerGateResult(value: unknown, candidateItemIds: readonly string[]): MaintainerGateResult {
-  const allowed = new Set(candidateItemIds);
+  const supplied = z.array(reviewerIdSchema).max(1_000)
+    .refine((ids) => new Set(ids).size === ids.length, 'Candidate item identifiers must be unique')
+    .parse(candidateItemIds);
+  const allowed = new Set(supplied);
   return maintainerGateResultSchema.refine((result) => result.blockers.every((blocker) => blocker.itemIds.every((id) => allowed.has(id))), 'Unknown candidate item identifier').parse(value);
 }
+
+export const maintainerGateRequestSchema = z.object({
+  expectedVersion: reviewerVersionSchema,
+  expectedContentVersion: reviewerVersionSchema,
+}).strict();
+export const maintainerGateScopeSchema = maintainerGateRequestSchema.extend({
+  candidateId: reviewerIdSchema,
+  candidateItemCount: z.number().int().min(0).max(1_000),
+}).strict();
+const maintainerGateResponseFields = {
+  analyzedScope: maintainerGateScopeSchema,
+  result: maintainerGateResultSchema,
+};
+export const maintainerGateResponseSchema = z.discriminatedUnion('status', [
+  z.object({ ...maintainerGateResponseFields, status: z.literal('CURRENT'), staleReason: z.null() }).strict(),
+  z.object({ ...maintainerGateResponseFields, status: z.literal('STALE'),
+    staleReason: z.literal('CANDIDATE_CHANGED') }).strict(),
+]);
 
 export const aiOutcomeSchema = z.enum(['SUCCESS', 'STALE', 'REJECTED', 'FAILED', 'CANCELLED']);
 export const aiErrorClassSchema = z.enum([
@@ -103,6 +125,8 @@ export const contributorAiUsageResponseSchema = z.object({
 }).strict();
 export const reviewerAiUsageResponseSchema = z.object(contributorAiUsageResponseSchema.shape).strict();
 export type ReviewerAiUsageResponse = z.infer<typeof reviewerAiUsageResponseSchema>;
+export const maintainerAiUsageResponseSchema = z.object(contributorAiUsageResponseSchema.shape).strict();
+export type MaintainerAiUsageResponse = z.infer<typeof maintainerAiUsageResponseSchema>;
 export const aiAuditEntrySchema = z.object({
   requestId: reviewerIdSchema, analyzedScope: patchRiskScopeSchema,
   requestedAt: reviewerTimestampSchema, completedAt: reviewerTimestampSchema.nullable(),
@@ -124,6 +148,9 @@ export type ReviewerRiskResult = z.infer<typeof reviewerRiskResultSchema>;
 export type PatchRiskResponse = z.infer<typeof patchRiskResponseSchema>;
 export type ContributorDraftResult = z.infer<typeof contributorDraftResultSchema>;
 export type MaintainerGateResult = z.infer<typeof maintainerGateResultSchema>;
+export type MaintainerGateRequest = z.infer<typeof maintainerGateRequestSchema>;
+export type MaintainerGateAnalyzedScope = z.infer<typeof maintainerGateScopeSchema>;
+export type MaintainerGateResponse = z.infer<typeof maintainerGateResponseSchema>;
 export type AiOutcome = z.infer<typeof aiOutcomeSchema>;
 export type AiErrorClass = z.infer<typeof aiErrorClassSchema>;
 export type AiTokenUsage = z.infer<typeof aiTokenUsageSchema>;

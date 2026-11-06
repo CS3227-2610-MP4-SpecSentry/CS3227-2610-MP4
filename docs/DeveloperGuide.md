@@ -26,26 +26,49 @@ content. Publication snapshots immutable evidence atomically. Membership changes
 advance contentVersion; explicit removal of a revoked item enters CHANGES_REQUESTED.
 New API contracts are in `src/shared/src/contracts/release.ts` and `revocation.ts`.
 
-The first Maintainer client slice adds a strict paginated `GET /api/release-candidates`
-projection and a `/releases/*` React workspace. It lists/filters candidates,
-creates and opens them, displays the responsible Maintainer and server-computed
-blockers, and permits only the creator to edit an OPEN candidate. List cursors are
-bound to project and status filter and ordered by `(createdAt,id)` descending.
-Create and edit uncertainty locks further mutation until a successful authoritative
-refresh; workspace unmount/session replacement suppresses late callbacks. This is
-not the full Maintainer role.
+The completed Maintainer client uses strict paginated candidate and eligible-proposal
+projections under `/releases/*`. It lists/filters/creates candidates, displays the
+responsible Maintainer and server-computed blockers, and permits only the creator to
+edit an OPEN candidate. Eligibility returns only exact proposal/revision/assignment
+coordinates and versions; it excludes approval IDs, patches, evidence, findings and
+private content. Completed approval survives Reviewer disablement unless explicitly
+invalidated. Add/remove payloads carry the displayed optimistic versions, and every
+successful, stale, uncertain or malformed membership result locks candidate mutation
+until detail and eligibility both reconcile.
 
-The next bounded slice exposes creator-only smoke-test recording for an OPEN
-candidate. It validates the existing strict shared request, sends the displayed
-candidate version and content version with the current CSRF token, and records an
-explicit PASS or FAIL plus non-empty plain-text procedure/results. Success, stale
-conflict, an uncertain network/5xx outcome and response-contract failure all require
-authoritative detail reconciliation before another edit or smoke mutation. The
-browser never removes the SMOKE blocker itself. An older PASS remains visible but
-cannot satisfy readiness after candidate membership advances `contentVersion`.
-Server transactions still enforce role, persisted session, creator ownership,
-lifecycle and optimistic versions. Member, publish, notice, audit and AI controls
-remain pending in the browser.
+Creator-only smoke records remain bound to exact candidate/content versions. A prior
+PASS remains visible but cannot satisfy gates after membership advances
+`contentVersion`. Candidate detail returns only the latest authoritative smoke record.
+The separate history route uses a candidate-bound cursor, at most 20 rows per API
+page and a 256 KiB UTF-8 procedure/result budget; the browser requests five at a time.
+Released detail is terminal and returns no OPEN-candidate blockers. The notification
+panel is recipient-scoped; candidate detail returns
+bounded unread revocation notices without changing them, and the browser acknowledges
+only exact rendered notice IDs through the CSRF-protected notification command.
+
+Publication requires explicit browser confirmation and exact candidate/content
+versions. The existing transaction rechecks every gate, serializes against revocation,
+and stores one immutable snapshot. Interrupted recovery preserves one request body and
+idempotency key; a conflict requires fresh state and a new intent. Released annotation
+reads are available to all Maintainers, while only the creator may append bounded text
+against the exact candidate version and snapshot. Database triggers reject annotation
+updates/deletes and preserve the original snapshot.
+
+The Release Gate Assistant is an owner-only, OPEN-candidate advisory call using the
+shared server-side gateway. Its context includes structured item summaries and gate
+statuses but no diffs, evidence/finding bodies, accounts or approval IDs. Admission is
+bounded at 6,000 conservative units and output at 800 tokens; strict JSON, secret
+screening, grounding, authorization before dispatch/delivery and CURRENT/STALE delivery
+apply. It never changes gates or publishes. Preflight request-record admission is
+serialized and bounded separately from provider-facing attempt quotas. Maintainers
+can separately view SGT-day project aggregate AI accounting computed inside
+PostgreSQL without per-user prompts, outputs, history or application row hydration.
+
+`GET /api/maintainer/audit` AND-combines actor/proposal/release/action/outcome/date
+filters with a source-aware newest-first cursor. It allowlists durable proposal activity,
+restricted security events, safe AI request metadata and release annotations. Raw
+prompts/responses, request bodies, credentials, private drafts, provider envelopes and
+snapshot evidence are not selected. Client output is escaped plain text.
 
 Lock order is sorted relevant accounts, actor session, candidates, then sorted
 proposals before approval/membership writes. Resolve opaque pointers before locking
@@ -189,9 +212,10 @@ approval gates, decision idempotency and authorized history. Revision cycles add
 the minimal Contributor API, durable notifications and withdrawal/reopening.
 Contributor private draft create/list/detail, editing, confirmed deletion and criteria
 management are implemented by Contributor increments 1–4. The Release Maintainer
-candidate list/create/open/detail/edit foundation is implemented locally; its broader
-actions and Maintainer AI remain pending. Full submitted-editing/submission UI status
-is tracked by the later Contributor completion evidence.
+workspace locally implements candidate assembly, exact-version smoke evidence,
+publication and recovery, revocation notices, append-only corrections, restricted
+audit and the advisory Release Gate Assistant. Full submitted-editing/submission UI
+status is tracked by the later Contributor completion evidence.
 The bounded revocation/release API is described above; consult its current review status.
 Reviewer AI is integrated with live operation disabled pending provider verification.
 See [Authentication](Authentication.md).

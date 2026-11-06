@@ -1,0 +1,35 @@
+{
+  "id": "9fd65fae4d8d4bd483984074f98f7ac7",
+  "prompter": "yu-sutong",
+  "session": "2026-11-06-maintainer-final",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "scope-and-design",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed",
+  "started_at": "2026-11-06T11:53:33.870182+00:00",
+  "ended_at": "2026-11-06T11:59:09.375334+00:00",
+  "elapsed_seconds": 335.505152,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Expanded final-Maintainer scope resolved from repository specifications and read-only architecture/security reviews; implementation write sets frozen",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "output_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "cache_read_tokens": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "tool_calls": "Per-record model, token, cache, tool-call and retry telemetry are not exposed",
+    "retries": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-record model, token, cache, tool-call and retry telemetry are not exposed"
+}

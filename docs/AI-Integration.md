@@ -47,6 +47,39 @@ this bounded increment. All five review findings were fixed and independently
 closed. Current evidence belongs to the
 [iteration 3 log](../logs/ngkhengyang/2026-10-26-reviewer-iteration3.md).
 
+## Release Maintainer Release Gate Assistant
+
+The responsible Maintainer may request an advisory readiness summary for an exact
+OPEN candidate version and content version through
+`POST /api/release-candidates/:id/ai/readiness`. The server selects the semantic
+version, rollback/dependency notes, deterministic blocker codes and at most 1,000
+attached item titles, submitted summaries, revision numbers and per-item gate
+statuses. It excludes patches, evidence and finding bodies, acceptance-criterion
+text, approval identifiers, account/session data, notifications and publication
+snapshot content.
+
+The shared gateway admits at most 6,000 conservative framed input units and 800
+output tokens. A versioned prompt treats every selected field as untrusted data;
+secret screening runs before dispatch. Strict duplicate-key and envelope parsing,
+the exact six-field Maintainer result schema, supplied-item grounding and the rule
+that failed deterministic gates cannot produce a READY recommendation all fail
+closed. Role, persisted session, creator ownership, OPEN state, candidate/content
+versions and attached-item count are checked before context retrieval, before each
+outbound attempt and before delivery. A continuously authorized changed candidate
+returns a labeled STALE result; access loss returns no advisory result.
+
+The assistant never changes membership, smoke evidence, gates or publication.
+The browser keeps manual release controls available when generation is disabled,
+rejected or unavailable, discards stale/invalid output and clears protected state
+on access loss or scope change. `GET /api/maintainer/ai/usage` is a separate
+Maintainer-authorized SGT-day project aggregate across all three features. It
+returns counts and provider-usage coverage only, without per-user rows, prompts,
+outputs or run history.
+
+Local strict-contract, gateway, service and client tests establish these boundaries;
+they do not establish provider usefulness, live latency, data-handling approval or
+deployed acceptance. Those remain release gates in the final Maintainer run.
+
 ## Configuration and operation
 
 `AI_LIVE_ENABLED` defaults to false. True requires a nonblank server-only
@@ -59,9 +92,9 @@ the application. Never prefix the key with `VITE_` or put it in a browser reques
 Keep the app flag false while evaluating with synthetic prompts. Before enabling
 real-draft traffic, review the model-specific evaluation, actual key limits and
 provider retention/data use with the affected owners. An environment flag cannot
-assert this evidence. Contributor and Reviewer share this switch and the same
-gateway protections; the Maintainer assistant remains pending. No local flag is
-automatically changed by the verification harness.
+assert this evidence. Contributor, Reviewer and Maintainer share this switch and
+the same gateway protections. No local flag is automatically changed by the
+verification harness.
 
 The Contributor v3 configuration verified on 2 November 2026 is:
 
@@ -193,6 +226,13 @@ omitting evidence. The UI explains an input-limit rejection and preserves manual
 review entries. Rejected transport responses are aborted and cancelled without
 waiting indefinitely for stream cleanup. A single 20-second monotonic deadline includes authorization,
 database waits, queueing, provider work, permitted retry and final disclosure.
+
+Preflight request-record creation is serialized on the shared coordinator and bounded
+at 120 per actor per rolling ten minutes, 1,000 per actor per SGT day and 300
+project-wide per rolling minute. Excess requests fail before a row is created. These
+limits are separate from the stricter provider-facing outbound-attempt quotas.
+Project aggregate usage uses database counts/sums over indexed time windows rather
+than loading per-request or per-attempt rows into application memory.
 
 The server-owned `utf8-bytes-framing-v1` admission method uses 512 units plus
 64 per message and the UTF-8 byte lengths of every prepared message's role and
