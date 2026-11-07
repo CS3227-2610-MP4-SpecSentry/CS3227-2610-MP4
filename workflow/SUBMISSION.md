@@ -10,7 +10,7 @@ completion certificate. Run `npm run check:submission` for local artifact presen
 | Public team repository named CS3227-2610-MP4 | Git origin / GitHub | Origin has the required name; public accessibility and membership not verified |
 | All production source | src/ | Infrastructure/module scaffold and static product website only |
 | Agentic SE workflow | workflow/ | Generic process, Reviewer instructions and tooling exist; Contributor setup is on its separate branch; link actual executed runs for final grading |
-| Accurate User Guide | docs/UserGuide.md | Current scaffold documented; deployed URL, role accounts and walkthroughs pending |
+| Accurate User Guide | docs/UserGuide.md | Verified development URL and six synthetic role accounts published; production walkthrough remains behind protected release gates |
 | Developer Guide and acknowledgements | docs/DeveloperGuide.md | Setup/design/process index present; keep synchronized with each release |
 | GitHub Pages product website | src/website/, .github/workflows/pages.yml | Source/workflow initialized; enable Pages using GitHub Actions and verify live deployment |
 | Reflections with experiments/results | docs/Reflections.md, workflow/evaluations/ | Structure initialized; measured comparisons and analysis pending |

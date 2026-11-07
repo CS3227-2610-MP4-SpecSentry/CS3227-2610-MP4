@@ -1,5 +1,32 @@
 # SpecSentry User Guide
 
+## Live access and role accounts
+
+Open the verified development deployment at
+**<https://specsentry-dev-bi1f.onrender.com>**. Render's free service can take about
+a minute to wake after inactivity; retry once after it starts.
+
+Use any of these synthetic demo-only accounts. They all use password
+`Password123!`:
+
+| Role | Primary account | Alternate account |
+| --- | --- | --- |
+| Contributor | `contributor1` | `contributor2` |
+| Reviewer | `reviewer1` | `reviewer2` |
+| Release Maintainer | `release_maintainer1` | `release_maintainer2` |
+
+There is no public registration or role picker. The role attached to the selected
+account determines which workspace opens. All six accounts were verified through
+deployed HTTPS login and logout on 7 November 2026. They are intentionally public
+test identities and are not the private deployment smoke account. Never put real
+personal data, private source, provider tokens or other secrets into this shared
+testing deployment.
+
+The production service infrastructure is online, but its database remains
+deliberately unmigrated and unseeded behind the documented protected-release gates.
+Use the development URL above for grading until this guide explicitly changes the
+testing target.
+
 ## Reading Contributor responses as a Reviewer
 
 Open an assigned proposal and find **Contributor response history** in Manual
@@ -110,17 +137,20 @@ the unassigned awaiting-revision queue so the owner can resubmit or withdraw.
 Manual review remains usable without AI. Verification boundaries and current
 evidence are in the [iteration 2 run](../logs/ngkhengyang/2026-10-26-reviewer-iteration2.md).
 
-Status: local Reviewer workflows and the Contributor draft, lifecycle, revision,
-response and advisory assistant implementation, updated1November2026. Current
+Status: Reviewer workflows and the Contributor draft, lifecycle, revision,
+response and advisory assistant implementation are available on the development
+deployment, updated 7 November 2026. Current
 independent checks and unresolved gates are recorded in the
 [Contributor run](../logs/yooplo/2026-11-01-contributor-completion.md); earlier
-increment/merge results remain historical evidence. No live application URL or
-peer-testing accounts have been verified. This guide describes current behavior;
-the [product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
+increment/merge results remain historical evidence. The live development URL and
+the six peer-testing accounts above have been verified. This guide describes
+current behavior; the [product specification](../workflow/specs/PRODUCT-SPEC.md)
+describes planned work.
 
 ## Access and current features
 
-For local access follow [Developer Guide setup](DeveloperGuide.md#install-and-run).
+For deployed access, use the development URL and accounts above. For local access
+follow [Developer Guide setup](DeveloperGuide.md#install-and-run).
 With `npm run dev`, open <http://localhost:5173>. With the production-style Compose
 profile, open <http://localhost:3000>.
 

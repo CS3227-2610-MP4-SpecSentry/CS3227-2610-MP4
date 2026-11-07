@@ -1,0 +1,35 @@
+{
+  "id": "4556be0ace474785a3f5c310432b0612",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-grader-credentials",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "document-verify",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "System identifies the agent as GPT-5; reasoning effort is not exposed",
+  "started_at": "2026-11-07T10:38:16.152019+00:00",
+  "ended_at": "2026-11-07T10:40:24.432719+00:00",
+  "elapsed_seconds": 128.2807,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Verified all six deployed synthetic role accounts and documented safe grader access in the README, User Guide, and submission checklist; local documentation checks passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record input, output, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "output_tokens": "Per-record input, output, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "cache_read_tokens": "Per-record input, output, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "tool_calls": "Per-record input, output, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "retries": "Per-record input, output, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder"
+  },
+  "unavailable_reason": "Per-record input, output, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder"
+}
