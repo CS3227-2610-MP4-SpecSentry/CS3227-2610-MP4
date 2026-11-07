@@ -1,0 +1,19 @@
+{
+  "id": "4f45faae47b346c68629114c699a30ac",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-production-release-and-submission",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "orchestrate",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Selected model family supplied by system; exact reasoning effort not exposed",
+  "started_at": "2026-11-07T10:48:16.232614+00:00",
+  "ended_at": null,
+  "elapsed_seconds": null,
+  "status": "running",
+  "usage": null
+}
