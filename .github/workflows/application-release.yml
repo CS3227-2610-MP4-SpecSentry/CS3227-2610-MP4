@@ -256,6 +256,13 @@ jobs:
           DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
           EXPECTED_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
         run: node workflow/deployment/tooling/verify-database.mjs postflight
+      - name: Ensure dedicated development smoke account
+        env:
+          DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+          ACCOUNT_USERNAME: ${{ secrets.SMOKE_USERNAME }}
+          ACCOUNT_PASSWORD: ${{ secrets.SMOKE_PASSWORD }}
+          ACCOUNT_ROLE: RELEASE_MAINTAINER
+        run: npm run account -- ensure
       - name: Deploy the immutable digest to development
         env:
           RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
@@ -455,6 +462,13 @@ jobs:
           DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
           EXPECTED_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
         run: node workflow/deployment/tooling/verify-database.mjs postflight
+      - name: Ensure dedicated production smoke account
+        env:
+          DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+          ACCOUNT_USERNAME: ${{ secrets.SMOKE_USERNAME }}
+          ACCOUNT_PASSWORD: ${{ secrets.SMOKE_PASSWORD }}
+          ACCOUNT_ROLE: RELEASE_MAINTAINER
+        run: npm run account -- ensure
       - name: Reject a stale master after migration
         env:
           MASTER_SHA: ${{ needs.resolve-production.outputs.master_sha }}

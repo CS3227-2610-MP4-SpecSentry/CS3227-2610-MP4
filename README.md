@@ -14,7 +14,32 @@ is disabled pending verification. Maintainer implementation evidence is in the
 foundation and smoke-test increments remain historical checkpoints. Broader
 release gates are also tracked in the
 [Contributor run](logs/yooplo/2026-11-01-contributor-completion.md).
-No deployed application is claimed.
+
+## Live grader access
+
+Use the verified development deployment for peer and grader testing:
+
+**<https://specsentry-dev-bi1f.onrender.com>**
+
+These are synthetic demo-only accounts. Each account uses password
+`Password123!`:
+
+| Role | Primary account | Alternate account |
+| --- | --- | --- |
+| Contributor | `contributor1` | `contributor2` |
+| Reviewer | `reviewer1` | `reviewer2` |
+| Release Maintainer | `release_maintainer1` | `release_maintainer2` |
+
+All six login/logout flows were verified against the deployed HTTPS application on
+7 November 2026. There is no public registration or role picker; signing in opens
+the workspace assigned to that account. The Render free service can take about a
+minute to wake after inactivity, so retry once after it starts. These public demo
+credentials are intentionally separate from private deployment smoke accounts,
+database credentials and provider tokens.
+
+The production service infrastructure is online, but its database is deliberately
+unmigrated and unseeded until the protected recovery, compatibility and teammate-
+approval gates complete. It is not yet the grader-testing target.
 
 ## Directory map
 
@@ -40,7 +65,8 @@ src/
     src/index.ts          Zod response schemas and TypeScript types
 workflow/                 Specifications, plans, developer tooling and browser tests
 docs/                     Developer setup and deployment guides
-.github/workflows/ci.yml   Automated checks (no live deployment yet)
+.github/workflows/ci.yml   Automated source, test, browser, audit and container checks
+.github/workflows/application-release.yml  Guarded image publication and deployment
 package.json              Root workspace commands and tooling dependencies
 package-lock.json         Exact dependency resolution; commit changes together
 tsconfig.base.json        Shared strict TypeScript compiler settings
@@ -48,7 +74,7 @@ eslint.config.mjs         Lint rules and client/server import boundary
 .env.example              Local environment template; live .env files are ignored
 Dockerfile                One production image serving frontend and backend
 compose.yaml              Local PostgreSQL and optional full application
-render.yaml               Render service template; requires a real image digest/secrets
+render.yaml               Render services pinned to the verified immutable image digest
 playwright.config.ts      Browser and automated accessibility smoke-test setup
 ```
 

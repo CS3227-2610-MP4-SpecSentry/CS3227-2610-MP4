@@ -250,10 +250,12 @@ test('all workflows pin actions and privileged release graph stays separated', a
   assert.doesNotMatch(publish, /environment:|DIRECT_DATABASE_URL|RENDER_API_TOKEN|RENDER_SERVICE_ID|SMOKE_PASSWORD/);
   assert.match(development, /DEPLOYMENT_AUTOMATION_ENABLED/);
   assert.match(development, /inputs\.operation == 'release-development'/);
+  assert.match(development, /db:migrate:deploy[\s\S]*ACCOUNT_ROLE: RELEASE_MAINTAINER[\s\S]*npm run account -- ensure[\s\S]*render-deploy\.mjs/);
   assert.match(resolution, /inputs\.operation == 'promote-production'/);
   assert.doesNotMatch(resolution, /IMAGE_RELEASE_ENABLED/);
   assert.match(release, /render-deploy\.mjs --execute --image/);
   assert.doesNotMatch(release, /deploy[_-]?hook/i);
   const production = release.slice(release.indexOf('  deploy-production:'));
+  assert.match(production, /db:migrate:deploy[\s\S]*ACCOUNT_ROLE: RELEASE_MAINTAINER[\s\S]*npm run account -- ensure[\s\S]*render-deploy\.mjs/);
   assert.doesNotMatch(production, /docker\/build-push-action|Build and publish/);
 });

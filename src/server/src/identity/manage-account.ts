@@ -9,22 +9,26 @@ import { ApprovalRevocationService } from '../reviews/approval-revocation.servic
 import { ProposalsService } from '../proposals/proposals.service';
 import { ActivityService } from '../activity/activity.service';
 import { NotificationsService } from '../notifications/notifications.service';
+import { ensureAccount } from './account-provisioning';
 
 async function main(): Promise<void> {
   loadRootEnvironment();
   const database = new DatabaseService(readConfig(process.env));
   try {
     const action = process.argv[2];
-    if (action === 'create') {
+    if (action === 'create' || action === 'ensure') {
       const username = usernameSchema.parse(process.env.ACCOUNT_USERNAME);
       const role = accountRoleSchema.parse(process.env.ACCOUNT_ROLE);
       const password = process.env.ACCOUNT_PASSWORD;
       if (!password || password.length < 12 || password.length > 256) throw new Error('Invalid password');
-      const passwordHash = await hashPassword(password);
-      await database.client.$transaction(async (tx) => {
-        const account = await tx.userAccount.create({ data: { username, role, passwordHash } });
-        await tx.securityEvent.create({ data: { actorId: account.id, action: 'ACCOUNT_CREATED', target: account.id, outcome: 'success' } });
-      });
+      if (action === 'ensure') await ensureAccount(database, { username, role, password });
+      else {
+        const passwordHash = await hashPassword(password);
+        await database.client.$transaction(async (tx) => {
+          const account = await tx.userAccount.create({ data: { username, role, passwordHash } });
+          await tx.securityEvent.create({ data: { actorId: account.id, action: 'ACCOUNT_CREATED', target: account.id, outcome: 'success' } });
+        });
+      }
     } else if (action === 'disable') {
       const username = usernameSchema.parse(process.env.ACCOUNT_USERNAME);
       const proposals = new ProposalsService();
