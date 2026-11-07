@@ -18,6 +18,10 @@ ENV DEPLOYMENT_SOURCE_SHA=${VCS_REF}
 LABEL org.opencontainers.image.source="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4"
 LABEL org.opencontainers.image.revision=${VCS_REF}
 WORKDIR /app
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --only-upgrade apt libapt-pkg6.0 \
+    && rm -rf /var/lib/apt/lists/* /usr/local/lib/node_modules/npm \
+    && rm -f /usr/local/bin/npm /usr/local/bin/npx
 COPY --from=build --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/package.json ./package.json
 COPY --from=build --chown=node:node /app/src/server/package.json ./src/server/package.json
