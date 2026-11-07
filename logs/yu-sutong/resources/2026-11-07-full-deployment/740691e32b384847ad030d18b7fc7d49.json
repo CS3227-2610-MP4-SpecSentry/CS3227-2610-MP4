@@ -1,0 +1,35 @@
+{
+  "id": "740691e32b384847ad030d18b7fc7d49",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-full-deployment",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "publish-deploy",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed to the repository tooling",
+  "started_at": "2026-11-06T19:23:35.785560+00:00",
+  "ended_at": "2026-11-06T19:45:01.222675+00:00",
+  "elapsed_seconds": 1285.437115,
+  "status": "interrupted",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Published PR #23 under yu-sutong, passed CI, protected master and deployment environments, and configured separate Neon environment secrets; full release paused at the required unfulfilled teammate approval gate",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry is not exposed to the repository recorder",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry is not exposed to the repository recorder",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry is not exposed to the repository recorder",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry is not exposed to the repository recorder",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry is not exposed to the repository recorder"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry is not exposed to the repository recorder"
+}

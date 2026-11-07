@@ -1,0 +1,35 @@
+{
+  "id": "98bca300602c4a2f9ac67c9162e01c21",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-full-deployment",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "deploy",
+  "attempt": 2,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed to the repository tooling",
+  "started_at": "2026-11-07T06:14:07.012181+00:00",
+  "ended_at": "2026-11-07T10:05:26.801087+00:00",
+  "elapsed_seconds": 13879.788906,
+  "status": "interrupted",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Validated, committed, and pushed the Render Blueprint; created an unapplied plan and stopped for explicit human approval plus secure per-environment database values",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed"
+}
