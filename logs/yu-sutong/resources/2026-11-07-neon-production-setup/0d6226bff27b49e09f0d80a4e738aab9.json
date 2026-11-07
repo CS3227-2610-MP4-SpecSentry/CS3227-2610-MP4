@@ -1,0 +1,35 @@
+{
+  "id": "0d6226bff27b49e09f0d80a4e738aab9",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-neon-production-setup",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "implement",
+  "attempt": 1,
+  "selected_model": "unavailable",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact execution model and effort are not exposed to the repository tooling",
+  "started_at": "2026-11-06T18:07:32.922297+00:00",
+  "ended_at": "2026-11-06T18:45:16.077376+00:00",
+  "elapsed_seconds": 2263.155079,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Neon skills and two Postgres projects configured; app wiring and local verification passed; remote Prisma migration and readiness remained blocked by TCP timeout",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model, and observed-effort telemetry are not exposed to the repository recorder"
+}

@@ -1,0 +1,477 @@
+name: Application release
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Release operation
+        required: true
+        default: publish-image
+        type: choice
+        options:
+          - publish-image
+          - release-development
+          - promote-production
+      development_run_id:
+        description: Successful Application release run that verified development
+        required: false
+        type: string
+
+permissions: {}
+
+env:
+  EXPECTED_REPOSITORY: CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4
+  IMAGE_NAME: ghcr.io/cs3227-2610-mp4-specsentry/cs3227-2610-mp4
+
+jobs:
+  verify-ci:
+    if: >-
+      vars.IMAGE_RELEASE_ENABLED == 'true' &&
+      (
+        github.event_name == 'push' ||
+        (
+          github.event_name == 'workflow_dispatch' &&
+          (inputs.operation == 'publish-image' || inputs.operation == 'release-development')
+        )
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      ci_run_id: ${{ steps.ci.outputs.ci_run_id }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Wait for the exact master CI run
+        id: ci
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          test "$GITHUB_REPOSITORY" = "$EXPECTED_REPOSITORY"
+          test "$GITHUB_REF" = "refs/heads/master"
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          for attempt in {1..60}; do
+            gh api --method GET -H "Accept: application/vnd.github+json" \
+              "/repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs" \
+              -f event=push -f branch=master -f head_sha="$SOURCE_SHA" -f per_page=10 > ci-runs.json
+            jq --arg sha "$SOURCE_SHA" \
+              '[.workflow_runs[] | select(.head_sha == $sha and .event == "push" and .head_branch == "master")] | sort_by(.run_number) | reverse | .[0] // {}' \
+              ci-runs.json > ci-run.json
+            status="$(jq -r '.status // "missing"' ci-run.json)"
+            if [ "$status" = "completed" ]; then
+              ci_run_id="$(jq -r '.id | tostring' ci-run.json)"
+              node workflow/deployment/tooling/release-candidate.mjs validate-ci-run \
+                --file ci-run.json --run-id "$ci_run_id" --source-sha "$SOURCE_SHA"
+              echo "ci_run_id=$ci_run_id" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Exact master CI run did not complete before the deadline" >&2
+          exit 1
+
+  build-development:
+    needs: verify-ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+      packages: write
+    outputs:
+      source_sha: ${{ steps.identity.outputs.source_sha }}
+      source_tree: ${{ steps.identity.outputs.source_tree }}
+      image: ${{ steps.identity.outputs.image }}
+      image_digest: ${{ steps.image.outputs.digest }}
+      migration_manifest_digest: ${{ steps.identity.outputs.migration_manifest_digest }}
+      ci_run_id: ${{ needs.verify-ci.outputs.ci_run_id }}
+    steps:
+      - name: Check trusted source event
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          OPERATION: ${{ inputs.operation }}
+        run: |
+          test "$GITHUB_REPOSITORY" = "$EXPECTED_REPOSITORY"
+          test "$GITHUB_REF" = "refs/heads/master"
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            test "$OPERATION" = "publish-image" -o "$OPERATION" = "release-development"
+          else
+            test "$EVENT_NAME" = "push"
+          fi
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Freeze source and migration identity
+        id: identity
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          git fetch --no-tags origin master
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test "$(git rev-parse origin/master)" = "$SOURCE_SHA"
+          source_tree="$(git rev-parse "$SOURCE_SHA^{tree}")"
+          manifest_digest="$(node workflow/deployment/tooling/release-candidate.mjs manifest-digest)"
+          digest="sha256:$(printf '0%.0s' {1..64})"
+          node workflow/deployment/tooling/release-candidate.mjs validate-build \
+            --source-sha "$SOURCE_SHA" --source-tree "$source_tree" --image "$IMAGE_NAME@$digest" --digest "$digest"
+          {
+            echo "source_sha=$SOURCE_SHA"
+            echo "source_tree=$source_tree"
+            echo "image=$IMAGE_NAME"
+            echo "migration_manifest_digest=$manifest_digest"
+          } >> "$GITHUB_OUTPUT"
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - name: Build and publish one image
+        id: image
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: ${{ env.IMAGE_NAME }}:${{ steps.identity.outputs.source_sha }}
+          build-args: VCS_REF=${{ steps.identity.outputs.source_sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ steps.identity.outputs.source_sha }}
+          provenance: mode=max
+          sbom: true
+      - name: Validate registry digest
+        env:
+          DIGEST: ${{ steps.image.outputs.digest }}
+          SOURCE_SHA: ${{ steps.identity.outputs.source_sha }}
+          SOURCE_TREE: ${{ steps.identity.outputs.source_tree }}
+        run: node workflow/deployment/tooling/release-candidate.mjs validate-build --source-sha "$SOURCE_SHA" --source-tree "$SOURCE_TREE" --image "$IMAGE_NAME@$DIGEST" --digest "$DIGEST"
+      - name: Attest published digest
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-name: ${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.image.outputs.digest }}
+          push-to-registry: true
+      - name: Scan the exact digest
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        with:
+          scan-type: image
+          image-ref: ${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: HIGH,CRITICAL
+      - name: Record published image identity
+        env:
+          SOURCE_SHA: ${{ steps.identity.outputs.source_sha }}
+          IMAGE_DIGEST: ${{ steps.image.outputs.digest }}
+          CI_RUN_ID: ${{ needs.verify-ci.outputs.ci_run_id }}
+        run: >-
+          jq -n --arg sourceSha "$SOURCE_SHA" --arg image "$IMAGE_NAME@$IMAGE_DIGEST"
+          --arg imageDigest "$IMAGE_DIGEST" --arg ciRunId "$CI_RUN_ID"
+          '{schemaVersion: 1, sourceSha: $sourceSha, image: $image,
+          imageDigest: $imageDigest, ciRunId: $ciRunId}' > published-image.json
+      - name: Preserve safe published-image identity
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: published-image
+          path: published-image.json
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy-development:
+    needs: build-development
+    if: >-
+      needs.build-development.result == 'success' &&
+      vars.DEPLOYMENT_AUTOMATION_ENABLED == 'true' &&
+      (
+        github.event_name == 'push' ||
+        (github.event_name == 'workflow_dispatch' && inputs.operation == 'release-development')
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: development
+    concurrency:
+      group: specsentry-application-development
+      cancel-in-progress: false
+    permissions:
+      attestations: read
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ needs.build-development.outputs.source_sha }}
+      - name: Reject a stale development candidate
+        env:
+          SOURCE_SHA: ${{ needs.build-development.outputs.source_sha }}
+        run: |
+          git fetch --no-tags origin master
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test "$(git rev-parse origin/master)" = "$SOURCE_SHA"
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify image provenance
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE: ${{ needs.build-development.outputs.image }}@${{ needs.build-development.outputs.image_digest }}
+          SOURCE_SHA: ${{ needs.build-development.outputs.source_sha }}
+        run: >-
+          gh attestation verify "oci://$IMAGE" --repo "$GITHUB_REPOSITORY"
+          --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/application-release.yml"
+          --source-ref refs/heads/master --source-digest "$SOURCE_SHA"
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run db:generate
+      - name: Verify development database before migration
+        env:
+          DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+          EXPECTED_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
+        run: node workflow/deployment/tooling/verify-database.mjs preflight
+      - name: Apply reviewed migrations once
+        env:
+          DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+        run: npm run db:migrate:deploy
+      - name: Verify development database after migration
+        env:
+          DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+          EXPECTED_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
+        run: node workflow/deployment/tooling/verify-database.mjs postflight
+      - name: Deploy the immutable digest to development
+        env:
+          RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
+          RENDER_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
+          IMAGE: ${{ needs.build-development.outputs.image }}@${{ needs.build-development.outputs.image_digest }}
+        run: node workflow/deployment/tooling/render-deploy.mjs --execute --image "$IMAGE" --output render-evidence.json
+      - name: Verify development source and authenticated flow
+        env:
+          DEPLOYMENT_BASE_URL: ${{ vars.DEPLOYMENT_BASE_URL }}
+          EXPECTED_DEPLOYMENT_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
+          EXPECTED_SOURCE_SHA: ${{ needs.build-development.outputs.source_sha }}
+          SMOKE_USERNAME: ${{ secrets.SMOKE_USERNAME }}
+          SMOKE_PASSWORD: ${{ secrets.SMOKE_PASSWORD }}
+        run: node workflow/deployment/tooling/verify-remote.mjs
+      - name: Record verified development candidate
+        env:
+          SOURCE_SHA: ${{ needs.build-development.outputs.source_sha }}
+          SOURCE_TREE: ${{ needs.build-development.outputs.source_tree }}
+          IMAGE_REF: ${{ needs.build-development.outputs.image }}@${{ needs.build-development.outputs.image_digest }}
+          IMAGE_DIGEST: ${{ needs.build-development.outputs.image_digest }}
+          MIGRATION_MANIFEST_DIGEST: ${{ needs.build-development.outputs.migration_manifest_digest }}
+          DEVELOPMENT_RUN_ID: ${{ github.run_id }}
+          DEVELOPMENT_CI_RUN_ID: ${{ needs.build-development.outputs.ci_run_id }}
+          DEVELOPMENT_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
+          DEVELOPMENT_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
+        run: node workflow/deployment/tooling/release-candidate.mjs create --deploy-evidence render-evidence.json --output release-candidate.json
+      - name: Preserve safe promotion input
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: verified-development-candidate
+          path: release-candidate.json
+          if-no-files-found: error
+          retention-days: 7
+
+  resolve-production:
+    if: github.event_name == 'workflow_dispatch' && inputs.operation == 'promote-production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      attestations: read
+      contents: read
+      packages: read
+    outputs:
+      master_sha: ${{ steps.master.outputs.master_sha }}
+      source_sha: ${{ steps.candidate.outputs.source_sha }}
+      source_tree: ${{ steps.candidate.outputs.source_tree }}
+      image: ${{ steps.candidate.outputs.image }}
+      image_digest: ${{ steps.candidate.outputs.image_digest }}
+      migration_manifest_digest: ${{ steps.candidate.outputs.migration_manifest_digest }}
+      development_service_fingerprint: ${{ steps.candidate.outputs.development_service_fingerprint }}
+      development_host_fingerprint: ${{ steps.candidate.outputs.development_host_fingerprint }}
+      development_database_fingerprint: ${{ steps.candidate.outputs.development_database_fingerprint }}
+      development_ci_run_id: ${{ steps.candidate.outputs.development_ci_run_id }}
+    steps:
+      - name: Check protected manual trigger
+        env:
+          AUTOMATION_ENABLED: ${{ vars.DEPLOYMENT_AUTOMATION_ENABLED }}
+          PRODUCTION_ENABLED: ${{ vars.PRODUCTION_RELEASE_ENABLED }}
+          DEVELOPMENT_RUN_ID: ${{ inputs.development_run_id }}
+        run: |
+          test "$GITHUB_REPOSITORY" = "$EXPECTED_REPOSITORY"
+          test "$GITHUB_REF" = "refs/heads/master"
+          test "$AUTOMATION_ENABLED" = "true"
+          test "$PRODUCTION_ENABLED" = "true"
+          [[ "$DEVELOPMENT_RUN_ID" =~ ^[1-9][0-9]{0,19}$ ]]
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: master
+      - name: Download the verified development candidate
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: verified-development-candidate
+          path: promotion-input
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.development_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate the candidate artifact
+        id: candidate
+        run: node workflow/deployment/tooling/release-candidate.mjs validate --file promotion-input/release-candidate.json --run-id "${{ inputs.development_run_id }}"
+      - name: Verify the development release and CI runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEVELOPMENT_RUN_ID: ${{ inputs.development_run_id }}
+          DEVELOPMENT_CI_RUN_ID: ${{ steps.candidate.outputs.development_ci_run_id }}
+          SOURCE_SHA: ${{ steps.candidate.outputs.source_sha }}
+        run: |
+          gh api --method GET -H "Accept: application/vnd.github+json" \
+            "/repos/$GITHUB_REPOSITORY/actions/runs/$DEVELOPMENT_RUN_ID" > development-run.json
+          node workflow/deployment/tooling/release-candidate.mjs validate-run \
+            --file development-run.json --run-id "$DEVELOPMENT_RUN_ID" --source-sha "$SOURCE_SHA"
+          gh api --method GET -H "Accept: application/vnd.github+json" \
+            "/repos/$GITHUB_REPOSITORY/actions/runs/$DEVELOPMENT_CI_RUN_ID" > development-ci-run.json
+          node workflow/deployment/tooling/release-candidate.mjs validate-ci-run \
+            --file development-ci-run.json --run-id "$DEVELOPMENT_CI_RUN_ID" --source-sha "$SOURCE_SHA"
+      - name: Bind development source tree to current master
+        id: master
+        env:
+          SOURCE_SHA: ${{ steps.candidate.outputs.source_sha }}
+          SOURCE_TREE: ${{ steps.candidate.outputs.source_tree }}
+        run: |
+          git fetch --no-tags origin master
+          master_sha="$(git rev-parse origin/master)"
+          test "$SOURCE_SHA" = "$master_sha"
+          test "$(git rev-parse "$SOURCE_SHA^{tree}")" = "$SOURCE_TREE"
+          test "$(git rev-parse "$master_sha^{tree}")" = "$SOURCE_TREE"
+          echo "master_sha=$master_sha" >> "$GITHUB_OUTPUT"
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Reverify promoted image provenance
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE: ${{ steps.candidate.outputs.image }}
+          SOURCE_SHA: ${{ steps.candidate.outputs.source_sha }}
+        run: >-
+          gh attestation verify "oci://$IMAGE" --repo "$GITHUB_REPOSITORY"
+          --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/application-release.yml"
+          --source-ref refs/heads/master --source-digest "$SOURCE_SHA"
+
+  deploy-production:
+    needs: resolve-production
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    concurrency:
+      group: specsentry-application-production
+      cancel-in-progress: false
+    permissions:
+      attestations: read
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ needs.resolve-production.outputs.master_sha }}
+      - name: Check production recovery, compatibility and target isolation
+        env:
+          MASTER_SHA: ${{ needs.resolve-production.outputs.master_sha }}
+          DEV_SERVICE_FINGERPRINT: ${{ needs.resolve-production.outputs.development_service_fingerprint }}
+          DEV_HOST_FINGERPRINT: ${{ needs.resolve-production.outputs.development_host_fingerprint }}
+          DEV_DATABASE_FINGERPRINT: ${{ needs.resolve-production.outputs.development_database_fingerprint }}
+          PROD_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
+          PROD_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
+          PROD_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
+          RECOVERY_EVIDENCE_ID: ${{ vars.RECOVERY_EVIDENCE_ID }}
+          SCHEMA_COMPATIBILITY_EVIDENCE_ID: ${{ vars.SCHEMA_COMPATIBILITY_EVIDENCE_ID }}
+        run: |
+          git fetch --no-tags origin master
+          test "$(git rev-parse HEAD)" = "$MASTER_SHA"
+          test "$(git rev-parse origin/master)" = "$MASTER_SHA"
+          [[ "$RECOVERY_EVIDENCE_ID" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$ ]]
+          [[ "$SCHEMA_COMPATIBILITY_EVIDENCE_ID" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$ ]]
+          [[ "$PROD_SERVICE_ID" =~ ^srv-[A-Za-z0-9_-]{3,120}$ ]]
+          [[ "$PROD_HOST" =~ ^[a-z0-9.-]{3,253}$ ]]
+          [[ "$PROD_DATABASE_HOST" =~ ^[a-z0-9.-]{3,253}$ ]]
+          test "$(printf %s "$PROD_SERVICE_ID" | sha256sum | cut -d' ' -f1)" != "$DEV_SERVICE_FINGERPRINT"
+          test "$(printf %s "$PROD_HOST" | sha256sum | cut -d' ' -f1)" != "$DEV_HOST_FINGERPRINT"
+          test "$(printf %s "$PROD_DATABASE_HOST" | sha256sum | cut -d' ' -f1)" != "$DEV_DATABASE_FINGERPRINT"
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Reverify promoted image provenance
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE: ${{ needs.resolve-production.outputs.image }}
+          SOURCE_SHA: ${{ needs.resolve-production.outputs.source_sha }}
+        run: >-
+          gh attestation verify "oci://$IMAGE" --repo "$GITHUB_REPOSITORY"
+          --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/application-release.yml"
+          --source-ref refs/heads/master --source-digest "$SOURCE_SHA"
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run db:generate
+      - name: Verify production database before migration
+        env:
+          DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+          EXPECTED_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
+        run: node workflow/deployment/tooling/verify-database.mjs preflight
+      - name: Apply reviewed migrations once
+        env:
+          DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+        run: npm run db:migrate:deploy
+      - name: Verify production database after migration
+        env:
+          DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+          EXPECTED_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
+        run: node workflow/deployment/tooling/verify-database.mjs postflight
+      - name: Reject a stale master after migration
+        env:
+          MASTER_SHA: ${{ needs.resolve-production.outputs.master_sha }}
+        run: |
+          git fetch --no-tags origin master
+          test "$(git rev-parse origin/master)" = "$MASTER_SHA"
+      - name: Deploy the development-tested digest to production
+        env:
+          RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
+          RENDER_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
+          IMAGE: ${{ needs.resolve-production.outputs.image }}
+        run: node workflow/deployment/tooling/render-deploy.mjs --execute --image "$IMAGE" --output production-render-evidence.json
+      - name: Verify production source and authenticated flow
+        env:
+          DEPLOYMENT_BASE_URL: ${{ vars.DEPLOYMENT_BASE_URL }}
+          EXPECTED_DEPLOYMENT_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
+          EXPECTED_SOURCE_SHA: ${{ needs.resolve-production.outputs.source_sha }}
+          SMOKE_USERNAME: ${{ secrets.SMOKE_USERNAME }}
+          SMOKE_PASSWORD: ${{ secrets.SMOKE_PASSWORD }}
+        run: node workflow/deployment/tooling/verify-remote.mjs

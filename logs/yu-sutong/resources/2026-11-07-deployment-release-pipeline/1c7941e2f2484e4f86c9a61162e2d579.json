@@ -1,0 +1,35 @@
+{
+  "id": "1c7941e2f2484e4f86c9a61162e2d579",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-deployment-release-pipeline",
+  "agent": "release-verifier",
+  "invocation": "release-1",
+  "stage": "independent-release-verification",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Fresh non-author verifies the frozen repository-only release candidate",
+  "started_at": "2026-11-06T17:06:38.487113+00:00",
+  "ended_at": "2026-11-06T17:34:01.832118+00:00",
+  "elapsed_seconds": 1643.345005,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Found DEP-REL-001: manifest verification omitted exact migration-directory inventory; verifier also mistakenly edited TLS/docs after compaction before returning to read-only role",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

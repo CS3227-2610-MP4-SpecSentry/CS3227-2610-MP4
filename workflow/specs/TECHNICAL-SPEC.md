@@ -28,7 +28,7 @@ A TypeScript modular monolith keeps deployment, security, and testing manageable
 - Use one same-origin web service and one PostgreSQL database per environment. Local Vite development proxies /api to NestJS. Sessions remain in PostgreSQL rather than process memory; browser code receives only the opaque session cookie and permitted response fields. Mutations require a session-bound CSRF token. SameSite cookies and client route guards do not replace CSRF checks or server authorization.
 - The SoC LLM remains the only product AI provider. Calls go through the existing bounded server gateway; no browser-held AI keys, repository execution, or agent tools are added by this stack change. Initial deployment uses one application instance per environment; global AI limits and queue bounds must remain effective if replication is introduced.
 - Keep production source under src/server, src/client, and src/shared; keep schema/migration source under src/server/prisma and workflow tooling under workflow. Root package manifests, lockfile, Docker configuration, and CI files may live in their conventional locations. Existing Python workflow tooling remains development infrastructure and need not be rewritten into TypeScript.
-- GitHub Actions builds, tests, scans, and publishes the Docker image. Render runs the prebuilt image with separate services, secrets, and hostnames for development and production; Neon hosts a separate PostgreSQL project/database for each environment. Runtime connections use the Neon pooled endpoint and reviewed migrations use its direct endpoint, with TLS verification enabled. Application development and deployment remain separately team-managed under the assignment restriction above. GitHub Pages hosts the separate product website.
+- GitHub Actions builds, tests, scans, and publishes the Docker image. Render runs the prebuilt image with separate services, secrets, and hostnames for development and production; Neon hosts a separate PostgreSQL project/database for each environment. Runtime connections use Prisma's official Neon WebSocket adapter with the pooled endpoint; localhost and CI retain the TCP adapter, and reviewed migrations use Neon's direct endpoint with TLS verification enabled. Application development and deployment remain separately team-managed under the assignment restriction above. GitHub Pages hosts the separate product website.
 
 This is the selected design baseline, not evidence of an implemented migration. Consult traceability for actual implementation status. Exact library versions and migration commands must match the supported versions pinned during scaffolding.
 
@@ -39,10 +39,18 @@ Technical references checked on 24 October 2026: [Node.js releases](https://node
 | **Environment** | **Source** | **Service** | **Database** | **Control** |
 | --- | --- | --- | --- | --- |
 | Local | Feature branch | Docker Compose | Local PostgreSQL | Synthetic fixtures and stubbed AI by default |
-| Development | develop branch | Render specsentry-dev | Separate Neon development PostgreSQL project | Automatic deployment after CI; synthetic data; separate secrets |
-| Production | protected master branch | Render specsentry-prod | Separate Neon production PostgreSQL project | Manual GitHub Environment approval; promote tested image digest |
+| Development | protected `master` release candidate after exact-SHA CI | Render specsentry-dev | Separate Neon development PostgreSQL project | Automatic canary after explicit enablement; synthetic data; separate secrets |
+| Production | same protected `master` source and development-tested digest | Render specsentry-prod | Separate Neon production PostgreSQL project | Manual GitHub Environment approval; promote without rebuilding |
 
-GitHub Actions will compile, test, scan, build and sign one Docker image, publish it to GitHub Container Registry, deploy that digest to development, run smoke tests, and allow manual promotion of the same digest to production. Render is the runtime platform, not the build source of truth. Development and production use separate services, databases, hostnames, secrets, cookies, and SoC LLM configuration.
+GitHub Actions validates `develop` and `master` changes in ordinary CI. The release
+workflow accepts only an exact successful protected-`master` CI revision, then builds,
+scans, attests and publishes one Docker image. That revision is first deployed to the
+separate development environment as a release canary; manual production promotion
+reuses its verified digest without rebuilding. This protected-master canary model
+avoids treating an earlier `develop` tree as the provenance of a later merge commit.
+Render is the runtime platform, not the build source of truth. Development and
+production use separate services, databases, hostnames, secrets, cookies, and SoC
+LLM configuration.
 
 ## Related constraints
 

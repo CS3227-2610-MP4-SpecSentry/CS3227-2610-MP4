@@ -3,11 +3,12 @@ on:
   push:
     branches: [master, develop]
   pull_request:
-permissions:
-  contents: read
+permissions: {}
 jobs:
   checks:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     services:
       postgres:
         image: postgres:17-alpine@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb
@@ -23,12 +24,15 @@ jobs:
       SESSION_SECRET: ci-only-synthetic-session-secret-32-characters
       TEST_DATABASE_URL: postgresql://specsentry:ci_synthetic_password@127.0.0.1:5433/specsentry_test
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - run: node workflow/deployment/tooling/release-candidate.mjs verify-migrations
       - run: npm run check:submission
       - run: npm run db:validate && npm run db:generate
       - run: npm run typecheck && npm run lint && npm test
@@ -47,10 +51,13 @@ jobs:
         run: docker compose --profile app down --volumes
   secret-scan:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Scan Git history for secrets
         # Include the checked-out revision's full ancestry, not unrelated remote branches.
-        run: docker run --rm -v "$PWD:/repo:ro" ghcr.io/gitleaks/gitleaks:v8.30.1 git /repo --log-opts=HEAD --redact --no-banner
+        run: docker run --rm -v "$PWD:/repo:ro" ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f git /repo --log-opts=HEAD --redact --no-banner

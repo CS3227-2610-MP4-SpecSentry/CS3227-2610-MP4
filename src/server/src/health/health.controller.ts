@@ -1,5 +1,6 @@
 import { Controller, Get, ServiceUnavailableException } from '@nestjs/common';
 import type { HealthResponse, ReadinessResponse } from '@specsentry/shared';
+import { deploymentSourceRevision } from '../config';
 import { DatabaseService } from '../database/database.service';
 import { Public } from '../identity/access';
 
@@ -10,7 +11,8 @@ export class HealthController {
 
   @Get('health')
   health(): HealthResponse {
-    return { status: 'ok', service: 'specsentry' };
+    return { status: 'ok', service: 'specsentry',
+      deployment: { sourceRevision: deploymentSourceRevision() } };
   }
 
   @Get('ready')

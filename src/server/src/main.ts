@@ -1,15 +1,15 @@
 import 'reflect-metadata';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { config as loadEnvironment } from 'dotenv';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { readConfig } from './config';
+import { loadRootEnvironment } from './environment';
 import { configureHttp } from './http';
 
 async function bootstrap(): Promise<void> {
-  loadEnvironment({ path: resolve(__dirname, '../../../.env'), quiet: true });
+  loadRootEnvironment();
   const config = readConfig(process.env);
   const clientDirectory = resolve(__dirname, '../../client/dist');
   if (config.NODE_ENV === 'production' && !existsSync(resolve(clientDirectory, 'index.html'))) {

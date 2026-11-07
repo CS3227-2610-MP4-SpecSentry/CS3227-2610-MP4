@@ -1,0 +1,35 @@
+{
+  "id": "7889fdabd2c840a9852be60ec0a57070",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-deployment-release-pipeline",
+  "agent": "database-recovery-specialist",
+  "invocation": "database-1",
+  "stage": "migration-recovery-pre-review",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Existing backend specialist is reused read-only for migration compatibility and recovery review",
+  "started_at": "2026-11-06T16:22:01.932208+00:00",
+  "ended_at": "2026-11-06T16:30:37.654858+00:00",
+  "elapsed_seconds": 515.72265,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Returned migration compatibility, UTC, serialization and recovery stop conditions; no database or provider state changed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

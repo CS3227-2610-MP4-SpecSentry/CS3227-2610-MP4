@@ -397,15 +397,19 @@ No upload API is exposed. Re-run generation after schema changes. Copy the root
 `.env.example` to `.env`, start `docker compose up -d db`, then `npm run dev`.
 Set a random `SESSION_SECRET` of at least 32 characters. Run
 `npm run db:migrate:deploy` and provision accounts as documented in
-[Authentication](Authentication.md) before signing in. Readiness checks connectivity only.
+[Authentication](Authentication.md) before signing in. Runtime readiness checks
+connectivity only; the release workflow separately verifies migration checksums,
+status and required schema objects before accepting an environment.
 
 Database schema source lives in `src/server/prisma/schema.prisma`; generated code
 under `src/server/src/generated/` is ignored. For a feature schema, create and
 review SQL with `npm run db:migrate:dev -w @specsentry/server -- --name <change>`,
 then apply reviewed migrations with `npm run db:migrate:deploy`. Never use `db push`
 for deployment. Develop migrations against a disposable database. Runtime uses
-the pooled `DATABASE_URL`; migrations use the direct `DIRECT_DATABASE_URL` with
-TLS verification enabled. Keep connection strings out of Git and logs.
+the pooled `DATABASE_URL`; Neon hosts select Prisma's official WebSocket adapter,
+while localhost and CI PostgreSQL retain the TCP `pg` adapter. Migrations remain
+Prisma-managed and use the direct `DIRECT_DATABASE_URL` with TLS verification
+enabled. Keep connection strings out of Git and logs.
 
 `npm run build` writes ignored `dist/` folders in each workspace. To serve the
 built client and backend locally, set `NODE_ENV=production` and run `npm start`.
@@ -525,8 +529,11 @@ scans the login page. It does not establish full product WCAG conformance.
 
 CI runs the checks with PostgreSQL, Chromium, dependency audit, secret scanning,
 Docker Compose and an HTTP smoke test. Local checks are not proof that remote CI
-has executed. CI publication/signing and live environment promotion are later
-release work, documented in [Deployment](Deployment.md).
+has executed. The disabled-by-default Application-release workflow can publish,
+attest and scan one protected-master image, verify it in development and promote
+that same digest behind production approval. Its definition and offline tests are
+not proof that a registry publish or deployment occurred; setup and evidence gates
+are documented in [Deployment](Deployment.md).
 
 ## GitHub PR review with Codex
 
@@ -566,12 +573,14 @@ constraints. Unknown API routes and missing assets stay JSON 404 responses.
 Proxy trust defaults to zero and must match the controlled deployment topology.
 See [Authentication](Authentication.md) for the session and administration contract.
 
-Health responses expose only status. Database query and connection timeouts are
-bounded; connection failures produce generic 503 errors with generated correlation
-IDs. Configuration errors never print supplied values. Helmet supplies baseline
-headers. Keep server/client/shared imports separated; ESLint prohibits server
-imports from frontend/shared TypeScript. Do not log request bodies or URLs that
-may contain credentials. TLS verification must remain enabled for Neon.
+Health responses expose status, the service name and a validated non-secret source
+revision (`local` or the exact 40-character build SHA). They do not expose an image
+tag, database identity or secret. Database query and connection timeouts are bounded;
+connection failures produce generic 503 errors with generated correlation IDs.
+Configuration errors never print supplied values. Helmet supplies baseline headers.
+Keep server/client/shared imports separated; ESLint prohibits server imports from
+frontend/shared TypeScript. Do not log request bodies or URLs that may contain
+credentials. TLS verification must remain enabled for Neon.
 
 ## Architecture and module ownership
 
@@ -625,6 +634,19 @@ telemetry and the local PostgreSQL limitation are preserved in the
 individual presentation. This evidence describes a local product increment, not a
 Render/Neon deployment or production release.
 
+The 7 November deployment-automation run exercised the delivery roles directly:
+read-only architecture, database/recovery and security specialists first disagreed
+with enabling provider mutations before targets/recovery were known; the coordinator
+therefore froze a repository-only, fail-closed scope. One implementer added the
+pipeline and deterministic failure tests. A coordinator review changed the original
+`develop`/`workflow_run` proposal to a protected-`master` canary so attestation
+source identity matches the code actually built, then added a publish-only bootstrap
+after identifying the first-image/Render setup dependency. Independent release,
+security and specification/documentation checks are recorded in the
+[deployment run](../logs/yu-sutong/2026-11-07-deployment-release-pipeline-run.md).
+This is presentation evidence about handoffs, rework and stop conditions, not a live
+deployment claim.
+
 The [AI security specification](../workflow/specs/AI-SECURITY-SPEC.md) defines planned
 context restrictions, validation, quotas, timeouts and adversarial tests. Implement
 and test them before exposing role AI endpoints. Session, CSRF, IDOR, concurrency,
@@ -675,9 +697,13 @@ The scaffold is new source, with no prior-MP code reused. It uses the APIs descr
 in [NestJS](https://docs.nestjs.com/), [Vite](https://vite.dev/guide/),
 [Prisma 7](https://www.prisma.io/docs/guides/upgrade-prisma-orm/v7),
 [React](https://react.dev/), [Zod](https://zod.dev/), and their test tooling.
-CI uses the maintained [checkout](https://github.com/actions/checkout) and
-[setup-node](https://github.com/actions/setup-node) Node24 actions, plus the
-[Gitleaks CLI](https://github.com/gitleaks/gitleaks) container for secret scanning.
+CI pins reviewed commits of the maintained
+[checkout](https://github.com/actions/checkout),
+[setup-node](https://github.com/actions/setup-node), Docker build/login,
+[GitHub artifact attestation](https://github.com/actions/attest),
+[Trivy](https://github.com/aquasecurity/trivy-action) and Pages actions. Secret
+scanning pins the [Gitleaks CLI](https://github.com/gitleaks/gitleaks) container by
+digest.
 The runtime and PostgreSQL container digests were resolved from Docker Hub during
 scaffolding. Update them deliberately alongside compatibility and security checks.
 

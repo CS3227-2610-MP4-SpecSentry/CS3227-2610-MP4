@@ -1,0 +1,35 @@
+{
+  "id": "3de48b6edb8a4d44b244c13cb558fe1e",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-deployment-release-pipeline",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "implementation-coordination",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Coordinator integrates deployment implementation, documentation and verification without provider mutations",
+  "started_at": "2026-11-06T16:34:04.493399+00:00",
+  "ended_at": "2026-11-06T17:28:56.971058+00:00",
+  "elapsed_seconds": 3292.477659,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Coordinated implementation, bootstrap correction and frozen candidate review; independent security and documentation checks identified closure fixes",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

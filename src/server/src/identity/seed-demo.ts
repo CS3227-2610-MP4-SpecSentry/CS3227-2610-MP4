@@ -1,9 +1,8 @@
 import { randomUUID } from 'node:crypto';
-import { resolve } from 'node:path';
-import { config as loadEnvironment } from 'dotenv';
 import type { AccountRole } from '@specsentry/shared';
 import { readConfig, type ServerConfig } from '../config';
 import { DatabaseService } from '../database/database.service';
+import { loadRootEnvironment } from '../environment';
 import { hashPassword } from './identity.service';
 
 const roles: AccountRole[] = ['CONTRIBUTOR', 'REVIEWER', 'RELEASE_MAINTAINER'];
@@ -29,7 +28,7 @@ export async function seedDemoAccounts(database: DatabaseService, environment: S
 }
 
 async function main(): Promise<void> {
-  loadEnvironment({ path: resolve(__dirname, '../../../../.env'), quiet: true });
+  loadRootEnvironment();
   const config = readConfig(process.env);
   const database = new DatabaseService(config);
   try {

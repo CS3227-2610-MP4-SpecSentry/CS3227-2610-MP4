@@ -1,8 +1,7 @@
-import { resolve } from 'node:path';
-import { config as loadEnvironment } from 'dotenv';
 import { accountRoleSchema, usernameSchema } from '@specsentry/shared';
 import { readConfig } from '../config';
 import { DatabaseService } from '../database/database.service';
+import { loadRootEnvironment } from '../environment';
 import { hashPassword } from './identity.service';
 import { AccountAdministrationService } from './account-administration.service';
 import { ReviewsService } from '../reviews/reviews.service';
@@ -12,7 +11,7 @@ import { ActivityService } from '../activity/activity.service';
 import { NotificationsService } from '../notifications/notifications.service';
 
 async function main(): Promise<void> {
-  loadEnvironment({ path: resolve(__dirname, '../../../../.env'), quiet: true });
+  loadRootEnvironment();
   const database = new DatabaseService(readConfig(process.env));
   try {
     const action = process.argv[2];

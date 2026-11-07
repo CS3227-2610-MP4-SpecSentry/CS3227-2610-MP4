@@ -1,5 +1,32 @@
 # Requirement traceability
 
+## Deployment release automation — 7 November 2026
+
+MP4-005 and MP4-008 now have repository-source automation in
+`.github/workflows/application-release.yml`, the pinned CI/Pages workflows,
+`Dockerfile`, the health deployment marker, `workflow/deployment/migrations.sha256`
+and deployment tooling/tests. The release graph accepts only an exact successful
+protected-`master` CI revision, builds one GHCR digest, produces SBOM/provenance and
+GitHub attestation, scans the exact digest, serializes environment migrations/deploys,
+verifies development, then allows a protected production job to reuse the same
+digest. `publish-image` bootstraps Render without provider/database access;
+`release-development` and `promote-production` are separately gated.
+
+Offline acceptance covers strict SHA/digest/candidate manifests, migration order and
+checksums, direct Neon/TLS/UTC/PostgreSQL/migration-state/schema probes, Render API
+host/redirect/body/retry/identity/deadline failures, bounded HTTPS source/session/CSRF/
+role smoke, pinned action/container references, least-privilege job separation,
+literal environments, non-cancelling concurrency and absence of production rebuilds.
+The HTTP test verifies the non-secret source marker. Exact commands, interactions and
+limitations are in the [run](../logs/yu-sutong/2026-11-07-deployment-release-pipeline-run.md).
+
+This closes only the repository-automation portion. No GHCR image was published and
+no Render/Neon/GitHub environment was created or changed. MP4-005 online dev/prod
+evidence remains pending, as do provider identity, protected-production reviewer
+configuration, remote migration/smoke, restore rehearsal, retention/RPO decision,
+N-1 image/schema compatibility and human approval. Environment evidence-ID variables
+are gates/references and never substitute for the underlying reviewed evidence.
+
 ## Release Maintainer completion — 6 November 2026
 
 This local completion supersedes the older Maintainer pending markers below while
@@ -358,7 +385,7 @@ Baseline review: 25 October 2026. Every existing requirement ID has one definiti
 | Technical workspace and portability foundation; NFR-PORT-001 partial | src/server, src/client, src/shared; root package manifests, Dockerfile, compose.yaml | Clean npm ci, Prisma generation, typecheck, production build and local built-server smoke passed. Real PostgreSQL 16 connectivity passed; PostgreSQL 17 Compose and Docker checks are configured in CI but have not run locally. Full AC-NFR-PORT-001 remains pending |
 | Safe HTTP failure/header foundation; NFR-SEC-001 and integration error contract partial | src/server/src/http.ts, config.ts, health/health.controller.ts | src/server/test/http.spec.ts: health independent of database, readiness success/failure without secrets, headers, API/asset404 and configuration validation. No authentication/session/CSRF implementation or acceptance completion claimed |
 | Browser response validation and initial accessibility; NFR-A11Y-001 partial | src/client/src/App.tsx, src/shared/src/index.ts | Four client tests; workflow/tests/browser/scaffold.spec.ts Chromium and axe smoke passed for the public setup page only. Product role flows and manual accessibility checks pending |
-| Deployment topology | render.yaml, docs/Deployment.md; TECHNICAL-SPEC.md | Render/Neon dev/prod separation documented. Image URLs intentionally require configuration; cloud resources, image publishing/signing/promotion, backups and rollback are pending |
+| Deployment topology | `.github/workflows/application-release.yml`, deployment tooling/tests and migration manifest; render.yaml, docs/Deployment.md; TECHNICAL-SPEC.md | Protected-master build/attest/scan, dev canary and same-digest production graph are implemented and tested offline. Image URLs still require configuration; cloud resources, actual publication/deployment, environment protection, restore and compatibility evidence remain pending |
 
 Command outcomes, corrections, independent review and resource limitations are in
 [the base-source session log](../logs/ngkhengyang/2026-10-25-base-source-initialization.md).

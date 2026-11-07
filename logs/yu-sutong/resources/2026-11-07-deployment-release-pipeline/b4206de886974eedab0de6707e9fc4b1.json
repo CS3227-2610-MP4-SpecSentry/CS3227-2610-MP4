@@ -1,0 +1,35 @@
+{
+  "id": "b4206de886974eedab0de6707e9fc4b1",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-deployment-release-pipeline",
+  "agent": "security-reviewer",
+  "invocation": "security-1",
+  "stage": "deployment-security-pre-review",
+  "attempt": 1,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Existing independent security reviewer receives focused deployment trust-boundary context",
+  "started_at": "2026-11-06T16:21:51.152641+00:00",
+  "ended_at": "2026-11-06T16:30:37.654852+00:00",
+  "elapsed_seconds": 526.502211,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Returned nine stable deployment security findings and repository-only go decision; all external mutations remain on hold",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call and retry telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call and retry telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call and retry telemetry not exposed"
+}

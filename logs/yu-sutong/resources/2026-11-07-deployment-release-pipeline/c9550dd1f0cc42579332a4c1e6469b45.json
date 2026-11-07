@@ -1,0 +1,35 @@
+{
+  "id": "c9550dd1f0cc42579332a4c1e6469b45",
+  "prompter": "yu-sutong",
+  "session": "2026-11-07-deployment-release-pipeline",
+  "agent": "spec-docs-verifier",
+  "invocation": "docs-2",
+  "stage": "independent-review",
+  "attempt": 2,
+  "selected_model": "inherited",
+  "selected_effort": "inherited",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Final non-author review verifies corrected specifications, guides, prompt/run evidence and candidate manifest",
+  "started_at": "2026-11-06T17:40:51.195524+00:00",
+  "ended_at": "2026-11-06T17:43:22.597119+00:00",
+  "elapsed_seconds": 151.401595,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Final spec/docs review passed: 28 deployment tests, submission check and diff check passed; 24-file frozen manifest matched; only the pending generated resource-report link was expected.",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record usage telemetry was not exposed by the execution environment",
+    "output_tokens": "Per-record usage telemetry was not exposed by the execution environment",
+    "cache_read_tokens": "Per-record usage telemetry was not exposed by the execution environment",
+    "tool_calls": "Per-record usage telemetry was not exposed by the execution environment",
+    "retries": "Per-record usage telemetry was not exposed by the execution environment"
+  },
+  "unavailable_reason": "Per-record usage telemetry was not exposed by the execution environment"
+}

@@ -1,8 +1,7 @@
-import { resolve } from 'node:path';
-import { config as loadEnvironment } from 'dotenv';
-import { PrismaPg } from '@prisma/adapter-pg';
 import { z } from 'zod';
 import { PrismaClient } from '../generated/prisma/client';
+import { createDatabaseAdapter } from '../database/database-adapter';
+import { loadRootEnvironment } from '../environment';
 import { AiRequestDeadline } from './deadline';
 import { PrismaAiAccounting } from './gateway/accounting';
 import { SystemAiClock } from './gateway/transport';
@@ -11,8 +10,7 @@ export async function cleanupAiRecords(environment: NodeJS.ProcessEnv): Promise<
   const parsed = z.string().url().refine(value => URL.canParse(value) && ['postgres:', 'postgresql:'].includes(new URL(value).protocol))
     .safeParse(environment.DATABASE_URL);
   if (!parsed.success) throw new Error('Invalid AI retention database configuration');
-  const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: parsed.data, max: 1,
-    connectionTimeoutMillis: 3000, query_timeout: 3000, statement_timeout: 3000 }), log: [] });
+  const prisma = new PrismaClient({ adapter: createDatabaseAdapter(parsed.data, 1), log: [] });
   const clock = new SystemAiClock();
   const deadline = new AiRequestDeadline(clock);
   try {
@@ -24,7 +22,7 @@ export async function cleanupAiRecords(environment: NodeJS.ProcessEnv): Promise<
 }
 
 if (require.main === module) {
-  loadEnvironment({ path: resolve(__dirname, '../../../../.env'), quiet: true });
+  loadRootEnvironment();
   void cleanupAiRecords(process.env).then(() => {
     console.info('AI record cleanup completed.');
   }).catch(() => {

@@ -1,9 +1,8 @@
 import { createHash } from 'node:crypto';
-import { resolve } from 'node:path';
-import { config as loadEnvironment } from 'dotenv';
 import { reviewerTitleSchema, submittedRevisionSchema, type ProposalState, type SubmittedRevision } from '@specsentry/shared';
 import { readConfig, type ServerConfig } from '../config';
 import { DatabaseService } from '../database/database.service';
+import { loadRootEnvironment } from '../environment';
 
 export const REVIEWER_FIXTURE_IDS = {
   pool: 'reviewer-fixture-pool', awaitingRevision: 'reviewer-fixture-awaiting-revision',
@@ -76,7 +75,7 @@ export async function seedReviewerFixtures(database: DatabaseService, environmen
 }
 
 async function main(): Promise<void> {
-  loadEnvironment({ path: resolve(__dirname, '../../../../.env'), quiet: true });
+  loadRootEnvironment();
   const config = readConfig(process.env);
   if (config.NODE_ENV === 'production') throw new Error('Reviewer fixtures are unavailable in production.');
   const database = new DatabaseService(config);
