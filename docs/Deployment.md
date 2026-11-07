@@ -2,13 +2,19 @@
 
 ## Current automation status
 
-`.github/workflows/application-release.yml` now defines the repository-managed
-release path, but no image or Render application deployment has been created. Two
-separate Neon projects have been provisioned. Development has all ten reviewed
-Prisma migrations plus synthetic demo accounts and has passed local readiness and
-authenticated Maintainer smoke checks through the Neon WebSocket adapter. Production
-has the UTC prerequisite but remains unmigrated and unseeded. The release workflow
-is still fail-closed behind repository variables and protected GitHub Environments.
+`.github/workflows/application-release.yml` defines the repository-managed release
+path. A scanned and attested image for source revision
+`2903086f16684de42a1b48e8929c5fa13d907232` has been published, and separate Render
+development and production services run that exact digest in Singapore. Both
+initial Blueprint deploys reached Render's `live` state, and their root,
+`/api/health`, and `/api/ready` endpoints returned successful responses. Two
+separate Neon projects are provisioned. Development has all ten reviewed Prisma
+migrations plus synthetic demo accounts and has passed local readiness and
+authenticated Maintainer smoke checks through the Neon WebSocket adapter.
+Production has the UTC prerequisite but remains unmigrated and unseeded. The
+release workflow therefore remains fail-closed behind repository variables,
+protected GitHub Environments, production evidence, teammate approval, and a
+dedicated Render automation credential.
 
 The release source is an exact successful CI revision on protected `master`. The
 workflow builds one `linux/amd64` GHCR image, records its registry digest, emits
@@ -51,13 +57,17 @@ must have separate databases, service hostnames and secrets. Render services run
 the same tested Docker image digest promoted through GitHub Actions. Application
 queries use Prisma's official Neon WebSocket adapter with the pooled URL; reviewed
 migrations and release verification continue to use the direct endpoint. The Neon
-resources exist, but the Render services and protected GitHub Environment values do not.
+and Render resources exist. The protected GitHub Environments contain the
+non-secret service IDs, hosts and database-host expectations. Their secret database
+and development smoke values are configured separately; a dedicated Render
+automation credential and the production-only release evidence remain pending.
 
-`render.yaml` is a reference template with deliberately non-deployable placeholder
-image references. Do not apply it unchanged. First use the workflow's
-`publish-image` operation, then create each Render service from the resulting
-`ghcr.io/...@sha256:...` reference. Configure read-only private-registry access in
-Render if the GHCR package is not public.
+`render.yaml` is pinned to the CI-published immutable digest used by both initial
+services. It references the separately stored read-only private-registry credential;
+no registry token or database URL belongs in the file. Future releases still use
+the workflow's `publish-image` operation and promote an exact verified digest
+through the guarded development and production jobs rather than changing a mutable
+tag.
 The runtime listens on Render's supplied `PORT` and `0.0.0.0`; the readiness
 endpoint is `/api/ready`. Do not add a Render source-build command.
 
