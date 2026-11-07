@@ -104,9 +104,11 @@ Keep all three repository variables unset or `false` while creating resources:
 7. On each Render service set `NODE_ENV=production`, a unique random
    `SESSION_SECRET` of at least 32 characters, `TRUST_PROXY_HOPS=1`, and that
    environment's pooled Neon URL as secret `DATABASE_URL`. Render supplies `PORT`.
-8. Create a dedicated Release Maintainer smoke account separately in each
-   environment from a trusted checkout. Use synthetic development data; do not copy
-   production contents into development.
+8. Configure a dedicated Release Maintainer smoke identity separately in each
+   environment. The guarded release job idempotently creates it after the reviewed
+   migrations exist and fails closed if an existing account has a different role,
+   disabled state or password. Use synthetic development data; do not copy production
+   contents into development.
 9. Configure the GitHub Environment names below. Values differ between development
    and production; never reuse a Render service, application host, Neon host, database
    URL, session secret or smoke password across them.
@@ -128,8 +130,9 @@ Keep all three repository variables unset or `false` while creating resources:
     `DEPLOYMENT_AUTOMATION_ENABLED=true` and run `release-development` (or allow the
     next protected-master push). The job verifies direct-target identity, PostgreSQL
     14-18, UTC, Prisma checksums/state and required schema objects before and after
-    `prisma migrate deploy`; then it deploys by Render API image digest and performs
-    bounded source-marker, readiness, secure-session, CSRF and Maintainer-read smoke.
+    `prisma migrate deploy`, provisions the dedicated smoke identity, then deploys by
+    Render API image digest and performs bounded source-marker, readiness,
+    secure-session, CSRF and Maintainer-read smoke.
 11. Before production, create and successfully restore a real recovery point into an
     isolated target, record the approved retention/RPO decision, and test the exact
     previous image against the migrated schema. Only then set the two production
