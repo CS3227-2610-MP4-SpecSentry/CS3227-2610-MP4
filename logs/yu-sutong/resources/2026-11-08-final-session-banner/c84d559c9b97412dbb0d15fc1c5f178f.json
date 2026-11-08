@@ -1,0 +1,35 @@
+{
+  "id": "c84d559c9b97412dbb0d15fc1c5f178f",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "spec-docs-verifier",
+  "invocation": "spec-docs-verifier-1",
+  "stage": "production-enable-review",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Fresh specification/documentation consistency review required after approved OPEN-002 policy exception; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T15:08:13.319564+00:00",
+  "ended_at": "2026-11-08T15:17:38.173579+00:00",
+  "elapsed_seconds": 564.854015,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Spec and documentation review passed after stale production-gate wording and duplicated User Guide wording were corrected; residual production AI evidence gaps remain explicit.",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+}

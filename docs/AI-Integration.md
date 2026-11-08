@@ -29,9 +29,8 @@ aggregates, separates requests/attempts/retries/preflight rejections, and report
 missing usage as unknown. Provider UTC spend windows and disabled application
 caching are labeled separately.
 
-Local configuration remains off by default under OPEN-002. The Render development
-service explicitly enables live NUS SoC AI for synthetic testing through a
-server-only secret; production remains fail-closed. Current synthetic tests and
+Local configuration remains off by default under OPEN-002. Both Render services
+explicitly enable live NUS SoC AI through server-only secrets. Current synthetic tests and
 remaining live-evaluation steps are tracked in the
 [Contributor completion run](../logs/yooplo/2026-11-01-contributor-completion.md).
 The gateway supports a separate server-only live configuration while rejecting
@@ -94,13 +93,15 @@ Contributor suggestion generation returned a schema-valid response, Reviewer pat
 risk completed successfully, and Maintainer readiness returned a schema-valid
 `NOT_READY` result for an intentionally empty candidate.
 
-The development service uses the live configuration below and stores the API key
-only as a protected server environment variable. Production retains the non-secret
-base/model/context declarations but sets `AI_LIVE_ENABLED=false` until the broader
-evaluation/privacy gate closes. Public production health, readiness, signed-out
-session behavior and the application root passed after that fail-closed redeploy.
-Broader model edge cases, actual key quotas, provider retention/data-use review and
-human teammate sign-off remain open; deterministic manual workflows remain the fallback.
+Both Render services use the live configuration below and store the API key only
+as a protected server environment variable. After an independent review initially
+held production activation, the application owner explicitly accepted the documented
+residual provider uncertainty and directed production enablement on 8 November.
+Activation deploy `dep-dbo8vbh5efls73d6i23g` reached `live`; public production
+health, readiness and the application root returned `200`, and signed-out session
+returned expected `401`. Broader model edge cases, actual key
+quotas, provider retention/data-use review and teammate sign-off remain open;
+deterministic manual workflows remain the fallback.
 
 ## Configuration and operation
 
@@ -117,7 +118,7 @@ protections. No local flag is automatically changed by the verification harness.
 The current Render activation is operational evidence, not proof of broad model
 quality, quota sufficiency or provider retention/data-use approval.
 
-The current Render development configuration is:
+The current Render configuration is:
 
 ```dotenv
 AI_LIVE_ENABLED=true

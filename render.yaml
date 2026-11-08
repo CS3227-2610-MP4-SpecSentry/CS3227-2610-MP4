@@ -54,7 +54,7 @@ services:
       - key: TRUST_PROXY_HOPS
         value: "1"
       - key: AI_LIVE_ENABLED
-        value: "false"
+        value: "true"
       - key: AI_BASE_URL
         value: https://soclaas-api.comp.nus.edu.sg/v1
       - key: AI_API_KEY

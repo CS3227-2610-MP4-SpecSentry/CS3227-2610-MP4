@@ -151,12 +151,13 @@ assumes one trusted hop). Provision accounts from a trusted checkout using
 [Authentication](Authentication.md). Authentication and all three role workflows
 are implemented to the limits described in their guides. Development and production
 deployment verification completed on 8 November 2026. Live NUS SoC AI is enabled
-only in the synthetic-data development service using a protected `AI_API_KEY`;
-production remains fail-closed with `AI_LIVE_ENABLED=false`. `render.yaml` declares
-only the non-secret base/model/context settings and `sync: false` key placeholder.
-One representative strict-contract call per role and all three deployed development
-workflows passed. Production activation/role-AI UI, broader model evaluation,
-provider quotas, retention/data-use review and human teammate sign-off remain gates.
+on both services using a protected `AI_API_KEY`; `render.yaml` declares only the
+non-secret base/model/context settings and `sync: false` key placeholder. One
+representative strict-contract call per role and all three deployed development
+workflows passed. The application owner explicitly accepted the documented residual
+provider uncertainty and authorized production activation. Production role-AI UI,
+broader model evaluation, quantitative provider quotas, retention/data-use review
+and teammate sign-off remain open evidence rather than hidden claims.
 
 ## Free-tier considerations
 

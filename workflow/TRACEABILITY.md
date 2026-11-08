@@ -10,17 +10,18 @@ strict validation for Contributor, Reviewer and Release Maintainer. This establi
 basic provider compatibility for those examples, not broad model quality or a
 universal token bound.
 
-The synthetic-data development service receives `AI_LIVE_ENABLED=true`, the
-approved NUS SoC base, `AI_MODEL=default`, `AI_CONTEXT_WINDOW=262144` and a
-protected server-only `AI_API_KEY`. Production declares the same non-secret model
-metadata but keeps `AI_LIVE_ENABLED=false`. The repository Blueprint records only
-non-secret values and a `sync: false` placeholder; no credential is committed. Development deploy
+Both Render services receive `AI_LIVE_ENABLED=true`, the approved NUS SoC base,
+`AI_MODEL=default`, `AI_CONTEXT_WINDOW=262144` and a protected server-only
+`AI_API_KEY`. The repository Blueprint records only non-secret values and a
+`sync: false` placeholder; no credential is committed. Development deploy
 `dep-dbo89d2jnfac73e5ms40` passed authenticated end-to-end Contributor generation,
 Reviewer patch-risk and Maintainer readiness. Production deploy
-`dep-dbo8hfpsrm7s73b8n1ug` restored the fail-closed production switch after an
-independent security review; it reached `live`, then root/health/readiness returned
-`200` and the signed-out session returned expected `401`. Production role-AI UI was
-intentionally not exercised.
+`dep-dbo8hfpsrm7s73b8n1ug` first restored the fail-closed production switch after
+independent security review. The application owner subsequently accepted the
+documented residual risk and explicitly directed production activation in PR29;
+activation deploy `dep-dbo8vbh5efls73d6i23g` reached `live`, after which root,
+health and readiness returned `200` and signed-out session returned expected `401`.
+Production role-AI UI remains unexercised because private credentials are unavailable.
 
 The same final change corrects fresh signed-out visits so an expected initial `401`
 does not display “Your session ended”; a previously authenticated session that later

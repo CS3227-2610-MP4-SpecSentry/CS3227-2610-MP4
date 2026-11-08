@@ -217,11 +217,11 @@ publication and recovery, revocation notices, append-only corrections, restricte
 audit and the advisory Release Gate Assistant. Full submitted-editing/submission UI
 status is tracked by the later Contributor completion evidence.
 The bounded revocation/release API is described above; consult its current review status.
-All three role assistants are integrated. Live NUS SoC AI is enabled in the
-synthetic-data development service through a protected server secret; representative
-contract probes and all three development workflows passed on 8 November 2026.
-Production and local live mode remain off by default while broader provider-policy/
-model evaluation remains open.
+All three role assistants are integrated. Live NUS SoC AI is enabled in both Render
+services through protected server secrets; representative contract probes and all
+three development workflows passed on 8 November 2026. The application owner
+explicitly authorized production activation with the residual provider-policy/model
+evaluation gaps recorded; local live mode remains off by default.
 See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 

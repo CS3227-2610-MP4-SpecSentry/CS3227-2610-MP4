@@ -1,0 +1,35 @@
+{
+  "id": "4363405502e94e7d91e4922948a85def",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "release-verifier",
+  "invocation": "release-verifier-3",
+  "stage": "production-enable-review",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Fresh release review required after owner-authorized production AI enablement in PR29; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T15:08:13.321044+00:00",
+  "ended_at": "2026-11-08T15:18:27.496927+00:00",
+  "elapsed_seconds": 614.175883,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Release review required two documentation corrections and fresh PR metadata/CI; Render declaration, secret boundary and activation evidence otherwise passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+}

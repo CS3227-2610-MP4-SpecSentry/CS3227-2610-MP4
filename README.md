@@ -9,12 +9,14 @@ snapshot, acknowledge recipient-scoped revocation notices, append released
 corrections and filter a restricted project audit. The optional Release Gate
 Assistant is advisory and cannot mutate or publish release state.
 All three role assistants use the bounded server gateway. Live NUS SoC AI is
-enabled in the synthetic-data development service through a server-only secret;
-production remains fail-closed under the privacy/evaluation gate. On 8 November
-2026, one representative exact-contract call passed for each role and all three
-deployed development workflows passed end to end. Broader edge-case/model
-evaluation, provider quota and retention/data-use review, production role-UI
-acceptance and human teammate sign-off remain open. Maintainer implementation evidence is in the
+enabled in both Render services through server-only secrets. On 8 November 2026,
+one representative exact-contract call passed for each role and all three deployed
+development workflows passed end to end. The application owner then explicitly
+accepted the remaining provider uncertainty and authorized production activation;
+existing quotas, strict schemas, authorization rechecks and manual fallback remain
+in force. Broader edge-case/model evaluation, quantitative provider quotas,
+retention/data-use review, production role-UI acceptance and teammate sign-off
+remain open. Maintainer implementation evidence is in the
 [final Maintainer run](logs/yu-sutong/2026-11-06-maintainer-final.md); earlier
 foundation and smoke-test increments remain historical checkpoints. Broader
 release gates are also tracked in the

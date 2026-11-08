@@ -168,8 +168,8 @@ membership, smoke-test, publication, notice, correction, restricted-audit and
 advisory Maintainer-AI controls.
 Contributor submission, working-copy editing and submitted detail controls are
 available as described below. Approval revocation and the supporting release API are described above.
-All three bounded role assistants use live NUS SoC AI in the synthetic-data
-development service. Production keeps deterministic manual workflows and AI off.
+All three bounded role assistants use live NUS SoC AI in both Render services.
+Deterministic manual workflows remain available when the provider fails or rejects a request.
 Contributors can create, list and open/edit/delete their own never-submitted private
 drafts and manage acceptance criteria as described below.
 
@@ -282,10 +282,11 @@ Suggestions are not restored from browser storage. A provider error, invalid
 result or unavailable configuration leaves manual editing and saving usable.
 Use the safe error reference when one is available.
 
-Live NUS SoC operation is enabled on the deployed synthetic-data development service;
-production and local development keep it off by default. One representative
-strict-contract call for each role and all three authenticated development workflows
-passed on 8 November 2026. An
+Live NUS SoC operation is enabled on both deployed Render services; local development
+keeps it off by default. One representative strict-contract call for each role and
+all three authenticated development workflows passed on 8 November 2026. The
+application owner explicitly authorized production activation with the remaining
+provider uncertainties recorded. An
 unavailable/error message can still occur during provider, quota or network failure,
 and manual work remains usable. Broader model edge-case evaluation, actual key
 quotas and provider retention/data-use review remain open; see
@@ -595,7 +596,7 @@ Include the action, observed result and safe correlation identifier when present
 - Complete manual peer walkthroughs of every role remain a human testing task.
 - Representative AI success for all three roles and deployed development workflow
   acceptance passed on 8 November; broader limits, edge cases, production role-UI
-  activation/role-UI acceptance and human walkthroughs remain pending.
+  acceptance and human walkthroughs remain pending.
 - Known release-specific limitation: provider quotas and retention/data-use policy
   have not been verified; deterministic manual workflows remain available.
 
