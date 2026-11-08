@@ -76,7 +76,8 @@ test('migration inventory rejects an unreviewed migration before deployment', as
   } finally { await rm(directory, { recursive: true }); }
 });
 
-const renderImage = { ref: image, sha: digest };
+const renderResolvedDigest = `sha256:${'9'.repeat(64)}`;
+const renderImage = { ref: image, sha: renderResolvedDigest };
 const jsonResponse = (value, status = 200, headers = {}) => new Response(JSON.stringify(value), {
   status, headers: { 'content-type': 'application/json', ...headers },
 });
@@ -113,6 +114,9 @@ test('Render client bounds retries and rejects redirects, auth failure and wrong
   await assert.rejects(() => deployImage({ serviceId: 'srv-abc', token: 'x'.repeat(32), image,
     fetchImpl: async () => jsonResponse({ id: 'dep-other', status: 'created',
       image: { ref: image.replace(digest, `sha256:${'0'.repeat(64)}`), sha: digest } }, 201) }), /image reference/);
+  await assert.rejects(() => deployImage({ serviceId: 'srv-abc', token: 'x'.repeat(32), image,
+    fetchImpl: async () => jsonResponse({ id: 'dep-other', status: 'created',
+      image: { ref: image, sha: 'not-a-digest' } }, 201) }), /digest/);
 });
 
 function databaseClient({ timezone = 'UTC', version = '170000', migrations = [], objects = true } = {}) {
