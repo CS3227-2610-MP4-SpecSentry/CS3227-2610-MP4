@@ -494,7 +494,7 @@ command results alone are not a release or full product acceptance claim.
 | Obligation | Planned verification | Current evidence / gap |
 | --- | --- | --- |
 | MP4-004: development-process security | [AC-DEVSEC-001 through AC-DEVSEC-004](specs/AI-SECURITY-SPEC.md#development-agent-security-and-evidence) | Planned; no new adversarial workflow run executed by the assignment-capture task |
-| MP4-006 / MP4-013: context/resource evidence and reflections | [Team experiment protocol](DEVELOPMENT.md#required-experiments-for-reflections), Reflections and linked evaluations | Capture preserves required analysis topics; experiments/results remain pending |
+| MP4-006 / MP4-013: context/resource evidence and reflections | [Team experiment protocol](DEVELOPMENT.md#required-experiments-for-reflections), [Reflections](../docs/Reflections.md) and linked evaluations | Final synthesis analyzes two measured coordinated workflow observations, application context/resource controls and explicit evidence limits; no matched single-agent, context-size, model or cache comparison was executed |
 | MP4-014 / MP4-015: interaction summaries and declaration | Prompter logs, human accuracy/completeness review, Developer Guide acknowledgements | Current task logged and AI assistance declared; complete historical coverage and human sign-off not inferred |
 
 ## Product acceptance plan

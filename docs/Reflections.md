@@ -1,122 +1,182 @@
 # Reflections
 
-Status: evidence collection initialized, 25 October 2026. This is a working
-reflection document, not a claim that planned experiments have been performed.
+Status: final evidence synthesis prepared on 8 November 2026. It reports measured
+observations and their limitations; it does not turn missing baselines, telemetry
+or human verification into positive results.
 
-## Current observations
+## Evidence and method
 
-The architecture task first produced a read-only proposal. Initialization was
-interrupted before writes, then resumed on `repo-architecture-init` with the
-assignment description. Re-reading branch state exposed an existing `.gitignore`
-edit to preserve. This illustrates why a continuation needs current workspace
-state as well as conversational context. The session log records the actual
-changes and checks; no token-saving measurement follows from this observation.
+We separate application AI from development-agent work because they have different
+inputs, risks and resource measurements. Application AI is the bounded NUS SoC LLM
+feature used by the three SpecSentry roles. Development agents helped specify,
+implement, review and release the repository. The main evidence is:
 
-This initialization uses one main agent because the changes form a small scaffold.
-It does not establish the benefits of multi-agent coordination. The repository's
-[Reviewer workflow](../workflow/reviewer/README.md) defines specialized assignments;
-executed run evidence must be assessed separately.
+| Evidence | What it establishes | Important limit |
+| --- | --- | --- |
+| [Maintainer smoke workflow observation](../workflow/evaluations/2026-11-05-maintainer-smoke-workflow-observation.md) | A measured orchestrator, implementer and independent-verifier run | No matched single-agent run |
+| [Deployment-agent workflow observation](../workflow/evaluations/2026-11-07-deployment-agent-workflow-observation.md) | Three specialist pre-reviews, implementation, correction and independent re-review | Repository-only at the time; no provider mutation in that experiment |
+| [Reviewer completion run](../logs/ngkhengyang/2026-11-04-reviewer-completion-execution.md) | A long coordinated run with pause/resume, blocked prerequisites and retained failed attempts | Environment and harness overhead cannot be separated cleanly from agent overhead |
+| [Final release and AI activation run](../logs/yu-sutong/2026-11-08-final-session-banner.md) | Strict-contract live probes, deployed development role checks, production activation and fresh reviews | Representative cases only; production role UI was not exercised |
+| [AI security specification](../workflow/specs/AI-SECURITY-SPEC.md) and tests linked from [traceability](../workflow/TRACEABILITY.md) | Context boundaries, schemas, quotas, timeout, retry and manual fallback | Provider quota and retention policy were not independently verified |
 
-### Reviewer completion observations, 4 November 2026
-
-The [Reviewer completion run](../logs/ngkhengyang/2026-11-04-reviewer-completion-execution.md)
-uses one dashboard vertical-slice worker and one evaluation worker, with shared
-retention assigned only after independent security review settled the deletion
-contract. Implementers own their tests; the dashboard worker executes integration,
-and an independent non-author performs verification. These choices are an executed
-coordination example, not a controlled comparison with a single-agent run.
-
-Environment and harness costs were concrete: sandbox visibility obscured native
-browser availability, the generated Prisma client was stale, and the coordinator's
-Windows command quoting prevented an initial fixture test from launching. Immutable
-prerequisites could not be replaced, so the failed run and measured interrupted
-attempts were preserved while a corrected canonical validation run continued.
-Writers froze source during recovery and verification resources were serialized.
-The run log separates these costs from product defects and records actual checks.
-
-The requested pause closed all preparation intervals; resumption used fresh
-per-thread stage baselines, excluding idle time. Cumulative parent/descendant
-counters were not added to both parent and child records. Waiting counts as elapsed
-time, not measured model computation. Token/cache samples can lag, and cached input
-is a subset of input. No causal time saving, model advantage, monetary saving,
-human usefulness rating or teammate signoff follows from this single run.
+The repository's role allocation assigns Contributor to `yooplo`, Reviewer to
+`ngkhengyang`, and Release Maintainer plus deployment work to `yu-sutong`. The logs
+record implementation evidence, but each person must still confirm their actual
+contribution and AI-use declaration before submission.
 
 ## Multi-Agent Software Engineering
 
-The [assignment discussion guide](../workflow/specs/ASSIGNMENT-SPEC.md#reflection-discussion-guide)
-preserves the PDF's sample questions. These guide evidence-based discussion;
-the controlled experiment protocol below is the team's chosen method, not a
-claim that the PDF mandates an experiment for every question. Distinguish
-application-AI findings from development-agent findings in each result.
+### What coordination changed
 
-For each real coordinated run, record triggering, responsibility, context supplied,
-file ownership, handoff, independent verification, conflicts, retries and blocked
-time. Compare against a single-agent task of similar scope using the protocol in
-[Development](../workflow/DEVELOPMENT.md#required-experiments-for-reflections).
+The Maintainer smoke workflow used a bounded architecture/security analysis before
+implementation, followed by independent Release, Security and Spec/Docs checks. It
+registered 13 intervals. End-to-end wall time was 1,256.265787 seconds, while
+summed overlapping interval time was 2,193.225086 seconds. Seven security controls
+were defined before review. One failed implementation attempt consumed 122.175881
+seconds and the focused correction consumed 21.115397 seconds. The final independent
+reviews reported no remaining findings in their scoped criteria. This is useful
+quality and coordination evidence, but the overlap ratio is not a speedup: there is
+no equivalent single-agent run and waiting time is included in elapsed time.
 
-Include resource sharing, idle/overloaded agents, repeated analysis and unnecessary
-calls. Explain whether actual verification showed the coordination pattern was
-followed. Development-process security needs its own implemented/tested evidence;
-use the planned AC-DEVSEC cases without presenting them as completed experiments.
+The deployment workflow gave the same repository-only release problem to a
+Deployment Architect, Security Reviewer and Database/Recovery Specialist. Their
+different perspectives were not interchangeable. Coordinator reconciliation
+rejected the first `workflow_run`/`develop` design because its attestation identity
+would not truthfully describe the checked-out source. A later integration pass found
+that Render could not bootstrap an image-backed service before the first GHCR image
+existed. The correction separated first-image publication from development release
+and production promotion. The run recorded 16 intervals and 12,756.592400 seconds
+of summed, overlapping time. The first independent Release, Security and Spec/Docs
+reviews all found issues; bounded fixes then passed fresh re-review. Specialization
+therefore exposed concrete trust, migration and bootstrap defects before provider
+deployment, while also adding three pre-reviews, a large implementation handoff and
+a correction cycle.
 
-Results pending: no controlled comparison is reported by this initialization.
-Analyze whether reduced defects or parallel progress justified coordination cost,
-and identify situations where a single agent was sufficient.
+The Reviewer completion run showed a different cost. A stale Prisma client, native
+browser visibility, Windows command quoting and database timing made some attempts
+fail for harness reasons rather than product reasons. Pausing correctly closed all
+active measurement intervals; resuming used fresh state and retained unresolved
+gates. This prevented a conversation summary from being treated as current source
+truth, but required coordination time and careful accounting.
 
-The [Maintainer smoke workflow observation](../workflow/evaluations/2026-11-05-maintainer-smoke-workflow-observation.md)
-now records one real orchestrator-subagent plus generator-verifier run. It completed
-the bounded slice with clean final independent reviews in 1,256.265787 seconds of
-wall time, while 2,193.225086 summed interval seconds overlapped. One failed focused
-test attempt and an unmeasured interrupted nested invocation are retained. Without
-a matched single-agent condition or attributable token/tool telemetry, this is
-presentation evidence about coordination behavior, not a causal efficiency result.
+### Our conclusion
 
-The [deployment-agent workflow observation](../workflow/evaluations/2026-11-07-deployment-agent-workflow-observation.md)
-records a second real coordinated run. Three independent pre-reviews converged on a
-repository-only scope while preserving different concerns: provider trust, database
-recovery and pipeline architecture. The coordinator rejected the first
-`workflow_run`/`develop` design because its attestation identity would describe the
-default branch rather than the checked-out source, selecting a protected-`master`
-development canary instead. A later integration review found the first-image/Render
-dependency and caused one bounded bootstrap correction. These are concrete examples
-of specialist disagreement and useful rework; unavailable attributable token/tool
-telemetry and the absence of a matched single-agent condition prevent efficiency or
-cost claims.
+Multiple agents were most valuable for cross-cutting, high-risk work where the
+acceptance views were genuinely different: authorization/security, migration and
+recovery, release identity, and specification/documentation consistency. A single
+coordinator remained necessary to resolve incompatible recommendations and own the
+final tree; parallel opinions did not integrate themselves. For a localized
+documentation correction, test assertion or small harness change, one writer plus
+deterministic checks is preferable because specialist setup, handoff and permission
+overhead would dominate the work.
+
+We did not execute a matched single-agent condition on the same source revision and
+task. Consequently, the evidence supports defect-prevention and coordination-cost
+claims, not claims that multi-agent work was faster, cheaper or used fewer tokens.
 
 ## Context Engineering
 
-Compare focused requirement/interface packs with broader context on comparable
-tasks. Record retrievals, missed instructions, rework and output quality. Evaluate
-prompt/skill versions using the same acceptance cases. Persist decisions, verified
-state, file ownership, unresolved issues and next actions in handoffs; do not
-persist hidden reasoning or raw sensitive prompts.
+### Application AI
 
-Results pending. Distinguish an observation about easier navigation from a measured
-improvement in correctness, time or token use.
+Each role receives a server-owned context pack rather than a browser-supplied prompt
+or a repository dump:
+
+- Contributor AI receives only the authenticated user's eligible draft fields and
+  server-owned instructions for a strict five-field specification suggestion.
+- Reviewer AI receives the immutable assigned submission, sanitized unified diff,
+  optional evidence and one to five selected criterion IDs. It must return exactly
+  those IDs and cannot write manual coverage or a review decision.
+- Maintainer AI receives selected approved-item summaries and deterministic gate
+  states, not credentials, raw patches or authority to publish.
+
+All three paths delimit untrusted text, prohibit tools and provider-side conversation
+state, cap input/output, validate one strict JSON object and recheck authorization
+after any queue wait. Unknown grounding IDs, extra fields, malformed JSON, refusal
+and truncation fail closed; the manual role workflow stays available.
+
+On 8 November, one representative request through each role's exact preparation and
+decoder returned HTTP 200 with schema-valid output. Authenticated Contributor,
+Reviewer and Maintainer development workflows also passed. This shows that the
+chosen context and contracts work for representative cases. It does not show that
+every multilingual, delimiter-heavy or near-limit input works, and it does not
+verify the provider's retention policy or quantitative key limits.
+
+### Development agents
+
+The useful pattern was a minimum sufficient owner pack followed by a fresh verifier
+view. Owners received the relevant requirements, interfaces, target files, tests and
+stop conditions. Verifiers received the frozen diff, acceptance criteria and prior
+failures, not the implementer's hidden reasoning. Persisted handoffs kept decisions,
+blocked prerequisites and next actions, while continuations re-read the current
+branch and worktree before acting.
+
+This mattered in practice. The deployment specialists could focus on distinct trust
+boundaries, but the coordinator still needed broader repository context to catch the
+attestation and first-image integration errors. In the final release/AI run, focused
+independent review caught stale gate wording and duplicated User Guide text after the
+functional change passed. The initialization and Reviewer continuation records also
+show why summaries alone are insufficient: current workspace state exposed existing
+edits, stale generated clients and unresolved checks that conversational context did
+not guarantee.
+
+We did not run the same task once with a focused pack and once with a broad repository
+pack, so we cannot quantify token or correctness improvement from context size. The
+evidence instead supports a design decision: use focused, permission-bounded context
+for each owner; use a current-tree/diff view at integration; and use broad context
+only for cross-cutting reconciliation. More context was not automatically better,
+but too little integration context caused rework.
 
 ## Resource-aware Use
 
-Use [resource recording](../workflow/RESOURCES.md) for model/effort, timestamps,
-tokens, cache, calls, retries and measurement sources. Compare model configurations,
-repeated-prefix cache behavior and expensive task categories with quality held
-constant. Record provider usage separately from development-agent usage.
+### Application controls
 
-Results pending. Missing token/cache/reasoning telemetry is unavailable, not zero.
-Report a reasoning-token fraction only if a provider exposes compatible counts;
-safe summaries are continuation context, not persisted internal reasoning.
+Application limits are enforced locally rather than relying on an unknown provider
+quota: 10 outbound attempts per user per rolling 10 minutes, 60 per user per SGT
+day, 30 globally per rolling minute, a queue cap of 10 and a 20-second overall
+deadline covering queue, authorization, database, provider and retry time. Output is
+capped at 800 tokens and response bodies at 64 KiB. Only one transient retry is
+allowed, within the same deadline and only after reserving quota; validation errors,
+refusals and most 4xx responses are not retried. Overload returns a safe retry/fallback
+response, and the deterministic manual workflow remains usable.
 
-## Experiment results and conclusions
+Application response caching is deliberately disabled because role context is
+private, mutable and authorization-sensitive. Provider token/cache figures are
+recorded only when the provider actually returns them; absent values stay unknown.
+This trades possible cache savings for simpler privacy and freshness guarantees.
 
-Create one [experiment record](../workflow/templates/EXPERIMENT.md) per comparison
-under `workflow/evaluations/`, linking input definitions, measured results and
-limitations. Include each member's actual role and shared-work contribution.
+### Development-agent measurements
 
-| Experiment | Evidence | Analysis / limitation |
+Resource intervals started before repository edits and retained failed or interrupted
+attempts. The Maintainer run's 1,256.265787-second wall time versus 2,193.225086
+summed seconds demonstrates overlap, not saved time. The deployment run retained
+16 intervals and 12,756.592400 summed seconds, including failed first reviews and
+their corrections. The final release/AI run recorded 6,429.285679 seconds end to
+end and 7,144.845127 summed seconds, including failed setup attempts and review-driven
+rework.
+
+Attributable input/output tokens, cache reads, tool calls, retries, observed model
+and reasoning effort were not exposed for these runs. We therefore report them as
+unavailable rather than zero, do not derive cost from account percentages and do not
+claim a cache or model-choice saving. Summed agent time can exceed wall time because
+intervals overlap; neither value is CPU/model-only computation.
+
+The practical resource decision is to reserve coordinated specialists for work where
+an independent viewpoint can prevent a high-impact defect. Use one owner for small
+edits, stop after a discriminating failed check instead of launching blind retries,
+and keep provider attempts bounded independently from development-agent activity.
+
+## Experiment results and final conclusions
+
+| Question | Evidence-backed result | Limit retained |
 | --- | --- | --- |
-| Single agent versus coordinated agents | Pending | No comparative result yet |
-| Maintainer smoke coordinated workflow | [Observed run](../workflow/evaluations/2026-11-05-maintainer-smoke-workflow-observation.md) | Real quality/time/coordination evidence; no single-agent baseline, so not a controlled comparison |
-| Deployment-agent coordinated workflow | [Observed run](../workflow/evaluations/2026-11-07-deployment-agent-workflow-observation.md) | Real architecture/security/database handoffs and two coordinator corrections; no live deployment or matched single-agent baseline |
-| Focused versus broad context | Pending | No comparative result yet |
-| Prompt/skill versions and AI security | Pending | No comparative result yet |
-| Model choice and resource cost | Pending | No comparative result yet |
-| Repeated context and cache usage | Pending | No comparative result yet |
+| Did coordinated agents improve quality? | Maintainer and deployment observations show explicit pre-review controls, two corrected deployment design defects and fresh independent verification. | No matched single-agent condition; no causal speed or cost claim. |
+| How was context shared? | Role-specific owner packs, frozen diffs, structured handoffs and current-tree rechecks separated ownership from verification. | No controlled focused-versus-broad token/quality comparison. |
+| Were resources measured honestly? | Wall and interval times, failures and corrections were retained; unavailable telemetry stayed null. | Token/cache/tool/retry and exact model/effort telemetry were not exposed for these runs. |
+| Did application context contracts work? | Representative strict-contract calls and all three development role workflows passed. | Broader model edge cases, provider quotas/retention and production role-UI acceptance were not tested. |
+| Did caching or model choice reduce cost? | No supported reduction claim. Application caching was disabled and development cache/model comparison was not executed. | A future controlled run would need the same task/revision/checks and attributable telemetry. |
+
+The strongest result is not that more agents or more context are always better. It
+is that explicit responsibility, minimum necessary context, deterministic gates,
+fresh independent review and honest resource accounting made defects and evidence
+gaps visible. The remaining limitations are part of the final result, not silently
+converted into successful experiments.

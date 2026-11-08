@@ -193,13 +193,11 @@ Current evidence and independent review are recorded in the
 
 ## Current state
 
-30 October checkpoint: PR10–13 are verified merged into master; yooplo reports their
-teammate reviews complete. Older stacked-branch/pending-review notes below describe
-historical increment checkpoints. Increment5 starts from fetched origin/master `c384d39`
-on `feature/contributor-submission-preparation`; its own final review is pending.
-The subsequent review-preparation request authorizes Increment5 commit/push and a PR
-against master; merge and Increment6 remain excluded. Final Increment5 teammate approval
-and human summary verification remain pending.
+8 November release state: PR29 is merged into `master`. Older increment and branch
+notes below are retained as historical checkpoints, not current merge status. The
+current release contains the completed Contributor, Reviewer and Release Maintainer
+workspaces, their bounded assistants, the refreshed GitHub Pages site, and separate
+Render/Neon development and production environments.
 
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
@@ -772,6 +770,14 @@ quality. Each member must verify and extend this declaration with their actual
 tools, specific uses and adapted-source acknowledgements before submission. No
 human verification of this draft declaration is implied. The assignment's cited
 academic integrity policies are indexed in [ASSIGNMENT-SPEC](../workflow/specs/ASSIGNMENT-SPEC.md#references-supplied-by-the-brief).
+
+Final declaration sign-off remains a human task. `yooplo` must confirm the
+Contributor/shared-work account, `ngkhengyang` the Reviewer/shared-work account, and
+`yu-sutong` the Release Maintainer/deployment account. Each person should verify the
+AI-produced summaries under their log directory, add any omitted tool or adapted
+source, and record a reviewer/date instead of deleting historical corrections or
+failed attempts. The consolidated administrative and peer-walkthrough checklist is
+in [Submission readiness](../workflow/SUBMISSION.md#remaining-human-only-sign-off).
 
 ### Phase3 presentation refinement
 
