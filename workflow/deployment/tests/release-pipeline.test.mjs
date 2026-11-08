@@ -259,3 +259,12 @@ test('all workflows pin actions and privileged release graph stays separated', a
   assert.match(production, /db:migrate:deploy[\s\S]*ACCOUNT_ROLE: RELEASE_MAINTAINER[\s\S]*npm run account -- ensure[\s\S]*render-deploy\.mjs/);
   assert.doesNotMatch(production, /docker\/build-push-action|Build and publish/);
 });
+
+test('account administration builds its internal shared dependency on a clean checkout', async () => {
+  const rootPackage = JSON.parse(await readFile(resolve('package.json'), 'utf8'));
+
+  assert.match(
+    rootPackage.scripts.account,
+    /^npm run build -w @specsentry\/shared && npm run account -w @specsentry\/server --$/,
+  );
+});

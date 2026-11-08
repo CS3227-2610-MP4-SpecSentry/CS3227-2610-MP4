@@ -42,6 +42,21 @@
 - Focused account-provisioning tests passed (3/3). Deployment workflow tests passed
   (28/28). Workspace typecheck, lint, production build and `git diff --check`
   passed; Vite retained its pre-existing non-failing chunk-size advisory.
+- PR #25 was approved by Justin (`yooplo`) and merged as
+  `f142004b851643c73eb9b33f85869d2cb0001189`. Exact-commit CI and the signed,
+  scanned application-image build passed.
+- The first guarded development release attempt (`42443430984`) verified the
+  development database and found all ten reviewed migrations already applied,
+  then failed before the Render deployment. The new `account -- ensure` command
+  could not resolve the unbuilt internal `@specsentry/shared` package on a clean
+  Actions checkout. The attempt did not change production.
+- The corrective change makes the root account-administration command build its
+  internal shared dependency first and adds a regression assertion that freezes
+  this clean-checkout requirement. A clean install/generation reproduction reached
+  the account command without the missing-module error; all 29 deployment tests,
+  workspace typecheck, lint, production build and `git diff --check` passed. The
+  existing non-failing Vite chunk-size advisory remains. Development release retry
+  and all production actions remain pending review and merge of the corrective PR.
 
 ## Resource record
 
@@ -50,3 +65,15 @@
 - Timing coverage: started before the first repository edit and before any provider
   mutation in this continuation.
 - Final report and validation outcomes will be appended after verification.
+- Corrective release interval:
+  `logs/yu-sutong/resources/2026-11-08-development-release-fix/c8d88cf1699d4df0bf9f304a80a9729a.json`.
+- Corrective interval report:
+
+| Stage / agent / invocation | Selected model / effort | Start / end (UTC) | Elapsed | Input / output tokens | Cache usage | Tool calls / retries | Outcome / telemetry source |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| diagnose-implement-validate / main / main-1 | gpt-5 / unavailable | 2026-11-08T03:41:04.932556+00:00 / 2026-11-08T03:43:20.162436+00:00 | 135.22988 s | unavailable / unavailable | unavailable | unavailable / unavailable | succeeded; structured resource record above; per-record usage telemetry is not exposed by the desktop runtime |
+
+- Corrective interval wall time and summed agent time are both 135.22988 seconds;
+  no concurrent agent intervals were used. Time coverage began before the first
+  corrective edit. Token, cache, tool-call, retry, observed-model and
+  observed-effort telemetry were unavailable from the desktop runtime.

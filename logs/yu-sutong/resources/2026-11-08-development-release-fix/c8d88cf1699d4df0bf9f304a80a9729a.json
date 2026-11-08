@@ -1,0 +1,35 @@
+{
+  "id": "c8d88cf1699d4df0bf9f304a80a9729a",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-development-release-fix",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "diagnose-implement-validate",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Reasoning effort and per-record token usage are not exposed by the desktop runtime",
+  "started_at": "2026-11-08T03:41:04.932556+00:00",
+  "ended_at": "2026-11-08T03:43:20.162436+00:00",
+  "elapsed_seconds": 135.22988,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Reproduced the clean-checkout account failure, added the shared-package build prerequisite and regression assertion, and passed deployment tests, typecheck, lint and production build",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+}
