@@ -59,11 +59,16 @@ two development/demo accounts per role:
 
 All newly created demo accounts use password `Password123!`, stored as Argon2id
 hashes. This fixed synthetic credential is an explicit demo-only exception to
-normal administrative provisioning. The seed refuses `NODE_ENV=production`.
-Reruns skip existing usernames without changing their passwords, roles, enabled
-status or versions. Account creation and its security events commit together.
-The seed uses `DATABASE_URL` from the root `.env`; migrations use
-`DIRECT_DATABASE_URL`. No schema migration is needed for the seed itself.
+normal administrative provisioning. The seed refuses `NODE_ENV=production` and
+must remain development-only. Production demo identities are provisioned from a
+trusted administrative checkout with `npm run account -- ensure`, one account at a
+time, after setting `ACCOUNT_USERNAME`, `ACCOUNT_ROLE`, and `ACCOUNT_PASSWORD`.
+`ensure` creates a missing account but fails closed if an existing account has a
+different password, role, or enabled state. Rerunning the development seed skips
+existing usernames without changing their passwords, roles, enabled status or
+versions. Account creation and its security events commit together. The seed uses
+`DATABASE_URL` from the root `.env`; migrations use `DIRECT_DATABASE_URL`. No
+schema migration is needed for either provisioning path.
 
 ## API contract
 

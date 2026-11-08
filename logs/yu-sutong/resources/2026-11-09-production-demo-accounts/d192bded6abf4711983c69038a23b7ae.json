@@ -1,0 +1,35 @@
+{
+  "id": "d192bded6abf4711983c69038a23b7ae",
+  "prompter": "yu-sutong",
+  "session": "2026-11-09-production-demo-accounts",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "provision-document-validate",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family provided by system; exact reasoning effort and per-stage token/cache/tool telemetry are not exposed by the desktop runtime",
+  "started_at": "2026-11-08T16:25:13.952114+00:00",
+  "ended_at": "2026-11-08T16:29:57.786060+00:00",
+  "elapsed_seconds": 283.833946,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Provisioned all six production demo identities through the idempotent account command, but production HTTPS wake-up stalled and bounded login/health verification timed out",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+}

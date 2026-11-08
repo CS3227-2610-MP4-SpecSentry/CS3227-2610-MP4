@@ -6,12 +6,18 @@
 > one minute to wake after inactivity. If the first request is slow, please wait
 > for startup and refresh once.
 
-Open the protected production release at
-**<https://specsentry-prod-bi1f.onrender.com>**. Use the separate development
-deployment for the public role accounts below:
+Use the protected production release as the primary peer and grader test
+environment:
 
-**<https://specsentry-dev-bi1f.onrender.com>**. Render's free service can take about
-a minute to wake after inactivity; retry once after it starts.
+**<https://specsentry-prod-bi1f.onrender.com>**
+
+A separate development deployment is available for team testing without sharing
+production data:
+
+**<https://specsentry-dev-bi1f.onrender.com>**
+
+Both Render services can take about a minute to wake after inactivity; retry once
+after startup.
 
 Use any of these synthetic demo-only accounts. They all use password
 `Password123!`:
@@ -23,16 +29,18 @@ Use any of these synthetic demo-only accounts. They all use password
 | Release Maintainer | `release_maintainer1` | `release_maintainer2` |
 
 There is no public registration or role picker. The role attached to the selected
-account determines which workspace opens. All six accounts were verified through
-deployed HTTPS login and logout on 7 November 2026. They are intentionally public
-test identities and are not the private deployment smoke account. Never put real
-personal data, private source, provider tokens or other secrets into this shared
-testing deployment.
+account determines which workspace opens. The same six identities are provisioned
+independently in production and development. On 9 November 2026, every production
+account passed deployed HTTPS login, correct-role session retrieval, logout, and
+post-logout rejection. They are intentionally public test identities and are not
+the private deployment smoke account. Never put real personal data, private source,
+provider tokens or other secrets into either shared testing environment.
 
 Production promotion completed on 8 November 2026 after protected teammate approval,
-reviewed database migration, exact-image promotion and authenticated smoke. Public
-demo identities intentionally remain in development so peer testing cannot write
-synthetic data into the protected production database.
+reviewed database migration, exact-image promotion and authenticated smoke. The six
+public demo identities were subsequently provisioned through the fail-closed
+administrator command in both isolated databases; the development seed remains
+blocked from running in production.
 
 ## Reading Contributor responses as a Reviewer
 
@@ -149,15 +157,16 @@ response and advisory assistant implementation are available on the development
 deployment, updated 7 November 2026. Current
 independent checks and unresolved gates are recorded in the
 [Contributor run](../logs/yooplo/2026-11-01-contributor-completion.md); earlier
-increment/merge results remain historical evidence. The live development URL and
-the six peer-testing accounts above have been verified. This guide describes
-current behavior; the [product specification](../workflow/specs/PRODUCT-SPEC.md)
-describes planned work.
+increment/merge results remain historical evidence. The live deployment URLs and
+the six peer-testing accounts above are published for role testing. This guide
+describes current behavior; the
+[product specification](../workflow/specs/PRODUCT-SPEC.md) describes planned work.
 
 ## Access and current features
 
-For deployed access, use the development URL and accounts above. For local access
-follow [Developer Guide setup](DeveloperGuide.md#install-and-run).
+For deployed access, use the production URL and accounts above; use development for
+team testing against its isolated data. For local access follow
+[Developer Guide setup](DeveloperGuide.md#install-and-run).
 With `npm run dev`, open <http://localhost:5173>. With the production-style Compose
 profile, open <http://localhost:3000>.
 
