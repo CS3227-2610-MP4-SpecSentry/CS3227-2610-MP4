@@ -28,11 +28,13 @@ release gates are also tracked in the
 > one minute to wake after inactivity. If the first request is slow, please wait
 > for startup and refresh once.
 
-**Production application: <https://specsentry-prod-bi1f.onrender.com>**
+**Production application and primary grader test environment:
+<https://specsentry-prod-bi1f.onrender.com>**
 
-Use the separate development deployment for peer and grader role testing:
+A separate development deployment is available for team testing without sharing
+production data:
 
-**<https://specsentry-dev-bi1f.onrender.com>**
+**Development application: <https://specsentry-dev-bi1f.onrender.com>**
 
 These are synthetic demo-only accounts. Each account uses password
 `Password123!`:
@@ -43,18 +45,21 @@ These are synthetic demo-only accounts. Each account uses password
 | Reviewer | `reviewer1` | `reviewer2` |
 | Release Maintainer | `release_maintainer1` | `release_maintainer2` |
 
-All six login/logout flows were verified against the deployed HTTPS application on
-7 November 2026. There is no public registration or role picker; signing in opens
-the workspace assigned to that account. The development service has the same
-free-tier cold-start behavior described above. These public demo credentials are
+The same six identities are provisioned independently in production and
+development. On 9 November 2026, every production account passed deployed HTTPS
+login, correct-role session retrieval, logout, and post-logout rejection. There is
+no public registration or role picker; signing in opens the workspace assigned to
+that account. Both services have the same free-tier cold-start behavior described
+above. These public demo credentials are
 intentionally separate from private deployment smoke accounts, database
-credentials and provider tokens.
+credentials and provider tokens. Data created in one environment does not appear
+in the other.
 
 Production promotion completed on 8 November 2026 after recovery and compatibility
 evidence, teammate approval, all ten reviewed migrations and authenticated release
-smoke passed. The public demo identities remain isolated to development so graders
-can test freely without writing synthetic data into the protected production
-database.
+smoke passed. The six public demo identities were subsequently provisioned through
+the fail-closed administrator command in each environment; the development seed is
+still blocked from running in production.
 
 ## Directory map
 

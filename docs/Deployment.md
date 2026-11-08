@@ -7,8 +7,9 @@ path. A scanned and attested image for source revision
 `8cdaefa517baf1f4777cddcba766ed151ebf5510` was published and verified in
 development, then its exact registry digest was promoted to the separate production
 service in Singapore. Two separate Neon projects contain all ten reviewed Prisma
-migrations. Development contains the public synthetic demo accounts; production
-contains only its dedicated private smoke identity. The protected production run
+migrations. Both isolated databases contain the public synthetic demo accounts and
+their own dedicated private smoke identity; no data is copied between them. The
+protected production run
 completed direct database preflight/postflight, recovery and schema-compatibility
 gates, teammate approval, Render deployment and authenticated application smoke on
 8 November 2026. The release workflow remains fail-closed for future revisions.
@@ -158,6 +159,11 @@ workflows passed. The application owner explicitly accepted the documented resid
 provider uncertainty and authorized production activation. Production role-AI UI,
 broader model evaluation, quantitative provider quotas, retention/data-use review
 and teammate sign-off remain open evidence rather than hidden claims.
+
+On 9 November 2026, all six published production demo accounts passed HTTPS login,
+correct-role session retrieval, logout and post-logout rejection. These identities
+were created with the fail-closed administrative `account ensure` path rather than
+the development-only database seed.
 
 ## Free-tier considerations
 

@@ -1,0 +1,35 @@
+{
+  "id": "acc769d184f0411c9dd0e6338ebcf1ab",
+  "prompter": "yu-sutong",
+  "session": "2026-11-09-production-demo-accounts",
+  "agent": "main",
+  "invocation": "main-2",
+  "stage": "production-recovery-and-reverification",
+  "attempt": 2,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Production Render wake-up stalled during the first verification attempt; exact reasoning effort and per-stage token/cache/tool telemetry are not exposed",
+  "started_at": "2026-11-08T16:29:57.923792+00:00",
+  "ended_at": "2026-11-08T16:42:11.200591+00:00",
+  "elapsed_seconds": 733.276799,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Recovered production by redeploying the same immutable image, verified root/health/readiness and all six production login/session/logout flows, updated grader and provisioning documentation, and passed documentation, lint, submission, link, and diff secret-pattern checks",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+}

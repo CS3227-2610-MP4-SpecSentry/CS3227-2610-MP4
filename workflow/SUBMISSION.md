@@ -10,7 +10,7 @@ completion certificate. Run `npm run check:submission` for local artifact presen
 | Public team repository named CS3227-2610-MP4 | Git origin / GitHub | Required public organization repository verified; confirm final membership before submission |
 | All production source | src/ | Implemented client, server, shared contracts and static product website |
 | Agentic SE workflow | workflow/, logs/, workflow/evaluations/ | Contributor, Reviewer, Maintainer and deployment workflows have executed evidence; Reflections analyzes two measured coordinated runs and their limitations |
-| Accurate User Guide | docs/UserGuide.md | Production URL and release evidence plus verified development URL and six synthetic role accounts published; final human walkthrough remains |
+| Accurate User Guide | docs/UserGuide.md | Production is the primary grader URL; the isolated development URL and the same six synthetic role accounts are also published; final human walkthrough remains |
 | Developer Guide and acknowledgements | docs/DeveloperGuide.md | Setup/design/process index present; keep synchronized with each release |
 | GitHub Pages product website | src/website/, .github/workflows/pages.yml | Refreshed release site is live at https://cs3227-2610-mp4-specsentry.github.io/CS3227-2610-MP4/ |
 | Reflections with experiments/results | docs/Reflections.md, workflow/evaluations/ | Final evidence synthesis analyzes measured Maintainer/deployment observations, context design and resource controls; missing matched baselines and telemetry are stated rather than invented |
@@ -38,9 +38,8 @@ Record the person/date/evidence when each box is completed:
 - [ ] `yooplo`, `ngkhengyang` and `yu-sutong` each verify their prompt/interaction
   summaries, AI-use declaration and actual role/shared-work contribution.
 - [ ] Teammates perform a peer walkthrough of Contributor, Reviewer and Release
-  Maintainer using the published development accounts, including one successful AI
-  interaction per role; separately record production AI acceptance if private
-  production test access is available.
+  Maintainer using the published production accounts, including one successful AI
+  interaction per role; development remains available for isolated team testing.
 - [ ] Confirm with the submitting teammate that the organization-name Canvas quiz
   was submitted; the repository cannot prove this historical administrative action.
 - [ ] Open the current Canvas submission page and confirm the required ZIP contents
