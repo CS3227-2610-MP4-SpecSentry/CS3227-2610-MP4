@@ -24,9 +24,11 @@ release gates are also tracked in the
 
 ## Live grader access
 
-The protected production release is available at:
+> **First-visit notice:** Production runs on Render's free tier and may take about
+> one minute to wake after inactivity. If the first request is slow, please wait
+> for startup and refresh once.
 
-**<https://specsentry-prod-bi1f.onrender.com>**
+**Production application: <https://specsentry-prod-bi1f.onrender.com>**
 
 Use the separate development deployment for peer and grader role testing:
 
@@ -43,10 +45,10 @@ These are synthetic demo-only accounts. Each account uses password
 
 All six login/logout flows were verified against the deployed HTTPS application on
 7 November 2026. There is no public registration or role picker; signing in opens
-the workspace assigned to that account. The Render free service can take about a
-minute to wake after inactivity, so retry once after it starts. These public demo
-credentials are intentionally separate from private deployment smoke accounts,
-database credentials and provider tokens.
+the workspace assigned to that account. The development service has the same
+free-tier cold-start behavior described above. These public demo credentials are
+intentionally separate from private deployment smoke accounts, database
+credentials and provider tokens.
 
 Production promotion completed on 8 November 2026 after recovery and compatibility
 evidence, teammate approval, all ten reviewed migrations and authenticated release
@@ -107,7 +109,7 @@ establish product completion.
 - [User Guide](docs/UserGuide.md): current behavior and testing limitations.
 - [Implemented UI/UX specification](workflow/specs/UI-UX-SPEC.md): shell, draft interactions, design tokens and verified responsive/accessibility scope.
 - [Developer Guide](docs/DeveloperGuide.md): setup, design, workflow and acknowledgements.
-- [Reflections](docs/Reflections.md): observations and pending experiments.
+- [Reflections](docs/Reflections.md): measured observations, analysis and explicit evidence limits.
 - [Workflow index](workflow/README.md): process files, templates and tools.
 - [Submission readiness](workflow/SUBMISSION.md): assignment deliverables and remaining gaps.
 - [Product website setup](docs/DeveloperGuide.md#product-website): static site and GitHub Pages publication.

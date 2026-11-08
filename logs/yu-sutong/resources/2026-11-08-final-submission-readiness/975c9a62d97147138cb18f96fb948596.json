@@ -1,0 +1,35 @@
+{
+  "id": "975c9a62d97147138cb18f96fb948596",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-submission-readiness",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "implement-review-validate",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family provided by system; exact reasoning effort and per-stage token/cache/tool telemetry are not exposed by the desktop runtime",
+  "started_at": "2026-11-08T15:49:06.107246+00:00",
+  "ended_at": "2026-11-08T15:50:00.343534+00:00",
+  "elapsed_seconds": 54.236288,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Prepared fresh branch and evidence boundary; first production smoke attempt could not run because curl is unavailable in this desktop shell",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+}

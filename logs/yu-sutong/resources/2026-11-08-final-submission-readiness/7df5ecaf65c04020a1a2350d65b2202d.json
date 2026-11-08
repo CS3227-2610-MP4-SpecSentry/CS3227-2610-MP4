@@ -1,0 +1,35 @@
+{
+  "id": "7df5ecaf65c04020a1a2350d65b2202d",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-submission-readiness",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "formatting-fix-and-revalidate",
+  "attempt": 3,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Commit preflight found one trailing blank line in the prompt log; exact reasoning effort and per-stage token/cache/tool telemetry are not exposed",
+  "started_at": "2026-11-08T15:58:37.446027+00:00",
+  "ended_at": "2026-11-08T15:58:55.072616+00:00",
+  "elapsed_seconds": 17.626589,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Removed the prompt-log trailing blank line identified by commit preflight; staged diff now passes git diff --cached --check",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+}

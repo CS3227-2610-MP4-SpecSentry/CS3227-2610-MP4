@@ -2,6 +2,10 @@
 
 ## Live access and role accounts
 
+> **First-visit notice:** Production runs on Render's free tier and may take about
+> one minute to wake after inactivity. If the first request is slow, please wait
+> for startup and refresh once.
+
 Open the protected production release at
 **<https://specsentry-prod-bi1f.onrender.com>**. Use the separate development
 deployment for the public role accounts below:
