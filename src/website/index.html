@@ -3,63 +3,233 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SpecSentry: a specification and review workspace for small software teams.">
-    <title>SpecSentry — Specification and review workspace</title>
+    <meta name="description" content="SpecSentry connects change specifications, human review and release evidence in one secure workspace.">
+    <meta name="theme-color" content="#0b1739">
+    <title>SpecSentry — From specification to verified release</title>
     <style>
-      :root { color-scheme: light; font-family: system-ui, sans-serif; color: #17283b; background: #f5f7fa; }
+      :root {
+        color-scheme: light;
+        --ink: #0b1739;
+        --muted: #50617d;
+        --blue: #155eef;
+        --blue-dark: #0b3fb3;
+        --blue-soft: #eaf1ff;
+        --green: #137a4d;
+        --green-soft: #e6f6ee;
+        --line: #d7dfec;
+        --surface: #ffffff;
+        --canvas: #f5f7fc;
+        --shadow: 0 1rem 3rem rgba(25, 45, 88, .12);
+        font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--canvas);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body { margin: 0; line-height: 1.65; }
-      main { max-width: 64rem; margin: auto; padding: 3rem 1.5rem; }
-      h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 1rem; }
-      h2 { margin-top: 2.5rem; }
-      a { color: #164d9a; text-underline-offset: .2em; }
-      a:focus-visible { outline: 3px solid #164d9a; outline-offset: 4px; }
-      .status { border-left: .3rem solid #895100; background: #fff3d9; padding: 1rem; }
-      .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
-      article { background: white; padding: 1.25rem; border: 1px solid #d4dce5; border-radius: .5rem; }
-      article h3 { margin-top: 0; }
-      footer { margin-top: 3rem; border-top: 1px solid #d4dce5; padding-top: 1rem; }
+      ::selection { color: white; background: var(--blue-dark); }
+      a { color: var(--blue-dark); text-underline-offset: .22em; text-decoration-thickness: .09em; }
+      a:hover { color: var(--blue); }
+      a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; border-radius: .2rem; }
+      p, li { max-width: 72ch; }
+
+      .site-header {
+        position: relative;
+        overflow: hidden;
+        color: white;
+        background:
+          radial-gradient(circle at 82% 14%, rgba(83, 141, 255, .42), transparent 30rem),
+          linear-gradient(145deg, #09152f 0%, #0b2666 68%, #114bb8 100%);
+      }
+      .site-header::after {
+        position: absolute;
+        inset: auto -8rem -18rem auto;
+        width: 34rem;
+        height: 34rem;
+        border: 1px solid rgba(255, 255, 255, .16);
+        border-radius: 50%;
+        content: "";
+      }
+      .nav, .hero, main, footer { width: min(72rem, calc(100% - 2rem)); margin-inline: auto; }
+      .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.15rem; }
+      .brand { display: inline-flex; align-items: center; gap: .7rem; color: white; font-weight: 700; text-decoration: none; letter-spacing: -.02em; }
+      .brand-mark { width: 2rem; height: 2rem; }
+      .nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .8rem 1.35rem; }
+      .nav-links a { color: #dfe9ff; font-size: .94rem; text-decoration: none; }
+      .nav-links a:hover { color: white; }
+      .hero { position: relative; z-index: 1; padding-block: clamp(4rem, 10vw, 7.5rem); }
+      .release-state { display: inline-flex; align-items: center; gap: .5rem; margin: 0 0 1.4rem; padding: .38rem .72rem; color: #c9f7df; background: rgba(8, 25, 58, .56); border: 1px solid rgba(174, 255, 211, .34); border-radius: 999px; font-size: .86rem; font-weight: 700; }
+      .release-state::before { width: .55rem; height: .55rem; background: #53df95; border-radius: 50%; content: ""; box-shadow: 0 0 0 .28rem rgba(83, 223, 149, .14); }
+      h1, h2, h3 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, serif; text-wrap: balance; }
+      h1 { max-width: 13ch; margin: 0; font-size: clamp(3.2rem, 9vw, 6rem); line-height: .98; letter-spacing: -.04em; }
+      .hero-copy { max-width: 43rem; margin: 1.4rem 0 0; color: #d6e2fb; font-size: clamp(1.1rem, 2.2vw, 1.35rem); }
+      .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+      .button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; padding: .7rem 1.15rem; border: 1px solid transparent; border-radius: .55rem; font-weight: 750; text-decoration: none; transition: transform .18s ease-out, background-color .18s ease-out, box-shadow .18s ease-out; }
+      .button:hover { transform: translateY(-2px); }
+      .button-primary { color: var(--blue-dark); background: white; box-shadow: 0 .65rem 1.6rem rgba(0, 0, 0, .2); }
+      .button-primary:hover { color: var(--blue-dark); background: #f4f7ff; }
+      .button-secondary { color: white; border-color: rgba(255, 255, 255, .42); background: rgba(8, 25, 58, .28); }
+      .button-secondary:hover { color: white; background: rgba(255, 255, 255, .1); }
+
+      main { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+      section + section { margin-top: clamp(4.5rem, 9vw, 7rem); }
+      .section-heading { display: grid; grid-template-columns: minmax(0, .72fr) minmax(20rem, 1fr); gap: 2rem 4rem; align-items: end; margin-bottom: 2rem; }
+      h2 { margin: 0; font-size: clamp(2.2rem, 5vw, 3.65rem); line-height: 1.02; letter-spacing: -.035em; }
+      .section-heading p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+      .workflow-list { margin: 0; border-top: 1px solid var(--line); }
+      .workflow { display: grid; grid-template-columns: minmax(11rem, .65fr) minmax(0, 1.4fr); gap: 1.2rem 3rem; padding-block: 1.7rem; border-bottom: 1px solid var(--line); }
+      .workflow dt { font-weight: 800; font-size: 1.08rem; }
+      .workflow dd { margin: 0; color: var(--muted); }
+
+      .testing {
+        padding: clamp(1.6rem, 5vw, 3.25rem);
+        border: 1px solid #c8d7f2;
+        border-radius: .85rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .testing-top { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(16rem, .75fr); gap: 2rem 4rem; align-items: start; }
+      .testing h2 { font-size: clamp(2rem, 4vw, 3.15rem); }
+      .testing p { color: var(--muted); }
+      .credential-note { padding: 1rem 1.15rem; color: #17422f; background: var(--green-soft); border: 1px solid #bce5d0; border-radius: .55rem; }
+      .credential-note strong { display: block; color: var(--green); }
+      .accounts { width: 100%; margin-top: 2rem; border-collapse: collapse; }
+      .accounts th, .accounts td { padding: .85rem 1rem; text-align: left; border-bottom: 1px solid var(--line); }
+      .accounts th { color: var(--muted); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+      code { padding: .14rem .32rem; color: #123c96; background: var(--blue-soft); border-radius: .25rem; font-family: "SFMono-Regular", Consolas, monospace; font-size: .92em; }
+      .cold-start { margin: 1rem 0 0; font-size: .92rem; }
+
+      .proof-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: .75rem; background: var(--line); }
+      .proof { padding: 1.5rem; background: var(--surface); }
+      .proof h3 { margin: 0 0 .5rem; font-size: 1.35rem; }
+      .proof p { margin: 0; color: var(--muted); font-size: .95rem; }
+      .proof strong { color: var(--green); }
+
+      .resources { display: grid; grid-template-columns: minmax(0, .8fr) minmax(20rem, 1.2fr); gap: 2rem 4rem; }
+      .resources p { color: var(--muted); }
+      .resource-links { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+      .resource-links a { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem .25rem; border-bottom: 1px solid var(--line); font-weight: 700; text-decoration: none; }
+      .resource-links a::after { content: "Open"; color: var(--muted); font-size: .82rem; font-weight: 600; }
+
+      footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; padding-block: 2rem; color: var(--muted); border-top: 1px solid var(--line); font-size: .9rem; }
+      footer p { margin: 0; }
+
+      @media (max-width: 760px) {
+        .nav { align-items: flex-start; }
+        .nav-links { max-width: 12rem; }
+        .section-heading, .testing-top, .resources { grid-template-columns: 1fr; }
+        .workflow { grid-template-columns: 1fr; gap: .45rem; }
+        .proof-grid { grid-template-columns: 1fr; }
+        .accounts th:nth-child(3), .accounts td:nth-child(3) { display: none; }
+      }
+
+      @media (max-width: 480px) {
+        .nav-links a:not(:last-child) { display: none; }
+        .actions, .button { width: 100%; }
+        .testing { padding-inline: 1rem; }
+        .accounts th, .accounts td { padding-inline: .5rem; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition-duration: .01ms !important; }
+      }
     </style>
   </head>
   <body>
-    <main>
-      <header>
-        <p>CS3227 · Team SpecSentry</p>
-        <h1>SpecSentry</h1>
-        <p>Connect change specifications, human code review and release evidence in one workspace.</p>
-      </header>
-      <p class="status"><strong>Development status — 25 October 2026:</strong>
-        infrastructure and architecture scaffold. Role workflows and AI features are planned.
-        No live application URL has been verified.</p>
-      <section aria-labelledby="roles-heading">
-        <h2 id="roles-heading">Planned workflows</h2>
-        <div class="roles">
-          <article><h3>Contributor</h3><p>Prepare specifications, criteria and text patches.
-            A Spec Draft Assistant will suggest ways to clarify requirements.</p></article>
-          <article><h3>Reviewer</h3><p>Assess submitted revisions, record findings and decide coverage.
-            A Patch Risk Assistant will suggest gaps, risks and tests.</p></article>
-          <article><h3>Release Maintainer</h3><p>Assemble approved changes and verify release gates.
-            A Release Gate Assistant will summarize readiness considerations.</p></article>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="SpecSentry home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <path fill="#ffffff" d="M16 2.6 28 7v8.4c0 7.2-4.8 11.6-12 14-7.2-2.4-12-6.8-12-14V7l12-4.4Zm0 3L7 8.9v6.5c0 5.4 3.4 8.8 9 10.9 5.6-2.1 9-5.5 9-10.9V8.9L16 5.6Z"/>
+            <path fill="#8eb5ff" d="m14.5 19.8-4.1-4.1 2-2 2.1 2.1 5.2-5.2 2 2-7.2 7.2Z"/>
+          </svg>
+          <span>SpecSentry</span>
+        </a>
+        <div class="nav-links">
+          <a href="#workflows">Workflows</a>
+          <a href="#testing">Test access</a>
+          <a href="#resources">Documentation</a>
         </div>
-        <p>AI is advisory. Human decisions and deterministic server checks control changes,
-          approvals and publication. The planned application does not execute patches or deploy submitted code.</p>
-      </section>
-      <nav aria-label="Project documentation">
-        <h2>Documentation and source</h2>
-        <ul>
-          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4">Source repository and setup</a></li>
-          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/UserGuide.md">User Guide</a></li>
-          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/DeveloperGuide.md">Developer Guide</a></li>
-          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/Architecture.md">Architecture</a></li>
-          <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/Reflections.md">Reflections and experiment status</a></li>
-        </ul>
       </nav>
-      <section aria-labelledby="team-heading">
-        <h2 id="team-heading">Team responsibilities</h2>
-        <p>yooplo — Contributor and authentication; ngkhengyang — Reviewer and AI gateway;
-          yu-sutong — Release Maintainer, persistence and deployment.</p>
+      <div class="hero" id="top">
+        <p class="release-state">Protected production release verified · 8 Nov 2026</p>
+        <h1>Bring clarity to every change.</h1>
+        <p class="hero-copy">SpecSentry connects precise specifications, accountable human review and immutable release evidence—without letting AI make the decision for you.</p>
+        <div class="actions">
+          <a class="button button-primary" href="https://specsentry-prod-bi1f.onrender.com">Open production</a>
+          <a class="button button-secondary" href="#testing">Use demo accounts</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="workflows" aria-labelledby="workflows-heading">
+        <div class="section-heading">
+          <h2 id="workflows-heading">One change, three accountable roles.</h2>
+          <p>Each workspace exposes only the information and actions its role needs. Server-side authorization, lifecycle checks and immutable submitted revisions remain authoritative.</p>
+        </div>
+        <dl class="workflow-list">
+          <div class="workflow"><dt>Contributor</dt><dd>Draft a change specification, submit immutable revisions, attach a unified text patch and respond to review findings. The Spec Draft Assistant offers bounded suggestions while manual drafting stays available.</dd></div>
+          <div class="workflow"><dt>Reviewer</dt><dd>Claim submitted work, assess requirement coverage, record findings and approve or request changes. The Patch Risk Assistant highlights risks and test ideas but never records a decision.</dd></div>
+          <div class="workflow"><dt>Release Maintainer</dt><dd>Assemble approved revisions, record exact-version smoke evidence, resolve deterministic blockers and publish an immutable release snapshot. The Release Gate Assistant remains advisory.</dd></div>
+        </dl>
       </section>
-      <footer><p>Release screenshots, peer-testing instructions and the application link will be added
-        after the corresponding features and deployments are verified.</p></footer>
+
+      <section class="testing" id="testing" aria-labelledby="testing-heading">
+        <div class="testing-top">
+          <div>
+            <h2 id="testing-heading">Test every role safely.</h2>
+            <p>The public demo identities live in the separate development environment, keeping peer testing isolated from the protected production database.</p>
+            <a class="button button-primary" href="https://specsentry-dev-bi1f.onrender.com">Open demo environment</a>
+          </div>
+          <p class="credential-note"><strong>Shared demo password</strong><code>Password123!</code><br>Use synthetic content only. There is no public registration or role picker.</p>
+        </div>
+        <table class="accounts">
+          <thead><tr><th scope="col">Role</th><th scope="col">Primary username</th><th scope="col">Alternate username</th></tr></thead>
+          <tbody>
+            <tr><td>Contributor</td><td><code>contributor1</code></td><td><code>contributor2</code></td></tr>
+            <tr><td>Reviewer</td><td><code>reviewer1</code></td><td><code>reviewer2</code></td></tr>
+            <tr><td>Release Maintainer</td><td><code>release_maintainer1</code></td><td><code>release_maintainer2</code></td></tr>
+          </tbody>
+        </table>
+        <p class="cold-start">Render's free services sleep after inactivity. Allow about a minute for the first request, then retry once. Production and development use separate Render services, Neon databases and secrets.</p>
+      </section>
+
+      <section aria-labelledby="delivery-heading">
+        <div class="section-heading">
+          <h2 id="delivery-heading">Release evidence, not release theatre.</h2>
+          <p>The delivery path builds once in GitHub Actions, verifies the immutable image in development and promotes that exact digest only after a protected human approval.</p>
+        </div>
+        <div class="proof-grid">
+          <article class="proof"><h3>Separated environments</h3><p><strong>Verified.</strong> Development and production have distinct application hosts, services, databases and credentials.</p></article>
+          <article class="proof"><h3>Reviewed migrations</h3><p><strong>Verified.</strong> Ten Prisma migrations passed direct Neon preflight, deployment and postflight checks.</p></article>
+          <article class="proof"><h3>Production smoke</h3><p><strong>Verified.</strong> Readiness, source revision, CSRF, secure sessions and an authenticated Maintainer flow passed.</p></article>
+        </div>
+      </section>
+
+      <section class="resources" id="resources" aria-labelledby="resources-heading">
+        <div>
+          <h2 id="resources-heading">Inspect the work.</h2>
+          <p>Read the implemented behavior, architecture and evidence directly. Live NUS SoC AI is enabled for all three roles in development and production; broader model, quota and provider-policy evidence remains explicitly open.</p>
+        </div>
+        <nav aria-label="Project documentation">
+          <ul class="resource-links">
+            <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4">Source repository</a></li>
+            <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/UserGuide.md">User Guide</a></li>
+            <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/DeveloperGuide.md">Developer Guide</a></li>
+            <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/Architecture.md">Architecture</a></li>
+            <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/blob/master/docs/Reflections.md">Reflections and experiments</a></li>
+            <li><a href="https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42481426084">Production release run</a></li>
+          </ul>
+        </nav>
+      </section>
     </main>
+
+    <footer>
+      <p>CS3227 · Team SpecSentry · November 2026</p>
+      <p>yooplo · Contributor &amp; authentication · ngkhengyang · Reviewer &amp; AI gateway · yu-sutong · Release Maintainer, persistence &amp; deployment</p>
+    </footer>
   </body>
 </html>

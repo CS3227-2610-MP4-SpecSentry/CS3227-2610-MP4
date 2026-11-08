@@ -4,17 +4,14 @@
 
 `.github/workflows/application-release.yml` defines the repository-managed release
 path. A scanned and attested image for source revision
-`2903086f16684de42a1b48e8929c5fa13d907232` has been published, and separate Render
-development and production services run that exact digest in Singapore. Both
-initial Blueprint deploys reached Render's `live` state, and their root,
-`/api/health`, and `/api/ready` endpoints returned successful responses. Two
-separate Neon projects are provisioned. Development has all ten reviewed Prisma
-migrations plus synthetic demo accounts and has passed local readiness and
-authenticated Maintainer smoke checks through the Neon WebSocket adapter.
-Production has the UTC prerequisite but remains unmigrated and unseeded. The
-release workflow therefore remains fail-closed behind repository variables,
-protected GitHub Environments, production evidence, teammate approval, and a
-dedicated Render automation credential.
+`8cdaefa517baf1f4777cddcba766ed151ebf5510` was published and verified in
+development, then its exact registry digest was promoted to the separate production
+service in Singapore. Two separate Neon projects contain all ten reviewed Prisma
+migrations. Development contains the public synthetic demo accounts; production
+contains only its dedicated private smoke identity. The protected production run
+completed direct database preflight/postflight, recovery and schema-compatibility
+gates, teammate approval, Render deployment and authenticated application smoke on
+8 November 2026. The release workflow remains fail-closed for future revisions.
 
 The release source is an exact successful CI revision on protected `master`. The
 workflow builds one `linux/amd64` GHCR image, records its registry digest, emits
@@ -59,8 +56,8 @@ queries use Prisma's official Neon WebSocket adapter with the pooled URL; review
 migrations and release verification continue to use the direct endpoint. The Neon
 and Render resources exist. The protected GitHub Environments contain the
 non-secret service IDs, hosts and database-host expectations. Their secret database
-and development smoke values are configured separately; a dedicated Render
-automation credential and the production-only release evidence remain pending.
+and smoke values, dedicated Render automation credential and production-only
+release evidence are configured separately in protected GitHub Environments.
 
 `render.yaml` is pinned to the CI-published immutable digest used by both initial
 services. It references the separately stored read-only private-registry credential;
@@ -152,9 +149,15 @@ Set an independent random `SESSION_SECRET` of at least 32 characters per service
 and configure `TRUST_PROXY_HOPS` to the verified TLS proxy topology (the template
 assumes one trusted hop). Provision accounts from a trusted checkout using
 [Authentication](Authentication.md). Authentication and all three role workflows
-are implemented locally to the limits described in their guides. Actual deployed
-verification stays pending. No AI key is required for this deployment foundation;
-live advisory-AI acceptance remains a separate gate.
+are implemented to the limits described in their guides. Development and production
+deployment verification completed on 8 November 2026. Live NUS SoC AI is enabled
+on both services using a protected `AI_API_KEY`; `render.yaml` declares only the
+non-secret base/model/context settings and `sync: false` key placeholder. One
+representative strict-contract call per role and all three deployed development
+workflows passed. The application owner explicitly accepted the documented residual
+provider uncertainty and authorized production activation. Production role-AI UI,
+broader model evaluation, quantitative provider quotas, retention/data-use review
+and teammate sign-off remain open evidence rather than hidden claims.
 
 ## Free-tier considerations
 
@@ -170,5 +173,6 @@ Use Neon rather than Render's expiring free database. Provider retention and res
 windows vary by plan; confirm the current project setting before relying on it. An
 image rollback redeploys a previously attested digest only when schema compatibility
 is proven. Database recovery is a separate human-approved restore-and-connection
-decision; never reverse Prisma history automatically. Until both are rehearsed, the
-repository automation is not production-release evidence.
+decision; never reverse Prisma history automatically. The recovery restore and
+schema-compatibility rehearsals were recorded before the 8 November promotion;
+future schema or rollback changes require fresh evidence.

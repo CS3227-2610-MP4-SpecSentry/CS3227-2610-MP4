@@ -1,0 +1,35 @@
+{
+  "id": "af3e1fa16e8044bb9d91e51d34a1b102",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "security-reviewer",
+  "invocation": "security-reviewer-3",
+  "stage": "production-enable-review",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Fresh security review required after explicit owner risk acceptance and production AI enablement; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T15:08:13.319545+00:00",
+  "ended_at": "2026-11-08T15:18:27.635354+00:00",
+  "elapsed_seconds": 614.315809,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Security review passed production AI activation with server-only secret, existing auth/quotas/deadlines/schema checks/manual fallback intact, and residual provider risks explicitly retained",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+}

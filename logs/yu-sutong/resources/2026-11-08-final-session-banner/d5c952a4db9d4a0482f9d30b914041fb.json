@@ -1,0 +1,35 @@
+{
+  "id": "d5c952a4db9d4a0482f9d30b914041fb",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "implement",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family provided by system; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T13:31:18.489187+00:00",
+  "ended_at": "2026-11-08T13:34:34.597965+00:00",
+  "elapsed_seconds": 196.108778,
+  "status": "failed",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Added initial regression assertion and prompt log; first test invocation could not run because this fresh worktree had no installed dependencies",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, and observed-effort telemetry not exposed"
+}

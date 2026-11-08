@@ -1,5 +1,14 @@
 # Delivery and implementation plan
 
+Live NUS SoC activation, 8 November 2026: both Render services hold the server-only
+key and explicitly enable the `default` model with its key-scoped 262,144 context
+declaration. One representative exact-contract call passed for each role and
+Contributor, Reviewer and Maintainer workflows passed end to end on development.
+After an independent hold and fail-closed correction, the application owner
+explicitly accepted the documented residual uncertainty and directed production
+activation in PR29. Broader model edge cases, quantitative key limits,
+retention/data-use review and teammate sign-off remain OPEN-002 evidence gaps.
+
 Deployment automation, 7 November 2026: TASK-008 now has a disabled-by-default,
 repository-managed protected-`master` canary pipeline. It waits for exact-SHA CI,
 publishes one immutable GHCR digest with provenance/SBOM/attestation and exact-digest
@@ -228,18 +237,19 @@ human usefulness ratings and deployed verification remain external gates.
 
 ## Work packages and dependencies
 
-Statuses below distinguish implemented infrastructure from pending product behavior and release verification. Owners are existing coordination contacts, not evidence of completed feature assignments.
+Statuses below are reconciled to the 8 November release/live-development evidence.
+Owners are existing coordination contacts, not evidence of human teammate sign-off.
 
 | Task | Scope | Dependencies | Coordination | Status / exit evidence |
 | --- | --- | --- | --- | --- |
-| TASK-001 | Resolve validation, identity, API and AI blocking decisions | None | Relevant role owners | Policy baseline approved 25 October; actual live provider verification remains pending |
-| TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Partial: base server/client/shared workspaces, connectivity, local Compose, Docker/CI templates and setup docs initialized 25 October; source/build/browser/PostgreSQL checks recorded in base-source log. Sessions, CSRF, domain migrations and audit remain pending; Docker/remote CI unexecuted locally |
-| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Private create/list/detail, editing, deletion and criteria increments 1–4 have local independent evidence; see [Contributor evidence](../logs/yooplo/2026-10-28-contributor-increment-4.md). Reviewer iteration 2 supplies shared submission/revision APIs; full Contributor submission UI and combined/deployed acceptance remain pending. |
-| TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Reviewer iterations 1–4 implement manual review, revision cycles, bounded AI integration and approval revocation; see [traceability](TRACEABILITY.md). Live provider, deployment and broader acceptance gates remain separate. |
-| TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Schemas/budgets approved; live acceptance waits for key-specific OPEN-002 verification |
-| TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | Source complete locally for REQ-REL-001–008: candidate assembly, deterministic gates/smoke evidence, publication/revocation serialization, notices, released corrections, restricted audit and advisory Maintainer AI. Server/client units and focused PostgreSQL integration pass; configured browser/deployed acceptance and teammate review remain TASK-007/008 gates. See the [final run](../logs/yu-sutong/2026-11-06-maintainer-final.md). |
-| TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Planned; requirement-linked results |
-| TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Partial source automation: protected-master build/attest/scan, migration/provider guards, dev canary and same-digest production graph implemented and tested offline on 7 November; provider resources, protected environment configuration, restore/N-1 evidence and verified dev/prod release remain pending |
+| TASK-001 | Resolve validation, identity, API and AI blocking decisions | None | Relevant role owners | Policy baseline approved; representative key/alias compatibility and all-role development workflows passed 8 November. The application owner authorized production activation while broader model, quota, retention/data-use and teammate-review evidence remains open under OPEN-002. |
+| TASK-002 | TypeScript workspace, PostgreSQL, scoped sessions/audit, CI | Applicable TASK-001 decisions | Shared team | Implemented and released: sessions, CSRF, role guards, ten migrations, restricted audit, Docker/CI and separate online environments are verified. |
+| TASK-003 | Contributor draft/submission/revisions | TASK-002 | yooplo | Complete role source and deployed development workflow, including live Spec Draft Assistant, passed; broader human/manual acceptance remains. |
+| TASK-004 | Pool, assignment, findings, coverage, decisions | TASK-003 and applicable decisions | ngkhengyang | Manual/revision/revocation workflow and bounded assistant are implemented; deployed development Patch Risk completed successfully. Broader human/manual acceptance remains. |
+| TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Strict schemas/budgets and representative exact-contract calls passed for all roles; all three development workflows passed. The application owner authorized production activation with remaining OPEN-002 gaps explicitly retained. |
+| TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | REQ-REL-001–008 source, migrations, release workflow and authenticated production smoke passed. Deployed development Maintainer AI returned a schema-valid result; human teammate sign-off remains. See the [final run](../logs/yu-sutong/2026-11-06-maintainer-final.md). |
+| TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Requirement-linked unit/integration/browser/performance evidence exists; final manual accessibility, broad AI edge-case/provider-policy review and human walkthrough/sign-off remain. |
+| TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Released 8 November: separate Render/Neon development and production targets, protected environments, restore/N-1 evidence, same-digest promotion and authenticated production smoke verified; GitHub Pages is live and release copy is refreshed in the final session-banner PR |
 
 Record actual commands, failures and outcomes rather than marking elapsed dates complete. Produce detailed task breakdown for each approved slice.
 

@@ -39,8 +39,10 @@ discovery uses an additive owner list while preserving private drafts. Explicit
 latest-content cloning explains replacement of saved private edits; attributed
 finding responses retain history and never resolve findings. The Spec Draft
 Assistant presents typed suggestions with initially empty selection, applies only
-to the unsaved editor and retains manual operation on failure. Live AI stays
-disabled pending provider verification. Final local checks and open findings are
+to the unsaved editor and retains manual operation on failure. Live AI is enabled
+in both Render services through server-only secrets; representative all-role
+contracts and the three development workflows passed on 8 November, while the safe
+local default remains disabled. Final checks and open findings are
 reported in the current run; this description alone is not acceptance. The proposed
 create-to-editor shortcut PROP-CON-001 stays inactive. Successful creation
 continues to open saved detail, not the editor.

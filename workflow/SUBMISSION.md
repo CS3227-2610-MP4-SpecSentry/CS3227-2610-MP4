@@ -7,21 +7,21 @@ completion certificate. Run `npm run check:submission` for local artifact presen
 
 | Deliverable / requirement | Location | Current evidence / remaining action |
 | --- | --- | --- |
-| Public team repository named CS3227-2610-MP4 | Git origin / GitHub | Origin has the required name; public accessibility and membership not verified |
-| All production source | src/ | Infrastructure/module scaffold and static product website only |
+| Public team repository named CS3227-2610-MP4 | Git origin / GitHub | Required public organization repository verified; confirm final membership before submission |
+| All production source | src/ | Implemented client, server, shared contracts and static product website |
 | Agentic SE workflow | workflow/ | Generic process, Reviewer instructions and tooling exist; Contributor setup is on its separate branch; link actual executed runs for final grading |
-| Accurate User Guide | docs/UserGuide.md | Verified development URL and six synthetic role accounts published; production walkthrough remains behind protected release gates |
+| Accurate User Guide | docs/UserGuide.md | Production URL and release evidence plus verified development URL and six synthetic role accounts published; final human walkthrough remains |
 | Developer Guide and acknowledgements | docs/DeveloperGuide.md | Setup/design/process index present; keep synchronized with each release |
-| GitHub Pages product website | src/website/, .github/workflows/pages.yml | Source/workflow initialized; enable Pages using GitHub Actions and verify live deployment |
+| GitHub Pages product website | src/website/, .github/workflows/pages.yml | Live at https://cs3227-2610-mp4-specsentry.github.io/CS3227-2610-MP4/; refreshed release copy awaits this PR merge |
 | Reflections with experiments/results | docs/Reflections.md, workflow/evaluations/ | Structure initialized; measured comparisons and analysis pending |
 | Prompt and interaction summary logs | logs/ | Per-prompter summaries; humans must verify accuracy and coverage |
-| One role and AI feature per member | workflow/specs/PRODUCT-SPEC.md, PLAN.md | Three roles defined; product implementation and acceptance pending |
+| One role and AI feature per member | workflow/specs/PRODUCT-SPEC.md, PLAN.md | All three role workflows and assistants implemented; representative live contract and deployed development acceptance passed; final human sign-off remains |
 | Spec-driven development | workflow/specs/, TRACEABILITY.md | Baseline exists; link actual tests and release evidence as implemented |
 | Coordinated specialized agents | workflow/reviewer/, DEVELOPMENT.md | Final evidence must show triggering, context/resource sharing, handoffs, verification, conflicts, idle/blocked work and retry overhead; toolkit use does not replace team-managed agents |
-| AI and development-process security | AI-SECURITY-SPEC.md, evaluations/, CI | Planned controls and scaffold checks; explicit AI/adversarial/authorization test evidence pending |
+| AI and development-process security | AI-SECURITY-SPEC.md, evaluations/, CI | Strict schemas, bounded context, secret screening, authorization rechecks, safe accounting and adversarial tests implemented; broader live model/policy evaluation remains |
 | Context/resource engineering | RESOURCES.md, logs/, evaluations/, Reflections.md | Recording rules/template initialized; actual controlled comparisons pending |
-| Online app with separated dev/prod | `.github/workflows/application-release.yml`, deployment tooling/tests, render.yaml, docs/Deployment.md | Fail-closed release automation is tested offline; provision, protect and verify separate team-managed environments, migrations and same-digest promotion |
-| SoC LLM only; quotas and guardrails | workflow/specs/AI-SECURITY-SPEC.md | No live integration or provider compatibility claimed |
+| Online app with separated dev/prod | `.github/workflows/application-release.yml`, deployment tooling/tests, render.yaml, docs/Deployment.md | Separate Render/Neon environments, same-digest promotion, protected approval, migrations and authenticated production smoke verified 8 November 2026 |
+| SoC LLM only; quotas and guardrails | workflow/specs/AI-SECURITY-SPEC.md | NUS SoC key/alias configured server-side on both Render services; representative all-role/live-development evidence passed and owner-authorized production activation is recorded, while quantitative key limits and retention/data-use review remain open |
 | No prior-MP reuse or integrated build-and-host deployment | DeveloperGuide.md, Deployment.md | New scaffold; preserve acknowledgements and separately team-managed build/deployment evidence |
 | Substantial role/shared contribution per member | workflow/PLAN.md, logs/, Reflections.md | Allocation exists; attach actual contributions and review evidence |
 | Organization registration | Canvas | Due 23 October 2026, 14:00 SGT; historical completion unverified, confirm with team |

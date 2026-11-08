@@ -1,0 +1,35 @@
+{
+  "id": "38817c5103fb475b8277e279169be4ba",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "release-verifier",
+  "invocation": "release-verifier-2",
+  "stage": "re-review",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Fresh independent re-review after task-ledger and production fail-closed corrections; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T14:51:38.519135+00:00",
+  "ended_at": "2026-11-08T14:53:31.972921+00:00",
+  "elapsed_seconds": 113.453786,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Fresh release re-review passed after PLAN/log reconciliation and development-only versus fail-closed production AI correction; no remaining release finding",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+}

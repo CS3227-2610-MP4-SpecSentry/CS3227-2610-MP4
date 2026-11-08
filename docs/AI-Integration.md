@@ -29,8 +29,9 @@ aggregates, separates requests/attempts/retries/preflight rejections, and report
 missing usage as unknown. Provider UTC spend windows and disabled application
 caching are labeled separately.
 
-Live configuration is off by default under OPEN-002. Current synthetic tests and
-remaining live/deployment steps are tracked in the
+Local configuration remains off by default under OPEN-002. Both Render services
+explicitly enable live NUS SoC AI through server-only secrets. Current synthetic tests and
+remaining live-evaluation steps are tracked in the
 [Contributor completion run](../logs/yooplo/2026-11-01-contributor-completion.md).
 The gateway supports a separate server-only live configuration while rejecting
 native transport in test mode. Credentials alone do not enable it: application
@@ -76,38 +77,61 @@ Maintainer-authorized SGT-day project aggregate across all three features. It
 returns counts and provider-usage coverage only, without per-user rows, prompts,
 outputs or run history.
 
-Local strict-contract, gateway, service and client tests establish these boundaries;
-they do not establish provider usefulness, live latency, data-handling approval or
-deployed acceptance. Those remain release gates in the final Maintainer run.
+Local strict-contract, gateway, service and client tests establish these boundaries.
+The 8 November live activation adds representative exact-contract and deployed
+development evidence, but it does not establish broad provider usefulness/latency,
+quota sufficiency, retention/data-use approval or production role-UI acceptance.
+
+## Current deployed live-AI status
+
+On 8 November 2026, the key-scoped NUS SoC catalog returned the configured
+`default` alias with a 262,144-token advertised context window. One representative
+call prepared and decoded through each role's exact contract passed strict output
+validation for Contributor, Reviewer and Release Maintainer. All three authenticated
+development workflows then passed end to end against the deployed application:
+Contributor suggestion generation returned a schema-valid response, Reviewer patch
+risk completed successfully, and Maintainer readiness returned a schema-valid
+`NOT_READY` result for an intentionally empty candidate.
+
+Both Render services use the live configuration below and store the API key only
+as a protected server environment variable. After an independent review initially
+held production activation, the application owner explicitly accepted the documented
+residual provider uncertainty and directed production enablement on 8 November.
+Activation deploy `dep-dbo8vbh5efls73d6i23g` reached `live`; public production
+health, readiness and the application root returned `200`, and signed-out session
+returned expected `401`. Broader model edge cases, actual key
+quotas, provider retention/data-use review and teammate sign-off remain open;
+deterministic manual workflows remain the fallback.
 
 ## Configuration and operation
 
-`AI_LIVE_ENABLED` defaults to false. True requires a nonblank server-only
+`AI_LIVE_ENABLED` defaults to false for local development. True requires a nonblank server-only
 `AI_API_KEY`, `AI_MODEL` and a positive safe-integer `AI_CONTEXT_WINDOW`; missing,
 placeholder or invalid live settings fail startup with field names only. The
 approved base is `https://soclaas-api.comp.nus.edu.sg/v1`. The canonical server
 settings are `AI_*`; `SOCLAAS_*` shell examples from the provider are not read by
 the application. Never prefix the key with `VITE_` or put it in a browser request.
 
-Keep the app flag false while evaluating with synthetic prompts. Before enabling
-real-draft traffic, review the model-specific evaluation, actual key limits and
-provider retention/data use with the affected owners. An environment flag cannot
-assert this evidence. Contributor, Reviewer and Maintainer share this switch and
-the same gateway protections. No local flag is automatically changed by the
-verification harness.
+Keep the app flag false for ordinary local work unless a live test is intentional.
+Contributor, Reviewer and Maintainer share this switch and the same gateway
+protections. No local flag is automatically changed by the verification harness.
+The current Render activation is operational evidence, not proof of broad model
+quality, quota sufficiency or provider retention/data-use approval.
 
-The Contributor v3 configuration verified on 2 November 2026 is:
+The current Render configuration is:
 
 ```dotenv
-AI_LIVE_ENABLED=false
+AI_LIVE_ENABLED=true
 AI_BASE_URL=https://soclaas-api.comp.nus.edu.sg/v1
-AI_MODEL=llama3.1:8b
-AI_CONTEXT_WINDOW=65536
-# Set AI_API_KEY locally through your environment or ignored .env; never commit it.
+AI_MODEL=default
+AI_CONTEXT_WINDOW=262144
+# AI_API_KEY is a protected Render secret; never commit or expose it to the browser.
 ```
 
-The context value is the user-reported catalog value, not a universal model
-default. Recheck catalog metadata and evaluation when switching aliases.
+`.env.example` intentionally retains `AI_LIVE_ENABLED=false` as the safe local
+default. The deployed context value is the key-scoped catalog value observed on
+8 November, not a universal provider default. Recheck catalog metadata and
+evaluation when switching aliases.
 
 ## Synthetic live verification
 

@@ -22,6 +22,16 @@ services:
         generateValue: true
       - key: TRUST_PROXY_HOPS
         value: "1"
+      - key: AI_LIVE_ENABLED
+        value: "true"
+      - key: AI_BASE_URL
+        value: https://soclaas-api.comp.nus.edu.sg/v1
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: default
+      - key: AI_CONTEXT_WINDOW
+        value: "262144"
   - type: web
     name: specsentry-prod
     runtime: image
@@ -43,3 +53,13 @@ services:
         generateValue: true
       - key: TRUST_PROXY_HOPS
         value: "1"
+      - key: AI_LIVE_ENABLED
+        value: "true"
+      - key: AI_BASE_URL
+        value: https://soclaas-api.comp.nus.edu.sg/v1
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: default
+      - key: AI_CONTEXT_WINDOW
+        value: "262144"

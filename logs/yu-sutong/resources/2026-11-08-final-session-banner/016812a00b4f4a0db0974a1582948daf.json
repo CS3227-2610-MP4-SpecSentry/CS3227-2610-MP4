@@ -1,0 +1,35 @@
+{
+  "id": "016812a00b4f4a0db0974a1582948daf",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "main",
+  "invocation": "main-4",
+  "stage": "fix-and-revalidate",
+  "attempt": 4,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Fresh corrections after independent review; interval started after the first correction edits because the earlier main interval had already been closed, so that gap is disclosed in the log",
+  "started_at": "2026-11-08T14:51:55.626812+00:00",
+  "ended_at": "2026-11-08T14:55:29.653604+00:00",
+  "elapsed_seconds": 214.026792,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Closed review findings by keeping production AI fail-closed, reconciling the task ledger and logs, confirming corrected Render deployment/public smoke, obtaining fresh release/security PASS decisions, and rerunning all local gates",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed; interval began after the first correction edits and that gap is disclosed in the prompt log",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed; interval began after the first correction edits and that gap is disclosed in the prompt log",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed; interval began after the first correction edits and that gap is disclosed in the prompt log",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed; interval began after the first correction edits and that gap is disclosed in the prompt log",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed; interval began after the first correction edits and that gap is disclosed in the prompt log"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed; interval began after the first correction edits and that gap is disclosed in the prompt log"
+}

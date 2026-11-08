@@ -9,11 +9,24 @@ const reply = (body: unknown, status = 200) => ({ ok: status < 400, status, json
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
 describe('base authentication', () => {
-  it('shows the login form without protected content', async () => {
+  it('shows the login form without a false ended-session notice for a fresh visitor', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(reply({}, 401)));
     render(<MemoryRouter initialEntries={['/reviewer']}><App /></MemoryRouter>);
     expect(await screen.findByLabelText('Username')).toBeInTheDocument();
+    expect(screen.queryByText('Your session ended. Please sign in again.')).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Reviewer workspace' })).not.toBeInTheDocument();
+  });
+  it('reports an ended session after an authenticated session is rejected', async () => {
+    let authenticated = true;
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(() => Promise.resolve(
+      authenticated ? reply(session()) : reply({}, 401),
+    )));
+    render(<MemoryRouter><App /></MemoryRouter>);
+    await screen.findByText('Signed in as alice');
+    authenticated = false;
+    fireEvent(window, new Event('focus'));
+    expect(await screen.findByText('Your session ended. Please sign in again.')).toBeInTheDocument();
+    expect(screen.getByLabelText('Username')).toBeInTheDocument();
   });
   it('signs in with CSRF and signs out', async () => {
     const fetch = vi.fn().mockResolvedValueOnce(reply({}, 401)).mockResolvedValueOnce(reply({ csrfToken }))
