@@ -25,15 +25,17 @@ function normalizeDatabaseUrl(value: string): string {
   }
   return url.toString();
 }
+const databaseUrlSchema = z.string().url().refine(
+  (value) => URL.canParse(value) && ['postgres:', 'postgresql:'].includes(new URL(value).protocol),
+  'Must be a PostgreSQL URL',
+).transform(normalizeDatabaseUrl);
+const databaseEnvironmentSchema = z.object({ DATABASE_URL: databaseUrlSchema });
 const environmentSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),
   SESSION_SECRET: z.string().min(32),
   TRUST_PROXY_HOPS: z.coerce.number().int().min(0).max(5).default(0),
-  DATABASE_URL: z.string().url().refine(
-    (value) => URL.canParse(value) && ['postgres:', 'postgresql:'].includes(new URL(value).protocol),
-    'Must be a PostgreSQL URL',
-  ).transform(normalizeDatabaseUrl),
+  DATABASE_URL: databaseUrlSchema,
   DEPLOYMENT_SOURCE_SHA: z.union([
     z.literal('local'),
     z.string().regex(/^[0-9a-f]{40}$/),
@@ -43,6 +45,7 @@ const environmentSchema = z.object({
 
 export type ServerConfig = z.infer<typeof environmentSchema>;
 export type AiConfig = z.infer<typeof aiEnvironmentSchema>;
+export type DatabaseConfig = z.infer<typeof databaseEnvironmentSchema>;
 export const SERVER_CONFIG = Symbol('SERVER_CONFIG');
 function parseConfig<T>(schema: z.ZodType<T>, environment: NodeJS.ProcessEnv): T {
   const result = schema.safeParse(environment);
@@ -54,6 +57,9 @@ function parseConfig<T>(schema: z.ZodType<T>, environment: NodeJS.ProcessEnv): T
 }
 export function readConfig(environment: NodeJS.ProcessEnv): ServerConfig { return parseConfig(environmentSchema, environment); }
 export function readAiConfig(environment: NodeJS.ProcessEnv): AiConfig { return parseConfig(aiEnvironmentSchema, environment); }
+export function readDatabaseConfig(environment: NodeJS.ProcessEnv): DatabaseConfig {
+  return parseConfig(databaseEnvironmentSchema, environment);
+}
 export function deploymentSourceRevision(environment: NodeJS.ProcessEnv = process.env): ServerConfig['DEPLOYMENT_SOURCE_SHA'] {
   return z.union([z.literal('local'), z.string().regex(/^[0-9a-f]{40}$/)])
     .parse(environment.DEPLOYMENT_SOURCE_SHA ?? 'local');

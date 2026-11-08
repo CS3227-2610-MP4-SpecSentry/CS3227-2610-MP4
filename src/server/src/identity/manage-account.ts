@@ -1,5 +1,5 @@
 import { accountRoleSchema, usernameSchema } from '@specsentry/shared';
-import { readConfig } from '../config';
+import { readDatabaseConfig } from '../config';
 import { DatabaseService } from '../database/database.service';
 import { loadRootEnvironment } from '../environment';
 import { hashPassword } from './identity.service';
@@ -13,7 +13,7 @@ import { ensureAccount } from './account-provisioning';
 
 async function main(): Promise<void> {
   loadRootEnvironment();
-  const database = new DatabaseService(readConfig(process.env));
+  const database = new DatabaseService(readDatabaseConfig(process.env));
   try {
     const action = process.argv[2];
     if (action === 'create' || action === 'ensure') {

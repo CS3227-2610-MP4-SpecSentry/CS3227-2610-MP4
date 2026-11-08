@@ -1,13 +1,13 @@
 import { Inject, Injectable, type OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '../generated/prisma/client';
-import { SERVER_CONFIG, type ServerConfig } from '../config';
+import { SERVER_CONFIG, type DatabaseConfig } from '../config';
 import { createDatabaseAdapter } from './database-adapter';
 
 @Injectable()
 export class DatabaseService implements OnModuleDestroy {
   readonly client: PrismaClient;
 
-  constructor(@Inject(SERVER_CONFIG) config: ServerConfig) {
+  constructor(@Inject(SERVER_CONFIG) config: DatabaseConfig) {
     const adapter = createDatabaseAdapter(config.DATABASE_URL, 5);
     this.client = new PrismaClient({ adapter, log: [] });
   }

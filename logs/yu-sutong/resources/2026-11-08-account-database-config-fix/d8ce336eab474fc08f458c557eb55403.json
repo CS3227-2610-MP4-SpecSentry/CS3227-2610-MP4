@@ -1,0 +1,35 @@
+{
+  "id": "d8ce336eab474fc08f458c557eb55403",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-account-database-config-fix",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "diagnose-implement-validate",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Reasoning effort and per-record token usage are not exposed by the desktop runtime",
+  "started_at": "2026-11-08T05:56:21.693697+00:00",
+  "ended_at": "2026-11-08T05:56:32.699781+00:00",
+  "elapsed_seconds": 11.006084,
+  "status": "interrupted",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Recorder started in the already-merged worktree before any corrective edit; replaced with a record in the new fix worktree",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the desktop runtime"
+}
