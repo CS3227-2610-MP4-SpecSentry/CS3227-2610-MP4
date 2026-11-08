@@ -106,3 +106,31 @@
   corrected recorder was started. Time coverage began before the first code edit.
   Token, cache, tool-call, retry, observed-model and observed-effort telemetry were
   unavailable from the desktop runtime.
+- Failure reflection: the first correction proved that the shared package built and
+  resolved, but its local account-command reproduction intentionally used an invalid
+  action. Because the CLI reports all internal failures through one generic message,
+  that check did not prove the real `account -- ensure` path under the workflow's
+  minimal environment. The result was described too broadly. The correct boundary is
+  the complete command with the same environment shape and a real development target,
+  followed by the remaining provider/remote-smoke prerequisite audit.
+- Before requesting merge of PR #27, the exact `account -- ensure` command passed
+  twice against the real development Neon database with only `DATABASE_URL` and the
+  three account inputs; the second pass verified idempotency. No connection string or
+  protected smoke credential was logged. GitHub CI and secret scanning passed.
+- GitHub environment and Render resource reconciliation confirmed distinct dev/prod
+  Neon hosts, Render service IDs and HTTPS origins; all four required encrypted
+  secrets exist in each environment; Render auto-deploy is disabled; both services
+  use immutable GHCR digests and `/api/ready`; production automation remains disabled.
+  `SCHEMA_COMPATIBILITY_EVIDENCE_ID` is intentionally deferred until a successful
+  development release produces real compatibility evidence.
+- Final pre-merge verification resource:
+  `logs/yu-sutong/resources/2026-11-08-final-premerge-verification/ba30a13719b647a0bb545175b8d63076.json`.
+
+| Stage / agent / invocation | Selected model / effort | Start / end (UTC) | Elapsed | Input / output tokens | Cache usage | Tool calls / retries | Outcome / telemetry source |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| real-development-preflight / main / main-1 | gpt-5 / unavailable | 2026-11-08T06:01:06.411245+00:00 / 2026-11-08T06:05:38.669503+00:00 | 272.258258 s | unavailable / unavailable | unavailable | unavailable / unavailable | succeeded; structured record above |
+
+- Final pre-merge verification wall time and summed agent time were both
+  272.258258 seconds with no concurrent agent intervals. Token, cache, tool-call,
+  retry, observed-model and observed-effort telemetry were unavailable from the
+  desktop runtime.
