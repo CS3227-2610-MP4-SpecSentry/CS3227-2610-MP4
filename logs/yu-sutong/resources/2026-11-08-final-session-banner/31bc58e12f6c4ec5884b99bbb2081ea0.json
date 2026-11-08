@@ -1,0 +1,35 @@
+{
+  "id": "31bc58e12f6c4ec5884b99bbb2081ea0",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "release-verifier",
+  "invocation": "release-verifier-1",
+  "stage": "review",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Independent release verification required by the repository deployment workflow; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T14:33:46.662747+00:00",
+  "ended_at": "2026-11-08T14:37:22.124018+00:00",
+  "elapsed_seconds": 215.461271,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Release review required reconciliation of stale TASK-001/004/005/006 status rows; session tests, key absence, Render declarations, live URLs, release run and base revision otherwise verified",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+}

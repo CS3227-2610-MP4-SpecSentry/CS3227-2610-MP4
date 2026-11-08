@@ -1,5 +1,39 @@
 # Requirement traceability
 
+## Live NUS SoC AI activation and final visitor fix — 8 November 2026
+
+OPEN-002, MP4-005, MP4-010 and all three role-assistant requirements now have
+bounded live evidence. The key-scoped model catalog returned `HTTP 200` and the
+configured `default` alias advertised a 262,144-token context window. One
+representative request prepared and decoded through each exact role contract passed
+strict validation for Contributor, Reviewer and Release Maintainer. This establishes
+basic provider compatibility for those examples, not broad model quality or a
+universal token bound.
+
+The synthetic-data development service receives `AI_LIVE_ENABLED=true`, the
+approved NUS SoC base, `AI_MODEL=default`, `AI_CONTEXT_WINDOW=262144` and a
+protected server-only `AI_API_KEY`. Production declares the same non-secret model
+metadata but keeps `AI_LIVE_ENABLED=false`. The repository Blueprint records only
+non-secret values and a `sync: false` placeholder; no credential is committed. Development deploy
+`dep-dbo89d2jnfac73e5ms40` passed authenticated end-to-end Contributor generation,
+Reviewer patch-risk and Maintainer readiness. Production deploy
+`dep-dbo8hfpsrm7s73b8n1ug` restored the fail-closed production switch after an
+independent security review; it reached `live`, then root/health/readiness returned
+`200` and the signed-out session returned expected `401`. Production role-AI UI was
+intentionally not exercised.
+
+The same final change corrects fresh signed-out visits so an expected initial `401`
+does not display “Your session ended”; a previously authenticated session that later
+receives `401` still does. Targeted client regression tests distinguish both cases.
+The GitHub Pages source and release/access documentation are refreshed in the same
+candidate. Full validation and publication results are recorded in the
+[8 November run](../logs/yu-sutong/2026-11-08-final-session-banner.md).
+
+Remaining OPEN-002 gates are broader multilingual/delimiter/near-cap and failure
+evaluation for every role, quantitative key quotas, provider retention/data-use
+review, production role-AI UI acceptance and human teammate sign-off. Manual role
+workflows remain available whenever AI is unavailable or rejects a request.
+
 ## Deployment release automation — 7 November 2026
 
 MP4-005 and MP4-008 now have repository-source automation in
@@ -385,7 +419,7 @@ Baseline review: 25 October 2026. Every existing requirement ID has one definiti
 | Technical workspace and portability foundation; NFR-PORT-001 partial | src/server, src/client, src/shared; root package manifests, Dockerfile, compose.yaml | Clean npm ci, Prisma generation, typecheck, production build and local built-server smoke passed. Real PostgreSQL 16 connectivity passed; PostgreSQL 17 Compose and Docker checks are configured in CI but have not run locally. Full AC-NFR-PORT-001 remains pending |
 | Safe HTTP failure/header foundation; NFR-SEC-001 and integration error contract partial | src/server/src/http.ts, config.ts, health/health.controller.ts | src/server/test/http.spec.ts: health independent of database, readiness success/failure without secrets, headers, API/asset404 and configuration validation. No authentication/session/CSRF implementation or acceptance completion claimed |
 | Browser response validation and initial accessibility; NFR-A11Y-001 partial | src/client/src/App.tsx, src/shared/src/index.ts | Four client tests; workflow/tests/browser/scaffold.spec.ts Chromium and axe smoke passed for the public setup page only. Product role flows and manual accessibility checks pending |
-| Deployment topology | `.github/workflows/application-release.yml`, deployment tooling/tests and migration manifest; render.yaml, docs/Deployment.md; TECHNICAL-SPEC.md | Protected-master build/attest/scan, dev canary and same-digest production graph are implemented and tested offline. Image URLs still require configuration; cloud resources, actual publication/deployment, environment protection, restore and compatibility evidence remain pending |
+| Deployment topology | `.github/workflows/application-release.yml`, deployment tooling/tests and migration manifest; render.yaml, docs/Deployment.md; TECHNICAL-SPEC.md | Separate Render/Neon development and production targets, protected-master build/attest/scan, dev canary, recovery/compatibility evidence and same-digest production promotion completed on 8 November 2026; [production run 42481426084](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42481426084) passed migrations and authenticated smoke |
 
 Command outcomes, corrections, independent review and resource limitations are in
 [the base-source session log](../logs/ngkhengyang/2026-10-25-base-source-initialization.md).

@@ -8,8 +8,13 @@ smoke evidence, inspect deterministic blockers, explicitly publish an immutable
 snapshot, acknowledge recipient-scoped revocation notices, append released
 corrections and filter a restricted project audit. The optional Release Gate
 Assistant is advisory and cannot mutate or publish release state.
-All three role assistants use the bounded server gateway; live provider operation
-is disabled pending verification. Maintainer implementation evidence is in the
+All three role assistants use the bounded server gateway. Live NUS SoC AI is
+enabled in the synthetic-data development service through a server-only secret;
+production remains fail-closed under the privacy/evaluation gate. On 8 November
+2026, one representative exact-contract call passed for each role and all three
+deployed development workflows passed end to end. Broader edge-case/model
+evaluation, provider quota and retention/data-use review, production role-UI
+acceptance and human teammate sign-off remain open. Maintainer implementation evidence is in the
 [final Maintainer run](logs/yu-sutong/2026-11-06-maintainer-final.md); earlier
 foundation and smoke-test increments remain historical checkpoints. Broader
 release gates are also tracked in the
@@ -17,7 +22,11 @@ release gates are also tracked in the
 
 ## Live grader access
 
-Use the verified development deployment for peer and grader testing:
+The protected production release is available at:
+
+**<https://specsentry-prod-bi1f.onrender.com>**
+
+Use the separate development deployment for peer and grader role testing:
 
 **<https://specsentry-dev-bi1f.onrender.com>**
 
@@ -37,9 +46,11 @@ minute to wake after inactivity, so retry once after it starts. These public dem
 credentials are intentionally separate from private deployment smoke accounts,
 database credentials and provider tokens.
 
-The production service infrastructure is online, but its database is deliberately
-unmigrated and unseeded until the protected recovery, compatibility and teammate-
-approval gates complete. It is not yet the grader-testing target.
+Production promotion completed on 8 November 2026 after recovery and compatibility
+evidence, teammate approval, all ten reviewed migrations and authenticated release
+smoke passed. The public demo identities remain isolated to development so graders
+can test freely without writing synthetic data into the protected production
+database.
 
 ## Directory map
 
@@ -101,7 +112,8 @@ establish product completion.
 
 `npm run check:submission` checks local required-artifact presence only. It does not
 certify product completion or live access. The Pages workflow publishes the product
-site from `master` after repository Pages configuration; deployment is unverified.
+site from `master`; the verified site is
+<https://cs3227-2610-mp4-specsentry.github.io/CS3227-2610-MP4/>.
 
 ## Local startup
 

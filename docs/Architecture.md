@@ -1,9 +1,12 @@
 # Architecture
 
-Status: local authentication and complete Contributor, Reviewer and Release
-Maintainer role source, 6 November 2026. The three advisory assistants share the
-bounded gateway; live-provider, deployed-environment and teammate acceptance remain
-pending. Current Maintainer evidence is in the
+Status: complete Contributor, Reviewer and Release Maintainer role source with
+separate development and production deployments, updated 8 November 2026. The
+three advisory assistants share the bounded gateway. Live NUS SoC AI is enabled in
+the synthetic-data development service; production remains fail-closed.
+Representative exact-contract calls and all three deployed development workflows
+passed; broader provider evaluation, production role-AI UI and teammate acceptance
+remain pending. Current Maintainer evidence is in the
 [final run](../logs/yu-sutong/2026-11-06-maintainer-final.md). The
 [technical specification](../workflow/specs/TECHNICAL-SPEC.md) remains normative.
 
@@ -40,10 +43,11 @@ flowchart TB
     AI --> SoC[SoC LLM]
 ```
 
-The diagram is the implemented local module design. Health/readiness,
+The diagram is the implemented and deployed module design. Health/readiness,
 authentication, database connectivity, Contributor lifecycle, Reviewer cycles and
 the Release Maintainer workflow are present. All three bounded role assistants are
-wired through the server gateway. Live AI stays disabled pending OPEN-002. See
+wired through the server gateway. Live AI is enabled in development through a
+server-only secret; production and the safe local default stay disabled. See
 [Authentication](Authentication.md) and [AI integration](AI-Integration.md).
 
 | Module / directory under server source | Single responsibility |

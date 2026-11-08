@@ -1,0 +1,35 @@
+{
+  "id": "28e87c26349f4dbbadfdcd524f9b84a2",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "security-reviewer",
+  "invocation": "security-reviewer-1",
+  "stage": "review",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Independent secret/session/deployment review required by the repository deployment workflow; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T14:33:46.662705+00:00",
+  "ended_at": "2026-11-08T14:37:22.124186+00:00",
+  "elapsed_seconds": 215.461481,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Security review found production live-AI activation violated the existing evaluation/privacy gate; session fix and secret boundary otherwise passed",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+}

@@ -217,7 +217,11 @@ publication and recovery, revocation notices, append-only corrections, restricte
 audit and the advisory Release Gate Assistant. Full submitted-editing/submission UI
 status is tracked by the later Contributor completion evidence.
 The bounded revocation/release API is described above; consult its current review status.
-Reviewer AI is integrated with live operation disabled pending provider verification.
+All three role assistants are integrated. Live NUS SoC AI is enabled in the
+synthetic-data development service through a protected server secret; representative
+contract probes and all three development workflows passed on 8 November 2026.
+Production and local live mode remain off by default while broader provider-policy/
+model evaluation remains open.
 See [Authentication](Authentication.md).
 The detailed specifications describe planned product behavior, not delivered features.
 
@@ -678,9 +682,9 @@ any local static server. `.github/workflows/pages.yml` publishes only that direc
 from `master`, including manual dispatch. In repository Settings â†’ Pages, select
 **GitHub Actions**; after merging, inspect the workflow's deployment URL. Environment
 protection still applies. Documentation links target `master` and reflect changes
-after merge. Add screenshots and the application link only after release verification.
-Application hosting remains separate and team-managed; see [Deployment](Deployment.md).
-Neither live deployment is claimed here.
+after merge. The verified product site is
+<https://cs3227-2610-mp4-specsentry.github.io/CS3227-2610-MP4/> and links to the
+separately team-managed Render application; see [Deployment](Deployment.md).
 
 ## Acknowledgements
 
@@ -826,5 +830,7 @@ checks, findings and resource evidence belong to the
 Codex assisted with this implementation, the interface proposal, test preparation,
 documentation and separate security/acceptance assignments. Existing same-repository
 services and tests were reused; no prior-MP source, external UI kit, new dependency
-or build-and-host service was introduced. Human summary verification, teammate
-patch approval, deployed acceptance and live SoC verification remain separate.
+or build-and-host service was introduced. At that increment boundary, human summary
+verification, teammate patch approval, deployed acceptance and live SoC verification
+were separate; current deployment/live evidence is recorded in the 8 November
+[activation run](../logs/yu-sutong/2026-11-08-final-session-banner.md).

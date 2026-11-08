@@ -1,0 +1,35 @@
+{
+  "id": "5a0346e155f44a7781fde05f65b1c107",
+  "prompter": "yu-sutong",
+  "session": "2026-11-08-final-session-banner",
+  "agent": "main",
+  "invocation": "main-3",
+  "stage": "implement",
+  "attempt": 3,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Retry after building the shared workspace; exact reasoning effort and per-stage usage telemetry not exposed",
+  "started_at": "2026-11-08T13:35:14.810079+00:00",
+  "ended_at": "2026-11-08T14:32:41.765322+00:00",
+  "elapsed_seconds": 3446.955243,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Implemented and fully validated the fresh-session fix, product-site and release documentation refresh, protected all-role NUS SoC activation declarations, and live development/production evidence without committing the key",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry not exposed"
+}

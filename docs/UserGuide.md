@@ -2,7 +2,10 @@
 
 ## Live access and role accounts
 
-Open the verified development deployment at
+Open the protected production release at
+**<https://specsentry-prod-bi1f.onrender.com>**. Use the separate development
+deployment for the public role accounts below:
+
 **<https://specsentry-dev-bi1f.onrender.com>**. Render's free service can take about
 a minute to wake after inactivity; retry once after it starts.
 
@@ -22,10 +25,10 @@ test identities and are not the private deployment smoke account. Never put real
 personal data, private source, provider tokens or other secrets into this shared
 testing deployment.
 
-The production service infrastructure is online, but its database remains
-deliberately unmigrated and unseeded behind the documented protected-release gates.
-Use the development URL above for grading until this guide explicitly changes the
-testing target.
+Production promotion completed on 8 November 2026 after protected teammate approval,
+reviewed database migration, exact-image promotion and authenticated smoke. Public
+demo identities intentionally remain in development so peer testing cannot write
+synthetic data into the protected production database.
 
 ## Reading Contributor responses as a Reviewer
 
@@ -160,13 +163,13 @@ workspace opens automatically. The role is assigned to your account. A different
 role's workspace displays an access-denied message. Reviewers can browse, claim,
 inspect and review seeded submissions, assess criteria, manage findings and record
 human decisions, receive revision notices and review owner-API submissions.
-The release candidate workspace described below is available locally, including
+The release candidate workspace described below is available in the deployed app, including
 membership, smoke-test, publication, notice, correction, restricted-audit and
 advisory Maintainer-AI controls.
 Contributor submission, working-copy editing and submitted detail controls are
-available locally as described below. Approval revocation and the supporting release API are described above.
-Reviewer AI has a bounded implementation with live operation
-disabled pending provider verification.
+available as described below. Approval revocation and the supporting release API are described above.
+All three bounded role assistants use live NUS SoC AI in the synthetic-data
+development service. Production keeps deterministic manual workflows and AI off.
 Contributors can create, list and open/edit/delete their own never-submitted private
 drafts and manage acceptance criteria as described below.
 
@@ -279,12 +282,14 @@ Suggestions are not restored from browser storage. A provider error, invalid
 result or unavailable configuration leaves manual editing and saving usable.
 Use the safe error reference when one is available.
 
-Live SoC operation is off by default. An operator can configure explicit live
-access after provider evaluation and data-handling review; see [AI integration](AI-Integration.md).
-With the default configuration, the unavailable message is expected. Synthetic
-browser/server checks establish fallback and contract behavior, not live usefulness
-or provider compatibility. The separate provider probe uses fixed synthetic drafts,
-does not save suggestions and does not enable this application's live switch.
+Live NUS SoC operation is enabled on the deployed synthetic-data development service;
+production and local development keep it off by default. One representative
+strict-contract call for each role and all three authenticated development workflows
+passed on 8 November 2026. An
+unavailable/error message can still occur during provider, quota or network failure,
+and manual work remains usable. Broader model edge-case evaluation, actual key
+quotas and provider retention/data-use review remain open; see
+[AI integration](AI-Integration.md).
 
 **Refresh my AI resource use** shows your application SGT-day requests, outbound
 attempts/retries, completed failures and preflight rejections. A failure rate with
@@ -565,9 +570,9 @@ OPEN-candidate readiness blockers; it shows publication and correction evidence.
 Use **Restricted project audit** to filter safe events by actor, proposal, release,
 action, outcome and date. The view contains allowlisted business/security/correction
 events and AI metadata only. Raw prompts, model responses, request bodies, credentials,
-private drafts and snapshot evidence are never displayed. Current work is local and
-still requires configured PostgreSQL/browser CI, teammate approval and deployment;
-no live application URL or provider acceptance is claimed here.
+private drafts and snapshot evidence are never displayed. The application has
+separate verified development and production deployments. Live SoC provider
+acceptance remains a separate documented limitation.
 
 ## Troubleshooting
 
@@ -577,15 +582,22 @@ the Developer Guide; ensure the authentication migration and accounts exist. See
 [Authentication administration](Authentication.md). Do not share credentials or connection URLs in bug reports.
 Include the action, observed result and safe correlation identifier when present.
 
-## Release information to complete before peer testing
+## Release information for peer testing
 
-- Verified production application URL and release identifier: pending.
-- Safe test-account distribution and sign-in instructions for each role: pending.
-- Local Reviewer intake walkthrough: verified in Chromium; deployed peer testing
-  of the complete role workflows remains pending.
-- Deployed Contributor and Maintainer walkthroughs: pending.
-- AI success, limits, failure recovery and manual fallback walkthroughs: pending.
-- Known release-specific limitations and supported browser evidence: pending.
+- Verified production application: <https://specsentry-prod-bi1f.onrender.com>,
+  promoted from protected `master` revision
+  `8cdaefa517baf1f4777cddcba766ed151ebf5510` on 8 November 2026.
+- Safe development test-account distribution and sign-in instructions for all three
+  roles: provided at the start of this guide; all six login/logout flows were
+  verified on 7 November 2026.
+- Production readiness, source marker, secure session, CSRF and authenticated
+  Release Maintainer smoke passed in the protected release workflow.
+- Complete manual peer walkthroughs of every role remain a human testing task.
+- Representative AI success for all three roles and deployed development workflow
+  acceptance passed on 8 November; broader limits, edge cases, production role-UI
+  activation/role-UI acceptance and human walkthroughs remain pending.
+- Known release-specific limitation: provider quotas and retention/data-use policy
+  have not been verified; deterministic manual workflows remain available.
 
 Update this guide from observed release behavior before inviting peer testers.
 Never publish real credentials, raw prompts or sensitive sample patches here.
@@ -608,5 +620,5 @@ Save/status, field validation and explicit protection before discarding unsaved
 edits. Required/optional acceptance criteria remain visible in saved detail.
 Control feedback respects reduced-motion preferences. Before/after screenshots,
 tested viewport sizes and verification limits are recorded in the
-[Phase3 run](../logs/yooplo/2026-10-31-visual-phase3.md); production access and full
-manual accessibility certification remain pending.
+[Phase3 run](../logs/yooplo/2026-10-31-visual-phase3.md); production access is
+verified, while full manual accessibility certification remains pending.

@@ -129,7 +129,10 @@ export function App() {
     try {
       const response = await fetch('/api/auth/session', { signal, credentials: 'same-origin' });
       if (signal?.aborted || generation.current !== currentGeneration) return;
-      if (response.status === 401) { invalidate('Your session ended. Please sign in again.'); return; }
+      if (response.status === 401) {
+        invalidate(adoptedSession.current ? 'Your session ended. Please sign in again.' : '');
+        return;
+      }
       if (!response.ok) throw new Error();
       const current = sessionResponseSchema.parse(await response.json());
       if (!signal?.aborted && generation.current === currentGeneration) {
