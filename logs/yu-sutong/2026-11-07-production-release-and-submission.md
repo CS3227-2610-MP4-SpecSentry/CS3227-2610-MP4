@@ -134,3 +134,39 @@
   272.258258 seconds with no concurrent agent intervals. Token, cache, tool-call,
   retry, observed-model and observed-effort telemetry were unavailable from the
   desktop runtime.
+- PR #27 was approved by Kheng Yang (`ngkhengyang`) and merged as
+  `21e5748c22b196a41b64e925596308d83e276f2b`. Exact-commit CI, image build,
+  provenance, vulnerability scan, database verification/migration and dedicated
+  smoke-account provisioning passed in release run `42476948333`.
+- Render accepted and completed development deploy `dep-dbo6563rjlhs73ah6u00`
+  for the exact requested immutable GHCR reference. The workflow nevertheless
+  stopped before its remote-smoke/artifact steps because the client incorrectly
+  required Render's `image.sha` to equal the GHCR index digest. Render retains the
+  requested index digest in `image.ref` but reports the platform-specific resolved
+  image digest in `image.sha`; both are valid and intentionally differ here.
+- Independent live development verification passed the source marker, readiness,
+  Release Maintainer login/session/CSRF/read/logout flow, and anonymous session
+  returned HTTP 401. The validator correction keeps exact `image.ref` equality as
+  the immutable identity check and validates `image.sha` as a well-formed resolved
+  digest without falsely requiring equality to the registry index digest.
+- Regression coverage now models Render's real index-digest/platform-digest response,
+  still rejects a changed immutable `image.ref`, and rejects a malformed resolved
+  digest. Deployment tests, lint, typecheck, 193 server tests, 289 client tests,
+  29 deployment/evidence tests, production build, migration inventory, Prisma
+  validation/client generation, dependency audit and `git diff --check` passed.
+- Local browser and container checks could not run because the disposable PostgreSQL
+  service was unavailable and the Docker daemon was not running. This is recorded as
+  a local-environment limitation rather than a product failure; the protected PR CI
+  remains the required clean-runner verification before merge.
+- Digest-validator correction resource record:
+  `logs/yu-sutong/resources/2026-11-08-render-digest-validator-fix/a05ddd6f0d124f81b9041931b2368f24.json`.
+
+| Stage / agent / invocation | Selected model / effort | Start / end (UTC) | Elapsed | Input / output tokens | Cache usage | Tool calls / retries | Outcome / telemetry source |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| diagnose-implement-validate / main / main-1 | gpt-5 / unavailable | 2026-11-08T12:11:16.549757+00:00 / 2026-11-08T12:16:45.465126+00:00 | 328.915369 s | unavailable / unavailable | unavailable | unavailable / unavailable | succeeded; structured resource record above; per-record usage telemetry is not exposed by the desktop runtime |
+
+- This corrective interval's wall time and summed agent time are both 328.915369
+  seconds with no concurrent agent interval. Recording began before the first
+  corrective edit. Token, cache, tool-call, retry and observed-effort telemetry
+  were unavailable from the desktop runtime; final report rendering and publication
+  are outside the measured interval.

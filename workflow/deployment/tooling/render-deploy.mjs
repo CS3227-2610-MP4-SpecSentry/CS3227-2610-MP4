@@ -71,9 +71,10 @@ function validateDeploy(value, serviceId, deployId, image) {
   validateId(deployId, 'dep');
   if (!value || value.id !== deployId || typeof value.status !== 'string') throw new Error('Render deploy response identity mismatch');
   if (value.image?.ref !== image) throw new Error('Render deploy image reference mismatch');
-  const expectedDigest = image.slice(image.indexOf('@') + 1);
-  if (value.image?.sha && ![expectedDigest, expectedDigest.slice('sha256:'.length)].includes(value.image.sha))
-    throw new Error('Render deploy image digest mismatch');
+  if (value.image?.sha) {
+    const resolvedDigest = value.image.sha.startsWith('sha256:') ? value.image.sha : `sha256:${value.image.sha}`;
+    validateDigest(resolvedDigest);
+  }
   return value;
 }
 function validateCreatedDeploy(value, serviceId, image) {
