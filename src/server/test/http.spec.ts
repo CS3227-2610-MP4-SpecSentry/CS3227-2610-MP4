@@ -8,7 +8,7 @@ import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { DatabaseService } from '../src/database/database.service';
 import { configureHttp } from '../src/http';
-import { readConfig } from '../src/config';
+import { readConfig, readDatabaseConfig } from '../src/config';
 
 describe('scaffold HTTP boundary', () => {
   let app: NestExpressApplication;
@@ -63,6 +63,14 @@ describe('scaffold HTTP boundary', () => {
       DATABASE_URL: 'postgresql://user:pass@ep-test-pooler.example.neon.tech/app?channel_binding=require&sslmode=require',
     });
     expect(new URL(config.DATABASE_URL).searchParams.get('sslmode')).toBe('verify-full');
+  });
+  it('validates database-only administration without requiring application secrets', () => {
+    const config = readDatabaseConfig({
+      DATABASE_URL: 'postgresql://user:pass@ep-test.example.neon.tech/app?sslmode=require',
+    });
+    expect(new URL(config.DATABASE_URL).searchParams.get('sslmode')).toBe('verify-full');
+    expect(() => readDatabaseConfig({ DATABASE_URL: 'secret-value' }))
+      .toThrow('Invalid server configuration: DATABASE_URL');
   });
   it('exposes only a validated source revision as deployment identity', () => {
     const sourceRevision = 'a'.repeat(40);

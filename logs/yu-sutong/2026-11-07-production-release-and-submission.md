@@ -77,3 +77,32 @@
   no concurrent agent intervals were used. Time coverage began before the first
   corrective edit. Token, cache, tool-call, retry, observed-model and
   observed-effort telemetry were unavailable from the desktop runtime.
+- PR #26 was approved by Justin (`yooplo`) and merged as
+  `49a16d228f120f60cad89a57adb4fdb3d251aaf1`. Its exact-commit CI, image build,
+  provenance check, scan, database preflight, migration and postflight passed.
+- The automatic development release (`42446637223`) then stopped at dedicated
+  smoke-account creation before Render deployment. The shared-package build fix
+  worked, exposing a second clean-runner defect: the account CLI loaded the full
+  web-server configuration and therefore required the unrelated `SESSION_SECRET`,
+  which the least-privilege migration job intentionally does not receive.
+- The follow-up fix gives database tooling a database-only validated configuration
+  path, preserves Neon TLS normalization, and adds regression coverage proving
+  that application secrets are not required. All 193 server tests, 289 client
+  tests and 29 deployment tests passed, together with typecheck, lint, the
+  production build and `git diff --check`. Production remained disabled and
+  unchanged throughout both failed development attempts.
+- Follow-up corrective resource records:
+  `logs/yu-sutong/resources/2026-11-08-account-database-config-fix/d8ce336eab474fc08f458c557eb55403.json`
+  and
+  `logs/yu-sutong/resources/2026-11-08-account-database-config-fix/fa0aff2191b742b8a97480e5f92598a5.json`.
+
+| Stage / agent / invocation | Selected model / effort | Start / end (UTC) | Elapsed | Input / output tokens | Cache usage | Tool calls / retries | Outcome / telemetry source |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| diagnose-implement-validate / main / main-1 | gpt-5 / unavailable | 2026-11-08T05:56:21.693697+00:00 / 2026-11-08T05:56:32.699781+00:00 | 11.006084 s | unavailable / unavailable | unavailable | unavailable / unavailable | interrupted before edits because recording began in the already-merged worktree; structured record above |
+| implement-validate / main / main-2 | gpt-5 / unavailable | 2026-11-08T05:56:32.699624+00:00 / 2026-11-08T05:59:23.467302+00:00 | 170.767678 s | unavailable / unavailable | unavailable | unavailable / unavailable | succeeded; structured record above |
+
+- Follow-up wall time was 181.773605 seconds and summed agent interval time was
+  181.773762 seconds; the intervals overlapped by 0.000157 seconds while the
+  corrected recorder was started. Time coverage began before the first code edit.
+  Token, cache, tool-call, retry, observed-model and observed-effort telemetry were
+  unavailable from the desktop runtime.
