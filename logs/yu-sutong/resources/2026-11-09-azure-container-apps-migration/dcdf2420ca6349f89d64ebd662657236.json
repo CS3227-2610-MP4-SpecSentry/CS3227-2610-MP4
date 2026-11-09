@@ -1,0 +1,35 @@
+{
+  "id": "dcdf2420ca6349f89d64ebd662657236",
+  "prompter": "yu-sutong",
+  "session": "2026-11-09-azure-container-apps-migration",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "coordinate-implement",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact reasoning effort and attributable token telemetry are not exposed",
+  "started_at": "2026-11-08T18:11:10.333254+00:00",
+  "ended_at": "2026-11-09T08:18:53.067285+00:00",
+  "elapsed_seconds": 50862.734031,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Azure Container Apps migration coordinated, provisioned, hardened and locally verified. Final candidate removes the unverified privileged extension, uses fixed ARM REST deployment, retains protected build-once promotion and documents cutover accurately; complete tests, lint, typecheck, build, submission, YAML and diff checks passed.",
+  "unavailable_reasons": {
+    "input_tokens": "Attributable token, cache, tool-call and retry telemetry are not exposed",
+    "output_tokens": "Attributable token, cache, tool-call and retry telemetry are not exposed",
+    "cache_read_tokens": "Attributable token, cache, tool-call and retry telemetry are not exposed",
+    "tool_calls": "Attributable token, cache, tool-call and retry telemetry are not exposed",
+    "retries": "Attributable token, cache, tool-call and retry telemetry are not exposed"
+  },
+  "unavailable_reason": "Attributable token, cache, tool-call and retry telemetry are not exposed"
+}

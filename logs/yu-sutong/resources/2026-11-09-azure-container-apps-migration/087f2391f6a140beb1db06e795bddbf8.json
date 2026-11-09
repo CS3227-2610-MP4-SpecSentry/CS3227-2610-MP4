@@ -1,0 +1,35 @@
+{
+  "id": "087f2391f6a140beb1db06e795bddbf8",
+  "prompter": "yu-sutong",
+  "session": "2026-11-09-azure-container-apps-migration",
+  "agent": "security-fix-reviewer",
+  "invocation": "security-fix-review-1",
+  "stage": "independent-review",
+  "attempt": 1,
+  "selected_model": "GPT-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Execution effort and attributable usage telemetry are not exposed; recording began after dispatch when the missing subagent interval was detected",
+  "started_at": "2026-11-09T08:12:11.867193+00:00",
+  "ended_at": "2026-11-09T08:16:45.192402+00:00",
+  "elapsed_seconds": 273.325209,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Read-only post-fix bypass and regression review found no concrete surviving extension-download path or ARM REST regression; deployment workflow tests 32/32 passed",
+  "unavailable_reasons": {
+    "input_tokens": "Recording began after dispatch; attributable token, cache, tool-call and retry telemetry are not exposed, and only the detected remainder of reviewer wall time is measured",
+    "output_tokens": "Recording began after dispatch; attributable token, cache, tool-call and retry telemetry are not exposed, and only the detected remainder of reviewer wall time is measured",
+    "cache_read_tokens": "Recording began after dispatch; attributable token, cache, tool-call and retry telemetry are not exposed, and only the detected remainder of reviewer wall time is measured",
+    "tool_calls": "Recording began after dispatch; attributable token, cache, tool-call and retry telemetry are not exposed, and only the detected remainder of reviewer wall time is measured",
+    "retries": "Recording began after dispatch; attributable token, cache, tool-call and retry telemetry are not exposed, and only the detected remainder of reviewer wall time is measured"
+  },
+  "unavailable_reason": "Recording began after dispatch; attributable token, cache, tool-call and retry telemetry are not exposed, and only the detected remainder of reviewer wall time is measured"
+}

@@ -196,8 +196,10 @@ Current evidence and independent review are recorded in the
 8 November release state: PR29 is merged into `master`. Older increment and branch
 notes below are retained as historical checkpoints, not current merge status. The
 current release contains the completed Contributor, Reviewer and Release Maintainer
-workspaces, their bounded assistants, the refreshed GitHub Pages site, and separate
-Render/Neon development and production environments.
+workspaces, their bounded assistants, the refreshed GitHub Pages site, separate
+Neon databases and an Azure Container Apps migration candidate. The previous
+Render services remain available only as a cutover fallback until Azure production
+promotion and authenticated smoke pass.
 
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
@@ -215,8 +217,8 @@ publication and recovery, revocation notices, append-only corrections, restricte
 audit and the advisory Release Gate Assistant. Full submitted-editing/submission UI
 status is tracked by the later Contributor completion evidence.
 The bounded revocation/release API is described above; consult its current review status.
-All three role assistants are integrated. Live NUS SoC AI is enabled in both Render
-services through protected server secrets; representative contract probes and all
+All three role assistants are integrated. Live NUS SoC AI is configured in both
+Azure Container Apps through protected server secrets; representative contract probes and all
 three development workflows passed on 8 November 2026. The application owner
 explicitly authorized production activation with the residual provider-policy/model
 evaluation gaps recorded; local live mode remains off by default.
@@ -649,6 +651,17 @@ security and specification/documentation checks are recorded in the
 This is presentation evidence about handoffs, rework and stop conditions, not a live
 deployment claim.
 
+The 9 November Azure migration reused the deployment-agent separation: an
+implementer changed only the release workflow/tooling/tests, database/recovery and
+security specialists reviewed the design independently, and the coordinator
+provisioned isolated Azure resources only after explicit owner confirmation.
+Development and production use environment-bound GitHub OIDC identities, separate
+Container App managed identities and no long-lived registry password. The private
+GHCR digest is imported once into ACR for development; production can only reuse
+the already verified digest. Provider bootstrap, a failed Container Registry
+registration attempt, the recovered agent stream and the no-secret transfer process
+are preserved in the [migration log](../logs/yu-sutong/2026-11-09-azure-container-apps-migration.md).
+
 The [AI security specification](../workflow/specs/AI-SECURITY-SPEC.md) defines planned
 context restrictions, validation, quotas, timeouts and adversarial tests. Implement
 and test them before exposing role AI endpoints. Session, CSRF, IDOR, concurrency,
@@ -682,7 +695,7 @@ from `master`, including manual dispatch. In repository Settings â†’ Pages,
 protection still applies. Documentation links target `master` and reflect changes
 after merge. The verified product site is
 <https://cs3227-2610-mp4-specsentry.github.io/CS3227-2610-MP4/> and links to the
-separately team-managed Render application; see [Deployment](Deployment.md).
+separately team-managed Azure application; see [Deployment](Deployment.md).
 
 ## Acknowledgements
 

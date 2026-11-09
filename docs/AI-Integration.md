@@ -29,7 +29,7 @@ aggregates, separates requests/attempts/retries/preflight rejections, and report
 missing usage as unknown. Provider UTC spend windows and disabled application
 caching are labeled separately.
 
-Local configuration remains off by default under OPEN-002. Both Render services
+Local configuration remains off by default under OPEN-002. Both Azure Container Apps
 explicitly enable live NUS SoC AI through server-only secrets. Current synthetic tests and
 remaining live-evaluation steps are tracked in the
 [Contributor completion run](../logs/yooplo/2026-11-01-contributor-completion.md).
@@ -93,11 +93,12 @@ Contributor suggestion generation returned a schema-valid response, Reviewer pat
 risk completed successfully, and Maintainer readiness returned a schema-valid
 `NOT_READY` result for an intentionally empty candidate.
 
-Both Render services use the live configuration below and store the API key only
-as a protected server environment variable. After an independent review initially
+Both Azure Container Apps use the live configuration below and store the API key
+only as a protected Azure secret reference. After an independent review initially
 held production activation, the application owner explicitly accepted the documented
 residual provider uncertainty and directed production enablement on 8 November.
-Activation deploy `dep-dbo8vbh5efls73d6i23g` reached `live`; public production
+The preceding Render activation deploy `dep-dbo8vbh5efls73d6i23g` reached `live`;
+public production
 health, readiness and the application root returned `200`, and signed-out session
 returned expected `401`. Broader model edge cases, actual key
 quotas, provider retention/data-use review and teammate sign-off remain open;
@@ -115,17 +116,18 @@ the application. Never prefix the key with `VITE_` or put it in a browser reques
 Keep the app flag false for ordinary local work unless a live test is intentional.
 Contributor, Reviewer and Maintainer share this switch and the same gateway
 protections. No local flag is automatically changed by the verification harness.
-The current Render activation is operational evidence, not proof of broad model
-quality, quota sufficiency or provider retention/data-use approval.
+The prior Render activation and the required Azure post-promotion smoke are
+operational evidence, not proof of broad model quality, quota sufficiency or
+provider retention/data-use approval.
 
-The current Render configuration is:
+The current Azure runtime configuration is:
 
 ```dotenv
 AI_LIVE_ENABLED=true
 AI_BASE_URL=https://soclaas-api.comp.nus.edu.sg/v1
 AI_MODEL=default
 AI_CONTEXT_WINDOW=262144
-# AI_API_KEY is a protected Render secret; never commit or expose it to the browser.
+# AI_API_KEY is a protected Azure Container App secret; never commit or expose it to the browser.
 ```
 
 `.env.example` intentionally retains `AI_LIVE_ENABLED=false` as the safe local

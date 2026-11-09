@@ -1,0 +1,35 @@
+{
+  "id": "e2213a7db26b426f971a1f0ca56fa90f",
+  "prompter": "yu-sutong",
+  "session": "2026-11-09-azure-container-apps-migration",
+  "agent": "deployment-implementer",
+  "invocation": "implementer-2",
+  "stage": "hardening-revalidation",
+  "attempt": 2,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Continuation interval started immediately after a small post-finish environment-sanitization edit; exact effort and attributable token telemetry are not exposed",
+  "started_at": "2026-11-09T05:58:28.628395+00:00",
+  "ended_at": "2026-11-09T05:58:58.261309+00:00",
+  "elapsed_seconds": 29.632914,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Post-finish hardening removed GHCR_TOKEN from Azure CLI child-process environment and repeated focused lint, 32 deployment-workflow tests, YAML parsing and diff checks successfully; interval started immediately after the small sanitization edit",
+  "unavailable_reasons": {
+    "input_tokens": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "output_tokens": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "cache_read_tokens": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "tool_calls": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "retries": "Per-invocation token, cache, tool-call and retry telemetry is not exposed"
+  },
+  "unavailable_reason": "Per-invocation token, cache, tool-call and retry telemetry is not exposed"
+}

@@ -2,22 +2,23 @@
 
 ## Live access and role accounts
 
-> **First-visit notice:** Production runs on Render's free tier and may take about
-> one minute to wake after inactivity. If the first request is slow, please wait
-> for startup and refresh once.
+> **First-visit notice:** Production uses Azure Container Apps scale-to-zero and
+> Neon serverless PostgreSQL. A first request after inactivity can be slower while
+> both resume; retry once if startup is still in progress.
 
 Use the protected production release as the primary peer and grader test
 environment:
 
-**<https://specsentry-prod-bi1f.onrender.com>**
+**<https://specsentry.livelymeadow-62e3ed89.eastasia.azurecontainerapps.io>**
 
 A separate development deployment is available for team testing without sharing
 production data:
 
-**<https://specsentry-dev-bi1f.onrender.com>**
+**<https://specsentry-dev.greensea-443a99a3.indonesiacentral.azurecontainerapps.io>**
 
-Both Render services can take about a minute to wake after inactivity; retry once
-after startup.
+The previous Render production service remains a temporary cutover fallback at
+<https://specsentry-prod-bi1f.onrender.com>. Azure is the target for new release
+evidence; Render is retained only until the protected Azure production smoke passes.
 
 Use any of these synthetic demo-only accounts. They all use password
 `Password123!`:
@@ -181,7 +182,7 @@ membership, smoke-test, publication, notice, correction, restricted-audit and
 advisory Maintainer-AI controls.
 Contributor submission, working-copy editing and submitted detail controls are
 available as described below. Approval revocation and the supporting release API are described above.
-All three bounded role assistants use live NUS SoC AI in both Render services.
+All three bounded role assistants use live NUS SoC AI in both Azure Container Apps.
 Deterministic manual workflows remain available when the provider fails or rejects a request.
 Contributors can create, list and open/edit/delete their own never-submitted private
 drafts and manage acceptance criteria as described below.
@@ -295,7 +296,7 @@ Suggestions are not restored from browser storage. A provider error, invalid
 result or unavailable configuration leaves manual editing and saving usable.
 Use the safe error reference when one is available.
 
-Live NUS SoC operation is enabled on both deployed Render services; local development
+Live NUS SoC operation is enabled on both deployed Azure services; local development
 keeps it off by default. One representative strict-contract call for each role and
 all three authenticated development workflows passed on 8 November 2026. The
 application owner explicitly authorized production activation with the remaining
@@ -598,9 +599,11 @@ Include the action, observed result and safe correlation identifier when present
 
 ## Release information for peer testing
 
-- Verified production application: <https://specsentry-prod-bi1f.onrender.com>,
-  promoted from protected `master` revision
-  `8cdaefa517baf1f4777cddcba766ed151ebf5510` on 8 November 2026.
+- Azure production target:
+  <https://specsentry.livelymeadow-62e3ed89.eastasia.azurecontainerapps.io>.
+  Treat it as verified only when the latest protected production promotion and
+  authenticated smoke are green; until then the Render URL above is the last
+  independently verified provider fallback.
 - Safe development test-account distribution and sign-in instructions for all three
   roles: provided at the start of this guide; all six login/logout flows were
   verified on 7 November 2026.

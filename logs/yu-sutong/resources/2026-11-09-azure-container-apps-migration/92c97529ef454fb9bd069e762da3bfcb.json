@@ -1,0 +1,35 @@
+{
+  "id": "92c97529ef454fb9bd069e762da3bfcb",
+  "prompter": "yu-sutong",
+  "session": "2026-11-09-azure-container-apps-migration",
+  "agent": "deployment-security-reviewer",
+  "invocation": "security-design-review-1",
+  "stage": "pre-review",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Exact reasoning effort and attributable token telemetry are not exposed",
+  "started_at": "2026-11-08T18:12:47.891092+00:00",
+  "ended_at": "2026-11-08T18:18:27.991249+00:00",
+  "elapsed_seconds": 340.100157,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Azure Container Apps security pre-review returned AZ-SEC-001 through AZ-SEC-008; production remains blocked pending isolated OIDC, bound target/revision verification, pinned tooling, safe registry auth, secret separation, and protected rollback",
+  "unavailable_reasons": {
+    "input_tokens": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "output_tokens": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "cache_read_tokens": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "tool_calls": "Per-invocation token, cache, tool-call and retry telemetry is not exposed",
+    "retries": "Per-invocation token, cache, tool-call and retry telemetry is not exposed"
+  },
+  "unavailable_reason": "Per-invocation token, cache, tool-call and retry telemetry is not exposed"
+}

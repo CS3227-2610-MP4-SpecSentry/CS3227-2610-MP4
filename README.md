@@ -9,7 +9,7 @@ snapshot, acknowledge recipient-scoped revocation notices, append released
 corrections and filter a restricted project audit. The optional Release Gate
 Assistant is advisory and cannot mutate or publish release state.
 All three role assistants use the bounded server gateway. Live NUS SoC AI is
-enabled in both Render services through server-only secrets. On 8 November 2026,
+configured in both Azure Container Apps through server-only secrets. On 8 November 2026,
 one representative exact-contract call passed for each role and all three deployed
 development workflows passed end to end. The application owner then explicitly
 accepted the remaining provider uncertainty and authorized production activation;
@@ -24,17 +24,24 @@ release gates are also tracked in the
 
 ## Live grader access
 
-> **First-visit notice:** Production runs on Render's free tier and may take about
-> one minute to wake after inactivity. If the first request is slow, please wait
-> for startup and refresh once.
+> **First-visit notice:** Production uses Azure Container Apps scale-to-zero and
+> Neon serverless PostgreSQL. The first request after inactivity can take longer
+> while both resume; retry once if the initial request is still starting.
 
-**Production application and primary grader test environment:
-<https://specsentry-prod-bi1f.onrender.com>**
+**Azure production endpoint (becomes the primary grader environment only after
+the protected Azure promotion and authenticated smoke pass):
+<https://specsentry.livelymeadow-62e3ed89.eastasia.azurecontainerapps.io>**
 
 A separate development deployment is available for team testing without sharing
 production data:
 
-**Development application: <https://specsentry-dev-bi1f.onrender.com>**
+**Development application:
+<https://specsentry-dev.greensea-443a99a3.indonesiacentral.azurecontainerapps.io>**
+
+During the migration cutover, the existing Render production service remains the
+grader fallback at <https://specsentry-prod-bi1f.onrender.com>. It is not the source
+of truth for new Azure release evidence and will be retired only after Azure
+production promotion and authenticated smoke succeed.
 
 These are synthetic demo-only accounts. Each account uses password
 `Password123!`:
@@ -46,20 +53,23 @@ These are synthetic demo-only accounts. Each account uses password
 | Release Maintainer | `release_maintainer1` | `release_maintainer2` |
 
 The same six identities are provisioned independently in production and
-development. On 9 November 2026, every production account passed deployed HTTPS
-login, correct-role session retrieval, logout, and post-logout rejection. There is
+development. On 9 November 2026, every account in the existing Render production
+deployment passed HTTPS login, correct-role session retrieval, logout, and
+post-logout rejection; Azure requires a fresh post-promotion smoke. There is
 no public registration or role picker; signing in opens the workspace assigned to
-that account. Both services have the same free-tier cold-start behavior described
-above. These public demo credentials are
+that account. The Azure applications and Neon databases can independently resume
+from idle as described above. These public demo credentials are
 intentionally separate from private deployment smoke accounts, database
 credentials and provider tokens. Data created in one environment does not appear
 in the other.
 
-Production promotion completed on 8 November 2026 after recovery and compatibility
-evidence, teammate approval, all ten reviewed migrations and authenticated release
-smoke passed. The six public demo identities were subsequently provisioned through
-the fail-closed administrator command in each environment; the development seed is
-still blocked from running in production.
+The last Render production promotion completed on 8 November 2026 after recovery
+and compatibility evidence, teammate approval, all ten reviewed migrations and
+authenticated release smoke passed. The Azure migration preserves those Neon
+databases and requires a fresh protected development release, human production
+approval and authenticated smoke before cutover is considered complete. The six
+public demo identities were provisioned through the fail-closed administrator
+command in each environment; the development seed remains blocked in production.
 
 ## Directory map
 
@@ -94,7 +104,8 @@ eslint.config.mjs         Lint rules and client/server import boundary
 .env.example              Local environment template; live .env files are ignored
 Dockerfile                One production image serving frontend and backend
 compose.yaml              Local PostgreSQL and optional full application
-render.yaml               Render services pinned to the verified immutable image digest
+render.yaml               Temporary Render rollback manifest retained during Azure cutover
+workflow/deployment/tooling/azure-deploy.mjs  Guarded ACR import and Container App promotion
 playwright.config.ts      Browser and automated accessibility smoke-test setup
 ```
 
@@ -170,6 +181,6 @@ npm run build
 ```
 
 For database and browser checks, see [Developer Guide](docs/DeveloperGuide.md).
-For Render + Neon setup and current operational limitations, see
+For Azure Container Apps + Neon setup and current operational limitations, see
 [Deployment](docs/Deployment.md). Product requirements start at
 [the specification index](workflow/specs/PRODUCT-SPEC.md).
