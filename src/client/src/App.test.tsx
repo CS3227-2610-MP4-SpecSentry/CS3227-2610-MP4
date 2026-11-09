@@ -18,11 +18,14 @@ describe('base authentication', () => {
   });
   it('reports an ended session after an authenticated session is rejected', async () => {
     let authenticated = true;
-    vi.stubGlobal('fetch', vi.fn().mockImplementation(() => Promise.resolve(
-      authenticated ? reply(session()) : reply({}, 401),
+    vi.stubGlobal('fetch', vi.fn().mockImplementation((url: string) => Promise.resolve(
+      url === '/api/auth/session'
+        ? (authenticated ? reply(session()) : reply({}, 401))
+        : reply({ items: [], nextCursor: null }),
     )));
     render(<MemoryRouter><App /></MemoryRouter>);
     await screen.findByText('Signed in as alice');
+    await act(async () => {});
     authenticated = false;
     fireEvent(window, new Event('focus'));
     expect(await screen.findByText('Your session ended. Please sign in again.')).toBeInTheDocument();
