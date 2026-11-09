@@ -6,7 +6,8 @@ import { join, resolve } from 'node:path';
 import { test } from 'node:test';
 import { createCandidate, readCandidate, validateCandidate, validateCiRun, validateReleaseRun,
   validateImageReference, verifyMigrationInventory, verifyMigrationManifest } from '../tooling/release-candidate.mjs';
-import { deployImage, renderRequest } from '../tooling/render-deploy.mjs';
+import { copyImageToAcr, deployImage, runAzure, validateAcrTarget, validateAzureTarget,
+  validateRegistryIdentity, verifyAcrImage } from '../tooling/azure-deploy.mjs';
 import { validateDirectDatabaseUrl, verifyDatabase } from '../tooling/verify-database.mjs';
 import { validateDeploymentTarget, verifyRemote } from '../tooling/verify-remote.mjs';
 
@@ -76,47 +77,184 @@ test('migration inventory rejects an unreviewed migration before deployment', as
   } finally { await rm(directory, { recursive: true }); }
 });
 
-const renderResolvedDigest = `sha256:${'9'.repeat(64)}`;
-const renderImage = { ref: image, sha: renderResolvedDigest };
 const jsonResponse = (value, status = 200, headers = {}) => new Response(JSON.stringify(value), {
   status, headers: { 'content-type': 'application/json', ...headers },
 });
 
-test('Render client deploys and polls only the returned immutable deploy', async () => {
+const subscriptionId = '11111111-1111-4111-8111-111111111111';
+const resourceGroup = 'specsentry-dev-rg';
+const containerAppName = 'specsentry-dev';
+const revision = 'specsentry-dev--abc123';
+const registryResourceGroup = 'specsentry-shared-rg';
+const registryName = 'specsentryregistry';
+const registryServer = `${registryName}.azurecr.io`;
+const containerImageName = 'specsentry/app';
+const registryIdentity = `/subscriptions/${subscriptionId}/resourceGroups/${resourceGroup}`
+  + '/providers/Microsoft.ManagedIdentity/userAssignedIdentities/specsentry-dev-pull';
+const deploymentHost = 'specsentry-dev.example.azurecontainerapps.io';
+const acrImage = `${registryServer}/${containerImageName}@${digest}`;
+const registryResource = { name: registryName, loginServer: registryServer, provisioningState: 'Succeeded',
+  id: `/subscriptions/${subscriptionId}/resourceGroups/${registryResourceGroup}`
+    + `/providers/Microsoft.ContainerRegistry/registries/${registryName}` };
+const runtimeEnvironment = [
+  { name: 'PORT', value: '3000' }, { name: 'TRUST_PROXY_HOPS', value: '1' },
+  { name: 'NODE_ENV', value: 'production' }, { name: 'DATABASE_URL', secretRef: 'database-url' },
+  { name: 'SESSION_SECRET', secretRef: 'session-secret' }, { name: 'AI_API_KEY', secretRef: 'ai-api-key' },
+];
+const runtimeProbes = [
+  { type: 'Readiness', httpGet: { path: '/api/ready', port: 3000, scheme: 'HTTP' } },
+  { type: 'Liveness', httpGet: { path: '/api/health', port: 3000, scheme: 'HTTP' } },
+];
+const azureContainer = { name: 'specsentry', image: acrImage, env: runtimeEnvironment, probes: runtimeProbes };
+const azureConfiguration = { activeRevisionsMode: 'Single',
+  registries: [{ server: registryServer, identity: registryIdentity }],
+  ingress: { external: true, allowInsecure: false, targetPort: 3000,
+    fqdn: deploymentHost } };
+const azurePreflight = { name: containerAppName, properties: { provisioningState: 'Succeeded',
+  latestRevisionName: 'specsentry-dev--previous', configuration: azureConfiguration,
+  template: { containers: [azureContainer] } } };
+const azureUpdate = { name: containerAppName, properties: { provisioningState: 'Succeeded',
+  latestRevisionName: revision, configuration: azureConfiguration,
+  template: { containers: [azureContainer] } } };
+const azureFinal = { name: containerAppName, properties: { ...azureUpdate.properties,
+  configuration: { ...azureConfiguration, ingress: { ...azureConfiguration.ingress,
+    traffic: [{ revisionName: revision, weight: 100 }] } } } };
+function azureRevision({ active = true, runningState = 'Running', healthState = 'Healthy',
+  provisioningState = 'Provisioned', deployedImage = acrImage } = {}) {
+  return { name: revision, properties: { active, runningState, healthState, provisioningState,
+    template: { containers: [{ ...azureContainer, image: deployedImage }] } } };
+}
+
+test('development copies the exact private GHCR manifest into ACR and verifies its digest', async () => {
   const calls = [];
-  const responses = [jsonResponse({ id: 'dep-abc', status: 'created', image: renderImage }, 201),
-    jsonResponse({ id: 'dep-abc', status: 'update_in_progress', image: renderImage }),
-    jsonResponse({ id: 'dep-abc', status: 'live', image: renderImage })];
-  const result = await deployImage({ serviceId: 'srv-abc', token: 'x'.repeat(32), image,
-    fetchImpl: async (url, options) => { calls.push({ url: String(url), options }); return responses.shift(); },
-    sleep: async () => undefined, pollIntervalMs: 0 });
-  assert.deepEqual(result, { deployId: 'dep-abc', imageDigest: digest });
-  assert.equal(calls[0].url, 'https://api.render.com/v1/services/srv-abc/deploys');
-  assert.match(calls[0].options.body, new RegExp(digest));
-  assert.ok(calls.slice(1).every(({ url }) => url.endsWith('/deploys/dep-abc')));
-  assert.ok(calls.every(({ options }) => options.redirect === 'manual'));
+  const responses = [registryResource, null, { digest }, { digest }];
+  const result = await copyImageToAcr({ subscriptionId, registryResourceGroup, registryName, registryServer,
+    containerImageName, sourceImage: image, expectedDigest: digest, ghcrUsername: 'yu-sutong',
+    ghcrToken: 'synthetic-short-lived-token',
+    run: async (args, options) => { calls.push({ args, options }); return responses.shift(); } });
+  assert.deepEqual(result, { image: acrImage, imageDigest: digest });
+  assert.deepEqual(calls.map(({ args }) => args.slice(0, 2)), [
+    ['acr', 'show'], ['acr', 'import'], ['acr', 'repository'], ['acr', 'repository'],
+  ]);
+  const importArgs = calls[1].args;
+  assert.equal(importArgs[importArgs.indexOf('--source') + 1], image);
+  assert.equal(importArgs[importArgs.indexOf('--image') + 1],
+    `${containerImageName}:sha256-${digest.slice('sha256:'.length)}`);
+  assert.equal(importArgs[importArgs.indexOf('--password') + 1], 'synthetic-short-lived-token');
+  assert.deepEqual(calls[1].options, { allowEmpty: true });
+  assert.equal(JSON.stringify(result).includes('synthetic-short-lived-token'), false);
 });
 
-test('Render client bounds retries and rejects redirects, auth failure and wrong identity', async () => {
-  let attempts = 0;
-  const retried = await renderRequest('/v1/services/srv-abc/deploys/dep-abc', { token: 'x'.repeat(32),
-    sleep: async () => undefined, fetchImpl: async () => {
-      attempts += 1;
-      return attempts === 1 ? jsonResponse({ error: 'busy' }, 429, { 'retry-after': '0' }) : jsonResponse({ ok: true });
-    } });
-  assert.deepEqual(retried, { ok: true }); assert.equal(attempts, 2);
-  await assert.rejects(() => renderRequest('/v1/services/srv-abc/deploys', { token: 'x'.repeat(32),
-    fetchImpl: async () => new Response(null, { status: 302, headers: { location: 'https://example.test/' } }) }), /redirect/);
-  attempts = 0;
-  await assert.rejects(() => renderRequest('/v1/services/srv-abc/deploys', { token: 'x'.repeat(32),
-    fetchImpl: async () => { attempts += 1; return jsonResponse({ error: 'no' }, 401); } }), /401/);
-  assert.equal(attempts, 1);
-  await assert.rejects(() => deployImage({ serviceId: 'srv-abc', token: 'x'.repeat(32), image,
-    fetchImpl: async () => jsonResponse({ id: 'dep-other', status: 'created',
-      image: { ref: image.replace(digest, `sha256:${'0'.repeat(64)}`), sha: digest } }, 201) }), /image reference/);
-  await assert.rejects(() => deployImage({ serviceId: 'srv-abc', token: 'x'.repeat(32), image,
-    fetchImpl: async () => jsonResponse({ id: 'dep-other', status: 'created',
-      image: { ref: image, sha: 'not-a-digest' } }, 201) }), /digest/);
+test('production only verifies the existing ACR digest and never imports it', async () => {
+  const calls = [];
+  const result = await verifyAcrImage({ subscriptionId, registryResourceGroup, registryName, registryServer,
+    containerImageName, expectedDigest: digest,
+    run: async (args) => { calls.push(args); return calls.length === 1 ? registryResource : { digest }; } });
+  assert.deepEqual(result, { image: acrImage, imageDigest: digest });
+  assert.equal(calls.some((args) => args[0] === 'acr' && args[1] === 'import'), false);
+  assert.equal(calls[1][calls[1].indexOf('--image') + 1], `${containerImageName}@${digest}`);
+  await assert.rejects(() => verifyAcrImage({ subscriptionId, registryResourceGroup, registryName, registryServer,
+    containerImageName, expectedDigest: digest,
+    run: async (args) => (args[1] === 'show' ? registryResource : { digest: `sha256:${'0'.repeat(64)}` }) }),
+  /digest mismatch/);
+});
+
+test('Azure client deploys the ACR digest and verifies the exact revision and all traffic', async () => {
+  const calls = [];
+  const responses = [azurePreflight, null, azureUpdate, azureRevision({ active: false, runningState: 'Processing',
+    healthState: 'None', provisioningState: 'Provisioning' }), azureRevision({ active: false }),
+  azureRevision(), azureFinal];
+  const result = await deployImage({ subscriptionId, resourceGroup, containerAppName,
+    registryName, registryServer, containerImageName, registryIdentity, expectedDeploymentHost: deploymentHost,
+    image: acrImage, expectedDigest: digest,
+    run: async (args, options) => { calls.push({ args, options }); return responses.shift(); },
+    sleep: async () => undefined, pollIntervalMs: 0 });
+  assert.deepEqual(result, { deployId: revision, imageDigest: digest });
+  assert.ok(calls.every(({ args }) => args[0] === 'rest'));
+  assert.deepEqual(calls.slice(0, 3).map(({ args }) => args[args.indexOf('--method') + 1]),
+    ['get', 'patch', 'get']);
+  assert.deepEqual(calls[1].options, { allowEmpty: true });
+  const appUrl = calls[0].args[calls[0].args.indexOf('--url') + 1];
+  assert.equal(appUrl, `https://management.azure.com/subscriptions/${subscriptionId}`
+    + `/resourceGroups/${resourceGroup}/providers/Microsoft.App/containerApps/${containerAppName}`
+    + '?api-version=2025-07-01');
+  assert.equal(calls[1].args[calls[1].args.indexOf('--url') + 1], appUrl);
+  const body = JSON.parse(calls[1].args[calls[1].args.indexOf('--body') + 1]);
+  assert.deepEqual(body.properties.configuration.registries,
+    [{ server: registryServer, identity: registryIdentity }]);
+  assert.equal(body.properties.template.containers[0].image, acrImage);
+  assert.deepEqual(body.properties.template.containers[0].env, runtimeEnvironment);
+  assert.ok(calls.slice(3, 6).every(({ args }) =>
+    args[args.indexOf('--url') + 1].includes(`/revisions/${revision}?api-version=2025-07-01`)));
+  assert.equal(calls.at(-1).args[calls.at(-1).args.indexOf('--url') + 1], appUrl);
+});
+
+test('Azure client rejects invalid targets, ambiguous CLI failures and wrong image identity', async () => {
+  assert.deepEqual(validateAzureTarget(subscriptionId, resourceGroup, containerAppName),
+    { subscriptionId, resourceGroup, containerAppName });
+  assert.deepEqual(validateAcrTarget(registryName, registryServer, containerImageName),
+    { registryName, registryServer, containerImageName });
+  assert.equal(validateRegistryIdentity(registryIdentity, subscriptionId, resourceGroup), registryIdentity);
+  assert.throws(() => validateAzureTarget('not-a-guid', resourceGroup, containerAppName), /subscription/);
+  assert.throws(() => validateAzureTarget(subscriptionId, 'Bad_Group', containerAppName), /resource group/);
+  assert.throws(() => validateAzureTarget(subscriptionId, resourceGroup, 'Bad_App'), /Container App/);
+  assert.throws(() => validateAcrTarget('bad_name', registryServer, containerImageName), /Registry name/);
+  assert.throws(() => validateAcrTarget(registryName, 'other.azurecr.io', containerImageName), /Registry server/);
+  assert.throws(() => validateRegistryIdentity(registryIdentity.replace(resourceGroup, 'other-rg'),
+    subscriptionId, resourceGroup), /outside/);
+  await assert.rejects(() => runAzure(['account', 'show'], {
+    exec: async () => { throw new Error('sensitive provider output'); },
+  }), (error) => error.message === 'Azure CLI command failed' && !error.message.includes('sensitive'));
+  await assert.rejects(() => deployImage({ subscriptionId, resourceGroup, containerAppName,
+    registryName, registryServer, containerImageName, registryIdentity, expectedDeploymentHost: deploymentHost,
+    image, expectedDigest: digest,
+    run: async () => azurePreflight }), /image identity/);
+  const wrongImage = acrImage.replace(digest, `sha256:${'0'.repeat(64)}`);
+  const responses = [azurePreflight, null, { ...azureUpdate, properties: { ...azureUpdate.properties,
+    template: { containers: [{ ...azureContainer, image: wrongImage }] } } }];
+  await assert.rejects(() => deployImage({ subscriptionId, resourceGroup, containerAppName,
+    registryName, registryServer, containerImageName, registryIdentity, expectedDeploymentHost: deploymentHost,
+    image: acrImage, expectedDigest: digest,
+    run: async () => responses.shift(), sleep: async () => undefined, maxPolls: 1 }), /image identity/);
+});
+
+test('Azure client rejects unsafe runtime secrets, probes, ingress and traffic', async () => {
+  const deploy = (responses) => deployImage({ subscriptionId, resourceGroup, containerAppName,
+    registryName, registryServer, containerImageName, registryIdentity, expectedDeploymentHost: deploymentHost,
+    image: acrImage, expectedDigest: digest,
+    run: async () => responses.shift(),
+    sleep: async () => undefined, maxPolls: 1 });
+  const directUrl = { ...azurePreflight, properties: { ...azurePreflight.properties,
+    template: { containers: [{ ...azureContainer,
+      env: [...runtimeEnvironment, { name: 'DIRECT_DATABASE_URL', secretRef: 'migration-url' }] }] } } };
+  await assert.rejects(() => deploy([directUrl]), /Migration credential/);
+  const literalSecret = { ...azurePreflight, properties: { ...azurePreflight.properties,
+    template: { containers: [{ ...azureContainer,
+      env: runtimeEnvironment.map((entry) => (entry.name === 'DATABASE_URL'
+        ? { name: 'DATABASE_URL', value: 'postgresql://sensitive' } : entry)) }] } } };
+  await assert.rejects(() => deploy([literalSecret]), /secret reference/);
+  const noLiveness = { ...azurePreflight, properties: { ...azurePreflight.properties,
+    template: { containers: [{ ...azureContainer, probes: runtimeProbes.slice(0, 1) }] } } };
+  await assert.rejects(() => deploy([noLiveness]), /liveness probe/);
+  const insecure = { ...azurePreflight, properties: { ...azurePreflight.properties,
+    configuration: { ...azureConfiguration, ingress: { ...azureConfiguration.ingress, allowInsecure: true } } } };
+  await assert.rejects(() => deploy([insecure]), /HTTPS ingress/);
+  const wrongHost = { ...azurePreflight, properties: { ...azurePreflight.properties,
+    configuration: { ...azureConfiguration,
+      ingress: { ...azureConfiguration.ingress, fqdn: 'different.example.azurecontainerapps.io' } } } };
+  await assert.rejects(() => deploy([wrongHost]), /HTTPS ingress/);
+  const registryPassword = { ...azurePreflight, properties: { ...azurePreflight.properties,
+    configuration: { ...azureConfiguration,
+      registries: [{ server: registryServer, username: 'persistent', passwordSecretRef: 'registry-password' }] } } };
+  await assert.rejects(() => deploy([registryPassword, null, registryPassword]), /managed identity/);
+  const wrongIdentity = { ...azurePreflight, properties: { ...azurePreflight.properties,
+    configuration: { ...azureConfiguration,
+      registries: [{ server: registryServer, identity: registryIdentity.replace('specsentry-dev-pull', 'other') }] } } };
+  await assert.rejects(() => deploy([wrongIdentity, null, wrongIdentity]), /managed identity/);
+  const wrongTraffic = { ...azureFinal, properties: { ...azureFinal.properties,
+    configuration: { ...azureConfiguration, ingress: { ...azureConfiguration.ingress,
+      traffic: [{ revisionName: 'specsentry-dev--wrong', weight: 100 }] } } } };
+  await assert.rejects(() => deploy([azurePreflight, null, azureUpdate, azureRevision(), wrongTraffic]), /traffic/);
 });
 
 function databaseClient({ timezone = 'UTC', version = '170000', migrations = [], objects = true } = {}) {
@@ -251,17 +389,36 @@ test('all workflows pin actions and privileged release graph stays separated', a
   assert.match(verifyCi, /IMAGE_RELEASE_ENABLED/);
   assert.match(verifyCi, /publish-image/);
   assert.match(verifyCi, /release-development/);
-  assert.doesNotMatch(publish, /environment:|DIRECT_DATABASE_URL|RENDER_API_TOKEN|RENDER_SERVICE_ID|SMOKE_PASSWORD/);
+  assert.doesNotMatch(publish, /environment:|DIRECT_DATABASE_URL|AZURE_CLIENT_ID|AZURE_RESOURCE_GROUP|SMOKE_PASSWORD/);
   assert.match(development, /DEPLOYMENT_AUTOMATION_ENABLED/);
   assert.match(development, /inputs\.operation == 'release-development'/);
-  assert.match(development, /db:migrate:deploy[\s\S]*ACCOUNT_ROLE: RELEASE_MAINTAINER[\s\S]*npm run account -- ensure[\s\S]*render-deploy\.mjs/);
+  assert.match(development, /permissions:[\s\S]*id-token: write[\s\S]*steps:/);
+  assert.doesNotMatch(development, /az extension|containerapp extension/);
+  assert.match(development, /azure\/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6/);
+  assert.match(development, /client-id: \$\{\{ vars\.AZURE_CLIENT_ID \}\}/);
+  assert.match(development, /AZURE_CONTAINER_REGISTRY: \$\{\{ vars\.AZURE_CONTAINER_REGISTRY \}\}/);
+  assert.match(development, /AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP: \$\{\{ vars\.AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP \}\}/);
+  assert.match(development, /AZURE_REGISTRY_SERVER: \$\{\{ vars\.AZURE_REGISTRY_SERVER \}\}/);
+  assert.match(development, /AZURE_CONTAINER_IMAGE_NAME: \$\{\{ vars\.AZURE_CONTAINER_IMAGE_NAME \}\}/);
+  assert.match(development, /AZURE_CONTAINER_REGISTRY_IDENTITY: \$\{\{ vars\.AZURE_CONTAINER_REGISTRY_IDENTITY \}\}/);
+  assert.match(development, /EXPECTED_DEPLOYMENT_HOST: \$\{\{ vars\.EXPECTED_DEPLOYMENT_HOST \}\}/);
+  assert.match(development, /GHCR_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+  assert.match(development, /--execute --copy-to-acr[\s\S]*--source-image "\$SOURCE_IMAGE"[\s\S]*--expected-digest/);
+  assert.match(development, /db:migrate:deploy[\s\S]*ACCOUNT_ROLE: RELEASE_MAINTAINER[\s\S]*npm run account -- ensure[\s\S]*azure-deploy\.mjs/);
   assert.match(resolution, /inputs\.operation == 'promote-production'/);
   assert.doesNotMatch(resolution, /IMAGE_RELEASE_ENABLED/);
-  assert.match(release, /render-deploy\.mjs --execute --image/);
+  assert.match(release, /azure-deploy\.mjs --execute --image/);
+  assert.doesNotMatch(release, /RENDER_API_TOKEN|RENDER_SERVICE_ID|render-deploy\.mjs/);
   assert.doesNotMatch(release, /deploy[_-]?hook/i);
   const production = release.slice(release.indexOf('  deploy-production:'));
-  assert.match(production, /db:migrate:deploy[\s\S]*ACCOUNT_ROLE: RELEASE_MAINTAINER[\s\S]*npm run account -- ensure[\s\S]*render-deploy\.mjs/);
-  assert.doesNotMatch(production, /docker\/build-push-action|Build and publish/);
+  assert.match(production, /permissions:[\s\S]*id-token: write[\s\S]*steps:/);
+  assert.doesNotMatch(production, /az extension|containerapp extension/);
+  assert.match(production, /PROD_SUBSCRIPTION_ID:[\s\S]*PROD_RESOURCE_GROUP:[\s\S]*PROD_CONTAINER_APP_NAME:/);
+  assert.match(production, /--verify-acr[\s\S]*--expected-digest/);
+  assert.match(production, /AZURE_CONTAINER_REGISTRY_IDENTITY: \$\{\{ vars\.AZURE_CONTAINER_REGISTRY_IDENTITY \}\}/);
+  assert.match(production, /EXPECTED_DEPLOYMENT_HOST: \$\{\{ vars\.EXPECTED_DEPLOYMENT_HOST \}\}/);
+  assert.match(production, /db:migrate:deploy[\s\S]*ACCOUNT_ROLE: RELEASE_MAINTAINER[\s\S]*npm run account -- ensure[\s\S]*azure-deploy\.mjs/);
+  assert.doesNotMatch(production, /docker\/build-push-action|Build and publish|copy-to-acr|GHCR_TOKEN/);
 });
 
 test('account administration builds its internal shared dependency on a clean checkout', async () => {

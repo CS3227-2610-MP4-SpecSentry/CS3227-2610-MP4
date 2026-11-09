@@ -40,7 +40,7 @@ latest-content cloning explains replacement of saved private edits; attributed
 finding responses retain history and never resolve findings. The Spec Draft
 Assistant presents typed suggestions with initially empty selection, applies only
 to the unsaved editor and retains manual operation on failure. Live AI is enabled
-in both Render services through server-only secrets; representative all-role
+in both Azure Container Apps through server-only secrets; representative all-role
 contracts and the three development workflows passed on 8 November, while the safe
 local default remains disabled. Final checks and open findings are
 reported in the current run; this description alone is not acceptance. The proposed

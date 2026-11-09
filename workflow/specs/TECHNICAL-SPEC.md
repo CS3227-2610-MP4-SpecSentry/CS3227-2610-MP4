@@ -28,19 +28,19 @@ A TypeScript modular monolith keeps deployment, security, and testing manageable
 - Use one same-origin web service and one PostgreSQL database per environment. Local Vite development proxies /api to NestJS. Sessions remain in PostgreSQL rather than process memory; browser code receives only the opaque session cookie and permitted response fields. Mutations require a session-bound CSRF token. SameSite cookies and client route guards do not replace CSRF checks or server authorization.
 - The SoC LLM remains the only product AI provider. Calls go through the existing bounded server gateway; no browser-held AI keys, repository execution, or agent tools are added by this stack change. Initial deployment uses one application instance per environment; global AI limits and queue bounds must remain effective if replication is introduced.
 - Keep production source under src/server, src/client, and src/shared; keep schema/migration source under src/server/prisma and workflow tooling under workflow. Root package manifests, lockfile, Docker configuration, and CI files may live in their conventional locations. Existing Python workflow tooling remains development infrastructure and need not be rewritten into TypeScript.
-- GitHub Actions builds, tests, scans, and publishes the Docker image. Render runs the prebuilt image with separate services, secrets, and hostnames for development and production; Neon hosts a separate PostgreSQL project/database for each environment. Runtime connections use Prisma's official Neon WebSocket adapter with the pooled endpoint; localhost and CI retain the TCP adapter, and reviewed migrations use Neon's direct endpoint with TLS verification enabled. Application development and deployment remain separately team-managed under the assignment restriction above. GitHub Pages hosts the separate product website.
+- GitHub Actions builds, tests, scans, attests and publishes the Docker image. Azure Container Apps runs the prebuilt image with separate applications, managed identities, secrets and hostnames for development and production; Neon hosts a separate PostgreSQL project/database for each environment. A shared private ACR stores the immutable development-tested digest, but runtime state is isolated. GitHub authenticates to Azure with environment-bound OIDC rather than a client secret, and each Container App pulls through its own managed identity. Runtime connections use Prisma's official Neon WebSocket adapter with the pooled endpoint; localhost and CI retain the TCP adapter, and reviewed migrations use Neon's direct endpoint with TLS verification enabled. Application development and deployment remain separately team-managed under the assignment restriction above. GitHub Pages hosts the separate product website.
 
 This is the selected design baseline, not evidence of an implemented migration. Consult traceability for actual implementation status. Exact library versions and migration commands must match the supported versions pinned during scaffolding.
 
-Technical references checked on 24 October 2026: [Node.js releases](https://nodejs.org/en/about/previous-releases), [NestJS architecture](https://docs.nestjs.com/), [NestJS testing](https://docs.nestjs.com/fundamentals/testing), [Vite](https://vite.dev/guide/), [Prisma transactions](https://www.prisma.io/docs/orm/fundamentals/transactions), [Prisma migrations](https://www.prisma.io/docs/orm/migrations/applying-a-migration), [Express sessions](https://expressjs.com/en/resources/middleware/session/), [Zod](https://zod.dev/), and [Render prebuilt images](https://render.com/docs/deploying-an-image).
+Technical references checked on 24 October and 9 November 2026: [Node.js releases](https://nodejs.org/en/about/previous-releases), [NestJS architecture](https://docs.nestjs.com/), [NestJS testing](https://docs.nestjs.com/fundamentals/testing), [Vite](https://vite.dev/guide/), [Prisma transactions](https://www.prisma.io/docs/orm/fundamentals/transactions), [Prisma migrations](https://www.prisma.io/docs/orm/migrations/applying-a-migration), [Express sessions](https://expressjs.com/en/resources/middleware/session/), [Zod](https://zod.dev/), [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/overview), [Azure Container Registry import](https://learn.microsoft.com/azure/container-registry/container-registry-import-images), and [GitHub OIDC with Azure](https://learn.microsoft.com/azure/developer/github/connect-from-azure-openid-connect).
 
 ### Environment Separation
 
 | **Environment** | **Source** | **Service** | **Database** | **Control** |
 | --- | --- | --- | --- | --- |
 | Local | Feature branch | Docker Compose | Local PostgreSQL | Synthetic fixtures and stubbed AI by default |
-| Development | protected `master` release candidate after exact-SHA CI | Render specsentry-dev | Separate Neon development PostgreSQL project | Automatic canary after explicit enablement; synthetic data; separate secrets |
-| Production | same protected `master` source and development-tested digest | Render specsentry-prod | Separate Neon production PostgreSQL project | Manual GitHub Environment approval; promote without rebuilding |
+| Development | protected `master` release candidate after exact-SHA CI | Azure Container App `specsentry-dev` | Separate Neon development PostgreSQL project | Environment-bound OIDC; import exact digest into ACR; automatic canary after explicit enablement |
+| Production | same protected `master` source and development-tested digest | Azure Container App `specsentry` | Separate Neon production PostgreSQL project | Separate OIDC identity; manual GitHub Environment approval; reuse ACR digest without rebuilding/importing |
 
 GitHub Actions validates `develop` and `master` changes in ordinary CI. The release
 workflow accepts only an exact successful protected-`master` CI revision, then builds,
@@ -48,9 +48,10 @@ scans, attests and publishes one Docker image. That revision is first deployed t
 separate development environment as a release canary; manual production promotion
 reuses its verified digest without rebuilding. This protected-master canary model
 avoids treating an earlier `develop` tree as the provenance of a later merge commit.
-Render is the runtime platform, not the build source of truth. Development and
-production use separate services, databases, hostnames, secrets, cookies, and SoC
-LLM configuration.
+Azure is the runtime platform, not the build source of truth. Development and
+production use separate applications, resource groups, identities, databases,
+hostnames, secrets, cookies and SoC LLM configuration. The shared registry is only
+an immutable image store and never a shared runtime environment.
 
 ## Related constraints
 

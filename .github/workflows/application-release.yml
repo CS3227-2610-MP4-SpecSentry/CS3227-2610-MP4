@@ -208,6 +208,7 @@ jobs:
     permissions:
       attestations: read
       contents: read
+      id-token: write
       packages: read
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -236,6 +237,28 @@ jobs:
           gh attestation verify "oci://$IMAGE" --repo "$GITHUB_REPOSITORY"
           --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/application-release.yml"
           --source-ref refs/heads/master --source-digest "$SOURCE_SHA"
+      - name: Authenticate to Azure with environment OIDC
+        uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2.3.1
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Copy the approved private image into Azure Container Registry
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP: ${{ vars.AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP }}
+          AZURE_CONTAINER_REGISTRY: ${{ vars.AZURE_CONTAINER_REGISTRY }}
+          AZURE_REGISTRY_SERVER: ${{ vars.AZURE_REGISTRY_SERVER }}
+          AZURE_CONTAINER_IMAGE_NAME: ${{ vars.AZURE_CONTAINER_IMAGE_NAME }}
+          SOURCE_IMAGE: ${{ needs.build-development.outputs.image }}@${{ needs.build-development.outputs.image_digest }}
+          EXPECTED_DIGEST: ${{ needs.build-development.outputs.image_digest }}
+          GHCR_USERNAME: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          node workflow/deployment/tooling/azure-deploy.mjs --execute --copy-to-acr
+          --source-image "$SOURCE_IMAGE" --expected-digest "$EXPECTED_DIGEST"
+          --output development-acr-image.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
@@ -265,10 +288,21 @@ jobs:
         run: npm run account -- ensure
       - name: Deploy the immutable digest to development
         env:
-          RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
-          RENDER_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
-          IMAGE: ${{ needs.build-development.outputs.image }}@${{ needs.build-development.outputs.image_digest }}
-        run: node workflow/deployment/tooling/render-deploy.mjs --execute --image "$IMAGE" --output render-evidence.json
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_CONTAINER_APP_NAME: ${{ vars.AZURE_CONTAINER_APP_NAME }}
+          AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP: ${{ vars.AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP }}
+          AZURE_CONTAINER_REGISTRY: ${{ vars.AZURE_CONTAINER_REGISTRY }}
+          AZURE_REGISTRY_SERVER: ${{ vars.AZURE_REGISTRY_SERVER }}
+          AZURE_CONTAINER_IMAGE_NAME: ${{ vars.AZURE_CONTAINER_IMAGE_NAME }}
+          AZURE_CONTAINER_REGISTRY_IDENTITY: ${{ vars.AZURE_CONTAINER_REGISTRY_IDENTITY }}
+          EXPECTED_DEPLOYMENT_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
+          EXPECTED_DIGEST: ${{ needs.build-development.outputs.image_digest }}
+        run: |
+          ACR_IMAGE="$(jq -er --arg digest "$EXPECTED_DIGEST" \
+            'select(.schemaVersion == 1 and .imageDigest == $digest) | .image' development-acr-image.json)"
+          node workflow/deployment/tooling/azure-deploy.mjs --execute --image "$ACR_IMAGE" \
+            --expected-digest "$EXPECTED_DIGEST" --output azure-evidence.json
       - name: Verify development source and authenticated flow
         env:
           DEPLOYMENT_BASE_URL: ${{ vars.DEPLOYMENT_BASE_URL }}
@@ -288,7 +322,7 @@ jobs:
           DEVELOPMENT_CI_RUN_ID: ${{ needs.build-development.outputs.ci_run_id }}
           DEVELOPMENT_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
           DEVELOPMENT_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
-        run: node workflow/deployment/tooling/release-candidate.mjs create --deploy-evidence render-evidence.json --output release-candidate.json
+        run: node workflow/deployment/tooling/release-candidate.mjs create --deploy-evidence azure-evidence.json --output release-candidate.json
       - name: Preserve safe promotion input
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
@@ -398,6 +432,7 @@ jobs:
     permissions:
       attestations: read
       contents: read
+      id-token: write
       packages: read
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -411,7 +446,9 @@ jobs:
           DEV_SERVICE_FINGERPRINT: ${{ needs.resolve-production.outputs.development_service_fingerprint }}
           DEV_HOST_FINGERPRINT: ${{ needs.resolve-production.outputs.development_host_fingerprint }}
           DEV_DATABASE_FINGERPRINT: ${{ needs.resolve-production.outputs.development_database_fingerprint }}
-          PROD_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
+          PROD_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          PROD_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          PROD_CONTAINER_APP_NAME: ${{ vars.AZURE_CONTAINER_APP_NAME }}
           PROD_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
           PROD_DATABASE_HOST: ${{ vars.EXPECTED_DATABASE_HOST }}
           RECOVERY_EVIDENCE_ID: ${{ vars.RECOVERY_EVIDENCE_ID }}
@@ -422,10 +459,13 @@ jobs:
           test "$(git rev-parse origin/master)" = "$MASTER_SHA"
           [[ "$RECOVERY_EVIDENCE_ID" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$ ]]
           [[ "$SCHEMA_COMPATIBILITY_EVIDENCE_ID" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$ ]]
-          [[ "$PROD_SERVICE_ID" =~ ^srv-[A-Za-z0-9_-]{3,120}$ ]]
+          [[ "$PROD_SUBSCRIPTION_ID" =~ ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$ ]]
+          [[ "$PROD_RESOURCE_GROUP" =~ ^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$ ]]
+          [[ "$PROD_CONTAINER_APP_NAME" =~ ^[a-z][a-z0-9-]{1,30}[a-z0-9]$ ]]
           [[ "$PROD_HOST" =~ ^[a-z0-9.-]{3,253}$ ]]
           [[ "$PROD_DATABASE_HOST" =~ ^[a-z0-9.-]{3,253}$ ]]
-          test "$(printf %s "$PROD_SERVICE_ID" | sha256sum | cut -d' ' -f1)" != "$DEV_SERVICE_FINGERPRINT"
+          prod_target="$PROD_SUBSCRIPTION_ID/$PROD_RESOURCE_GROUP/$PROD_CONTAINER_APP_NAME"
+          test "$(printf %s "$prod_target" | sha256sum | cut -d' ' -f1)" != "$DEV_SERVICE_FINGERPRINT"
           test "$(printf %s "$PROD_HOST" | sha256sum | cut -d' ' -f1)" != "$DEV_HOST_FINGERPRINT"
           test "$(printf %s "$PROD_DATABASE_HOST" | sha256sum | cut -d' ' -f1)" != "$DEV_DATABASE_FINGERPRINT"
       - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
@@ -442,6 +482,24 @@ jobs:
           gh attestation verify "oci://$IMAGE" --repo "$GITHUB_REPOSITORY"
           --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/application-release.yml"
           --source-ref refs/heads/master --source-digest "$SOURCE_SHA"
+      - name: Authenticate to Azure with environment OIDC
+        uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2.3.1
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Verify the development-tested digest already exists in Azure Container Registry
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP: ${{ vars.AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP }}
+          AZURE_CONTAINER_REGISTRY: ${{ vars.AZURE_CONTAINER_REGISTRY }}
+          AZURE_REGISTRY_SERVER: ${{ vars.AZURE_REGISTRY_SERVER }}
+          AZURE_CONTAINER_IMAGE_NAME: ${{ vars.AZURE_CONTAINER_IMAGE_NAME }}
+          EXPECTED_DIGEST: ${{ needs.resolve-production.outputs.image_digest }}
+        run: >-
+          node workflow/deployment/tooling/azure-deploy.mjs --verify-acr
+          --expected-digest "$EXPECTED_DIGEST" --output production-acr-image.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
@@ -477,10 +535,21 @@ jobs:
           test "$(git rev-parse origin/master)" = "$MASTER_SHA"
       - name: Deploy the development-tested digest to production
         env:
-          RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
-          RENDER_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
-          IMAGE: ${{ needs.resolve-production.outputs.image }}
-        run: node workflow/deployment/tooling/render-deploy.mjs --execute --image "$IMAGE" --output production-render-evidence.json
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_CONTAINER_APP_NAME: ${{ vars.AZURE_CONTAINER_APP_NAME }}
+          AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP: ${{ vars.AZURE_CONTAINER_REGISTRY_RESOURCE_GROUP }}
+          AZURE_CONTAINER_REGISTRY: ${{ vars.AZURE_CONTAINER_REGISTRY }}
+          AZURE_REGISTRY_SERVER: ${{ vars.AZURE_REGISTRY_SERVER }}
+          AZURE_CONTAINER_IMAGE_NAME: ${{ vars.AZURE_CONTAINER_IMAGE_NAME }}
+          AZURE_CONTAINER_REGISTRY_IDENTITY: ${{ vars.AZURE_CONTAINER_REGISTRY_IDENTITY }}
+          EXPECTED_DEPLOYMENT_HOST: ${{ vars.EXPECTED_DEPLOYMENT_HOST }}
+          EXPECTED_DIGEST: ${{ needs.resolve-production.outputs.image_digest }}
+        run: |
+          ACR_IMAGE="$(jq -er --arg digest "$EXPECTED_DIGEST" \
+            'select(.schemaVersion == 1 and .imageDigest == $digest) | .image' production-acr-image.json)"
+          node workflow/deployment/tooling/azure-deploy.mjs --execute --image "$ACR_IMAGE" \
+            --expected-digest "$EXPECTED_DIGEST" --output production-azure-evidence.json
       - name: Verify production source and authenticated flow
         env:
           DEPLOYMENT_BASE_URL: ${{ vars.DEPLOYMENT_BASE_URL }}

@@ -1,5 +1,40 @@
 # Requirement traceability
 
+## Azure Container Apps migration — 9 November 2026
+
+MP4-005 and MP4-008 retain the separately managed build/runtime boundary while
+moving the unreliable free Render runtime to Azure Container Apps. GitHub Actions
+still builds, scans, attests and publishes the only application image. The
+development job authenticates with a `development`-bound OIDC identity, imports
+the exact approved private GHCR digest once into `specsentryacr`, verifies its ACR
+digest, then updates only the development Container App. Production uses a separate
+`production`-bound OIDC identity, verifies that the same digest already exists in
+ACR and promotes it without a rebuild or second import.
+
+The Azure for Students foundation contains separate development and production
+resource groups, Container Apps environments, applications, public hosts, managed
+identities and protected runtime secrets. Development is in Indonesia Central;
+production is in East Asia because the Student subscription permits only one
+Express Container Apps environment per region. Each application identity has
+`AcrPull`; the GitHub identities have Contributor only on their exact application,
+with registry import/read for development and pull/read for production. No Azure
+client secret or registry password exists. The existing distinct Neon projects are
+retained; pooled URLs stay in Azure while direct URLs remain migration-only GitHub
+Environment secrets.
+
+Local acceptance includes Prisma generation, 193 server tests, 290 client tests,
+32 deployment-workflow tests, lint, typecheck, production build and submission-file
+presence. The release client rejects malformed targets and responses that do not
+match the configured subscription/resource/app/ACR/identity/public host, as well as
+wrong digests, unsafe runtime secret mapping, missing probes, insecure ingress,
+ambiguous CLI mutation, unhealthy revisions or traffic that does not converge to
+100 percent. Protected environment variables plus narrow Azure RBAC anchor the
+trusted target. The live resource foundation and local checks do not replace the
+required protected-master development run, teammate production approval and
+authenticated Azure production smoke. Render remains a temporary fallback until
+those gates pass. Full interactions and failed/retried steps are in the
+[Azure migration log](../logs/yu-sutong/2026-11-09-azure-container-apps-migration.md).
+
 ## Live NUS SoC AI activation and final visitor fix — 8 November 2026
 
 OPEN-002, MP4-005, MP4-010 and all three role-assistant requirements now have
@@ -10,7 +45,7 @@ strict validation for Contributor, Reviewer and Release Maintainer. This establi
 basic provider compatibility for those examples, not broad model quality or a
 universal token bound.
 
-Both Render services receive `AI_LIVE_ENABLED=true`, the approved NUS SoC base,
+Both Azure Container Apps receive `AI_LIVE_ENABLED=true`, the approved NUS SoC base,
 `AI_MODEL=default`, `AI_CONTEXT_WINDOW=262144` and a protected server-only
 `AI_API_KEY`. The repository Blueprint records only non-secret values and a
 `sync: false` placeholder; no credential is committed. Development deploy
@@ -420,7 +455,7 @@ Baseline review: 25 October 2026. Every existing requirement ID has one definiti
 | Technical workspace and portability foundation; NFR-PORT-001 partial | src/server, src/client, src/shared; root package manifests, Dockerfile, compose.yaml | Clean npm ci, Prisma generation, typecheck, production build and local built-server smoke passed. Real PostgreSQL 16 connectivity passed; PostgreSQL 17 Compose and Docker checks are configured in CI but have not run locally. Full AC-NFR-PORT-001 remains pending |
 | Safe HTTP failure/header foundation; NFR-SEC-001 and integration error contract partial | src/server/src/http.ts, config.ts, health/health.controller.ts | src/server/test/http.spec.ts: health independent of database, readiness success/failure without secrets, headers, API/asset404 and configuration validation. No authentication/session/CSRF implementation or acceptance completion claimed |
 | Browser response validation and initial accessibility; NFR-A11Y-001 partial | src/client/src/App.tsx, src/shared/src/index.ts | Four client tests; workflow/tests/browser/scaffold.spec.ts Chromium and axe smoke passed for the public setup page only. Product role flows and manual accessibility checks pending |
-| Deployment topology | `.github/workflows/application-release.yml`, deployment tooling/tests and migration manifest; render.yaml, docs/Deployment.md; TECHNICAL-SPEC.md | Separate Render/Neon development and production targets, protected-master build/attest/scan, dev canary, recovery/compatibility evidence and same-digest production promotion completed on 8 November 2026; [production run 42481426084](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42481426084) passed migrations and authenticated smoke |
+| Deployment topology | `.github/workflows/application-release.yml`, `azure-deploy.mjs`, deployment tests and migration manifest; docs/Deployment.md; TECHNICAL-SPEC.md | Separate Azure Container Apps/Neon development and production targets with environment-bound OIDC, managed-identity ACR pulls, protected-master build/attest/scan, dev canary and same-digest production promotion. Local migration checks are green; preserve the final Azure development and protected-production run IDs before replacing the 8 November Render evidence as the verified deployment record |
 
 Command outcomes, corrections, independent review and resource limitations are in
 [the base-source session log](../logs/ngkhengyang/2026-10-25-base-source-initialization.md).

@@ -180,7 +180,7 @@ async function main() {
     if (!evidence || Object.keys(evidence).sort().join() !== ['deployId', 'imageDigest', 'schemaVersion', 'serviceFingerprint'].sort().join()
         || evidence.schemaVersion !== 1 || evidence.imageDigest !== process.env.IMAGE_DIGEST
         || !/^[0-9a-f]{64}$/.test(evidence.serviceFingerprint ?? ''))
-      throw new Error('Render deployment evidence is invalid');
+      throw new Error('Deployment evidence is invalid');
     if (!/^[a-z0-9.-]{3,253}$/.test(process.env.DEVELOPMENT_HOST ?? '')
         || !/^[a-z0-9.-]{3,253}$/.test(process.env.DEVELOPMENT_DATABASE_HOST ?? ''))
       throw new Error('Development target identity is invalid');

@@ -154,11 +154,11 @@
         </div>
       </nav>
       <div class="hero" id="top">
-        <p class="release-state">Protected production release verified · 8 Nov 2026</p>
+        <p class="release-state">Azure Container Apps · protected same-digest release</p>
         <h1>Bring clarity to every change.</h1>
         <p class="hero-copy">SpecSentry connects precise specifications, accountable human review and immutable release evidence—without letting AI make the decision for you.</p>
         <div class="actions">
-          <a class="button button-primary" href="https://specsentry-prod-bi1f.onrender.com">Open production</a>
+          <a class="button button-primary" href="https://specsentry.livelymeadow-62e3ed89.eastasia.azurecontainerapps.io">Open production</a>
           <a class="button button-secondary" href="#testing">Use demo accounts</a>
         </div>
       </div>
@@ -182,8 +182,8 @@
           <div>
             <h2 id="testing-heading">Test every role safely.</h2>
             <p>The same public demo identities are available in both isolated environments. Use production for grader testing and development for team testing.</p>
-            <a class="button button-primary" href="https://specsentry-prod-bi1f.onrender.com">Open production demo</a>
-            <a class="button button-secondary" href="https://specsentry-dev-bi1f.onrender.com">Open development</a>
+            <a class="button button-primary" href="https://specsentry.livelymeadow-62e3ed89.eastasia.azurecontainerapps.io">Open production demo</a>
+            <a class="button button-secondary" href="https://specsentry-dev.greensea-443a99a3.indonesiacentral.azurecontainerapps.io">Open development</a>
           </div>
           <p class="credential-note"><strong>Shared demo password</strong><code>Password123!</code><br>Use synthetic content only. There is no public registration or role picker.</p>
         </div>
@@ -195,7 +195,7 @@
             <tr><td>Release Maintainer</td><td><code>release_maintainer1</code></td><td><code>release_maintainer2</code></td></tr>
           </tbody>
         </table>
-        <p class="cold-start">Render's free services sleep after inactivity. Allow about a minute for the first request, then retry once. Production and development use separate Render services, Neon databases and secrets.</p>
+        <p class="cold-start">Production and development use separate Azure Container Apps, Neon databases, OIDC identities and secrets. The production target is released only after development verification and protected human approval.</p>
       </section>
 
       <section aria-labelledby="delivery-heading">
@@ -204,9 +204,9 @@
           <p>The delivery path builds once in GitHub Actions, verifies the immutable image in development and promotes that exact digest only after a protected human approval.</p>
         </div>
         <div class="proof-grid">
-          <article class="proof"><h3>Separated environments</h3><p><strong>Verified.</strong> Development and production have distinct application hosts, services, databases and credentials.</p></article>
-          <article class="proof"><h3>Reviewed migrations</h3><p><strong>Verified.</strong> Ten Prisma migrations passed direct Neon preflight, deployment and postflight checks.</p></article>
-          <article class="proof"><h3>Production smoke</h3><p><strong>Verified.</strong> Readiness, source revision, CSRF, secure sessions and an authenticated Maintainer flow passed.</p></article>
+          <article class="proof"><h3>Separated environments</h3><p><strong>Provisioned.</strong> Development and production have distinct application hosts, services, databases and credentials.</p></article>
+          <article class="proof"><h3>Reviewed migrations</h3><p><strong>Release-gated.</strong> Ten reviewed Prisma migrations must pass direct Neon preflight, deployment and postflight in each Azure release.</p></article>
+          <article class="proof"><h3>Production smoke</h3><p><strong>Pending cutover.</strong> Readiness, source revision, CSRF, secure sessions and an authenticated Maintainer flow must pass after protected Azure promotion.</p></article>
         </div>
       </section>
 

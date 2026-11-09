@@ -23,7 +23,8 @@
 | deployment/templates/RUN.md | Deployment brief, assignments, findings, commands, approvals and terminal status record |
 | deployment/migrations.sha256 | Reviewed migration-file inventory and checksums used by CI and release preflight |
 | deployment/tooling/release-candidate.mjs | Immutable source/image/candidate and migration-manifest validation |
-| deployment/tooling/render-deploy.mjs | Explicit, allowlisted Render image-digest deployment client |
+| deployment/tooling/azure-deploy.mjs | Exact-digest ACR import, Azure target validation, revision/traffic polling and managed-identity deployment client |
+| deployment/tooling/render-deploy.mjs | Legacy Render client retained temporarily as cutover rollback evidence; not used by the active release workflow |
 | deployment/tooling/verify-database.mjs | Direct Neon target, TLS, UTC, migration-state and schema verification |
 | deployment/tooling/verify-remote.mjs | Bounded source-marker, readiness, session/CSRF and Maintainer-read deployment smoke |
 | deployment/tooling/verify-run-evidence.mjs | Deterministic completed-run/resource/manifest checker |
