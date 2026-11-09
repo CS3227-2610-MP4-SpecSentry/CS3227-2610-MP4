@@ -177,3 +177,8 @@
   34 deployment-workflow tests, submission check, diff check, GitHub run readback
   and both Azure health probes passed. The cleanup remains a separate repository
   PR until human merge.
+- The cleanup PR's first CI attempt passed secret scanning, typecheck, lint and all
+  server tests, then hit one timing-sensitive failure in unchanged
+  `FunctionalUx.test.tsx`. The exact 11-test file passed three consecutive focused
+  local reruns; no product-source fix was warranted, and the follow-up evidence
+  commit triggers a fresh full CI run.

@@ -149,6 +149,11 @@
 - Validation passed: `npm run lint`; `npm run test:deployment-workflow` (34/34);
   `npm run check:submission`; `git diff --check`; both GitHub run conclusions/SHA;
   and development/production `/api/health` responses with the expected source SHA.
+- The first PR CI run passed secret scanning, typecheck, lint and all 193 server
+  tests, then had one timing-sensitive failure in the unchanged client
+  `FunctionalUx.test.tsx`. That exact file passed 11/11 in three consecutive focused
+  local reruns; no unrelated client source/test change was made. A fresh full CI run
+  is required on the evidence-only follow-up commit.
 - Remaining action: human review and merge of the cleanup PR. External Render
   services and credentials were not changed or deleted.
 
@@ -163,8 +168,10 @@
 | Stage / agent / invocation | Selected model / effort | Start / end (UTC) | Elapsed | Input / output tokens | Cache | Tool calls / retries | Outcome / source |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Cutover finalization / main / `main-1` | GPT-5 / unavailable | 2026-11-09T12:56:43.398770Z / 2026-11-09T13:02:05.881756Z | 322.482986 s | unavailable | unavailable | unavailable | Succeeded; shared resource-session report |
+| CI failure investigation / main / `main-2` | GPT-5 / unavailable | 2026-11-09T13:04:56.683198Z / 2026-11-09T13:05:27.354425Z | 30.671227 s | unavailable | unavailable | unavailable | Succeeded; existing focused test passed three consecutive reruns |
 
-- End-to-end wall time and summed agent elapsed time: 322.482986 seconds; one
-  non-overlapping interval.
+- End-to-end wall time from first start to final finish: 523.955655 seconds. Summed
+  agent elapsed time: 353.154213 seconds; the two intervals do not overlap and the
+  gap covers commit/push/remote-CI waiting outside registered execution stages.
 - Per-record input/output tokens, cache, tool calls, retries, observed model and
   observed effort were not exposed by the interface and were not estimated.
