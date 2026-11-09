@@ -200,6 +200,16 @@ test('Azure client accepts implicit latest traffic for a verified single-revisio
   assert.deepEqual(result, { deployId: revision, imageDigest: digest });
 });
 
+test('Azure client accepts an active provisioned revision that already scaled to zero', async () => {
+  const responses = [azurePreflight, null, azureUpdate,
+    azureRevision({ runningState: 'ScaledToZero', healthState: 'None' }), azureUpdate];
+  const result = await deployImage({ subscriptionId, resourceGroup, containerAppName,
+    registryName, registryServer, containerImageName, registryIdentity,
+    expectedDeploymentHost: deploymentHost, image: acrImage, expectedDigest: digest,
+    run: async () => responses.shift(), sleep: async () => undefined, pollIntervalMs: 0 });
+  assert.deepEqual(result, { deployId: revision, imageDigest: digest });
+});
+
 test('Azure client rejects invalid targets, ambiguous CLI failures and wrong image identity', async () => {
   assert.deepEqual(validateAzureTarget(subscriptionId, resourceGroup, containerAppName),
     { subscriptionId, resourceGroup, containerAppName });

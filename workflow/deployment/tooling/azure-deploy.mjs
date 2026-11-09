@@ -251,6 +251,17 @@ function validateRevision(value, revision, image) {
   return value.properties;
 }
 
+function revisionIsReady(properties) {
+  const runningHealthy = properties.runningState === 'Running'
+    && properties.healthState === 'Healthy';
+  // A zero-minimum-replica app can reach its steady scaled-down state before the deployment
+  // poll observes Healthy. The subsequent remote verification wakes it and checks both probes.
+  const scaledToZero = properties.runningState === 'ScaledToZero'
+    && properties.healthState === 'None';
+  return properties.active === true && properties.provisioningState === 'Provisioned'
+    && (runningHealthy || scaledToZero);
+}
+
 function validateFinalApplication(value, containerAppName, registryServer, registryIdentity,
   expectedDeploymentHost, revision, image, revisionTrafficWeight) {
   const properties = validateApplication(value, containerAppName, registryServer, registryIdentity,
@@ -315,8 +326,7 @@ export async function deployImage({ subscriptionId, resourceGroup, containerAppN
     try {
       const revisionPath = `${resourcePath}/revisions/${revision}`;
       properties = validateRevision(await run(restArguments('get', revisionPath)), revision, image);
-      if (properties.active === true && properties.runningState === 'Running'
-          && properties.healthState === 'Healthy' && properties.provisioningState === 'Provisioned') {
+      if (revisionIsReady(properties)) {
         validateFinalApplication(await run(restArguments('get', resourcePath)),
           containerAppName, registryServer, registryIdentity, expectedDeploymentHost, revision, image,
           properties.trafficWeight);
