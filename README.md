@@ -28,8 +28,7 @@ release gates are also tracked in the
 > Neon serverless PostgreSQL. The first request after inactivity can take longer
 > while both resume; retry once if the initial request is still starting.
 
-**Azure production endpoint (becomes the primary grader environment only after
-the protected Azure promotion and authenticated smoke pass):
+**Primary production and grader endpoint:
 <https://specsentry.livelymeadow-62e3ed89.eastasia.azurecontainerapps.io>**
 
 A separate development deployment is available for team testing without sharing
@@ -37,11 +36,6 @@ production data:
 
 **Development application:
 <https://specsentry-dev.greensea-443a99a3.indonesiacentral.azurecontainerapps.io>**
-
-During the migration cutover, the existing Render production service remains the
-grader fallback at <https://specsentry-prod-bi1f.onrender.com>. It is not the source
-of truth for new Azure release evidence and will be retired only after Azure
-production promotion and authenticated smoke succeed.
 
 These are synthetic demo-only accounts. Each account uses password
 `Password123!`:
@@ -53,9 +47,8 @@ These are synthetic demo-only accounts. Each account uses password
 | Release Maintainer | `release_maintainer1` | `release_maintainer2` |
 
 The same six identities are provisioned independently in production and
-development. On 9 November 2026, every account in the existing Render production
-deployment passed HTTPS login, correct-role session retrieval, logout, and
-post-logout rejection; Azure requires a fresh post-promotion smoke. There is
+development. The protected Azure production release passed source, health,
+readiness, session, CSRF and authenticated Maintainer-read smoke. There is
 no public registration or role picker; signing in opens the workspace assigned to
 that account. The Azure applications and Neon databases can independently resume
 from idle as described above. These public demo credentials are
@@ -63,11 +56,13 @@ intentionally separate from private deployment smoke accounts, database
 credentials and provider tokens. Data created in one environment does not appear
 in the other.
 
-The last Render production promotion completed on 8 November 2026 after recovery
-and compatibility evidence, teammate approval, all ten reviewed migrations and
-authenticated release smoke passed. The Azure migration preserves those Neon
-databases and requires a fresh protected development release, human production
-approval and authenticated smoke before cutover is considered complete. The six
+Azure development run
+[`42605859917`](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42605859917)
+and production run
+[`42619894195`](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42619894195)
+successfully promoted source `6dfe10db7958dac8f378f2a96118ab3b4ee69a5d` and the
+same immutable image digest through both environments. The production health
+response confirms that source revision. The six
 public demo identities were provisioned through the fail-closed administrator
 command in each environment; the development seed remains blocked in production.
 
@@ -104,7 +99,6 @@ eslint.config.mjs         Lint rules and client/server import boundary
 .env.example              Local environment template; live .env files are ignored
 Dockerfile                One production image serving frontend and backend
 compose.yaml              Local PostgreSQL and optional full application
-render.yaml               Temporary Render rollback manifest retained during Azure cutover
 workflow/deployment/tooling/azure-deploy.mjs  Guarded ACR import and Container App promotion
 playwright.config.ts      Browser and automated accessibility smoke-test setup
 ```

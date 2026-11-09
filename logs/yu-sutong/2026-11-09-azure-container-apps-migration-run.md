@@ -159,3 +159,26 @@
 | `workflow/specs/OPEN-DECISIONS.md` | `daf122cc03ab2b156f95f1ef0fdee43bc6b650be5eee804c1f4627c2e4de61c8` |
 | `workflow/specs/TECHNICAL-SPEC.md` | `b4725e23534290414abb4148ba9c5d353bbb2c35533ee97d2bef42d9e01e146d` |
 | `workflow/specs/UI-UX-SPEC.md` | `c2f9664a3d07b74864fe9b78725a437d418a8b01bd21a853095a4c579a8f51c6` |
+
+## Live cutover closure
+
+- Development release run: `42605859917`.
+- Production release run: `42619894195`.
+- Released source: `6dfe10db7958dac8f378f2a96118ab3b4ee69a5d`.
+- Released digest:
+  `sha256:b53a5573676b4af43357dd19ee32dc7805c32c8b95ee78f53054d5446ee2e759`.
+- Production authenticated smoke passed; the health endpoint returned `200` with
+  the expected source revision.
+- Production GitHub identity has exact-registry `AcrPull` and `Reader`.
+- Production approval remains restricted to protected branches, names `yu-sutong`
+  as reviewer and permits self-review.
+- The migration objective is released. The documentation cleanup is tracked by
+  successful resource session `2026-11-09-azure-cutover-finalization`; its lint,
+  34 deployment-workflow tests, submission check, diff check, GitHub run readback
+  and both Azure health probes passed. The cleanup remains a separate repository
+  PR until human merge.
+- The cleanup PR's first CI attempt passed secret scanning, typecheck, lint and all
+  server tests, then hit one timing-sensitive failure in unchanged
+  `FunctionalUx.test.tsx`. The exact 11-test file passed three consecutive focused
+  local reruns; no product-source fix was warranted, and the follow-up evidence
+  commit triggers a fresh full CI run.

@@ -1,6 +1,6 @@
 # Azure Container Apps + Neon PostgreSQL
 
-## Current migration status
+## Deployment status
 
 `.github/workflows/application-release.yml` is the repository-managed release path.
 GitHub Actions remains the only builder: it accepts an exact successful protected-
@@ -19,14 +19,16 @@ subscription with no credit card:
 The environments, applications, Neon databases, hostnames, managed identities,
 session secrets and smoke accounts are separate. The shared private Azure Container
 Registry is `specsentryacr.azurecr.io`; sharing the registry does not share runtime
-state. Render remains available as a temporary rollback host until an Azure
-protected-production run and authenticated smoke have passed. Do not delete the
-Render services during cutover.
+state.
 
-The repository migration candidate configures the Azure release path. Repository
-files and provisioned resources are not, by themselves, proof that the candidate
-image has passed development and production. Preserve the successful GitHub Actions
-run IDs and authenticated smoke output as release evidence.
+The Azure release path is live. Development run
+[`42605859917`](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42605859917)
+and production run
+[`42619894195`](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42619894195)
+successfully promoted source `6dfe10db7958dac8f378f2a96118ab3b4ee69a5d` and ACR
+digest `sha256:b53a5573676b4af43357dd19ee32dc7805c32c8b95ee78f53054d5446ee2e759`.
+The production workflow completed its authenticated smoke, and the public health
+endpoint returned `200` with the same source revision.
 
 Both Azure jobs use the Azure CLI's built-in `az rest` command with the fixed,
 stable Container Apps ARM API version `2025-07-01`; they do not download or execute
@@ -68,7 +70,7 @@ federated credentials:
 
 Neither identity has a client secret. Each has `Contributor` only on its exact
 Container App. Development has `Container Registry Data Importer and Data Reader`
-on the shared ACR; production has `AcrPull`. Each Container App uses its own
+on the shared ACR; production has `AcrPull` and `Reader` on that registry. Each Container App uses its own
 user-assigned managed identity with `AcrPull`, so Azure stores no registry password.
 
 Runtime secrets are stored directly as Azure Container App secrets:
@@ -114,8 +116,10 @@ before a separate human-approved connection switch.
 ## GitHub Environment configuration
 
 Both literal GitHub Environments, `development` and `production`, are restricted to
-the protected release branch. Production requires a teammate reviewer and should
-prevent self-review and bypass where the repository plan permits.
+the protected release branch. Production currently names `yu-sutong` as the
+required reviewer and permits self-review; the protected-branch deployment policy
+remains enabled. This preserves an explicit approval pause while allowing the
+repository owner to approve when no second eligible reviewer is available.
 
 | Scope | Name | Kind | Meaning |
 | --- | --- | --- | --- |
@@ -159,8 +163,6 @@ copied through every release job.
 7. Confirm production root, `/api/health` and `/api/ready` return `200`; signed-out
    `/api/auth/session` returns `401`; and the dedicated authenticated smoke passes.
 8. Exercise the six published demo identities and representative live-AI flows.
-9. Only after those checks may the old Render services be retired. Keep their final
-   release evidence even after provider cleanup.
 
 ## Cost and recovery notes
 
@@ -170,11 +172,6 @@ is authorized. Container Apps can scale to zero, while the Standard ACR and mana
 environment consume subscription allowance. Monitor Azure Cost Management and keep
 budget alerts enabled. Neon has separate compute/storage limits and can also suspend
 idle compute.
-
-The old `render.yaml` and Render deployment helper remain temporarily as cutover
-rollback evidence, but the active release workflow no longer sends a Render API
-token or deploy request. Remove those legacy artifacts only in a separately reviewed
-cleanup after Azure production has been proven stable.
 
 See the [deployment-agent workflow](../workflow/deployment/README.md),
 [Authentication](Authentication.md), and the 9 November Azure migration interaction

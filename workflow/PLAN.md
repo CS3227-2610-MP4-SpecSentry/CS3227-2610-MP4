@@ -1,6 +1,12 @@
 # Delivery and implementation plan
 
-Live NUS SoC activation, 8 November 2026: both Render services hold the server-only
+Azure release completion, 9 November 2026: development run `42605859917` and
+production run `42619894195` promoted source
+`6dfe10db7958dac8f378f2a96118ab3b4ee69a5d` and the same immutable digest through
+the separate Azure Container Apps/Neon environments. Production authenticated smoke
+and the health/source check passed. Azure is the active deployment path.
+
+Live NUS SoC activation, 8 November 2026: both deployed environments hold the server-only
 key and explicitly enable the `default` model with its key-scoped 262,144 context
 declaration. One representative exact-contract call passed for each role and
 Contributor, Reviewer and Maintainer workflows passed end to end on development.
@@ -249,7 +255,7 @@ Owners are existing coordination contacts, not evidence of human teammate sign-o
 | TASK-005 | Bounded SoC gateway and three assistants | TASK-002; OPEN-001/002 | ngkhengyang with role owners | Strict schemas/budgets and representative exact-contract calls passed for all roles; all three development workflows passed. The application owner authorized production activation with remaining OPEN-002 gaps explicitly retained. |
 | TASK-006 | Candidate gates, publication, revocation notices | TASK-004 and approved release policies | yu-sutong | REQ-REL-001–008 source, migrations, release workflow and authenticated production smoke passed. Deployed development Maintainer AI returned a schema-valid result; human teammate sign-off remains. See the [final run](../logs/yu-sutong/2026-11-06-maintainer-final.md). |
 | TASK-007 | Security, browser, accessibility and performance verification | Applicable slices | Shared team with independent review | Requirement-linked unit/integration/browser/performance evidence exists; final manual accessibility, broad AI edge-case/provider-policy review and human walkthrough/sign-off remain. |
-| TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Released 8 November: separate Render/Neon development and production targets, protected environments, restore/N-1 evidence, same-digest promotion and authenticated production smoke verified; GitHub Pages is live and release copy is refreshed in the final session-banner PR |
+| TASK-008 | Environments, guides, website and release evidence | TASK-007 and operational readiness | Shared team | Azure development run `42605859917` and production run `42619894195` verified separate Container Apps/Neon targets, protected environments, same-digest promotion and authenticated production smoke; GitHub Pages publishes the current Azure links |
 
 Record actual commands, failures and outcomes rather than marking elapsed dates complete. Produce detailed task breakdown for each approved slice.
 

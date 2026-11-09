@@ -1,0 +1,35 @@
+{
+  "id": "1c262256ea704c8ea093d2f90245cd22",
+  "prompter": "yu-sutong",
+  "session": "2026-11-09-azure-cutover-finalization",
+  "agent": "main",
+  "invocation": "main-1",
+  "stage": "implement",
+  "attempt": 1,
+  "selected_model": "gpt-5",
+  "selected_effort": "unavailable",
+  "observed_model": null,
+  "observed_effort": null,
+  "settings_reason": "Model family is known from the active Codex session; reasoning effort and per-stage usage are not exposed",
+  "started_at": "2026-11-09T12:56:43.398770+00:00",
+  "ended_at": "2026-11-09T13:02:05.881756+00:00",
+  "elapsed_seconds": 322.482986,
+  "status": "succeeded",
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "tool_calls": null,
+    "retries": null
+  },
+  "usage_source": null,
+  "outcome": "Updated current deployment documentation and GitHub Pages for verified Azure cutover, removed obsolete Render repository artifacts, and passed lint, 34 deployment workflow tests, submission check, diff check, GitHub run verification, and both Azure health probes",
+  "unavailable_reasons": {
+    "input_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the active interface",
+    "output_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the active interface",
+    "cache_read_tokens": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the active interface",
+    "tool_calls": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the active interface",
+    "retries": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the active interface"
+  },
+  "unavailable_reason": "Per-record token, cache, tool-call, retry, observed-model and observed-effort telemetry are not exposed by the active interface"
+}

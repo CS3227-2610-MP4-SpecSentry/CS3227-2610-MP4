@@ -1,6 +1,6 @@
 # Reflections
 
-Status: final evidence synthesis prepared on 8 November 2026. It reports measured
+Status: final evidence synthesis updated on 9 November 2026. It reports measured
 observations and their limitations; it does not turn missing baselines, telemetry
 or human verification into positive results.
 
@@ -15,6 +15,7 @@ implement, review and release the repository. The main evidence is:
 | --- | --- | --- |
 | [Maintainer smoke workflow observation](../workflow/evaluations/2026-11-05-maintainer-smoke-workflow-observation.md) | A measured orchestrator, implementer and independent-verifier run | No matched single-agent run |
 | [Deployment-agent workflow observation](../workflow/evaluations/2026-11-07-deployment-agent-workflow-observation.md) | Three specialist pre-reviews, implementation, correction and independent re-review | Repository-only at the time; no provider mutation in that experiment |
+| [Azure migration run](../logs/yu-sutong/2026-11-09-azure-container-apps-migration-run.md) | Provider migration, isolated OIDC/RBAC, recovery from quota/registration failures and final same-digest Azure release evidence | Long-running intervals include waiting and cannot isolate agent-only cost |
 | [Reviewer completion run](../logs/ngkhengyang/2026-11-04-reviewer-completion-execution.md) | A long coordinated run with pause/resume, blocked prerequisites and retained failed attempts | Environment and harness overhead cannot be separated cleanly from agent overhead |
 | [Final release and AI activation run](../logs/yu-sutong/2026-11-08-final-session-banner.md) | Strict-contract live probes, deployed development role checks, production activation and fresh reviews | Representative cases only; production role UI was not exercised |
 | [AI security specification](../workflow/specs/AI-SECURITY-SPEC.md) and tests linked from [traceability](../workflow/TRACEABILITY.md) | Context boundaries, schemas, quotas, timeout, retry and manual fallback | Provider quota and retention policy were not independently verified |
