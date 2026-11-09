@@ -20,8 +20,8 @@ const identityNamePattern = /^[a-z][a-z0-9-]{1,126}[a-z0-9]$/;
 const hostPattern = /^[a-z0-9](?:[a-z0-9.-]{1,251}[a-z0-9])$/;
 const revisionPattern = /^[a-z][a-z0-9-]{2,127}$/;
 const failedRunningStates = new Set(['ActivationFailed', 'Degraded', 'Failed', 'Stopped']);
-const pendingRunningStates = new Set(['Processing', 'Running', 'Unknown']);
-const pendingHealthStates = new Set(['Healthy', 'None', 'Unknown']);
+const pendingRunningStates = new Set([undefined, null, 'Processing', 'Running', 'Unknown']);
+const pendingHealthStates = new Set([undefined, null, 'Healthy', 'None', 'Unknown']);
 const pendingProvisioningStates = new Set(['Provisioned', 'Provisioning']);
 
 export function validateAzureTarget(subscriptionId, resourceGroup, containerAppName) {
@@ -252,12 +252,20 @@ function validateRevision(value, revision, image) {
 }
 
 function validateFinalApplication(value, containerAppName, registryServer, registryIdentity,
-  expectedDeploymentHost, revision, image) {
+  expectedDeploymentHost, revision, image, revisionTrafficWeight) {
   const properties = validateApplication(value, containerAppName, registryServer, registryIdentity,
     expectedDeploymentHost, image);
   if (properties.latestRevisionName !== revision)
     throw new Error('Azure latest revision identity mismatch');
   const traffic = properties.configuration?.ingress?.traffic;
+  // Azure omits ingress traffic arrays for some single-revision Container Apps and rejects an
+  // attempt to set explicit weights. In that case the revision resource still reports the
+  // effective traffic weight, so require it to be 100 before accepting the implicit routing.
+  if (traffic === undefined || traffic === null) {
+    if (revisionTrafficWeight !== 100)
+      throw new Error('Azure production traffic did not converge on the approved revision');
+    return;
+  }
   if (!Array.isArray(traffic) || traffic.length !== 1 || traffic[0]?.weight !== 100
       || !(traffic[0]?.revisionName === revision || traffic[0]?.latestRevision === true))
     throw new Error('Azure production traffic did not converge on the approved revision');
@@ -310,7 +318,8 @@ export async function deployImage({ subscriptionId, resourceGroup, containerAppN
       if (properties.active === true && properties.runningState === 'Running'
           && properties.healthState === 'Healthy' && properties.provisioningState === 'Provisioned') {
         validateFinalApplication(await run(restArguments('get', resourcePath)),
-          containerAppName, registryServer, registryIdentity, expectedDeploymentHost, revision, image);
+          containerAppName, registryServer, registryIdentity, expectedDeploymentHost, revision, image,
+          properties.trafficWeight);
         return Object.freeze({ deployId: revision, imageDigest: digest });
       }
     } catch (error) {
