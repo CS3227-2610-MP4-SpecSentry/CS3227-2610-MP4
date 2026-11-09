@@ -16,10 +16,6 @@ production data:
 
 **<https://specsentry-dev.greensea-443a99a3.indonesiacentral.azurecontainerapps.io>**
 
-The previous Render production service remains a temporary cutover fallback at
-<https://specsentry-prod-bi1f.onrender.com>. Azure is the target for new release
-evidence; Render is retained only until the protected Azure production smoke passes.
-
 Use any of these synthetic demo-only accounts. They all use password
 `Password123!`:
 
@@ -31,14 +27,18 @@ Use any of these synthetic demo-only accounts. They all use password
 
 There is no public registration or role picker. The role attached to the selected
 account determines which workspace opens. The same six identities are provisioned
-independently in production and development. On 9 November 2026, every production
-account passed deployed HTTPS login, correct-role session retrieval, logout, and
-post-logout rejection. They are intentionally public test identities and are not
-the private deployment smoke account. Never put real personal data, private source,
-provider tokens or other secrets into either shared testing environment.
+independently in production and development. The protected Azure workflow passed
+source, health, readiness, session, CSRF and authenticated Maintainer-read smoke;
+complete role-by-role use of the public accounts remains a human peer walkthrough.
+They are intentionally public test identities and are not the private deployment
+smoke account. Never put real personal data, private source, provider tokens or
+other secrets into either shared testing environment.
 
-Production promotion completed on 8 November 2026 after protected teammate approval,
-reviewed database migration, exact-image promotion and authenticated smoke. The six
+Azure production promotion completed on 9 November 2026 in run
+[`42619894195`](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42619894195)
+after the successful development candidate run
+[`42605859917`](https://github.com/CS3227-2610-MP4-SpecSentry/CS3227-2610-MP4/actions/runs/42605859917),
+reviewed database migration, same-digest promotion and authenticated smoke. The six
 public demo identities were subsequently provisioned through the fail-closed
 administrator command in both isolated databases; the development seed remains
 blocked from running in production.
@@ -601,9 +601,9 @@ Include the action, observed result and safe correlation identifier when present
 
 - Azure production target:
   <https://specsentry.livelymeadow-62e3ed89.eastasia.azurecontainerapps.io>.
-  Treat it as verified only when the latest protected production promotion and
-  authenticated smoke are green; until then the Render URL above is the last
-  independently verified provider fallback.
+  The protected production promotion and authenticated smoke passed in run
+  `42619894195`; health returned `200` for source
+  `6dfe10db7958dac8f378f2a96118ab3b4ee69a5d`.
 - Safe development test-account distribution and sign-in instructions for all three
   roles: provided at the start of this guide; all six login/logout flows were
   verified on 7 November 2026.

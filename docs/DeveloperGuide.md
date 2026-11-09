@@ -193,13 +193,14 @@ Current evidence and independent review are recorded in the
 
 ## Current state
 
-8 November release state: PR29 is merged into `master`. Older increment and branch
+9 November release state: the Azure production promotion is complete. Older increment and branch
 notes below are retained as historical checkpoints, not current merge status. The
 current release contains the completed Contributor, Reviewer and Release Maintainer
 workspaces, their bounded assistants, the refreshed GitHub Pages site, separate
-Neon databases and an Azure Container Apps migration candidate. The previous
-Render services remain available only as a cutover fallback until Azure production
-promotion and authenticated smoke pass.
+Neon databases and live Azure Container Apps development and production deployments.
+Development run `42605859917` and production run `42619894195` promoted source
+`6dfe10db7958dac8f378f2a96118ab3b4ee69a5d` with the same immutable image digest;
+the production workflow and health-source check passed.
 
 The base scaffold implements NestJS/Express, React/Vite, browser-safe Zod health
 contracts and Prisma PostgreSQL connectivity, plus account provisioning, login,
@@ -661,6 +662,9 @@ GHCR digest is imported once into ACR for development; production can only reuse
 the already verified digest. Provider bootstrap, a failed Container Registry
 registration attempt, the recovered agent stream and the no-secret transfer process
 are preserved in the [migration log](../logs/yu-sutong/2026-11-09-azure-container-apps-migration.md).
+The subsequent protected releases completed as development run `42605859917` and
+production run `42619894195`; Azure is now the sole active repository deployment
+path.
 
 The [AI security specification](../workflow/specs/AI-SECURITY-SPEC.md) defines planned
 context restrictions, validation, quotas, timeouts and adversarial tests. Implement

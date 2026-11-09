@@ -127,3 +127,44 @@
 - Unavailable reasons: the interface does not expose attributable token, cache,
   tool-call or retry counters. They are `unavailable`, never estimated from account
   limits.
+
+## Cutover finalization — 9 November 2026
+
+- Additional explicit request: update the repository from migration-candidate
+  wording to the completed Azure deployment, including README, GitHub Pages,
+  Reflections and other current Markdown; publish the development and production
+  links and remove obsolete Render fallback implementation.
+- Decision: Azure is the sole active repository deployment path. Preserve dated
+  Render history and evaluation evidence, but remove the temporary `render.yaml`
+  and Render deployment helper. Do not delete external Render resources or
+  credentials in this repository-only cleanup.
+- Prompter identity remains `yu-sutong`, explicitly supplied in the continued
+  conversation and corroborated by Git identity `Yu Sutong`.
+- Human summary verification remains pending.
+- Changes made: current Azure status, run evidence, URLs and approval/RBAC details
+  were reconciled across README, User/Developer/Deployment/Architecture/AI guides,
+  Reflections, the public GitHub Pages source, plan, workflow index, submission,
+  traceability and OPEN-002. The temporary Render manifest/helper were removed;
+  dated historical Render evidence was preserved.
+- Validation passed: `npm run lint`; `npm run test:deployment-workflow` (34/34);
+  `npm run check:submission`; `git diff --check`; both GitHub run conclusions/SHA;
+  and development/production `/api/health` responses with the expected source SHA.
+- Remaining action: human review and merge of the cleanup PR. External Render
+  services and credentials were not changed or deleted.
+
+### Cutover-finalization resource record
+
+- Structured record:
+  `logs/yu-sutong/resources/2026-11-09-azure-cutover-finalization/1c262256ea704c8ea093d2f90245cd22.json`.
+- Timing coverage: the interval began before the first repository edit and ended
+  after validation. Final report rendering and this measurement transcription are
+  outside the closed interval as required by the recording procedure.
+
+| Stage / agent / invocation | Selected model / effort | Start / end (UTC) | Elapsed | Input / output tokens | Cache | Tool calls / retries | Outcome / source |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Cutover finalization / main / `main-1` | GPT-5 / unavailable | 2026-11-09T12:56:43.398770Z / 2026-11-09T13:02:05.881756Z | 322.482986 s | unavailable | unavailable | unavailable | Succeeded; shared resource-session report |
+
+- End-to-end wall time and summed agent elapsed time: 322.482986 seconds; one
+  non-overlapping interval.
+- Per-record input/output tokens, cache, tool calls, retries, observed model and
+  observed effort were not exposed by the interface and were not estimated.

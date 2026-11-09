@@ -97,10 +97,10 @@ Both Azure Container Apps use the live configuration below and store the API key
 only as a protected Azure secret reference. After an independent review initially
 held production activation, the application owner explicitly accepted the documented
 residual provider uncertainty and directed production enablement on 8 November.
-The preceding Render activation deploy `dep-dbo8vbh5efls73d6i23g` reached `live`;
-public production
-health, readiness and the application root returned `200`, and signed-out session
-returned expected `401`. Broader model edge cases, actual key
+Azure development run `42605859917` and production run `42619894195` then promoted
+the same immutable digest. Production authenticated smoke passed, and the public
+health endpoint returned `200` with source revision
+`6dfe10db7958dac8f378f2a96118ab3b4ee69a5d`. Broader model edge cases, actual key
 quotas, provider retention/data-use review and teammate sign-off remain open;
 deterministic manual workflows remain the fallback.
 
@@ -116,7 +116,7 @@ the application. Never prefix the key with `VITE_` or put it in a browser reques
 Keep the app flag false for ordinary local work unless a live test is intentional.
 Contributor, Reviewer and Maintainer share this switch and the same gateway
 protections. No local flag is automatically changed by the verification harness.
-The prior Render activation and the required Azure post-promotion smoke are
+The earlier Render activation and completed Azure post-promotion smoke are
 operational evidence, not proof of broad model quality, quota sufficiency or
 provider retention/data-use approval.
 
