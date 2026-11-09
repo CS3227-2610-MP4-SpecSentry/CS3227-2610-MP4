@@ -120,8 +120,8 @@ const azureFinal = { name: containerAppName, properties: { ...azureUpdate.proper
   configuration: { ...azureConfiguration, ingress: { ...azureConfiguration.ingress,
     traffic: [{ revisionName: revision, weight: 100 }] } } } };
 function azureRevision({ active = true, runningState = 'Running', healthState = 'Healthy',
-  provisioningState = 'Provisioned', deployedImage = acrImage } = {}) {
-  return { name: revision, properties: { active, runningState, healthState, provisioningState,
+  provisioningState = 'Provisioned', deployedImage = acrImage, trafficWeight = 100 } = {}) {
+  return { name: revision, properties: { active, runningState, healthState, provisioningState, trafficWeight,
     template: { containers: [{ ...azureContainer, image: deployedImage }] } } };
 }
 
@@ -162,7 +162,9 @@ test('production only verifies the existing ACR digest and never imports it', as
 test('Azure client deploys the ACR digest and verifies the exact revision and all traffic', async () => {
   const calls = [];
   const responses = [azurePreflight, null, azureUpdate, azureRevision({ active: false, runningState: 'Processing',
-    healthState: 'None', provisioningState: 'Provisioning' }), azureRevision({ active: false }),
+    healthState: 'None', provisioningState: 'Provisioning' }),
+  azureRevision({ active: false, runningState: undefined, healthState: undefined,
+    provisioningState: 'Provisioning' }), azureRevision({ active: false }),
   azureRevision(), azureFinal];
   const result = await deployImage({ subscriptionId, resourceGroup, containerAppName,
     registryName, registryServer, containerImageName, registryIdentity, expectedDeploymentHost: deploymentHost,
@@ -187,6 +189,25 @@ test('Azure client deploys the ACR digest and verifies the exact revision and al
   assert.ok(calls.slice(3, 6).every(({ args }) =>
     args[args.indexOf('--url') + 1].includes(`/revisions/${revision}?api-version=2025-07-01`)));
   assert.equal(calls.at(-1).args[calls.at(-1).args.indexOf('--url') + 1], appUrl);
+});
+
+test('Azure client accepts implicit latest traffic for a verified single-revision app', async () => {
+  const responses = [azurePreflight, null, azureUpdate, azureRevision(), azureUpdate];
+  const result = await deployImage({ subscriptionId, resourceGroup, containerAppName,
+    registryName, registryServer, containerImageName, registryIdentity,
+    expectedDeploymentHost: deploymentHost, image: acrImage, expectedDigest: digest,
+    run: async () => responses.shift(), sleep: async () => undefined, pollIntervalMs: 0 });
+  assert.deepEqual(result, { deployId: revision, imageDigest: digest });
+});
+
+test('Azure client accepts an active provisioned revision that already scaled to zero', async () => {
+  const responses = [azurePreflight, null, azureUpdate,
+    azureRevision({ runningState: 'ScaledToZero', healthState: 'None' }), azureUpdate];
+  const result = await deployImage({ subscriptionId, resourceGroup, containerAppName,
+    registryName, registryServer, containerImageName, registryIdentity,
+    expectedDeploymentHost: deploymentHost, image: acrImage, expectedDigest: digest,
+    run: async () => responses.shift(), sleep: async () => undefined, pollIntervalMs: 0 });
+  assert.deepEqual(result, { deployId: revision, imageDigest: digest });
 });
 
 test('Azure client rejects invalid targets, ambiguous CLI failures and wrong image identity', async () => {
@@ -255,6 +276,8 @@ test('Azure client rejects unsafe runtime secrets, probes, ingress and traffic',
     configuration: { ...azureConfiguration, ingress: { ...azureConfiguration.ingress,
       traffic: [{ revisionName: 'specsentry-dev--wrong', weight: 100 }] } } } };
   await assert.rejects(() => deploy([azurePreflight, null, azureUpdate, azureRevision(), wrongTraffic]), /traffic/);
+  await assert.rejects(() => deploy([azurePreflight, null, azureUpdate,
+    azureRevision({ trafficWeight: 0 }), azureUpdate]), /traffic/);
 });
 
 function databaseClient({ timezone = 'UTC', version = '170000', migrations = [], objects = true } = {}) {
